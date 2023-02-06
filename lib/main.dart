@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'utils/routes/app_pages.dart';
@@ -13,15 +14,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
+    return ScreenUtilInit(
+        designSize: const Size(390, 800),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder:(BuildContext context, Widget? child){
+      return GetMaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
 
-        primarySwatch: Colors.blue,
-      ),
-      initialRoute: AppPages.initialRoute,
-      getPages: AppPages.routes,
-    );
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: AppPages.initialRoute,
+        getPages: AppPages.routes,
+      );
+    });
+
   }
 }
 
