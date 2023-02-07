@@ -31,3 +31,5 @@ class AppStrings {
  const String doGoodTxt = "Do Good";
  const String tmTxt = "TM";
  const String aboutDonnaTxt = "ABOUT DONNA";
+ const String seeCopyHumbleTxt = "See a copy of The Humble Warrior's";
+ const String hereTxt = "here";

@@ -22,8 +22,8 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "123627bb9093a99913eb12f5ff47eab91eb68cf9"
-      url: "https://github.com/KiranPrimotech/authentication.git"
+      resolved-ref: edad0dbbbe9aaafe5f584fc28487fa6c0ceacecf
+      url: "https://username@github.com/KiranPrimotech/authentication.git"
     source: git
     version: "0.0.1"
   auto_size_text_pk:
@@ -553,6 +553,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1"
+  readmore:
+    dependency: "direct main"
+    description:
+      name: readmore
+      sha256: "99c2483202f7c7e98c50834d72be2b119aefecf4497ca1960ae9d5f418eb1481"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   rxdart:
     dependency: transitive
     description:

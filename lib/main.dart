@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_themes/app_theme.dart';
-
 import 'firebase_options.dart';
 import 'utils/routes/app_pages.dart';
 
@@ -29,6 +28,7 @@ class MyApp extends StatelessWidget {
         builder: (BuildContext context, Widget? child) {
           return GetMaterialApp(
             title: 'Flutter Demo',
+            debugShowCheckedModeBanner: false,
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
             themeMode: ThemeMode.system,

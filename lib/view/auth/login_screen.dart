@@ -10,6 +10,7 @@ import '../../utils/app_colors.dart';
 import '../../utils/image_path_assets.dart';
 import '../../utils/image_path_network.dart';
 import '../../utils/localization/localization_String.dart';
+import '../../utils/routes/app_routes.dart';
 
 class LoginScreen extends GetView<LoginController> with AuthWidget {
   const LoginScreen({super.key});
@@ -82,9 +83,13 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
               alignment: Alignment.bottomCenter,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children: [
                   AppText("Sign up", fontSize: 24),
-                  AppText("Skip", fontSize: 24),
+                  InkWell(
+                      onTap:  (){
+                        Get.offNamed(AppRoutes.bottomNavigation);
+                      },
+                      child: AppText("Skip", fontSize: 24)),
                 ],
               ),
             ).px(20).py(30)

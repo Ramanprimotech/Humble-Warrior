@@ -9,7 +9,7 @@ import 'package:humble_warrior/view/landing/intro_screen.dart';
 import 'app_routes.dart';
 
 class AppPages {
-  static String initialRoute = AppRoutes.loginPage;
+  static String initialRoute = AppRoutes.introScreen;
   static final List<GetPage<dynamic>> routes = [
     GetPage(
         name: AppRoutes.introScreen,
