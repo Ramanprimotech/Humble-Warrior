@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/view/bottom_navigation/bottom_navigation_controller.dart';
 
 class BottomNavigationScreen extends GetView<BottomNavigationController> {
@@ -12,25 +13,25 @@ class BottomNavigationScreen extends GetView<BottomNavigationController> {
         builder: (BottomNavigationController ctr) {
           return Scaffold(
             bottomNavigationBar: BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
+              items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
+                  icon: AppIcons.home(),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.favorite_outlined),
+                  icon: AppIcons.favourite(),
                   label: 'My favourite',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_bag),
+                  icon: AppIcons.bag(),
                   label: 'My Amazon',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.facebook),
+                  icon: AppIcons.join(),
                   label: 'Join Us',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.person_2_rounded),
+                  icon: AppIcons.person(),
                   label: 'Account',
                 ),
               ],

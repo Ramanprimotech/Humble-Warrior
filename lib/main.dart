@@ -7,7 +7,7 @@ import 'package:humble_warrior/utils/app_themes/app_theme.dart';
 import 'firebase_options.dart';
 import 'utils/routes/app_pages.dart';
 
-Future main() async{
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(

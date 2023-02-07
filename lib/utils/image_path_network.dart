@@ -91,6 +91,4 @@ class ImagePathNetwork {
 
   static const String quote =
       "https://i.pinimg.com/originals/a2/14/a0/a214a0ae593b4f3aaba19dcab9e4a7df.jpg";
-  static const String puzzle =
-      "https://previews.123rf.com/images/sellingpix/sellingpix1403/sellingpix140300068/27365946-puzzle-square-vector-logo-design-template-funny-rebus-entertainment-concept-colorful-logic-icon.jpg";
 }
