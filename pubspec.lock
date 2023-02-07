@@ -23,7 +23,7 @@ packages:
       path: "."
       ref: master
       resolved-ref: "91f7d3ebd48e0152413a8879b27c80aab7d34850"
-      url: "https://github.com/KiranPrimotech/authentication.git"
+      url: "https://username@github.com/KiranPrimotech/authentication.git"
     source: git
     version: "0.0.1"
   auto_size_text_pk:
