@@ -6,14 +6,15 @@ import 'package:humble_warrior/view/home/home_controller.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     final HomeScreenController controller = Get.find();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: CustomSearchBar(textEditingController: controller.searchTextController,),
+          title: CustomSearchBar(
+            textEditingController: controller.searchTextController,
+          ),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
