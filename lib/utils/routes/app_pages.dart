@@ -13,7 +13,7 @@ import '../../view/productDetail/product_detail_binding.dart';
 import 'app_routes.dart';
 
 class AppPages {
-  static String initialRoute = AppRoutes.loginPage;
+  static String initialRoute = AppRoutes.introScreen;
   static final List<GetPage<dynamic>> routes = [
     GetPage(
         name: AppRoutes.introScreen,

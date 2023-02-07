@@ -33,7 +33,7 @@ dependencies:
     sdk: flutter
   authentication:
     git:
-      url: https://github.com/KiranPrimotech/authentication.git
+      url: https://username@github.com/KiranPrimotech/authentication.git
       ref: master
 
 
