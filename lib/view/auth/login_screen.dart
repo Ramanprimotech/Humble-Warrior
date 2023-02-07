@@ -29,15 +29,10 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(6.0),
-                    child: CachedNetworkImage(
+                    child:  Image.asset(
+                      ImagePathAssets.hw_logo,
                       height: 200,
                       width: 200,
-                      fit: BoxFit.cover,
-                      imageUrl: ImagePathNetwork.url,
-                      placeholder: (context, url) =>
-                          const Center(child: CircularProgressIndicator()),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
                     ),
                   ).centered().pLTRB(0, 20, 0, 10),
                   SizedBox(
