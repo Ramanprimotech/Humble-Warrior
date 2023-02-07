@@ -4,21 +4,21 @@ import 'package:velocity_x/velocity_x.dart';
 
 import 'intro_screen.dart';
 
-class IntroScreenController extends GetxController{
+class IntroScreenController extends GetxController {
   final pageController = PageController();
 
   RxInt currentIndex = 0.obs;
 
-  void skipFunc(){
+  void skipFunc() {
     pageController.jumpToBottom();
   }
-  void startFunc(){
-    Get.to(IntroScreen());
-  }
-  void nextFunc(){
-    pageController.nextPage(
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut);
+
+  void startFunc() {
+    Get.to(const IntroScreen());
   }
 
+  void nextFunc() {
+    pageController.nextPage(
+        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+  }
 }

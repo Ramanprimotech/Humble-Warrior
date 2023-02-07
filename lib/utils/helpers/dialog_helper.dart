@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/extensions.dart';
-import 'package:humble_warrior/utils/sizes/enumClass.dart';
 
 import '../app_colors.dart';
 import '../app_text.dart';
@@ -32,10 +31,14 @@ abstract class DialogHelper {
             mainAxisAlignment:
                 showLabel ? MainAxisAlignment.start : MainAxisAlignment.center,
             children: [
-               CircularProgressIndicator(color: AppColors.primary),
+              CircularProgressIndicator(color: AppColors.primary),
               if (showLabel) ...[
                 const SizedBox(width: 16),
-                AppText(label, fontSize: 18, maxlines: 1,),
+                AppText(
+                  label,
+                  fontSize: 18,
+                  maxLines: 1,
+                ),
               ],
             ],
           ),
@@ -66,7 +69,7 @@ abstract class DialogHelper {
               if (description != null) ...[
                 AppText(
                   description,
-                  maxlines: 3,
+                  maxLines: 3,
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                 ),
               ],
@@ -110,7 +113,7 @@ abstract class DialogHelper {
               8.sh,
               AppText(
                 description,
-                maxlines: maxLines,
+                maxLines: maxLines,
                 padding: 8.pl,
               ),
               16.sh,
@@ -144,7 +147,10 @@ abstract class DialogHelper {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (icon != null) ...[
-            const Icon(Icons.add,color: AppColors.white,),
+            const Icon(
+              Icons.add,
+              color: AppColors.white,
+            ),
             // AppIcon(icon, color: AppColors.white),
             const SizedBox(width: 8),
           ],
