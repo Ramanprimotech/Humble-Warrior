@@ -8,8 +8,7 @@ import 'package:get/get.dart';
 
 import '../../firebase_options.dart';
 
-class LoginController extends GetxController{
-
+class LoginController extends GetxController {
   User? user;
   RxBool platformBool = false.obs;
 
@@ -22,15 +21,17 @@ class LoginController extends GetxController{
       debugPrint("platform -- else --- ${platformBool.value}");
     }
   }
+
   @override
   void onInit() {
-   checkCurrentPlatform();
+    checkCurrentPlatform();
     super.onInit();
   }
-  /// Click
-  Function onClickFunction({required OnClick action,required BuildContext context}) {
-    Map<OnClick, void Function()> actions = {
 
+  /// Click
+  Function onClickFunction(
+      {required OnClick action, required BuildContext context}) {
+    Map<OnClick, void Function()> actions = {
       /// Click  facebook
       OnClick.facebook: () async {
         debugPrint("bbhbhnbnjnjnj");
@@ -39,11 +40,9 @@ class LoginController extends GetxController{
           if (user != null) {
             Get.snackbar("Login ", "User Login Successfully ");
           }
-        }
-        catch(e){
+        } catch (e) {
           debugPrint("error --- $e");
         }
-
       },
 
       /// Click Google
@@ -53,9 +52,9 @@ class LoginController extends GetxController{
 
           user = await AuthManager().googleLogin(
               androidClientId:
-              DefaultFirebaseOptions.currentPlatform.androidClientId ?? "",
+                  DefaultFirebaseOptions.currentPlatform.androidClientId ?? "",
               iosClientId:
-              DefaultFirebaseOptions.currentPlatform.iosClientId ?? "");
+                  DefaultFirebaseOptions.currentPlatform.iosClientId ?? "");
 
           // user = await GoogleLoginManager().signInWithGoogle(context);
           if (user != null) {
@@ -66,28 +65,28 @@ class LoginController extends GetxController{
             //     LocalString.signKey, user!.email!);
             // settingController.getGoogleLoginValue();
             // Get.back();
-          }
-          else {
+          } else {
             Loader.hide();
           }
-        }
-        catch(e){
+        } catch (e) {
           Loader.hide();
           Get.snackbar("Error ", "$e ");
         }
       },
 
-
       /// Click apple
       OnClick.apple: () async {
-
+        debugPrint("apple ");
+        user = await AuthManager().appleLogin();
+        if (user != null) {
+          Get.snackbar("Login ", "User Login Successfully ");
+        }
       },
-
-
     };
 
     Function act = actions[action]!;
     return act;
   }
 }
-enum OnClick { facebook, google,  apple }
+
+enum OnClick { facebook, google, apple }

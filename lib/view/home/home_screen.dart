@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
           ),
           actions: [
             Padding(
-              padding: EdgeInsets.only(right: 15),
+              padding: const EdgeInsets.only(right: 15),
               child: InkWell(
                   onTap: () {}, child: AppIcons.notificationActice(size: 28)),
             )
@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                               fit: BoxFit.fitHeight,
                               height: 50,
                             ),
-                            Text(
+                            const Text(
                               "Product",
                               style: TextStyle(fontSize: 12),
                             ),
@@ -93,7 +93,8 @@ class HomeScreen extends StatelessWidget {
                                 height: 40,
                                 width: 250,
                                 alignment: Alignment.center,
-                                decoration: BoxDecoration(color: Colors.white),
+                                decoration:
+                                    const BoxDecoration(color: Colors.white),
                                 child: AppText(
                                   HomeOptions.homeOptionsList[index].text,
                                 ),
@@ -110,7 +111,7 @@ class HomeScreen extends StatelessWidget {
               ),
               Row(
                 children: [
-                  AppText(
+                  const AppText(
                     "BRAND'S I",
                     fontSize: 24,
                   ),
@@ -119,7 +120,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               SizedBox(
@@ -139,7 +140,7 @@ class HomeScreen extends StatelessWidget {
                               fit: BoxFit.fitHeight,
                               height: 50,
                             ),
-                            Text(
+                            const Text(
                               "Product",
                               style: TextStyle(fontSize: 12),
                             ),

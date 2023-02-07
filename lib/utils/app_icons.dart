@@ -8,7 +8,7 @@ class AppIcons {
   static Icon favourite() => const Icon(Icons.favorite_outlined);
   static Icon bag() => const Icon(Icons.shopping_bag);
   static Icon join() => const Icon(Icons.facebook);
-  static Icon person() => const Icon(Icons.person_2_outlined);
+  static Icon person() => const Icon(Icons.person_outlined);
   //<=========== Bottom Navigation
 
   //Action Bar ===========>

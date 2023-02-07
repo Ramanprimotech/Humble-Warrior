@@ -5,11 +5,13 @@ import 'package:humble_warrior/view/bottom_navigation/bottom_navigation_binging.
 import 'package:humble_warrior/view/bottom_navigation/bottom_navigation_screen.dart';
 import 'package:humble_warrior/view/landing/intro_binding.dart';
 import 'package:humble_warrior/view/landing/intro_screen.dart';
+import 'package:humble_warrior/view/productDetail/product_detail_Screen.dart';
+import 'package:humble_warrior/view/productDetail/product_detail_binding.dart';
 
 import 'app_routes.dart';
 
 class AppPages {
-  static String initialRoute = AppRoutes.bottomNavigation;
+  static String initialRoute = AppRoutes.productDetail;
   static final List<GetPage<dynamic>> routes = [
     GetPage(
         name: AppRoutes.introScreen,
@@ -22,6 +24,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.bottomNavigation,
         page: () => const BottomNavigationScreen(),
-        binding: BottomNavigationBindings())
+        binding: BottomNavigationBindings()),
+    GetPage(
+        name: AppRoutes.productDetail,
+        page: () => const ProductDetailScreen(),
+        binding: ProductDetailBinding())
   ];
 }
