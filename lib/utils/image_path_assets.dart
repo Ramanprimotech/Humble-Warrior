@@ -10,4 +10,5 @@ class ImagePathAssets {
   static const String appleImg = "assets/image/apple.png";
   static const String callImg = "assets/image/call.png";
   static const String hw_logo = "assets/image/hw_logo.png";
+  static const String user = "assets/icons/user.svg";
 }

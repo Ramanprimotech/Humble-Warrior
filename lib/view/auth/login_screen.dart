@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_text.dart';
+import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/view/auth/auth_widget.dart';
 import 'package:humble_warrior/view/auth/login_controller.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -69,6 +70,16 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                       imagePath: ImagePathAssets.facebookImg,
                       onTap: controller.onClickFunction(
                           action: OnClick.facebook, context: context)),
+
+                  /// Without Login
+                  optionWidget(
+                      bckClr: AppColors.twitterClr,
+                      imagePath: ImagePathAssets.twitterImg ,
+                      title: "Continue Without Login",
+                      textClr: AppColors.white,
+                      onTap: (){
+                        Get.offNamed(AppRoutes.bottomNavigation);
+                      }),
 
                   const Align(
                           alignment: Alignment.center,

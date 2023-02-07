@@ -13,7 +13,7 @@ class HomeScreenController extends GetxController {
                 "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg")
         .addList();
     HomeOptions(
-            text: "Front Page Deals",
+            text: "Donna's Daily Deals",
             image:
                 "https://humblewarrior.com/wp-content/uploads/2022/11/vinex600.jpg")
         .addList();
