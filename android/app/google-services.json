@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "340829922874",
+    "firebase_url": "https://hwapp-78661-default-rtdb.firebaseio.com",
+    "project_id": "hwapp-78661",
+    "storage_bucket": "hwapp-78661.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340829922874:android:062f81e74783000dec7703",
+        "android_client_info": {
+          "package_name": "com.example.humble_warrior"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "340829922874-93t396tuid0r0k1f0b3k6hbf4d1lmr4h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnM-Y6B6Xqm3hVLdNgvXa6UHuSOO9EGas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "340829922874-93t396tuid0r0k1f0b3k6hbf4d1lmr4h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -31,6 +31,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  authentication:
+    git:
+      url: https://github.com/KiranPrimotech/authentication.git
+      ref: master
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -47,6 +52,9 @@ dependencies:
   velocity_x: ^3.6.0
   smooth_page_indicator: ^1.0.0+2
   cached_network_image: ^3.2.3
+  firebase_core: ^2.4.1
+  firebase_auth: ^4.2.5
+  flutter_overlay_loader: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -71,8 +79,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/image/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
