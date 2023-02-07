@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
+import 'package:humble_warrior/utils/app_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../utils/image_path_network.dart';
 import '../../utils/routes/app_routes.dart';
+import '../../utils/sizes/enumClass.dart';
 import 'intro_controller.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -25,107 +27,102 @@ class _IntroScreenState extends State<IntroScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            Expanded(
-              child: Stack(
-                children: [
-                  PageView(
-                    onPageChanged: (index) {
-                      controller.currentIndex.value = index;
-                    },
-                    controller: controller.pageController,
-                    children: [
-                      introOne(),
-                      introTwo(),
-                      introThree(),
-                      introFour(),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 40,
-                    child: Obx(
-                      () => Visibility(
-                        visible: controller.currentIndex.value != 3,
-                        child: TextButton(
-                          onPressed: () {
-                            controller.pageController.jumpToBottom();
-                          },
-                          child: "Skip"
-                              .text
-                              .size(28)
-                              .black
-                              .fontWeight(FontWeight.w400)
-                              .make(),
-                        ),
-                      ),
-                    ),
-                  ).positioned(top: 5, right: 5),
-                ],
+            SizedBox(height: 10,),
+            AppText("The Humble Warrior",fontSize: TextSizes.extraLarge,color: Colors.black),
+            SizedBox(height: 10,),
+            AppText("Fashion and Lifestyle for women",fontSize: TextSizes.medium,color: Colors.black),
+            SizedBox(height: 50,),
+            AppText("Look Good ❤ Feel Good ❤ Do Good",fontSize: TextSizes.large,color: Colors.pinkAccent),
+            SizedBox(height: 50,),
+            Container(
+              height:350,
+              margin: EdgeInsets.symmetric(vertical: 20,horizontal: 20),
+              padding: EdgeInsets.symmetric(vertical: 10,horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [BoxShadow(color: Colors.grey.shade200,blurRadius: 10,spreadRadius: 2)]
               ),
-            ),
-            Transform.scale(
-                scale: .6,
-                child: SmoothPageIndicator(
-                  count: 4,
-                  effect: const WormEffect(
-                    activeDotColor: AppColors.purple,
-                    dotColor: AppColors.lightPurple,
-                  ),
-                  onDotClicked: (index) {},
-                  controller: controller.pageController,
-                )),
-            Obx(
-              () => Container(
-                alignment: Alignment.center,
-                height: 60,
-                child: controller.currentIndex.value != 3
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: PageView(
+                        onPageChanged: (index) {
+                          controller.currentIndex.value = index;
+                        },
+                        controller: controller.pageController,
                         children: [
-                          controller.currentIndex.value != 0
-                              ? IconButton(
-                                  iconSize: 30,
-                                  onPressed: () {
-                                    print("dfghjk");
-                                    controller.currentIndex.value =
-                                        controller.currentIndex.value - 1;
-                                    controller.pageController.previousPage(
-                                        duration: const Duration(milliseconds: 500),
-                                        curve: Curves.easeInOut);
-                                  },
-                                  icon: const Icon(Icons.arrow_back),
-                                )
-                              : const SizedBox(
-                                  height: 20,
-                                ),
-                          IconButton(
-                            iconSize: 30,
-                            onPressed: () {
-                              print("dfghjk");
-                              controller.pageController.nextPage(
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.easeInOut);
-                            },
-                            icon: const Icon(Icons.arrow_forward),
-                          ),
+                          _image(imgUrl: ImagePathNetwork.insight),
+                          _image(imgUrl: ImagePathNetwork.insight),
+                          _image(imgUrl: ImagePathNetwork.insight),
+                          //introFour(),
                         ],
-                      ).py(8)
-                    : SizedBox(
-                        height: 60,
-                        width: 80,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Get.toNamed(AppRoutes.loginPage);
-                          },
-                          child: "Next".text.make(),
-                        ),
-                        // CommonUtils.button(title: "Next", function: () {
-                        //   Get.toNamed(AppRoutes.landing);
-                        // }),
                       ),
-              ).py(16),
+                  ),
+
+                  SizedBox(height: 10,),
+            Transform.scale(
+                  scale: .6,
+                  child: SmoothPageIndicator(
+                    count: 3,
+                    effect: WormEffect(
+                      activeDotColor: Colors.black,
+                      dotColor: Colors.grey.shade600,
+                    ),
+                    onDotClicked: (index) {},
+                    controller: controller.pageController,
+                  )),
+            Obx(
+            () => Container(
+                  alignment: Alignment.center,
+                  height: 60,
+                  child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            controller.currentIndex.value != 2?
+                            TextButton(
+                              onPressed: (){
+                                controller.pageController.jumpToBottom();
+                            }, child: AppText("Skip",color: Colors.black,fontSize: TextSizes.large,)
+                            ):
+                            SizedBox(),
+                             /*IconButton(
+                                    iconSize: 30,
+                                    onPressed: () {
+                                      print("dfghjk");
+                                      controller.currentIndex.value =
+                                          controller.currentIndex.value - 1;
+                                      controller.pageController.previousPage(
+                                          duration: const Duration(milliseconds: 500),
+                                          curve: Curves.easeInOut);
+                                    },
+                                    icon: const Icon(Icons.arrow_back),
+                                  )*/
+                               TextButton(onPressed: (){
+                                 controller.pageController.nextPage(
+                                     duration: const Duration(milliseconds: 500),
+                                     curve: Curves.easeInOut);
+                               },
+                                   child: AppText("Next",color: Colors.black,fontSize: TextSizes.large,)),
+                            /*IconButton(
+                              iconSize: 30,
+                              onPressed: () {
+                                print("dfghjk");
+                                controller.pageController.nextPage(
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.easeInOut);
+                              },
+                              icon: const Icon(Icons.arrow_forward),
+                            ),*/
+                          ],
+                        )
+            )
             ),
             const SizedBox(
-              height: 10,
+            height: 10,
+            ),
+
+                ],
+              ),
             ),
           ],
         ),
@@ -133,11 +130,19 @@ class _IntroScreenState extends State<IntroScreen> {
     );
   }
 
-  Widget introOne() {
+  Widget _image({imgUrl}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Stack(
+        Expanded(
+          child: Image.network(
+            imgUrl,
+            //ImagePathNetwork.insight,
+            // height: 60,
+            // width: 100,
+          ),
+        ),
+        /*Stack(
           children: [
             Image.network(
               ImagePathNetwork.insight,
@@ -165,7 +170,7 @@ class _IntroScreenState extends State<IntroScreen> {
         ),
         "The best choices to select from".text.gray400.make(),
         "supplimenting all your needs".text.gray400.make(),
-        // "".text.gray400.make(),
+        // "".text.gray400.make(),*/
       ],
     );
   }
@@ -180,6 +185,12 @@ class _IntroScreenState extends State<IntroScreen> {
           width: 100,
           fit: BoxFit.fill,
         ),
+        /*Image.network(
+          ImagePathNetwork.insight,
+          height: 60,
+          width: 100,
+          fit: BoxFit.fill,
+        ),
         const SizedBox(
           height: 25,
         ),
@@ -189,7 +200,7 @@ class _IntroScreenState extends State<IntroScreen> {
           height: 8,
         ),
         "Your dream destination is just".text.gray400.make(),
-        "a few clicks away".text.gray400.make(),
+        "a few clicks away".text.gray400.make(),*/
       ],
     );
   }
@@ -204,6 +215,12 @@ class _IntroScreenState extends State<IntroScreen> {
           width: 100,
           fit: BoxFit.fill,
         ),
+        /*Image.network(
+          ImagePathNetwork.insight,
+          height: 60,
+          width: 100,
+          fit: BoxFit.fill,
+        ),
         const SizedBox(
           height: 25,
         ),
@@ -213,12 +230,12 @@ class _IntroScreenState extends State<IntroScreen> {
           height: 8,
         ),
         "It's the first and best platform to".text.gray400.make(),
-        "BID for a better BARGIN".text.gray400.make(),
+        "BID for a better BARGIN".text.gray400.make(),*/
       ],
     );
   }
 
-  Widget introFour() {
+/*  Widget introFour() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -240,5 +257,5 @@ class _IntroScreenState extends State<IntroScreen> {
         "offer you the best price".text.gray400.make(),
       ],
     );
-  }
+  }*/
 }
