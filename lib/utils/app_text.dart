@@ -10,6 +10,45 @@ import 'sizes/enumClass.dart';
 
 class AppText extends StatelessWidget {
   final String label;
+  final TextAlign textAlign;
+  final Color? color;
+  final double? fontSize;
+  final FontWeight? fontWeight;
+  final TextDecoration? textDecoration;
+  final maxlines;
+  final EdgeInsetsGeometry? padding;
+  const AppText(
+        this.label,{
+        this.textAlign = TextAlign.left,
+        this.color,
+        this.fontSize,
+        this.fontWeight,
+        this.textDecoration,
+        this.maxlines,
+        this.padding,
+        Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: padding??EdgeInsets.zero,
+      child: Text(label,
+        textAlign: textAlign,
+        style: TextStyle(color: color,
+          fontSize:fontSize??16,
+          fontWeight: fontWeight,
+          decoration: textDecoration,
+        ),
+        maxLines: maxlines??1,
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+  }
+}
+
+
+/*class AppText extends StatelessWidget {
+  final String label;
   final TextSizes? fontSize;
   final Color? color;
   final FontWeight? fontWeight;
@@ -139,7 +178,7 @@ class AppText extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 
 class HeadingText extends StatelessWidget {
   const HeadingText(

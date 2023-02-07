@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_text.dart';
+import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/view/auth/auth_widget.dart';
 import 'package:humble_warrior/view/auth/login_controller.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -10,7 +11,6 @@ import '../../utils/app_colors.dart';
 import '../../utils/image_path_assets.dart';
 import '../../utils/image_path_network.dart';
 import '../../utils/localization/localization_String.dart';
-import '../../utils/sizes/enumClass.dart';
 
 class LoginScreen extends GetView<LoginController> with AuthWidget {
   const LoginScreen({super.key});
@@ -35,7 +35,8 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                       imageUrl: ImagePathNetwork.url,
                       placeholder: (context, url) =>
                           const Center(child: CircularProgressIndicator()),
-                      errorWidget: (context, url, error) => const Icon(Icons.error),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                   ).centered().pLTRB(0, 20, 0, 10),
                   SizedBox(
@@ -70,22 +71,31 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                       onTap: controller.onClickFunction(
                           action: OnClick.facebook, context: context)),
 
+                  /// Without Login
+                  optionWidget(
+                      bckClr: AppColors.twitterClr,
+                      imagePath: ImagePathAssets.twitterImg ,
+                      title: "Continue Without Login",
+                      textClr: AppColors.white,
+                      onTap: (){
+                        Get.offNamed(AppRoutes.bottomNavigation);
+                      }),
+
                   const Align(
-                    alignment: Alignment.center,
-                      child: AppText("Forgot Password ?")).px(40).py(20),
-
-
+                          alignment: Alignment.center,
+                          child: AppText("Forgot Password ?"))
+                      .px(40)
+                      .py(20),
                 ],
               ),
             ).expand(),
-
             Container(
               alignment: Alignment.bottomCenter,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [
-                  AppText("Sign up",fontSize: TextSizes.large,),
-                  AppText("Skip",fontSize: TextSizes.large),
+                  AppText("Sign up", fontSize: 24),
+                  AppText("Skip", fontSize: 24),
                 ],
               ),
             ).px(20).py(30)

@@ -47,5 +47,41 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<key>FacebookAppID</key>
+            <string>1855778784755753</string>
+            <key>FacebookDisplayName</key>
+            <string>Humble Warrior</string>
+            <key>FacebookClientToken</key>
+            <string>65aea227b0bb45966afa0e131a5739f7</string>
+            <key>LSApplicationQueriesSchemes</key>
+            <array>
+              <string>fbapi</string>
+              <string>fb-messenger-share-api</string>
+            </array>
+            <key>FacebookAdvertiserIDCollectionEnabled</key>
+            <false/>
+
+            <key>CFBundleURLTypes</key>
+            <array>
+                <dict>
+                    <key>CFBundleTypeRole</key>
+                    <string>Editor</string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+
+                        <!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+                        <string>com.googleusercontent.apps.340829922874-o8qpij3h27hbmn0fjai7di4k31pnj1c1</string>
+                    </array>
+                </dict>
+                 <dict>
+                      <key>CFBundleURLSchemes</key>
+                      <array>
+                        <string>fb1855778784755753</string>
+                      </array>
+                      </dict>
+            </array>
+
+
 </dict>
 </plist>

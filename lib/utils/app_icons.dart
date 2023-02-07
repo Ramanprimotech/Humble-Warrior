@@ -31,6 +31,13 @@ class AppIcons {
         color: iconColor,
         size: size,
       );
+  static Icon filter(
+          {Color iconColor = Colors.black, double size = 24}) =>
+      Icon(
+        Icons.sort,
+        color: iconColor,
+        size: size,
+      );
   //<=========Action Bar
 
   //Account Icons===========>
@@ -46,6 +53,7 @@ class AppIcons {
 
   static Icon clock({Color iconColor = Colors.black}) =>
       Icon(Icons.timer, color: iconColor);
+
   static Icon heart({Color iconColor = Colors.black}) =>
       Icon(Icons.favorite_outlined, color: iconColor);
   static Icon share2({Color iconColor = Colors.blue}) =>
