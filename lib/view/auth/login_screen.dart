@@ -10,7 +10,6 @@ import '../../utils/app_colors.dart';
 import '../../utils/image_path_assets.dart';
 import '../../utils/image_path_network.dart';
 import '../../utils/localization/localization_String.dart';
-import '../../utils/sizes/enumClass.dart';
 
 class LoginScreen extends GetView<LoginController> with AuthWidget {
   const LoginScreen({super.key});
@@ -35,7 +34,8 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                       imageUrl: ImagePathNetwork.url,
                       placeholder: (context, url) =>
                           const Center(child: CircularProgressIndicator()),
-                      errorWidget: (context, url, error) => const Icon(Icons.error),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                   ).centered().pLTRB(0, 20, 0, 10),
                   SizedBox(
@@ -71,21 +71,20 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                           action: OnClick.facebook, context: context)),
 
                   const Align(
-                    alignment: Alignment.center,
-                      child: AppText("Forgot Password ?")).px(40).py(20),
-
-
+                          alignment: Alignment.center,
+                          child: AppText("Forgot Password ?"))
+                      .px(40)
+                      .py(20),
                 ],
               ),
             ).expand(),
-
             Container(
               alignment: Alignment.bottomCenter,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [
-                  AppText("Sign up",fontSize: TextSizes.large,),
-                  AppText("Skip",fontSize: TextSizes.large),
+                  AppText("Sign up", fontSize: 24),
+                  AppText("Skip", fontSize: 24),
                 ],
               ),
             ).px(20).py(30)

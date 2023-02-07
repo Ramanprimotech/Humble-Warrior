@@ -110,7 +110,10 @@ class HomeScreen extends StatelessWidget {
               ),
               Row(
                 children: [
-                  AppText.large("BRAND'S I"),
+                  AppText(
+                    "BRAND'S I",
+                    fontSize: 24,
+                  ),
                   AppIcons.heart(
                     iconColor: Colors.red,
                   ),
