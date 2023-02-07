@@ -40,7 +40,7 @@ class AuthWidget {
                 width: 28.h,
               ).centered().p(2),
             ).px(8),
-            title!.tr.text.color(textClr).make().px(4),
+            title!.text.color(textClr).make().px(4),
           ],
         ).p(8),
       ).py(10).px(20),
