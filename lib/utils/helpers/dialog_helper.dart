@@ -35,7 +35,7 @@ abstract class DialogHelper {
                CircularProgressIndicator(color: AppColors.primary),
               if (showLabel) ...[
                 const SizedBox(width: 16),
-                AppText(label, fontSize: TextSizes.medium, maxLines: 1),
+                AppText(label, fontSize: 18, maxlines: 1,),
               ],
             ],
           ),
@@ -66,7 +66,7 @@ abstract class DialogHelper {
               if (description != null) ...[
                 AppText(
                   description,
-                  maxLines: 3,
+                  maxlines: 3,
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                 ),
               ],
@@ -103,14 +103,14 @@ abstract class DialogHelper {
               8.sh,
               AppText(
                 title,
-                fontSize: TextSizes.normal,
+                fontSize: 18,
                 padding: 8.pl,
                 fontWeight: FontWeight.bold,
               ),
               8.sh,
               AppText(
                 description,
-                maxLines: maxLines,
+                maxlines: maxLines,
                 padding: 8.pl,
               ),
               16.sh,

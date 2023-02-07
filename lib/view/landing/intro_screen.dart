@@ -1,43 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_colors.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
+import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:velocity_x/velocity_x.dart';
-
 import '../../utils/image_path_network.dart';
-import '../../utils/routes/app_routes.dart';
-import '../../utils/sizes/enumClass.dart';
 import 'intro_controller.dart';
 
-class IntroScreen extends StatefulWidget {
-  const IntroScreen({Key? key}) : super(key: key);
-
-  @override
-  State<IntroScreen> createState() => _IntroScreenState();
-}
-
-class _IntroScreenState extends State<IntroScreen> {
-  final IntroScreenController controller = Get.find();
+class IntroScreen extends StatelessWidget {
+  const IntroScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final IntroScreenController controller = Get.find();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 10,),
-            AppText("The Humble Warrior",fontSize: TextSizes.extraLarge,color: Colors.black),
-            SizedBox(height: 10,),
-            AppText("Fashion and Lifestyle for women",fontSize: TextSizes.medium,color: Colors.black),
-            SizedBox(height: 50,),
-            AppText("Look Good ❤ Feel Good ❤ Do Good",fontSize: TextSizes.large,color: Colors.pinkAccent),
-            SizedBox(height: 50,),
+            50.sh,
+            RichText(
+                text: TextSpan(children: [TextSpan(text: humbleWarriorTxt,style: TextStyle(
+                color: Colors.grey.shade600,fontSize: 34,
+            )),
+                  WidgetSpan(
+                    child: Transform.translate(
+                      offset: const Offset(8.0, -20.0),
+                      child: Text(
+                        tmTxt,
+                        style: TextStyle(fontSize: 12,color: Colors.grey.shade600,),
+                      ),
+                    ),
+                  ),
+            ])),
+            // AppText("The Humble Warrior",fontSize: 36,color: Colors.grey.shade600),
+            AppText(fashionLifestyleTxt,fontSize: 16,color: Colors.black),
+            30.sh,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              _title(text: lookGoodTxt),
+              5.sw,
+              Icon(Icons.favorite,color: Colors.pinkAccent.shade100,),
+                5.sw,
+                _title(text: feelGoodTxt),
+                5.sw,
+              Icon(Icons.favorite,color: Colors.pinkAccent.shade100,),
+                5.sw,
+                _title(text: doGoodTxt),
+            ],),
+            // AppText("Look Good ❤ Feel Good ❤ Do Good",fontSize: TextSizes.large,color: Colors.pinkAccent),
             Container(
-              height:350,
+              height:400,
               margin: EdgeInsets.symmetric(vertical: 20,horizontal: 20),
-              padding: EdgeInsets.symmetric(vertical: 10,horizontal: 20),
+              padding: EdgeInsets.only(top:40,bottom: 10,left: 20,right: 20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [BoxShadow(color: Colors.grey.shade200,blurRadius: 10,spreadRadius: 2)]
@@ -59,7 +76,7 @@ class _IntroScreenState extends State<IntroScreen> {
                       ),
                   ),
 
-                  SizedBox(height: 10,),
+                  40.sh,
             Transform.scale(
                   scale: .6,
                   child: SmoothPageIndicator(
@@ -74,53 +91,28 @@ class _IntroScreenState extends State<IntroScreen> {
             Obx(
             () => Container(
                   alignment: Alignment.center,
-                  height: 60,
+                 // height: 60,
                   child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             controller.currentIndex.value != 2?
                             TextButton(
                               onPressed: (){
-                                controller.pageController.jumpToBottom();
-                            }, child: AppText("Skip",color: Colors.black,fontSize: TextSizes.large,)
+                                controller.skipFunc();
+                            }, child: AppText(skipTxt,color: Colors.black,fontSize: 18,)
                             ):
                             SizedBox(),
-                             /*IconButton(
-                                    iconSize: 30,
-                                    onPressed: () {
-                                      print("dfghjk");
-                                      controller.currentIndex.value =
-                                          controller.currentIndex.value - 1;
-                                      controller.pageController.previousPage(
-                                          duration: const Duration(milliseconds: 500),
-                                          curve: Curves.easeInOut);
-                                    },
-                                    icon: const Icon(Icons.arrow_back),
-                                  )*/
                                TextButton(onPressed: (){
-                                 controller.pageController.nextPage(
-                                     duration: const Duration(milliseconds: 500),
-                                     curve: Curves.easeInOut);
+                                 controller.currentIndex.value !=2?
+                                 controller.nextFunc():
+                                 controller.startFunc();
                                },
-                                   child: AppText("Next",color: Colors.black,fontSize: TextSizes.large,)),
-                            /*IconButton(
-                              iconSize: 30,
-                              onPressed: () {
-                                print("dfghjk");
-                                controller.pageController.nextPage(
-                                    duration: const Duration(milliseconds: 500),
-                                    curve: Curves.easeInOut);
-                              },
-                              icon: const Icon(Icons.arrow_forward),
-                            ),*/
+                                   child: AppText(controller.currentIndex.value != 2?nextTxt:startTxt,color: Colors.black,fontSize: 18,)),
                           ],
                         )
             )
             ),
-            const SizedBox(
-            height: 10,
-            ),
-
+                  10.sh,
                 ],
               ),
             ),
@@ -137,125 +129,16 @@ class _IntroScreenState extends State<IntroScreen> {
         Expanded(
           child: Image.network(
             imgUrl,
-            //ImagePathNetwork.insight,
-            // height: 60,
-            // width: 100,
           ),
         ),
-        /*Stack(
-          children: [
-            Image.network(
-              ImagePathNetwork.insight,
-              height: 60,
-              width: 100,
-            ),
-            Positioned(
-              top: 15,
-              left: 15,
-              right: 15,
-              child: Image.network(
-                ImagePathNetwork.image2,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 25,
-        ),
-        "From Five Star".text.size(12).make(),
-        "To No Star".text.size(12).make(),
-        const SizedBox(
-          height: 8,
-        ),
-        "The best choices to select from".text.gray400.make(),
-        "supplimenting all your needs".text.gray400.make(),
-        // "".text.gray400.make(),*/
+
       ],
     );
   }
 
-  Widget introTwo() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Image.network(
-          ImagePathNetwork.insight,
-          height: 60,
-          width: 100,
-          fit: BoxFit.fill,
-        ),
-        /*Image.network(
-          ImagePathNetwork.insight,
-          height: 60,
-          width: 100,
-          fit: BoxFit.fill,
-        ),
-        const SizedBox(
-          height: 25,
-        ),
-        "Fast And".text.size(12).make(),
-        "Easy".text.size(12).make(),
-        const SizedBox(
-          height: 8,
-        ),
-        "Your dream destination is just".text.gray400.make(),
-        "a few clicks away".text.gray400.make(),*/
-      ],
-    );
-  }
+_title({text}){
+  return AppText(text,color: Colors.pinkAccent.shade100,fontSize: 18);
+}
 
-  Widget introThree() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Image.network(
-          ImagePathNetwork.insight,
-          height: 60,
-          width: 100,
-          fit: BoxFit.fill,
-        ),
-        /*Image.network(
-          ImagePathNetwork.insight,
-          height: 60,
-          width: 100,
-          fit: BoxFit.fill,
-        ),
-        const SizedBox(
-          height: 25,
-        ),
-        "Need a Good".text.size(12).make(),
-        "Buy?".text.size(12).make(),
-        const SizedBox(
-          height: 8,
-        ),
-        "It's the first and best platform to".text.gray400.make(),
-        "BID for a better BARGIN".text.gray400.make(),*/
-      ],
-    );
-  }
 
-/*  Widget introFour() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Image.network(
-          ImagePathNetwork.image2,
-          height: 60,
-          width: 100,
-          fit: BoxFit.fill,
-        ),
-        const SizedBox(
-          height: 25,
-        ),
-        "Need a Customized".text.size(12).make(),
-        "Offer?".text.size(12).make(),
-        const SizedBox(
-          height: 8,
-        ),
-        "Tell us what you need. Let the hotels".text.gray400.make(),
-        "offer you the best price".text.gray400.make(),
-      ],
-    );
-  }*/
 }
