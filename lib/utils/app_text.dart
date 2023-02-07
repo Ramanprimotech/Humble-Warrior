@@ -1,12 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:humble_warrior/utils/sizes/sizes_config.dart';
 
 import 'app_themes/app_theme_controller.dart';
-import 'media_query_widget.dart';
-import 'sizes/enumClass.dart';
 
 class AppText extends StatelessWidget {
   final String label;
@@ -15,37 +11,38 @@ class AppText extends StatelessWidget {
   final double? fontSize;
   final FontWeight? fontWeight;
   final TextDecoration? textDecoration;
-  final maxlines;
+  final maxLines;
   final EdgeInsetsGeometry? padding;
-  const AppText(
-        this.label,{
-        this.textAlign = TextAlign.left,
-        this.color,
-        this.fontSize,
-        this.fontWeight,
-        this.textDecoration,
-        this.maxlines,
-        this.padding,
-        Key? key}) : super(key: key);
+  const AppText(this.label,
+      {this.textAlign = TextAlign.left,
+      this.color,
+      this.fontSize,
+      this.fontWeight,
+      this.textDecoration,
+      this.maxLines,
+      this.padding,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding??EdgeInsets.zero,
-      child: Text(label,
+      padding: padding ?? EdgeInsets.zero,
+      child: Text(
+        label,
         textAlign: textAlign,
-        style: TextStyle(color: color,
-          fontSize:fontSize??16,
+        style: TextStyle(
+          color: color,
+          fontSize: fontSize ?? 16,
           fontWeight: fontWeight,
           decoration: textDecoration,
         ),
-        maxLines: maxlines??1,
+        maxLines: maxLines ?? 1,
         overflow: TextOverflow.ellipsis,
       ),
     );
   }
 }
-
 
 /*class AppText extends StatelessWidget {
   final String label;
@@ -182,12 +179,12 @@ class AppText extends StatelessWidget {
 
 class HeadingText extends StatelessWidget {
   const HeadingText(
-      this.label, {
-        Key? key,
-        this.color,
-        this.fontSize = 36,
-        this.padding,
-      }) : super(key: key);
+    this.label, {
+    Key? key,
+    this.color,
+    this.fontSize = 36,
+    this.padding,
+  }) : super(key: key);
 
   final String label;
   final Color? color;
@@ -202,22 +199,21 @@ class HeadingText extends StatelessWidget {
       padding: padding ?? const EdgeInsets.symmetric(vertical: 16),
       child: color == null
           ? Obx(() => Text(
-        label,
-        style: GoogleFonts.montserrat(
-          color: _themeController.headingColor.value,
-          fontWeight: FontWeight.w700,
-          fontSize: fontSize,
-        ),
-      ))
+                label,
+                style: GoogleFonts.montserrat(
+                  color: _themeController.headingColor.value,
+                  fontWeight: FontWeight.w700,
+                  fontSize: fontSize,
+                ),
+              ))
           : Text(
-        label,
-        style: GoogleFonts.montserrat(
-          color: color,
-          fontWeight: FontWeight.w700,
-          fontSize: fontSize,
-        ),
-      ),
+              label,
+              style: GoogleFonts.montserrat(
+                color: color,
+                fontWeight: FontWeight.w700,
+                fontSize: fontSize,
+              ),
+            ),
     );
   }
 }
-

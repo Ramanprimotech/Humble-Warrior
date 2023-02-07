@@ -11,6 +11,7 @@ import '../../utils/app_colors.dart';
 import '../../utils/image_path_assets.dart';
 import '../../utils/image_path_network.dart';
 import '../../utils/localization/localization_String.dart';
+import '../../utils/routes/app_routes.dart';
 
 class LoginScreen extends GetView<LoginController> with AuthWidget {
   const LoginScreen({super.key});
@@ -28,15 +29,10 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(6.0),
-                    child: CachedNetworkImage(
+                    child:  Image.asset(
+                      ImagePathAssets.hw_logo,
                       height: 200,
                       width: 200,
-                      fit: BoxFit.cover,
-                      imageUrl: ImagePathNetwork.url,
-                      placeholder: (context, url) =>
-                          const Center(child: CircularProgressIndicator()),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
                     ),
                   ).centered().pLTRB(0, 20, 0, 10),
                   SizedBox(
@@ -93,9 +89,13 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
               alignment: Alignment.bottomCenter,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children: [
                   AppText("Sign up", fontSize: 24),
-                  AppText("Skip", fontSize: 24),
+                  InkWell(
+                      onTap:  (){
+                        Get.offNamed(AppRoutes.bottomNavigation);
+                      },
+                      child: AppText("Skip", fontSize: 24)),
                 ],
               ),
             ).px(20).py(30)

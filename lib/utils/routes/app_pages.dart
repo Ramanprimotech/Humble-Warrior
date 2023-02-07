@@ -8,6 +8,8 @@ import 'package:humble_warrior/view/home_option/home_option_screen.dart';
 import 'package:humble_warrior/view/landing/intro_binding.dart';
 import 'package:humble_warrior/view/landing/intro_screen.dart';
 
+import '../../view/productDetail/product_detail_Screen.dart';
+import '../../view/productDetail/product_detail_binding.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -28,6 +30,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.homeOptions,
         page: () => const HomeOptionScreen(),
-        binding: HomeOptionBindings())
+        binding: HomeOptionBindings()),
+    GetPage(
+        name: AppRoutes.productDetail,
+        page: () => const ProductDetailScreen(),
+        binding: ProductDetailBinding())
   ];
 }
