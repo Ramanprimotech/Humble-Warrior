@@ -1,7 +1,7 @@
 class Endpoints {
   //Base Urls Endpoints
-  static const String baseUrl = "https://newsapi.org/";
-  static const String news = "v2/everything?q=Apple&from=2022-12-26&sortBy=popularity&apiKey=ac1e23df99ad43b0bca1f1562a9b4825";
-
-
+  static const String baseUrl = "http://112.196.54.37/Development/HW/wp-json";
+  static const String generateToken = "/jwt-auth/v1/token/";
+  static const String verifyToken = "/jwt-auth/v1/token/validate";
+  static const String donnaDeals = "/hwapi/get_donna_daily_deals";
 }
