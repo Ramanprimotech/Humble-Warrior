@@ -198,14 +198,14 @@ class HeadingText extends StatelessWidget {
     return Padding(
       padding: padding ?? const EdgeInsets.symmetric(vertical: 16),
       child: color == null
-          ? Obx(() => Text(
+          ?Text(
                 label,
                 style: GoogleFonts.montserrat(
-                  color: _themeController.headingColor.value,
+                  color: Colors.black,
                   fontWeight: FontWeight.w700,
                   fontSize: fontSize,
                 ),
-              ))
+              )
           : Text(
               label,
               style: GoogleFonts.montserrat(

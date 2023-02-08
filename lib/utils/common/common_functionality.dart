@@ -1,9 +1,13 @@
 
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
+import 'package:humble_warrior/utils/app_text.dart';
+import 'package:humble_warrior/utils/extensions.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -57,6 +61,51 @@ class CommonUtils{
     File imageFile = File(image!.path);
 
     return imageFile;
+  }
+
+  static Widget header([String? label]) {
+    return AppText(
+      label ?? humbleWarriorTxt,
+      fontSize: 20,
+      textAlign: TextAlign.center,
+    );
+  }
+
+  static Widget actionButton(
+      String label, {
+        required VoidCallback onTap,
+      }) {
+    return Container(
+      decoration: BoxDecoration(
+        // color: Colors.white,
+      ),
+      child: CupertinoActionSheetAction(
+        child: AppText(
+          label,
+          fontSize: 16,
+          color: Colors.blue,
+        ),
+        onPressed: onTap,
+      ),
+    );
+  }
+
+  static Widget cancelButton() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: 12.brc,
+        // color: Colors.white,
+      ),
+      child: CupertinoActionSheetAction(
+        isDefaultAction: true,
+        child: AppText(
+          cancelTxt,
+          fontSize: 20,
+          color:Colors.red,
+        ),
+        onPressed: () => Get.back(),
+      ),
+    );
   }
 
 

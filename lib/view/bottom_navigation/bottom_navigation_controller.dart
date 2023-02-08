@@ -11,7 +11,7 @@ class BottomNavigationController extends GetxController {
     const Center(child: Text("My Favourite")),
     const Center(child: Text("My Amazone")),
     const ProductDetailScreen(),
-    const MyAccount(),
+     MyAccount(),
   ];
 
   List<Widget> get navigationItems => _navigationItems;
