@@ -3,6 +3,7 @@ class AppRoutes {
   static String homePage = "/home";
   static String loginPage = "/loginPage";
   static String bottomNavigation = "/bottomNavigation";
+  static String aboutDonna = "/aboutDonna";
   static String productDetail = "/productDetail";
   static String homeOptions = "/homeOptions";
   static String selectedAlbum = "/selectedAlbum";
@@ -27,5 +28,4 @@ class AppRoutes {
   static String notificationPagerScreen = "/notificationPagerScreen";
   static String pollPagerScreen = "/pollPagerScreen";
   static String commonWidget = "/commonWidget";
-
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/extensions.dart';
+import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/view/my_account/my_account_controller.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class MyAccount extends StatelessWidget {
   const MyAccount({Key? key}) : super(key: key);
@@ -13,31 +12,39 @@ class MyAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     final MyAccountController controller = Get.put(MyAccountController());
     return Container(
-      margin: EdgeInsets.only(top: 50,left: 10,right: 10),
+      margin: EdgeInsets.only(top: 50, left: 10, right: 10),
       child: SingleChildScrollView(
         child: Column(children: [
-         _profileImage(),
+          _profileImage(),
           10.sh,
           _divider(),
           10.sh,
           _myAccountTxt(heading: "MY ACCOUNT"),
-          _detailsOptions(controller,title: "Account Details"),
-          _detailsOptions(controller,title: "Notifications",isSwitchRequired: true,click:controller.switchFunc),
+          _detailsOptions(controller, title: "Account Details"),
+          _detailsOptions(controller,
+              title: "Notifications",
+              isSwitchRequired: true,
+              click: controller.switchFunc),
           10.sh,
           _divider(),
           10.sh,
           _myAccountTxt(heading: "THE HUMBLE WARRIOR"),
-          _detailsOptions(controller,title: "About Donna"),
-          _detailsOptions(controller,title: "Share with friends"),
+          _detailsOptions(controller, title: "About Donna", ontap: () {
+            Get.toNamed(AppRoutes.aboutDonna);
+          }),
+          _detailsOptions(controller, title: "Share with friends"),
           10.sh,
           _divider(),
           10.sh,
           _myAccountTxt(heading: "SETTINGS"),
-          _detailsOptions(controller,title: "Passcode"),
-          _detailsOptions(controller,title: "Dark Mode",isSwitchRequired: true,click: controller.darkMode),
-          _detailsOptions(controller,title: "Help & Support"),
-          _detailsOptions(controller,title: "Terms & Conditions"),
-          _detailsOptions(controller,title: "Logout"),
+          _detailsOptions(controller, title: "Passcode"),
+          _detailsOptions(controller,
+              title: "Dark Mode",
+              isSwitchRequired: true,
+              click: controller.darkMode),
+          _detailsOptions(controller, title: "Help & Support"),
+          _detailsOptions(controller, title: "Terms & Conditions"),
+          _detailsOptions(controller, title: "Logout"),
           AppText('APP VERSION V 1.0'),
           10.sh,
         ]),
@@ -45,7 +52,7 @@ class MyAccount extends StatelessWidget {
     );
   }
 
-  _profileImage(){
+  _profileImage() {
     return Column(
       children: [
         Container(
@@ -71,43 +78,56 @@ class MyAccount extends StatelessWidget {
     );
   }
 
-  _divider(){
+  _divider() {
     return Divider(
       color: Colors.grey.shade200,
       height: 2,
     );
   }
 
-  _myAccountTxt({heading}){
+  _myAccountTxt({heading}) {
     return Align(
-        alignment: Alignment.topLeft,
-        child: AppText(heading,fontSize: 18,fontWeight: FontWeight.bold),
+      alignment: Alignment.topLeft,
+      child: AppText(heading, fontSize: 18, fontWeight: FontWeight.bold),
     );
   }
 
-  _detailsOptions(MyAccountController controller,{title ,bool isSwitchRequired = false, ontap,click}){
+  _detailsOptions(MyAccountController controller,
+      {title, bool isSwitchRequired = false, ontap, click}) {
     return GestureDetector(
-      onTap: (){ontap;},
+      onTap: ontap,
       child: Container(
-        padding: EdgeInsets.only(left: 15,right: 5,top:isSwitchRequired?0:10,bottom: isSwitchRequired?0:10),
-        margin: EdgeInsets.symmetric(horizontal: 0,vertical: 7),
+        padding: EdgeInsets.only(
+            left: 15,
+            right: 5,
+            top: isSwitchRequired ? 0 : 10,
+            bottom: isSwitchRequired ? 0 : 10),
+        margin: EdgeInsets.symmetric(horizontal: 0, vertical: 7),
         width: MediaQuery.of(Get.context!).size.width,
         decoration: BoxDecoration(
             color: Colors.grey,
             borderRadius: BorderRadius.circular(25),
-            boxShadow: [BoxShadow(
-              color: Colors.grey.shade600,spreadRadius: 1,blurRadius: 2,
-              offset: Offset(0,3),
-            )]
-        ),
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AppText(title,fontSize: 16,fontWeight: FontWeight.w500,color: Colors.grey.shade900,),
-                    isSwitchRequired?Obx(
-                    ()=> Transform.scale(
-                  scale: 0.7,
-                  child: Switch(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade600,
+                spreadRadius: 1,
+                blurRadius: 2,
+                offset: Offset(0, 3),
+              )
+            ]),
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          AppText(
+            title,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: Colors.grey.shade900,
+          ),
+          isSwitchRequired
+              ? Obx(
+                  () => Transform.scale(
+                    scale: 0.7,
+                    child: Switch(
                       thumbIcon: MaterialStateProperty.resolveWith<Icon?>(
                         (Set<MaterialState> states) {
                           // Thumb icon when the switch is selected.
@@ -117,7 +137,9 @@ class MyAccount extends StatelessWidget {
                           return const Icon(Icons.close);
                         },
                       ),
-                      value: title == "Notifications" ? controller.checkNotification.value: controller.checkDark.value,
+                      value: title == "Notifications"
+                          ? controller.checkNotification.value
+                          : controller.checkDark.value,
                       activeColor: Colors.green,
                       inactiveTrackColor: Colors.red,
                       thumbColor: MaterialStateProperty.all(Colors.white),
@@ -127,10 +149,10 @@ class MyAccount extends StatelessWidget {
                       },
                     ),
                   ),
-              ):SizedBox(),
-            ]),
+                )
+              : SizedBox(),
+        ]),
       ),
     );
   }
-
 }

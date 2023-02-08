@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/common/common_functionality.dart';
+import 'package:humble_warrior/utils/routes/app_routes.dart';
 
 import '../../utils/app_text.dart';
 
@@ -29,63 +30,68 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: imageHeight + buttonbarHeight,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(radius),
-          boxShadow: const [
-            BoxShadow(blurRadius: 4, spreadRadius: 0, color: Colors.black38)
-          ]),
-      child: Column(
-        children: [
-          Stack(
-            children: [
-              SizedBox(
-                height: imageHeight,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(radius),
-                    topLeft: Radius.circular(radius),
-                  ),
-                  child: Image.network(
-                    imageUrl,
-                    alignment: Alignment.topCenter,
-                    width: Get.width,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  width: Get.width,
-                  height: imageTitleHeight,
-                  alignment: Alignment.centerLeft,
-                  decoration: const BoxDecoration(
-                    // borderRadius: BorderRadius.only(
-                    //     bottomRight: Radius.circular(15),
-                    //     bottomLeft: Radius.circular(15)),
-                    gradient: LinearGradient(
-                        colors: [Colors.transparent, Colors.black],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: AppText(
-                      title,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 24,
-                      color: Colors.white,
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed(AppRoutes.productDetail);
+      },
+      child: Container(
+        height: imageHeight + buttonbarHeight,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(radius),
+            boxShadow: const [
+              BoxShadow(blurRadius: 4, spreadRadius: 0, color: Colors.black38)
+            ]),
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                SizedBox(
+                  height: imageHeight,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(radius),
+                      topLeft: Radius.circular(radius),
+                    ),
+                    child: Image.network(
+                      imageUrl,
+                      alignment: Alignment.topCenter,
+                      width: Get.width,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: buttonbarHeight, child: buttons)
-        ],
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    width: Get.width,
+                    height: imageTitleHeight,
+                    alignment: Alignment.centerLeft,
+                    decoration: const BoxDecoration(
+                      // borderRadius: BorderRadius.only(
+                      //     bottomRight: Radius.circular(15),
+                      //     bottomLeft: Radius.circular(15)),
+                      gradient: LinearGradient(
+                          colors: [Colors.transparent, Colors.black],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: AppText(
+                        title,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 24,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: buttonbarHeight, child: buttons)
+          ],
+        ),
       ),
     );
   }
