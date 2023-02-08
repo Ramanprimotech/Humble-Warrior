@@ -15,6 +15,7 @@ class HomeScreen extends StatelessWidget {
     final HomeScreenController controller = Get.find();
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           elevation: 0,
           centerTitle: false,
@@ -50,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             Image.network(
-                              "https://www.freepnglogos.com/uploads/shoes-png/mens-shoes-png-transparent-images-images-11.png",
+                              controller.products[index % 4],
                               fit: BoxFit.fitHeight,
                               height: 50,
                             ),
@@ -142,7 +143,8 @@ class HomeScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             Image.network(
-                              "https://seeklogo.com/images/A/adidas-logo-107B082DA0-seeklogo.com.png",
+                              alignment: Alignment.bottomCenter,
+                              controller.brands[index % 4],
                               fit: BoxFit.contain,
                               height: 80,
                               width: 110,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 
-import '../../utils/image_path_network.dart';
 import 'common_home_option.dart';
 
 class FrontPageDeals extends StatelessWidget {
@@ -27,7 +26,8 @@ class FrontPageDeals extends StatelessWidget {
               ),
             ],
           ),
-          imageUrl: ImagePathNetwork.banner,
+          imageUrl:
+              "https://humblewarrior.com/wp-content/uploads/2022/11/ANRABESS-2022-Fall-Winter-Long-Sleeve-1-4-Zipper-Collared-Casual-Chunky-Cable-Knit-Cropped-Pullover-11-15-22-LIVE-PIC-SMC.jpg",
           title: 'Title Of Image',
         ),
       );

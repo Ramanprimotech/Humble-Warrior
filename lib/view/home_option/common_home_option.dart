@@ -34,7 +34,9 @@ class ItemCard extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(radius),
-          boxShadow: const [BoxShadow(blurRadius: 4, spreadRadius: 0)]),
+          boxShadow: const [
+            BoxShadow(blurRadius: 4, spreadRadius: 0, color: Colors.black38)
+          ]),
       child: Column(
         children: [
           Stack(
@@ -48,6 +50,8 @@ class ItemCard extends StatelessWidget {
                   ),
                   child: Image.network(
                     imageUrl,
+                    alignment: Alignment.topCenter,
+                    width: Get.width,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -135,5 +139,14 @@ Widget shareButton({required shareUrl}) {
       CommonUtils().share(shareUrl: "$shareUrl");
     },
     icon: AppIcons.share(),
+  );
+}
+
+Widget bookmarkButton({required shareUrl}) {
+  return IconButton(
+    onPressed: () {
+      CommonUtils().share(shareUrl: "$shareUrl");
+    },
+    icon: AppIcons.bookmarks(),
   );
 }

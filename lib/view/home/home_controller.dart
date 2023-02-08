@@ -24,6 +24,20 @@ class HomeScreenController extends GetxController {
         .addList();
     super.onInit();
   }
+
+  List<String> products = [
+    "https://www.freepnglogos.com/uploads/shoes-png/mens-shoes-png-transparent-images-images-11.png",
+    "https://e7.pngegg.com/pngimages/757/605/png-clipart-women-s-yellow-sleeveless-dress-dress-see-through-clothing-top-women-dress-tshirt-orange.png",
+    "https://www.pngfind.com/pngs/m/162-1629667_18-handbag-hd-png-download.png",
+    "https://www.pngfind.com/pngs/m/505-5055598_your-engagement-pre-engagement-ring-hd-png-download.png"
+  ];
+
+  List<String> brands = [
+    "https://seeklogo.com/images/A/adidas-logo-107B082DA0-seeklogo.com.png",
+    "https://www.pngfind.com/pngs/m/415-4156288_image-nike-logo-just-do-it-orange-hd.png",
+    "https://www.pngfind.com/pngs/m/59-595532_nike-logo-clipart-clear-ugg-australia-logo-png.png",
+    "https://www.pngfind.com/pngs/m/49-499731_profile-logo-art-tesla-logo-hd-png-download.png"
+  ];
 }
 
 class HomeOptions {
