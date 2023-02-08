@@ -19,16 +19,14 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final AboutScreenController controller = Get.put(AboutScreenController());
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: EdgeInsets.only(top: 20,right: 10,left: 10),
       child: SingleChildScrollView(
         child: Column(children: [
           _aboutButton(),
           _showImg(),
           _details(),
           _seeCopyButton(),
-          10.sh,
           _brandRow(),
-
           _brandList(),
         ]),
       ),
@@ -37,17 +35,18 @@ class AboutScreen extends StatelessWidget {
 
   _aboutButton(){
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-      margin: EdgeInsets.symmetric(horizontal: 0,vertical: 30),
+      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 0,vertical: 15),
       width: MediaQuery.of(Get.context!).size.width,
       decoration: BoxDecoration(
           color: Colors.grey.shade400,
           borderRadius: BorderRadius.circular(5),
           boxShadow: [BoxShadow(
-            color: Colors.grey.shade300,spreadRadius: 2,blurRadius: 3,
+            color: Colors.grey.shade500,spreadRadius: 2,blurRadius: 3,
+            offset: Offset(0,3),
           )]
       ),
-      child: AppText(aboutDonnaTxt,fontWeight: FontWeight.bold,textAlign: TextAlign.center),
+      child: AppText(aboutDonnaTxt,fontWeight: FontWeight.bold,fontSize: 18,textAlign: TextAlign.center),
     );
   }
 
@@ -67,19 +66,20 @@ class AboutScreen extends StatelessWidget {
   _details(){
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-      margin: EdgeInsets.symmetric(vertical: 20,horizontal: 0),
+      margin: EdgeInsets.symmetric(vertical: 15,horizontal: 0),
       width: MediaQuery.of(Get.context!).size.width,
       decoration: BoxDecoration(
-          color: Colors.grey.shade400,
+          color: Colors.grey.shade300,
           borderRadius: BorderRadius.circular(5),
           boxShadow: [BoxShadow(
-            color: Colors.grey.shade300,spreadRadius: 2,blurRadius: 3,
+            color: Colors.grey.shade500,spreadRadius: 2,blurRadius: 3,
+            offset: Offset(0,3),
           )]
       ),
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            AppText('Hello Gourgeos!',fontWeight: FontWeight.bold,),
+          children: [
+            AppText('HELLO GORGEOUS!',fontWeight: FontWeight.bold,color: Colors.grey.shade800),
             ReadMoreText(
               'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
               trimLines: 10,
@@ -95,13 +95,15 @@ class AboutScreen extends StatelessWidget {
 
   _seeCopyButton(){
     return Container(
+      margin: EdgeInsets.only(bottom: 10),
       padding: EdgeInsets.symmetric(horizontal: 20,vertical: 15),
       width: MediaQuery.of(Get.context!).size.width,
       decoration: BoxDecoration(
-          color: Colors.grey.shade400,
+          color: Colors.blueAccent.shade100,
           borderRadius: BorderRadius.circular(5),
           boxShadow: [BoxShadow(
-            color: Colors.grey.shade300,spreadRadius: 2,blurRadius: 3,
+            color: Colors.grey.shade500,spreadRadius: 2,blurRadius: 3,
+            offset: Offset(0,3),
           )]
       ),
       child: RichText(
@@ -117,46 +119,50 @@ class AboutScreen extends StatelessWidget {
   }
 
   _brandRow(){
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            AppText(
-              "BRAND'S I",
-              fontSize: 18,
-            ),
-            AppIcons.heart(
-              iconColor: Colors.red,
-            ),
-          ],
-        ),
-        AppText(
-          "View All",
-          fontSize: 16,
-        ),
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 3),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              AppText(
+                "BRAND'S I",
+                fontSize: 18,
+              ),
+              AppIcons.heart(
+                iconColor: Colors.red,
+              ),
+            ],
+          ),
+          AppText(
+            "View All",
+            fontSize: 16,
+          ),
+        ],
+      ),
     );
   }
 
   _brandList(){
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5),
-      height: 70,
-      width: Get.width,
+      height: 80,
+      width: Get.height,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: 25,
           itemBuilder: (ctx, index) {
             return SizedBox(
               height: 80,
-              width: 68,
+              width: 100,
               child: Column(
                 children: [
                   Image.network(
-                    ImagePathNetwork.feature,
-                    fit: BoxFit.fitHeight,
-                    height: 50,
+                    "https://seeklogo.com/images/A/adidas-logo-107B082DA0-seeklogo.com.png",
+                    fit: BoxFit.fill,
+                    height: 60,
+                    width: 80,
                   ),
                   Text(
                     "Product",

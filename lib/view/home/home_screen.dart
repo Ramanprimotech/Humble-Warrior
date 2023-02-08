@@ -113,20 +113,7 @@ class HomeScreen extends StatelessWidget {
                     }),
               ),
               const SizedBox(height: 15,),
-              Row(
-                children: [
-                  const AppText(
-                    "BRAND'S I",
-                    fontSize: 24,
-                  ),
-                  AppIcons.heart(
-                    iconColor: Colors.red,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
+              _brandRow(),
               SizedBox(
                 height: 80,
                 width: Get.height,
@@ -136,14 +123,14 @@ class HomeScreen extends StatelessWidget {
                     itemBuilder: (ctx, index) {
                       return SizedBox(
                         height: 80,
-                        width: 120,
+                        width: 100,
                         child: Column(
                           children: [
                             Image.network(
                               "https://seeklogo.com/images/A/adidas-logo-107B082DA0-seeklogo.com.png",
-                              fit: BoxFit.contain,
+                              fit: BoxFit.fill,
                               height: 80,
-                              width: 110,
+                              width: 80,
                             ),
 
                           ],
@@ -157,4 +144,28 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
+  _brandRow(){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            AppText(
+              "BRAND'S I",
+              fontSize: 18,
+            ),
+            AppIcons.heart(
+              iconColor: Colors.red,
+            ),
+          ],
+        ),
+        AppText(
+          "View All",
+          fontSize: 16,
+        ),
+      ],
+    );
+  }
+
 }
