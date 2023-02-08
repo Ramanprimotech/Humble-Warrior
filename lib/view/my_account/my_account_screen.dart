@@ -1,74 +1,113 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
+import 'package:humble_warrior/utils/common/common_functionality.dart';
 import 'package:humble_warrior/utils/extensions.dart';
+import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
+import 'package:humble_warrior/utils/sizes/enums.dart';
 import 'package:humble_warrior/view/my_account/my_account_controller.dart';
+import 'package:image_picker/image_picker.dart';
+
+import '../../utils/button.dart';
 
 class MyAccount extends StatelessWidget {
-  const MyAccount({Key? key}) : super(key: key);
+   MyAccount({Key? key}) : super(key: key);
+  final MyAccountController controller = Get.put(MyAccountController());
 
   @override
   Widget build(BuildContext context) {
-    final MyAccountController controller = Get.put(MyAccountController());
-    return Container(
-      margin: EdgeInsets.only(top: 50, left: 10, right: 10),
-      child: SingleChildScrollView(
-        child: Column(children: [
-          _profileImage(),
-          10.sh,
-          _divider(),
-          10.sh,
-          _myAccountTxt(heading: "MY ACCOUNT"),
-          _detailsOptions(controller, title: "Account Details"),
-          _detailsOptions(controller,
-              title: "Notifications",
-              isSwitchRequired: true,
-              click: controller.switchFunc),
-          10.sh,
-          _divider(),
-          10.sh,
-          _myAccountTxt(heading: "THE HUMBLE WARRIOR"),
-          _detailsOptions(controller, title: "About Donna", ontap: () {
-            Get.toNamed(AppRoutes.aboutDonna);
-          }),
-          _detailsOptions(controller, title: "Share with friends"),
-          10.sh,
-          _divider(),
-          10.sh,
-          _myAccountTxt(heading: "SETTINGS"),
-          _detailsOptions(controller, title: "Passcode"),
-          _detailsOptions(controller,
-              title: "Dark Mode",
-              isSwitchRequired: true,
-              click: controller.darkMode),
-          _detailsOptions(controller, title: "Help & Support"),
-          _detailsOptions(controller, title: "Terms & Conditions"),
-          _detailsOptions(controller, title: "Logout"),
-          AppText('APP VERSION V 1.0'),
-          10.sh,
-        ]),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.only(top: 50, left: 10, right: 10),
+          child: Column(children: [
+            _profileImage(controller),
+            10.sh,
+            _divider(),
+            10.sh,
+            _myAccountTxt(heading: myAccountTxt),
+            _detailsOptions(controller, title: accountDetailsTxt),
+            _detailsOptions(controller,
+                title: notificationsTxt,
+                isSwitchRequired: true,
+                click: controller.switchFunc),
+            10.sh,
+            _divider(),
+            10.sh,
+            _myAccountTxt(heading: theHumbleWarriorTxt),
+            _detailsOptions(controller, title: aboutDonna, ontap: () {
+              Get.toNamed(AppRoutes.aboutDonna);
+            }),
+            _detailsOptions(controller, title: shareWithFriendsTxt),
+            10.sh,
+            _divider(),
+            10.sh,
+            _myAccountTxt(heading: settingsTxt),
+            _detailsOptions(controller, title: passcodeTxt),
+            _detailsOptions(controller,
+                title: darkModeTxt,
+                isSwitchRequired: true,
+                click: controller.darkMode),
+            _detailsOptions(controller, title: helpSupportTxt),
+            _detailsOptions(controller, title: termsConditionsTxt),
+            _detailsOptions(controller, title: logoutTxt,ontap: (){
+              /*DialogHelper.showConfirmationDialog(title: "Humble Warrior",
+                  description: "Are you sure?",
+                  actions: [Button(label: "cancel",
+                buttonSize: ButtonSize.medium,
+                padding: 4.pa,
+                onTap: DialogHelper.closeDialog,),
+                    Button(label: "ok",
+                      buttonSize: ButtonSize.medium,
+                      padding: 4.pa,
+                      onTap: DialogHelper.closeDialog,)
+                  ]);*/
+            }),
+            AppText('${appVersionTxt} V 1.0'),
+            10.sh,
+          ]),
+        ),
       ),
     );
   }
 
-  _profileImage() {
+  _profileImage(MyAccountController controller) {
     return Column(
       children: [
-        Container(
-          alignment: Alignment.center,
-          height: 150,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.grey.shade200,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.camera_alt, color: Colors.black, size: 40),
-              5.sh,
-              AppText("Add Photo"),
-            ],
+        Obx(
+              () => Container(
+            alignment: Alignment.center,
+            height: 150,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.grey.shade200,
+            ),
+            child: controller.imageUrl.isEmpty?InkWell(
+              onTap: (){
+                _openBottomSheet();
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.camera_alt, color: Colors.black, size: 40),
+                  5.sh,
+                  AppText(addPhotoTxt),
+                ],
+              ),
+            ): ClipRRect(
+              borderRadius: BorderRadius.circular(150),
+              child: Image.file(
+               File(controller.imageUrl.value),
+                fit: BoxFit.fill,
+                height: 145,
+                width: 145,
+              ),
+            ),
           ),
         ),
         10.sh,
@@ -100,8 +139,8 @@ class MyAccount extends StatelessWidget {
         padding: EdgeInsets.only(
             left: 15,
             right: 5,
-            top: isSwitchRequired ? 0 : 10,
-            bottom: isSwitchRequired ? 0 : 10),
+            top: isSwitchRequired ? 0 : 12,
+            bottom: isSwitchRequired ? 0 : 12),
         margin: EdgeInsets.symmetric(horizontal: 0, vertical: 7),
         width: MediaQuery.of(Get.context!).size.width,
         decoration: BoxDecoration(
@@ -137,15 +176,14 @@ class MyAccount extends StatelessWidget {
                           return const Icon(Icons.close);
                         },
                       ),
-                      value: title == "Notifications"
-                          ? controller.checkNotification.value
-                          : controller.checkDark.value,
-                      activeColor: Colors.green,
+                      value: title == darkModeTxt
+                          ? controller.checkDark.value
+                          : controller.checkNotification.value,
+                      activeColor: Colors.lightGreen.shade600,
                       inactiveTrackColor: Colors.red,
                       thumbColor: MaterialStateProperty.all(Colors.white),
                       onChanged: (_) {
                         click();
-                        //controller.update();
                       },
                     ),
                   ),
@@ -155,4 +193,35 @@ class MyAccount extends StatelessWidget {
       ),
     );
   }
+
+  Future<void> _openBottomSheet() async {
+    return showCupertinoModalPopup<void>(
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return CupertinoActionSheet(
+          title: CommonUtils.header(),
+          actions: <Widget>[
+            CommonUtils.actionButton(
+             cameraTxt,
+              onTap: () {
+               controller.getImageCamera();
+              //  CommonUtils().getImagePath(imageSource: ImageSource.camera);
+                Navigator.pop(context);
+              },
+            ),
+            CommonUtils.actionButton(
+              galleryTxt,
+              onTap: () {
+                controller.getImageGallery();
+              //  CommonUtils().getImagePath(imageSource: ImageSource.gallery);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+          cancelButton: CommonUtils.cancelButton(),
+        );
+      },
+    );
+  }
+
 }
