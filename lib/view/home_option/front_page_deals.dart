@@ -16,10 +16,7 @@ class FrontPageDeals extends StatelessWidget {
           buttons: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              IconButton(
-                onPressed: () {},
-                icon: AppIcons.share(),
-              ),
+              shareButton(shareUrl: "shareUrl"),
               IconButton(
                 onPressed: () {},
                 icon: AppIcons.bookmarks(),

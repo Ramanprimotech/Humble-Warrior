@@ -16,12 +16,9 @@ class DonnaFavourite extends StatelessWidget {
           buttons: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              shareButton(),
+              shopButton(url: ""),
               codeButton(code: "dklfgj"),
-              IconButton(
-                onPressed: () {},
-                icon: AppIcons.share(),
-              ),
+              shareButton(shareUrl: "shareUrl"),
               IconButton(
                 onPressed: () {},
                 icon: AppIcons.bookmarks(),

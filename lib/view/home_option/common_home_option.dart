@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
+import 'package:humble_warrior/utils/common/common_functionality.dart';
 
 import '../../utils/app_text.dart';
 
@@ -88,7 +89,9 @@ class ItemCard extends StatelessWidget {
 
 Widget codeButton({required String code}) {
   return InkWell(
-    onTap: () {},
+    onTap: () {
+      CommonUtils().copyToClipboard(copyText: code);
+    },
     child: Container(
         alignment: Alignment.center,
         width: 90,
@@ -108,9 +111,11 @@ Widget codeButton({required String code}) {
   );
 }
 
-Widget shareButton() {
+Widget shopButton({required url}) {
   return InkWell(
-    onTap: () {},
+    onTap: () async {
+      await CommonUtils().urlLauncher(url: url);
+    },
     child: Container(
         alignment: Alignment.center,
         width: 90,
@@ -121,5 +126,14 @@ Widget shareButton() {
           "Shop Now",
           fontSize: 14,
         )),
+  );
+}
+
+Widget shareButton({required shareUrl}) {
+  return IconButton(
+    onPressed: () {
+      CommonUtils().share(shareUrl: "$shareUrl");
+    },
+    icon: AppIcons.share(),
   );
 }
