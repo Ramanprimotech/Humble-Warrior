@@ -15,6 +15,5 @@ class ProductDetailController extends GetxController {
      imagePath = await CommonUtils().getImagePath(imageSource: ImageSource.gallery);
      debugPrint("Image Path $imagePath");
      update();
-
    }
 }
