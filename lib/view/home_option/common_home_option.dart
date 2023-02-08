@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/common/common_functionality.dart';
+import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 
 import '../../utils/app_text.dart';
@@ -53,8 +54,8 @@ class ItemCard extends StatelessWidget {
                       topRight: Radius.circular(radius),
                       topLeft: Radius.circular(radius),
                     ),
-                    child: Image.network(
-                      imageUrl,
+                    child: CommonWidgets.networkImage(
+                      imageUrl: imageUrl,
                       alignment: Alignment.topCenter,
                       width: Get.width,
                       fit: BoxFit.cover,

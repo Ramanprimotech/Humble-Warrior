@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_text.dart';
+import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_UI.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
@@ -56,11 +57,11 @@ class HomeScreen extends StatelessWidget {
                         width: 68,
                         child: Column(
                           children: [
-                            Image.network(
-                              controller.products[index % 4],
-                              fit: BoxFit.fitHeight,
-                              height: 50,
-                            ),
+                            CommonWidgets.networkImage(
+                                imageUrl: controller.products[index % 4],
+                                fit: BoxFit.fitHeight,
+                                height: 50,
+                                scale: 0.7),
                             const AppText(
                               "Product",
                               fontSize: 12,
@@ -116,9 +117,9 @@ class HomeScreen extends StatelessWidget {
                               width: 120,
                               child: Column(
                                 children: [
-                                  Image.network(
+                                  CommonWidgets.networkImage(
                                     alignment: Alignment.bottomCenter,
-                                    controller.brands[index % 4],
+                                    imageUrl: controller.brands[index % 4],
                                     fit: BoxFit.contain,
                                     height: 80,
                                     width: 110,
@@ -150,8 +151,8 @@ Widget homeOption({required HomeOptions homeOptions, required int index}) {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
-            child: Image.network(
-              homeOptions.image,
+            child: CommonWidgets.networkImage(
+              imageUrl: homeOptions.image,
               fit: BoxFit.fitWidth,
               height: 200,
               alignment: Alignment.topCenter,
