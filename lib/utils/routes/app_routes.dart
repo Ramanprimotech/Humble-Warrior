@@ -6,26 +6,6 @@ class AppRoutes {
   static String aboutDonna = "/aboutDonna";
   static String productDetail = "/productDetail";
   static String homeOptions = "/homeOptions";
-  static String selectedAlbum = "/selectedAlbum";
-  static String discover = "/discover";
-  static String setting = "/setting";
-  static String homeTabView = "/homeTabView";
-  static String notification = "/notification";
-  static String signIn = "/signIn";
-  static String signInWithPhoneNumber = "/signInWithPhoneNumber";
-  static String verifyOtp = "/verifyOtp";
-  static String pauseNotification = "/pauseNotification";
-  static String phoneAuth = "/phoneAuth";
-  static String search = "/search";
-  static String quoteScreen = "/quoteScreen";
-  static String notificationDetail = "/notificationDetail";
-  static String pollScreen = "/pollScreen";
-  static String puzzleScreen = "/puzzleScreen";
-  static String insightScreen = "/insightScreen";
-  static String relevancyScreen = "/relevancyScreen";
-  static String topicScreen = "/topicScreen";
-  static String topicCardScreen = "/topicCardScreen";
-  static String notificationPagerScreen = "/notificationPagerScreen";
-  static String pollPagerScreen = "/pollPagerScreen";
-  static String commonWidget = "/commonWidget";
+  static String splashScreen = "/splashScreen";
+
 }

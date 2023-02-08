@@ -8,6 +8,8 @@ import 'package:humble_warrior/view/home_option/home_option_binging.dart';
 import 'package:humble_warrior/view/home_option/home_option_screen.dart';
 import 'package:humble_warrior/view/landing/intro_binding.dart';
 import 'package:humble_warrior/view/landing/intro_screen.dart';
+import 'package:humble_warrior/view/splash/splash_binding.dart';
+import 'package:humble_warrior/view/splash/splash_screen.dart';
 
 import '../../view/about_donna/about_binding.dart';
 import '../../view/productDetail/product_detail_Screen.dart';
@@ -15,7 +17,7 @@ import '../../view/productDetail/product_detail_binding.dart';
 import 'app_routes.dart';
 
 class AppPages {
-  static String initialRoute = AppRoutes.introScreen;
+  static String initialRoute = AppRoutes.splashScreen;
   static final List<GetPage<dynamic>> routes = [
     GetPage(
         name: AppRoutes.introScreen,
@@ -40,6 +42,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.aboutDonna,
         page: () => const AboutScreen(),
-        binding: AboutBinding())
+        binding: AboutBinding()),
+    GetPage(
+        name: AppRoutes.splashScreen,
+        page: () => const SplashScreen(),
+        binding: SplashBinding())
   ];
 }

@@ -5,8 +5,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
+import 'package:humble_warrior/utils/routes/app_routes.dart';
 
 import '../../firebase_options.dart';
+import '../../utils/shared_prefrence/shared_pref.dart';
 
 class LoginController extends GetxController {
   User? user;
@@ -39,6 +42,13 @@ class LoginController extends GetxController {
           user = await AuthManager().facebookLogin();
           if (user != null) {
             Get.snackbar("Login ", "User Login Successfully ");
+            await SharePreferenceData.addBoolToSF(isLogged, true);
+            await SharePreferenceData.addStringToSF(userEmail, user!.email!);
+            await SharePreferenceData.addStringToSF(userPhoneNumber, user!.phoneNumber!);
+            await SharePreferenceData.addStringToSF(userName, user!.displayName!);
+            await SharePreferenceData.addStringToSF(userProfilePic, user!.photoURL!);
+            Get.toNamed(AppRoutes.bottomNavigation);
+
           }
         } catch (e) {
           debugPrint("error --- $e");
@@ -56,15 +66,23 @@ class LoginController extends GetxController {
               iosClientId:
                   DefaultFirebaseOptions.currentPlatform.iosClientId ?? "");
 
-          // user = await GoogleLoginManager().signInWithGoogle(context);
           if (user != null) {
             Loader.hide();
             Get.snackbar("Login ", "User Login Successfully ");
+            await SharePreferenceData.addBoolToSF(isLogged, true);
+           // print("user values ------ ${user!.email!  }--${user!.photoURL!  }---${user!.phoneNumber!  }--${user!.displayName!  }");
+            await SharePreferenceData.addStringToSF(userEmail, user!.email!);
+            // if( user!.photoURL!.isNotEmpty  user!.phoneNumber!.isNotEmpty || user!.displayName!.isNotEmpty){
+            //   await SharePreferenceData.addStringToSF(userPhoneNumber, user!.phoneNumber!);
+            //
+            //   await SharePreferenceData.addStringToSF(userProfilePic, user!.photoURL!);
+            // }
+            // if(user!.displayName!.isNotEmpty && user!.displayName! == null){
+            //   await SharePreferenceData.addStringToSF(userName, user!.displayName!);
+            // }
 
-            // await SharePreference.addStringToSF(
-            //     LocalString.signKey, user!.email!);
-            // settingController.getGoogleLoginValue();
-            // Get.back();
+            Get.offNamed(AppRoutes.bottomNavigation);
+
           } else {
             Loader.hide();
           }
@@ -80,6 +98,13 @@ class LoginController extends GetxController {
         user = await AuthManager().appleLogin();
         if (user != null) {
           Get.snackbar("Login ", "User Login Successfully ");
+          await SharePreferenceData.addBoolToSF(isLogged, true);
+          await SharePreferenceData.addStringToSF(userEmail, user!.email!);
+          await SharePreferenceData.addStringToSF(userPhoneNumber, user!.phoneNumber!);
+          await SharePreferenceData.addStringToSF(userName, user!.displayName!);
+          await SharePreferenceData.addStringToSF(userProfilePic, user!.photoURL!);
+          Get.toNamed(AppRoutes.bottomNavigation);
+
         }
       },
     };

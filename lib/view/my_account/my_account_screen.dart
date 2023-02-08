@@ -1,8 +1,11 @@
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
+import 'package:humble_warrior/utils/shared_prefrence/shared_pref.dart';
 import 'package:humble_warrior/view/my_account/my_account_controller.dart';
 
 class MyAccount extends StatelessWidget {
@@ -12,7 +15,7 @@ class MyAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     final MyAccountController controller = Get.put(MyAccountController());
     return Container(
-      margin: EdgeInsets.only(top: 50, left: 10, right: 10),
+      margin: const EdgeInsets.only(top: 50, left: 10, right: 10),
       child: SingleChildScrollView(
         child: Column(children: [
           _profileImage(),
@@ -44,7 +47,17 @@ class MyAccount extends StatelessWidget {
               click: controller.darkMode),
           _detailsOptions(controller, title: "Help & Support"),
           _detailsOptions(controller, title: "Terms & Conditions"),
-          _detailsOptions(controller, title: "Logout"),
+          GestureDetector(
+            onTap: () async {
+              SharePreferenceData.clear();
+              FirebaseAuth.instance.signOut();
+
+              Get.offNamed(AppRoutes.introScreen);
+
+            },
+            child:  _detailsOptions(controller, title: "Logout"),
+          ),
+
           AppText('APP VERSION V 1.0'),
           10.sh,
         ]),
@@ -150,7 +163,7 @@ class MyAccount extends StatelessWidget {
                     ),
                   ),
                 )
-              : SizedBox(),
+              : const SizedBox(),
         ]),
       ),
     );
