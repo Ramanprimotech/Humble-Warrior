@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
+import 'package:humble_warrior/utils/image_path_network.dart';
 import 'package:readmore/readmore.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../utils/common/common_functionality.dart';
 import '../../utils/sizes/sizes_config.dart';
 
 class ProductDetailWidget {
@@ -50,23 +52,24 @@ class ProductDetailWidget {
   Widget shopSubButton() {
     return Card(
       elevation: 5,
-      // shape: RoundedRectangleBorder(
-      //   side: BorderSide(
-      //     color: Colors.grey.shade100,
-      //     width: 1, //<-- SEE HERE
-      //   ),
-      //   borderRadius: BorderRadius.circular(0.0),
-      // ),
       child: Container(
         width: MediaQuery.of(Get.context!).size.width * .9,
         color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            button(title: shopNow, backClr: AppColors.secondary),
+            GestureDetector(
+              onTap: (){
+                CommonUtils().share(shareUrl: "");
+              },
+                child: button(title: shopNow, backClr: AppColors.secondary)),
             Row(
               children: [
-                button(title: subscribe, backClr: AppColors.blue),
+                GestureDetector(
+                  onTap: (){
+                    CommonUtils().urlLauncher(url: ImagePathNetwork.url);
+                  },
+                    child: button(title: subscribe, backClr: AppColors.blue)),
                 Icon(
                   Icons.share,
                   color: Colors.black,
