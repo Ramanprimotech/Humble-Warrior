@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/image_path_network.dart';
+import 'package:humble_warrior/view/home_option/common_home_option.dart';
 import 'package:humble_warrior/view/productDetail/product_detail_widget.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -24,23 +25,19 @@ class ProductDetailScreen extends StatelessWidget with ProductDetailWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            GestureDetector(
-              onTap: (){
-                controller.getImagePath();
-              },
-                child: "Pick Image".text.make().p(10)),
-              controller.imagePath == null ?Image.network(ImagePathNetwork.image4,height: 100,) :
-              GetBuilder(
-                init: controller,
-                  builder: (ProductDetailController controller) {
-                   return Image.file(controller.imagePath!).p(10);
-                  },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ItemCard(
+                buttons: shopSubButton(shopNowUrl: 'https://humblewarrior.com', subscribeUrl: '', shareUrl: 'https://humblewarrior.com'),
+                buttonbarHeight: 60,
+                imageUrl: ImagePathNetwork.banner,
+                title: 'Title Of Image',
               ),
+            ),
             productText(),
-            shopSubButton(),
             productDescription(),
           ],
-        ),
+        ).p(10),
       ),
     );
   }

@@ -11,6 +11,8 @@ import '../../utils/common/common_functionality.dart';
 import '../../utils/sizes/sizes_config.dart';
 
 class ProductDetailWidget {
+
+
   Widget productText() {
     return Card(
       elevation: 5,
@@ -43,43 +45,40 @@ class ProductDetailWidget {
               ),
             ),
           ],
-        ).p(20),
+        ).p(6),
       ),
-    ).p(10);
+    ).py(10);
   }
 
   /// Shop/Subscribe Button
-  Widget shopSubButton() {
-    return Card(
-      elevation: 5,
-      child: Container(
-        width: MediaQuery.of(Get.context!).size.width * .9,
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  Widget shopSubButton({required String shopNowUrl,required String subscribeUrl,required String shareUrl}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        GestureDetector(
+          onTap: (){
+            CommonUtils().urlLauncher(url:shopNowUrl);          },
+            child: button(title: shopNow, backClr: AppColors.secondary)),
+        Row(
           children: [
             GestureDetector(
               onTap: (){
-                CommonUtils().share(shareUrl: "");
+
               },
-                child: button(title: shopNow, backClr: AppColors.secondary)),
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: (){
-                    CommonUtils().urlLauncher(url: ImagePathNetwork.url);
-                  },
-                    child: button(title: subscribe, backClr: AppColors.blue)),
-                Icon(
-                  Icons.share,
-                  color: Colors.black,
-                  size: Dimens.smallIcon,
-                ).px(10),
-              ],
+                child: button(title: subscribe, backClr: AppColors.blue)),
+            GestureDetector(
+              onTap: (){
+                CommonUtils().share(shareUrl: shareUrl);
+              },
+              child: Icon(
+                Icons.share,
+                color: Colors.black,
+                size: Dimens.smallIcon,
+              ).px(10),
             ),
           ],
         ),
-      ),
+      ],
     );
   }
 
@@ -141,6 +140,6 @@ class ProductDetailWidget {
           ],
         ).p(6),
       ),
-    ).p(10);
+    ).py(6);
   }
 }

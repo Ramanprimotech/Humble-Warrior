@@ -35,7 +35,8 @@ class ItemCard extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(radius),
           boxShadow: const [BoxShadow(blurRadius: 4, spreadRadius: 0)]),
-      child: Column(
+      child:
+      Column(
         children: [
           Stack(
             children: [
@@ -96,7 +97,7 @@ Widget codeButton({required String code}) {
         alignment: Alignment.center,
         width: 90,
         height: 28,
-        decoration: BoxDecoration(color: Colors.blue),
+        decoration: const BoxDecoration(color: Colors.blue),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -120,8 +121,8 @@ Widget shopButton({required url}) {
         alignment: Alignment.center,
         width: 90,
         height: 28,
-        decoration: BoxDecoration(color: Colors.pink),
-        child: AppText(
+        decoration: const BoxDecoration(color: Colors.pink),
+        child: const AppText(
           color: Colors.white,
           "Shop Now",
           fontSize: 14,

@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CommonUtils{
@@ -13,11 +13,12 @@ class CommonUtils{
   /// Share Data
   Future<void> share({required String shareUrl}) async {
 
-    await FlutterShare.share(
-
-        linkUrl: 'https://flutter.dev/', title: '',
-
-    );
+    Share.share(shareUrl);
+    // await FlutterShare.share(
+    //
+    //     linkUrl: 'https://flutter.dev/', title: '',
+    //
+    // );
   }
 
 
