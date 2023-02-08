@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/view/home_option/Donna_deals.dart';
+import 'package:humble_warrior/view/home_option/donnas_favourite.dart';
+import 'package:humble_warrior/view/home_option/front_page_deals.dart';
 import 'package:humble_warrior/view/home_option/home_option_controller.dart';
 
 import '../../utils/app_icons.dart';
 import '../../utils/search_bar/search_bar_UI.dart';
+import 'donnas_deals.dart';
 
 class HomeOptionScreen extends StatelessWidget {
-  const HomeOptionScreen({Key? key}) : super(key: key);
+  HomeOptionScreen({Key? key}) : super(key: key);
+
+  final HomeOptionController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    HomeOptionController controller = Get.find();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -27,10 +30,14 @@ class HomeOptionScreen extends StatelessWidget {
                 Get.back();
               },
               child: AppIcons.backArrow()),
-          bottom: TabBar(controller: controller.tabController, tabs: const <Widget>[
-            AppText("Front Page Deals"),
-            AppText("Donna's Daily Deals")
-          ]),
+          bottom: TabBar(
+              isScrollable: true,
+              controller: controller.tabController,
+              tabs: const <Widget>[
+                AppText("Front Page Deals"),
+                AppText("Donna's Daily Deals"),
+                AppText("Donna's Favourite Things")
+              ]),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 15),
@@ -40,13 +47,13 @@ class HomeOptionScreen extends StatelessWidget {
         ),
         body: TabBarView(
           controller: controller.tabController,
-          children: [
-            DonnaDeals(),
-            Text("sddsd"),
+          children: const [
+            FrontPageDeals(),
+            DonnaDailyDeals(),
+            DonnaFavourite(),
           ],
         ),
       ),
     );
   }
 }
-

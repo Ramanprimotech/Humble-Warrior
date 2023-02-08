@@ -8,7 +8,6 @@ class BottomNavigationBindings implements Bindings {
   @override
   void dependencies() {
     Get.put(BottomNavigationController());
-    Get.put(HomeOptionController());
     Get.put(HomeScreenController());
   }
 }

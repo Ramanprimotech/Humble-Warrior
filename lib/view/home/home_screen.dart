@@ -3,12 +3,9 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/image_path_network.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_UI.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
-
-import '../bottom_navigation/bottom_navigation_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -53,12 +50,13 @@ class HomeScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             Image.network(
-                             "https://www.freepnglogos.com/uploads/shoes-png/mens-shoes-png-transparent-images-images-11.png",
+                              "https://www.freepnglogos.com/uploads/shoes-png/mens-shoes-png-transparent-images-images-11.png",
                               fit: BoxFit.fitHeight,
                               height: 50,
                             ),
                             const AppText(
-                              "Product",fontSize: 12,
+                              "Product",
+                              fontSize: 12,
                             ),
                           ],
                         ),
@@ -77,8 +75,9 @@ class HomeScreen extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         child: GestureDetector(
-                          onTap: (){
-                            Get.toNamed(AppRoutes.homeOptions);
+                          onTap: () {
+                            Get.toNamed(AppRoutes.homeOptions,
+                                arguments: <int>[index]);
                           },
                           child: Stack(
                             children: [
@@ -100,7 +99,8 @@ class HomeScreen extends StatelessWidget {
                                   height: 40,
                                   width: 250,
                                   alignment: Alignment.center,
-                                  decoration: BoxDecoration(color: Colors.white),
+                                  decoration:
+                                      BoxDecoration(color: Colors.white),
                                   child: AppText(
                                     HomeOptions.homeOptionsList[index].text,
                                   ),
@@ -112,7 +112,9 @@ class HomeScreen extends StatelessWidget {
                       );
                     }),
               ),
-              const SizedBox(height: 15,),
+              const SizedBox(
+                height: 15,
+              ),
               Row(
                 children: [
                   const AppText(
@@ -145,7 +147,6 @@ class HomeScreen extends StatelessWidget {
                               height: 80,
                               width: 110,
                             ),
-
                           ],
                         ),
                       );

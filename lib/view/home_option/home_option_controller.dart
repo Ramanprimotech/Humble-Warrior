@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:humble_warrior/view/home/home_screen.dart';
 
-class HomeOptionController extends GetxController with GetSingleTickerProviderStateMixin{
-   late TabController tabController;
+class HomeOptionController extends GetxController
+    with GetSingleTickerProviderStateMixin {
+  late TabController tabController;
   final TextEditingController searchTextController = TextEditingController();
   final FocusNode focusNode = FocusNode();
   RxInt selectedIndex = 0.obs;
-
+  int initialIndex = Get.arguments[0];
   @override
   void onInit() {
-    tabController = TabController(length: 2, vsync: this);
+    print(initialIndex);
+    tabController =
+        TabController(length: 3, initialIndex: initialIndex, vsync: this);
     tabController.addListener(() {
       selectedIndex.value = tabController.index;
     });

@@ -29,7 +29,7 @@ class AppPages {
         binding: BottomNavigationBindings()),
     GetPage(
         name: AppRoutes.homeOptions,
-        page: () => const HomeOptionScreen(),
+        page: () => HomeOptionScreen(),
         binding: HomeOptionBindings()),
     GetPage(
         name: AppRoutes.productDetail,

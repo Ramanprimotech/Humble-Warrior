@@ -17,6 +17,11 @@ class HomeScreenController extends GetxController {
             image:
                 "https://humblewarrior.com/wp-content/uploads/2022/11/vinex600.jpg")
         .addList();
+    HomeOptions(
+            text: "Donna's Favourite Things",
+            image:
+                "https://humblewarrior.com/wp-content/uploads/2022/11/Screen-Shot-2022-01-12-at-1.58.30-PM.jpg")
+        .addList();
     super.onInit();
   }
 }
