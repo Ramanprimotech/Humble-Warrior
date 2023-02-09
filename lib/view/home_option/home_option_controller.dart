@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
+import 'package:humble_warrior/modals/response/front_page_response_model.dart';
+
+import '../../modals/requests/pagination_modal.dart';
+import '../../modals/response/donna_deals_response.dart';
+import '../../network/api_call.dart';
 
 class HomeOptionController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -8,6 +14,31 @@ class HomeOptionController extends GetxController
   final FocusNode focusNode = FocusNode();
   RxInt selectedIndex = 0.obs;
   int initialIndex = Get.arguments[0];
+
+  /// Donna's Deals
+  final RxInt donnaDealsLength = 0.obs;
+  final RxBool donnaDealsBool = true.obs;
+  List<DonnaDealsDetails> donnaDealList = [];
+  int donnaDealsPage = 1;
+  final ScrollController donnaDealScrollController =
+      ScrollController(initialScrollOffset: 0.0);
+
+  /// Front Page Deals
+  final RxInt frontPageDealsLength = 0.obs;
+  final RxBool frontPageDealsBool = true.obs;
+  List<FrontPageDetails> frontPageDealList = [];
+  int frontPageDealsPage = 1;
+  final ScrollController frontPageDealScrollController =
+      ScrollController(initialScrollOffset: 0.0);
+
+  /// Donna's Favourite
+  final RxInt donnaFavouriteDealsLength = 0.obs;
+  final RxBool donnaFavouriteDealsBool = true.obs;
+  List<DonnaFavouriteDetails> donnaFavouriteDealList = [];
+  int donnaFavouriteDealsPage = 1;
+  final ScrollController donnaFavouriteDealScrollController =
+      ScrollController(initialScrollOffset: 0.0);
+
   @override
   void onInit() {
     print(initialIndex);
@@ -16,7 +47,42 @@ class HomeOptionController extends GetxController
     tabController.addListener(() {
       selectedIndex.value = tabController.index;
     });
+    Future.wait(
+        [donaDealsAPI(), donnaFavouriteDealsAPI(), frontPageDealsAPI()]);
     super.onInit();
+  }
+
+  Future donaDealsAPI() async {
+    PaginationModel paginationModel =
+        PaginationModel(page: donnaDealsPage.toString());
+    await CallAPI.donnaDeals(payload: paginationModel).then((value) {
+      donnaDealsPage += 1;
+      donnaDealList.addAll(value);
+      donnaDealsBool.value = false;
+      update();
+    });
+  }
+
+  Future frontPageDealsAPI() async {
+    PaginationModel paginationModel =
+        PaginationModel(page: frontPageDealsPage.toString());
+    await CallAPI.frontPage(payload: paginationModel).then((value) {
+      frontPageDealsPage += 1;
+      frontPageDealList.addAll(value);
+      frontPageDealsBool.value = false;
+      update();
+    });
+  }
+
+  Future donnaFavouriteDealsAPI() async {
+    PaginationModel paginationModel =
+        PaginationModel(page: donnaFavouriteDealsPage.toString());
+    await CallAPI.donnaFavourite(payload: paginationModel).then((value) {
+      donnaFavouriteDealsPage += 1;
+      donnaFavouriteDealList.addAll(value);
+      donnaFavouriteDealsBool.value = false;
+      update();
+    });
   }
 
   @override

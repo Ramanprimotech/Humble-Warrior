@@ -20,9 +20,9 @@ class ItemCard extends StatelessWidget {
   const ItemCard(
       {Key? key,
       this.buttons,
-      this.buttonbarHeight = 40,
+      this.buttonbarHeight = 50,
       this.radius = 15,
-      this.imageHeight = 180,
+      this.imageHeight = 220,
       this.imageTitleHeight = 60,
       this.cardHeight,
       required this.imageUrl,
@@ -73,7 +73,11 @@ class ItemCard extends StatelessWidget {
                       //     bottomRight: Radius.circular(15),
                       //     bottomLeft: Radius.circular(15)),
                       gradient: LinearGradient(
-                          colors: [Colors.transparent, Colors.black],
+                          colors: [
+                            Colors.transparent,
+                            Colors.black26,
+                            Colors.black
+                          ],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter),
                     ),
@@ -105,17 +109,19 @@ Widget codeButton({required String code}) {
     },
     child: Container(
         alignment: Alignment.center,
-        width: 90,
-        height: 28,
-        decoration: BoxDecoration(color: Colors.blue),
+        width: 100,
+        height: 35,
+        decoration: BoxDecoration(
+            color: Colors.blue, borderRadius: BorderRadius.circular(20)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AppIcons.cut(),
+            AppIcons.cut(size: 16),
             AppText(
               color: Colors.white,
+              fontWeight: FontWeight.w700,
               code,
-              fontSize: 14,
+              fontSize: 12,
             ),
           ],
         )),
@@ -130,10 +136,14 @@ Widget shopButton({required url}) {
     child: Container(
         alignment: Alignment.center,
         width: 90,
-        height: 28,
-        decoration: BoxDecoration(color: Colors.pink),
+        height: 35,
+        decoration: BoxDecoration(
+            color: Colors.pink,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 3)]),
         child: AppText(
           color: Colors.white,
+          fontWeight: FontWeight.w700,
           "Shop Now",
           fontSize: 14,
         )),

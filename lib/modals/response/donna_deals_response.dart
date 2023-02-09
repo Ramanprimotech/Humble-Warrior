@@ -1,6 +1,6 @@
 class DonnaDealsResponseModal {
   bool? status;
-  List<DonnaDealsList>? data;
+  List<DonnaDealsDetails>? data;
   String? message;
 
   DonnaDealsResponseModal({this.status, this.data, this.message});
@@ -8,9 +8,9 @@ class DonnaDealsResponseModal {
   DonnaDealsResponseModal.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     if (json['data'] != null) {
-      data = <DonnaDealsList>[];
+      data = <DonnaDealsDetails>[];
       json['data'].forEach((v) {
-        data!.add(new DonnaDealsList.fromJson(v));
+        data!.add(new DonnaDealsDetails.fromJson(v));
       });
     }
     message = json['message'];
@@ -27,15 +27,15 @@ class DonnaDealsResponseModal {
   }
 }
 
-class DonnaDealsList {
+class DonnaDealsDetails {
   String? dealName;
   String? shopUrl;
   String? couponCode;
   String? url;
 
-  DonnaDealsList({this.dealName, this.shopUrl, this.couponCode, this.url});
+  DonnaDealsDetails({this.dealName, this.shopUrl, this.couponCode, this.url});
 
-  DonnaDealsList.fromJson(Map<String, dynamic> json) {
+  DonnaDealsDetails.fromJson(Map<String, dynamic> json) {
     dealName = json['deal_name'];
     shopUrl = json['shop_url'];
     couponCode = json['coupon_code'];

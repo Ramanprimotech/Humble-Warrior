@@ -26,7 +26,10 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(right: 15),
               child: InkWell(
-                  onTap: () {}, child: AppIcons.notificationActice(size: 28)),
+                  onTap: () {
+                    controller.generateToken();
+                  },
+                  child: AppIcons.notificationActice(size: 28)),
             )
           ],
         ),
