@@ -168,7 +168,7 @@ abstract class DialogHelper {
     }
   }
 
-  static Future<void> logoutDialog() async {
+  static Future<void> logoutDialog({required action}) async {
     showDialog(
        barrierDismissible: false,
       context: Get.context!,
@@ -189,7 +189,9 @@ abstract class DialogHelper {
                   borderRadius: BorderRadius.circular(10)),
               backgroundColor: AppColors.primary,
             ),
-            onPressed: () {},
+            onPressed: () {
+              action;
+            },
             child: AppText('OK', color: Colors.white,fontWeight: FontWeight.bold),
           ),
           OutlinedButton(

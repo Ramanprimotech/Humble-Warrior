@@ -43,10 +43,10 @@ class LoginController extends GetxController {
           if (user != null) {
             Get.snackbar("Login ", "User Login Successfully ");
             await SharePreferenceData.addBoolToSF(isLogged, true);
-            await SharePreferenceData.addStringToSF(userEmail, user!.email!);
-            await SharePreferenceData.addStringToSF(userPhoneNumber, user!.phoneNumber!);
-            await SharePreferenceData.addStringToSF(userName, user!.displayName!);
-            await SharePreferenceData.addStringToSF(userProfilePic, user!.photoURL!);
+            await SharePreferenceData.addStringToSF(userEmail, "${user?.email}");
+            await SharePreferenceData.addStringToSF(userPhoneNumber, "${user?.phoneNumber}");
+            await SharePreferenceData.addStringToSF(userName, "${user?.displayName}");
+            await SharePreferenceData.addStringToSF(userProfilePic, "${user?.photoURL}");
             Get.toNamed(AppRoutes.bottomNavigation);
 
           }
@@ -70,17 +70,10 @@ class LoginController extends GetxController {
             Loader.hide();
             Get.snackbar("Login ", "User Login Successfully ");
             await SharePreferenceData.addBoolToSF(isLogged, true);
-           // print("user values ------ ${user!.email!  }--${user!.photoURL!  }---${user!.phoneNumber!  }--${user!.displayName!  }");
-            await SharePreferenceData.addStringToSF(userEmail, user!.email!);
-            // if( user!.photoURL!.isNotEmpty  user!.phoneNumber!.isNotEmpty || user!.displayName!.isNotEmpty){
-            //   await SharePreferenceData.addStringToSF(userPhoneNumber, user!.phoneNumber!);
-            //
-            //   await SharePreferenceData.addStringToSF(userProfilePic, user!.photoURL!);
-            // }
-            // if(user!.displayName!.isNotEmpty && user!.displayName! == null){
-            //   await SharePreferenceData.addStringToSF(userName, user!.displayName!);
-            // }
-
+            await SharePreferenceData.addStringToSF(userEmail, "${user?.email}");
+            await SharePreferenceData.addStringToSF(userPhoneNumber, "${user?.phoneNumber}");
+            await SharePreferenceData.addStringToSF(userName, "${user?.displayName}");
+            await SharePreferenceData.addStringToSF(userProfilePic, "${user?.photoURL}");
             Get.offNamed(AppRoutes.bottomNavigation);
 
           } else {
@@ -99,10 +92,13 @@ class LoginController extends GetxController {
         if (user != null) {
           Get.snackbar("Login ", "User Login Successfully ");
           await SharePreferenceData.addBoolToSF(isLogged, true);
-          await SharePreferenceData.addStringToSF(userEmail, user!.email!);
-          await SharePreferenceData.addStringToSF(userPhoneNumber, user!.phoneNumber!);
-          await SharePreferenceData.addStringToSF(userName, user!.displayName!);
-          await SharePreferenceData.addStringToSF(userProfilePic, user!.photoURL!);
+          await SharePreferenceData.addStringToSF(userEmail, "${user?.email}");
+          await SharePreferenceData.addStringToSF(userPhoneNumber, "${user?.phoneNumber}");
+          await SharePreferenceData.addStringToSF(userName, "${user?.displayName}");
+          await SharePreferenceData.addStringToSF(userProfilePic, "${user?.photoURL}");
+          if(userPhoneNumber.isEmpty || userProfilePic.isEmpty){
+            Get.toNamed(AppRoutes.bottomNavigation);
+          }
           Get.toNamed(AppRoutes.bottomNavigation);
 
         }
