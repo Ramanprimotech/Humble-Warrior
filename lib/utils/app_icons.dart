@@ -54,7 +54,7 @@ class AppIcons {
       Icon(Icons.timer, color: iconColor);
 
   static Icon heart({Color iconColor = Colors.black}) =>
-      Icon(Icons.favorite_outlined, color: iconColor);
+      Icon(Icons.favorite_outlined, color: iconColor,size:16,);
   static Icon share2({Color iconColor = Colors.blue}) =>
       Icon(Icons.share, color: iconColor);
   static Icon comment({Color iconColor = Colors.black}) =>

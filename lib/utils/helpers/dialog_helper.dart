@@ -167,4 +167,52 @@ abstract class DialogHelper {
       Get.back();
     }
   }
+
+  static Future<void> logoutDialog() async {
+    showDialog(
+       barrierDismissible: false,
+      context: Get.context!,
+      builder: (context) => AlertDialog(
+        contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        alignment: Alignment.center,
+        actionsAlignment: MainAxisAlignment.spaceAround,
+        backgroundColor: Colors.white,
+        elevation: 5,
+        title:
+            AppText("Are you Sure?", textAlign: TextAlign.center, fontSize: 20),
+        actions: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              elevation: 5,
+              fixedSize: Size(90, 35),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              backgroundColor: AppColors.primary,
+            ),
+            onPressed: () {},
+            child: AppText('OK', color: Colors.white,fontWeight: FontWeight.bold),
+          ),
+          OutlinedButton(
+            style: ButtonStyle(
+              elevation: MaterialStateProperty.resolveWith((states) => 5),
+              shape: MaterialStateProperty.resolveWith((states) =>
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10))),
+              // overlayColor: MaterialStateProperty.all(AppColors.primary),
+              side: MaterialStateProperty.resolveWith(
+                (states) => BorderSide(
+                  color: AppColors.primary,
+                  width: 2,
+                ),
+              ),
+            ),
+            onPressed: () {
+              Get.back();
+            },
+            child: AppText('Cancel', fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
+    );
+  }
 }

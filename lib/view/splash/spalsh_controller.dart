@@ -9,9 +9,9 @@ class SplashController extends GetxController {
     print(
         "Logged value ---- ${await SharePreferenceData.getBoolValuesSF(isLogged)}");
     if (await SharePreferenceData.getBoolValuesSF(isLogged) != null) {
-      Get.toNamed(AppRoutes.bottomNavigation);
+      Get.offNamed(AppRoutes.bottomNavigation);
     } else {
-      Get.toNamed(AppRoutes.introScreen);
+      Get.offNamed(AppRoutes.loginPage);
     }
   }
 

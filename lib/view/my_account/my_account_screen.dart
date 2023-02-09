@@ -56,6 +56,7 @@ class MyAccount extends StatelessWidget {
             _detailsOptions(controller, title: helpSupportTxt),
             _detailsOptions(controller, title: termsConditionsTxt),
             _detailsOptions(controller, title: logoutTxt,ontap: (){
+              DialogHelper.logoutDialog();
               /*DialogHelper.showConfirmationDialog(title: "Humble Warrior",
                   description: "Are you sure?",
                   actions: [Button(label: "cancel",

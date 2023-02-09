@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
 
 class CommonWidgets {
   static Widget networkImage({
@@ -23,9 +24,13 @@ class CommonWidgets {
           ),
         ),
       ),
-      placeholder: (context, url) => Center(
-          child: Transform.scale(
-              scale: scale, child: CircularProgressIndicator())),
+      placeholder: (context, url) => ShimmerLoader(
+        child: Container(
+          color: Colors.grey,
+          height: height,
+          width: width,
+        ),
+      ),
       errorWidget: (context, url, error) => Icon(Icons.error),
     );
   }

@@ -8,17 +8,17 @@ class HomeScreenController extends GetxController {
   @override
   void onInit() {
     HomeOptions(
-            text: "Front Page Deals",
+            text: "FRONT PAGE DEALS",
             image:
                 "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg")
         .addList();
     HomeOptions(
-            text: "Donna's Daily Deals",
+            text: "DONNA'S DAILY DEALS",
             image:
                 "https://humblewarrior.com/wp-content/uploads/2022/11/vinex600.jpg")
         .addList();
     HomeOptions(
-            text: "Donna's Favourite Things",
+            text: "DONNA'S FAVOURITE THINGS",
             image:
                 "https://humblewarrior.com/wp-content/uploads/2022/11/Screen-Shot-2022-01-12-at-1.58.30-PM.jpg")
         .addList();
@@ -36,7 +36,6 @@ class HomeScreenController extends GetxController {
     "https://seeklogo.com/images/A/adidas-logo-107B082DA0-seeklogo.com.png",
     "https://www.pngfind.com/pngs/m/415-4156288_image-nike-logo-just-do-it-orange-hd.png",
     "https://www.pngfind.com/pngs/m/59-595532_nike-logo-clipart-clear-ugg-australia-logo-png.png",
-    "https://www.pngfind.com/pngs/m/49-499731_profile-logo-art-tesla-logo-hd-png-download.png"
   ];
 }
 

@@ -72,7 +72,7 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                     Get.offNamed(AppRoutes.bottomNavigation);
                   }),
 
-              const Align(
+             /* const Align(
                       alignment: Alignment.center,
                       child: AppText("Forgot Password ?"))
                   .px(40)
@@ -90,7 +90,7 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                         child: const AppText("Skip", fontSize: 24)),
                   ],
                 ),
-              ).px(20).py(30)
+              ).px(20).py(30)*/
             ],
           ),
         ),
