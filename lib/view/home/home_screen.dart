@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
     final HomeScreenController controller = Get.find();
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
           centerTitle: false,
           title: CustomSearchBar(

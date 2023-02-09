@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,9 +10,11 @@ import 'package:humble_warrior/utils/common/common_functionality.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
+import 'package:humble_warrior/utils/shared_prefrence/shared_pref.dart';
 import 'package:humble_warrior/utils/sizes/enums.dart';
 import 'package:humble_warrior/view/my_account/my_account_controller.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../utils/button.dart';
 
@@ -21,14 +24,17 @@ class MyAccount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.only(top: 50, left: 10, right: 10),
+          margin: const EdgeInsets.only(top: 50, left: 10, right: 10),
           child: Column(children: [
-            _profileImage(controller),
+            if(controller.userCheck == true)...[
+              _profileImage(controller),
             10.sh,
             _divider(),
+            ],
             10.sh,
             _myAccountTxt(heading: myAccountTxt),
             _detailsOptions(controller, title: accountDetailsTxt),
@@ -56,7 +62,7 @@ class MyAccount extends StatelessWidget {
             _detailsOptions(controller, title: helpSupportTxt),
             _detailsOptions(controller, title: termsConditionsTxt),
             _detailsOptions(controller, title: logoutTxt,ontap: (){
-              DialogHelper.logoutDialog();
+              DialogHelper.logoutDialog(action: logout());
               /*DialogHelper.showConfirmationDialog(title: "Humble Warrior",
                   description: "Are you sure?",
                   actions: [Button(label: "cancel",
@@ -75,6 +81,11 @@ class MyAccount extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void>logout() async {
+    await FirebaseAuth.instance.signOut().then((value) async {  await SharePreferenceData.clear();
+    Get.offNamed(AppRoutes.loginPage);});
   }
 
   _profileImage(MyAccountController controller) {
@@ -112,8 +123,8 @@ class MyAccount extends StatelessWidget {
           ),
         ),
         10.sh,
-        AppText("Peter Wilson"),
-        AppText("Peter.Wilson@gmail.com"),
+        AppText(controller?.username??"Name"),
+        AppText(controller?.user??"username"),
       ],
     );
   }
