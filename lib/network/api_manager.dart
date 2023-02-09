@@ -1,20 +1,21 @@
-import 'dart:convert';
 import 'dart:async';
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
-import 'custome_exception.dart';
+
 import 'package:http/http.dart' as http;
+
+import 'custome_exception.dart';
 import 'endpoints.dart';
 
 class APIManager {
-
-
   Future<dynamic> getAllCall({required String url}) async {
     print("Calling API: $url");
     Uri urlForPost = Uri.parse("${Endpoints.baseUrl}$url");
     var responseJson;
     try {
-      final response = await http
-          .get(urlForPost, headers: {'Authorization': 'Bearer'});
+      final response = await http.get(urlForPost,
+          headers: {'Authorization': 'Bearer ${Endpoints.token}'});
       responseJson = _response(response);
     } on SocketException {
       throw FetchDataException('No Internet connection');
@@ -27,8 +28,9 @@ class APIManager {
     Uri urlForPost = Uri.parse("${Endpoints.baseUrl}$url");
     var responseJson;
     try {
-      final response = await http
-          .post(urlForPost, headers: {'Authorization': 'Bearer '});
+      final response = await http.post(urlForPost,
+          headers: {'Authorization': 'Bearer ${Endpoints.token}'});
+
       responseJson = _response(response);
     } on SocketException {
       throw FetchDataException('No Internet connection');
@@ -45,10 +47,35 @@ class APIManager {
     try {
       final response = await http.post(urlForPost,
           headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-            'Authorization': 'Bearer '
+            'Content-type': "application/json",
+            'Authorization': 'Bearer ${Endpoints.token}'
           },
           body: jsonEncode(param.toJson()));
+      log(response.body);
+      responseJson = _response(response);
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    } on Error catch (e) {
+      print('Error: $e');
+    }
+    return responseJson;
+  }
+
+  Future<dynamic> postAPICallNoBearer(
+      {required String url, required var param}) async {
+    print("Calling API: $url");
+    print("Calling parameters: $param");
+
+    Uri urlForPost = Uri.parse("${Endpoints.baseUrl}$url");
+    var responseJson;
+    try {
+      final response = await http.post(urlForPost,
+          headers: {
+            'Content-type': "application/json",
+            // 'Authorization': 'Bearer ${Endpoints.token}'
+          },
+          body: jsonEncode(param.toJson()));
+      log(response.body);
       responseJson = _response(response);
     } on SocketException {
       throw FetchDataException('No Internet connection');

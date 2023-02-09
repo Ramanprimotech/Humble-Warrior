@@ -1,5 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/modals/requests/token_model_request.dart';
+import 'package:humble_warrior/network/api_call.dart';
+
+import '../../network/endpoints.dart';
 
 class HomeScreenController extends GetxController {
   final TextEditingController searchTextController = TextEditingController();
@@ -22,6 +28,7 @@ class HomeScreenController extends GetxController {
             image:
                 "https://humblewarrior.com/wp-content/uploads/2022/11/Screen-Shot-2022-01-12-at-1.58.30-PM.jpg")
         .addList();
+    generateToken();
     super.onInit();
   }
 
@@ -37,6 +44,16 @@ class HomeScreenController extends GetxController {
     "https://www.pngfind.com/pngs/m/415-4156288_image-nike-logo-just-do-it-orange-hd.png",
     "https://www.pngfind.com/pngs/m/59-595532_nike-logo-clipart-clear-ugg-australia-logo-png.png",
   ];
+
+  Future generateToken() async {
+    TokenRequestModel tokenRequestModel = TokenRequestModel(
+        username: "info@newjerseymultimedia.com",
+        password: "JtB@zCajal87@7MVXjzfyxOd");
+    await CallAPI.generateToken(payload: tokenRequestModel).then((value) {
+      Endpoints.token = value.token.toString();
+      log(value.token.toString());
+    });
+  }
 }
 
 class HomeOptions {
