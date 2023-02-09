@@ -3,17 +3,25 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_text.dart';
+import 'package:humble_warrior/utils/common/common_functionality.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_UI.dart';
+import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
+
+import '../../modals/response/brands_response_mdel.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    double productHeight = 70;
+    double brandLoveHeight = 55;
+    double brandHeight = 50;
+
     final HomeScreenController controller = Get.find();
     return SafeArea(
       child: Scaffold(
@@ -28,10 +36,7 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(right: 15),
               child: InkWell(
-                  onTap: () {
-                    controller.generateToken();
-                  },
-                  child: AppIcons.notificationActice(size: 28)),
+                  onTap: () {}, child: AppIcons.notificationActice(size: 28)),
             )
           ],
         ),
@@ -41,12 +46,12 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            Container(
+            SizedBox(
               // margin: EdgeInsets.symmetric(horizontal: 20),
-              height: 70,
-              width: Get.height,
+              height: productHeight,
+              width: Get.width,
               child: ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   scrollDirection: Axis.horizontal,
                   itemCount: 25,
                   itemBuilder: (ctx, index) {
@@ -72,7 +77,13 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            Flexible(
+            Expanded(
+              // height: Get.height -
+              //     productHeight -
+              //     brandHeight -
+              //     brandLoveHeight -
+              //     16 -
+              //     AppBar().preferredSize.height,
               child: ListView.builder(
                 itemBuilder: (ctx, index) {
                   return homeOption(
@@ -82,44 +93,89 @@ class HomeScreen extends StatelessWidget {
                 itemCount: HomeOptions.homeOptionsList.length,
               ),
             ),
-            _brandRow(),
-            Container(
-              height: 50,
+            _brandRow(height: brandLoveHeight),
+            SizedBox(
+              height: brandHeight,
               width: Get.height,
-              child: ListView.separated(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 25,
-                  itemBuilder: (ctx, index) {
-                    return SizedBox(
-                      height: 60,
-                      width: 80,
-                      child: Column(
-                        children: [
-                          CommonWidgets.networkImage(
-                            alignment: Alignment.bottomCenter,
-                            imageUrl: controller.brands[index % 3],
-                            fit: BoxFit.contain,
-                            height: 40,
+              child: FutureBuilder<List<BrandDetails>>(
+                  future: controller.allBrands(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return ListView.separated(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 25,
+                        itemBuilder: (ctx, index) {
+                          return SizedBox(
+                            height: 60,
                             width: 80,
+                            child: Column(
+                              children: const [
+                                ShimmerLoader(
+                                    child: AppText(
+                                  "HW",
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 35,
+                                )),
+                              ],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return 20.sw;
+                        },
+                      );
+                    }
+                    if (snapshot.hasError) {
+                      return AppText("Something Went Wrong");
+                    }
+                    List<BrandDetails> data = snapshot.data ?? [];
+                    return ListView.separated(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: data.length,
+                      itemBuilder: (ctx, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            CommonUtils()
+                                .urlLauncher(url: data[index].brandLink!);
+                          },
+                          child: SizedBox(
+                            height: 60,
+                            width: 80,
+                            child: Column(
+                              children: [
+                                CommonWidgets.networkImage(
+                                  alignment: Alignment.bottomCenter,
+                                  imageUrl: data[index].brandImage!,
+                                  fit: BoxFit.contain,
+                                  height: 40,
+                                  width: 80,
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
-                      ),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return 20.sw;
+                      },
                     );
-                  }, separatorBuilder: (BuildContext context, int index) {
-                  return 20.sw;
-              },),
+                  }),
             ),
-            10.sh,
+            SizedBox(
+              height: 10,
+            ),
           ],
         ),
       ),
     );
   }
 
-  _brandRow() {
+  _brandRow({required double height}) {
     return Container(
-      padding: EdgeInsets.only(top: 20,right: 20,left: 20,bottom: 20),
+      height: height,
+      padding: EdgeInsets.only(top: 15, right: 20, left: 20, bottom: 20),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -159,7 +215,7 @@ class HomeScreen extends StatelessWidget {
 
 Widget homeOption({required HomeOptions homeOptions, required int index}) {
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 20),
+    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
     child: GestureDetector(
       onTap: () {
         Get.toNamed(AppRoutes.homeOptions, arguments: <int>[index]);

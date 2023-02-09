@@ -88,6 +88,9 @@ class HomeOptionController extends GetxController
   @override
   void onClose() {
     tabController.dispose();
+    donnaDealScrollController.dispose();
+    donnaFavouriteDealScrollController.dispose();
+    frontPageDealScrollController.dispose();
     super.onClose();
   }
 }

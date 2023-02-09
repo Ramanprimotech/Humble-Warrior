@@ -9,13 +9,12 @@ import '../../utils/app_icons.dart';
 import '../../utils/search_bar/search_bar_UI.dart';
 import 'donnas_deals.dart';
 
-class HomeOptionScreen extends StatelessWidget {
-  HomeOptionScreen({Key? key}) : super(key: key);
-
-  final HomeOptionController controller = Get.find();
+class HomeOptionScreen extends GetView<HomeOptionController> {
+  const HomeOptionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // final HomeOptionController controller = Get.find();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
