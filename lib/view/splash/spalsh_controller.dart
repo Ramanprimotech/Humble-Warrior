@@ -21,18 +21,19 @@ class SplashController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     Future.delayed(const Duration(seconds: 5), () {
       getData();
     });
-    generateToken();
+    await generateToken();
     super.onInit();
   }
 
   Future generateToken() async {
-    TokenRequestModel tokenRequestModel = TokenRequestModel(
-        username: "info@newjerseymultimedia.com",
-        password: "JtB@zCajal87@7MVXjzfyxOd");
+    TokenRequestModel tokenRequestModel = TokenRequestModel(userid: "4"
+        // username: "info@newjerseymultimedia.com",
+        // password: "JtB@zCajal87@7MVXjzfyxOd"
+        );
     await CallAPI.generateToken(payload: tokenRequestModel).then((value) {
       Endpoints.token = value.token.toString();
       log(value.token.toString());
