@@ -14,7 +14,7 @@ class BottomNavigationController extends GetxController {
     const Center(child: Text("My Favourite")),
     const AmazonWebView(),
     const FaceBookWebView(),
-    MyAccount(),
+    const MyAccount(),
   ];
 
   List<Widget> get navigationItems => _navigationItems;

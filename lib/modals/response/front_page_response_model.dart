@@ -10,19 +10,19 @@ class FrontPageResponseModel {
     if (json['data'] != null) {
       data = <FrontPageDetails>[];
       json['data'].forEach((v) {
-        data!.add(new FrontPageDetails.fromJson(v));
+        data!.add(FrontPageDetails.fromJson(v));
       });
     }
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data['message'] = this.message;
+    data['message'] = message;
     return data;
   }
 }
@@ -39,9 +39,9 @@ class FrontPageDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['product_name'] = this.productName;
-    data['url'] = this.url;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['product_name'] = productName;
+    data['url'] = url;
     return data;
   }
 }

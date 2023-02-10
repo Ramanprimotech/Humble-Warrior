@@ -8,7 +8,7 @@ import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/image_path_assets.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
-import 'package:humble_warrior/utils/search_bar/search_bar_UI.dart';
+import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
 

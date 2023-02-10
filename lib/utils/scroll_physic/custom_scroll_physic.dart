@@ -15,7 +15,7 @@ class CustomScrollPhysics extends ScrollPhysics {
   double applyBoundaryConditions(ScrollMetrics position, double value) {
     assert(() {
       if (value == position.pixels) {
-        throw new FlutterError(
+        throw  FlutterError(
             '$runtimeType.applyBoundaryConditions() was called redundantly.\n'
             'The proposed new position, $value, is exactly equal to the current position of the '
             'given ${position.runtimeType}, ${position.pixels}.\n'
@@ -31,7 +31,7 @@ class CustomScrollPhysics extends ScrollPhysics {
     if (value < position.pixels &&
         position.pixels <= position.minScrollExtent) {
       // underscroll
-      print("ONE");
+      debugPrint("ONE");
       // _controller.jumpTo(position.viewportDimension + value);
       return  value - position.minScrollExtent;
     }
@@ -39,7 +39,7 @@ class CustomScrollPhysics extends ScrollPhysics {
         position.pixels < value) {
       // overscroll
 
-      print("Two $value");
+      debugPrint("Two $value");
       _controller.jumpTo(position.viewportDimension +
           (value - position.viewportDimension * 1.5));
        return value - position.maxScrollExtent;
@@ -47,17 +47,17 @@ class CustomScrollPhysics extends ScrollPhysics {
     if (value < position.minScrollExtent &&
         position.minScrollExtent < position.pixels){ // hit top edge
 
-      print("Three");
+      debugPrint("Three");
       return value - position.minScrollExtent;}
     if (position.pixels < position.maxScrollExtent &&
         position.maxScrollExtent < value) { // hit bottom edge
 
-      print("Four");
+      debugPrint("Four");
       return value - position.maxScrollExtent;
     }
 
 
-    print("Five");
+    debugPrint("Five");
     return 0.0;
     }
 

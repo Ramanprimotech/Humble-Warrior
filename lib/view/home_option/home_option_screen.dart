@@ -6,7 +6,7 @@ import 'package:humble_warrior/view/home_option/front_page_deals.dart';
 import 'package:humble_warrior/view/home_option/home_option_controller.dart';
 
 import '../../utils/app_icons.dart';
-import '../../utils/search_bar/search_bar_UI.dart';
+import '../../utils/search_bar/search_bar_ui.dart';
 import 'donnas_deals.dart';
 
 class HomeOptionScreen extends GetView<HomeOptionController> {

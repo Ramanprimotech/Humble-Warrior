@@ -20,11 +20,11 @@ class TokenResponseModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['token'] = this.token;
-    data['user_email'] = this.userEmail;
-    data['user_nicename'] = this.userNicename;
-    data['user_display_name'] = this.userDisplayName;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['token'] = token;
+    data['user_email'] = userEmail;
+    data['user_nicename'] = userNicename;
+    data['user_display_name'] = userDisplayName;
     return data;
   }
 }

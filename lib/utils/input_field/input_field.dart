@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../app_colors.dart';
-import 'hide_pass-controller.dart';
+import 'hide_pass_controller.dart';
 
 class InputField extends StatelessWidget {
   const InputField({

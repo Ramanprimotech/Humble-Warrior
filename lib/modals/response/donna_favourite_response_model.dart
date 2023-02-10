@@ -10,19 +10,19 @@ class DonnaFavouriteResponseModel {
     if (json['data'] != null) {
       data = <DonnaFavouriteDetails>[];
       json['data'].forEach((v) {
-        data!.add(new DonnaFavouriteDetails.fromJson(v));
+        data!.add(DonnaFavouriteDetails.fromJson(v));
       });
     }
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data['message'] = this.message;
+    data['message'] = message;
     return data;
   }
 }
@@ -39,9 +39,9 @@ class DonnaFavouriteDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['product_name'] = this.productName;
-    data['url'] = this.url;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['product_name'] = productName;
+    data['url'] = url;
     return data;
   }
 }

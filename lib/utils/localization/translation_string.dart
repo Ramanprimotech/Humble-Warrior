@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'localization_String.dart';
+import 'localization_string.dart';
 
 class TranslationString extends Translations {
   @override

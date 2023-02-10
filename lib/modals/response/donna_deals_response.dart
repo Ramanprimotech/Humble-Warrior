@@ -10,19 +10,19 @@ class DonnaDealsResponseModal {
     if (json['data'] != null) {
       data = <DonnaDealsDetails>[];
       json['data'].forEach((v) {
-        data!.add(new DonnaDealsDetails.fromJson(v));
+        data!.add(DonnaDealsDetails.fromJson(v));
       });
     }
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data['message'] = this.message;
+    data['message'] = message;
     return data;
   }
 }
@@ -43,11 +43,11 @@ class DonnaDealsDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['deal_name'] = this.dealName;
-    data['shop_url'] = this.shopUrl;
-    data['coupon_code'] = this.couponCode;
-    data['url'] = this.url;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['deal_name'] = dealName;
+    data['shop_url'] = shopUrl;
+    data['coupon_code'] = couponCode;
+    data['url'] = url;
     return data;
   }
 }

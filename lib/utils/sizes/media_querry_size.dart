@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MediaQueryText extends StatefulWidget {
-   MediaQueryText({Key? key ,required this.child}) : super(key: key);
-Widget child;
+  Widget child;
+
+  MediaQueryText({Key? key ,required this.child}) : super(key: key);
 
   @override
   State<MediaQueryText> createState() => _MediaQueryTextState();

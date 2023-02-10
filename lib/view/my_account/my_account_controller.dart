@@ -56,12 +56,13 @@ class MyAccountController extends GetxController{
   Future<void>logout() async {
     await FirebaseAuth.instance.signOut().then((value) async {  await SharePreferenceData.clear();
      Get.offAllNamed(AppRoutes.loginPage);
-
     });
   }
+
    loginPage(){
     Get.offAllNamed(AppRoutes.loginPage);
   }
+
 
   @override
   void onInit() {

@@ -1,19 +1,14 @@
-import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/common/common_functionality.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/view/my_account/my_account_controller.dart';
 import 'package:humble_warrior/view/my_account/my_account_widget.dart';
 
-import '../../utils/app_colors.dart';
 
 
 class MyAccount extends StatelessWidget  {
@@ -69,7 +64,7 @@ class MyAccount extends StatelessWidget  {
                  DialogHelper.logoutDialog(context: context, onTap:controller.loginPage());
                }),
 
-              const AppText('${appVersionTxt} V 1.0'),
+              const AppText('$appVersionTxt V 1.0'),
               10.sh,
             ]),
           ),
