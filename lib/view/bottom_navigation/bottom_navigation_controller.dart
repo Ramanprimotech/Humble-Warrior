@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/view/home/home_screen.dart';
-import 'package:humble_warrior/view/productDetail/product_detail_Screen.dart';
+import 'package:humble_warrior/view/join_us_facebook/facebook.dart';
+import 'package:humble_warrior/view/my_amazone/amazone.dart';
 
 import '../../utils/app_strings.dart';
 import '../../utils/shared_prefrence/shared_pref.dart';
@@ -11,9 +12,9 @@ class BottomNavigationController extends GetxController {
   final List<Widget> _navigationItems = [
     const HomeScreen(),
     const Center(child: Text("My Favourite")),
-    const Center(child: Text("My Amazone")),
-    const ProductDetailScreen(),
-     MyAccount(),
+    const AmazonWebView(),
+    const FaceBookWebView(),
+    MyAccount(),
   ];
 
   List<Widget> get navigationItems => _navigationItems;
@@ -28,7 +29,6 @@ class BottomNavigationController extends GetxController {
   }
 
   Future<void> getLoggedValue() async {
-
     value = await SharePreferenceData.getBoolValuesSF(isLogged) ?? false;
     user = await SharePreferenceData.getStringValuesSF(userEmail) ?? "";
     debugPrint("Logged Value ---- $value --- user --- $user");
