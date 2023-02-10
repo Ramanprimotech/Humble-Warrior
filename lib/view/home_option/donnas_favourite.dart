@@ -80,8 +80,10 @@ class DonnaFavourite extends StatelessWidget {
                           buttons: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              shopButton(url: ImagePathNetwork.url),
-                              codeButton(code: "dklfgj"),
+                              shopButton(
+                                  url: controller
+                                      .donnaFavouriteDealList[index].url),
+                              // codeButton(code: ""),
                               shareButton(shareUrl: ImagePathNetwork.url),
                               IconButton(
                                 onPressed: () {},

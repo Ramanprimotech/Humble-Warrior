@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/image_path_network.dart';
+import 'package:humble_warrior/view/home_option/common_home_option.dart';
 import 'package:readmore/readmore.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -11,8 +11,6 @@ import '../../utils/common/common_functionality.dart';
 import '../../utils/sizes/sizes_config.dart';
 
 class ProductDetailWidget {
-
-
   Widget productText() {
     return Card(
       elevation: 5,
@@ -51,23 +49,23 @@ class ProductDetailWidget {
   }
 
   /// Shop/Subscribe Button
-  Widget shopSubButton({required String shopNowUrl,required String subscribeUrl,required String shareUrl}) {
+  Widget shopSubButton(
+      {required String shopNowUrl,
+      required String subscribeUrl,
+      required String shareUrl}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         GestureDetector(
-          onTap: (){
-            CommonUtils().urlLauncher(url:shopNowUrl);          },
+            onTap: () {
+              CommonUtils().urlLauncher(url: shopNowUrl);
+            },
             child: button(title: shopNow, backClr: AppColors.secondary)),
         Row(
           children: [
+            codeButton(code: "dfdh45"),
             GestureDetector(
-              onTap: (){
-
-              },
-                child: button(title: subscribe, backClr: AppColors.blue)),
-            GestureDetector(
-              onTap: (){
+              onTap: () {
                 CommonUtils().share(shareUrl: shareUrl);
               },
               child: Icon(
