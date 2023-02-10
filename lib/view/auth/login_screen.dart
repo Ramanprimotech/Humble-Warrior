@@ -59,6 +59,14 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                             action: OnClick.apple, context: context)),
 
                     /// Facebook
+                    /*optionWidget(
+                        bckClr: AppColors.facebookClr,
+                        title: LocalString.signWithFacebook,
+                        textClr: AppColors.white,
+                        imagePath: ImagePathAssets.facebookImg,
+                        onTap: controller.onClickFunction(
+                            action: OnClick.facebook, context: context)),*/
+
                     optionWidget(
                         bckClr: AppColors.facebookClr,
                         title: LocalString.signWithFacebook,
