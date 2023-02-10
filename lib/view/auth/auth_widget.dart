@@ -1,15 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_text.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class AuthWidget {
+/*class AuthWidget {
   Widget optionWidget(
       {Color? bckClr,
       Color? textClr,
       String? title,
       String? imagePath,
       required Function onTap}) {
+    return InkWell(
+      onTap: () => onTap(),
+      child: Container(
+        height: 60,
+        width: Get.width * .9,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(color: Colors.black,width: 1),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.shade400,
+                  blurRadius: 3,
+                  spreadRadius: 2,
+                  offset: const Offset(0.0, 0.75)),
+            ]),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image.asset(
+              imagePath!,
+              fit: BoxFit.cover,
+              height: 28.h,
+              width: 28.h,
+            ).centered().p(2).px(8),
+            AppText(title!, color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),
+            SizedBox(width: 40),
+          ],
+        ).p(8),
+      ).py(10).px(20),
+    );
+  }
+}*/
+
+
+class AuthWidget {
+  Widget optionWidget(
+      {Color? bckClr,
+        Color? textClr,
+        String? title,
+        String? imagePath,
+        required Function onTap}) {
     return InkWell(
       onTap: () => onTap(),
       child: Container(
