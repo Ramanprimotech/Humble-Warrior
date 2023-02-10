@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
 
@@ -30,14 +29,14 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12.0),
+      padding: const EdgeInsets.symmetric(vertical: 18.0),
       child: CupertinoSearchTextField(
         focusNode: widget.focusNode,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
             border: Border.all(color: AppColors.grey, width: 1.5)),
         controller: widget.textEditingController,
-        placeholder: "Search",
+        placeholder: "             Search",
         prefixInsets: const EdgeInsets.only(left: 15, right: 10),
         suffixInsets: const EdgeInsets.only(right: 15),
         suffixMode: OverlayVisibilityMode.editing,

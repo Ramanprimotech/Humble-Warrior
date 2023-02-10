@@ -27,7 +27,7 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                 borderRadius: BorderRadius.circular(6.0),
                 child: Image.asset(
                   ImagePathAssets.hw_logo,
-                  width: Get.width * .6,
+                  width: Get.width * .65,
                 ),
               ).centered().pLTRB(0, 20, 0, 10),
 
@@ -40,6 +40,9 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                 height: 80 * 4,
                 child: Column(
                   children: [
+                    SizedBox(
+                      height: 20,
+                    ),
                     optionWidget(
                         bckClr: AppColors.white,
                         title: LocalString.signWithGoogle,

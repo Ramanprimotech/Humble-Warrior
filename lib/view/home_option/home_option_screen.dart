@@ -15,43 +15,47 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
   @override
   Widget build(BuildContext context) {
     // final HomeOptionController controller = Get.find();
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          leadingWidth: 35,
-          centerTitle: false,
-          title: CustomSearchBar(
-            focusNode: controller.focusNode,
-            textEditingController: controller.searchTextController,
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(110.0),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 12.0),
+          child: AppBar(
+            leadingWidth: 35,
+            centerTitle: false,
+            title: CustomSearchBar(
+              focusNode: controller.focusNode,
+              textEditingController: controller.searchTextController,
+            ),
+            leading: InkWell(
+                onTap: () {
+                  Get.back();
+                },
+                child: AppIcons.backArrow()),
+            bottom: TabBar(
+                isScrollable: true,
+                controller: controller.tabController,
+                tabs: const <Widget>[
+                  AppText("Donna's Daily Deals"),
+                  AppText("Donna's Favourite Things"),
+                  AppText("Front Page Deals")
+                ]),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 15),
+                child: InkWell(onTap: () {}, child: AppIcons.filter()),
+              )
+            ],
           ),
-          leading: InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: AppIcons.backArrow()),
-          bottom: TabBar(
-              isScrollable: true,
-              controller: controller.tabController,
-              tabs: const <Widget>[
-                AppText("Donna's Daily Deals"),
-                AppText("Donna's Favourite Things"),
-                AppText("Front Page Deals")
-              ]),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 15),
-              child: InkWell(onTap: () {}, child: AppIcons.filter()),
-            )
-          ],
         ),
-        body: TabBarView(
-          controller: controller.tabController,
-          children: const [
-            DonnaDailyDeals(),
-            DonnaFavourite(),
-            FrontPageDeals(),
-          ],
-        ),
+      ),
+      body: TabBarView(
+        controller: controller.tabController,
+        children: const [
+          DonnaDailyDeals(),
+          DonnaFavourite(),
+          FrontPageDeals(),
+        ],
       ),
     );
   }

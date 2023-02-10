@@ -7,7 +7,6 @@ import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/common/common_functionality.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
-import 'package:humble_warrior/utils/image_path_assets.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
@@ -22,9 +21,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeScreenController controller = Get.find();
 
-    double productHeight = 70;
+    double productHeight = 60;
     double brandLoveHeight = 55;
-    double brandHeight = 50;
+    double brandHeight = 60;
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -100,10 +99,10 @@ class HomeScreen extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     CommonWidgets.networkImage(
-                                      alignment: Alignment.bottomCenter,
+                                      alignment: Alignment.center,
                                       imageUrl: data[index].brandImage!,
                                       fit: BoxFit.contain,
-                                      height: 40,
+                                      height: 60,
                                       width: 80,
                                     ),
                                   ],
@@ -215,28 +214,36 @@ class HomeScreen extends StatelessWidget {
         //           ),
         //         ),
         // ),
-        appBar: AppBar(
-          centerTitle: false,
-          title: CustomSearchBar(
-            onTap: controller.onTap,
-            onSubmit: controller.onSubmit,
-            onChange: controller.onChange,
-            focusNode: controller.focusNode,
-            textEditingController: controller.searchTextController,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(70.0),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: AppBar(
+              backgroundColor: Colors.white,
+              centerTitle: false,
+              title: CustomSearchBar(
+                onTap: controller.onTap,
+                onSubmit: controller.onSubmit,
+                onChange: controller.onChange,
+                focusNode: controller.focusNode,
+                textEditingController: controller.searchTextController,
+              ),
+              actions: [
+                Padding(
+                  padding: EdgeInsets.only(right: 15),
+                  child:
+                      InkWell(onTap: () {}, child: AppIcons.notificationActice()
+                          // Image.asset(
+                          //   ImagePathAssets.bellIcon,
+                          //   fit: BoxFit.cover,
+                          //   height: 30,
+                          //   width: 30,
+                          // ),
+                          ),
+                )
+              ],
+            ),
           ),
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 15),
-              child: InkWell(
-                  onTap: () {},
-                  child: Image.asset(
-                    ImagePathAssets.bellIcon,
-                    fit: BoxFit.cover,
-                    height: 30,
-                    width: 30,
-                  )),
-            )
-          ],
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -251,23 +258,27 @@ class HomeScreen extends StatelessWidget {
               child: ListView.builder(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   scrollDirection: Axis.horizontal,
-                  itemCount: 25,
+                  itemCount: ProductImages.productImagesList.length,
                   itemBuilder: (ctx, index) {
-                    return SizedBox(
-                      height: 80,
-                      width: 68,
-                      child: Column(
-                        children: [
-                          CommonWidgets.networkImage(
-                              imageUrl: controller.products[index % 4],
-                              fit: BoxFit.fitHeight,
-                              height: 50,
-                              scale: 0.7),
-                          const AppText(
-                            "Product",
-                            fontSize: 12,
-                          ),
-                        ],
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                      child: SizedBox(
+                        height: productHeight,
+                        width: 62,
+                        child: Column(
+                          children: [
+                            CommonWidgets.networkImage(
+                                imageUrl: ProductImages
+                                    .productImagesList[index].image,
+                                fit: BoxFit.fitHeight,
+                                height: productHeight - 20,
+                                scale: 0.7),
+                            AppText(
+                              "${ProductImages.productImagesList[index].name}",
+                              fontSize: 12,
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   }),

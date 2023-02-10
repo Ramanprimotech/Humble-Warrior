@@ -31,6 +31,7 @@ class SplashController extends GetxController {
 
   Future generateToken() async {
     TokenRequestModel tokenRequestModel = TokenRequestModel(userid: "4"
+
         // username: "info@newjerseymultimedia.com",
         // password: "JtB@zCajal87@7MVXjzfyxOd"
         );
