@@ -6,6 +6,7 @@ import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/common/common_functionality.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
+import 'package:humble_warrior/utils/image_path_assets.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_UI.dart';
 import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
@@ -130,7 +131,13 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(right: 15),
               child: InkWell(
-                  onTap: () {}, child: AppIcons.notificationActice(size: 28)),
+                  onTap: () {},
+                  child: Image.asset(
+                ImagePathAssets.bellIcon,
+                fit: BoxFit.cover,
+                height: 30,
+                width: 30,
+              )),
             )
           ],
         ),

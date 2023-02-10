@@ -13,6 +13,7 @@ class AuthWidget {
     return InkWell(
       onTap: () => onTap(),
       child: Container(
+        height: 60,
         width: Get.width * .7,
         decoration: BoxDecoration(
             color: bckClr,
