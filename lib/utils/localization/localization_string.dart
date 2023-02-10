@@ -1,3 +1,4 @@
+
 class  LocalString {
  static String appName= 'appName';
  static String enterPassword= 'enter_password';

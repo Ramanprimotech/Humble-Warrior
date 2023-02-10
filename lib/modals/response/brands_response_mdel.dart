@@ -10,19 +10,19 @@ class BrandsResponseModel {
     if (json['data'] != null) {
       data = <BrandDetails>[];
       json['data'].forEach((v) {
-        data!.add(new BrandDetails.fromJson(v));
+        data!.add(BrandDetails.fromJson(v));
       });
     }
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data['message'] = this.message;
+    data['message'] = message;
     return data;
   }
 }
@@ -41,10 +41,10 @@ class BrandDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['brand_name'] = this.brandName;
-    data['brand_image'] = this.brandImage;
-    data['brand_link'] = this.brandLink;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['brand_name'] = brandName;
+    data['brand_image'] = brandImage;
+    data['brand_link'] = brandLink;
     return data;
   }
 }

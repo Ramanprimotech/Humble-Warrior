@@ -66,16 +66,16 @@ class CommonUtils {
     required VoidCallback onTap,
   }) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           // color: Colors.white,
           ),
       child: CupertinoActionSheetAction(
+        onPressed: onTap,
         child: AppText(
           label,
           fontSize: 16,
           color: Colors.blue,
         ),
-        onPressed: onTap,
       ),
     );
   }
@@ -88,7 +88,7 @@ class CommonUtils {
       ),
       child: CupertinoActionSheetAction(
         isDefaultAction: true,
-        child: AppText(
+        child: const AppText(
           cancelTxt,
           fontSize: 20,
           color: Colors.red,

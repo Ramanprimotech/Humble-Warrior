@@ -20,7 +20,7 @@ abstract class InputHelper {
     FilteringTextInputFormatter.deny(RegExp(' ')),
   ];
 
-  static List<TextInputFormatter> zip_quentity_dis = [
+  static List<TextInputFormatter> zipQuantityDis = [
     FilteringTextInputFormatter.digitsOnly,
   ];
 

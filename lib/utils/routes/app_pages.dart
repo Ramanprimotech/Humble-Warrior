@@ -35,7 +35,7 @@ class AppPages {
         binding: BottomNavigationBindings()),
     GetPage(
         name: AppRoutes.homeOptions,
-        page: () => HomeOptionScreen(),
+        page: () => const HomeOptionScreen(),
         binding: HomeOptionBindings()),
     GetPage(
         name: AppRoutes.productDetail,
@@ -51,7 +51,7 @@ class AppPages {
         binding: SplashBinding()),
     GetPage(
         name: AppRoutes.myAccount,
-        page: () =>  MyAccount(),
+        page: () =>  const MyAccount(),
         binding: MyAccountBindings())
   ];
 }

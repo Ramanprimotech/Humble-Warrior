@@ -8,8 +8,8 @@ class PaginationModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['page'] = this.page;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['page'] = page;
     return data;
   }
 }

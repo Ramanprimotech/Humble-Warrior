@@ -7,7 +7,7 @@ import 'package:velocity_x/velocity_x.dart';
 
 import '../../utils/app_colors.dart';
 import '../../utils/image_path_assets.dart';
-import '../../utils/localization/localization_String.dart';
+import '../../utils/localization/localization_string.dart';
 
 class LoginScreen extends GetView<LoginController> with AuthWidget {
   const LoginScreen({super.key});
