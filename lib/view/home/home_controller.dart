@@ -7,7 +7,7 @@ import 'package:humble_warrior/network/api_call.dart';
 class HomeScreenController extends GetxController implements SearchActions {
   final TextEditingController searchTextController = TextEditingController();
   final FocusNode focusNode = FocusNode();
-  RxBool keyboardIsOpened = false.obs;
+  RxBool keyboardIsOpened = true.obs;
 
   void getKeyBoard(BuildContext context) {
     keyboardIsOpened.value = (MediaQuery.of(context).viewInsets.bottom != 0.0);
