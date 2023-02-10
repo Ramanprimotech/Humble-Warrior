@@ -18,17 +18,111 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final HomeScreenController controller = Get.find();
+
     double productHeight = 70;
     double brandLoveHeight = 55;
     double brandHeight = 50;
-
-    final HomeScreenController controller = Get.find();
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset: false,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Obx(
+          () => !controller.keyboardIsOpened.value
+              ? const SizedBox()
+              : Container(
+                  color: Colors.white,
+                  height: brandHeight + brandLoveHeight + 10,
+                  child: Column(
+                    children: [
+                      _brandRow(height: brandLoveHeight),
+                      Container(
+                        color: Colors.white,
+                        height: brandHeight,
+                        width: Get.height,
+                        child: FutureBuilder<List<BrandDetails>>(
+                            future: controller.allBrands(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return ListView.separated(
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: 25,
+                                  itemBuilder: (ctx, index) {
+                                    return Container(
+                                      color: Colors.white,
+                                      height: 60,
+                                      width: 80,
+                                      child: Column(
+                                        children: const [
+                                          ShimmerLoader(
+                                              child: AppText(
+                                            "HW",
+                                            fontWeight: FontWeight.w900,
+                                            fontSize: 35,
+                                          )),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder:
+                                      (BuildContext context, int index) {
+                                    return 20.sw;
+                                  },
+                                );
+                              }
+                              if (snapshot.hasError) {
+                                return AppText("Something Went Wrong");
+                              }
+                              List<BrandDetails> data = snapshot.data ?? [];
+                              return ListView.separated(
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                scrollDirection: Axis.horizontal,
+                                itemCount: data.length,
+                                itemBuilder: (ctx, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      CommonUtils().urlLauncher(
+                                          url: data[index].brandLink!);
+                                    },
+                                    child: SizedBox(
+                                      height: 60,
+                                      width: 80,
+                                      child: Column(
+                                        children: [
+                                          CommonWidgets.networkImage(
+                                            alignment: Alignment.bottomCenter,
+                                            imageUrl: data[index].brandImage!,
+                                            fit: BoxFit.contain,
+                                            height: 40,
+                                            width: 80,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return 20.sw;
+                                },
+                              );
+                            }),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      )
+                    ],
+                  ),
+                ),
+        ),
         appBar: AppBar(
           centerTitle: false,
           title: CustomSearchBar(
+            onTap: controller.onTap,
+            onSubmit: controller.onSubmit,
+            onChange: controller.onChange,
             focusNode: controller.focusNode,
             textEditingController: controller.searchTextController,
           ),
@@ -86,85 +180,22 @@ class HomeScreen extends StatelessWidget {
               //     AppBar().preferredSize.height,
               child: ListView.builder(
                 itemBuilder: (ctx, index) {
+                  if (index == HomeOptions.homeOptionsList.length) {
+                    return Obx(
+                      () => Visibility(
+                        visible: controller.keyboardIsOpened.value,
+                        child: SizedBox(
+                          height: brandHeight + brandLoveHeight + 10,
+                        ),
+                      ),
+                    );
+                  }
                   return homeOption(
                       homeOptions: HomeOptions.homeOptionsList[index],
                       index: index);
                 },
-                itemCount: HomeOptions.homeOptionsList.length,
+                itemCount: HomeOptions.homeOptionsList.length + 1,
               ),
-            ),
-            _brandRow(height: brandLoveHeight),
-            SizedBox(
-              height: brandHeight,
-              width: Get.height,
-              child: FutureBuilder<List<BrandDetails>>(
-                  future: controller.allBrands(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return ListView.separated(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 25,
-                        itemBuilder: (ctx, index) {
-                          return SizedBox(
-                            height: 60,
-                            width: 80,
-                            child: Column(
-                              children: const [
-                                ShimmerLoader(
-                                    child: AppText(
-                                  "HW",
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 35,
-                                )),
-                              ],
-                            ),
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return 20.sw;
-                        },
-                      );
-                    }
-                    if (snapshot.hasError) {
-                      return AppText("Something Went Wrong");
-                    }
-                    List<BrandDetails> data = snapshot.data ?? [];
-                    return ListView.separated(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: data.length,
-                      itemBuilder: (ctx, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            CommonUtils()
-                                .urlLauncher(url: data[index].brandLink!);
-                          },
-                          child: SizedBox(
-                            height: 60,
-                            width: 80,
-                            child: Column(
-                              children: [
-                                CommonWidgets.networkImage(
-                                  alignment: Alignment.bottomCenter,
-                                  imageUrl: data[index].brandImage!,
-                                  fit: BoxFit.contain,
-                                  height: 40,
-                                  width: 80,
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return 20.sw;
-                      },
-                    );
-                  }),
-            ),
-            SizedBox(
-              height: 10,
             ),
           ],
         ),

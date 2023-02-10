@@ -9,6 +9,7 @@ class CustomSearchBar extends StatefulWidget {
   final Function()? onTap;
   final Function(String? text)? onSuffix;
   final Function(String? text)? onSubmit;
+  final Function(String? text)? onChange;
 
   const CustomSearchBar(
       {Key? key,
@@ -16,6 +17,7 @@ class CustomSearchBar extends StatefulWidget {
       required this.focusNode,
       this.onTap,
       this.onSubmit,
+      this.onChange,
       this.onSuffix})
       : super(key: key);
 
@@ -43,7 +45,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           height: 40,
           width: 40,
         ),
-        onChanged: (String? text) {},
+        onChanged: widget.onChange ?? (String? text) {},
         onSubmitted: widget.onSubmit ?? (String? text) {},
         onTap: widget.onTap ??
             () {
