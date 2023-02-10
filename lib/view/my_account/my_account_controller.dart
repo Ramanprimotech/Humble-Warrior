@@ -1,12 +1,13 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/common/common_functionality.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:share_plus/share_plus.dart';
 
 import '../../utils/app_strings.dart';
+import '../../utils/routes/app_routes.dart';
 import '../../utils/shared_prefrence/shared_pref.dart';
 
 class MyAccountController extends GetxController{
@@ -15,7 +16,7 @@ class MyAccountController extends GetxController{
   RxBool checkNotification = true.obs;
   RxBool checkDark = true.obs;
   RxBool isSwitch = false.obs;
-  bool userCheck = false;
+  RxBool userCheck = false.obs;
   String user = "";
   String username = "";
   String userPhone = "";
@@ -31,12 +32,12 @@ class MyAccountController extends GetxController{
   }
 
   Future<void> getData() async {
-    userCheck = await SharePreferenceData.getBoolValuesSF(isLogged) ?? false;
+    userCheck.value = await SharePreferenceData.getBoolValuesSF(isLogged) ?? false;
     user = await SharePreferenceData.getStringValuesSF(userEmail) ?? "";
     username = await SharePreferenceData.getStringValuesSF(userName) ?? "";
     userPhone = await SharePreferenceData.getStringValuesSF(userPhoneNumber) ?? "";
     userImg = await SharePreferenceData.getStringValuesSF(userProfilePic) ?? "";
-    print("user data ---- ${username} ---- ${userPhone} ---- ${userImg}");
+    debugPrint("user data ---- $username ---- $userPhone ---- $userImg");
   }
 
   Future<void> getImageCamera() async {
@@ -51,6 +52,17 @@ class MyAccountController extends GetxController{
   void darkMode(){
     checkDark.value = !checkDark.value;
   }
+
+  Future<void>logout() async {
+    await FirebaseAuth.instance.signOut().then((value) async {  await SharePreferenceData.clear();
+     Get.offAllNamed(AppRoutes.loginPage);
+
+    });
+  }
+   loginPage(){
+    Get.offAllNamed(AppRoutes.loginPage);
+  }
+
   @override
   void onInit() {
     getData();

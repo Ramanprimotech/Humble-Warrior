@@ -168,31 +168,31 @@ abstract class DialogHelper {
     }
   }
 
-  static Future<void> logoutDialog({required action}) async {
+  static Future<void> logoutDialog({required BuildContext context, required void Function() onTap}) async {
     showDialog(
-       barrierDismissible: false,
+      barrierDismissible: false,
       context: Get.context!,
       builder: (context) => AlertDialog(
-        contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         alignment: Alignment.center,
         actionsAlignment: MainAxisAlignment.spaceAround,
         backgroundColor: Colors.white,
         elevation: 5,
         title:
-            AppText("Are you Sure?", textAlign: TextAlign.center, fontSize: 20),
+        const AppText("Are you Sure?", textAlign: TextAlign.center, fontSize: 20),
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               elevation: 5,
-              fixedSize: Size(90, 35),
+              fixedSize: const Size(90, 35),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
               backgroundColor: AppColors.primary,
             ),
             onPressed: () {
-              action;
+              onTap();
             },
-            child: AppText('OK', color: Colors.white,fontWeight: FontWeight.bold),
+            child: const AppText('OK', color: Colors.white,fontWeight: FontWeight.bold),
           ),
           OutlinedButton(
             style: ButtonStyle(
@@ -202,7 +202,7 @@ abstract class DialogHelper {
                       borderRadius: BorderRadius.circular(10))),
               // overlayColor: MaterialStateProperty.all(AppColors.primary),
               side: MaterialStateProperty.resolveWith(
-                (states) => BorderSide(
+                    (states) => BorderSide(
                   color: AppColors.primary,
                   width: 2,
                 ),
@@ -211,7 +211,7 @@ abstract class DialogHelper {
             onPressed: () {
               Get.back();
             },
-            child: AppText('Cancel', fontWeight: FontWeight.bold),
+            child: const AppText('Cancel', fontWeight: FontWeight.bold),
           )
         ],
       ),

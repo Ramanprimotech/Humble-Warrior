@@ -4,7 +4,7 @@ import 'package:humble_warrior/view/home/home_controller.dart';
 import 'package:humble_warrior/view/productDetail/product_detail_Screen.dart';
 import 'package:humble_warrior/view/productDetail/product_detail_controller.dart';
 
-import '../home_option/home_option_controller.dart';
+import '../my_account/my_account_controller.dart';
 
 class BottomNavigationBindings implements Bindings {
   @override
@@ -12,5 +12,7 @@ class BottomNavigationBindings implements Bindings {
     Get.put(BottomNavigationController());
     Get.put(HomeScreenController());
     Get.put(ProductDetailController());
+    Get.put(MyAccountController());
+
   }
 }
