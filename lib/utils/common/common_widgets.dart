@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
 
 class CommonWidgets {
@@ -31,7 +32,11 @@ class CommonWidgets {
           width: width,
         ),
       ),
-      errorWidget: (context, url, error) => Icon(Icons.error),
+      errorWidget: (context, url, error) => Container(
+          color: Colors.grey,
+          height: height,
+          width: width ?? Get.width,
+          child: const Icon(Icons.error)),
     );
   }
 }

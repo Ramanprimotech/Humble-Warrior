@@ -2,15 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/modals/abstract_enums/search_bar.dart';
 import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
+import 'package:humble_warrior/modals/response/home_categories_response_model.dart';
 import 'package:humble_warrior/network/api_call.dart';
 
 class HomeScreenController extends GetxController implements SearchActions {
   final TextEditingController searchTextController = TextEditingController();
   final FocusNode focusNode = FocusNode();
-  RxBool keyboardIsOpened = true.obs;
+  ValueNotifier<bool> keyboardIsOpened = ValueNotifier(true);
 
   void getKeyBoard(BuildContext context) {
-    keyboardIsOpened.value = (MediaQuery.of(context).viewInsets.bottom != 0.0);
+    keyboardIsOpened.value =
+        (MediaQuery.of(Get.context!).viewInsets.bottom != 0.0);
   }
 
   @override
@@ -19,23 +21,15 @@ class HomeScreenController extends GetxController implements SearchActions {
       print(focusNode.hasFocus);
       getKeyBoard(Get.context!);
     });
-    HomeOptions(
-            text: "FRONT PAGE DEALS",
-            image:
-                "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg")
-        .addList();
-    HomeOptions(
-            text: "DONNA'S DAILY DEALS",
-            image:
-                "https://humblewarrior.com/wp-content/uploads/2022/11/vinex600.jpg")
-        .addList();
-    HomeOptions(
-            text: "DONNA'S FAVOURITE THINGS",
-            image:
-                "https://humblewarrior.com/wp-content/uploads/2022/11/Screen-Shot-2022-01-12-at-1.58.30-PM.jpg")
-        .addList();
+
     super.onInit();
   }
+
+  // void unfocusNode() {
+  //   log("${focusNode.hasFocus}", name: "${focusNode.hasPrimaryFocus}");
+  //   focusNode.unfocus();
+  //   getKeyBoard(Get.context!);
+  // }
 
   List<String> products = [
     "https://www.freepnglogos.com/uploads/shoes-png/mens-shoes-png-transparent-images-images-11.png",
@@ -54,6 +48,10 @@ class HomeScreenController extends GetxController implements SearchActions {
     return await CallAPI.allBrands();
   }
 
+  Future<List<HomeCategoryList>> homeCategories() async {
+    return await CallAPI.homeCategory();
+  }
+
   @override
   void onChange(String? data) {
     // TODO: implement onChange
@@ -67,22 +65,5 @@ class HomeScreenController extends GetxController implements SearchActions {
   @override
   void onTap() {
     // TODO: implement onTap
-  }
-}
-
-class HomeOptions {
-  final String image;
-  final String text;
-
-  HomeOptions({required this.text, required this.image});
-
-  static List<HomeOptions> homeOptionsList = [];
-
-  void addList() {
-    homeOptionsList.add(this);
-  }
-
-  void clear() {
-    homeOptionsList.clear();
   }
 }

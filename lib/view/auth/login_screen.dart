@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/view/auth/auth_widget.dart';
 import 'package:humble_warrior/view/auth/login_controller.dart';
@@ -19,23 +17,27 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: SizedBox(
-            height: Get.height,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(6.0),
-                  child:  Image.asset(
-                    ImagePathAssets.hw_logo,
-                width: Get.width*.7,
-                  ),
-                ).centered().pLTRB(0, 20, 0, 10),
-
-                /// Google
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
               SizedBox(
-                height: 80*4,
+                height: 80,
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(6.0),
+                child: Image.asset(
+                  ImagePathAssets.hw_logo,
+                  width: Get.width * .6,
+                ),
+              ).centered().pLTRB(0, 20, 0, 10),
+
+              SizedBox(
+                height: 80,
+              ),
+
+              /// Google
+              SizedBox(
+                height: 80 * 4,
                 child: Column(
                   children: [
                     optionWidget(
@@ -68,37 +70,35 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                     /// Without Login
                     optionWidget(
                         bckClr: AppColors.twitterClr,
-                        imagePath: ImagePathAssets.loginImg ,
+                        imagePath: ImagePathAssets.loginImg,
                         title: "Continue Without Login",
                         textClr: AppColors.white,
-                        onTap: (){
+                        onTap: () {
                           Get.offNamed(AppRoutes.bottomNavigation);
                         }),
-
                   ],
                 ),
               )
-               /* const Align(
-                        alignment: Alignment.center,
-                        child: AppText("Forgot Password ?"))
-                    .px(40)
-                    .py(20),
-                Container(
-                  alignment: Alignment.bottomCenter,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const AppText("Sign up", fontSize: 24),
-                      InkWell(
-                          onTap:  (){
-                            Get.offNamed(AppRoutes.bottomNavigation);
-                          },
-                          child: const AppText("Skip", fontSize: 24)),
-                    ],
-                  ),
-                ).px(20).py(30)*/
-              ],
-            ),
+              /* const Align(
+                      alignment: Alignment.center,
+                      child: AppText("Forgot Password ?"))
+                  .px(40)
+                  .py(20),
+              Container(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const AppText("Sign up", fontSize: 24),
+                    InkWell(
+                        onTap:  (){
+                          Get.offNamed(AppRoutes.bottomNavigation);
+                        },
+                        child: const AppText("Skip", fontSize: 24)),
+                  ],
+                ),
+              ).px(20).py(30)*/
+            ],
           ),
         ),
       ),

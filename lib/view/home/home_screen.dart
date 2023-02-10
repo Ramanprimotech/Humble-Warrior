@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/modals/response/home_categories_response_model.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_text.dart';
@@ -28,96 +29,192 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Obx(
-          () => !controller.keyboardIsOpened.value
-              ? const SizedBox()
-              : Container(
+        floatingActionButton: ValueListenableBuilder(
+          valueListenable: controller.keyboardIsOpened,
+          builder: (BuildContext context, value, Widget? child) {
+            return Transform.translate(
+              offset:
+                  Offset(0, !value ? (brandHeight + brandLoveHeight + 10) : 0),
+              child: child,
+            );
+          },
+          child: Container(
+            color: Colors.white,
+            height: brandHeight + brandLoveHeight + 10,
+            child: Column(
+              children: [
+                _brandRow(height: brandLoveHeight),
+                Container(
                   color: Colors.white,
-                  height: brandHeight + brandLoveHeight + 10,
-                  child: Column(
-                    children: [
-                      _brandRow(height: brandLoveHeight),
-                      Container(
-                        color: Colors.white,
-                        height: brandHeight,
-                        width: Get.height,
-                        child: FutureBuilder<List<BrandDetails>>(
-                            future: controller.allBrands(),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return ListView.separated(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: 25,
-                                  itemBuilder: (ctx, index) {
-                                    return Container(
-                                      color: Colors.white,
-                                      height: 60,
-                                      width: 80,
-                                      child: Column(
-                                        children: const [
-                                          ShimmerLoader(
-                                              child: AppText(
-                                            "HW",
-                                            fontWeight: FontWeight.w900,
-                                            fontSize: 35,
-                                          )),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                  separatorBuilder:
-                                      (BuildContext context, int index) {
-                                    return 20.sw;
-                                  },
-                                );
-                              }
-                              if (snapshot.hasError) {
-                                return AppText("Something Went Wrong");
-                              }
-                              List<BrandDetails> data = snapshot.data ?? [];
-                              return ListView.separated(
-                                padding: EdgeInsets.symmetric(horizontal: 20),
-                                scrollDirection: Axis.horizontal,
-                                itemCount: data.length,
-                                itemBuilder: (ctx, index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      CommonUtils().urlLauncher(
-                                          url: data[index].brandLink!);
-                                    },
-                                    child: SizedBox(
-                                      height: 60,
-                                      width: 80,
-                                      child: Column(
-                                        children: [
-                                          CommonWidgets.networkImage(
-                                            alignment: Alignment.bottomCenter,
-                                            imageUrl: data[index].brandImage!,
-                                            fit: BoxFit.contain,
-                                            height: 40,
-                                            width: 80,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                                separatorBuilder:
-                                    (BuildContext context, int index) {
-                                  return 20.sw;
-                                },
+                  height: brandHeight,
+                  width: Get.height,
+                  child: FutureBuilder<List<BrandDetails>>(
+                      future: controller.allBrands(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return ListView.separated(
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 25,
+                            itemBuilder: (ctx, index) {
+                              return Container(
+                                color: Colors.white,
+                                height: 60,
+                                width: 80,
+                                child: Column(
+                                  children: const [
+                                    ShimmerLoader(
+                                        child: AppText(
+                                      "HW",
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 35,
+                                    )),
+                                  ],
+                                ),
                               );
-                            }),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      )
-                    ],
-                  ),
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return 20.sw;
+                            },
+                          );
+                        }
+                        if (snapshot.hasError) {
+                          return AppText("Something Went Wrong");
+                        }
+                        List<BrandDetails> data = snapshot.data ?? [];
+                        return ListView.separated(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: data.length,
+                          itemBuilder: (ctx, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                CommonUtils()
+                                    .urlLauncher(url: data[index].brandLink!);
+                              },
+                              child: SizedBox(
+                                height: 60,
+                                width: 80,
+                                child: Column(
+                                  children: [
+                                    CommonWidgets.networkImage(
+                                      alignment: Alignment.bottomCenter,
+                                      imageUrl: data[index].brandImage!,
+                                      fit: BoxFit.contain,
+                                      height: 40,
+                                      width: 80,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return 20.sw;
+                          },
+                        );
+                      }),
                 ),
+                const SizedBox(
+                  height: 10,
+                )
+              ],
+            ),
+          ),
         ),
+
+        // Obx(
+        //   () => !controller.keyboardIsOpened.value
+        //       ? const SizedBox()
+        //       : Container(
+        //           color: Colors.white,
+        //           height: brandHeight + brandLoveHeight + 10,
+        //           child: Column(
+        //             children: [
+        //               _brandRow(height: brandLoveHeight),
+        //               Container(
+        //                 color: Colors.white,
+        //                 height: brandHeight,
+        //                 width: Get.height,
+        //                 child: FutureBuilder<List<BrandDetails>>(
+        //                     future: controller.allBrands(),
+        //                     builder: (context, snapshot) {
+        //                       if (snapshot.connectionState ==
+        //                           ConnectionState.waiting) {
+        //                         return ListView.separated(
+        //                           padding: EdgeInsets.symmetric(horizontal: 20),
+        //                           scrollDirection: Axis.horizontal,
+        //                           itemCount: 25,
+        //                           itemBuilder: (ctx, index) {
+        //                             return Container(
+        //                               color: Colors.white,
+        //                               height: 60,
+        //                               width: 80,
+        //                               child: Column(
+        //                                 children: const [
+        //                                   ShimmerLoader(
+        //                                       child: AppText(
+        //                                     "HW",
+        //                                     fontWeight: FontWeight.w900,
+        //                                     fontSize: 35,
+        //                                   )),
+        //                                 ],
+        //                               ),
+        //                             );
+        //                           },
+        //                           separatorBuilder:
+        //                               (BuildContext context, int index) {
+        //                             return 20.sw;
+        //                           },
+        //                         );
+        //                       }
+        //                       if (snapshot.hasError) {
+        //                         return AppText("Something Went Wrong");
+        //                       }
+        //                       List<BrandDetails> data = snapshot.data ?? [];
+        //                       return ListView.separated(
+        //                         padding: EdgeInsets.symmetric(horizontal: 20),
+        //                         scrollDirection: Axis.horizontal,
+        //                         itemCount: data.length,
+        //                         itemBuilder: (ctx, index) {
+        //                           return GestureDetector(
+        //                             onTap: () {
+        //                               CommonUtils().urlLauncher(
+        //                                   url: data[index].brandLink!);
+        //                             },
+        //                             child: SizedBox(
+        //                               height: 60,
+        //                               width: 80,
+        //                               child: Column(
+        //                                 children: [
+        //                                   CommonWidgets.networkImage(
+        //                                     alignment: Alignment.bottomCenter,
+        //                                     imageUrl: data[index].brandImage!,
+        //                                     fit: BoxFit.contain,
+        //                                     height: 40,
+        //                                     width: 80,
+        //                                   ),
+        //                                 ],
+        //                               ),
+        //                             ),
+        //                           );
+        //                         },
+        //                         separatorBuilder:
+        //                             (BuildContext context, int index) {
+        //                           return 20.sw;
+        //                         },
+        //                       );
+        //                     }),
+        //               ),
+        //               const SizedBox(
+        //                 height: 10,
+        //               )
+        //             ],
+        //           ),
+        //         ),
+        // ),
         appBar: AppBar(
           centerTitle: false,
           title: CustomSearchBar(
@@ -133,11 +230,11 @@ class HomeScreen extends StatelessWidget {
               child: InkWell(
                   onTap: () {},
                   child: Image.asset(
-                ImagePathAssets.bellIcon,
-                fit: BoxFit.cover,
-                height: 30,
-                width: 30,
-              )),
+                    ImagePathAssets.bellIcon,
+                    fit: BoxFit.cover,
+                    height: 30,
+                    width: 30,
+                  )),
             )
           ],
         ),
@@ -178,32 +275,67 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            Expanded(
-              // height: Get.height -
-              //     productHeight -
-              //     brandHeight -
-              //     brandLoveHeight -
-              //     16 -
-              //     AppBar().preferredSize.height,
-              child: ListView.builder(
-                itemBuilder: (ctx, index) {
-                  if (index == HomeOptions.homeOptionsList.length) {
-                    return Obx(
-                      () => Visibility(
-                        visible: controller.keyboardIsOpened.value,
-                        child: SizedBox(
-                          height: brandHeight + brandLoveHeight + 10,
-                        ),
+            FutureBuilder<List<HomeCategoryList>>(
+                future: controller.homeCategories(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Expanded(
+                      child: ListView.builder(
+                        itemBuilder: (ctx, index) {
+                          if (index == 3) {
+                            return ValueListenableBuilder(
+                              valueListenable: controller.keyboardIsOpened,
+                              builder: (context, value, child) {
+                                return Visibility(
+                                  visible: value,
+                                  child: SizedBox(
+                                    height: brandHeight + brandLoveHeight + 10,
+                                  ),
+                                );
+                              },
+                            );
+                          }
+                          return ShimmerLoader(
+                            child: homeOption(
+                                homeOptions: HomeCategoryList(
+                                    categoryImage:
+                                        "https://www.pngfind.com/pngs/m/415-4156288_image-nike-logo-just-do-it-orange-hd.png",
+                                    categoryName: "Donna's Options",
+                                    id: 0),
+                                index: index),
+                          );
+                        },
+                        itemCount: 4,
                       ),
                     );
                   }
-                  return homeOption(
-                      homeOptions: HomeOptions.homeOptionsList[index],
-                      index: index);
-                },
-                itemCount: HomeOptions.homeOptionsList.length + 1,
-              ),
-            ),
+                  if (snapshot.hasError) {
+                    return AppText("Something Went Wrong");
+                  }
+                  List<HomeCategoryList> data = snapshot.data ?? [];
+                  return Expanded(
+                    child: ListView.builder(
+                      itemBuilder: (ctx, index) {
+                        if (index == data.length) {
+                          return ValueListenableBuilder(
+                            valueListenable: controller.keyboardIsOpened,
+                            builder: (ctx, value, child) {
+                              return Visibility(
+                                visible: value,
+                                child: SizedBox(
+                                  height: brandHeight + brandLoveHeight + 10,
+                                ),
+                              );
+                            },
+                          );
+                        }
+                        return homeOption(
+                            homeOptions: data[index], index: index);
+                      },
+                      itemCount: data.length + 1,
+                    ),
+                  );
+                }),
           ],
         ),
       ),
@@ -251,12 +383,12 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-Widget homeOption({required HomeOptions homeOptions, required int index}) {
+Widget homeOption({required HomeCategoryList homeOptions, required int index}) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
     child: GestureDetector(
       onTap: () {
-        Get.toNamed(AppRoutes.homeOptions, arguments: <int>[index]);
+        Get.toNamed(AppRoutes.homeOptions, arguments: <int>[homeOptions.id!]);
       },
       child: Stack(
         alignment: Alignment.bottomLeft,
@@ -264,7 +396,7 @@ Widget homeOption({required HomeOptions homeOptions, required int index}) {
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: CommonWidgets.networkImage(
-              imageUrl: homeOptions.image,
+              imageUrl: homeOptions.categoryImage!,
               fit: BoxFit.fitWidth,
               height: 200,
               alignment: Alignment.topCenter,
@@ -280,7 +412,7 @@ Widget homeOption({required HomeOptions homeOptions, required int index}) {
                   topRight: Radius.circular(20),
                 )),
             child: AppText(
-              homeOptions.text,
+              homeOptions.categoryName!,
               fontWeight: FontWeight.bold,
               color: Colors.white,
               fontSize: 14,

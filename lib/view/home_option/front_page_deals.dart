@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/modals/response/front_page_response_model.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
+import 'package:humble_warrior/utils/extentions/color_string_extention.dart';
 
 import '../../utils/app_text.dart';
+import '../../utils/custom_paint/ribbon.dart';
 import 'common_home_option.dart';
 import 'home_option_controller.dart';
 
@@ -72,35 +74,65 @@ class FrontPageDeals extends StatelessWidget {
                 if (index != controller.frontPageDealList.length) {
                   details = controller.frontPageDealList[index];
                 }
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: index != controller.frontPageDealList.length
-                      ? ItemCard(
-                          buttons: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              shareButton(shareUrl: "shareUrl"),
-                              IconButton(
-                                onPressed: () {},
-                                icon: AppIcons.bookmarks(),
+                return Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: index != controller.frontPageDealList.length
+                          ? ItemCard(
+                              buttons: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  shareButton(shareUrl: "shareUrl"),
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: AppIcons.bookmarks(),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: AppIcons.comment(),
+                                  ),
+                                ],
                               ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: AppIcons.comment(),
-                              ),
-                            ],
-                          ),
-                          imageUrl: details.url!,
-                          title: details.productName.toString(),
-                        )
-                      : Obx(
-                          () => Visibility(
-                              visible: controller.frontPageDealsBool.value,
-                              child: Container(
-                                  height: 80,
-                                  alignment: Alignment.center,
-                                  child: CircularProgressIndicator())),
+                              imageUrl: details.url!,
+                              title: details.productName.toString(),
+                            )
+                          : Obx(
+                              () => Visibility(
+                                  visible: controller.frontPageDealsBool.value,
+                                  child: Container(
+                                      height: 80,
+                                      alignment: Alignment.center,
+                                      child: CircularProgressIndicator())),
+                            ),
+                    ),
+                    Positioned(
+                      top: (220 / 4) - 4,
+                      left: (-220 / 4) + 16,
+                      child: Transform.rotate(
+                        angle: (360 - 45) * 3.1415927 / 180,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            CustomPaint(
+                              size: Size(220, 40),
+                              //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
+                              painter: FrontPageBanner(
+                                  color: details.ribbonColor != null
+                                      ? details.ribbonColor!.toColor()
+                                      : Colors.transparent),
+                            ),
+                            AppText(
+                              "${details.ribbonName}",
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ],
                         ),
+                      ),
+                    ),
+                  ],
                 );
               });
         },

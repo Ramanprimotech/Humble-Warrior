@@ -33,9 +33,9 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
               isScrollable: true,
               controller: controller.tabController,
               tabs: const <Widget>[
-                AppText("Front Page Deals"),
                 AppText("Donna's Daily Deals"),
-                AppText("Donna's Favourite Things")
+                AppText("Donna's Favourite Things"),
+                AppText("Front Page Deals")
               ]),
           actions: [
             Padding(
@@ -47,9 +47,9 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
         body: TabBarView(
           controller: controller.tabController,
           children: const [
-            FrontPageDeals(),
             DonnaDailyDeals(),
             DonnaFavourite(),
+            FrontPageDeals(),
           ],
         ),
       ),
