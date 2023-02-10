@@ -58,7 +58,7 @@ class MyAccount extends StatelessWidget {
             child:  _detailsOptions(controller, title: "Logout"),
           ),
 
-          AppText('APP VERSION V 1.0'),
+          const AppText('APP VERSION V 1.0'),
           10.sh,
         ]),
       ),

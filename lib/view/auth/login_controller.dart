@@ -12,7 +12,7 @@ import '../../firebase_options.dart';
 import '../../utils/shared_prefrence/shared_pref.dart';
 
 class LoginController extends GetxController {
-  User? user;
+   User? user;
   RxBool platformBool = false.obs;
 
   checkCurrentPlatform() {
@@ -43,7 +43,7 @@ class LoginController extends GetxController {
           if (user != null) {
             Get.snackbar("Login ", "User Login Successfully ");
             await SharePreferenceData.addBoolToSF(isLogged, true);
-            await SharePreferenceData.addStringToSF(userEmail, user!.email!);
+            await SharePreferenceData.addStringToSF(userEmail, user!.email!  );
             await SharePreferenceData.addStringToSF(userPhoneNumber, user!.phoneNumber!);
             await SharePreferenceData.addStringToSF(userName, user!.displayName!);
             await SharePreferenceData.addStringToSF(userProfilePic, user!.photoURL!);
@@ -72,20 +72,17 @@ class LoginController extends GetxController {
             await SharePreferenceData.addBoolToSF(isLogged, true);
            // print("user values ------ ${user!.email!  }--${user!.photoURL!  }---${user!.phoneNumber!  }--${user!.displayName!  }");
             await SharePreferenceData.addStringToSF(userEmail, user!.email!);
-            // if( user!.photoURL!.isNotEmpty  user!.phoneNumber!.isNotEmpty || user!.displayName!.isNotEmpty){
-            //   await SharePreferenceData.addStringToSF(userPhoneNumber, user!.phoneNumber!);
-            //
-            //   await SharePreferenceData.addStringToSF(userProfilePic, user!.photoURL!);
-            // }
-            // if(user!.displayName!.isNotEmpty && user!.displayName! == null){
-            //   await SharePreferenceData.addStringToSF(userName, user!.displayName!);
-            // }
+              await SharePreferenceData.addStringToSF(userPhoneNumber, "${user?.phoneNumber}");
+              await SharePreferenceData.addStringToSF(userProfilePic, "${user?.photoURL}");
+              await SharePreferenceData.addStringToSF(userName,"${user?.displayName}");
+
 
             Get.offNamed(AppRoutes.bottomNavigation);
 
           } else {
             Loader.hide();
           }
+          
         } catch (e) {
           Loader.hide();
           Get.snackbar("Error ", "$e ");
