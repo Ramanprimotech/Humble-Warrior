@@ -55,6 +55,7 @@ dependencies:
   firebase_auth: ^4.2.5
   flutter_overlay_loader: ^2.0.0
   readmore: ^2.2.0
+  webview_flutter: ^4.0.1
   url_launcher: ^6.1.9
   share_plus: ^6.3.0
   image_picker: ^0.8.6+1
