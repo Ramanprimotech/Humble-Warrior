@@ -7,5 +7,6 @@ class AppRoutes {
   static String productDetail = "/productDetail";
   static String homeOptions = "/homeOptions";
   static String splashScreen = "/splashScreen";
+  static String myAccount = "/myAccount";
 
 }

@@ -47,6 +47,7 @@ const String passcodeTxt = "Passcode";
 const String darkModeTxt = "Dark Mode";
 const String helpSupportTxt = "Help & Support";
 const String termsConditionsTxt = "Terms & Conditions";
+const String login = "Login";
 const String logoutTxt = "Logout";
 const String appVersionTxt = "APP VERSION";
 const String addPhotoTxt = "Add Photo";
