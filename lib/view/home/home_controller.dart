@@ -1,14 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/modals/abstract_enums/search_bar.dart';
 import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/network/api_call.dart';
 
-class HomeScreenController extends GetxController {
+class HomeScreenController extends GetxController implements SearchActions {
   final TextEditingController searchTextController = TextEditingController();
   final FocusNode focusNode = FocusNode();
+  RxBool keyboardIsOpened = false.obs;
+
+  void getKeyBoard(BuildContext context) {
+    keyboardIsOpened.value = (MediaQuery.of(context).viewInsets.bottom != 0.0);
+  }
 
   @override
   void onInit() {
+    focusNode.addListener(() {
+      print(focusNode.hasFocus);
+      getKeyBoard(Get.context!);
+    });
     HomeOptions(
             text: "FRONT PAGE DEALS",
             image:
@@ -42,6 +52,21 @@ class HomeScreenController extends GetxController {
 
   Future<List<BrandDetails>> allBrands() async {
     return await CallAPI.allBrands();
+  }
+
+  @override
+  void onChange(String? data) {
+    // TODO: implement onChange
+  }
+
+  @override
+  void onSubmit(String? data) {
+    // TODO: implement onSubmit
+  }
+
+  @override
+  void onTap() {
+    // TODO: implement onTap
   }
 }
 
