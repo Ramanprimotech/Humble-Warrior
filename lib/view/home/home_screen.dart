@@ -54,7 +54,9 @@ class HomeScreen extends StatelessWidget {
                     Expanded(
                       flex: 6,
                       child: Container(
-                        color: Colors.white,
+                        color: Theme.of(context)
+                            .floatingActionButtonTheme
+                            .backgroundColor,
                         height: brandHeight,
                         width: Get.height,
                         child: FutureBuilder<List<BrandDetails>>(
@@ -68,7 +70,9 @@ class HomeScreen extends StatelessWidget {
                                   itemCount: 25,
                                   itemBuilder: (ctx, index) {
                                     return Container(
-                                      color: Colors.white,
+                                      color: Theme.of(context)
+                                          .floatingActionButtonTheme
+                                          .backgroundColor,
                                       height: 60,
                                       width: 80,
                                       child: Column(
@@ -140,11 +144,7 @@ class HomeScreen extends StatelessWidget {
                                 duration: Duration(milliseconds: 150),
                                 curve: Curves.linear);
                           },
-                          child: Icon(
-                            Icons.arrow_forward_ios,
-                            size: 20,
-                            color: Colors.black,
-                          )),
+                          child: AppIcons.next()),
                     ),
                   ],
                 ),
@@ -325,19 +325,14 @@ class HomeScreen extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: GestureDetector(
-                      onTap: () {
-                        controller.productScrollController.animateTo(
-                            controller.productScrollController.offset +
-                                (70 * 1),
-                            duration: Duration(milliseconds: 150),
-                            curve: Curves.linear);
-                      },
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.black,
-                        size: 20,
-                        weight: 10,
-                      )),
+                    onTap: () {
+                      controller.productScrollController.animateTo(
+                          controller.productScrollController.offset + (70 * 1),
+                          duration: Duration(milliseconds: 150),
+                          curve: Curves.linear);
+                    },
+                    child: AppIcons.next(),
+                  ),
                 ),
               ],
             ),

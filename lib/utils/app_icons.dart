@@ -40,6 +40,9 @@ class AppIcons {
       Icon(Icons.login, color: iconColor);
   static Icon rightArrow({Color iconColor = Colors.black}) =>
       Icon(Icons.chevron_right, color: iconColor);
+  static Icon next({Color iconColor = Colors.black}) => Icon(
+        Icons.arrow_forward_ios,
+      );
   static Icon backArrow({Color? iconColor, double size = 24}) =>
       Icon(Icons.arrow_back, size: size, color: iconColor);
   static Icon cross({Color iconColor = Colors.black, double size = 24}) =>
