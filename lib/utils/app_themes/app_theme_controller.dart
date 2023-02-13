@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../app_colors.dart';
+import '../shared_prefrence/shared_pref.dart';
 
 class ThemeController extends GetxController {
   static ThemeController get to => Get.find();
@@ -71,5 +72,14 @@ class ThemeController extends GetxController {
     }
 
     setThemeMode(themeMode);
+  }
+
+  changeTheme(bool value){
+    Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
+    upgradeFun(value);
+
+    setThemeMode(value ? ThemeMode.dark : ThemeMode.light);
+
+    SharePreferenceData.addBoolToSF("mode", value);
   }
 }

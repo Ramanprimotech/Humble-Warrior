@@ -122,7 +122,7 @@ class MyAccWidget {
                       activeColor: Colors.lightGreen.shade600,
                       inactiveTrackColor: Colors.red,
                       thumbColor: MaterialStateProperty.all(Colors.white),
-                      onChanged: (_) {
+                      onChanged: (value) {
                         click();
                       },
                     ),
