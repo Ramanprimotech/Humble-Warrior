@@ -42,6 +42,6 @@ class _AmazonWebViewState extends State<AmazonWebView> {
   Widget build(BuildContext context) {
     return SafeArea(
         child:
-            WebViewWidget(key: Key("amazon"), controller: _webViewController));
+            WebViewWidget(key: const Key("amazon"), controller: _webViewController));
   }
 }

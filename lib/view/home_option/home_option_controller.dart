@@ -41,7 +41,7 @@ class HomeOptionController extends GetxController
 
   @override
   void onInit() {
-    print(initialIndex);
+    debugPrint("$initialIndex");
     tabController =
         TabController(length: 3, initialIndex: initialIndex, vsync: this);
     tabController.addListener(() {

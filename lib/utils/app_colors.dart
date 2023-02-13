@@ -13,7 +13,7 @@ class AppColors {
   static Color gray = Colors.grey.shade700;
   static Color greyText = Colors.grey.shade900;
   static Color grey = Colors.grey;
-  static Color primary = Color(0xFFE5A1D2);
+  static Color primary = const Color(0xFFE5A1D2);
   static const Color facebookClr = Color(0xFF1877F2);
   static Color twitterClr = Colors.blue.shade400;
   static Color phoneClr = Colors.blue.shade600;

@@ -20,18 +20,18 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 80,
               ),
               ClipRRect(
                 borderRadius: BorderRadius.circular(6.0),
                 child: Image.asset(
-                  ImagePathAssets.hw_logo,
+                  ImagePathAssets.hwLogo,
                   width: Get.width * .65,
                 ),
               ).centered().pLTRB(0, 20, 0, 10),
 
-              SizedBox(
+              const SizedBox(
                 height: 80,
               ),
 
@@ -40,7 +40,7 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                 height: 80 * 4,
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     optionWidget(

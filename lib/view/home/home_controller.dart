@@ -56,7 +56,7 @@ class HomeScreenController extends GetxController implements SearchActions {
         .add();
 
     focusNode.addListener(() {
-      print(focusNode.hasFocus);
+      debugPrint("${focusNode.hasFocus}");
       getKeyBoard(Get.context!);
     });
 

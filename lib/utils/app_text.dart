@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'app_themes/app_theme_controller.dart';
 
 class AppText extends StatelessWidget {
   final String label;
@@ -191,7 +189,7 @@ class HeadingText extends StatelessWidget {
   final EdgeInsets? padding;
   final double? fontSize;
 
-  static final ThemeController _themeController = Get.find();
+  // static final ThemeController _themeController = Get.find();
 
   @override
   Widget build(BuildContext context) {

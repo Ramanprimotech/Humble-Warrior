@@ -242,7 +242,7 @@ class _OutlinedButton extends StatelessWidget {
           ),
         ),
         textStyle: MaterialStateProperty.resolveWith(
-          (state) => Get.textTheme.bodyText2!.copyWith(
+          (state) => Get.textTheme.bodyMedium!.copyWith(
             fontSize: fontSize,
             fontWeight: FontWeight.w600,
           ),

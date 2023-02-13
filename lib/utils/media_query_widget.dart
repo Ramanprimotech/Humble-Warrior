@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MediaQueryWidget extends StatefulWidget {
-  Widget child;
-  MediaQueryWidget({
+  final Widget child;
+  const MediaQueryWidget({
     Key? key,
     required this.child,
   }) : super(key: key);

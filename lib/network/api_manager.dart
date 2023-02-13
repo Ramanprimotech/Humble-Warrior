@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'custome_exception.dart';
@@ -10,9 +11,9 @@ import 'endpoints.dart';
 
 class APIManager {
   Future<dynamic> getAllCall({required String url}) async {
-    print("Calling API: $url");
+    debugPrint("Calling API: $url");
     Uri urlForPost = Uri.parse("${Endpoints.baseUrl}$url");
-    var responseJson;
+    var   responseJson;
     try {
       final response = await http.get(urlForPost,
           headers: {'Authorization': 'Bearer ${Endpoints.token}'});
@@ -24,7 +25,7 @@ class APIManager {
   }
 
   Future<dynamic> postAllCallNonParam({required String url}) async {
-    print("Calling API: $url");
+    debugPrint("Calling API: $url");
     Uri urlForPost = Uri.parse("${Endpoints.baseUrl}$url");
     var responseJson;
     try {
@@ -39,8 +40,8 @@ class APIManager {
   }
 
   Future<dynamic> postAPICall({required String url, required var param}) async {
-    print("Calling API: $url");
-    print("Calling parameters: $param");
+    debugPrint("Calling API: $url");
+    debugPrint("Calling parameters: $param");
 
     Uri urlForPost = Uri.parse("${Endpoints.baseUrl}$url");
     var responseJson;
@@ -56,15 +57,15 @@ class APIManager {
     } on SocketException {
       throw FetchDataException('No Internet connection');
     } on Error catch (e) {
-      print('Error: $e');
+      debugPrint('Error: $e');
     }
     return responseJson;
   }
 
   Future<dynamic> postAPICallNoBearer(
       {required String url, required var param}) async {
-    print("Calling API: $url");
-    print("Calling parameters: $param");
+    debugPrint("Calling API: $url");
+    debugPrint("Calling parameters: $param");
 
     Uri urlForPost = Uri.parse("${Endpoints.baseUrl}$url");
     var responseJson;
@@ -86,7 +87,7 @@ class APIManager {
   }
 
   dynamic _response(http.Response response) {
-    print(response.statusCode);
+    debugPrint("${response.statusCode}");
     switch (response.statusCode) {
       case 200:
         var responseJson = jsonDecode(response.body);

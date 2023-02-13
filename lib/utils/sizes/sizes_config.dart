@@ -46,7 +46,7 @@ class SizeConfig {
       Dimens.fontLarge = 21.0;
       Dimens.fontExtraLarge = 25.0;
 
-      print("iff small ${Dimens.fontSmall}");
+      debugPrint("iff small ${Dimens.fontSmall}");
     }
     else if(Get.width > 480){
       Dimens.margin = 18.0;
@@ -62,7 +62,7 @@ class SizeConfig {
       Dimens.fontLarge = 24.0;
       Dimens.fontExtraLarge = 27.0;
 
-      print("iff small ${Dimens.fontSmall}");
+      debugPrint("iff small ${Dimens.fontSmall}");
     }
 
     //   // font sizes
