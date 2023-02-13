@@ -12,7 +12,6 @@ import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
 import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 import '../../modals/response/brands_response_mdel.dart';
 
@@ -49,7 +48,7 @@ class HomeScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                _brandRow(height: brandLoveHeight),
+                _brandRow(height: brandLoveHeight, context: context),
                 Row(
                   children: [
                     Expanded(
@@ -103,8 +102,8 @@ class HomeScreen extends StatelessWidget {
                                 itemBuilder: (ctx, index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      CommonUtils()
-                                          .urlLauncher(url: data[index].brandLink!);
+                                      CommonUtils().urlLauncher(
+                                          url: data[index].brandLink!);
                                     },
                                     child: SizedBox(
                                       height: 60,
@@ -123,7 +122,8 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   );
                                 },
-                                separatorBuilder: (BuildContext context, int index) {
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
                                   return 20.sw;
                                 },
                               );
@@ -131,14 +131,21 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                        flex: 1,
-                        child: GestureDetector(
-                            onTap: (){
-                              controller.brandScrollController.animateTo(controller.brandScrollController.offset + (80*2),
-                                  duration: Duration(milliseconds: 150), curve: Curves.linear);
-                            },
-                            child: Icon(Icons.arrow_forward_ios,size: 20,color: Colors.black,)),
-                          ),
+                      flex: 1,
+                      child: GestureDetector(
+                          onTap: () {
+                            controller.brandScrollController.animateTo(
+                                controller.brandScrollController.offset +
+                                    (80 * 2),
+                                duration: Duration(milliseconds: 150),
+                                curve: Curves.linear);
+                          },
+                          child: Icon(
+                            Icons.arrow_forward_ios,
+                            size: 20,
+                            color: Colors.black,
+                          )),
+                    ),
                   ],
                 ),
                 const SizedBox(
@@ -291,7 +298,8 @@ class HomeScreen extends StatelessWidget {
                         itemCount: ProductImages.productImagesList.length,
                         itemBuilder: (ctx, index) {
                           return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 2.0),
                             child: SizedBox(
                               height: productHeight,
                               width: 62,
@@ -317,11 +325,19 @@ class HomeScreen extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: GestureDetector(
-                      onTap: (){
-                        controller.productScrollController.animateTo(controller.productScrollController.offset + (70*1),
-                            duration: Duration(milliseconds: 150), curve: Curves.linear);
+                      onTap: () {
+                        controller.productScrollController.animateTo(
+                            controller.productScrollController.offset +
+                                (70 * 1),
+                            duration: Duration(milliseconds: 150),
+                            curve: Curves.linear);
                       },
-                      child: Icon(Icons.arrow_forward_ios,color: Colors.black,size: 20,weight: 10,)),
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.black,
+                        size: 20,
+                        weight: 10,
+                      )),
                 ),
               ],
             ),
