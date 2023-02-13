@@ -1,4 +1,6 @@
 
+import 'package:flutter/cupertino.dart';
+
 import '../../utils/app_strings.dart';
 
 class ResultStatusCheck {
@@ -8,22 +10,22 @@ class ResultStatusCheck {
   ResultStatusCheck({required this.status, this.messageResponse});
 
   String resultCheck() {
-    print(status);
+    debugPrint("$status");
     switch (status) {
       case 400:
-        return statusMessage(AppStrings.Er400);
+        return statusMessage(AppStrings.er_400);
 
       case 401:
-        return statusMessage(AppStrings.Er401);
+        return statusMessage(AppStrings.er401);
 
       case 403:
-        return statusMessage(AppStrings.Er403);
+        return statusMessage(AppStrings.er403);
 
       case 500:
-        return statusMessage(AppStrings.Er500);
+        return statusMessage(AppStrings.er500);
 
       default:
-        return statusMessage(AppStrings.ErrDefault);
+        return statusMessage(AppStrings.errDefault);
     }
   }
 

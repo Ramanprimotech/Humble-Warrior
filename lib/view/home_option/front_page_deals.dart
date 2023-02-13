@@ -20,15 +20,15 @@ class FrontPageDeals extends StatelessWidget {
       onNotification: (ScrollNotification scrollInfo) {
         if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
           // onLoadMore();
-          print("object");
+          debugPrint("object");
           if (controller.frontPageDealsBool.value == false) {
             controller.frontPageDealsBool.value = true;
             controller.update();
-            Future.delayed(Duration(milliseconds: 10), () {
+            Future.delayed(const Duration(milliseconds: 10), () {
               controller.frontPageDealScrollController.animateTo(
                 controller
                     .frontPageDealScrollController.position.maxScrollExtent,
-                duration: Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 500),
                 curve: Curves.fastOutSlowIn,
               );
             });
@@ -104,7 +104,7 @@ class FrontPageDeals extends StatelessWidget {
                                   child: Container(
                                       height: 80,
                                       alignment: Alignment.center,
-                                      child: CircularProgressIndicator())),
+                                      child: const CircularProgressIndicator())),
                             ),
                     ),
                     Positioned(
@@ -116,7 +116,7 @@ class FrontPageDeals extends StatelessWidget {
                           alignment: Alignment.center,
                           children: [
                             CustomPaint(
-                              size: Size(220, 40),
+                              size: const Size(220, 40),
                               //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
                               painter: FrontPageBanner(
                                   color: details.ribbonColor != null

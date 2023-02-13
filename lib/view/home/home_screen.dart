@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
                           return ListView.separated(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
                             scrollDirection: Axis.horizontal,
                             itemCount: 25,
                             itemBuilder: (ctx, index) {
@@ -80,11 +80,11 @@ class HomeScreen extends StatelessWidget {
                           );
                         }
                         if (snapshot.hasError) {
-                          return AppText("Something Went Wrong");
+                          return const AppText("Something Went Wrong");
                         }
                         List<BrandDetails> data = snapshot.data ?? [];
                         return ListView.separated(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
                           scrollDirection: Axis.horizontal,
                           itemCount: data.length,
                           itemBuilder: (ctx, index) {
@@ -215,7 +215,7 @@ class HomeScreen extends StatelessWidget {
         //         ),
         // ),
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(70.0),
+          preferredSize: const Size.fromHeight(70.0),
           child: Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: AppBar(
@@ -230,7 +230,7 @@ class HomeScreen extends StatelessWidget {
               ),
               actions: [
                 Padding(
-                  padding: EdgeInsets.only(right: 15),
+                  padding: const EdgeInsets.only(right: 15),
                   child:
                       InkWell(onTap: () {}, child: AppIcons.notificationActice()
                           // Image.asset(
@@ -256,7 +256,7 @@ class HomeScreen extends StatelessWidget {
               height: productHeight,
               width: Get.width,
               child: ListView.builder(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   scrollDirection: Axis.horizontal,
                   itemCount: ProductImages.productImagesList.length,
                   itemBuilder: (ctx, index) {
@@ -274,7 +274,7 @@ class HomeScreen extends StatelessWidget {
                                 height: productHeight - 20,
                                 scale: 0.7),
                             AppText(
-                              "${ProductImages.productImagesList[index].name}",
+                              ProductImages.productImagesList[index].name,
                               fontSize: 12,
                             ),
                           ],
@@ -321,7 +321,7 @@ class HomeScreen extends StatelessWidget {
                     );
                   }
                   if (snapshot.hasError) {
-                    return AppText("Something Went Wrong");
+                    return const AppText("Something Went Wrong");
                   }
                   List<HomeCategoryList> data = snapshot.data ?? [];
                   return Expanded(
@@ -356,8 +356,8 @@ class HomeScreen extends StatelessWidget {
   _brandRow({required double height}) {
     return Container(
       height: height,
-      padding: EdgeInsets.only(top: 15, right: 20, left: 20, bottom: 20),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.only(top: 15, right: 20, left: 20, bottom: 20),
+      decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(15), topLeft: Radius.circular(15)),
@@ -372,7 +372,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-              AppText(
+              const AppText(
                 "BRAND'S  I",
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -383,7 +383,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          AppText(
+          const AppText(
             "VIEW ALL",
             fontSize: 14,
             color: AppColors.blue,
@@ -415,10 +415,10 @@ Widget homeOption({required HomeCategoryList homeOptions, required int index}) {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
             decoration: BoxDecoration(
                 color: AppColors.primary,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(15),
                   topRight: Radius.circular(20),
                 )),

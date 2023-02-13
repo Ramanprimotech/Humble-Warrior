@@ -4,7 +4,6 @@ import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
-import 'package:humble_warrior/view/about_donna/about_controller.dart';
 import 'package:readmore/readmore.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -12,10 +11,10 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AboutScreenController controller = Get.put(AboutScreenController());
+    // final AboutScreenController controller = Get.put(AboutScreenController());
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.only(top: 20, right: 10, left: 10),
+        margin: const EdgeInsets.only(top: 20, right: 10, left: 10),
         child: SingleChildScrollView(
           child: Column(children: [
             _aboutButton(),
@@ -32,8 +31,8 @@ class AboutScreen extends StatelessWidget {
 
   _aboutButton() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      margin: EdgeInsets.symmetric(horizontal: 0, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 15),
       width: MediaQuery.of(Get.context!).size.width,
       decoration: BoxDecoration(
           color: Colors.grey.shade400,
@@ -43,10 +42,10 @@ class AboutScreen extends StatelessWidget {
               color: Colors.grey.shade500,
               spreadRadius: 2,
               blurRadius: 3,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             )
           ]),
-      child: AppText(aboutDonnaTxt,
+      child: const AppText(aboutDonnaTxt,
           fontWeight: FontWeight.bold,
           fontSize: 18,
           textAlign: TextAlign.center),
@@ -68,8 +67,8 @@ class AboutScreen extends StatelessWidget {
 
   _details() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 0),
       width: MediaQuery.of(Get.context!).size.width,
       decoration: BoxDecoration(
           color: Colors.grey.shade300,
@@ -79,13 +78,13 @@ class AboutScreen extends StatelessWidget {
               color: Colors.grey.shade500,
               spreadRadius: 2,
               blurRadius: 3,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             )
           ]),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         AppText('HELLO GORGEOUS!',
             fontWeight: FontWeight.bold, color: Colors.grey.shade800),
-        ReadMoreText(
+        const ReadMoreText(
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
           trimLines: 10,
           trimMode: TrimMode.Line,
@@ -102,8 +101,8 @@ class AboutScreen extends StatelessWidget {
 
   _seeCopyButton() {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       width: MediaQuery.of(Get.context!).size.width,
       decoration: BoxDecoration(
           color: Colors.blueAccent.shade100,
@@ -113,19 +112,19 @@ class AboutScreen extends StatelessWidget {
               color: Colors.grey.shade500,
               spreadRadius: 2,
               blurRadius: 3,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             )
           ]),
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(children: [
-          TextSpan(
+          const TextSpan(
             text: seeCopyHumbleTxt,
             style: TextStyle(
                 fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
           ),
           WidgetSpan(child: 10.sw),
-          TextSpan(
+          const TextSpan(
               text: hereTxt,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -138,13 +137,13 @@ class AboutScreen extends StatelessWidget {
 
   _brandRow() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 3),
+      padding: const EdgeInsets.symmetric(horizontal: 3),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              AppText(
+              const AppText(
                 "BRAND'S I",
                 fontSize: 18,
               ),
@@ -153,7 +152,7 @@ class AboutScreen extends StatelessWidget {
               ),
             ],
           ),
-          AppText(
+          const AppText(
             "View All",
             fontSize: 16,
           ),
@@ -164,7 +163,7 @@ class AboutScreen extends StatelessWidget {
 
   _brandList() {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 5),
+      margin: const EdgeInsets.symmetric(vertical: 5),
       height: 80,
       width: Get.height,
       child: ListView.builder(
@@ -182,7 +181,7 @@ class AboutScreen extends StatelessWidget {
                     height: 60,
                     width: 80,
                   ),
-                  Text(
+                  const Text(
                     "Product",
                     style: TextStyle(fontSize: 12),
                   ),

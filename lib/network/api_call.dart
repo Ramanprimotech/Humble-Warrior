@@ -42,7 +42,7 @@ class CallAPI {
       //   description: response['msg'],
       // );
       return tokenResponseModel;
-    } catch (e, st) {
+    } catch (e) {
       // Endpoints.generateToken
       //     .logError(apiName: Endpoints.generateToken, error: e);
       log(e.toString());
@@ -76,7 +76,7 @@ class CallAPI {
       //   description: response['msg'],
       // );
       return false;
-    } catch (e, st) {
+    } catch (e) {
       // Endpoints.verifyToken.logError(apiName: Endpoints.verifyToken, error: e);
       return false;
     }
@@ -113,7 +113,7 @@ class CallAPI {
       //   description: response['msg'],
       // );
       return [];
-    } catch (e, st) {
+    } catch (e) {
       // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
       return [];
     }
@@ -150,7 +150,7 @@ class CallAPI {
       //   description: response['msg'],
       // );
       return [];
-    } catch (e, st) {
+    } catch (e) {
       // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
       return [];
     }
@@ -187,7 +187,7 @@ class CallAPI {
       //   description: response['msg'],
       // );
       return [];
-    } catch (e, st) {
+    } catch (e) {
       // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
       return [];
     }
@@ -223,7 +223,7 @@ class CallAPI {
       //   description: response['msg'],
       // );
       return [];
-    } catch (e, st) {
+    } catch (e) {
       // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
       return [];
     }
@@ -259,7 +259,7 @@ class CallAPI {
       //   description: response['msg'],
       // );
       return [];
-    } catch (e, st) {
+    } catch (e) {
       // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
       return [];
     }

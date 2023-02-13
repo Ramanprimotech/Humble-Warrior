@@ -16,7 +16,7 @@ class BottomNavigationScreen extends GetView<BottomNavigationController> {
           builder: (BottomNavigationController ctr) {
             return Scaffold(
               bottomNavigationBar: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20),
@@ -29,7 +29,7 @@ class BottomNavigationScreen extends GetView<BottomNavigationController> {
                   ],
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20)),
                   child: BottomNavigationBar(

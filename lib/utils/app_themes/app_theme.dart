@@ -1,11 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../app_colors.dart';
-import 'button_theme.dart';
 
 class AppTheme {
 
@@ -23,43 +20,43 @@ ThemeData _lightTheme = ThemeData.from(
 
   colorScheme: ColorScheme.light(primary: AppColors.primary),
   textTheme: TextTheme(
-    headline1: _textTheme.headline1!.copyWith(
+    displayLarge: _textTheme.displayLarge!.copyWith(
       color: AppColors.gray,
     ),
-    headline2: _textTheme.headline2!.copyWith(
+    displayMedium: _textTheme.displayMedium!.copyWith(
       color: AppColors.gray,
     ),
-    headline3: _textTheme.headline3!.copyWith(
+    displaySmall: _textTheme.displaySmall!.copyWith(
       color: AppColors.gray,
     ),
-    headline4: _textTheme.headline4!.copyWith(
+    headlineMedium: _textTheme.headlineMedium!.copyWith(
       color: AppColors.gray,
     ),
-    headline5: _textTheme.headline5!.copyWith(
+    headlineSmall: _textTheme.headlineSmall!.copyWith(
       color: AppColors.gray,
     ),
-    headline6: _textTheme.headline6!.copyWith(
+    titleLarge: _textTheme.titleLarge!.copyWith(
       color: AppColors.gray,
     ),
-    subtitle1: _textTheme.subtitle1!.copyWith(
+    titleMedium: _textTheme.titleMedium!.copyWith(
       color: AppColors.gray,
     ),
-    subtitle2: _textTheme.subtitle2!.copyWith(
+    titleSmall: _textTheme.titleSmall!.copyWith(
       color: AppColors.gray,
     ),
-    bodyText1: _textTheme.bodyText1!.copyWith(
+    bodyLarge: _textTheme.bodyLarge!.copyWith(
       color: AppColors.gray,
     ),
-    bodyText2: _textTheme.bodyText2!.copyWith(
+    bodyMedium: _textTheme.bodyMedium!.copyWith(
       color: AppColors.gray,
     ),
-    button: _textTheme.button!.copyWith(
+    labelLarge: _textTheme.labelLarge!.copyWith(
       color: AppColors.gray,
     ),
-    caption: _textTheme.caption!.copyWith(
+    bodySmall: _textTheme.bodySmall!.copyWith(
       color: AppColors.gray,
     ),
-    overline: _textTheme.overline!.copyWith(
+    labelSmall: _textTheme.labelSmall!.copyWith(
       color: AppColors.gray,
     ),
   ),
@@ -87,7 +84,7 @@ ThemeData _lightTheme = ThemeData.from(
     indicator:  UnderlineTabIndicator(
 
         borderSide: BorderSide(width: 3.0,color: AppColors.primary),
-        insets: EdgeInsets.symmetric(horizontal: 150.0)),
+        insets: const EdgeInsets.symmetric(horizontal: 150.0)),
 
 
 
@@ -198,7 +195,6 @@ ThemeData _darkTheme = ThemeData.from(
   //   shape: 4.shape as OutlinedBorder?,
   //   visualDensity: VisualDensity.compact,
   // ),
-  errorColor: AppColors.white,
   tabBarTheme:   const TabBarTheme(
     labelColor:AppColors.white,
     unselectedLabelColor: AppColors.white,
@@ -235,65 +231,65 @@ ThemeData _darkTheme = ThemeData.from(
 );
 
 final TextTheme _textTheme = TextTheme(
-  headline1: GoogleFonts.jost(
+  displayLarge: GoogleFonts.jost(
     fontSize: 110,
     fontWeight: FontWeight.w300,
     letterSpacing: -1.5,
   ),
-  headline2: GoogleFonts.jost(
+  displayMedium: GoogleFonts.jost(
     fontSize: 69,
     fontWeight: FontWeight.w300,
     letterSpacing: -0.5,
   ),
-  headline3: GoogleFonts.jost(
+  displaySmall: GoogleFonts.jost(
     fontSize: 55,
     fontWeight: FontWeight.w400,
   ),
-  headline4: GoogleFonts.jost(
+  headlineMedium: GoogleFonts.jost(
     fontSize: 39,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.25,
   ),
-  headline5: GoogleFonts.jost(
+  headlineSmall: GoogleFonts.jost(
     fontSize: 28,
     fontWeight: FontWeight.w400,
   ),
-  headline6: GoogleFonts.jost(
+  titleLarge: GoogleFonts.jost(
     fontSize: 23,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.15,
   ),
-  subtitle1: GoogleFonts.jost(
+  titleMedium: GoogleFonts.jost(
     fontSize: 18,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.15,
   ),
-  subtitle2: GoogleFonts.jost(
+  titleSmall: GoogleFonts.jost(
     fontSize: 16,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.1,
   ),
-  bodyText1: GoogleFonts.jost(
+  bodyLarge: GoogleFonts.jost(
     fontSize: 18,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.5,
   ),
-  bodyText2: GoogleFonts.jost(
+  bodyMedium: GoogleFonts.jost(
     fontSize: 16,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.25,
   ),
-  button: GoogleFonts.jost(
+  labelLarge: GoogleFonts.jost(
     fontSize: 16,
     fontWeight: FontWeight.w500,
     letterSpacing: 1.25,
   ),
-  caption: GoogleFonts.jost(
+  bodySmall: GoogleFonts.jost(
     fontSize: 14,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.4,
   ),
-  overline: GoogleFonts.jost(
+  labelSmall: GoogleFonts.jost(
     fontSize: 12,
     fontWeight: FontWeight.w400,
     letterSpacing: 1.5,

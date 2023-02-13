@@ -1,9 +1,9 @@
 class AppStrings {
-  static const String Er400 = "Bad Request : Error 400";
-  static const String Er401 = "Please logout and SignIn again";
-  static const String Er403 = "Forbidden : Error 403";
-  static const String Er500 = "Internal Server Error : Error 500";
-  static const String ErrDefault = "Something went wrong";
+  static const String er_400 = "Bad Request : Error 400";
+  static const String er401 = "Please logout and SignIn again";
+  static const String er403 = "Forbidden : Error 403";
+  static const String er500 = "Internal Server Error : Error 500";
+  static const String errDefault = "Something went wrong";
   static const String rupees = "₹";
   static const String degree = "°";
   static const String skipTxt = "SKIP";

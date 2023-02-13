@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_text.dart';
@@ -17,7 +18,7 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
     // final HomeOptionController controller = Get.find();
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(110.0),
+        preferredSize: const Size.fromHeight(110.0),
         child: Padding(
           padding: const EdgeInsets.only(top: 12.0),
           child: AppBar(

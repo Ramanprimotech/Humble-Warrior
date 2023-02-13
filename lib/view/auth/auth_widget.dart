@@ -38,7 +38,7 @@ class AuthWidget {
             ).centered().p(2).px(8),
             AppText(title!,
                 color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
-            SizedBox(width: 40),
+            const SizedBox(width: 40),
           ],
         ).p(8),
       ).py(10).px(20),

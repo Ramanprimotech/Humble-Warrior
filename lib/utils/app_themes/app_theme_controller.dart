@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../app_colors.dart';
 import '../shared_prefrence/shared_pref.dart';
 
@@ -56,9 +55,7 @@ class ThemeController extends GetxController {
     update();
     prefs = await SharedPreferences.getInstance();
     await prefs.setString('theme', themeMode.toString().split('.')[1]);
-
   }
-
 
   getThemeModeFromPreferences() async {
     ThemeMode themeMode;
@@ -70,16 +67,17 @@ class ThemeController extends GetxController {
     } catch (e) {
       themeMode = ThemeMode.system;
     }
-
     setThemeMode(themeMode);
   }
 
-  changeTheme(bool value){
+  changeTheme(bool value,GetxController controller){
     Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
     upgradeFun(value);
 
     setThemeMode(value ? ThemeMode.dark : ThemeMode.light);
-
     SharePreferenceData.addBoolToSF("mode", value);
+    controller.update();
   }
+
+
 }
