@@ -10,6 +10,7 @@ import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
+import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
 
 import '../../modals/response/brands_response_mdel.dart';
@@ -38,13 +39,20 @@ class HomeScreen extends StatelessWidget {
             );
           },
           child: Container(
-            color: Colors.white,
             height: brandHeight + brandLoveHeight + 10,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+              color:
+                  Theme.of(context).floatingActionButtonTheme.backgroundColor,
+            ),
             child: Column(
               children: [
-                _brandRow(height: brandLoveHeight),
+                _brandRow(height: brandLoveHeight, context: context),
                 Container(
-                  color: Colors.white,
+                  color: Theme.of(context)
+                      .floatingActionButtonTheme
+                      .backgroundColor,
                   height: brandHeight,
                   width: Get.height,
                   child: FutureBuilder<List<BrandDetails>>(
@@ -58,7 +66,9 @@ class HomeScreen extends StatelessWidget {
                             itemCount: 25,
                             itemBuilder: (ctx, index) {
                               return Container(
-                                color: Colors.white,
+                                color: Theme.of(context)
+                                    .floatingActionButtonTheme
+                                    .backgroundColor,
                                 height: 60,
                                 width: 80,
                                 child: Column(
@@ -219,9 +229,9 @@ class HomeScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: AppBar(
-              backgroundColor: Colors.white,
               centerTitle: false,
               title: CustomSearchBar(
+                height: 70,
                 onTap: controller.onTap,
                 onSubmit: controller.onSubmit,
                 onChange: controller.onChange,
@@ -353,19 +363,24 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  _brandRow({required double height}) {
+  _brandRow({required double height, required BuildContext context}) {
+    final ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
     return Container(
       height: height,
       padding: EdgeInsets.only(top: 15, right: 20, left: 20, bottom: 20),
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(15), topLeft: Radius.circular(15)),
           boxShadow: [
             BoxShadow(
-                offset: Offset(-2, -3), blurRadius: 2, color: Colors.black12),
+                offset: Offset(-1, -1),
+                blurRadius: 2,
+                color: shadowTheme.shadowColor!),
             BoxShadow(
-                offset: Offset(2, -3), blurRadius: 2, color: Colors.black12)
+                offset: Offset(1, -1),
+                blurRadius: 1,
+                color: shadowTheme.shadowColor!)
           ]),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -3,14 +3,18 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 
 import '../../utils/app_strings.dart';
 import '../../utils/app_text.dart';
 import '../../utils/common/common_functionality.dart';
+import '../../utils/theme_extention/account_option_theme_extentions.dart';
 import 'my_account_controller.dart';
 
 class MyAccWidget {
+  final BuildContext context;
+  MyAccWidget({required this.context});
   final MyAccountController controller = Get.find();
 
   profileImage() {
@@ -22,7 +26,7 @@ class MyAccWidget {
             height: 150,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.grey.shade200,
+              color: AppColors.primary,
             ),
             child: controller.imageUrl.isEmpty
                 ? InkWell(
@@ -73,6 +77,8 @@ class MyAccWidget {
 
   detailsOptions(MyAccountController controller,
       {title, bool isSwitchRequired = false, ontap, click}) {
+    final AccountOptionTheme accountOptionTheme =
+        Theme.of(context).extension<AccountOptionTheme>()!;
     return GestureDetector(
       onTap: ontap,
       child: Container(
@@ -84,14 +90,14 @@ class MyAccWidget {
         margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 7),
         width: MediaQuery.of(Get.context!).size.width,
         decoration: BoxDecoration(
-            color: Colors.grey,
+            color: accountOptionTheme.backGroundColor,
             borderRadius: BorderRadius.circular(25),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.shade600,
                 spreadRadius: 1,
-                blurRadius: 2,
-                offset: const Offset(0, 3),
+                blurRadius: 1,
+                offset: const Offset(0, 0),
               )
             ]),
         child:
@@ -100,7 +106,7 @@ class MyAccWidget {
             title,
             fontSize: 16,
             fontWeight: FontWeight.w500,
-            color: Colors.grey.shade900,
+            color: accountOptionTheme.textColor,
           ),
           isSwitchRequired
               ? Obx(

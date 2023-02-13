@@ -1,26 +1,20 @@
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
+import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart';
+import 'package:humble_warrior/utils/theme_extention/shop_button_theme.dart';
 
 import '../app_colors.dart';
-import 'button_theme.dart';
+import '../theme_extention/custom_notice_theme_extention.dart';
 
 class AppTheme {
-
-
   static ThemeData darkTheme = _darkTheme;
 
   static ThemeData lightTheme = _lightTheme;
-
-
-
-
 }
 
 ThemeData _lightTheme = ThemeData.from(
-
   colorScheme: ColorScheme.light(primary: AppColors.primary),
   textTheme: TextTheme(
     headline1: _textTheme.headline1!.copyWith(
@@ -64,13 +58,28 @@ ThemeData _lightTheme = ThemeData.from(
     ),
   ),
 ).copyWith(
+  extensions: <ThemeExtension>[
+    ShopNowTheme(textColor: AppColors.white, backGroundColor: AppColors.pink),
+    AccountOptionTheme(
+        shadow: AppColors.shadowLight,
+        textColor: AppColors.greyText,
+        backGroundColor: AppColors.white),
+    const ShadowTheme(shadowColor: AppColors.shadowLight),
+    DialogueThemeExtention(
+        backGroundColor: AppColors.white,
+        textColor: AppColors.gray,
+        buttonColor: AppColors.primary,
+        shadow: AppColors.shadowLight),
+  ],
+  cupertinoOverrideTheme: CupertinoThemeData(
+      textTheme:
+          CupertinoTextThemeData(textStyle: TextStyle(color: AppColors.black))),
   scaffoldBackgroundColor: AppColors.white,
   dialogBackgroundColor: AppColors.white,
 
-  iconTheme:  IconThemeData(
-      color: AppColors.primary
-
-  ),
+  iconTheme: IconThemeData(color: AppColors.primary),
+  floatingActionButtonTheme:
+      const FloatingActionButtonThemeData(backgroundColor: AppColors.white),
   appBarTheme: AppBarTheme(
     elevation: 0,
     centerTitle: true,
@@ -81,20 +90,24 @@ ThemeData _lightTheme = ThemeData.from(
     // foregroundColor: AppColors.textLight,
     //systemOverlayStyle: SystemUiOverlayStyle.dark,
   ),
-  tabBarTheme :  TabBarTheme(
-    labelColor:AppColors.primary,
+  tabBarTheme: TabBarTheme(
+    labelColor: AppColors.primary,
     unselectedLabelColor: AppColors.black,
-    indicator:  UnderlineTabIndicator(
-
-        borderSide: BorderSide(width: 3.0,color: AppColors.primary),
+    indicator: UnderlineTabIndicator(
+        borderSide: BorderSide(width: 3.0, color: AppColors.primary),
         insets: EdgeInsets.symmetric(horizontal: 150.0)),
-
-
-
   ),
-
-
-
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    // backgroundColor: ,
+    elevation: 10,
+    showUnselectedLabels: false,
+    selectedItemColor: AppColors.primary,
+    selectedIconTheme: IconThemeData(color: AppColors.primary, size: 24),
+    unselectedIconTheme: IconThemeData(color: AppColors.black, size: 24),
+    selectedLabelStyle: TextStyle(color: AppColors.primary, fontSize: 12),
+    unselectedLabelStyle: TextStyle(color: AppColors.black),
+    type: BottomNavigationBarType.fixed,
+  ),
   // inputDecorationTheme: InputDecorationTheme(
   //   alignLabelWithHint: true,
   //   filled: true,
@@ -163,12 +176,26 @@ ThemeData _darkTheme = ThemeData.from(
     ),
   ),
 ).copyWith(
+  extensions: <ThemeExtension<dynamic>>[
+    ShopNowTheme(textColor: AppColors.white, backGroundColor: AppColors.pink),
+    AccountOptionTheme(
+        shadow: AppColors.shadowDark,
+        textColor: AppColors.white,
+        backGroundColor: AppColors.gray),
+    const ShadowTheme(shadowColor: AppColors.shadowDark),
+    DialogueThemeExtention(
+        backGroundColor: AppColors.backgroundDark,
+        textColor: AppColors.white,
+        buttonColor: AppColors.primary,
+        shadow: AppColors.shadowDark),
+  ],
+  cupertinoOverrideTheme: CupertinoThemeData(
+      textTheme:
+          CupertinoTextThemeData(textStyle: TextStyle(color: AppColors.white))),
   scaffoldBackgroundColor: AppColors.black,
-  iconTheme: const IconThemeData(
-      color: AppColors.white
-
-  ),
-
+  iconTheme: const IconThemeData(color: AppColors.white),
+  floatingActionButtonTheme:
+      FloatingActionButtonThemeData(backgroundColor: AppColors.backgroundDark),
   // dialogBackgroundColor: AppColors.dialogDark,
   appBarTheme: AppBarTheme(
     elevation: 0,
@@ -184,13 +211,17 @@ ThemeData _darkTheme = ThemeData.from(
   //   backgroundColor: AppColors.dialogDark,
   //   shape: 12.shape,
   // ),
-  // bottomNavigationBarTheme: BottomNavigationBarThemeData(
-  //   backgroundColor: AppColors.backgroundDark,
-  //   elevation: 0,
-  //   selectedLabelStyle: _textTheme.subtitle1!.copyWith(color: AppColors.primaryDark),
-  //   unselectedLabelStyle: _textTheme.subtitle1!.copyWith(color: AppColors.textDark),
-  //   type: BottomNavigationBarType.fixed,
-  // ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    // backgroundColor: ,
+    elevation: 10,
+    showUnselectedLabels: false,
+    selectedItemColor: AppColors.primary,
+    selectedIconTheme: IconThemeData(color: AppColors.primary, size: 24),
+    unselectedIconTheme: IconThemeData(color: AppColors.gray, size: 24),
+    selectedLabelStyle: TextStyle(color: AppColors.primary, fontSize: 12),
+    unselectedLabelStyle: TextStyle(color: AppColors.gray),
+    type: BottomNavigationBarType.fixed,
+  ),
   // checkboxTheme: CheckboxThemeData(
   //   checkColor: MaterialStateProperty.resolveWith((_) => Colors.white),
   //   fillColor: MaterialStateProperty.resolveWith(
@@ -199,16 +230,12 @@ ThemeData _darkTheme = ThemeData.from(
   //   visualDensity: VisualDensity.compact,
   // ),
   errorColor: AppColors.white,
-  tabBarTheme:   const TabBarTheme(
-    labelColor:AppColors.white,
+  tabBarTheme: TabBarTheme(
+    labelColor: AppColors.primary,
     unselectedLabelColor: AppColors.white,
     indicator: UnderlineTabIndicator(
-
-        borderSide: BorderSide(width: 3.0,color: AppColors.white),
-        insets: EdgeInsets.symmetric(horizontal: 150.0)),
-
-
-
+      borderSide: BorderSide(width: 3.0, color: AppColors.primary),
+    ),
   ),
   // inputDecorationTheme: InputDecorationTheme(
   //   alignLabelWithHint: true,

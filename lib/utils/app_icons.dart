@@ -8,7 +8,7 @@ class AppIcons {
   static Icon favourite() => const Icon(Icons.favorite_outlined);
   static Icon bag() => const Icon(Icons.shopping_bag);
   static Icon join() => const Icon(Icons.facebook);
-  static Icon person() => const Icon(Icons.person_outlined);
+  static Icon person() => const Icon(Icons.person);
   //<=========== Bottom Navigation
 
   //Action Bar ===========>
@@ -20,19 +20,15 @@ class AppIcons {
         Icons.share,
         color: iconColor,
       );
-  static Icon sort({Color iconColor = Colors.black}) =>
-      Icon(Icons.sort, color: iconColor);
+  static Icon sort({Color? iconColor}) => Icon(Icons.sort, color: iconColor);
   static Icon notification({Color iconColor = Colors.black}) =>
       Icon(Icons.notifications_none_rounded, color: iconColor);
-  static Icon notificationActice(
-          {Color iconColor = Colors.black, double size = 24}) =>
-      Icon(
+  static Icon notificationActice({Color? iconColor, double size = 24}) => Icon(
         Icons.notifications_active,
         color: iconColor,
         size: size,
       );
-  static Icon filter({Color iconColor = Colors.black, double size = 24}) =>
-      Icon(
+  static Icon filter({Color? iconColor, double size = 24}) => Icon(
         Icons.sort,
         color: iconColor,
         size: size,
@@ -44,7 +40,7 @@ class AppIcons {
       Icon(Icons.login, color: iconColor);
   static Icon rightArrow({Color iconColor = Colors.black}) =>
       Icon(Icons.chevron_right, color: iconColor);
-  static Icon backArrow({Color iconColor = Colors.black, double size = 24}) =>
+  static Icon backArrow({Color? iconColor, double size = 24}) =>
       Icon(Icons.arrow_back, size: size, color: iconColor);
   static Icon cross({Color iconColor = Colors.black, double size = 24}) =>
       Icon(Icons.highlight_off, size: size, color: iconColor);
@@ -53,8 +49,11 @@ class AppIcons {
   static Icon clock({Color iconColor = Colors.black}) =>
       Icon(Icons.timer, color: iconColor);
 
-  static Icon heart({Color iconColor = Colors.black}) =>
-      Icon(Icons.favorite_outlined, color: iconColor,size:16,);
+  static Icon heart({Color iconColor = Colors.black}) => Icon(
+        Icons.favorite_outlined,
+        color: iconColor,
+        size: 16,
+      );
   static Icon share2({Color iconColor = Colors.blue}) =>
       Icon(Icons.share, color: iconColor);
   static Icon comment({Color iconColor = Colors.black}) =>

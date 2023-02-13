@@ -1,32 +1,36 @@
 import 'package:flutter/material.dart';
 
-class AccountOptionTheme extends ThemeExtension<AccountOptionTheme> {
+class DialogueThemeExtention extends ThemeExtension<DialogueThemeExtention> {
   final Color? textColor;
   final Color? backGroundColor;
+  final Color? buttonColor;
   final Color? shadow;
 
-  const AccountOptionTheme(
+  const DialogueThemeExtention(
       {required this.textColor,
       required this.backGroundColor,
+      required this.buttonColor,
       required this.shadow});
 
   @override
-  ThemeExtension<AccountOptionTheme> copyWith(
+  ThemeExtension<DialogueThemeExtention> copyWith(
       {Color? textColor, Color? backGroundColor}) {
-    return AccountOptionTheme(
+    return DialogueThemeExtention(
         textColor: textColor ?? this.textColor,
         shadow: shadow ?? this.shadow,
+        buttonColor: buttonColor ?? this.buttonColor,
         backGroundColor: backGroundColor ?? this.backGroundColor);
   }
 
   @override
-  ThemeExtension<AccountOptionTheme> lerp(
-      covariant ThemeExtension<AccountOptionTheme>? other, double t) {
-    if (other is! AccountOptionTheme) {
+  ThemeExtension<DialogueThemeExtention> lerp(
+      covariant ThemeExtension<DialogueThemeExtention>? other, double t) {
+    if (other is! DialogueThemeExtention) {
       return this;
     }
-    return AccountOptionTheme(
+    return DialogueThemeExtention(
       textColor: Color.lerp(textColor, other.textColor, t),
+      buttonColor: Color.lerp(buttonColor, other.buttonColor, t),
       shadow: Color.lerp(shadow, other.shadow, t),
       backGroundColor: Color.lerp(backGroundColor, other.backGroundColor, t),
     );
