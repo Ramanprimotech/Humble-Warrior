@@ -7,6 +7,8 @@ import 'package:humble_warrior/network/api_call.dart';
 
 class HomeScreenController extends GetxController implements SearchActions {
   final TextEditingController searchTextController = TextEditingController();
+  final ScrollController brandScrollController = ScrollController(initialScrollOffset: 0.0);
+  final ScrollController productScrollController = ScrollController(initialScrollOffset: 0.0);
   final FocusNode focusNode = FocusNode();
   ValueNotifier<bool> keyboardIsOpened = ValueNotifier(true);
 
