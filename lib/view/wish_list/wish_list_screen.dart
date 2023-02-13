@@ -29,11 +29,11 @@ class WishList extends StatelessWidget {
                           color: dialogueThemeExtention.shadow!,
                           spreadRadius: 2,
                           blurRadius: 2,
-                          offset: Offset(0, 0))
+                          offset: Offset(0,0))
                     ],
                   ),
                   child: Column(children: [
-                    const AppText('Please Login for access this feature.'),
+                    const AppText('Please Login for access this feature.',fontSize: 20),
                     20.sh,
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
