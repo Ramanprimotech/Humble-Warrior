@@ -31,7 +31,7 @@ class HomeScreenWidgets {
   /// App Bar
   PreferredSize appBar() {
     return PreferredSize(
-      preferredSize: Size.fromHeight(70.0),
+      preferredSize: const Size.fromHeight(70.0),
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: AppBar(
@@ -45,7 +45,7 @@ class HomeScreenWidgets {
           ),
           actions: [
             Padding(
-              padding: EdgeInsets.only(right: 15),
+              padding: const EdgeInsets.only(right: 15),
               child:
                   InkWell(onTap: () {}, child: AppIcons.notificationActice()),
             )
@@ -92,7 +92,7 @@ class HomeScreenWidgets {
             );
           }
           if (snapshot.hasError) {
-            return AppText("Something Went Wrong");
+            return const AppText("Something Went Wrong");
           }
           List<HomeCategoryList> data = snapshot.data ?? [];
           return Expanded(
@@ -142,10 +142,10 @@ class HomeScreenWidgets {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
               decoration: BoxDecoration(
                   color: AppColors.primary,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(15),
                     topRight: Radius.circular(20),
                   )),
@@ -173,7 +173,7 @@ class HomeScreenWidgets {
             height: productHeight,
             width: Get.width,
             child: ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 scrollDirection: Axis.horizontal,
                 controller: controller.productScrollController,
                 itemCount: ProductImages.productImagesList.length,
@@ -208,7 +208,7 @@ class HomeScreenWidgets {
             onTap: () {
               controller.productScrollController.animateTo(
                   controller.productScrollController.offset + (70 * 1),
-                  duration: Duration(milliseconds: 150),
+                  duration: const Duration(milliseconds: 150),
                   curve: Curves.linear);
             },
             child: AppIcons.next(),
@@ -260,7 +260,7 @@ class HomeScreenWidgets {
                       onTap: () {
                         controller.brandScrollController.animateTo(
                             controller.brandScrollController.offset + (80 * 2),
-                            duration: Duration(milliseconds: 150),
+                            duration: const Duration(milliseconds: 150),
                             curve: Curves.linear);
                       },
                       child: AppIcons.next()),
@@ -283,7 +283,7 @@ class HomeScreenWidgets {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return ListView.separated(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               scrollDirection: Axis.horizontal,
               itemCount: 25,
               itemBuilder: (ctx, index) {
@@ -311,12 +311,12 @@ class HomeScreenWidgets {
             );
           }
           if (snapshot.hasError) {
-            return AppText("Something Went Wrong");
+            return const AppText("Something Went Wrong");
           }
           List<BrandDetails> data = snapshot.data ?? [];
           return ListView.separated(
             // physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             scrollDirection: Axis.horizontal,
             controller: controller.brandScrollController,
             itemCount: data.length,
@@ -354,18 +354,18 @@ class HomeScreenWidgets {
     final ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
     return Container(
       height: height,
-      padding: EdgeInsets.only(top: 15, right: 20, left: 20, bottom: 20),
+      padding: const EdgeInsets.only(top: 15, right: 20, left: 20, bottom: 20),
       decoration: BoxDecoration(
           color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topRight: Radius.circular(15), topLeft: Radius.circular(15)),
           boxShadow: [
             BoxShadow(
-                offset: Offset(-1, -1),
+                offset: const Offset(-1, -1),
                 blurRadius: 2,
                 color: shadowTheme.shadowColor!),
             BoxShadow(
-                offset: Offset(1, -1),
+                offset: const Offset(1, -1),
                 blurRadius: 1,
                 color: shadowTheme.shadowColor!)
           ]),
@@ -374,7 +374,7 @@ class HomeScreenWidgets {
         children: [
           Row(
             children: [
-              AppText(
+              const AppText(
                 "BRAND'S  I",
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -387,9 +387,9 @@ class HomeScreenWidgets {
           ),
           GestureDetector(
             onTap: () {
-              Get.toNamed(AppRoutes.homePage);
+              Get.toNamed(AppRoutes.brands);
             },
-            child: AppText(
+            child: const AppText(
               "VIEW ALL",
               fontSize: 14,
               color: AppColors.blue,
