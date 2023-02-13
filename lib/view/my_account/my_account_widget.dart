@@ -111,7 +111,7 @@ class MyAccWidget {
           isSwitchRequired
               ? Obx(
                   () => Transform.scale(
-                    scale: 0.7,
+                    scale: 0.9,
                     child: Switch(
                       thumbIcon: MaterialStateProperty.resolveWith<Icon?>(
                         (Set<MaterialState> states) {
