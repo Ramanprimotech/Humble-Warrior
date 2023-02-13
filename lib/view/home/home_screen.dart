@@ -251,7 +251,6 @@ class HomeScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: AppBar(
-              backgroundColor: Colors.white,
               centerTitle: false,
               title: CustomSearchBar(
                 onTap: controller.onTap,
