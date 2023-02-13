@@ -4,6 +4,8 @@ import 'package:humble_warrior/view/auth/login_binding.dart';
 import 'package:humble_warrior/view/auth/login_screen.dart';
 import 'package:humble_warrior/view/bottom_navigation/bottom_navigation_binging.dart';
 import 'package:humble_warrior/view/bottom_navigation/bottom_navigation_screen.dart';
+import 'package:humble_warrior/view/brands/brands_binding.dart';
+import 'package:humble_warrior/view/brands/brands_screen.dart';
 import 'package:humble_warrior/view/home_option/home_option_binging.dart';
 import 'package:humble_warrior/view/home_option/home_option_screen.dart';
 import 'package:humble_warrior/view/landing/intro_binding.dart';
@@ -52,6 +54,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.myAccount,
         page: () =>  const MyAccount(),
-        binding: MyAccountBindings())
+        binding: MyAccountBindings()),
+    GetPage(
+        name: AppRoutes.brands,
+        page: () => const BrandsScreen(),
+        binding: BrandsBinding())
   ];
 }
