@@ -45,7 +45,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           suffixInsets: const EdgeInsets.only(right: 15),
           suffixMode: OverlayVisibilityMode.editing,
           prefixIcon: Image.asset(
-            ImagePathAssets.hw_logo,
+            ImagePathAssets.hwLogo,
             height: 40,
             width: 40,
           ),

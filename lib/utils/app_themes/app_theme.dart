@@ -1,4 +1,4 @@
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
@@ -9,19 +9,12 @@ import '../app_colors.dart';
 import '../theme_extention/custom_notice_theme_extention.dart';
 
 class AppTheme {
-
-
   static ThemeData darkTheme = _darkTheme;
 
   static ThemeData lightTheme = _lightTheme;
-
-
-
-
 }
 
 ThemeData _lightTheme = ThemeData.from(
-
   colorScheme: ColorScheme.light(primary: AppColors.primary),
   textTheme: TextTheme(
     displayLarge: _textTheme.displayLarge!.copyWith(
