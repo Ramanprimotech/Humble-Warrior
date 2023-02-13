@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
 import 'package:humble_warrior/utils/common/common_functionality.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -14,13 +15,14 @@ class MyAccountController extends GetxController{
 
   RxBool check = true.obs;
   RxBool checkNotification = true.obs;
-  RxBool checkDark = true.obs;
+  RxBool checkDark = false.obs;
   RxBool isSwitch = false.obs;
   RxBool userCheck = false.obs;
   String user = "";
   String username = "";
   String userPhone = "";
   String userImg = "";
+  ThemeController themeController = Get.find();
 
   // Rx<File?> imagePath = File("").obs;
   File? imagePath;
@@ -47,10 +49,21 @@ class MyAccountController extends GetxController{
 
   void switchFunc(){
     checkNotification.value = !checkNotification.value;
+
   }
 
   void darkMode(){
     checkDark.value = !checkDark.value;
+    //themeController.changeTheme(check.value);
+    Get.changeThemeMode(checkDark.value ? ThemeMode.dark : ThemeMode.light);
+    themeController.upgradeFun(checkDark.value);
+    themeController
+        .setThemeMode(checkDark.value ? ThemeMode.dark : ThemeMode.light);
+
+    SharePreferenceData.addBoolToSF("mode", checkDark.value);
+    update();
+
+
   }
 
   Future<void>logout() async {
