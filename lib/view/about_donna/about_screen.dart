@@ -4,6 +4,9 @@ import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
+import 'package:humble_warrior/utils/routes/app_routes.dart';
+import 'package:humble_warrior/view/home/home_controller.dart';
+import 'package:humble_warrior/view/home/home_screen_widgets.dart';
 import 'package:readmore/readmore.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -11,6 +14,7 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final HomeScreenController controller = Get.find();
     // final AboutScreenController controller = Get.put(AboutScreenController());
     return Scaffold(
       body: Container(
@@ -21,8 +25,11 @@ class AboutScreen extends StatelessWidget {
             _showImg(),
             _details(),
             _seeCopyButton(),
+            const SizedBox(
+              height: 25,
+            ),
             _brandRow(),
-            _brandList(),
+            _brandList(context: context, controller: controller),
           ]),
         ),
       ),
@@ -152,43 +159,29 @@ class AboutScreen extends StatelessWidget {
               ),
             ],
           ),
-          const AppText(
-            "View All",
-            fontSize: 16,
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(AppRoutes.brands);
+            },
+            child: const AppText(
+              "View All",
+              fontSize: 16,
+            ),
           ),
         ],
       ),
     );
   }
 
-  _brandList() {
+  _brandList(
+      {required HomeScreenController controller,
+      required BuildContext context}) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
       height: 80,
       width: Get.height,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 25,
-          itemBuilder: (ctx, index) {
-            return SizedBox(
-              height: 80,
-              width: 100,
-              child: Column(
-                children: [
-                  Image.network(
-                    "https://seeklogo.com/images/A/adidas-logo-107B082DA0-seeklogo.com.png",
-                    fit: BoxFit.fill,
-                    height: 60,
-                    width: 80,
-                  ),
-                  const Text(
-                    "Product",
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ],
-              ),
-            );
-          }),
+      child: HomeScreenWidgets(context: context, controller: controller)
+          .brandListAPIBuilder(),
     );
   }
 }

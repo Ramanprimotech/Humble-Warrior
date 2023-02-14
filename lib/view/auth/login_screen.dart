@@ -30,12 +30,9 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                   width: Get.width * .65,
                 ),
               ).centered().pLTRB(0, 20, 0, 10),
-
               const SizedBox(
                 height: 80,
               ),
-
-              /// Google
               SizedBox(
                 height: 80 * 4,
                 child: Column(
@@ -43,23 +40,6 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    optionWidget(
-                        bckClr: AppColors.white,
-                        title: LocalString.signWithGoogle,
-                        textClr: AppColors.black,
-                        imagePath: ImagePathAssets.googleImg,
-                        onTap: controller.onClickFunction(
-                            action: OnClick.google, context: context)),
-
-                    /// Apple
-
-                    optionWidget(
-                        bckClr: AppColors.grey,
-                        title: LocalString.signWithApple,
-                        textClr: AppColors.white,
-                        imagePath: ImagePathAssets.appleImg,
-                        onTap: controller.onClickFunction(
-                            action: OnClick.apple, context: context)),
 
                     /// Facebook
                     /*optionWidget(
@@ -78,11 +58,30 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                         onTap: controller.onClickFunction(
                             action: OnClick.facebook, context: context)),
 
+                    /// Google
+                    optionWidget(
+                        bckClr: AppColors.white,
+                        title: LocalString.signWithGoogle,
+                        textClr: AppColors.black,
+                        imagePath: ImagePathAssets.googleImg,
+                        onTap: controller.onClickFunction(
+                            action: OnClick.google, context: context)),
+
+                    /// Apple
+
+                    optionWidget(
+                        bckClr: AppColors.grey,
+                        title: LocalString.signWithApple,
+                        textClr: AppColors.white,
+                        imagePath: ImagePathAssets.appleImg,
+                        onTap: controller.onClickFunction(
+                            action: OnClick.apple, context: context)),
+
                     /// Without Login
                     optionWidget(
                         bckClr: AppColors.twitterClr,
-                        imagePath: ImagePathAssets.loginImg,
-                        title: "Continue Without Login",
+                        // imagePath: ImagePathAssets.loginImg,
+                        title: LocalString.signWithoutLogin,
                         textClr: AppColors.white,
                         onTap: () {
                           Get.offNamed(AppRoutes.bottomNavigation);

@@ -30,12 +30,16 @@ class AuthWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset(
-              imagePath!,
-              fit: BoxFit.cover,
-              height: 28.h,
-              width: 28.h,
-            ).centered().p(2).px(8),
+            imagePath.isNotEmptyAndNotNull
+                ? Image.asset(
+                    imagePath!,
+                    fit: BoxFit.cover,
+                    height: 28.h,
+                    width: 28.h,
+                  ).centered().p(2).px(4)
+                : const SizedBox(
+                    width: 30,
+                  ).centered().p(2).px(4),
             AppText(title!,
                 color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
             const SizedBox(width: 40),

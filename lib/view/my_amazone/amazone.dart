@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:humble_warrior/utils/app_text.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class AmazonWebView extends StatefulWidget {
@@ -10,6 +11,8 @@ class AmazonWebView extends StatefulWidget {
 
 class _AmazonWebViewState extends State<AmazonWebView> {
   late WebViewController _webViewController;
+
+  bool canGoBool = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -21,8 +24,12 @@ class _AmazonWebViewState extends State<AmazonWebView> {
           onProgress: (int progress) {
             // Update loading bar.
           },
-          onPageStarted: (String url) {},
-          onPageFinished: (String url) {},
+          onPageStarted: (String url) {
+            canGo();
+          },
+          onPageFinished: (String url) {
+            canGo();
+          },
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://www.youtube.com/')) {
@@ -38,10 +45,36 @@ class _AmazonWebViewState extends State<AmazonWebView> {
     super.initState();
   }
 
+  Future canGo() async {
+    canGoBool = await _webViewController.canGoBack();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child:
-            WebViewWidget(key: const Key("amazon"), controller: _webViewController));
+    // initState(() {});
+
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 5,
+        leading: Visibility(
+          visible: canGoBool,
+          child: BackButton(
+            onPressed: () {
+              _webViewController.goBack();
+            },
+          ),
+        ),
+        automaticallyImplyLeading: canGoBool,
+        title: AppText(
+          "My Amazon",
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      body: WebViewWidget(
+        key: const Key("amazon"),
+        controller: _webViewController,
+      ),
+    );
   }
 }
