@@ -261,7 +261,7 @@ class CallAPI {
       return [];
     } catch (e) {
       // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
-      return [];
+      rethrow;
     }
   }
 }

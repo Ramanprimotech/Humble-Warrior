@@ -19,7 +19,7 @@ class MyAccount extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          margin: const EdgeInsets.only(top: 50, left: 10, right: 10),
+          margin: const EdgeInsets.only(top: 60, left: 10, right: 10),
           child: Obx(
             () => Column(children: [
               if (controller.userCheck.value == true) ...[

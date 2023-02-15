@@ -78,7 +78,12 @@ class DonnaDailyDeals extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               shopButton(url: "${details.shopUrl}"),
-                              codeButton(code: "${details.couponCode}"),
+                              !(details.couponCode == null ||
+                                      details.couponCode == "")
+                                  ? codeButton(code: "${details.couponCode}")
+                                  : const SizedBox(
+                                      width: 80,
+                                    ),
                               shareButton(shareUrl: "shareUrl"),
                               IconButton(
                                 onPressed: () {},

@@ -31,15 +31,16 @@ class MyAccWidget {
             child: controller.imageUrl.isEmpty
                 ? InkWell(
                     onTap: () {
-                      _openBottomSheet();
+                      // _openBottomSheet();
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.camera_alt,
-                            color: Colors.black, size: 40),
-                        5.sh,
-                        const AppText(addPhotoTxt),
+                        profileText(firstName: controller.username),
+                        // const Icon(Icons.camera_alt,
+                        //     color: Colors.black, size: 40),
+                        // 5.sh,
+                        // const AppText(addPhotoTxt),
                       ],
                     ),
                   )
@@ -59,6 +60,12 @@ class MyAccWidget {
         AppText(controller.user),
       ],
     );
+  }
+
+  profileText({String? firstName, String? secondName}) {
+    String text =
+        "${firstName != null ? firstName[0] : ""} ${secondName != null ? secondName[0] : ""}";
+    return AppText("${text.toUpperCase()}");
   }
 
   divider() {
