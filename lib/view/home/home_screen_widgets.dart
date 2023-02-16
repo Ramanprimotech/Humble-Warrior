@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/network/endpoints.dart';
 import 'package:humble_warrior/utils/extensions.dart';
+import 'package:humble_warrior/utils/future_widget/future_widget.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
 
 import '../../modals/response/brands_response_mdel.dart';
@@ -9,13 +10,11 @@ import '../../modals/response/home_categories_response_model.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_icons.dart';
 import '../../utils/app_text.dart';
-import '../../utils/common/common_functionality.dart';
-import '../../utils/common/common_widgets.dart';
 import '../../utils/routes/app_routes.dart';
 import '../../utils/search_bar/search_bar_ui.dart';
-import '../../utils/shimmer/shimmer_loader.dart';
-import '../../utils/theme_extention/custom_notice_theme_extention.dart';
 import '../../utils/theme_extention/shadow_theme_extention.dart';
+import 'home_brands_api_widgets.dart';
+import 'home_category_api_widgets.dart';
 
 class HomeScreenWidgets {
   final HomeScreenController controller;
@@ -48,8 +47,12 @@ class HomeScreenWidgets {
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 15),
-              child:
-                  InkWell(onTap: () {}, child: AppIcons.notificationActice()),
+              child: InkWell(
+                  onTap: () {},
+                  child: Image.asset(
+                    'assets/icons/notification.png',
+                    width: 30,
+                  )),
             )
           ],
         ),
@@ -58,158 +61,16 @@ class HomeScreenWidgets {
   }
 
   ///HOme Options List Future Builder
-  Widget homeOptionList() {
+  Widget homeOptionListTwo() {
     return GetBuilder(
         id: Endpoints.homeCategories,
         init: controller,
         builder: (controller) {
-          return FutureBuilder<List<HomeCategoryList>>(
+          return FutureWidget<List<HomeCategoryList>>().builder(
+              futureWidgets: HomePageCategoryAPIWidgets(context: context),
               future: controller.homeCategories(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Expanded(
-                    child: ListView.builder(
-                      itemBuilder: (ctx, index) {
-                        if (index == 3) {
-                          return ValueListenableBuilder(
-                            valueListenable: controller.keyboardIsOpened,
-                            builder: (context, value, child) {
-                              return Visibility(
-                                visible: value,
-                                child: SizedBox(
-                                  height: brandHeight + brandLoveHeight + 10,
-                                ),
-                              );
-                            },
-                          );
-                        }
-                        return ShimmerLoader(
-                          child: homeOption(
-                              homeOptions: HomeCategoryList(
-                                  categoryImage:
-                                      "https://www.pngfind.com/pngs/m/415-4156288_image-nike-logo-just-do-it-orange-hd.png",
-                                  categoryName: "Donna's Options",
-                                  id: 0),
-                              index: index),
-                        );
-                      },
-                      itemCount: 4,
-                    ),
-                  );
-                }
-                if (snapshot.hasError) {
-                  // return ErrorWidget(snapshot.error!);
-                  final DialogueThemeExtention dialogueThemeExtention =
-                      Theme.of(context).extension<DialogueThemeExtention>()!;
-                  return Padding(
-                    padding:
-                        const EdgeInsets.only(top: 80.0, left: 30, right: 30),
-                    child: Container(
-                      height: 200,
-                      width: Get.width,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: dialogueThemeExtention.backGroundColor,
-                        boxShadow: [
-                          BoxShadow(
-                              color: dialogueThemeExtention.shadow!,
-                              spreadRadius: 2,
-                              blurRadius: 2,
-                              offset: Offset(0, 0))
-                        ],
-                      ),
-                      child: Column(children: [
-                        AppText("${snapshot.error.toString()}",
-                            maxLines: 5, fontSize: 20),
-                        20.sh,
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            elevation: 5,
-                            // fixedSize: const Size(, 35),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            backgroundColor: dialogueThemeExtention.buttonColor,
-                          ),
-                          onPressed: () {
-                            controller.update([Endpoints.homeCategories]);
-                          },
-                          child: const AppText('Retry',
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                      ]),
-                    ),
-                  );
-                  // return const AppText("Something Went Wrong");
-                }
-                List<HomeCategoryList> data = snapshot.data ?? [];
-                return Expanded(
-                  child: ListView.builder(
-                    itemBuilder: (ctx, index) {
-                      if (index == data.length) {
-                        return ValueListenableBuilder(
-                          valueListenable: controller.keyboardIsOpened,
-                          builder: (ctx, value, child) {
-                            return Visibility(
-                              visible: value,
-                              child: SizedBox(
-                                height: brandHeight + brandLoveHeight + 10,
-                              ),
-                            );
-                          },
-                        );
-                      }
-                      return homeOption(homeOptions: data[index], index: index);
-                    },
-                    itemCount: data.length + 1,
-                  ),
-                );
-              });
+              context: context);
         });
-  }
-
-  /// Home Options
-  Widget homeOption(
-      {required HomeCategoryList homeOptions, required int index}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-      child: GestureDetector(
-        onTap: () {
-          Get.toNamed(AppRoutes.homeOptions, arguments: <int>[homeOptions.id!]);
-        },
-        child: Stack(
-          alignment: Alignment.bottomLeft,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: CommonWidgets.networkImage(
-                imageUrl: homeOptions.categoryImage!,
-                fit: BoxFit.fitWidth,
-                height: 200,
-                alignment: Alignment.topCenter,
-                // width: Get.width,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(15),
-                    topRight: Radius.circular(20),
-                  )),
-              child: AppText(
-                "${homeOptions.categoryName!.toUpperCase()}",
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontSize: 14,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 
   /// Product List Future Builder
@@ -217,7 +78,7 @@ class HomeScreenWidgets {
     return Row(
       children: [
         Expanded(
-          flex: 6,
+          flex: 8,
           child: SizedBox(
             // margin: EdgeInsets.symmetric(horizontal: 20),
             height: productHeight,
@@ -232,18 +93,18 @@ class HomeScreenWidgets {
                     padding: const EdgeInsets.symmetric(horizontal: 2.0),
                     child: SizedBox(
                       height: productHeight,
-                      width: 62,
+                      width: 80,
                       child: Column(
                         children: [
-                          CommonWidgets.networkImage(
-                              imageUrl:
-                                  ProductImages.productImagesList[index].image,
+                          Image.asset(
+                              ProductImages.productImagesList[index].image,
                               fit: BoxFit.fitHeight,
                               height: productHeight - 20,
                               scale: 0.7),
                           AppText(
-                            "${ProductImages.productImagesList[index].name}",
+                            ProductImages.productImagesList[index].name,
                             fontSize: 12,
+                            maxLines: 2,
                           ),
                         ],
                       ),
@@ -261,7 +122,7 @@ class HomeScreenWidgets {
                   duration: const Duration(milliseconds: 150),
                   curve: Curves.linear);
             },
-            child: AppIcons.next(),
+            child: AppIcons.next(iconColor: Colors.black),
           ),
         ),
       ],
@@ -270,133 +131,144 @@ class HomeScreenWidgets {
 
   /// Brand List
   Widget brandsList() {
-    return ValueListenableBuilder(
-      valueListenable: controller.keyboardIsOpened,
-      builder: (BuildContext context, value, Widget? child) {
-        return Transform.translate(
-          offset: Offset(0, !value ? (brandHeight + brandLoveHeight + 10) : 0),
-          child: child,
-        );
-      },
-      child: Container(
-        height: brandHeight + brandLoveHeight + 10,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(15), topLeft: Radius.circular(15)),
-          color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-        ),
-        child: Column(
-          children: [
-            /// Brand Title Row
-            _brandRow(height: brandLoveHeight, context: context),
-            Row(
-              children: [
-                Expanded(
-                  flex: 6,
-                  child: Container(
-                    color: Theme.of(context)
-                        .floatingActionButtonTheme
-                        .backgroundColor,
-                    height: brandHeight,
-                    width: Get.height,
-
-                    /// Brand List Future Builder
-                    child: brandListAPIBuilder(),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: GestureDetector(
-                      onTap: () {
-                        controller.brandScrollController.animateTo(
-                            controller.brandScrollController.offset + (80 * 2),
-                            duration: const Duration(milliseconds: 150),
-                            curve: Curves.linear);
-                      },
-                      child: AppIcons.next()),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            )
-          ],
-        ),
+    return
+        // ValueListenableBuilder(
+        // valueListenable: controller.keyboardIsOpened,
+        // builder: (BuildContext context, value, Widget? child) {
+        //   return Transform.translate(
+        //     offset: Offset(0, !value ? (brandHeight + brandLoveHeight + 10) : 0),
+        //     child: child,
+        //   );
+        // },
+        // child:
+        Container(
+      height: brandHeight + brandLoveHeight + 10,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
+            topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+        color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
       ),
-    );
-  }
-
-  ///
-  FutureBuilder brandListAPIBuilder() {
-    return FutureBuilder<List<BrandDetails>>(
-        future: controller.allBrands(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              scrollDirection: Axis.horizontal,
-              itemCount: 25,
-              itemBuilder: (ctx, index) {
-                return Container(
+      child: Column(
+        children: [
+          /// Brand Title Row
+          _brandRow(height: brandLoveHeight, context: context),
+          Row(
+            children: [
+              Expanded(
+                flex: 8,
+                child: Container(
                   color: Theme.of(context)
                       .floatingActionButtonTheme
                       .backgroundColor,
-                  height: 60,
-                  width: 80,
-                  child: Column(
-                    children: const [
-                      ShimmerLoader(
-                          child: AppText(
-                        "HW",
-                        fontWeight: FontWeight.w900,
-                        fontSize: 35,
-                      )),
-                    ],
-                  ),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return 20.sw;
-              },
-            );
-          }
-          if (snapshot.hasError) {
-            return const AppText("Something Went Wrong");
-          }
-          List<BrandDetails> data = snapshot.data ?? [];
-          return ListView.separated(
-            // physics: BouncingScrollPhysics(),
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            scrollDirection: Axis.horizontal,
-            controller: controller.brandScrollController,
-            itemCount: data.length,
-            itemBuilder: (ctx, index) {
-              return GestureDetector(
-                onTap: () {
-                  CommonUtils().urlLauncher(url: data[index].brandLink!);
-                },
-                child: SizedBox(
-                  height: 60,
-                  width: 80,
-                  child: Column(
-                    children: [
-                      CommonWidgets.networkImage(
-                        alignment: Alignment.center,
-                        imageUrl: data[index].brandImage!,
-                        fit: BoxFit.contain,
-                        height: 60,
-                        width: 80,
-                      ),
-                    ],
-                  ),
+                  height: brandHeight,
+                  width: Get.height,
+
+                  /// Brand List Future Builder
+                  child: brandListAPIBuilder(),
                 ),
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return 20.sw;
-            },
-          );
+              ),
+              Expanded(
+                flex: 1,
+                child: GestureDetector(
+                    onTap: () {
+                      controller.brandScrollController.animateTo(
+                          controller.brandScrollController.offset + (80 * 2),
+                          duration: const Duration(milliseconds: 150),
+                          curve: Curves.linear);
+                    },
+                    child: AppIcons.next(iconColor: Colors.black)),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          )
+        ],
+      ),
+    );
+    // );
+  }
+
+  /// Brand List API Builder
+  GetBuilder<HomeScreenController> brandListAPIBuilder() {
+    return GetBuilder<HomeScreenController>(
+        id: Endpoints.allBrands,
+        init: controller,
+        builder: (controller) {
+          return FutureWidget<List<BrandDetails>>().builder(
+              futureWidgets: HomePageBrandAPIWidgets(context: context),
+              future: controller.allBrands(),
+              context: context);
         });
+    // return FutureBuilder<List<BrandDetails>>(
+    //     future: controller.allBrands(),
+    //     builder: (context, snapshot) {
+    //       if (snapshot.connectionState == ConnectionState.waiting) {
+    //         return ListView.separated(
+    //           padding: const EdgeInsets.symmetric(horizontal: 20),
+    //           scrollDirection: Axis.horizontal,
+    //           itemCount: 25,
+    //           itemBuilder: (ctx, index) {
+    //             return Container(
+    //               color: Theme.of(context)
+    //                   .floatingActionButtonTheme
+    //                   .backgroundColor,
+    //               height: 60,
+    //               width: 80,
+    //               child: Column(
+    //                 children: const [
+    //                   ShimmerLoader(
+    //                       child: AppText(
+    //                     "HW",
+    //                     fontWeight: FontWeight.w900,
+    //                     fontSize: 35,
+    //                   )),
+    //                 ],
+    //               ),
+    //             );
+    //           },
+    //           separatorBuilder: (BuildContext context, int index) {
+    //             return 20.sw;
+    //           },
+    //         );
+    //       }
+    //       if (snapshot.hasError) {
+    //         return const AppText("Something Went Wrong");
+    //       }
+    //       List<BrandDetails> data = snapshot.data ?? [];
+    //       return ListView.separated(
+    //         // physics: BouncingScrollPhysics(),
+    //         padding: const EdgeInsets.symmetric(horizontal: 20),
+    //         scrollDirection: Axis.horizontal,
+    //         controller: controller.brandScrollController,
+    //         itemCount: data.length,
+    //         itemBuilder: (ctx, index) {
+    //           return GestureDetector(
+    //             onTap: () {
+    //               CommonUtils().urlLauncher(url: data[index].brandLink!);
+    //             },
+    //             child: SizedBox(
+    //               height: 60,
+    //               width: 80,
+    //               child: Column(
+    //                 children: [
+    //                   CommonWidgets.networkImage(
+    //                     alignment: Alignment.center,
+    //                     imageUrl: data[index].brandImage!,
+    //                     fit: BoxFit.contain,
+    //                     height: 60,
+    //                     width: 80,
+    //                   ),
+    //                 ],
+    //               ),
+    //             ),
+    //           );
+    //         },
+    //         separatorBuilder: (BuildContext context, int index) {
+    //           return 20.sw;
+    //         },
+    //       );
+    //     });
   }
 
   /// Brand Title Row
@@ -449,4 +321,116 @@ class HomeScreenWidgets {
       ),
     );
   }
+
+// ///HOme Options List Future Builder
+// Widget homeOptionList() {
+//   return GetBuilder(
+//       id: Endpoints.homeCategories,
+//       init: controller,
+//       builder: (controller) {
+//         return FutureBuilder<List<HomeCategoryList>>(
+//             future: controller.homeCategories(),
+//             builder: (context, snapshot) {
+//               if (snapshot.connectionState == ConnectionState.waiting) {
+//                 return Expanded(
+//                   child: ListView.builder(
+//                     itemBuilder: (ctx, index) {
+//                       if (index == 3) {
+//                         return ValueListenableBuilder(
+//                           valueListenable: controller.keyboardIsOpened,
+//                           builder: (context, value, child) {
+//                             return Visibility(
+//                               visible: value,
+//                               child: SizedBox(
+//                                 height: brandHeight + brandLoveHeight + 10,
+//                               ),
+//                             );
+//                           },
+//                         );
+//                       }
+//                       return ShimmerLoader(
+//                         child: homeOption(
+//                             homeOptions: HomeCategoryList(
+//                                 categoryImage:
+//                                     "https://www.pngfind.com/pngs/m/415-4156288_image-nike-logo-just-do-it-orange-hd.png",
+//                                 categoryName: "Donna's Options",
+//                                 id: 0),
+//                             index: index),
+//                       );
+//                     },
+//                     itemCount: 4,
+//                   ),
+//                 );
+//               }
+//               if (snapshot.hasError) {
+//                 // return ErrorWidget(snapshot.error!);
+//                 final DialogueThemeExtention dialogueThemeExtention =
+//                     Theme.of(context).extension<DialogueThemeExtention>()!;
+//                 return Padding(
+//                   padding:
+//                       const EdgeInsets.only(top: 80.0, left: 30, right: 30),
+//                   child: Container(
+//                     height: 200,
+//                     width: Get.width,
+//                     padding:
+//                         EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+//                     decoration: BoxDecoration(
+//                       borderRadius: BorderRadius.circular(10),
+//                       color: dialogueThemeExtention.backGroundColor,
+//                       boxShadow: [
+//                         BoxShadow(
+//                             color: dialogueThemeExtention.shadow!,
+//                             spreadRadius: 2,
+//                             blurRadius: 2,
+//                             offset: Offset(0, 0))
+//                       ],
+//                     ),
+//                     child: Column(children: [
+//                       AppText("${snapshot.error.toString()}",
+//                           maxLines: 5, fontSize: 20),
+//                       20.sh,
+//                       ElevatedButton(
+//                         style: ElevatedButton.styleFrom(
+//                           elevation: 5,
+//                           // fixedSize: const Size(, 35),
+//                           shape: RoundedRectangleBorder(
+//                               borderRadius: BorderRadius.circular(10)),
+//                           backgroundColor: dialogueThemeExtention.buttonColor,
+//                         ),
+//                         onPressed: () {
+//                           controller.update([Endpoints.homeCategories]);
+//                         },
+//                         child: const AppText('Retry',
+//                             color: Colors.white, fontWeight: FontWeight.bold),
+//                       ),
+//                     ]),
+//                   ),
+//                 );
+//                 // return const AppText("Something Went Wrong");
+//               }
+//               List<HomeCategoryList> data = snapshot.data ?? [];
+//               return Expanded(
+//                 child: ListView.builder(
+//                   itemBuilder: (ctx, index) {
+//                     if (index == data.length) {
+//                       return ValueListenableBuilder(
+//                         valueListenable: controller.keyboardIsOpened,
+//                         builder: (ctx, value, child) {
+//                           return Visibility(
+//                             visible: value,
+//                             child: SizedBox(
+//                               height: brandHeight + brandLoveHeight + 10,
+//                             ),
+//                           );
+//                         },
+//                       );
+//                     }
+//                     return homeOption(homeOptions: data[index], index: index);
+//                   },
+//                   itemCount: data.length + 1,
+//                 ),
+//               );
+//             });
+//       });
+// }
 }

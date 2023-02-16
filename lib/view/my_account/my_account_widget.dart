@@ -14,7 +14,9 @@ import 'my_account_controller.dart';
 
 class MyAccWidget {
   final BuildContext context;
+
   MyAccWidget({required this.context});
+
   final MyAccountController controller = Get.find();
 
   profileImage() {
@@ -63,9 +65,18 @@ class MyAccWidget {
   }
 
   profileText({String? firstName, String? secondName}) {
-    String text =
-        "${firstName != null ? firstName[0] : ""} ${secondName != null ? secondName[0] : ""}";
-    return AppText("${text.toUpperCase()}");
+    List<String> names = firstName!.split(" ");
+    String text = "";
+    if (names.length == 1) {
+      text = names[0][0];
+    } else {
+      text = "${names[0][0]}${names[1][0]}";
+    }
+    return AppText(
+      text.toUpperCase(),
+      fontWeight: FontWeight.w900,
+      fontSize: 54,
+    );
   }
 
   divider() {

@@ -195,72 +195,40 @@ class CallAPI {
 
   static Future<List<BrandDetails>> allBrands() async {
     try {
-      // payload.toString().logRequest(apiName: Endpoints.donnaDeals);
-
       var response =
           await APIManager().postAllCallNonParam(url: Endpoints.allBrands);
 
       BrandsResponseModel brandsResponseModel =
           BrandsResponseModel.fromJson(response);
-
-      //
-      // log(response.toString(), name: "${Endpoints.donnaDeals}");
-      // response.toString().logResponse(apiName: Endpoints.donnaDeals);
       if (response == null) {
         return [];
       }
 
-      // DialogHelper.closeDialog();
-
       if (brandsResponseModel.status == true) {
-        // _userController.userModel = UserModel.fromMap(response['data']);
-        // DialogHelper.showToast(Get.context!, response['msg']);
         return brandsResponseModel.data!;
       }
-      // Endpoints.donnaDeals.logError( apiName : Endpoints.donnaDeals ,error: response);
-      // DialogHelper.showErrorDialog(
-      //   title: 'Error Updating',
-      //   description: response['msg'],
-      // );
+
       return [];
     } catch (e) {
-      // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
-      return [];
+      rethrow;
     }
   }
 
   static Future<List<HomeCategoryList>> homeCategory() async {
     try {
-      // payload.toString().logRequest(apiName: Endpoints.donnaDeals);
-
       var response =
           await APIManager().postAllCallNonParam(url: Endpoints.homeCategories);
 
       HomeCategoryResponseModel homeCategoryResponseModel =
           HomeCategoryResponseModel.fromJson(response);
-
-      //
-      // log(response.toString(), name: "${Endpoints.donnaDeals}");
-      // response.toString().logResponse(apiName: Endpoints.donnaDeals);
       if (response == null) {
         return [];
       }
-
-      // DialogHelper.closeDialog();
-
       if (homeCategoryResponseModel.status == true) {
-        // _userController.userModel = UserModel.fromMap(response['data']);
-        // DialogHelper.showToast(Get.context!, response['msg']);
         return homeCategoryResponseModel.data!;
       }
-      // Endpoints.donnaDeals.logError( apiName : Endpoints.donnaDeals ,error: response);
-      // DialogHelper.showErrorDialog(
-      //   title: 'Error Updating',
-      //   description: response['msg'],
-      // );
       return [];
     } catch (e) {
-      // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
       rethrow;
     }
   }

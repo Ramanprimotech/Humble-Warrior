@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
 import 'package:humble_warrior/view/home/home_screen_widgets.dart';
@@ -15,29 +16,35 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-
-        ///Brand List Future Builder
-        floatingActionButton: homeScreenWidgets.brandsList(),
 
         /// App Bar
         appBar: homeScreenWidgets.appBar(),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        body: Stack(
+          fit: StackFit.passthrough,
+          alignment: Alignment.bottomCenter,
           children: [
-            const SizedBox(
-              height: 8,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 8,
+                ),
+
+                /// Product List Future Builder
+                homeScreenWidgets.productList(),
+                const SizedBox(
+                  height: 8,
+                ),
+
+                ///Home Option List Future Builder
+                homeScreenWidgets.homeOptionListTwo(),
+              ],
             ),
-
-            /// Product List Future Builder
-            homeScreenWidgets.productList(),
-
-            const SizedBox(
-              height: 8,
-            ),
-
-            ///Home Option List Future Builder
-            homeScreenWidgets.homeOptionList(),
+            KeyboardVisibilityBuilder(builder: (context, isKVisible) {
+              debugPrint(isKVisible.toString());
+              return Visibility(
+                  visible: !isKVisible, child: homeScreenWidgets.brandsList());
+            }),
           ],
         ),
       ),

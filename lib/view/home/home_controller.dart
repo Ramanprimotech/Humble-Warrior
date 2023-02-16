@@ -7,8 +7,11 @@ import 'package:humble_warrior/network/api_call.dart';
 
 class HomeScreenController extends GetxController implements SearchActions {
   final TextEditingController searchTextController = TextEditingController();
-  final ScrollController brandScrollController = ScrollController(initialScrollOffset: 0.0);
-  final ScrollController productScrollController = ScrollController(initialScrollOffset: 0.0);
+
+  final ScrollController brandScrollController =
+      ScrollController(initialScrollOffset: 0.0);
+  final ScrollController productScrollController =
+      ScrollController(initialScrollOffset: 0.0);
   final FocusNode focusNode = FocusNode();
   ValueNotifier<bool> keyboardIsOpened = ValueNotifier(true);
 
@@ -19,40 +22,21 @@ class HomeScreenController extends GetxController implements SearchActions {
 
   @override
   void onInit() {
+    const ProductImages(image: "assets/brands/men.png", name: "Men").add();
+    const ProductImages(image: "assets/brands/gift.png", name: "Gift").add();
     const ProductImages(
-            image:
-                "https://png.pngtree.com/element_our/20190529/ourmid/pngtree-beautiful-red-tube-top-dress-image_1217088.jpg",
-            name: "Dress")
+            image: "assets/brands/giftformom.png", name: "Gift For Mom")
+        .add();
+    const ProductImages(image: "assets/brands/health.png", name: "Health")
+        .add();
+    const ProductImages(image: "assets/brands/kids.png", name: "Kids").add();
+    const ProductImages(image: "assets/brands/food.png", name: "Food").add();
+    const ProductImages(image: "assets/brands/outdoor.png", name: "Outdoor")
+        .add();
+    const ProductImages(image: "assets/brands/travel.png", name: "Travel")
         .add();
     const ProductImages(
-            image:
-                "https://www.bigw.com.au/medias/sys_master/images/images/hb0/hcf/33475806134302.jpg",
-            name: "T-Shirt")
-        .add();
-    const ProductImages(
-            image:
-                "https://png.pngtree.com/png-clipart/20210801/original/pngtree-indian-wedding-rich-saree-for-women-png-image_6585178.jpg",
-            name: "Saree")
-        .add();
-    const ProductImages(
-            image:
-                "https://www.freepnglogos.com/uploads/women-shoes-png/pink-women-shoes-png-image-icons-and-png-backgrounds-1.png",
-            name: "Footwear")
-        .add();
-    const ProductImages(
-            image:
-                "https://www.pngfind.com/pngs/m/505-5055598_your-engagement-pre-engagement-ring-hd-png-download.png",
-            name: "Rings")
-        .add();
-    const ProductImages(
-            image:
-                "https://www.pngfind.com/pngs/m/162-1629667_18-handbag-hd-png-download.png",
-            name: "Purse")
-        .add();
-    const ProductImages(
-            image:
-                "https://e7.pngegg.com/pngimages/550/602/png-clipart-cosmetics-desktop-foundation-lipstick-makeup-miscellaneous-cream.png",
-            name: "Cosmetics")
+            image: "assets/brands/womenfashion.png", name: "Women Fashion")
         .add();
 
     focusNode.addListener(() {
@@ -76,8 +60,28 @@ class HomeScreenController extends GetxController implements SearchActions {
     "https://www.pngfind.com/pngs/m/505-5055598_your-engagement-pre-engagement-ring-hd-png-download.png"
   ];
 
+  // Future<List<BrandDetails>> allBrands() async {
+  //   return await CallAPI.allBrands();
+  // }
   Future<List<BrandDetails>> allBrands() async {
-    return await CallAPI.allBrands();
+    List<BrandDetails> data = [];
+    data.add(BrandDetails(
+        brandImage: "assets/categories/nike.png",
+        brandName: "Nike",
+        brandLink: "https://humblewarrior.com/"));
+    data.add(BrandDetails(
+        brandImage: "assets/categories/reebok.png",
+        brandName: "Reebok",
+        brandLink: "https://humblewarrior.com/"));
+    data.add(BrandDetails(
+        brandImage: "assets/categories/guchi.png",
+        brandName: "Gucci",
+        brandLink: "https://humblewarrior.com/"));
+    data.add(BrandDetails(
+        brandImage: "assets/categories/adidas.png",
+        brandName: "adidas",
+        brandLink: "https://humblewarrior.com/"));
+    return data;
   }
 
   Future<List<HomeCategoryList>> homeCategories() async {

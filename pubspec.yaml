@@ -59,6 +59,7 @@ dependencies:
   url_launcher: ^6.1.9
   share_plus: ^6.3.0
   image_picker: ^0.8.6+1
+  flutter_keyboard_visibility: ^5.4.0
 
 
 dev_dependencies:
@@ -87,6 +88,8 @@ flutter:
   assets:
     - assets/image/
     - assets/icons/
+    - assets/brands/
+    - assets/categories/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
