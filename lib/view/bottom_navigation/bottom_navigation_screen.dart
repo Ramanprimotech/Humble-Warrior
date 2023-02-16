@@ -28,15 +28,17 @@ class BottomNavigationScreen extends GetView<BottomNavigationController> {
                   elevation: 10,
                   items: <BottomNavigationBarItem>[
                     BottomNavigationBarItem(
-                      icon: AppIcons.home(),
+                      icon: AppIcons.unselectedHome(context),
+                      activeIcon: AppIcons.home(context),
                       label: 'Home',
                     ),
                     BottomNavigationBarItem(
                       icon: AppIcons.favourite(),
-                      label: 'Wish list',
+                      label: 'My Wishlist',
                     ),
                     BottomNavigationBarItem(
-                      icon: AppIcons.bag(),
+                      icon: AppIcons.unselectedCheck(context),
+                      activeIcon: AppIcons.check(context),
                       label: 'My Amazon',
                     ),
                     BottomNavigationBarItem(

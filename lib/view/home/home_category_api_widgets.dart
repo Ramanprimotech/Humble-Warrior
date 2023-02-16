@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 
@@ -6,7 +7,6 @@ import '../../modals/response/home_categories_response_model.dart';
 import '../../network/endpoints.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_text.dart';
-import '../../utils/common/common_widgets.dart';
 import '../../utils/future_widget/abstract_future_widget.dart';
 import '../../utils/routes/app_routes.dart';
 import '../../utils/shimmer/shimmer_loader.dart';
@@ -75,17 +75,15 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
       child: ListView.builder(
         itemBuilder: (ctx, index) {
           if (index == dataa.length) {
-            return ValueListenableBuilder(
-              valueListenable: controller.keyboardIsOpened,
-              builder: (ctx, value, child) {
-                return Visibility(
-                  visible: value,
-                  child: SizedBox(
-                    height: brandHeight + brandLoveHeight + 10,
-                  ),
-                );
-              },
-            );
+            return KeyboardVisibilityBuilder(builder: (context, isKVisible) {
+              debugPrint(isKVisible.toString());
+              return Visibility(
+                visible: !isKVisible,
+                child: SizedBox(
+                  height: brandHeight + brandLoveHeight + 10,
+                ),
+              );
+            });
           }
           return homeOption(homeOptions: dataa[index], index: index);
         },
@@ -145,13 +143,21 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: CommonWidgets.networkImage(
-                imageUrl: homeOptions.categoryImage!,
+              child: Image.asset(
+                homeOptions.categoryImage!,
+                width: Get.width,
                 fit: BoxFit.fitWidth,
                 height: 200,
                 alignment: Alignment.topCenter,
                 // width: Get.width,
               ),
+              // CommonWidgets.networkImage(
+              //   imageUrl: homeOptions.categoryImage!,
+              //   fit: BoxFit.fitWidth,
+              //   height: 200,
+              //   alignment: Alignment.topCenter,
+              //   // width: Get.width,
+              // ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),

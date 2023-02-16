@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/modals/abstract_enums/search_bar.dart';
 import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/modals/response/home_categories_response_model.dart';
-import 'package:humble_warrior/network/api_call.dart';
 
 class HomeScreenController extends GetxController implements SearchActions {
   final TextEditingController searchTextController = TextEditingController();
@@ -12,6 +11,7 @@ class HomeScreenController extends GetxController implements SearchActions {
       ScrollController(initialScrollOffset: 0.0);
   final ScrollController productScrollController =
       ScrollController(initialScrollOffset: 0.0);
+
   final FocusNode focusNode = FocusNode();
   ValueNotifier<bool> keyboardIsOpened = ValueNotifier(true);
 
@@ -35,9 +35,6 @@ class HomeScreenController extends GetxController implements SearchActions {
         .add();
     const ProductImages(image: "assets/brands/travel.png", name: "Travel")
         .add();
-    const ProductImages(
-            image: "assets/brands/womenfashion.png", name: "Women Fashion")
-        .add();
 
     focusNode.addListener(() {
       debugPrint("${focusNode.hasFocus}");
@@ -52,13 +49,13 @@ class HomeScreenController extends GetxController implements SearchActions {
   //   focusNode.unfocus();
   //   getKeyBoard(Get.context!);
   // }
-
-  List<String> products = [
-    "https://www.freepnglogos.com/uploads/shoes-png/mens-shoes-png-transparent-images-images-11.png",
-    "https://e7.pngegg.com/pngimages/757/605/png-clipart-women-s-yellow-sleeveless-dress-dress-see-through-clothing-top-women-dress-tshirt-orange.png",
-    "https://www.pngfind.com/pngs/m/162-1629667_18-handbag-hd-png-download.png",
-    "https://www.pngfind.com/pngs/m/505-5055598_your-engagement-pre-engagement-ring-hd-png-download.png"
-  ];
+  //
+  // List<String> products = [
+  //   "https://www.freepnglogos.com/uploads/shoes-png/mens-shoes-png-transparent-images-images-11.png",
+  //   "https://e7.pngegg.com/pngimages/757/605/png-clipart-women-s-yellow-sleeveless-dress-dress-see-through-clothing-top-women-dress-tshirt-orange.png",
+  //   "https://www.pngfind.com/pngs/m/162-1629667_18-handbag-hd-png-download.png",
+  //   "https://www.pngfind.com/pngs/m/505-5055598_your-engagement-pre-engagement-ring-hd-png-download.png"
+  // ];
 
   // Future<List<BrandDetails>> allBrands() async {
   //   return await CallAPI.allBrands();
@@ -85,7 +82,21 @@ class HomeScreenController extends GetxController implements SearchActions {
   }
 
   Future<List<HomeCategoryList>> homeCategories() async {
-    return await CallAPI.homeCategory();
+    List<HomeCategoryList> data = [];
+    data.add(HomeCategoryList(
+        categoryName: "Donna's Daily Deals",
+        categoryImage: "assets/image/donna_deals.jpeg",
+        id: 0));
+    data.add(HomeCategoryList(
+        categoryName: "Donna's Favourite Deals",
+        categoryImage: "assets/image/donna_fav.jpg",
+        id: 1));
+    data.add(HomeCategoryList(
+        categoryName: "Donna's Front Page Deals",
+        categoryImage: "assets/image/donna_front.jpeg",
+        id: 2));
+    return data;
+    // return await CallAPI.homeCategory();
   }
 
   @override
