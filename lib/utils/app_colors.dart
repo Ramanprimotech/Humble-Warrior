@@ -24,4 +24,6 @@ class AppColors {
   static Color pink = Colors.pink;
   static const Color shadowDark = Colors.black54;
   static const Color shadowLight = Color(0xFFD8D4CF);
+  static const Color switchActiveColor = Color(0xFF4CD864);
+  static const Color switchInactiveColor = Color(0xFF494E4A);
 }

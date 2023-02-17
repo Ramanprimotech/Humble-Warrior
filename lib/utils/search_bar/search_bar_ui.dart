@@ -6,8 +6,8 @@ import 'package:humble_warrior/utils/app_text.dart';
 import '../image_path_assets.dart';
 
 class CustomSearchBar extends StatefulWidget {
-  final TextEditingController textEditingController;
-  final FocusNode focusNode;
+  final TextEditingController? textEditingController;
+  final FocusNode? focusNode;
   final Function()? onTap;
   final double? height;
   final Function(String? text)? onSuffix;
@@ -16,8 +16,8 @@ class CustomSearchBar extends StatefulWidget {
 
   const CustomSearchBar(
       {Key? key,
-      required this.textEditingController,
-      required this.focusNode,
+      this.textEditingController,
+      this.focusNode,
       this.onTap,
       this.onSubmit,
       this.onChange,
@@ -37,7 +37,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 18.0),
         child: Container(
-          height: 50,
+          height: 42,
           width: Get.width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),

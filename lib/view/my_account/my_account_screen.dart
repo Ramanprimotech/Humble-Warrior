@@ -19,7 +19,7 @@ class MyAccount extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          margin: const EdgeInsets.only(top: 60, left: 10, right: 10),
+          margin: const EdgeInsets.only(top: 60, left: 20, right: 20),
           child: Obx(
             () => Column(children: [
               if (controller.userCheck.value == true) ...[
@@ -66,8 +66,6 @@ class MyAccount extends StatelessWidget {
                       DialogHelper.logoutDialog(
                           context: context, onTap: controller.loginPage());
                     }),
-              const AppText('$appVersionTxt V 1.0'),
-              10.sh,
             ]),
           ),
         ),

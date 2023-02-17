@@ -14,19 +14,20 @@ class AuthWidget {
     return InkWell(
       onTap: () => onTap(),
       child: Container(
-        height: 50,
+        height: 40,
         width: Get.width * .8,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(30),
-            // border: Border.all(color: Colors.black, width: 1),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.shade400,
-                  blurRadius: 3,
-                  spreadRadius: 2,
-                  offset: const Offset(0.0, 0.75)),
-            ]),
+            border: Border.all(color: Colors.black, width: 1),
+            // boxShadow: [
+            //   BoxShadow(
+            //       color: Colors.grey.shade800,
+            //       blurRadius: 2,
+            //       spreadRadius: 2,
+            //       offset: const Offset(0.0, 0.75)),
+            // ],
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -41,11 +42,11 @@ class AuthWidget {
                     width: 30,
                   ).centered().p(2).px(4),
             AppText(title!,
-                color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+                color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
             const SizedBox(width: 40),
           ],
-        ).p(8),
-      ).py(10).px(20),
+        ),
+      ).py(12).px(20),
     );
   }
 }

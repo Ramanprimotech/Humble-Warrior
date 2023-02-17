@@ -6,35 +6,71 @@ class AppIcons {
   //Bottom Navigation ==============>
   // static Icon home() => const Icon(Icons.home);
 
-  static Icon favourite() => const Icon(Icons.favorite_outlined);
+  // static Icon favourite(BuildContext context) => Icon(Icons.favorite_outlined,color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,);
+
+  static Image favourite(BuildContext context) => Image.asset(
+    "assets/icons/heart.png",
+    height: 25,
+    color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+  );
+
+  static Image unselectedfavourite(BuildContext context) => Image.asset(
+    "assets/icons/heart.png",
+    height: 25,
+    color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+  );
 
   static Icon bag() => const Icon(Icons.shopping_bag);
 
   static Image check(BuildContext context) => Image.asset(
         "assets/icons/amazon_bot.png",
-        height: 32,
+        height: 25,
         color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
       );
   static Image unselectedCheck(BuildContext context) => Image.asset(
         "assets/icons/amazon_bot.png",
-        height: 32,
+        height: 25,
         color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
       );
 
   static Image home(BuildContext context) => Image.asset(
         "assets/icons/home.png",
-        height: 32,
+        height: 25,
         color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
       );
   static Image unselectedHome(BuildContext context) => Image.asset(
         "assets/icons/home.png",
-        height: 32,
+        height: 25,
         color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
       );
 
-  static Icon join() => const Icon(Icons.facebook);
+  static Image join(BuildContext context) => Image.asset(
+    "assets/icons/facebook.png",
+    height: 25,
+    color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+  );
 
-  static Icon person() => const Icon(Icons.person);
+  static Image unselectedJoin(BuildContext context) => Image.asset(
+    "assets/icons/facebook.png",
+    height: 25,
+    color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+  );
+
+  static Image person(BuildContext context) => Image.asset(
+    "assets/icons/person.png",
+    height: 25,
+    color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+  );
+
+  static Image unselectedPerson(BuildContext context) => Image.asset(
+    "assets/icons/person.png",
+    height: 25,
+    color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+  );
+
+  // static Icon join(BuildContext context) =>  Icon(Icons.facebook, color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,);
+
+  // static Icon person(BuildContext context) =>  Icon(Icons.person, color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,);
 
   //<=========== Bottom Navigation
 
@@ -80,6 +116,11 @@ class AppIcons {
         color: iconColor,
       );
 
+  static Icon backArrrowIos({Color? iconColor}) => Icon(
+    Icons.arrow_back_ios,
+    color: iconColor,
+  );
+
   static Icon backArrow({Color? iconColor, double size = 24}) =>
       Icon(Icons.arrow_back, size: size, color: iconColor);
 
@@ -94,7 +135,7 @@ class AppIcons {
   static Icon heart({Color iconColor = Colors.black}) => Icon(
         Icons.favorite_outlined,
         color: iconColor,
-        size: 16,
+        size: 20,
       );
 
   static Icon share2({Color iconColor = Colors.blue}) =>

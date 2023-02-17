@@ -19,10 +19,10 @@ class HomeScreen extends StatelessWidget {
 
         /// App Bar
         appBar: homeScreenWidgets.appBar(),
-        body: Stack(
+        body: /*Stack(
           fit: StackFit.passthrough,
           alignment: Alignment.bottomCenter,
-          children: [
+          children: [*/
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                   height: 8,
                 ),
 
-                /// Product List Future Builder
+
                 homeScreenWidgets.productList(),
                 const SizedBox(
                   height: 8,
@@ -38,15 +38,17 @@ class HomeScreen extends StatelessWidget {
 
                 ///Home Option List Future Builder
                 homeScreenWidgets.homeOptionListTwo(),
+                /// Product List Future Builder
+                homeScreenWidgets.brandsList(),
               ],
             ),
-            KeyboardVisibilityBuilder(builder: (context, isKVisible) {
+           /* KeyboardVisibilityBuilder(builder: (context, isKVisible) {
               debugPrint(isKVisible.toString());
               return Visibility(
                   visible: !isKVisible, child: homeScreenWidgets.brandsList());
-            }),
-          ],
-        ),
+            }),*/
+        //   ],
+        // ),
       ),
     );
   }

@@ -73,8 +73,9 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
     List<HomeCategoryList> dataa = data ?? [];
     return Expanded(
       child: ListView.builder(
+        physics: BouncingScrollPhysics(),
         itemBuilder: (ctx, index) {
-          if (index == dataa.length) {
+      /*    if (index == dataa.length) {
             return KeyboardVisibilityBuilder(builder: (context, isKVisible) {
               debugPrint(isKVisible.toString());
               return Visibility(
@@ -84,10 +85,10 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
                 ),
               );
             });
-          }
+          }*/
           return homeOption(homeOptions: dataa[index], index: index);
         },
-        itemCount: dataa.length + 1,
+        itemCount: dataa.length,
       ),
     );
   }
@@ -142,7 +143,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
           alignment: Alignment.bottomLeft,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(10),
               child: Image.asset(
                 homeOptions.categoryImage!,
                 width: Get.width,
@@ -160,12 +161,12 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
               // ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 4),
               decoration: BoxDecoration(
                   color: AppColors.primary,
                   borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(15),
-                    topRight: Radius.circular(20),
+                    bottomLeft: Radius.circular(5),
+                    topRight: Radius.circular(10),
                   )),
               child: AppText(
                 homeOptions.categoryName!.toUpperCase(),

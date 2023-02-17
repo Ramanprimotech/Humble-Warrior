@@ -26,7 +26,7 @@ class HomeScreenWidgets {
   });
 
   final double productHeight = 60;
-  final double brandLoveHeight = 55;
+  final double brandLoveHeight = 50;
   final double brandHeight = 60;
 
   /// App Bar
@@ -75,56 +75,92 @@ class HomeScreenWidgets {
 
   /// Product List Future Builder
   Widget productList() {
-    return Row(
-      children: [
-        Expanded(
-          flex: 8,
-          child: SizedBox(
-            // margin: EdgeInsets.symmetric(horizontal: 20),
-            height: productHeight,
-            width: Get.width,
-            child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                scrollDirection: Axis.horizontal,
-                controller: controller.productScrollController,
-                itemCount: ProductImages.productImagesList.length,
-                itemBuilder: (ctx, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                    child: SizedBox(
-                      height: productHeight,
-                      width: 80,
-                      child: Column(
-                        children: [
-                          Image.asset(
-                              ProductImages.productImagesList[index].image,
-                              fit: BoxFit.fitHeight,
-                              height: productHeight - 20,
-                              scale: 0.7),
-                          AppText(
-                            ProductImages.productImagesList[index].name,
-                            fontSize: 12,
-                            maxLines: 2,
+    return Stack(
+      alignment: Alignment.center,
+      children:[
+        Row(
+          children: [
+            Expanded(
+              // flex: 8,
+              child: SizedBox(
+                // margin: EdgeInsets.symmetric(horizontal: 20),
+                height: productHeight,
+                width: Get.width,
+                child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 0),
+                    scrollDirection: Axis.horizontal,
+                    controller: controller.productScrollController,
+                    itemCount: ProductImages.productImagesList.length,
+                    itemBuilder: (ctx, index) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        child: SizedBox(
+                          height: productHeight,
+                          width: 80,
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                  ProductImages.productImagesList[index].image,
+                                  fit: BoxFit.fitHeight,
+                                  height: productHeight - 20,
+                                  scale: 0.7),
+                              AppText(
+                                ProductImages.productImagesList[index].name,
+                                fontSize: 12,
+                                maxLines: 1,
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
+                      );
+                    }),
+              ),
+            ),
+          ],
+        ),
+            Obx(
+            () => Visibility(
+                    visible: controller.listBack.value,
+                    child: Positioned(
+                      left: 0,
+                      child: Container(
+                         padding: EdgeInsets.only(left: 20),
+                        child: GestureDetector(
+                          onTap: () {
+                            controller.productScrollController.animateTo(
+                                controller.productScrollController.offset - (60 * 3),
+                                duration: const Duration(milliseconds: 150),
+                                curve: Curves.linear);
+                          },
+                          child: AppIcons.backArrrowIos(iconColor: Colors.black),
+                        ),
                       ),
                     ),
-                  );
-                }),
+                  ),
+            ),
+
+
+
+        Obx(
+              () => Visibility(
+            visible: controller.listForward.value,
+            child: Positioned(
+              right: -5,
+              child: Container(
+                padding: EdgeInsets.only(right: 20),
+                child: GestureDetector(
+                  onTap: () {
+                    controller.productScrollController.animateTo(
+                        controller.productScrollController.offset + (60 * 3),
+                        duration: const Duration(milliseconds: 150),
+                        curve: Curves.linear);
+                  },
+                  child: AppIcons.next(iconColor: Colors.black),
+                ),
+              ),
+            ),
           ),
-        ),
-        Expanded(
-          flex: 1,
-          child: GestureDetector(
-            onTap: () {
-              controller.productScrollController.animateTo(
-                  controller.productScrollController.offset + (70 * 1),
-                  duration: const Duration(milliseconds: 150),
-                  curve: Curves.linear);
-            },
-            child: AppIcons.next(iconColor: Colors.black),
-          ),
-        ),
+        )
       ],
     );
   }
@@ -142,7 +178,7 @@ class HomeScreenWidgets {
         // },
         // child:
         Container(
-      height: brandHeight + brandLoveHeight + 10,
+      height: brandHeight + brandLoveHeight + 20,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
             topRight: Radius.circular(15), topLeft: Radius.circular(15)),
@@ -178,11 +214,14 @@ class HomeScreenWidgets {
                     },
                     child: AppIcons.next(iconColor: Colors.black)),
               ),
+
             ],
           ),
-          const SizedBox(
-            height: 10,
-          )
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 25),
+            height: 1,width: Get.width,color: Colors.black,),
+          // Divider(color: Colors.black,thickness: 1),
+          // SizedBox(height: 5,),
         ],
       ),
     );
@@ -276,7 +315,7 @@ class HomeScreenWidgets {
     final ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
     return Container(
       height: height,
-      padding: const EdgeInsets.only(top: 15, right: 20, left: 20, bottom: 20),
+      padding: const EdgeInsets.only(top: 15, right: 20, left: 20, bottom: 10),
       decoration: BoxDecoration(
           color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
           borderRadius: const BorderRadius.only(
@@ -297,13 +336,16 @@ class HomeScreenWidgets {
           Row(
             children: [
               const AppText(
-                "BRAND'S  I",
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+                "BRAND'S I",
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
               5.sw,
-              AppIcons.heart(
-                iconColor: Colors.red,
+              Padding(
+                padding: EdgeInsets.only(top: 2),
+                child: AppIcons.heart(
+                  iconColor: Colors.red,
+                ),
               ),
             ],
           ),
@@ -313,7 +355,7 @@ class HomeScreenWidgets {
             },
             child: const AppText(
               "VIEW ALL",
-              fontSize: 14,
+              fontSize: 18,
               color: AppColors.blue,
             ),
           ),

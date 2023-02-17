@@ -12,6 +12,11 @@ class HomeScreenController extends GetxController implements SearchActions {
   final ScrollController productScrollController =
       ScrollController(initialScrollOffset: 0.0);
 
+  RxBool listBack = false.obs;
+  RxBool listForward = true.obs;
+  // RxBool brandListBack = false.obs;
+  // RxBool brandListForward = true.obs;
+
   final FocusNode focusNode = FocusNode();
   ValueNotifier<bool> keyboardIsOpened = ValueNotifier(true);
 
@@ -22,19 +27,35 @@ class HomeScreenController extends GetxController implements SearchActions {
 
   @override
   void onInit() {
+    productScrollController.addListener(() {
+         listForward.value = productScrollController.offset != productScrollController.position.maxScrollExtent;
+         listBack.value = productScrollController.offset != productScrollController.initialScrollOffset;
+    });
+
+    // brandScrollController.addListener(() {
+    //
+    //      brandListForward.value = brandScrollController.offset != brandScrollController.position.maxScrollExtent;
+    //      brandListBack.value = brandScrollController.offset != brandScrollController.initialScrollOffset;
+    //
+    // });
+
     const ProductImages(image: "assets/brands/men.png", name: "Men").add();
     const ProductImages(image: "assets/brands/gift.png", name: "Gift").add();
-    const ProductImages(
-            image: "assets/brands/giftformom.png", name: "Gift For Mom")
-        .add();
-    const ProductImages(image: "assets/brands/health.png", name: "Health")
-        .add();
+    const ProductImages(image: "assets/brands/giftformom.png", name: "Gift For Mom").add();
+    const ProductImages(image: "assets/brands/health.png", name: "Health").add();
     const ProductImages(image: "assets/brands/kids.png", name: "Kids").add();
     const ProductImages(image: "assets/brands/food.png", name: "Food").add();
-    const ProductImages(image: "assets/brands/outdoor.png", name: "Outdoor")
-        .add();
-    const ProductImages(image: "assets/brands/travel.png", name: "Travel")
-        .add();
+    const ProductImages(image: "assets/brands/womenfashion.png", name: "Women's fashion").add();
+    const ProductImages(image: "assets/brands/outdoor.png", name: "Outdoor").add();
+    const ProductImages(image: "assets/brands/travel.png", name: "Travel").add();
+    const ProductImages(image: "assets/brands/packaging.png", name: "Packing").add();
+    const ProductImages(image: "assets/brands/fitness.png", name: "Fitness").add();
+    const ProductImages(image: "assets/brands/order.png", name: "Food").add();
+    const ProductImages(image: "assets/brands/jewelry.png", name: "Jewelry").add();
+    const ProductImages(image: "assets/brands/baby.png", name: "Baby").add();
+    const ProductImages(image: "assets/brands/books.png", name: "Books").add();
+    const ProductImages(image: "assets/brands/vehicle.png", name: "vehicles").add();
+    const ProductImages(image: "assets/brands/pets.png", name: "Pets").add();
 
     focusNode.addListener(() {
       debugPrint("${focusNode.hasFocus}");
