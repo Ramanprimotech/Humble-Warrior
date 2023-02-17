@@ -60,7 +60,7 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
             CommonUtils().urlLauncher(url: dataa[index].brandLink!);
           },
           child: SizedBox(
-            height: 60,
+            height: 50,
             width: 80,
             child: Column(
               children: [
@@ -75,8 +75,8 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
                   alignment: Alignment.center,
                   dataa[index].brandImage!,
                   fit: BoxFit.contain,
-                  height: 60,
-                  width: 80,
+                  height: 50,
+                  width: 60,
                 ),
               ],
             ),
@@ -84,7 +84,7 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
         );
       },
       separatorBuilder: (BuildContext context, int index) {
-        return 20.sw;
+        return 5.sw;
       },
     );
   }

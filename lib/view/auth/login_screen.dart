@@ -21,7 +21,7 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(
-                height: 80,
+                height: 100,
               ),
               ClipRRect(
                 borderRadius: BorderRadius.circular(6.0),
@@ -31,7 +31,7 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                 ),
               ).centered().pLTRB(0, 20, 0, 10),
               const SizedBox(
-                height: 80,
+                height: 40,
               ),
               SizedBox(
                 height: 80 * 4,

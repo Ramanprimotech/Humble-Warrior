@@ -95,6 +95,17 @@ class MyAccWidget {
 
   detailsOptions(MyAccountController controller,
       {title, bool isSwitchRequired = false, ontap, click}) {
+
+    final MaterialStateProperty<Icon?> thumbIcon =
+    MaterialStateProperty.resolveWith<Icon?>(
+          (Set<MaterialState> states) {
+        // Thumb icon when the switch is selected.
+        if (states.contains(MaterialState.selected)) {
+          return const Icon(Icons.check , size: 0);
+        }
+        return const Icon(Icons.close,size: 0);
+      },
+    );
     final AccountOptionTheme accountOptionTheme =
         Theme.of(context).extension<AccountOptionTheme>()!;
     return GestureDetector(
@@ -120,6 +131,7 @@ class MyAccWidget {
             ]),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+
           AppText(
             title,
             fontSize: 16,
@@ -128,28 +140,17 @@ class MyAccWidget {
           ),
           isSwitchRequired
               ? Obx(
-                  () => Transform.scale(
-                    scale: 0.9,
-                    child: Switch(
-                      thumbIcon: MaterialStateProperty.resolveWith<Icon?>(
-                        (Set<MaterialState> states) {
-                          // Thumb icon when the switch is selected.
-                          if (states.contains(MaterialState.selected)) {
-                            return const Icon(Icons.check);
-                          }
-                          return const Icon(Icons.close);
-                        },
-                      ),
-                      value: title == darkModeTxt
-                          ? controller.checkDark.value
-                          : controller.checkNotification.value,
-                      activeColor: Colors.lightGreen.shade600,
-                      inactiveTrackColor: Colors.red,
-                      thumbColor: MaterialStateProperty.all(Colors.white),
-                      onChanged: (value) {
-                        click();
-                      },
-                    ),
+                  () => Switch(
+                    thumbIcon:  thumbIcon,
+                    value: title == darkModeTxt
+                        ? controller.checkDark.value
+                        : controller.checkNotification.value,
+                    activeColor: AppColors.switchActiveColor,
+                    inactiveTrackColor: AppColors.switchInactiveColor,
+                    thumbColor: MaterialStateProperty.all(Colors.white),
+                    onChanged: (value) {
+                      click();
+                    },
                   ),
                 )
               : const SizedBox(),

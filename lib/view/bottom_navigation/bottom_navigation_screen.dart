@@ -33,7 +33,8 @@ class BottomNavigationScreen extends GetView<BottomNavigationController> {
                       label: 'Home',
                     ),
                     BottomNavigationBarItem(
-                      icon: AppIcons.favourite(),
+                      icon: AppIcons.unselectedfavourite(context),
+                      activeIcon: AppIcons.favourite(context),
                       label: 'My Wishlist',
                     ),
                     BottomNavigationBarItem(
@@ -42,11 +43,13 @@ class BottomNavigationScreen extends GetView<BottomNavigationController> {
                       label: 'My Amazon',
                     ),
                     BottomNavigationBarItem(
-                      icon: AppIcons.join(),
+                      icon: AppIcons.unselectedJoin(context),
+                      activeIcon: AppIcons.join(context),
                       label: 'Join Us',
                     ),
                     BottomNavigationBarItem(
-                      icon: AppIcons.person(),
+                      icon: AppIcons.unselectedPerson(context),
+                      activeIcon: AppIcons.person(context),
                       label: 'Account',
                     ),
                   ],

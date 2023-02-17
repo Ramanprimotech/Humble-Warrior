@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
+import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
 import 'package:humble_warrior/view/home/home_screen_widgets.dart';
 import 'package:readmore/readmore.dart';
@@ -17,20 +19,40 @@ class AboutScreen extends StatelessWidget {
     final HomeScreenController controller = Get.find();
     // final AboutScreenController controller = Get.put(AboutScreenController());
     return Scaffold(
-      body: Container(
-        margin: const EdgeInsets.only(top: 20, right: 10, left: 10),
-        child: SingleChildScrollView(
-          child: Column(children: [
-            _aboutButton(),
-            _showImg(),
-            _details(),
-            _seeCopyButton(),
+      appBar: AppBar(
+        leadingWidth: 20,
+        leading: Padding(
+          padding: EdgeInsets.only(left: 15),
+          child: GestureDetector(
+              onTap: (){
+                Get.back();
+              },
+              child: Icon(Icons.arrow_back_ios)),
+        ),
+        title: CustomSearchBar(),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(right: 10, left: 10),
+              child: Column(children: [
+                _aboutButton(),
+                _showImg(),
+                _details(),
+                _seeCopyButton(),
+                const SizedBox(
+                  height: 15,
+                ),
+
+              ]),
+            ),
+            HomeScreenWidgets(context: context, controller: controller)
+                .brandsList(),
             const SizedBox(
               height: 25,
             ),
-            _brandRow(),
-            _brandList(context: context, controller: controller),
-          ]),
+          ],
         ),
       ),
     );
@@ -42,19 +64,20 @@ class AboutScreen extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 15),
       width: MediaQuery.of(Get.context!).size.width,
       decoration: BoxDecoration(
-          color: Colors.grey.shade400,
-          borderRadius: BorderRadius.circular(5),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.shade500,
-              spreadRadius: 2,
-              blurRadius: 3,
-              offset: const Offset(0, 3),
+              color: Colors.grey.shade400,
+              spreadRadius: 1,
+              blurRadius: 1,
+              // offset: const Offset(0, 3),
             )
           ]),
-      child: const AppText(aboutDonnaTxt,
+      child: AppText(aboutDonnaTxt,
           fontWeight: FontWeight.bold,
           fontSize: 18,
+          color: AppColors.primary,
           textAlign: TextAlign.center),
     );
   }
@@ -78,14 +101,14 @@ class AboutScreen extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 0),
       width: MediaQuery.of(Get.context!).size.width,
       decoration: BoxDecoration(
-          color: Colors.grey.shade300,
-          borderRadius: BorderRadius.circular(5),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.shade500,
-              spreadRadius: 2,
-              blurRadius: 3,
-              offset: const Offset(0, 3),
+              color: Colors.grey.shade400,
+              spreadRadius: 1,
+              blurRadius: 1,
+              // offset: const Offset(0, 3),
             )
           ]),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -108,18 +131,17 @@ class AboutScreen extends StatelessWidget {
 
   _seeCopyButton() {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       width: MediaQuery.of(Get.context!).size.width,
       decoration: BoxDecoration(
-          color: Colors.blueAccent.shade100,
-          borderRadius: BorderRadius.circular(5),
+          color: AppColors.primary,
+          borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.shade500,
-              spreadRadius: 2,
-              blurRadius: 3,
-              offset: const Offset(0, 3),
+              color: Colors.grey.shade400,
+              spreadRadius: 1,
+              blurRadius: 1,
+              // offset: const Offset(0, 3),
             )
           ]),
       child: RichText(
