@@ -10,13 +10,13 @@ class AppIcons {
 
   static Image favourite(BuildContext context) => Image.asset(
     "assets/icons/heart.png",
-    height: 25,
+    height: 20,
     color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
   );
 
   static Image unselectedfavourite(BuildContext context) => Image.asset(
     "assets/icons/heart.png",
-    height: 25,
+    height: 20,
     color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
   );
 
@@ -24,47 +24,47 @@ class AppIcons {
 
   static Image check(BuildContext context) => Image.asset(
         "assets/icons/amazon_bot.png",
-        height: 25,
+        height: 22,
         color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
       );
   static Image unselectedCheck(BuildContext context) => Image.asset(
         "assets/icons/amazon_bot.png",
-        height: 25,
+        height: 20,
         color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
       );
 
   static Image home(BuildContext context) => Image.asset(
         "assets/icons/home.png",
-        height: 25,
+        height: 20,
         color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
       );
   static Image unselectedHome(BuildContext context) => Image.asset(
         "assets/icons/home.png",
-        height: 25,
+        height: 20,
         color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
       );
 
   static Image join(BuildContext context) => Image.asset(
     "assets/icons/facebook.png",
-    height: 25,
+    height: 20,
     color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
   );
 
   static Image unselectedJoin(BuildContext context) => Image.asset(
     "assets/icons/facebook.png",
-    height: 25,
+    height: 20,
     color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
   );
 
   static Image person(BuildContext context) => Image.asset(
     "assets/icons/person.png",
-    height: 25,
+    height: 20,
     color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
   );
 
   static Image unselectedPerson(BuildContext context) => Image.asset(
     "assets/icons/person.png",
-    height: 25,
+    height: 20,
     color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
   );
 

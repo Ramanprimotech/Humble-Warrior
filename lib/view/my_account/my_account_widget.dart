@@ -95,15 +95,14 @@ class MyAccWidget {
 
   detailsOptions(MyAccountController controller,
       {title, bool isSwitchRequired = false, ontap, click}) {
-
     final MaterialStateProperty<Icon?> thumbIcon =
-    MaterialStateProperty.resolveWith<Icon?>(
-          (Set<MaterialState> states) {
+        MaterialStateProperty.resolveWith<Icon?>(
+      (Set<MaterialState> states) {
         // Thumb icon when the switch is selected.
         if (states.contains(MaterialState.selected)) {
-          return const Icon(Icons.check , size: 0);
+          return const Icon(Icons.check, size: 0);
         }
-        return const Icon(Icons.close,size: 0);
+        return const Icon(Icons.close, size: 0);
       },
     );
     final AccountOptionTheme accountOptionTheme =
@@ -111,6 +110,7 @@ class MyAccWidget {
     return GestureDetector(
       onTap: ontap,
       child: Container(
+        height: 45,
         padding: EdgeInsets.only(
             left: 15,
             right: 5,
@@ -129,32 +129,33 @@ class MyAccWidget {
                 offset: const Offset(0, 0),
               )
             ]),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-
-          AppText(
-            title,
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: accountOptionTheme.textColor,
-          ),
-          isSwitchRequired
-              ? Obx(
-                  () => Switch(
-                    thumbIcon:  thumbIcon,
-                    value: title == darkModeTxt
-                        ? controller.checkDark.value
-                        : controller.checkNotification.value,
-                    activeColor: AppColors.switchActiveColor,
-                    inactiveTrackColor: AppColors.switchInactiveColor,
-                    thumbColor: MaterialStateProperty.all(Colors.white),
-                    onChanged: (value) {
-                      click();
-                    },
-                  ),
-                )
-              : const SizedBox(),
-        ]),
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              AppText(
+                title,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: accountOptionTheme.textColor,
+              ),
+              isSwitchRequired
+                  ? Obx(
+                      () => Switch(
+                        thumbIcon: thumbIcon,
+                        value: title == darkModeTxt
+                            ? controller.checkDark.value
+                            : controller.checkNotification.value,
+                        activeColor: AppColors.switchActiveColor,
+                        inactiveTrackColor: AppColors.switchInactiveColor,
+                        thumbColor: MaterialStateProperty.all(Colors.white),
+                        onChanged: (value) {
+                          click();
+                        },
+                      ),
+                    )
+                  : const SizedBox(),
+            ]),
       ),
     );
   }

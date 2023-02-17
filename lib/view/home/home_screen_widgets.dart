@@ -355,7 +355,7 @@ class HomeScreenWidgets {
             },
             child: const AppText(
               "VIEW ALL",
-              fontSize: 18,
+              fontSize: 16,
               color: AppColors.blue,
             ),
           ),
