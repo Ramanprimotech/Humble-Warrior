@@ -1,12 +1,15 @@
 class FrontPageResponseModel {
   bool? status;
+  String? totalRecords;
   List<FrontPageDetails>? data;
   String? message;
 
-  FrontPageResponseModel({this.status, this.data, this.message});
+  FrontPageResponseModel(
+      {this.status, this.totalRecords, this.data, this.message});
 
   FrontPageResponseModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
+    totalRecords = json['total_records'];
     if (json['data'] != null) {
       data = <FrontPageDetails>[];
       json['data'].forEach((v) {
@@ -18,11 +21,12 @@ class FrontPageResponseModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
+    data['status'] = status;
+    data['total_records'] = totalRecords;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data['message'] = this.message;
+    data['message'] = message;
     return data;
   }
 }
@@ -45,10 +49,10 @@ class FrontPageDetails {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['product_name'] = this.productName;
-    data['url'] = this.url;
-    data['ribbon_name'] = this.ribbonName;
-    data['ribbon_color'] = this.ribbonColor;
+    data['product_name'] = productName;
+    data['url'] = url;
+    data['ribbon_name'] = ribbonName;
+    data['ribbon_color'] = ribbonColor;
     return data;
   }
 }

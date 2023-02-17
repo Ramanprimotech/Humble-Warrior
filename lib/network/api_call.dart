@@ -82,7 +82,7 @@ class CallAPI {
     }
   }
 
-  static Future<List<DonnaDealsDetails>> donnaDeals(
+  static Future<DonnaDealsResponseModal> donnaDeals(
       {required PaginationModel payload}) async {
     try {
       // payload.toString().logRequest(apiName: Endpoints.donnaDeals);
@@ -97,7 +97,7 @@ class CallAPI {
       // log(response.toString(), name: "${Endpoints.donnaDeals}");
       // response.toString().logResponse(apiName: Endpoints.donnaDeals);
       if (response == null) {
-        return [];
+        return DonnaDealsResponseModal(data: []);
       }
 
       // DialogHelper.closeDialog();
@@ -105,21 +105,21 @@ class CallAPI {
       if (donnaDealsResponseModal.status == true) {
         // _userController.userModel = UserModel.fromMap(response['data']);
         // DialogHelper.showToast(Get.context!, response['msg']);
-        return donnaDealsResponseModal.data!;
+        return donnaDealsResponseModal;
       }
       // Endpoints.donnaDeals.logError( apiName : Endpoints.donnaDeals ,error: response);
       // DialogHelper.showErrorDialog(
       //   title: 'Error Updating',
       //   description: response['msg'],
       // );
-      return [];
+      return DonnaDealsResponseModal(data: []);
     } catch (e) {
       // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
-      return [];
+      return DonnaDealsResponseModal(data: []);
     }
   }
 
-  static Future<List<FrontPageDetails>> frontPage(
+  static Future<FrontPageResponseModel> frontPage(
       {required PaginationModel payload}) async {
     try {
       // payload.toString().logRequest(apiName: Endpoints.donnaDeals);
@@ -134,7 +134,7 @@ class CallAPI {
       // log(response.toString(), name: "${Endpoints.donnaDeals}");
       // response.toString().logResponse(apiName: Endpoints.donnaDeals);
       if (response == null) {
-        return [];
+        return FrontPageResponseModel(data: []);
       }
 
       // DialogHelper.closeDialog();
@@ -142,21 +142,21 @@ class CallAPI {
       if (frontPageResponseModel.status == true) {
         // _userController.userModel = UserModel.fromMap(response['data']);
         // DialogHelper.showToast(Get.context!, response['msg']);
-        return frontPageResponseModel.data!;
+        return frontPageResponseModel;
       }
       // Endpoints.donnaDeals.logError( apiName : Endpoints.donnaDeals ,error: response);
       // DialogHelper.showErrorDialog(
       //   title: 'Error Updating',
       //   description: response['msg'],
       // );
-      return [];
+      return FrontPageResponseModel(data: []);
     } catch (e) {
       // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
-      return [];
+      return FrontPageResponseModel(data: []);
     }
   }
 
-  static Future<List<DonnaFavouriteDetails>> donnaFavourite(
+  static Future<DonnaFavouriteResponseModel> donnaFavourite(
       {required PaginationModel payload}) async {
     try {
       // payload.toString().logRequest(apiName: Endpoints.donnaDeals);
@@ -171,7 +171,7 @@ class CallAPI {
       // log(response.toString(), name: "${Endpoints.donnaDeals}");
       // response.toString().logResponse(apiName: Endpoints.donnaDeals);
       if (response == null) {
-        return [];
+        return DonnaFavouriteResponseModel(data: []);
       }
 
       // DialogHelper.closeDialog();
@@ -179,17 +179,17 @@ class CallAPI {
       if (donnaFavouriteResponseModel.status == true) {
         // _userController.userModel = UserModel.fromMap(response['data']);
         // DialogHelper.showToast(Get.context!, response['msg']);
-        return donnaFavouriteResponseModel.data!;
+        return donnaFavouriteResponseModel;
       }
       // Endpoints.donnaDeals.logError( apiName : Endpoints.donnaDeals ,error: response);
       // DialogHelper.showErrorDialog(
       //   title: 'Error Updating',
       //   description: response['msg'],
       // );
-      return [];
+      return DonnaFavouriteResponseModel(data: []);
     } catch (e) {
       // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
-      return [];
+      return DonnaFavouriteResponseModel(data: []);
     }
   }
 

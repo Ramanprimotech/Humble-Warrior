@@ -1,12 +1,15 @@
 class DonnaFavouriteResponseModel {
   bool? status;
+  String? totalRecords;
   List<DonnaFavouriteDetails>? data;
   String? message;
 
-  DonnaFavouriteResponseModel({this.status, this.data, this.message});
+  DonnaFavouriteResponseModel(
+      {this.status, this.totalRecords, this.data, this.message});
 
   DonnaFavouriteResponseModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
+    totalRecords = json['total_records'];
     if (json['data'] != null) {
       data = <DonnaFavouriteDetails>[];
       json['data'].forEach((v) {
@@ -19,6 +22,7 @@ class DonnaFavouriteResponseModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
+    data['total_records'] = totalRecords;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }

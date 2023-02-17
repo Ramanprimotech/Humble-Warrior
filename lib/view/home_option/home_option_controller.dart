@@ -19,14 +19,18 @@ class HomeOptionController extends GetxController
   final RxInt donnaDealsLength = 0.obs;
   final RxBool donnaDealsBool = true.obs;
   List<DonnaDealsDetails> donnaDealList = [];
+  RxInt donnaDealListLength = 0.obs;
   int donnaDealsPage = 1;
+  RxInt donnaDealsTotalDeals = 20.obs;
   final ScrollController donnaDealScrollController =
       ScrollController(initialScrollOffset: 0.0);
 
   /// Front Page Deals
   final RxInt frontPageDealsLength = 0.obs;
   final RxBool frontPageDealsBool = true.obs;
+  RxInt frontPageDealsTotalDeals = 20.obs;
   List<FrontPageDetails> frontPageDealList = [];
+  RxInt frontPageDealListLength = 0.obs;
   int frontPageDealsPage = 1;
   final ScrollController frontPageDealScrollController =
       ScrollController(initialScrollOffset: 0.0);
@@ -35,7 +39,9 @@ class HomeOptionController extends GetxController
   final RxInt donnaFavouriteDealsLength = 0.obs;
   final RxBool donnaFavouriteDealsBool = true.obs;
   List<DonnaFavouriteDetails> donnaFavouriteDealList = [];
+  RxInt donnaFavouriteDealsTotalDeals = 20.obs;
   int donnaFavouriteDealsPage = 1;
+  RxInt donnaFavouriteDealListLength = 0.obs;
   final ScrollController donnaFavouriteDealScrollController =
       ScrollController(initialScrollOffset: 0.0);
 
@@ -57,8 +63,12 @@ class HomeOptionController extends GetxController
         PaginationModel(page: donnaDealsPage.toString());
     await CallAPI.donnaDeals(payload: paginationModel).then((value) {
       donnaDealsPage += 1;
-      donnaDealList.addAll(value);
+      donnaDealList.addAll(value.data!);
       donnaDealsBool.value = false;
+      donnaDealListLength.value = donnaDealList.length;
+      if (value.totalRecords != null) {
+        donnaDealListLength.value = int.parse(value.totalRecords!);
+      }
       update();
     });
   }
@@ -68,7 +78,11 @@ class HomeOptionController extends GetxController
         PaginationModel(page: frontPageDealsPage.toString());
     await CallAPI.frontPage(payload: paginationModel).then((value) {
       frontPageDealsPage += 1;
-      frontPageDealList.addAll(value);
+      frontPageDealList.addAll(value.data!);
+      frontPageDealListLength.value = frontPageDealList.length;
+      if (value.totalRecords != null) {
+        frontPageDealsTotalDeals.value = int.parse(value.totalRecords!);
+      }
       frontPageDealsBool.value = false;
       update();
     });
@@ -79,7 +93,12 @@ class HomeOptionController extends GetxController
         PaginationModel(page: donnaFavouriteDealsPage.toString());
     await CallAPI.donnaFavourite(payload: paginationModel).then((value) {
       donnaFavouriteDealsPage += 1;
-      donnaFavouriteDealList.addAll(value);
+      donnaFavouriteDealList.addAll(value.data!);
+      donnaFavouriteDealListLength.value = donnaFavouriteDealList.length;
+      if (value.totalRecords != null) {
+        donnaFavouriteDealsTotalDeals.value = int.parse(value.totalRecords!);
+      }
+
       donnaFavouriteDealsBool.value = false;
       update();
     });

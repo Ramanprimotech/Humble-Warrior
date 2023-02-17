@@ -1,12 +1,15 @@
 class DonnaDealsResponseModal {
   bool? status;
   List<DonnaDealsDetails>? data;
+  String? totalRecords;
   String? message;
 
-  DonnaDealsResponseModal({this.status, this.data, this.message});
+  DonnaDealsResponseModal(
+      {this.status, this.totalRecords, this.data, this.message});
 
   DonnaDealsResponseModal.fromJson(Map<String, dynamic> json) {
     status = json['status'];
+    totalRecords = json['total_records'];
     if (json['data'] != null) {
       data = <DonnaDealsDetails>[];
       json['data'].forEach((v) {
@@ -19,6 +22,7 @@ class DonnaDealsResponseModal {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
+    data['total_records'] = totalRecords;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
