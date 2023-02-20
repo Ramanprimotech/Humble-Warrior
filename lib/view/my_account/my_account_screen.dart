@@ -16,6 +16,7 @@ class MyAccount extends StatelessWidget {
     MyAccountController controller = Get.find();
 
     MyAccWidget myAccWidget = MyAccWidget(context: context);
+    double optionSpacing = 15;
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -24,19 +25,19 @@ class MyAccount extends StatelessWidget {
             () => Column(children: [
               if (controller.userCheck.value == true) ...[
                 myAccWidget.profileImage(),
-                10.sh,
+                optionSpacing.sh,
                 myAccWidget.divider(),
               ],
-              10.sh,
+              optionSpacing.sh,
               myAccWidget.myAccountTextFun(heading: myAccountTxt),
               myAccWidget.detailsOptions(controller, title: accountDetailsTxt),
               myAccWidget.detailsOptions(controller,
                   title: notificationsTxt,
                   isSwitchRequired: true,
                   click: controller.switchFunc),
-              10.sh,
+              optionSpacing.sh,
               myAccWidget.divider(),
-              10.sh,
+              optionSpacing.sh,
               myAccWidget.myAccountTextFun(heading: theHumbleWarriorTxt),
               myAccWidget.detailsOptions(controller, title: aboutDonna,
                   ontap: () {
@@ -44,9 +45,9 @@ class MyAccount extends StatelessWidget {
               }),
               myAccWidget.detailsOptions(controller,
                   title: shareWithFriendsTxt),
-              10.sh,
+              optionSpacing.sh,
               myAccWidget.divider(),
-              10.sh,
+              optionSpacing.sh,
               myAccWidget.myAccountTextFun(heading: settingsTxt),
               myAccWidget.detailsOptions(controller, title: passcodeTxt),
               myAccWidget.detailsOptions(controller,

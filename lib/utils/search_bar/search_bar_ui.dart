@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_text.dart';
+import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
 
 import '../image_path_assets.dart';
 
@@ -32,6 +32,8 @@ class CustomSearchBar extends StatefulWidget {
 class _CustomSearchBarState extends State<CustomSearchBar> {
   @override
   Widget build(BuildContext context) {
+    final ThemeController themeController = Get.find();
+    bool isDark = themeController.themeMode == ThemeMode.dark;
     return PreferredSize(
       preferredSize: Size.fromHeight(widget.height ?? 60),
       child: Padding(
@@ -41,7 +43,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           width: Get.width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
-            border: Border.all(color: AppColors.black, width: 1),
+            border: Border.all(color: Theme.of(context).textTheme.displaySmall!.color!, width: 1),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,7 +51,9 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Image.asset(
-                  ImagePathAssets.hwLogoUnnamed,
+                  !isDark?
+                  ImagePathAssets.hwLogoUnnamed:
+                  ImagePathAssets.hwLogoUnnamedDark,
                   height: 40,
                   width: 40,
                 ),

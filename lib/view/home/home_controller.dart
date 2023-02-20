@@ -39,6 +39,7 @@ class HomeScreenController extends GetxController implements SearchActions {
     //
     // });
 
+    const ProductImages(image: "assets/brands/beauty.png", name: "Beauty").add();
     const ProductImages(image: "assets/brands/men.png", name: "Men").add();
     const ProductImages(image: "assets/brands/gift.png", name: "Gift").add();
     const ProductImages(image: "assets/brands/giftformom.png", name: "Gift For Mom").add();
@@ -84,6 +85,21 @@ class HomeScreenController extends GetxController implements SearchActions {
   Future<List<BrandDetails>> allBrands() async {
     List<BrandDetails> data = [];
     data.add(BrandDetails(
+        brandImage: "assets/categories/nike.png",
+        brandName: "Nike",
+        brandLink: "https://humblewarrior.com/"));
+    data.add(BrandDetails(
+        brandImage: "assets/categories/reebok.png",
+        brandName: "Reebok",
+        brandLink: "https://humblewarrior.com/"));
+    data.add(BrandDetails(
+        brandImage: "assets/categories/guchi.png",
+        brandName: "Gucci",
+        brandLink: "https://humblewarrior.com/"));
+    data.add(BrandDetails(
+        brandImage: "assets/categories/adidas.png",
+        brandName: "adidas",
+        brandLink: "https://humblewarrior.com/"));    data.add(BrandDetails(
         brandImage: "assets/categories/nike.png",
         brandName: "Nike",
         brandLink: "https://humblewarrior.com/"));

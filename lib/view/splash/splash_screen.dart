@@ -14,6 +14,8 @@ class SplashScreen extends StatelessWidget {
         body: Container(
           child: Center(
             child: Image.asset(
+              !controller.isDark?
+              ImagePathAssets.hwLogoDarkMode:
               ImagePathAssets.hwLogo,
               height: 200,
               width: 200,

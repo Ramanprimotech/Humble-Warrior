@@ -33,7 +33,8 @@ class WishList extends StatelessWidget {
                     ],
                   ),
                   child: Column(children: [
-                    const AppText('Please Login for accessing this feature.',
+                     AppText('Please Login for accessing this feature.',
+                        color: dialogueThemeExtention.textColor,
                         fontSize: 20),
                     20.sh,
                     ElevatedButton(

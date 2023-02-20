@@ -53,21 +53,39 @@ class ThemeController extends GetxController {
     Get.changeThemeMode(themeMode);
     _themeMode = themeMode;
     update();
-    prefs = await SharedPreferences.getInstance();
-    await prefs.setString('theme', themeMode.toString().split('.')[1]);
+    await SharePreferenceData.addBoolToSF("mode", themeMode == ThemeMode.dark);
+    // prefs = await SharedPreferences.getInstance();
+    // await prefs.setString('theme', themeMode.toString().split('.')[1]);
   }
 
+  // getThemeModeFromPreferences() async {
+  //   ThemeMode themeMode;
+  //   prefs = await SharedPreferences.getInstance();
+  //   String themeText = prefs.getString('theme') ?? 'system';
+  //   try {
+  //     themeMode =
+  //         ThemeMode.values.firstWhere((e) => describeEnum(e) == themeText);
+  //   } catch (e) {
+  //     themeMode = ThemeMode.system;
+  //   }
+  //   setThemeMode(themeMode);
+  // }
   getThemeModeFromPreferences() async {
     ThemeMode themeMode;
-    prefs = await SharedPreferences.getInstance();
-    String themeText = prefs.getString('theme') ?? 'system';
+    bool? isDark =  await SharePreferenceData.getBoolValuesSF("mode");
     try {
-      themeMode =
-          ThemeMode.values.firstWhere((e) => describeEnum(e) == themeText);
+      if(isDark == null){
+        themeMode = ThemeMode.system;
+
+      }else{
+      themeMode =  isDark? ThemeMode.dark : ThemeMode.light;
+      }
+
     } catch (e) {
       themeMode = ThemeMode.system;
     }
     setThemeMode(themeMode);
+    return themeMode;
   }
 
   changeTheme(bool value,GetxController controller){
@@ -79,5 +97,10 @@ class ThemeController extends GetxController {
     controller.update();
   }
 
+  @override
+  void onInit() {
+    getThemeModeFromPreferences();
+    super.onInit();
+  }
 
 }

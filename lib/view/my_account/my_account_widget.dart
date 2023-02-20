@@ -110,13 +110,13 @@ class MyAccWidget {
     return GestureDetector(
       onTap: ontap,
       child: Container(
-        height: 45,
+        height: 35,
         padding: EdgeInsets.only(
-            left: 15,
+            left: 16,
             right: 5,
-            top: isSwitchRequired ? 0 : 12,
-            bottom: isSwitchRequired ? 0 : 12),
-        margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 7),
+            top: isSwitchRequired ? 0 : 0,
+            bottom: isSwitchRequired ? 0 : 0),
+        margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
         width: MediaQuery.of(Get.context!).size.width,
         decoration: BoxDecoration(
             color: accountOptionTheme.backGroundColor,
@@ -135,23 +135,29 @@ class MyAccWidget {
             children: [
               AppText(
                 title,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
                 color: accountOptionTheme.textColor,
               ),
               isSwitchRequired
                   ? Obx(
-                      () => Switch(
-                        thumbIcon: thumbIcon,
-                        value: title == darkModeTxt
-                            ? controller.checkDark.value
-                            : controller.checkNotification.value,
-                        activeColor: AppColors.switchActiveColor,
-                        inactiveTrackColor: AppColors.switchInactiveColor,
-                        thumbColor: MaterialStateProperty.all(Colors.white),
-                        onChanged: (value) {
-                          click();
-                        },
+                      () => SizedBox(
+                        height: 35,
+                        width:60,
+                        child: FittedBox(
+                          child: Switch(
+                            thumbIcon: thumbIcon,
+                            value: title == darkModeTxt
+                                ? controller.checkDark.value
+                                : controller.checkNotification.value,
+                            activeColor: AppColors.switchActiveColor,
+                            inactiveTrackColor: AppColors.switchInactiveColor,
+                            thumbColor: MaterialStateProperty.all(Colors.white),
+                            onChanged: (value) {
+                              click();
+                            },
+                          ),
+                        ),
                       ),
                     )
                   : const SizedBox(),

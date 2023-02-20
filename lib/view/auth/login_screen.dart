@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
+import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
 import 'package:humble_warrior/view/auth/auth_widget.dart';
 import 'package:humble_warrior/view/auth/login_controller.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -14,6 +16,7 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
 
   @override
   Widget build(BuildContext context) {
+   ThemeController themeController = Get.find();
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -26,7 +29,7 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(6.0),
                 child: Image.asset(
-                  ImagePathAssets.hwLogo,
+                themeController.themeMode==ThemeMode.dark ?  ImagePathAssets.hwLogoDarkMode : ImagePathAssets.hwLogo,
                   width: Get.width * .65,
                 ),
               ).centered().pLTRB(0, 20, 0, 10),

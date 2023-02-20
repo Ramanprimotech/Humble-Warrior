@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:humble_warrior/utils/app_colors.dart';
 
 class AppIcons {
   // IconData
@@ -14,35 +15,48 @@ class AppIcons {
     color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
   );
 
-  static Image unselectedfavourite(BuildContext context) => Image.asset(
+  static Image unselectedfavourite(BuildContext context , Color color) => Image.asset(
     "assets/icons/heart.png",
     height: 20,
-    color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+    color:color,
+    // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
   );
 
   static Icon bag() => const Icon(Icons.shopping_bag);
 
-  static Image check(BuildContext context) => Image.asset(
+  static Image check(BuildContext context ) => Image.asset(
         "assets/icons/amazon_bot.png",
         height: 22,
         color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
       );
-  static Image unselectedCheck(BuildContext context) => Image.asset(
+  static Image unselectedCheck(BuildContext context , Color color) => Image.asset(
         "assets/icons/amazon_bot.png",
         height: 20,
-        color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+        color:color,
+        // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
       );
 
-  static Image home(BuildContext context) => Image.asset(
+  static Image home(BuildContext context ) => Image.asset(
         "assets/icons/home.png",
         height: 20,
         color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
       );
-  static Image unselectedHome(BuildContext context) => Image.asset(
+  static Image unselectedHome(BuildContext context , Color color) => Image.asset(
         "assets/icons/home.png",
         height: 20,
-        color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+        color: color,
+        // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
       );
+
+  static Image notification(BuildContext context ) =>
+      Image.asset(
+        // 'assets/image/bell.png',
+        //color: Theme.of(context).textTheme.displayLarge!.color!,
+        'assets/icons/notification.png',
+        height: 40,
+        width: 30,
+      );
+
 
   static Image join(BuildContext context) => Image.asset(
     "assets/icons/facebook.png",
@@ -50,22 +64,25 @@ class AppIcons {
     color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
   );
 
-  static Image unselectedJoin(BuildContext context) => Image.asset(
+  static Image unselectedJoin(BuildContext context , Color color) => Image.asset(
     "assets/icons/facebook.png",
     height: 20,
-    color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+    color: color,
+    // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
   );
 
-  static Image person(BuildContext context) => Image.asset(
+  static Image person(BuildContext context ) => Image.asset(
     "assets/icons/person.png",
     height: 20,
+    // color: AppColors.grey,
     color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
   );
 
-  static Image unselectedPerson(BuildContext context) => Image.asset(
+  static Image unselectedPerson(BuildContext context , Color color) => Image.asset(
     "assets/icons/person.png",
     height: 20,
-    color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+    // color: AppColors.grey,
+    color: color,
   );
 
   // static Icon join(BuildContext context) =>  Icon(Icons.facebook, color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,);
@@ -87,8 +104,8 @@ class AppIcons {
 
   static Icon sort({Color? iconColor}) => Icon(Icons.sort, color: iconColor);
 
-  static Icon notification({Color iconColor = Colors.black}) =>
-      Icon(Icons.notifications_none_rounded, color: iconColor);
+  // static Icon notification({Color iconColor = Colors.black}) =>
+  //     Icon(Icons.notifications_none_rounded, color: iconColor,size: 30,);
 
   static Icon notificationActice({Color? iconColor, double size = 24}) => Icon(
         Icons.notifications_active,

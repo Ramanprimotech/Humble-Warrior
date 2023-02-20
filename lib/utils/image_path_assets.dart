@@ -14,7 +14,10 @@ class ImagePathAssets {
   static const String loginImg = "assets/image/login.png";
   static const String callImg = "assets/image/call.png";
   static const String hwLogo = "assets/image/hw_logo.png";
+  static const String hwLogoDarkMode = "assets/image/logo_darkmode.png";
   static const String hwLogoUnnamed = "assets/icons/logo.png";
+  static const String hwLogoUnnamedDark = "assets/icons/humble_icon_darkmode.png";
+  static const String hwIcon = "assets/icons/humble_icon.png";
   static const String user = "assets/icons/user.svg";
   static const String bellIcon = "assets/image/bell.png";
 }

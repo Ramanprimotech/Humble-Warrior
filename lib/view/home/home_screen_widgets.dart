@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/network/endpoints.dart';
+import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/future_widget/future_widget.dart';
+import 'package:humble_warrior/utils/theme_extention/image_icon_theme_extention.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
 
 import '../../modals/response/brands_response_mdel.dart';
@@ -48,11 +50,9 @@ class HomeScreenWidgets {
             Padding(
               padding: const EdgeInsets.only(right: 15),
               child: InkWell(
-                  onTap: () {},
-                  child: Image.asset(
-                    'assets/icons/notification.png',
-                    width: 30,
-                  )),
+                onTap: () {},
+                child: AppIcons.notification(context),
+              ),
             )
           ],
         ),
@@ -77,13 +77,13 @@ class HomeScreenWidgets {
   Widget productList() {
     return Stack(
       alignment: Alignment.center,
-      children:[
+      children: [
         Row(
           children: [
             Expanded(
               // flex: 8,
-              child: SizedBox(
-                // margin: EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 22),
                 height: productHeight,
                 width: Get.width,
                 child: ListView.builder(
@@ -118,31 +118,30 @@ class HomeScreenWidgets {
             ),
           ],
         ),
-            Obx(
-            () => Visibility(
-                    visible: controller.listBack.value,
-                    child: Positioned(
-                      left: 0,
-                      child: Container(
-                         padding: EdgeInsets.only(left: 20),
-                        child: GestureDetector(
-                          onTap: () {
-                            controller.productScrollController.animateTo(
-                                controller.productScrollController.offset - (60 * 3),
-                                duration: const Duration(milliseconds: 150),
-                                curve: Curves.linear);
-                          },
-                          child: AppIcons.backArrrowIos(iconColor: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ),
-            ),
-
-
-
         Obx(
-              () => Visibility(
+          () => Visibility(
+            visible: controller.listBack.value,
+            child: Positioned(
+              left: 0,
+              child: Container(
+                padding: EdgeInsets.only(left: 20),
+                child: GestureDetector(
+                  onTap: () {
+                    controller.productScrollController.animateTo(
+                        controller.productScrollController.offset - (60 * 3),
+                        duration: const Duration(milliseconds: 150),
+                        curve: Curves.linear);
+                  },
+                  child: AppIcons.backArrrowIos(
+                      iconColor:
+                          Theme.of(context).textTheme.displaySmall!.color!),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Obx(
+          () => Visibility(
             visible: controller.listForward.value,
             child: Positioned(
               right: -5,
@@ -155,7 +154,9 @@ class HomeScreenWidgets {
                         duration: const Duration(milliseconds: 150),
                         curve: Curves.linear);
                   },
-                  child: AppIcons.next(iconColor: Colors.black),
+                  child: AppIcons.next(
+                      iconColor:
+                          Theme.of(context).textTheme.displaySmall!.color!),
                 ),
               ),
             ),
@@ -167,6 +168,7 @@ class HomeScreenWidgets {
 
   /// Brand List
   Widget brandsList() {
+    final ImageIconTheme imageIconTheme = Theme.of(context).extension<ImageIconTheme>()!;
     return
         // ValueListenableBuilder(
         // valueListenable: controller.keyboardIsOpened,
@@ -212,14 +214,17 @@ class HomeScreenWidgets {
                           duration: const Duration(milliseconds: 150),
                           curve: Curves.linear);
                     },
-                    child: AppIcons.next(iconColor: Colors.black)),
+                    child: AppIcons.next(
+                        iconColor: imageIconTheme.textColor)),
               ),
-
             ],
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 25),
-            height: 1,width: Get.width,color: Colors.black,),
+            height: 1,
+            width: Get.width,
+            color: AppColors.gray,
+          ),
           // Divider(color: Colors.black,thickness: 1),
           // SizedBox(height: 5,),
         ],

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/network/api_call.dart';
 import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
@@ -8,9 +9,19 @@ import 'package:humble_warrior/utils/shared_prefrence/shared_pref.dart';
 import '../../modals/requests/token_model_request.dart';
 import '../../network/endpoints.dart';
 import '../../utils/app_strings.dart';
+import '../../utils/app_themes/app_theme_controller.dart';
 import '../../utils/routes/app_routes.dart';
 
 class SplashController extends GetxController {
+
+  final ThemeController themeController = ThemeController();
+
+  bool isDark = false;
+
+  getTheme()async{
+    isDark = themeController.themeMode == ThemeMode.dark;
+  }
+
   Future<void> getData() async {
     print(
         "Logged value ---- ${await SharePreferenceData.getBoolValuesSF(isLogged)}");
@@ -28,7 +39,7 @@ class SplashController extends GetxController {
             getData();
           })
         : showError());
-
+    getTheme();
     super.onInit();
   }
 

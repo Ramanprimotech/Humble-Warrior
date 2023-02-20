@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_text.dart';
+import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class AuthWidget {
@@ -11,13 +12,15 @@ class AuthWidget {
       String? title,
       String? imagePath,
       required Function onTap}) {
+    final AccountOptionTheme accountOptionTheme =
+    Theme.of(Get.context!).extension<AccountOptionTheme>()!;
     return InkWell(
       onTap: () => onTap(),
       child: Container(
         height: 40,
         width: Get.width * .8,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: accountOptionTheme.backGroundColor,
           borderRadius: BorderRadius.circular(30),
           border: Border.all(color: Colors.black, width: 1),
           // boxShadow: [
@@ -42,7 +45,7 @@ class AuthWidget {
                     width: 30,
                   ).centered().p(2).px(4),
             AppText(title!,
-                color: Colors.black, fontSize: 14, fontWeight: FontWeight.w600),
+                color: accountOptionTheme.textColor, fontSize: 14, fontWeight: FontWeight.w600),
             const SizedBox(width: 40),
           ],
         ),

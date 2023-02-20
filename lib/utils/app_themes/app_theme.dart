@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
+import 'package:humble_warrior/utils/theme_extention/image_icon_theme_extention.dart';
 import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart';
 import 'package:humble_warrior/utils/theme_extention/shop_button_theme.dart';
 
@@ -59,6 +60,7 @@ ThemeData _lightTheme = ThemeData.from(
   ),
 ).copyWith(
   extensions: <ThemeExtension>[
+    ImageIconTheme(textColor: Colors.black,backGroundColor: Colors.black),
     ShopNowTheme(textColor: AppColors.white, backGroundColor: AppColors.pink),
     AccountOptionTheme(
         shadow: AppColors.shadowLight,
@@ -66,8 +68,8 @@ ThemeData _lightTheme = ThemeData.from(
         backGroundColor: AppColors.white),
     const ShadowTheme(shadowColor: AppColors.shadowLight),
     DialogueThemeExtention(
-        backGroundColor: AppColors.white,
-        textColor: AppColors.gray,
+        backGroundColor: AppColors.backgroundDark,
+        textColor: AppColors.white,
         buttonColor: AppColors.primary,
         shadow: AppColors.shadowLight),
   ],
@@ -78,6 +80,7 @@ ThemeData _lightTheme = ThemeData.from(
   dialogBackgroundColor: AppColors.white,
 
   iconTheme: IconThemeData(color: AppColors.primary),
+  useMaterial3: true,
   floatingActionButtonTheme:
       const FloatingActionButtonThemeData(backgroundColor: AppColors.white),
   appBarTheme: AppBarTheme(
@@ -177,6 +180,7 @@ ThemeData _darkTheme = ThemeData.from(
   ),
 ).copyWith(
   extensions: <ThemeExtension<dynamic>>[
+    ImageIconTheme(textColor: Colors.white,backGroundColor: AppColors.gray),
     ShopNowTheme(textColor: AppColors.white, backGroundColor: AppColors.pink),
     AccountOptionTheme(
         shadow: AppColors.shadowDark,
@@ -184,15 +188,15 @@ ThemeData _darkTheme = ThemeData.from(
         backGroundColor: AppColors.gray),
     const ShadowTheme(shadowColor: AppColors.shadowDark),
     DialogueThemeExtention(
-        backGroundColor: AppColors.backgroundDark,
-        textColor: AppColors.white,
+        backGroundColor: AppColors.white,
+        textColor: AppColors.black,
         buttonColor: AppColors.primary,
         shadow: AppColors.shadowDark),
   ],
   cupertinoOverrideTheme: CupertinoThemeData(
       textTheme:
           CupertinoTextThemeData(textStyle: TextStyle(color: AppColors.white))),
-  scaffoldBackgroundColor: AppColors.black,
+  scaffoldBackgroundColor: AppColors.backgroundDark,
   iconTheme: const IconThemeData(color: AppColors.white),
   floatingActionButtonTheme:
       FloatingActionButtonThemeData(backgroundColor: AppColors.backgroundDark),
@@ -201,7 +205,7 @@ ThemeData _darkTheme = ThemeData.from(
     elevation: 0,
     centerTitle: true,
     titleTextStyle: const TextStyle(color: AppColors.white),
-    backgroundColor: AppColors.black,
+    backgroundColor: AppColors.backgroundDark,
     iconTheme: const IconThemeData(color: AppColors.white),
     actionsIconTheme: const IconThemeData(color: AppColors.white),
     foregroundColor: AppColors.gray,
@@ -214,6 +218,7 @@ ThemeData _darkTheme = ThemeData.from(
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     // backgroundColor: ,
     elevation: 10,
+    backgroundColor: AppColors.backgroundDark,
     showUnselectedLabels: true,
     selectedItemColor: AppColors.primary,
     selectedIconTheme: IconThemeData(color: AppColors.primary, size: 32),
@@ -237,6 +242,7 @@ ThemeData _darkTheme = ThemeData.from(
       borderSide: BorderSide(width: 3.0, color: AppColors.primary),
     ),
   ),
+  useMaterial3: true,
   // inputDecorationTheme: InputDecorationTheme(
   //   alignLabelWithHint: true,
   //   filled: true,

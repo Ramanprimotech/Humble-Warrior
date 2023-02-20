@@ -79,6 +79,7 @@ class MyAccountController extends GetxController{
 
   @override
   void onInit() {
+  checkDark.value=    themeController.themeMode == ThemeMode.dark;
     getData();
     super.onInit();
   }

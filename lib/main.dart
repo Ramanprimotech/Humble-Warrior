@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_themes/app_theme.dart';
+import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
+import 'package:humble_warrior/utils/shared_prefrence/shared_pref.dart';
 import 'firebase_options.dart';
 import 'utils/routes/app_pages.dart';
 
@@ -12,12 +16,20 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  runApp(const MyApp());
+  Get.put(ThemeController());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   MyApp({super.key});
+
+ThemeController themeController = Get.put(ThemeController());
+  ValueNotifier theme = ValueNotifier(false);
+
+  void getTheme()async{
+    var themeMode =   themeController.getThemeModeFromPreferences();
+   theme.value = themeMode ==  ThemeMode.dark;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +38,18 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (BuildContext context, Widget? child) {
-          return GetMaterialApp(
-            title: 'Flutter Demo',
-            debugShowCheckedModeBanner: false,
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: ThemeMode.system,
-            initialRoute: AppPages.initialRoute,
-            getPages: AppPages.routes,
+          return ValueListenableBuilder(
+            valueListenable: theme,
+            builder: (BuildContext context, value, Widget? child) { return GetMaterialApp(
+              title: 'Flutter Demo',
+              debugShowCheckedModeBanner: false,
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.darkTheme,
+              themeMode:value? ThemeMode.dark:ThemeMode.light,
+              initialRoute: AppPages.initialRoute,
+              getPages: AppPages.routes,
+            ); },
+
           );
         });
   }
