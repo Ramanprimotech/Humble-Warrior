@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/network/endpoints.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/future_widget/future_widget.dart';
@@ -341,7 +342,7 @@ class HomeScreenWidgets {
           Row(
             children: [
               const AppText(
-                "BRAND'S I",
+                "${brandsTxt} I",
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -359,7 +360,7 @@ class HomeScreenWidgets {
               Get.toNamed(AppRoutes.brands);
             },
             child: const AppText(
-              "VIEW ALL",
+              viewAllTxt,
               fontSize: 16,
               color: AppColors.blue,
             ),

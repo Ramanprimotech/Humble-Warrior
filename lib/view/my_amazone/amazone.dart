@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -67,7 +68,7 @@ class _AmazonWebViewState extends State<AmazonWebView> {
         ),
         automaticallyImplyLeading: canGoBool,
         title: AppText(
-          "My Amazon",
+          myAmazonTxt,
           fontWeight: FontWeight.w700,
         ),
       ),

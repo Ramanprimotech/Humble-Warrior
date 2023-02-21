@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_functionality.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
@@ -142,9 +143,9 @@ Widget shopButton({required url}) {
             borderRadius: BorderRadius.circular(20),
             boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 3)]),
         child: AppText(
+          shopNowTxt,
           color: Colors.white,
           fontWeight: FontWeight.w700,
-          "Shop Now",
           fontSize: 14,
         )),
   );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/theme_extention/image_icon_theme_extention.dart';
 import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart';
 import 'package:humble_warrior/view/bottom_navigation/bottom_navigation_controller.dart';
@@ -33,27 +34,27 @@ class BottomNavigationScreen extends GetView<BottomNavigationController> {
                     BottomNavigationBarItem(
                       icon: AppIcons.unselectedHome(context , iconColor),
                       activeIcon: AppIcons.home(context),
-                      label: 'Home',
+                      label: homeTxt,
                     ),
                     BottomNavigationBarItem(
                       icon: AppIcons.unselectedfavourite(context, iconColor),
                       activeIcon: AppIcons.favourite(context),
-                      label: 'My Wishlist',
+                      label: myWishlistTxt,
                     ),
                     BottomNavigationBarItem(
                       icon: AppIcons.unselectedCheck(context, iconColor),
                       activeIcon: AppIcons.check(context),
-                      label: 'My Amazon',
+                      label: myAmazonTxt,
                     ),
                     BottomNavigationBarItem(
                       icon: AppIcons.unselectedJoin(context, iconColor),
                       activeIcon: AppIcons.join(context),
-                      label: 'Join Us',
+                      label: joinUsTxt,
                     ),
                     BottomNavigationBarItem(
                       icon: AppIcons.unselectedPerson(context, iconColor),
                       activeIcon: AppIcons.person(context),
-                      label: 'Account',
+                      label: accountTxt,
                     ),
                   ],
                   currentIndex: ctr.selectedIndex,

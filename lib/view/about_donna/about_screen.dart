@@ -112,15 +112,15 @@ class AboutScreen extends StatelessWidget {
             )
           ]),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        AppText('HELLO GORGEOUS!',
+        AppText(helloGorgeousTxt,
             fontWeight: FontWeight.bold, color: Colors.grey.shade800),
         const ReadMoreText(
           style: TextStyle(color: Colors.black),
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
           trimLines: 10,
           trimMode: TrimMode.Line,
-          trimCollapsedText: "read more",
-          trimExpandedText: "read less",
+          trimCollapsedText: readMoreTxt,
+          trimExpandedText: readLessTxt,
           lessStyle: TextStyle(
               fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
           moreStyle: TextStyle(
@@ -165,46 +165,4 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
-  _brandRow() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 3),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              const AppText(
-                "BRAND'S I",
-                fontSize: 18,
-              ),
-              AppIcons.heart(
-                iconColor: Colors.red,
-              ),
-            ],
-          ),
-          GestureDetector(
-            onTap: () {
-              Get.toNamed(AppRoutes.brands);
-            },
-            child: const AppText(
-              "View All",
-              fontSize: 16,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  _brandList(
-      {required HomeScreenController controller,
-      required BuildContext context}) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5),
-      height: 80,
-      width: Get.height,
-      child: HomeScreenWidgets(context: context, controller: controller)
-          .brandListAPIBuilder(),
-    );
-  }
 }

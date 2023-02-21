@@ -60,7 +60,7 @@ class ProductDetailWidget {
             onTap: () {
               CommonUtils().urlLauncher(url: shopNowUrl);
             },
-            child: button(title: shopNow, backClr: AppColors.secondary)),
+            child: button(title: shopNowTxt, backClr: AppColors.secondary)),
         Row(
           children: [
             codeButton(code: "dfdh45"),
@@ -130,8 +130,8 @@ class ProductDetailWidget {
               trimLines: 20,
               colorClickableText: Colors.pink,
               trimMode: TrimMode.Length,
-              trimCollapsedText: 'Show more',
-              trimExpandedText: ' Show less',
+              trimCollapsedText: showMoreTxt,
+              trimExpandedText: showLessTxt,
               lessStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               moreStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             ).p(6)

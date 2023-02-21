@@ -12,11 +12,9 @@ class HomeScreen extends StatelessWidget {
     final HomeScreenController controller = Get.find();
     final HomeScreenWidgets homeScreenWidgets =
         HomeScreenWidgets(controller: controller, context: context);
-
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-
         /// App Bar
         appBar: homeScreenWidgets.appBar(),
         body: /*Stack(

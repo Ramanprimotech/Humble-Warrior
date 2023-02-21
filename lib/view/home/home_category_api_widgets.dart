@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 
 import '../../modals/response/home_categories_response_model.dart';
@@ -120,7 +121,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
                 homeOptions: HomeCategoryList(
                     categoryImage:
                         "https://www.pngfind.com/pngs/m/415-4156288_image-nike-logo-just-do-it-orange-hd.png",
-                    categoryName: "Donna's Options",
+                    categoryName: donnasOptionTxt,
                     id: 0),
                 index: index),
           );

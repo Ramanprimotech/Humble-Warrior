@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
@@ -33,7 +34,7 @@ class WishList extends StatelessWidget {
                     ],
                   ),
                   child: Column(children: [
-                     AppText('Please Login for accessing this feature.',
+                     AppText(accessingMsgTxt,
                         color: dialogueThemeExtention.textColor,
                         fontSize: 20),
                     20.sh,
@@ -48,12 +49,12 @@ class WishList extends StatelessWidget {
                       onPressed: () {
                         Get.offAllNamed(AppRoutes.loginPage);
                       },
-                      child: const AppText('Go to Login',
+                      child: const AppText(gotoLoginTxt,
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ]),
                 )
-              : AppText('My Favourite'),
+              : AppText(myFvrtTxt),
         ),
       ),
     );

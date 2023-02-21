@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/modals/abstract_enums/search_bar.dart';
 import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/modals/response/home_categories_response_model.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
+import 'package:humble_warrior/utils/image_path_assets.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class HomeScreenController extends GetxController implements SearchActions {
   final TextEditingController searchTextController = TextEditingController();
@@ -39,24 +42,24 @@ class HomeScreenController extends GetxController implements SearchActions {
     //
     // });
 
-    const ProductImages(image: "assets/brands/beauty.png", name: "Beauty").add();
-    const ProductImages(image: "assets/brands/men.png", name: "Men").add();
-    const ProductImages(image: "assets/brands/gift.png", name: "Gift").add();
-    const ProductImages(image: "assets/brands/giftformom.png", name: "Gift For Mom").add();
-    const ProductImages(image: "assets/brands/health.png", name: "Health").add();
-    const ProductImages(image: "assets/brands/kids.png", name: "Kids").add();
-    const ProductImages(image: "assets/brands/food.png", name: "Food").add();
-    const ProductImages(image: "assets/brands/womenfashion.png", name: "Women's fashion").add();
-    const ProductImages(image: "assets/brands/outdoor.png", name: "Outdoor").add();
-    const ProductImages(image: "assets/brands/travel.png", name: "Travel").add();
-    const ProductImages(image: "assets/brands/packaging.png", name: "Packing").add();
-    const ProductImages(image: "assets/brands/fitness.png", name: "Fitness").add();
-    const ProductImages(image: "assets/brands/order.png", name: "Food").add();
-    const ProductImages(image: "assets/brands/jewelry.png", name: "Jewelry").add();
-    const ProductImages(image: "assets/brands/baby.png", name: "Baby").add();
-    const ProductImages(image: "assets/brands/books.png", name: "Books").add();
-    const ProductImages(image: "assets/brands/vehicle.png", name: "vehicles").add();
-    const ProductImages(image: "assets/brands/pets.png", name: "Pets").add();
+    const ProductImages(image: ImagePathAssets.giftIcon, name: giftTxt).add();
+    const ProductImages(image: ImagePathAssets.giftForMomIcon, name: giftForMomTxt).add();
+    const ProductImages(image: ImagePathAssets.menIcon, name: menTxt).add();
+    const ProductImages(image: ImagePathAssets.kidsIcon, name: kidsTxt).add();
+    const ProductImages(image: ImagePathAssets.foodIcon, name: kitchenTxt).add();
+    const ProductImages(image: ImagePathAssets.beautyIcon, name: beautyTxt).add();
+    const ProductImages(image: ImagePathAssets.travelIcon, name: travelTxt).add();
+    const ProductImages(image: ImagePathAssets.healthIcon, name: healthTxt).add();
+    const ProductImages(image: ImagePathAssets.womensFashionIcon, name: womensFashionTxt).add();
+    const ProductImages(image: ImagePathAssets.outdoorIcon, name: outdoorTxt).add();
+    const ProductImages(image: ImagePathAssets.packingIcon, name: packingTxt).add();
+    const ProductImages(image: ImagePathAssets.fitnessIcon, name: fitnessTxt).add();
+    const ProductImages(image: ImagePathAssets.orderIcon, name: foodTxt).add();
+    const ProductImages(image: ImagePathAssets.jewelryIcon, name: jewelryTxt).add();
+    const ProductImages(image: ImagePathAssets.babyIcon, name: babyTxt).add();
+    const ProductImages(image: ImagePathAssets.booksIcon, name: booksTxt).add();
+    const ProductImages(image: ImagePathAssets.vehicleIcon, name: vehiclesTxt).add();
+    const ProductImages(image: ImagePathAssets.petsIcon, name: petsTxt).add();
 
     focusNode.addListener(() {
       debugPrint("${focusNode.hasFocus}");
@@ -85,52 +88,53 @@ class HomeScreenController extends GetxController implements SearchActions {
   Future<List<BrandDetails>> allBrands() async {
     List<BrandDetails> data = [];
     data.add(BrandDetails(
-        brandImage: "assets/categories/nike.png",
-        brandName: "Nike",
-        brandLink: "https://humblewarrior.com/"));
+        brandImage: ImagePathAssets.nikeIcon,
+        brandName: nikeTxt,
+        brandLink: brandLink));
     data.add(BrandDetails(
-        brandImage: "assets/categories/reebok.png",
-        brandName: "Reebok",
-        brandLink: "https://humblewarrior.com/"));
+        brandImage: ImagePathAssets.adidasIcon,
+        brandName: adidasTxt,
+        brandLink: brandLink));
     data.add(BrandDetails(
-        brandImage: "assets/categories/guchi.png",
-        brandName: "Gucci",
-        brandLink: "https://humblewarrior.com/"));
+        brandImage: ImagePathAssets.reebokIcon,
+        brandName: reebokTxt,
+        brandLink: brandLink));
     data.add(BrandDetails(
-        brandImage: "assets/categories/adidas.png",
-        brandName: "adidas",
-        brandLink: "https://humblewarrior.com/"));    data.add(BrandDetails(
-        brandImage: "assets/categories/nike.png",
-        brandName: "Nike",
-        brandLink: "https://humblewarrior.com/"));
+        brandImage: ImagePathAssets.gucciIcon,
+        brandName: gucciTxt,
+        brandLink: brandLink));
     data.add(BrandDetails(
-        brandImage: "assets/categories/reebok.png",
-        brandName: "Reebok",
-        brandLink: "https://humblewarrior.com/"));
+        brandImage: ImagePathAssets.nikeIcon,
+        brandName: nikeTxt,
+        brandLink: brandLink));
     data.add(BrandDetails(
-        brandImage: "assets/categories/guchi.png",
-        brandName: "Gucci",
-        brandLink: "https://humblewarrior.com/"));
+        brandImage: ImagePathAssets.adidasIcon,
+        brandName: adidasTxt,
+        brandLink: brandLink));
     data.add(BrandDetails(
-        brandImage: "assets/categories/adidas.png",
-        brandName: "adidas",
-        brandLink: "https://humblewarrior.com/"));
+        brandImage: ImagePathAssets.reebokIcon,
+        brandName: reebokTxt,
+        brandLink: brandLink));
+    data.add(BrandDetails(
+        brandImage: ImagePathAssets.gucciIcon,
+        brandName: gucciTxt,
+        brandLink: brandLink));
     return data;
   }
 
   Future<List<HomeCategoryList>> homeCategories() async {
     List<HomeCategoryList> data = [];
     data.add(HomeCategoryList(
-        categoryName: "Donna's Daily Deals",
-        categoryImage: "assets/image/donna_deals.jpeg",
+        categoryName: donnaDailyDealTxt.upperCamelCase,
+        categoryImage: ImagePathAssets.donnaDailyDealImage,
         id: 0));
     data.add(HomeCategoryList(
-        categoryName: "Donna's Favourite Deals",
-        categoryImage: "assets/image/donna_fav.jpg",
+        categoryName: donnaFavouriteDealTxt.upperCamelCase,
+        categoryImage: ImagePathAssets.donnaFavDealImage,
         id: 1));
     data.add(HomeCategoryList(
-        categoryName: "Donna's Front Page Deals",
-        categoryImage: "assets/image/donna_front.jpeg",
+        categoryName: donnaFrontPageDealTxt.upperCamelCase,
+        categoryImage: ImagePathAssets.donnaFrontDealImage,
         id: 2));
     return data;
     // return await CallAPI.homeCategory();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
+import 'package:humble_warrior/utils/image_path_assets.dart';
 
 class AppIcons {
   // IconData
@@ -10,13 +11,13 @@ class AppIcons {
   // static Icon favourite(BuildContext context) => Icon(Icons.favorite_outlined,color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,);
 
   static Image favourite(BuildContext context) => Image.asset(
-    "assets/icons/heart.png",
+    ImagePathAssets.heartIcon,
     height: 20,
     color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
   );
 
   static Image unselectedfavourite(BuildContext context , Color color) => Image.asset(
-    "assets/icons/heart.png",
+    ImagePathAssets.heartIcon,
     height: 20,
     color:color,
     // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
@@ -25,24 +26,24 @@ class AppIcons {
   static Icon bag() => const Icon(Icons.shopping_bag);
 
   static Image check(BuildContext context ) => Image.asset(
-        "assets/icons/amazon_bot.png",
+        ImagePathAssets.amazonIcon,
         height: 22,
         color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
       );
   static Image unselectedCheck(BuildContext context , Color color) => Image.asset(
-        "assets/icons/amazon_bot.png",
+        ImagePathAssets.amazonIcon,
         height: 20,
         color:color,
         // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
       );
 
   static Image home(BuildContext context ) => Image.asset(
-        "assets/icons/home.png",
+        ImagePathAssets.homeIcon,
         height: 20,
         color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
       );
   static Image unselectedHome(BuildContext context , Color color) => Image.asset(
-        "assets/icons/home.png",
+        ImagePathAssets.homeIcon,
         height: 20,
         color: color,
         // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
@@ -52,34 +53,34 @@ class AppIcons {
       Image.asset(
         // 'assets/image/bell.png',
         //color: Theme.of(context).textTheme.displayLarge!.color!,
-        'assets/icons/notification.png',
+        ImagePathAssets.notificationIcon,
         height: 40,
         width: 30,
       );
 
 
   static Image join(BuildContext context) => Image.asset(
-    "assets/icons/facebook.png",
+    ImagePathAssets.facebookIcon,
     height: 20,
     color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
   );
 
   static Image unselectedJoin(BuildContext context , Color color) => Image.asset(
-    "assets/icons/facebook.png",
+    ImagePathAssets.facebookIcon,
     height: 20,
     color: color,
     // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
   );
 
   static Image person(BuildContext context ) => Image.asset(
-    "assets/icons/person.png",
+    ImagePathAssets.personIcon,
     height: 20,
     // color: AppColors.grey,
     color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
   );
 
   static Image unselectedPerson(BuildContext context , Color color) => Image.asset(
-    "assets/icons/person.png",
+    ImagePathAssets.personIcon,
     height: 20,
     // color: AppColors.grey,
     color: color,

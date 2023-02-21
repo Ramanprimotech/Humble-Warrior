@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/modals/response/donna_deals_response.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/view/home_option/home_option_controller.dart';
@@ -33,7 +34,7 @@ class DonnaDailyDeals extends StatelessWidget {
               children: const [
                 CircularProgressIndicator(),
                 AppText(
-                  " Loading Deals for you...",
+                  loadingDealsTxt,
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                 ),
@@ -44,7 +45,7 @@ class DonnaDailyDeals extends StatelessWidget {
               controller.donnaDealsBool.value == false) {
             return const Center(
               child: AppText(
-                "No Data Found",
+                noDataFoundTxt,
                 fontSize: 24,
                 fontWeight: FontWeight.w700,
               ),

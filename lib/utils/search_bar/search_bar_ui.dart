@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
 
@@ -62,7 +63,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 children: const [
                   Icon(Icons.search),
                   AppText(
-                    "Search",
+                    searchTxt,
                     fontWeight: FontWeight.w700,
                   ),
                 ],

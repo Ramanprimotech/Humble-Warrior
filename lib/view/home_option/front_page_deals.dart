@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/modals/response/front_page_response_model.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/extentions/color_string_extention.dart';
 
@@ -35,7 +36,7 @@ class FrontPageDeals extends StatelessWidget {
               children: const [
                 CircularProgressIndicator(),
                 AppText(
-                  " Loading Deals for you...",
+                  loadingDealsTxt,
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                 ),
@@ -46,7 +47,7 @@ class FrontPageDeals extends StatelessWidget {
               controller.frontPageDealsBool.value == false) {
             return const Center(
               child: AppText(
-                "No Data Found",
+                noDataFoundTxt,
                 fontSize: 24,
                 fontWeight: FontWeight.w700,
               ),
