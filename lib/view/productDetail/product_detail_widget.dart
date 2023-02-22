@@ -4,52 +4,48 @@ import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
+import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart';
 import 'package:humble_warrior/view/home_option/common_home_option.dart';
 import 'package:readmore/readmore.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../utils/common/common_functionality.dart';
+import '../../utils/decorations.dart';
 import '../../utils/sizes/sizes_config.dart';
 
 class ProductDetailWidget {
   final AccountOptionTheme accountOptionTheme =
-  Theme.of(Get.context!).extension<AccountOptionTheme>()!;
-  Widget productText() {
-    return Card(
-      elevation: 5,
-      color: AppColors.white,
-      shadowColor: AppColors.white,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(
-          color: Colors.grey.shade100,
-          width: 1, //<-- SEE HERE
-        ),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Container(
-        color: Colors.white,
-        width: MediaQuery.of(Get.context!).size.width * .9,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const AppText("Vine Oh! for the Holidays !",fontWeight: FontWeight.bold,fontSize: 18,
-            color: Colors.black,
+      Theme.of(Get.context!).extension<AccountOptionTheme>()!;
+  Widget productText(context) {
+    final ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
+
+    return Container(
+      decoration: CustomBoxDecorations().shadow(context: context),
+      width: MediaQuery.of(Get.context!).size.width * .9,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const AppText(
+            "Vine Oh! for the Holidays !",
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+          RichText(
+            text: TextSpan(
+              text: "The",
+              style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyMedium!.color,
+                  fontSize: 15),
+              children: <TextSpan>[
+                TextSpan(
+                  text: '  Vine Oh! Ho Ho! Box is here !',
+                  style: TextStyle(color: AppColors.primary, fontSize: 15),
+                ),
+              ],
             ),
-            RichText(
-              text: TextSpan(
-                text: "The",
-                style: TextStyle(color: AppColors.black,fontSize: 15),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: '  Vine Oh! Ho Ho! Box is here !',
-                    style: TextStyle(color: AppColors.primary,fontSize: 15),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ).p(6),
-      ),
+          ),
+        ],
+      ).p(6),
     ).py(10);
   }
 
@@ -125,8 +121,10 @@ class ProductDetailWidget {
             trimMode: TrimMode.Length,
             trimCollapsedText: readmoreTxt,
             trimExpandedText: readlessTxt,
-            lessStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Colors.blue),
-            moreStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Colors.blue),
+            lessStyle: TextStyle(
+                fontSize: 15, fontWeight: FontWeight.bold, color: Colors.blue),
+            moreStyle: TextStyle(
+                fontSize: 15, fontWeight: FontWeight.bold, color: Colors.blue),
           ).p(6)
         ],
       ).p(6),

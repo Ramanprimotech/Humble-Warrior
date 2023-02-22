@@ -13,13 +13,14 @@ import '../../utils/app_themes/app_theme_controller.dart';
 import '../../utils/routes/app_routes.dart';
 
 class SplashController extends GetxController {
-
   final ThemeController themeController = ThemeController();
 
-  bool isDark = false;
+  RxBool isDark = false.obs;
 
-  getTheme()async{
-    isDark = themeController.themeMode == ThemeMode.dark;
+  getTheme() async {
+    isDark.value = await SharePreferenceData.getBoolValuesSF('mode') ??
+        ThemeMode.system == ThemeMode.dark;
+    // isDark = themeController.themeMode == ThemeMode.dark;
   }
 
   Future<void> getData() async {
@@ -39,7 +40,7 @@ class SplashController extends GetxController {
             getData();
           })
         : showError());
-    getTheme();
+    isDark.value = await getTheme();
     super.onInit();
   }
 

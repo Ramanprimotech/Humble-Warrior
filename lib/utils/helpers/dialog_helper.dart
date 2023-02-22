@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/extensions.dart';
+import 'package:humble_warrior/utils/theme_extention/custom_notice_theme_extention.dart';
 
 import '../app_colors.dart';
 import '../app_text.dart';
@@ -168,18 +169,25 @@ abstract class DialogHelper {
     }
   }
 
-  static Future<void> logoutDialog({required BuildContext context, required void Function() onTap}) async {
+  static Future<void> logoutDialog(
+      {required BuildContext context, required void Function() onTap}) async {
+    DialogueThemeExtention dialogueThemeExtention =
+        Theme.of(context).extension<DialogueThemeExtention>()!;
     showDialog(
       barrierDismissible: false,
       context: Get.context!,
       builder: (context) => AlertDialog(
-        contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        surfaceTintColor: Colors.transparent,
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         alignment: Alignment.center,
         actionsAlignment: MainAxisAlignment.spaceAround,
-        backgroundColor: Colors.white,
+        backgroundColor: dialogueThemeExtention.backGroundColor,
         elevation: 5,
-        title:
-        const AppText("Are you Sure?", textAlign: TextAlign.center, fontSize: 20),
+        title: AppText("Are you Sure?",
+            color: dialogueThemeExtention.textColor,
+            textAlign: TextAlign.center,
+            fontSize: 20),
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -192,7 +200,8 @@ abstract class DialogHelper {
             onPressed: () {
               onTap();
             },
-            child: const AppText('OK', color: Colors.white,fontWeight: FontWeight.bold),
+            child: const AppText('OK',
+                color: Colors.white, fontWeight: FontWeight.bold),
           ),
           OutlinedButton(
             style: ButtonStyle(
@@ -202,7 +211,7 @@ abstract class DialogHelper {
                       borderRadius: BorderRadius.circular(10))),
               // overlayColor: MaterialStateProperty.all(AppColors.primary),
               side: MaterialStateProperty.resolveWith(
-                    (states) => BorderSide(
+                (states) => BorderSide(
                   color: AppColors.primary,
                   width: 2,
                 ),

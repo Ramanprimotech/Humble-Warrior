@@ -5,6 +5,7 @@ import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_functionality.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
+import 'package:humble_warrior/utils/decorations.dart';
 
 import '../../utils/app_text.dart';
 
@@ -38,12 +39,14 @@ class ItemCard extends StatelessWidget {
       onTap: onTap ?? () {},
       child: Container(
         height: imageHeight + buttonbarHeight,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(radius),
-            boxShadow: const [
-              BoxShadow(blurRadius: 4, spreadRadius: 0, color: Colors.black38)
-            ]),
+        decoration: CustomBoxDecorations()
+            .shadow(context: context, color: Colors.white),
+        // BoxDecoration(
+        //     color: Theme.of(context).scaffoldBackgroundColor,
+        //     borderRadius: BorderRadius.circular(radius),
+        //     boxShadow: const [
+        //       BoxShadow(blurRadius: 4, spreadRadius: 0, color: Colors.black38)
+        //     ]),
         child: Column(
           children: [
             Stack(

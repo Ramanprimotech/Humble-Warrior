@@ -4,11 +4,8 @@ import 'package:humble_warrior/modals/response/front_page_response_model.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/extentions/color_string_extention.dart';
 import 'package:humble_warrior/utils/image_path_assets.dart';
 
-import '../../utils/app_text.dart';
-import '../../utils/custom_paint/ribbon.dart';
 import 'common_home_option.dart';
 import 'home_option_controller.dart';
 
@@ -102,20 +99,23 @@ class FrontPageDeals extends StatelessWidget {
                         angle: (360 - 45) * 3.1415927 / 180,
                         child: Stack(
                           alignment: Alignment.center,
-                          children: [
-                            CustomPaint(
-                              size: const Size(220, 40),
-                              //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-                              painter: FrontPageBanner(
-                                  color: details.ribbonColor != null
-                                      ? details.ribbonColor!.toColor()
-                                      : Colors.transparent),
+                          children: const [
+                            SizedBox(
+                              width: 23,
                             ),
-                            AppText(
-                              "${details.ribbonName}",
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
+                            // CustomPaint(
+                            //   size: const Size(220, 40),
+                            //   //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
+                            //   painter: FrontPageBanner(
+                            //       color: details.ribbonColor != null
+                            //           ? details.ribbonColor!.toColor()
+                            //           : Colors.transparent),
+                            // ),
+                            // AppText(
+                            //   "${details.ribbonName}",
+                            //   fontSize: 16,
+                            //   color: Colors.white,
+                            // ),
                           ],
                         ),
                       ),

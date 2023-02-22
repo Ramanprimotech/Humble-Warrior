@@ -65,7 +65,7 @@ class ProductDetailScreen extends StatelessWidget with ProductDetailWidget {
                 title: 'Title Of Image',
               ),
             ),
-            productText(),
+            productText(context),
             productDescription(),
           ],
         ).p(10),

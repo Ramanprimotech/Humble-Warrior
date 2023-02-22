@@ -86,7 +86,7 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
                 title: 'Title Of Image',
               ),
             ),
-            productText(),
+            productText(context),
             productDescription(),
           ],
         ),
