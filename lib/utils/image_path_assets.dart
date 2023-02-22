@@ -69,6 +69,7 @@ class ImagePathAssets {
   static const String donnaDailyDealImage = "assets/image/donna_deals.jpeg";
   static const String donnaFavDealImage = "assets/image/donna_fav.jpg";
   static const String donnaFrontDealImage = "assets/image/donna_front.jpeg";
+  static const String commentIcon = "assets/icons/comments.png";
 
 
 
