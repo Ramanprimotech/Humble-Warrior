@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_functionality.dart';
@@ -17,6 +18,7 @@ class ItemCard extends StatelessWidget {
   final double radius;
   final String imageUrl;
   final String title;
+  final VoidCallback? onTap;
 
   const ItemCard(
       {Key? key,
@@ -26,6 +28,7 @@ class ItemCard extends StatelessWidget {
       this.imageHeight = 220,
       this.imageTitleHeight = 60,
       this.cardHeight,
+       this.onTap,
       required this.imageUrl,
       required this.title})
       : super(key: key);
@@ -33,9 +36,7 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Get.toNamed(AppRoutes.productDetail);
-      },
+      onTap:onTap??(){},
       child: Container(
         height: imageHeight + buttonbarHeight,
         decoration: BoxDecoration(
@@ -110,14 +111,15 @@ Widget codeButton({required String code}) {
     },
     child: Container(
         alignment: Alignment.center,
-        width: 100,
-        height: 35,
+        // width: 100,
+        height: 30,
+        padding: EdgeInsets.symmetric(vertical: 0,horizontal: 15),
         decoration: BoxDecoration(
-            color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+            color: AppColors.appGreen, borderRadius: BorderRadius.circular(20)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AppIcons.cut(size: 16),
+            // AppIcons.cut(size: 16),
             AppText(
               color: Colors.white,
               fontWeight: FontWeight.w700,
@@ -136,10 +138,11 @@ Widget shopButton({required url}) {
     },
     child: Container(
         alignment: Alignment.center,
-        width: 90,
-        height: 35,
+        // width: 90,
+        height: 30,
+        padding: EdgeInsets.symmetric(vertical: 0,horizontal: 15),
         decoration: BoxDecoration(
-            color: Colors.pink,
+            color: AppColors.primary,
             borderRadius: BorderRadius.circular(20),
             boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 3)]),
         child: AppText(

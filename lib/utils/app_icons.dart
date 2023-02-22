@@ -150,10 +150,10 @@ class AppIcons {
   static Icon clock({Color iconColor = Colors.black}) =>
       Icon(Icons.timer, color: iconColor);
 
-  static Icon heart({Color iconColor = Colors.black}) => Icon(
+  static Icon heart({Color iconColor = Colors.black, double? size}) => Icon(
         Icons.favorite_outlined,
         color: iconColor,
-        size: 20,
+        size: size??20,
       );
 
   static Icon share2({Color iconColor = Colors.blue}) =>
@@ -183,3 +183,43 @@ class AppIcons {
   static Icon cut({Color iconColor = Colors.black, double size = 18}) =>
       Icon(Icons.cut, size: size, color: iconColor);
 }
+
+class Heart extends StatefulWidget {
+   Heart({
+    super.key,
+    required this.size,
+     this.isSelected
+  });
+
+  final double? size;
+   bool? isSelected = false;
+
+  @override
+  State<Heart> createState() => _HeartState();
+}
+
+class _HeartState extends State<Heart> {
+   bool selected = false;
+  @override
+  void initState() {
+    selected == widget.isSelected;
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) => GestureDetector(
+    key: widget.key,
+    onTap: (){
+      selected = !selected;
+      setState(() {
+
+      });
+    },
+    child: Icon(
+      Icons.favorite_outlined,
+      color: selected?Colors.red:Colors.black,
+      size: widget.size??20,
+    ),
+  );
+}
+
+

@@ -138,8 +138,11 @@ const String userProfilePic = "userProfilePic";
 const String userId = "userId";
 const String showMoreTxt = 'Show more';
 const String showLessTxt = 'Show less';
+const String readlessTxt = 'read less';
+const String readmoreTxt = 'read more';
 const String accessingMsgTxt = 'Please Login for accessing this feature.';
 const String gotoLoginTxt = 'Go to Login';
 const String myFvrtTxt = 'My Favourite';
+const String buyNowTxt = 'Buy Now';
 
 

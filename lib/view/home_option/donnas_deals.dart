@@ -5,12 +5,12 @@ import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
+import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/view/home_option/home_option_controller.dart';
-
 import 'common_home_option.dart';
 
 class DonnaDailyDeals extends StatelessWidget {
-  const DonnaDailyDeals({Key? key}) : super(key: key);
+   const DonnaDailyDeals({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +52,7 @@ class DonnaDailyDeals extends StatelessWidget {
             );
           }
           return ListView.builder(
+            padding: EdgeInsets.symmetric(horizontal:15,vertical: 10),
               controller: controller.donnaDealScrollController,
               itemCount: controller.donnaDealList.length + 1,
               itemBuilder: (ctx, index) {
@@ -63,21 +64,43 @@ class DonnaDailyDeals extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: index != controller.donnaDealList.length
                       ? ItemCard(
+                    onTap: (){
+                      Get.toNamed(AppRoutes.dailyDealProductDetail);
+                    },
+                    radius: 10,
                           buttons: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              shopButton(url: "${details.shopUrl}"),
-                              !(details.couponCode == null ||
+                              Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  shopButton(url: "${details.shopUrl}"),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  !(details.couponCode == null ||
                                       details.couponCode == "")
-                                  ? codeButton(code: "${details.couponCode}")
-                                  : const SizedBox(
-                                      width: 80,
-                                    ),
-                              shareButton(shareUrl: "shareUrl"),
-                              IconButton(
-                                onPressed: () {},
-                                icon: AppIcons.bookmarks(),
+                                      ? codeButton(code: "${details.couponCode}")
+                                      : const SizedBox(
+                                    width: 80,
+                                  ),
+                                ],
                               ),
+
+                              Row(
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      // controller.select.value = !controller.select.value;
+                                    },
+                                    icon: Heart(key: Key(index.toString()), size: 22,),
+                                  ),
+                                  shareButton(shareUrl: "shareUrl"),
+                                ],
+                              ),
+
                             ],
                           ),
                           imageUrl: details.url!,

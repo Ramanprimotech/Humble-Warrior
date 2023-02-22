@@ -4,6 +4,9 @@ import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
+import 'package:humble_warrior/utils/button.dart';
+import 'package:humble_warrior/utils/common/common_functionality.dart';
+import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
 import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart';
@@ -21,12 +24,27 @@ class BrandsScreen extends StatelessWidget {
     BrandsController controller = Get.find();
     ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
     return Scaffold(
-      appBar: AppBar(
-        title: CustomSearchBar(
-          textEditingController: TextEditingController(),
-          focusNode: FocusNode(),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60),
+        child: CustomAppBar(
+          title: CustomSearchBar(textEditingController: TextEditingController(), focusNode: FocusNode(),),
+          showBackButton: true,
         ),
       ),
+      /*AppBar(
+        leadingWidth: 20,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: GestureDetector(
+              onTap: (){
+                Get.back();
+              },
+              child: Icon(Icons.arrow_back_ios,color: Theme.of(context).textTheme.displaySmall!.color!,))),
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: CustomSearchBar(textEditingController: TextEditingController(), focusNode: FocusNode(),),
+        ),
+      ),*/
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(

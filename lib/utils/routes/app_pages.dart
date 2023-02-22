@@ -11,6 +11,10 @@ import 'package:humble_warrior/view/home_option/home_option_screen.dart';
 import 'package:humble_warrior/view/landing/intro_binding.dart';
 import 'package:humble_warrior/view/landing/intro_screen.dart';
 import 'package:humble_warrior/view/my_account/my_account_screen.dart';
+import 'package:humble_warrior/view/productDetail/daily_deal_product.dart';
+import 'package:humble_warrior/view/productDetail/daily_deal_product_binding.dart';
+import 'package:humble_warrior/view/productDetail/favourite_deals.dart';
+import 'package:humble_warrior/view/productDetail/favourite_deals_binding.dart';
 import 'package:humble_warrior/view/splash/splash_binding.dart';
 import 'package:humble_warrior/view/splash/splash_screen.dart';
 
@@ -41,8 +45,16 @@ class AppPages {
         binding: HomeOptionBindings()),
     GetPage(
         name: AppRoutes.productDetail,
-        page: () => const ProductDetailScreen(),
+        page: () =>  ProductDetailScreen(),
         binding: ProductDetailBinding()),
+    GetPage(
+        name: AppRoutes.dailyDealProductDetail,
+        page: () =>  DailyDealProduct(),
+        binding: DailyDealProductBinding()),
+    GetPage(
+        name: AppRoutes.favouriteDeal,
+        page: () =>  const FavouriteDeals(),
+        binding: FavouriteDealsBinding()),
     GetPage(
         name: AppRoutes.aboutDonna,
         page: () => const AboutScreen(),

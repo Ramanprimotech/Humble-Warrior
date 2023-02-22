@@ -13,6 +13,7 @@ class HomeOptionController extends GetxController
   final TextEditingController searchTextController = TextEditingController();
   final FocusNode focusNode = FocusNode();
   RxInt selectedIndex = 0.obs;
+  RxBool select = false.obs;
   int initialIndex = Get.arguments[0];
 
   /// Donna's Deals
