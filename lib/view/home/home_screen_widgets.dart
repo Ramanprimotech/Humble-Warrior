@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/network/endpoints.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/future_widget/future_widget.dart';
 import 'package:humble_warrior/utils/theme_extention/image_icon_theme_extention.dart';
@@ -169,7 +168,8 @@ class HomeScreenWidgets {
 
   /// Brand List
   Widget brandsList() {
-    final ImageIconTheme imageIconTheme = Theme.of(context).extension<ImageIconTheme>()!;
+    final ImageIconTheme imageIconTheme =
+        Theme.of(context).extension<ImageIconTheme>()!;
     return
         // ValueListenableBuilder(
         // valueListenable: controller.keyboardIsOpened,
@@ -215,13 +215,12 @@ class HomeScreenWidgets {
                           duration: const Duration(milliseconds: 150),
                           curve: Curves.linear);
                     },
-                    child: AppIcons.next(
-                        iconColor: imageIconTheme.textColor)),
+                    child: AppIcons.next(iconColor: imageIconTheme.textColor)),
               ),
             ],
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 25),
+            margin: 25.ph,
             height: 1,
             width: Get.width,
             color: AppColors.gray,
