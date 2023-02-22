@@ -18,17 +18,12 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeScreenController controller = Get.find();
     return Scaffold(
-      appBar: AppBar(
-        leadingWidth: 20,
-        leading: Padding(
-          padding: 15.pl,
-          child: GestureDetector(
-              onTap: () {
-                Get.back();
-              },
-              child: Icon(Icons.arrow_back_ios)),
+      appBar: CustomAppBar(
+        title: CustomSearchBar(
+          textEditingController: TextEditingController(),
+          focusNode: FocusNode(),
         ),
-        title: CustomSearchBar(),
+        showBackButton: true,
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -7,7 +7,6 @@ import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
 import 'package:humble_warrior/view/home_option/common_home_option.dart';
 import 'package:humble_warrior/view/productDetail/daily_deal_product_controller.dart';
-
 import 'product_detail_widget.dart';
 
 class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
@@ -18,15 +17,12 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
 
     final DailyDealProductController controller = Get.find();
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
-        child: CustomAppBar(
-          title: CustomSearchBar(
-            textEditingController: TextEditingController(),
-            focusNode: FocusNode(),
-          ),
-          showBackButton: true,
+      appBar: CustomAppBar(
+        title: CustomSearchBar(
+          textEditingController: TextEditingController(),
+          focusNode: FocusNode(),
         ),
+        showBackButton: true,
       ),
       body: SingleChildScrollView(
         child: Column(

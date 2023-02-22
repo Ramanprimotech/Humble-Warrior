@@ -18,12 +18,9 @@ class FavouriteDeals extends StatelessWidget {
     Theme.of(Get.context!).extension<AccountOptionTheme>()!;
     FavouriteDealController controller = Get.find();
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
-    child: CustomAppBar(
-    title: CustomSearchBar(textEditingController: TextEditingController(), focusNode: FocusNode(),),
-    showBackButton: true,
-    ),
+      appBar: CustomAppBar(
+      title: CustomSearchBar(textEditingController: TextEditingController(), focusNode: FocusNode(),),
+      showBackButton: true,
       ),
       body: Container(
         padding: 20.ph,

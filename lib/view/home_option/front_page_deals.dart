@@ -4,6 +4,7 @@ import 'package:humble_warrior/modals/response/front_page_response_model.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
+import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/extentions/color_string_extention.dart';
 import '../../utils/app_text.dart';
 import '../../utils/custom_paint/ribbon.dart';
@@ -31,25 +32,15 @@ class FrontPageDeals extends StatelessWidget {
             return Center(
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 CircularProgressIndicator(),
-                AppText(
-                  loadingDealsTxt,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                ),
+                CommonWidgets.loading(),
               ],
             ));
           }
           if (controller.frontPageDealList.isEmpty &&
               controller.frontPageDealsBool.value == false) {
-            return const Center(
-              child: AppText(
-                noDataFoundTxt,
-                fontSize: 24,
-                fontWeight: FontWeight.w700,
-              ),
-            );
+            return CommonWidgets.noData();
           }
           return ListView.builder(
            padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),

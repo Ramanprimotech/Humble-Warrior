@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
+import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
 
 class CommonWidgets {
@@ -39,4 +41,25 @@ class CommonWidgets {
           child: const Icon(Icons.error)),
     );
   }
+
+  static Widget noData(){
+    return const Center(
+      child: AppText(
+        noDataFoundTxt,
+        fontSize: 24,
+        fontWeight: FontWeight.w700,
+      ),
+    );
+  }
+
+  static Widget loading(){
+    return const Center(
+      child: AppText(
+        loadingDealsTxt,
+        fontSize: 20,
+        fontWeight: FontWeight.w700,
+      ),
+    );
+  }
+
 }

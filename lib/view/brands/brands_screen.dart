@@ -21,14 +21,10 @@ class BrandsScreen extends StatelessWidget {
     BrandsController controller = Get.find();
     ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
-        child: CustomAppBar(
-          title: CustomSearchBar(
-            textEditingController: TextEditingController(),
-            focusNode: FocusNode(),
-          ),
-          showBackButton: true,
+      appBar: AppBar(
+        title: CustomSearchBar(
+          textEditingController: TextEditingController(),
+          focusNode: FocusNode(),
         ),
       ),
       /*AppBar(

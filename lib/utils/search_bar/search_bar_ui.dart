@@ -131,58 +131,6 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   }
 }
 
-class CustomAppBar extends StatefulWidget  {
-  const CustomAppBar({
-    Key? key,
-    required this.title,
-    this.onTap,
-    this.actions,
-    this.height,
-    this.leadWidth,
-    this.showBackButton = true,
-  }) : super(key: key);
-
-  final Widget? title;
-  final VoidCallback? onTap;
-  final List<Widget>? actions;
-  final bool showBackButton;
-  final double? height;
-  final double? leadWidth;
-
-  @override
-  State<CustomAppBar> createState() => _CustomAppBarState();
-
-
-}
-
-class _CustomAppBarState extends State<CustomAppBar>  {
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      title: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: widget.title,
-      ),
-      leadingWidth: widget.leadWidth??20,
-      leading: widget.showBackButton ? Padding(
-        padding: const EdgeInsets.only(left: 20),
-        child:
-         GestureDetector(
-           onTap: (){
-             Get.back();
-           },
-           child: Icon(Icons.arrow_back_ios,
-                  color: Theme.of(context).textTheme.displaySmall!.color!,),
-         ),
-      ) : SizedBox(),
-      actions: widget.actions,
-    );
-  }
-}
-
-
-/*
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     Key? key,
@@ -216,19 +164,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: leadWidth??20,
       leading: showBackButton ? Padding(
           padding: const EdgeInsets.only(left: 20),
-          child: BackButton(),
-
-        */
-/*IconButton(
-              onPressed: (){
-                print("click");
-                // Get.back();
-              },
-              icon: Icon(Icons.arrow_back_ios,
-                color: Theme.of(context).textTheme.displaySmall!.color!,)),*//*
-
+          child: GestureDetector(
+            onTap: (){
+              Get.back();
+            },
+            child: Icon(Icons.arrow_back_ios,
+                  color: Theme.of(context).textTheme.displaySmall!.color!,),
+          ),
       ) : SizedBox(),
       actions: actions,
     );
   }
-}*/
+}
