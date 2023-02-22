@@ -4,9 +4,6 @@ import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/button.dart';
-import 'package:humble_warrior/utils/common/common_functionality.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
 import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart';
@@ -27,7 +24,10 @@ class BrandsScreen extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: CustomAppBar(
-          title: CustomSearchBar(textEditingController: TextEditingController(), focusNode: FocusNode(),),
+          title: CustomSearchBar(
+            textEditingController: TextEditingController(),
+            focusNode: FocusNode(),
+          ),
           showBackButton: true,
         ),
       ),
