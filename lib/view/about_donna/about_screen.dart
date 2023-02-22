@@ -88,7 +88,7 @@ class AboutScreen extends StatelessWidget {
 
   _details(context) {
     return Container(
-      padding: 10.pv,
+      padding: 10.pa,
       margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 0),
       width: Get.width,
       decoration: CustomBoxDecorations().shadow(context: context),
@@ -96,7 +96,7 @@ class AboutScreen extends StatelessWidget {
         const AppText(helloGorgeousTxt, fontWeight: FontWeight.bold),
         ReadMoreText(
           style: Theme.of(context).textTheme.bodyMedium,
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+          AppStrings.lorem,
           trimLines: 10,
           trimMode: TrimMode.Line,
           trimCollapsedText: readMoreTxt,

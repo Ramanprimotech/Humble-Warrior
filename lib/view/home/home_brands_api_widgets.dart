@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/utils/decorations.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/theme_extention/custom_notice_theme_extention.dart';
-import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart';
 
 import '../../modals/response/brands_response_mdel.dart';
 import '../../modals/response/home_categories_response_model.dart';
@@ -51,7 +50,6 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   @override
   Widget success({List<BrandDetails>? data}) {
     List<BrandDetails> dataa = data ?? [];
-    ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
     return Padding(
       padding: 5.pb,
       child: ListView.separated(
