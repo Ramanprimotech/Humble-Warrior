@@ -5,6 +5,7 @@ import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/extentions/color_string_extention.dart';
+import 'package:humble_warrior/utils/image_path_assets.dart';
 
 import '../../utils/app_text.dart';
 import '../../utils/custom_paint/ribbon.dart';
@@ -43,7 +44,7 @@ class FrontPageDeals extends StatelessWidget {
             return CommonWidgets.noData();
           }
           return ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+           padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
               controller: controller.frontPageDealScrollController,
               itemCount: controller.frontPageDealList.length + 1,
               itemBuilder: (ctx, index) {
@@ -74,9 +75,10 @@ class FrontPageDeals extends StatelessWidget {
                                         size: 28,
                                       ),
                                     ),
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: AppIcons.comment(),
+
+                                    Image.asset(
+                                      ImagePathAssets.commentIcon,
+                                      height: 20,
                                     ),
                                   ],
                                 ),
