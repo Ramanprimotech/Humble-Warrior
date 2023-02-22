@@ -5,6 +5,8 @@ import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
+import 'package:humble_warrior/utils/common/common_widgets.dart';
+
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/view/home_option/home_option_controller.dart';
 import 'common_home_option.dart';
@@ -31,25 +33,15 @@ class DonnaDailyDeals extends StatelessWidget {
             return Center(
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 CircularProgressIndicator(),
-                AppText(
-                  loadingDealsTxt,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                ),
+                CommonWidgets.loading(),
               ],
             ));
           }
           if (controller.donnaDealList.isEmpty &&
               controller.donnaDealsBool.value == false) {
-            return const Center(
-              child: AppText(
-                noDataFoundTxt,
-                fontSize: 24,
-                fontWeight: FontWeight.w700,
-              ),
-            );
+            return CommonWidgets.noData();
           }
           return ListView.builder(
             padding: EdgeInsets.symmetric(horizontal:15,vertical: 10),

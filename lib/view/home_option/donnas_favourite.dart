@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
+import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/view/home_option/home_option_controller.dart';
 
@@ -31,25 +33,15 @@ class DonnaFavourite extends StatelessWidget {
             return Center(
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 CircularProgressIndicator(),
-                AppText(
-                  " Loading Deals for you...",
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                ),
+                CommonWidgets.loading(),
               ],
             ));
           }
           if (controller.donnaFavouriteDealList.isEmpty &&
               controller.donnaFavouriteDealsBool.value == false) {
-            return const Center(
-              child: AppText(
-                "No Data Found",
-                fontSize: 24,
-                fontWeight: FontWeight.w700,
-              ),
-            );
+            return CommonWidgets.noData();
           }
           return ListView.builder(
               controller: controller.donnaFavouriteDealScrollController,
@@ -87,7 +79,7 @@ class DonnaFavourite extends StatelessWidget {
                           () => Visibility(
                               visible: controller.donnaFavouriteDealsBool.value,
                               child: Container(
-                                  height: 80,
+                                  height: 50,
                                   alignment: Alignment.center,
                                   child: CircularProgressIndicator())),
                         ),
