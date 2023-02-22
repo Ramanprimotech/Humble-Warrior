@@ -44,7 +44,7 @@ class FrontPageDeals extends StatelessWidget {
             return CommonWidgets.noData();
           }
           return ListView.builder(
-           padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               controller: controller.frontPageDealScrollController,
               itemCount: controller.frontPageDealList.length + 1,
               itemBuilder: (ctx, index) {
@@ -75,7 +75,6 @@ class FrontPageDeals extends StatelessWidget {
                                         size: 28,
                                       ),
                                     ),
-
                                     Image.asset(
                                       ImagePathAssets.commentIcon,
                                       height: 20,
