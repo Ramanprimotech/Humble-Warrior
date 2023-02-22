@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
-import 'package:humble_warrior/utils/app_icons.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/view/home_option/home_option_controller.dart';
 
-import '../../utils/app_text.dart';
-import '../../utils/image_path_network.dart';
-import 'common_home_option.dart';
+import '../../utils/routes/app_routes.dart';
 
 class DonnaFavourite extends StatelessWidget {
-   const DonnaFavourite({Key? key}) : super(key: key);
+  const DonnaFavourite({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,29 +47,48 @@ class DonnaFavourite extends StatelessWidget {
                   details = controller.donnaFavouriteDealList[index];
                 }
                 return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 20),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                   child: index != controller.donnaFavouriteDealList.length
-                      ? ItemCard(
-                    onTap: (){
-                        Get.toNamed(AppRoutes.favouriteDeal);
-                    },
-                          buttons: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              shopButton(
-                                  url: controller
-                                      .donnaFavouriteDealList[index].url),
-                              // codeButton(code: ""),
-                              shareButton(shareUrl: ImagePathNetwork.url),
-                              IconButton(
-                                onPressed: () {},
-                                icon: AppIcons.bookmarks(),
+                      ? InkWell(
+                          onTap: () {
+                            Get.toNamed(AppRoutes.favouriteDeal);
+                          },
+                          child: SizedBox(
+                            height: 220,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: CommonWidgets.networkImage(
+                                imageUrl: controller
+                                    .donnaFavouriteDealList[index].url!,
+                                alignment: Alignment.center,
+                                width: Get.width,
+                                fit: BoxFit.cover,
                               ),
-                            ],
+                            ),
                           ),
-                          imageUrl: details.url!,
-                          title: details.productName.toString(),
                         )
+                      // ItemCard(
+                      //   onTap: (){
+                      //       Get.toNamed(AppRoutes.favouriteDeal);
+                      //   },
+                      //         buttons: Row(
+                      //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      //           children: [
+                      //             shopButton(
+                      //                 url: controller
+                      //                     .donnaFavouriteDealList[index].url),
+                      //             // codeButton(code: ""),
+                      //             shareButton(shareUrl: ImagePathNetwork.url),
+                      //             IconButton(
+                      //               onPressed: () {},
+                      //               icon: AppIcons.bookmarks(),
+                      //             ),
+                      //           ],
+                      //         ),
+                      //         imageUrl: details.url!,
+                      //         title: details.productName.toString(),
+                      //       )
                       : Obx(
                           () => Visibility(
                               visible: controller.donnaFavouriteDealsBool.value,

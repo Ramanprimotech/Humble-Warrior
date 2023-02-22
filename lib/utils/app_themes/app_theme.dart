@@ -60,7 +60,7 @@ ThemeData _lightTheme = ThemeData.from(
   ),
 ).copyWith(
   extensions: <ThemeExtension>[
-    ImageIconTheme(textColor: Colors.black,backGroundColor: Colors.black),
+    ImageIconTheme(textColor: Colors.black, backGroundColor: Colors.black),
     ShopNowTheme(textColor: AppColors.white, backGroundColor: AppColors.pink),
     AccountOptionTheme(
         shadow: AppColors.shadowLight,
@@ -68,10 +68,10 @@ ThemeData _lightTheme = ThemeData.from(
         backGroundColor: AppColors.white),
     const ShadowTheme(shadowColor: AppColors.shadowLight),
     DialogueThemeExtention(
-        backGroundColor: AppColors.backgroundDark,
-        textColor: AppColors.white,
+        backGroundColor: AppColors.white,
+        textColor: AppColors.black,
         buttonColor: AppColors.primary,
-        shadow: AppColors.shadowLight),
+        shadow: AppColors.shadowDark),
   ],
   cupertinoOverrideTheme: CupertinoThemeData(
       textTheme:
@@ -181,7 +181,7 @@ ThemeData _darkTheme = ThemeData.from(
   ),
 ).copyWith(
   extensions: <ThemeExtension<dynamic>>[
-    ImageIconTheme(textColor: Colors.white,backGroundColor: AppColors.gray),
+    ImageIconTheme(textColor: Colors.white, backGroundColor: AppColors.gray),
     ShopNowTheme(textColor: AppColors.white, backGroundColor: AppColors.pink),
     AccountOptionTheme(
         shadow: AppColors.shadowDark,
@@ -189,10 +189,10 @@ ThemeData _darkTheme = ThemeData.from(
         backGroundColor: AppColors.gray),
     const ShadowTheme(shadowColor: AppColors.shadowDark),
     DialogueThemeExtention(
-        backGroundColor: AppColors.white,
-        textColor: AppColors.black,
+        backGroundColor: AppColors.backgroundDark,
+        textColor: AppColors.white,
         buttonColor: AppColors.primary,
-        shadow: AppColors.shadowDark),
+        shadow: AppColors.shadowLight),
   ],
   cupertinoOverrideTheme: CupertinoThemeData(
       textTheme:

@@ -14,6 +14,7 @@ class _AmazonWebViewState extends State<AmazonWebView> {
   late WebViewController _webViewController;
 
   bool canGoBool = false;
+  bool loading = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -23,12 +24,14 @@ class _AmazonWebViewState extends State<AmazonWebView> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
+            loading = true;
             // Update loading bar.
           },
           onPageStarted: (String url) {
             canGo();
           },
           onPageFinished: (String url) {
+            loading = false;
             canGo();
           },
           onWebResourceError: (WebResourceError error) {},
@@ -72,10 +75,26 @@ class _AmazonWebViewState extends State<AmazonWebView> {
           fontWeight: FontWeight.w700,
         ),
       ),
-      body: WebViewWidget(
-        key: const Key("amazon"),
-        controller: _webViewController,
-      ),
+      body: loading
+          ? Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  AppText(
+                    "Loading...",
+                    fontSize: 24,
+                  )
+                ],
+              ),
+            )
+          : WebViewWidget(
+              key: const Key("amazon"),
+              controller: _webViewController,
+            ),
     );
   }
 }

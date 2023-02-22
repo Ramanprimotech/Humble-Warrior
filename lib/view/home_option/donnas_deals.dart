@@ -2,17 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/modals/response/donna_deals_response.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
-
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/view/home_option/home_option_controller.dart';
+
 import 'common_home_option.dart';
 
 class DonnaDailyDeals extends StatelessWidget {
-   const DonnaDailyDeals({Key? key}) : super(key: key);
+  const DonnaDailyDeals({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +42,7 @@ class DonnaDailyDeals extends StatelessWidget {
             return CommonWidgets.noData();
           }
           return ListView.builder(
-            padding: EdgeInsets.symmetric(horizontal:15,vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               controller: controller.donnaDealScrollController,
               itemCount: controller.donnaDealList.length + 1,
               itemBuilder: (ctx, index) {
@@ -56,10 +54,10 @@ class DonnaDailyDeals extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: index != controller.donnaDealList.length
                       ? ItemCard(
-                    onTap: (){
-                      Get.toNamed(AppRoutes.dailyDealProductDetail);
-                    },
-                    radius: 10,
+                          onTap: () {
+                            Get.toNamed(AppRoutes.dailyDealProductDetail);
+                          },
+                          radius: 10,
                           buttons: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -73,26 +71,28 @@ class DonnaDailyDeals extends StatelessWidget {
                                     width: 10,
                                   ),
                                   !(details.couponCode == null ||
-                                      details.couponCode == "")
-                                      ? codeButton(code: "${details.couponCode}")
+                                          details.couponCode == "")
+                                      ? codeButton(
+                                          code: "${details.couponCode}")
                                       : const SizedBox(
-                                    width: 80,
-                                  ),
+                                          width: 80,
+                                        ),
                                 ],
                               ),
-
                               Row(
                                 children: [
                                   IconButton(
                                     onPressed: () {
                                       // controller.select.value = !controller.select.value;
                                     },
-                                    icon: Heart(key: Key(index.toString()), size: 22,),
+                                    icon: Heart(
+                                      key: Key(index.toString()),
+                                      size: 28,
+                                    ),
                                   ),
                                   shareButton(shareUrl: "shareUrl"),
                                 ],
                               ),
-
                             ],
                           ),
                           imageUrl: details.url!,

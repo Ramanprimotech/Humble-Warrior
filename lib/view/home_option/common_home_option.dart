@@ -5,7 +5,6 @@ import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_functionality.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/routes/app_routes.dart';
 
 import '../../utils/app_text.dart';
 
@@ -28,7 +27,7 @@ class ItemCard extends StatelessWidget {
       this.imageHeight = 220,
       this.imageTitleHeight = 60,
       this.cardHeight,
-       this.onTap,
+      this.onTap,
       required this.imageUrl,
       required this.title})
       : super(key: key);
@@ -36,7 +35,7 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:onTap??(){},
+      onTap: onTap ?? () {},
       child: Container(
         height: imageHeight + buttonbarHeight,
         decoration: BoxDecoration(
@@ -106,6 +105,26 @@ class ItemCard extends StatelessWidget {
 
 Widget codeButton({required String code}) {
   return InkWell(
+    onTap: () async {
+      CommonUtils().copyToClipboard(copyText: code);
+    },
+    child: Container(
+        alignment: Alignment.center,
+        // width: 90,
+        height: 30,
+        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+        decoration: BoxDecoration(
+            color: AppColors.appGreen,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 3)]),
+        child: AppText(
+          code,
+          color: Colors.white,
+          fontWeight: FontWeight.w700,
+          fontSize: 14,
+        )),
+  );
+  return InkWell(
     onTap: () {
       CommonUtils().copyToClipboard(copyText: code);
     },
@@ -113,7 +132,7 @@ Widget codeButton({required String code}) {
         alignment: Alignment.center,
         // width: 100,
         height: 30,
-        padding: EdgeInsets.symmetric(vertical: 0,horizontal: 15),
+        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
         decoration: BoxDecoration(
             color: AppColors.appGreen, borderRadius: BorderRadius.circular(20)),
         child: Row(
@@ -140,7 +159,7 @@ Widget shopButton({required url}) {
         alignment: Alignment.center,
         // width: 90,
         height: 30,
-        padding: EdgeInsets.symmetric(vertical: 0,horizontal: 15),
+        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
         decoration: BoxDecoration(
             color: AppColors.primary,
             borderRadius: BorderRadius.circular(20),

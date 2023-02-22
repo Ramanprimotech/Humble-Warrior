@@ -16,6 +16,7 @@ class _FaceBookWebViewState extends State<FaceBookWebView> {
   late WebViewController _webViewController;
 
   bool canGoBool = false;
+  bool loading = true;
 
   @override
   void initState() {
@@ -27,11 +28,15 @@ class _FaceBookWebViewState extends State<FaceBookWebView> {
         NavigationDelegate(
           onProgress: (int progress) {
             // Update loading bar.
+            loading = true;
+            setState(() {});
           },
           onPageStarted: (String url) {
             // canGo();
           },
           onPageFinished: (String url) {
+            loading = false;
+            setState(() {});
             canGo();
           },
           onWebResourceError: (WebResourceError error) {},
@@ -73,10 +78,26 @@ class _FaceBookWebViewState extends State<FaceBookWebView> {
           fontWeight: FontWeight.w700,
         ),
       ),
-      body: WebViewWidget(
-        key: const Key("amazon"),
-        controller: _webViewController,
-      ),
+      body: loading
+          ? Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  AppText(
+                    "Loading...",
+                    fontSize: 24,
+                  )
+                ],
+              ),
+            )
+          : WebViewWidget(
+              key: const Key("amazon"),
+              controller: _webViewController,
+            ),
     );
   }
 }

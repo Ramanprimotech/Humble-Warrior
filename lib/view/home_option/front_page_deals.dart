@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/modals/response/front_page_response_model.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/extentions/color_string_extention.dart';
+
 import '../../utils/app_text.dart';
 import '../../utils/custom_paint/ribbon.dart';
 import 'common_home_option.dart';
@@ -43,7 +43,7 @@ class FrontPageDeals extends StatelessWidget {
             return CommonWidgets.noData();
           }
           return ListView.builder(
-           padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               controller: controller.frontPageDealScrollController,
               itemCount: controller.frontPageDealList.length + 1,
               itemBuilder: (ctx, index) {
@@ -58,19 +58,22 @@ class FrontPageDeals extends StatelessWidget {
                       child: index != controller.frontPageDealList.length
                           ? ItemCard(
                               buttons: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 15),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 15),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     shareButton(shareUrl: "shareUrl"),
-                                     IconButton(
-                                        onPressed: () {
-                                          // controller.select.value = !controller.select.value;
-                                        },
-                                        icon: Heart(key: Key(index.toString()), size: 22,),
+                                    IconButton(
+                                      onPressed: () {
+                                        // controller.select.value = !controller.select.value;
+                                      },
+                                      icon: Heart(
+                                        key: Key(index.toString()),
+                                        size: 28,
                                       ),
-
+                                    ),
                                     IconButton(
                                       onPressed: () {},
                                       icon: AppIcons.comment(),

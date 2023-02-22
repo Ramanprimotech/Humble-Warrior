@@ -9,6 +9,7 @@ import 'package:humble_warrior/view/home/home_controller.dart';
 import 'package:humble_warrior/view/home/home_screen_widgets.dart';
 import 'package:readmore/readmore.dart';
 
+import '../../utils/app_icons.dart';
 import '../../utils/decorations.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -18,13 +19,36 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeScreenController controller = Get.find();
     return Scaffold(
-      appBar: CustomAppBar(
-        title: CustomSearchBar(
-          textEditingController: TextEditingController(),
-          focusNode: FocusNode(),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(110.0),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 12.0),
+          child: AppBar(
+            leadingWidth: 35,
+            centerTitle: false,
+            title: CustomSearchBar(
+              focusNode: controller.focusNode,
+              textEditingController: controller.searchTextController,
+            ),
+            leading: InkWell(
+                onTap: () {
+                  Get.back();
+                },
+                child: Padding(
+                  padding: 20.pl,
+                  child: AppIcons.backArrrowIos(),
+                )),
+          ),
         ),
-        showBackButton: true,
       ),
+      // CustomAppBar(
+      //
+      //   title: CustomSearchBar(
+      //     textEditingController: TextEditingController(),
+      //     focusNode: FocusNode(),
+      //   ),
+      //   showBackButton: true,
+      // ),
       body: SingleChildScrollView(
         child: Column(
           children: [
