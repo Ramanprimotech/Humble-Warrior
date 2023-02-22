@@ -67,7 +67,7 @@ class _AmazonWebViewState extends State<AmazonWebView> {
           ),
         ),
         automaticallyImplyLeading: canGoBool,
-        title: AppText(
+        title: const AppText(
           myAmazonTxt,
           fontWeight: FontWeight.w700,
         ),
