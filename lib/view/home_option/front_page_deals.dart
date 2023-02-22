@@ -5,7 +5,6 @@ import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/extentions/color_string_extention.dart';
-
 import '../../utils/app_text.dart';
 import '../../utils/custom_paint/ribbon.dart';
 import 'common_home_option.dart';
@@ -17,7 +16,6 @@ class FrontPageDeals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeOptionController controller = Get.find();
-
     return PaginationWidget(
       apiBool: controller.frontPageDealsBool,
       api: controller.frontPageDealsAPI,
@@ -54,6 +52,7 @@ class FrontPageDeals extends StatelessWidget {
             );
           }
           return ListView.builder(
+           padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
               controller: controller.frontPageDealScrollController,
               itemCount: controller.frontPageDealList.length + 1,
               itemBuilder: (ctx, index) {
@@ -67,20 +66,26 @@ class FrontPageDeals extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: index != controller.frontPageDealList.length
                           ? ItemCard(
-                              buttons: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  shareButton(shareUrl: "shareUrl"),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: AppIcons.bookmarks(),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: AppIcons.comment(),
-                                  ),
-                                ],
+                              buttons: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 15),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    shareButton(shareUrl: "shareUrl"),
+                                     IconButton(
+                                        onPressed: () {
+                                          // controller.select.value = !controller.select.value;
+                                        },
+                                        icon: Heart(key: Key(index.toString()), size: 22,),
+                                      ),
+
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: AppIcons.comment(),
+                                    ),
+                                  ],
+                                ),
                               ),
                               imageUrl: details.url!,
                               title: details.productName.toString(),
