@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
-import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
-import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
 import 'package:humble_warrior/view/home/home_screen_widgets.dart';
 import 'package:readmore/readmore.dart';
+
+import '../../utils/decorations.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -17,14 +17,13 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeScreenController controller = Get.find();
-    // final AboutScreenController controller = Get.put(AboutScreenController());
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 20,
         leading: Padding(
-          padding: EdgeInsets.only(left: 15),
+          padding: 15.pl,
           child: GestureDetector(
-              onTap: (){
+              onTap: () {
                 Get.back();
               },
               child: Icon(Icons.arrow_back_ios)),
@@ -34,18 +33,20 @@ class AboutScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.only(right: 10, left: 10),
-              child: Column(children: [
-                _aboutButton(),
-                _showImg(),
-                _details(),
-                _seeCopyButton(),
-                const SizedBox(
-                  height: 15,
-                ),
-
-              ]),
+            Padding(
+              padding: 15.ph,
+              child: Container(
+                margin: 10.pv,
+                child: Column(children: [
+                  _aboutButton(context),
+                  _showImg(),
+                  _details(context),
+                  _seeCopyButton(),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                ]),
+              ),
             ),
             HomeScreenWidgets(context: context, controller: controller)
                 .brandsList(),
@@ -58,22 +59,12 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
-  _aboutButton() {
+  _aboutButton(context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 15),
       width: MediaQuery.of(Get.context!).size.width,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade400,
-              spreadRadius: 1,
-              blurRadius: 1,
-              // offset: const Offset(0, 3),
-            )
-          ]),
+      decoration: CustomBoxDecorations().shadow(context: context),
       child: AppText(aboutDonnaTxt,
           fontWeight: FontWeight.bold,
           fontSize: 18,
@@ -95,27 +86,16 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
-  _details() {
+  _details(context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      padding: 10.pv,
       margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 0),
-      width: MediaQuery.of(Get.context!).size.width,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade400,
-              spreadRadius: 1,
-              blurRadius: 1,
-              // offset: const Offset(0, 3),
-            )
-          ]),
+      width: Get.width,
+      decoration: CustomBoxDecorations().shadow(context: context),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        AppText(helloGorgeousTxt,
-            fontWeight: FontWeight.bold, color: Colors.grey.shade800),
-        const ReadMoreText(
-          style: TextStyle(color: Colors.black),
+        const AppText(helloGorgeousTxt, fontWeight: FontWeight.bold),
+        ReadMoreText(
+          style: Theme.of(context).textTheme.bodyMedium,
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
           trimLines: 10,
           trimMode: TrimMode.Line,
@@ -164,5 +144,4 @@ class AboutScreen extends StatelessWidget {
       ),
     );
   }
-
 }

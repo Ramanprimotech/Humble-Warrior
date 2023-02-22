@@ -10,6 +10,7 @@ import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart
 import 'package:humble_warrior/view/brands/brands_controller.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
 
+import '../../utils/decorations.dart';
 import '../../utils/search_bar/search_bar_ui.dart';
 
 class BrandsScreen extends StatelessWidget {
@@ -53,17 +54,8 @@ class BrandsScreen extends StatelessWidget {
                                 itemCount: 25,
                                 itemBuilder: (ctx, index) {
                                   return Container(
-                                    decoration: BoxDecoration(
-                                        color: Theme.of(context)
-                                            .scaffoldBackgroundColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: shadowTheme.shadowColor!,
-                                            spreadRadius: 2,
-                                            blurRadius: 2,
-                                          ),
-                                        ]),
+                                    decoration: CustomBoxDecorations()
+                                        .shadow(context: context),
                                     child: Column(
                                       children: const [
                                         ShimmerLoader(
@@ -83,7 +75,7 @@ class BrandsScreen extends StatelessWidget {
                               );
                             }
                             if (snapshot.hasError) {
-                              return Center(child: AppText(somethingTxt));
+                              return const Center(child: AppText(somethingTxt));
                             }
                             List<BrandDetails> data = snapshot.data ?? [];
                             return GridView.builder(
@@ -97,26 +89,15 @@ class BrandsScreen extends StatelessWidget {
                               itemCount: data.length,
                               itemBuilder: (ctx, index) {
                                 return GestureDetector(
-                                  onTap: () {
-                                    // CommonUtils().urlLauncher(
-                                    //     url: data[index].brandLink!);
-                                  },
+                                  onTap: () {},
                                   child: Column(
                                     children: [
                                       Expanded(
                                         child: Container(
-                                          decoration: BoxDecoration(
-                                              color: Colors.grey.shade100,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color:
-                                                      shadowTheme.shadowColor!,
-                                                  spreadRadius: 2,
-                                                  blurRadius: 2,
-                                                ),
-                                              ]),
+                                          decoration: CustomBoxDecorations()
+                                              .shadow(
+                                                  context: context,
+                                                  color: Colors.grey.shade200),
                                           child: Padding(
                                             padding: 10.pa,
                                             child: Image.asset(
@@ -190,29 +171,20 @@ class BrandsScreen extends StatelessWidget {
   _aboutButton(context, color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      margin: const EdgeInsets.only(bottom: 40),
+      margin: 40.pb,
       width: MediaQuery.of(Get.context!).size.width,
-      decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: color,
-              spreadRadius: 2,
-              blurRadius: 2,
-            )
-          ]),
+      decoration: CustomBoxDecorations().shadow(context: context),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const AppText(
-            "${brandsTxt} I",
+            "$brandsTxt I",
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
           5.sw,
           Padding(
-            padding: EdgeInsets.only(top: 2),
+            padding: 2.pt,
             child: AppIcons.heart(
               iconColor: Colors.red,
             ),

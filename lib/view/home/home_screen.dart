@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
 import 'package:humble_warrior/view/home/home_screen_widgets.dart';
@@ -15,6 +14,7 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
+
         /// App Bar
         appBar: homeScreenWidgets.appBar(),
         body: /*Stack(
@@ -22,25 +22,26 @@ class HomeScreen extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           children: [*/
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 8,
-                ),
-
-
-                homeScreenWidgets.productList(),
-                const SizedBox(
-                  height: 8,
-                ),
-
-                ///Home Option List Future Builder
-                homeScreenWidgets.homeOptionListTwo(),
-                /// Product List Future Builder
-                homeScreenWidgets.brandsList(),
-              ],
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 8,
             ),
-           /* KeyboardVisibilityBuilder(builder: (context, isKVisible) {
+
+            ///Home Screen Categories List
+            homeScreenWidgets.productList(),
+            const SizedBox(
+              height: 8,
+            ),
+
+            ///Home Option List Future Builder
+            homeScreenWidgets.homeOptionListTwo(),
+
+            /// Brand List Future Builder
+            homeScreenWidgets.brandsList(),
+          ],
+        ),
+        /* KeyboardVisibilityBuilder(builder: (context, isKVisible) {
               debugPrint(isKVisible.toString());
               return Visibility(
                   visible: !isKVisible, child: homeScreenWidgets.brandsList());

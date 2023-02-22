@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/decorations.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/theme_extention/custom_notice_theme_extention.dart';
+import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart';
 
 import '../../modals/response/brands_response_mdel.dart';
 import '../../modals/response/home_categories_response_model.dart';
@@ -49,50 +51,62 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   @override
   Widget success({List<BrandDetails>? data}) {
     List<BrandDetails> dataa = data ?? [];
-    return ListView.separated(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      scrollDirection: Axis.horizontal,
-      controller: controller.brandScrollController,
-      itemCount: dataa.length,
-      itemBuilder: (ctx, index) {
-        return GestureDetector(
-          onTap: () {
-            CommonUtils().urlLauncher(url: dataa[index].brandLink!);
-          },
-          child: SizedBox(
-            height: 50,
-            width: 80,
-            child: Column(
-              children: [
-                // CommonWidgets.networkImage(
-                //   alignment: Alignment.center,
-                //   imageUrl: dataa[index].brandImage!,
-                //   fit: BoxFit.contain,
-                //   height: 60,
-                //   width: 80,
-                // ),
-                Image.asset(
-                  alignment: Alignment.center,
-                  dataa[index].brandImage!,
-                  fit: BoxFit.contain,
-                  height: 50,
-                  width: 60,
-                ),
-              ],
+    ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
+    return Padding(
+      padding: 5.pb,
+      child: ListView.separated(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        scrollDirection: Axis.horizontal,
+        controller: controller.brandScrollController,
+        itemCount: dataa.length,
+        itemBuilder: (ctx, index) {
+          return GestureDetector(
+            onTap: () {
+              CommonUtils().urlLauncher(url: dataa[index].brandLink!);
+            },
+            child: SizedBox(
+              height: 50,
+              width: 80,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // CommonWidgets.networkImage(
+                  //   alignment: Alignment.center,
+                  //   imageUrl: dataa[index].brandImage!,
+                  //   fit: BoxFit.contain,
+                  //   height: 60,
+                  //   width: 80,
+                  // ),
+                  Container(
+                    width: 70,
+                    height: 50,
+                    decoration: CustomBoxDecorations()
+                        .shadow(context: context, color: Colors.grey.shade200),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        alignment: Alignment.center,
+                        dataa[index].brandImage!,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return 5.sw;
-      },
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return 5.sw;
+        },
+      ),
     );
   }
 
   @override
   Widget waiting() {
     return ListView.separated(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: 20.ph,
       scrollDirection: Axis.horizontal,
       itemCount: 25,
       itemBuilder: (ctx, index) {
