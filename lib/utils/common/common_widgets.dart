@@ -5,6 +5,8 @@ import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
 
+import '../image_path_assets.dart';
+
 class CommonWidgets {
   static Widget networkImage({
     required String imageUrl,
@@ -34,11 +36,14 @@ class CommonWidgets {
           width: width,
         ),
       ),
-      errorWidget: (context, url, error) => Container(
-          color: Colors.grey,
-          height: height,
-          width: width ?? Get.width,
-          child: const Icon(Icons.error)),
+      errorWidget: (context, url, error) =>
+      Center(child: Image.asset(ImagePathAssets.noImageFound,alignment: Alignment.center,fit: fit,height: height,))    ,
+
+      // Container(
+          // color: Colors.grey,
+          // height: height,
+          // width: width ?? Get.width,
+          // child: const Icon(Icons.error)),
     );
   }
 

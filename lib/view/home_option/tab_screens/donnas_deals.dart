@@ -4,6 +4,7 @@ import 'package:humble_warrior/modals/response/donna_deals_response.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
+import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 
 import '../common_home_option.dart';
@@ -174,14 +175,13 @@ ItemCard donnaDealsCard(DonnaDealsDetails details, int index) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(
-              width: 10,
+            Padding(
+              padding:8.pl,
+              child: shopButton(url: "${details.shopUrl}"),
             ),
-            shopButton(url: "${details.shopUrl}"),
-            const SizedBox(
-              width: 10,
-            ),
+
             !(details.couponCode == null || details.couponCode == "")
                 ? codeButton(code: "${details.couponCode}")
                 : const SizedBox(
@@ -190,6 +190,8 @@ ItemCard donnaDealsCard(DonnaDealsDetails details, int index) {
           ],
         ),
         Row(
+
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             IconButton(
               onPressed: () {
@@ -197,7 +199,7 @@ ItemCard donnaDealsCard(DonnaDealsDetails details, int index) {
               },
               icon: Heart(
                 key: Key(index.toString()),
-                size: 28,
+                size: 24,
               ),
             ),
             shareButton(shareUrl: "shareUrl"),

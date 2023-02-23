@@ -10,16 +10,17 @@ class CustomBoxDecorations {
     );
   }
 
-  BoxDecoration shadow({required BuildContext context, Color? color}) {
+  BoxDecoration shadow({required BuildContext context, Color? color,double? radius}) {
     ShadowTheme shadowColor = Theme.of(context).extension<ShadowTheme>()!;
     Color containerColor = color ?? Theme.of(context).scaffoldBackgroundColor;
     return BoxDecoration(
         color: containerColor,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(radius??10),
         boxShadow: [
           BoxShadow(
             color: shadowColor.shadowColor!,
-            spreadRadius: 2,
+            offset: Offset(0,1),
+            spreadRadius: 1,
             blurRadius: 2,
           ),
         ]);

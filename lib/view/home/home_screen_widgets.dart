@@ -31,6 +31,7 @@ class HomeScreenWidgets {
   final double brandLoveHeight = 50;
   final double brandHeight = 60;
   final double productArrowIconPadding = 8;
+  final double arrowWidth = 30;
 
   /// App Bar
   PreferredSize appBar() {
@@ -81,10 +82,8 @@ class HomeScreenWidgets {
       children: [
         Row(
           children: [
-            Expanded(
-              // flex: 8,
+            Expanded(// flex: 8,
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 22),
                 height: productHeight,
                 width: Get.width,
                 child: ListView.builder(
@@ -125,6 +124,8 @@ class HomeScreenWidgets {
             child: Positioned(
               left: 0,
               child: Container(
+                alignment: Alignment.center,
+                color: Theme.of(context).scaffoldBackgroundColor,height: brandHeight , width: arrowWidth,
                 padding: EdgeInsets.only(left: productArrowIconPadding),
                 child: GestureDetector(
                   onTap: () {
@@ -145,9 +146,12 @@ class HomeScreenWidgets {
           () => Visibility(
             visible: controller.listForward.value,
             child: Positioned(
-              right: -5,
+              // right: -5,
+              right: 0,
               child: Container(
-                padding: EdgeInsets.only(right: productArrowIconPadding),
+                alignment: Alignment.center,
+                color: Theme.of(context).scaffoldBackgroundColor,height: brandHeight , width: arrowWidth,
+                // padding: EdgeInsets.only(right: productArrowIconPadding),
                 child: GestureDetector(
                   onTap: () {
                     controller.productScrollController.animateTo(
@@ -192,31 +196,61 @@ class HomeScreenWidgets {
         children: [
           /// Brand Title Row
           _brandRow(height: brandLoveHeight, context: context),
-          Row(
+          Stack(
+            alignment: Alignment.center,
             children: [
-              Expanded(
-                flex: 8,
-                child: Container(
-                  color: Theme.of(context)
-                      .floatingActionButtonTheme
-                      .backgroundColor,
-                  height: brandHeight,
-                  width: Get.height,
+              Row(
+                children: [
 
-                  /// Brand List Future Builder
-                  child: brandListAPIBuilder(),
-                ),
+                  Expanded(
+                    flex: 10,
+                    child: Container(
+                      color: Theme.of(context)
+                          .floatingActionButtonTheme
+                          .backgroundColor,
+                      height: brandHeight,
+                      width: Get.height,
+
+                      /// Brand List Future Builder
+                      child: brandListAPIBuilder(),
+                    ),
+                  ),
+
+                ],
               ),
-              Expanded(
-                flex: 1,
-                child: GestureDetector(
-                    onTap: () {
-                      controller.brandScrollController.animateTo(
-                          controller.brandScrollController.offset + (80 * 2),
-                          duration: const Duration(milliseconds: 150),
-                          curve: Curves.linear);
-                    },
-                    child: AppIcons.next(iconColor: imageIconTheme.textColor)),
+              Obx(()=>
+                  Visibility(
+                    visible:controller.brandListBack.value ,
+                    child: Positioned(
+                      left: 0,
+                      child: GestureDetector(
+                          onTap: () {
+                            controller.brandScrollController.animateTo(
+                                controller.brandScrollController.offset - (80 * 2),
+                                duration: const Duration(milliseconds: 150),
+                                curve: Curves.linear);
+                          },
+                          child: Container(
+                              alignment: Alignment.center,
+                              padding: productArrowIconPadding.pl,
+                              color: Theme.of(context).scaffoldBackgroundColor,height: brandHeight , width: arrowWidth,child: AppIcons.backArrrowIos(iconColor: imageIconTheme.textColor))),
+                    ),
+                  ),
+              ),
+              Obx(()=>
+                  Visibility(
+                    visible: controller.brandListForward.value ,
+                    child: Positioned(
+                     right: 0, child: GestureDetector(
+                          onTap: () {
+                            controller.brandScrollController.animateTo(
+                                controller.brandScrollController.offset + (80 * 2),
+                                duration: const Duration(milliseconds: 150),
+                                curve: Curves.linear);
+                          },
+                          child: Container(color: Theme.of(context).scaffoldBackgroundColor,height: brandHeight , width: arrowWidth,child: AppIcons.next(iconColor: imageIconTheme.textColor))),
+                    ),
+                  ),
               ),
             ],
           ),
@@ -224,10 +258,10 @@ class HomeScreenWidgets {
             margin: 25.ph,
             height: 1,
             width: Get.width,
-            color: AppColors.gray,
+            color: Colors.grey.shade400,
           ),
           // Divider(color: Colors.black,thickness: 1),
-          // SizedBox(height: 5,),
+          SizedBox(height: 10,),
         ],
       ),
     );

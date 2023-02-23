@@ -6,6 +6,7 @@ import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_functionality.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/decorations.dart';
+import 'package:humble_warrior/utils/extensions.dart';
 
 import '../../utils/app_text.dart';
 
@@ -107,15 +108,15 @@ class ItemCard extends StatelessWidget {
 }
 
 Widget codeButton({required String code}) {
-  return InkWell(
-    onTap: () async {
+  return IconButton(
+    onPressed: ()async{
       CommonUtils().copyToClipboard(copyText: code);
     },
-    child: Container(
+    icon: Container(
         alignment: Alignment.center,
         // width: 90,
         height: 30,
-        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+        padding: 10.ph,
         decoration: BoxDecoration(
             color: AppColors.appGreen,
             borderRadius: BorderRadius.circular(20),
@@ -124,21 +125,20 @@ Widget codeButton({required String code}) {
           code,
           color: Colors.white,
           fontWeight: FontWeight.w700,
-          fontSize: 14,
+          fontSize: 12,
         )),
   );
 }
 
 Widget shopButton({required url}) {
-  return InkWell(
-    onTap: () async {
+  return IconButton(
+    onPressed: ()async{
       await CommonUtils().urlLauncher(url: url);
-    },
-    child: Container(
+    },icon: Container(
         alignment: Alignment.center,
         // width: 90,
         height: 30,
-        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+        padding:10.ph,
         decoration: BoxDecoration(
             color: AppColors.primary,
             borderRadius: BorderRadius.circular(20),
@@ -147,7 +147,7 @@ Widget shopButton({required url}) {
           shopNowTxt,
           color: Colors.white,
           fontWeight: FontWeight.w700,
-          fontSize: 14,
+          fontSize: 12,
         )),
   );
 }
@@ -158,6 +158,7 @@ Widget shareButton({required shareUrl}) {
       CommonUtils().share(shareUrl: "$shareUrl");
     },
     icon: AppIcons.share(),
+
   );
 }
 

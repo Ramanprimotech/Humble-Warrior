@@ -4,6 +4,7 @@ import 'package:humble_warrior/modals/response/front_page_response_model.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
+import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/image_path_assets.dart';
 
 import '../../../utils/routes/app_routes.dart';
@@ -42,7 +43,7 @@ class FrontPageDeals extends StatelessWidget {
             return CommonWidgets.noData();
           }
           return ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              padding: 10.pa,
               controller: controller.frontPageDealScrollController,
               itemCount: controller.frontPageDealList.length + 1,
               itemBuilder: (ctx, index) {

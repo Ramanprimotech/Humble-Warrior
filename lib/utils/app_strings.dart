@@ -35,7 +35,7 @@ const String searchTxt = "Search";
 const String homeTxt = "Home";
 const String myWishlistTxt = "My Wishlist";
 const String myAmazonTxt = "My Amazon";
-const String joinUsTxt = "Join Us";
+const String joinUsTxt = "Join Us!";
 const String accountTxt = "Account";
 
 
@@ -141,7 +141,9 @@ const String showLessTxt = 'Show less';
 const String readlessTxt = 'read less';
 const String readmoreTxt = 'read more';
 const String accessingMsgTxt = 'Please Login for accessing this feature.';
+const String webSiteError = 'Unable to reach the website';
 const String gotoLoginTxt = 'Go to Login';
+const String retry = 'Retry';
 const String myFvrtTxt = 'My Favourite';
 const String buyNowTxt = 'Buy Now';
 

@@ -19,7 +19,7 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
     final FrontPageDetails details = Get.arguments[0];
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(110.0),
+        preferredSize: const Size.fromHeight(80.0),
         child: Padding(
           padding: const EdgeInsets.only(top: 12.0),
           child: AppBar(
@@ -51,17 +51,8 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: 8.ph,
               child: frontPageCard(details, 0),
-              // child: ItemCard(
-              //   buttons: shopSubButton(
-              //       shopNowUrl: 'https://humblewarrior.com',
-              //       subscribeUrl: '',
-              //       shareUrl: 'https://humblewarrior.com'),
-              //   buttonbarHeight: 60,
-              //   imageUrl: ImagePathNetwork.banner,
-              //   title: 'Title Of Image',
-              // ),
             ),
             productText(context, details.productName),
             productDescription(),

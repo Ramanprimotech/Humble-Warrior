@@ -73,13 +73,13 @@ class FavouriteDeals extends StatelessWidget {
                   color: AppColors.primary,
                   borderRadius: BorderRadius.circular(10)),
               child: AppText(
-                donnaFavouriteDetails.productName!,
+               " ${donnaFavouriteDetails.productName!}",
                 color: Colors.white,
                 textAlign: TextAlign.left,
                 fontWeight: FontWeight.bold,
                 padding: 5.pl,
                 maxLines: 2,
-                fontSize: 20,
+                fontSize: 18,
               ),
             ),
             Container(

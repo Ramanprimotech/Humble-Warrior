@@ -9,7 +9,9 @@ import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
 import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart';
 import 'package:humble_warrior/view/brands/brands_controller.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../utils/common/common_functionality.dart';
 import '../../utils/decorations.dart';
 import '../../utils/search_bar/search_bar_ui.dart';
 
@@ -60,11 +62,17 @@ class BrandsScreen extends StatelessWidget {
                       return FutureBuilder<List<BrandDetails>>(
                           future: controller.allBrands(),
                           builder: (context, snapshot) {
+
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return ListView.separated(
-                                padding: 20.ph,
-                                scrollDirection: Axis.vertical,
+                              return GridView.builder(
+                                gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  crossAxisSpacing: 40.0,
+                                  mainAxisSpacing: 60.0,
+                                  childAspectRatio: 1.5,
+                                ),
                                 itemCount: 25,
                                 itemBuilder: (ctx, index) {
                                   return Container(
@@ -82,16 +90,15 @@ class BrandsScreen extends StatelessWidget {
                                     ),
                                   );
                                 },
-                                separatorBuilder:
-                                    (BuildContext context, int index) {
-                                  return 20.sw;
-                                },
+
                               );
                             }
                             if (snapshot.hasError) {
                               return const Center(child: AppText(somethingTxt));
                             }
                             List<BrandDetails> data = snapshot.data ?? [];
+
+
                             return GridView.builder(
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
@@ -102,8 +109,11 @@ class BrandsScreen extends StatelessWidget {
                               ),
                               itemCount: data.length,
                               itemBuilder: (ctx, index) {
+                                BrandDetails brandDetails = data[index];
                                 return GestureDetector(
-                                  onTap: () {},
+                                  onTap: () async{
+                                      await CommonUtils().urlLauncher(url: brandDetails.brandLink!);
+                                  },
                                   child: Column(
                                     children: [
                                       Expanded(
@@ -116,7 +126,7 @@ class BrandsScreen extends StatelessWidget {
                                             padding: 10.pa,
                                             child: Image.asset(
                                               alignment: Alignment.center,
-                                              data[index].brandImage!,
+                                              brandDetails.brandImage!,
                                               fit: BoxFit.contain,
                                               width: Get.width,
                                             ),

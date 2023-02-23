@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
+import 'package:humble_warrior/utils/decorations.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 
 import '../../utils/app_strings.dart';
@@ -25,7 +26,7 @@ class MyAccWidget {
         Obx(
           () => Container(
             alignment: Alignment.center,
-            height: 150,
+            height: 120,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: AppColors.primary,
@@ -75,7 +76,7 @@ class MyAccWidget {
     return AppText(
       text.toUpperCase(),
       fontWeight: FontWeight.w900,
-      fontSize: 54,
+      fontSize: 48,
     );
   }
 
@@ -118,17 +119,18 @@ class MyAccWidget {
             bottom: isSwitchRequired ? 0 : 0),
         margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
         width: MediaQuery.of(Get.context!).size.width,
-        decoration: BoxDecoration(
-            color: accountOptionTheme.backGroundColor,
-            borderRadius: BorderRadius.circular(25),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.shade600,
-                spreadRadius: 1,
-                blurRadius: 1,
-                offset: const Offset(0, 0),
-              )
-            ]),
+        decoration: CustomBoxDecorations().shadow(context: context,color: accountOptionTheme.backGroundColor,radius: 50),
+        // decoration: BoxDecoration(
+        //     color: accountOptionTheme.backGroundColor,
+        //     borderRadius: BorderRadius.circular(25),
+        //     boxShadow: [
+        //       BoxShadow(
+        //         color: Colors.grey.shade600,
+        //         spreadRadius: 1,
+        //         blurRadius: 1,
+        //         offset: const Offset(0, 0),
+        //       )
+        //     ]),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -136,7 +138,7 @@ class MyAccWidget {
               AppText(
                 title,
                 fontSize: 15,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w400,
                 color: accountOptionTheme.textColor,
               ),
               isSwitchRequired

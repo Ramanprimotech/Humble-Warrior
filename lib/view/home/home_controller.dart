@@ -17,8 +17,8 @@ class HomeScreenController extends GetxController implements SearchActions {
 
   RxBool listBack = false.obs;
   RxBool listForward = true.obs;
-  // RxBool brandListBack = false.obs;
-  // RxBool brandListForward = true.obs;
+  RxBool brandListBack = false.obs;
+  RxBool brandListForward = true.obs;
 
   final FocusNode focusNode = FocusNode();
   ValueNotifier<bool> keyboardIsOpened = ValueNotifier(true);
@@ -35,12 +35,10 @@ class HomeScreenController extends GetxController implements SearchActions {
          listBack.value = productScrollController.offset != productScrollController.initialScrollOffset;
     });
 
-    // brandScrollController.addListener(() {
-    //
-    //      brandListForward.value = brandScrollController.offset != brandScrollController.position.maxScrollExtent;
-    //      brandListBack.value = brandScrollController.offset != brandScrollController.initialScrollOffset;
-    //
-    // });
+    brandScrollController.addListener(() {
+         brandListForward.value = brandScrollController.offset != brandScrollController.position.maxScrollExtent;
+         brandListBack.value = brandScrollController.offset != brandScrollController.initialScrollOffset;
+    });
 
     const ProductImages(image: ImagePathAssets.giftIcon, name: giftTxt).add();
     const ProductImages(image: ImagePathAssets.giftForMomIcon, name: giftForMomTxt).add();

@@ -14,7 +14,6 @@ class MyAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MyAccountController controller = Get.find();
-
     MyAccWidget myAccWidget = MyAccWidget(context: context);
     double optionSpacing = 15;
     return Scaffold(
@@ -23,14 +22,18 @@ class MyAccount extends StatelessWidget {
           margin: const EdgeInsets.only(top: 60, left: 20, right: 20),
           child: Obx(
             () => Column(children: [
+              ///Image and account details
               if (controller.userCheck.value == true) ...[
                 myAccWidget.profileImage(),
                 optionSpacing.sh,
                 myAccWidget.divider(),
               ],
               optionSpacing.sh,
+              ///===> My Account
               myAccWidget.myAccountTextFun(heading: myAccountTxt),
+              ///Account Details
               myAccWidget.detailsOptions(controller, title: accountDetailsTxt),
+              ///Notification
               myAccWidget.detailsOptions(controller,
                   title: notificationsTxt,
                   isSwitchRequired: true,
@@ -38,39 +41,56 @@ class MyAccount extends StatelessWidget {
               optionSpacing.sh,
               myAccWidget.divider(),
               optionSpacing.sh,
+              ///=====>The Humble Warrior
               myAccWidget.myAccountTextFun(heading: theHumbleWarriorTxt),
+              ///About Donna
               myAccWidget.detailsOptions(controller, title: aboutDonna,
                   ontap: () {
                 Get.toNamed(AppRoutes.aboutDonna);
               }),
+              ///Share with friends
               myAccWidget.detailsOptions(controller,
                   title: shareWithFriendsTxt),
               optionSpacing.sh,
               myAccWidget.divider(),
               optionSpacing.sh,
+              ///====>Settings
               myAccWidget.myAccountTextFun(heading: settingsTxt),
+              ///Passcode
               myAccWidget.detailsOptions(controller, title: passcodeTxt),
+              ///Dark Mode
               myAccWidget.detailsOptions(controller,
                   title: darkModeTxt,
                   isSwitchRequired: true,
                   click: controller.darkMode),
+              ///Help & Support
               myAccWidget.detailsOptions(controller, title: helpSupportTxt),
+              ///Term & Conditions
               myAccWidget.detailsOptions(controller, title: termsConditionsTxt),
-              controller.userCheck.value == true
-                  ? myAccWidget.detailsOptions(controller, title: logoutTxt,
-                      ontap: () {
-                      DialogHelper.logoutDialog(
-                          context: context, onTap: controller.logout);
-                    })
-                  : myAccWidget.detailsOptions(controller, title: login,
-                      ontap: () {
-                      DialogHelper.logoutDialog(
-                          context: context, onTap: controller.loginPage());
-                    }),
-            ]),
+              ///Login or Logout
+              _loginOrLogout(context),
+              10.sh,
+         ]),
           ),
         ),
       ),
     );
   }
+  Widget _loginOrLogout(context){
+    MyAccountController controller = Get.find();
+    MyAccWidget myAccWidget = MyAccWidget(context: context);
+    return
+       controller.userCheck.value == true
+        ? myAccWidget.detailsOptions(controller, title: logoutTxt,
+          ontap: () {
+            DialogHelper.logoutDialog(
+                context: context, onTap: controller.logout);
+          })
+          : myAccWidget.detailsOptions(controller, title: login,
+          ontap: () {
+            DialogHelper.logoutDialog(
+                context: context, onTap: controller.loginPage());
+          });
+  }
+
 }
