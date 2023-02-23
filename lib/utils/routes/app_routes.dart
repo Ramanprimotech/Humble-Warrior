@@ -6,10 +6,10 @@ class AppRoutes {
   static String aboutDonna = "/aboutDonna";
   static String productDetail = "/productDetail";
   static String dailyDealProductDetail = "/dailyDealProductDetail";
+  static String frontPageProductDetail = "/frontPageProductDetail";
   static String favouriteDeal = "/favouriteDeal";
   static String homeOptions = "/homeOptions";
   static String splashScreen = "/splashScreen";
   static String myAccount = "/myAccount";
   static String brands = "/brands";
-
 }

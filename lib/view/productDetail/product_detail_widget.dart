@@ -4,7 +4,6 @@ import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
-import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart';
 import 'package:humble_warrior/view/home_option/common_home_option.dart';
 import 'package:readmore/readmore.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -16,17 +15,16 @@ import '../../utils/sizes/sizes_config.dart';
 class ProductDetailWidget {
   final AccountOptionTheme accountOptionTheme =
       Theme.of(Get.context!).extension<AccountOptionTheme>()!;
-  Widget productText(context) {
-    final ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
 
+  Widget productText(context, title) {
     return Container(
       decoration: CustomBoxDecorations().shadow(context: context),
       width: MediaQuery.of(Get.context!).size.width * .9,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const AppText(
-            "Vine Oh! for the Holidays !",
+          AppText(
+            "$title",
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
@@ -38,7 +36,7 @@ class ProductDetailWidget {
                   fontSize: 15),
               children: <TextSpan>[
                 TextSpan(
-                  text: '  Vine Oh! Ho Ho! Box is here !',
+                  text: '  $title',
                   style: TextStyle(color: AppColors.primary, fontSize: 15),
                 ),
               ],

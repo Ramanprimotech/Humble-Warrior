@@ -6,8 +6,9 @@ import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/image_path_assets.dart';
 
-import 'common_home_option.dart';
-import 'home_option_controller.dart';
+import '../../../utils/routes/app_routes.dart';
+import '../common_home_option.dart';
+import '../home_options_main/home_option_controller.dart';
 
 class FrontPageDeals extends StatelessWidget {
   const FrontPageDeals({Key? key}) : super(key: key);
@@ -54,34 +55,7 @@ class FrontPageDeals extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: index != controller.frontPageDealList.length
-                          ? ItemCard(
-                              buttons: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    shareButton(shareUrl: "shareUrl"),
-                                    IconButton(
-                                      onPressed: () {
-                                        // controller.select.value = !controller.select.value;
-                                      },
-                                      icon: Heart(
-                                        key: Key(index.toString()),
-                                        size: 28,
-                                      ),
-                                    ),
-                                    Image.asset(
-                                      ImagePathAssets.commentIcon,
-                                      height: 20,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              imageUrl: details.url!,
-                              title: details.productName.toString(),
-                            )
+                          ? frontPageCard(details, index)
                           : Obx(
                               () => Visibility(
                                   visible: controller.frontPageDealsBool.value,
@@ -250,4 +224,39 @@ class FrontPageDeals extends StatelessWidget {
     //   ),
     // );
   }
+}
+
+ItemCard frontPageCard(FrontPageDetails details, int index) {
+  return ItemCard(
+    onTap: () {
+      Get.toNamed(AppRoutes.frontPageProductDetail, arguments: [details]);
+    },
+    buttons: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          shareButton(shareUrl: "shareUrl"),
+          IconButton(
+            onPressed: () {
+              // controller.select.value = !controller.select.value;
+            },
+            icon: Heart(
+              key: Key(index.toString()),
+              size: 28,
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Image.asset(
+              ImagePathAssets.commentIcon,
+              height: 24,
+            ),
+          ),
+        ],
+      ),
+    ),
+    imageUrl: details.url!,
+    title: details.productName.toString(),
+  );
 }

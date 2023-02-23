@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
 import 'package:humble_warrior/modals/response/front_page_response_model.dart';
 
-import '../../modals/requests/pagination_modal.dart';
-import '../../modals/response/donna_deals_response.dart';
-import '../../network/api_call.dart';
+import '../../../modals/requests/pagination_modal.dart';
+import '../../../modals/response/donna_deals_response.dart';
+import '../../../network/api_call.dart';
 
 class HomeOptionController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -65,11 +65,12 @@ class HomeOptionController extends GetxController
     await CallAPI.donnaDeals(payload: paginationModel).then((value) {
       donnaDealsPage += 1;
       donnaDealList.addAll(value.data!);
-      donnaDealsBool.value = false;
+
       donnaDealListLength.value = donnaDealList.length;
       if (value.totalRecords != null) {
-        donnaDealListLength.value = int.parse(value.totalRecords!);
+        donnaDealsTotalDeals.value = int.parse(value.totalRecords!);
       }
+      donnaDealsBool.value = false;
       update();
     });
   }

@@ -5,9 +5,9 @@ import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
-import 'package:humble_warrior/view/home_option/home_option_controller.dart';
 
-import 'common_home_option.dart';
+import '../common_home_option.dart';
+import '../home_options_main/home_option_controller.dart';
 
 class DonnaDailyDeals extends StatelessWidget {
   const DonnaDailyDeals({Key? key}) : super(key: key);
@@ -53,51 +53,7 @@ class DonnaDailyDeals extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: index != controller.donnaDealList.length
-                      ? ItemCard(
-                          onTap: () {
-                            Get.toNamed(AppRoutes.dailyDealProductDetail);
-                          },
-                          radius: 10,
-                          buttons: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  shopButton(url: "${details.shopUrl}"),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  !(details.couponCode == null ||
-                                          details.couponCode == "")
-                                      ? codeButton(
-                                          code: "${details.couponCode}")
-                                      : const SizedBox(
-                                          width: 80,
-                                        ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      // controller.select.value = !controller.select.value;
-                                    },
-                                    icon: Heart(
-                                      key: Key(index.toString()),
-                                      size: 28,
-                                    ),
-                                  ),
-                                  shareButton(shareUrl: "shareUrl"),
-                                ],
-                              ),
-                            ],
-                          ),
-                          imageUrl: details.url!,
-                          title: details.dealName!,
-                        )
+                      ? donnaDealsCard(details, index)
                       : Obx(
                           () => Visibility(
                               visible: controller.donnaDealsBool.value,
@@ -206,4 +162,50 @@ class DonnaDailyDeals extends StatelessWidget {
     //   ),
     // );
   }
+}
+
+ItemCard donnaDealsCard(DonnaDealsDetails details, int index) {
+  return ItemCard(
+    onTap: () {
+      Get.toNamed(AppRoutes.dailyDealProductDetail, arguments: [details]);
+    },
+    radius: 10,
+    buttons: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            const SizedBox(
+              width: 10,
+            ),
+            shopButton(url: "${details.shopUrl}"),
+            const SizedBox(
+              width: 10,
+            ),
+            !(details.couponCode == null || details.couponCode == "")
+                ? codeButton(code: "${details.couponCode}")
+                : const SizedBox(
+                    width: 80,
+                  ),
+          ],
+        ),
+        Row(
+          children: [
+            IconButton(
+              onPressed: () {
+                // controller.select.value = !controller.select.value;
+              },
+              icon: Heart(
+                key: Key(index.toString()),
+                size: 28,
+              ),
+            ),
+            shareButton(shareUrl: "shareUrl"),
+          ],
+        ),
+      ],
+    ),
+    imageUrl: details.url!,
+    title: details.dealName!,
+  );
 }

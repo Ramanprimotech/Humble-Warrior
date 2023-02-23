@@ -127,30 +127,6 @@ Widget codeButton({required String code}) {
           fontSize: 14,
         )),
   );
-  return InkWell(
-    onTap: () {
-      CommonUtils().copyToClipboard(copyText: code);
-    },
-    child: Container(
-        alignment: Alignment.center,
-        // width: 100,
-        height: 30,
-        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
-        decoration: BoxDecoration(
-            color: AppColors.appGreen, borderRadius: BorderRadius.circular(20)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // AppIcons.cut(size: 16),
-            AppText(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-              code,
-              fontSize: 12,
-            ),
-          ],
-        )),
-  );
 }
 
 Widget shopButton({required url}) {

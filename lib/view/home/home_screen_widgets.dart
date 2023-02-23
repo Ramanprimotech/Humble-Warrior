@@ -30,6 +30,7 @@ class HomeScreenWidgets {
   final double productHeight = 60;
   final double brandLoveHeight = 50;
   final double brandHeight = 60;
+  final double productArrowIconPadding = 8;
 
   /// App Bar
   PreferredSize appBar() {
@@ -124,7 +125,7 @@ class HomeScreenWidgets {
             child: Positioned(
               left: 0,
               child: Container(
-                padding: EdgeInsets.only(left: 20),
+                padding: EdgeInsets.only(left: productArrowIconPadding),
                 child: GestureDetector(
                   onTap: () {
                     controller.productScrollController.animateTo(
@@ -146,7 +147,7 @@ class HomeScreenWidgets {
             child: Positioned(
               right: -5,
               child: Container(
-                padding: EdgeInsets.only(right: 20),
+                padding: EdgeInsets.only(right: productArrowIconPadding),
                 child: GestureDetector(
                   onTap: () {
                     controller.productScrollController.animateTo(

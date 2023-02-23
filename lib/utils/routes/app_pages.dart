@@ -6,22 +6,22 @@ import 'package:humble_warrior/view/bottom_navigation/bottom_navigation_binging.
 import 'package:humble_warrior/view/bottom_navigation/bottom_navigation_screen.dart';
 import 'package:humble_warrior/view/brands/brands_binding.dart';
 import 'package:humble_warrior/view/brands/brands_screen.dart';
-import 'package:humble_warrior/view/home_option/home_option_binging.dart';
-import 'package:humble_warrior/view/home_option/home_option_screen.dart';
+import 'package:humble_warrior/view/home_option/home_options_main/home_option_binging.dart';
 import 'package:humble_warrior/view/landing/intro_binding.dart';
 import 'package:humble_warrior/view/landing/intro_screen.dart';
 import 'package:humble_warrior/view/my_account/my_account_screen.dart';
-import 'package:humble_warrior/view/productDetail/daily_deal_product.dart';
-import 'package:humble_warrior/view/productDetail/daily_deal_product_binding.dart';
-import 'package:humble_warrior/view/productDetail/favourite_deals.dart';
-import 'package:humble_warrior/view/productDetail/favourite_deals_binding.dart';
+import 'package:humble_warrior/view/productDetail/daily_deals_details_screen/daily_deal_product.dart';
+import 'package:humble_warrior/view/productDetail/daily_deals_details_screen/daily_deal_product_binding.dart';
+import 'package:humble_warrior/view/productDetail/donna_favourite_details_screen/favourite_deals.dart';
 import 'package:humble_warrior/view/splash/splash_binding.dart';
 import 'package:humble_warrior/view/splash/splash_screen.dart';
 
 import '../../view/about_donna/about_binding.dart';
+import '../../view/home_option/home_options_main/home_option_screen.dart';
 import '../../view/my_account/my_account_binding.dart';
-import '../../view/productDetail/product_detail_screen.dart';
-import '../../view/productDetail/product_detail_binding.dart';
+import '../../view/productDetail/donna_favourite_details_screen/favourite_deals_binding.dart';
+import '../../view/productDetail/front_page_details_screen/front_page_detail_binding.dart';
+import '../../view/productDetail/front_page_details_screen/front_page_detail_screen.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -44,16 +44,16 @@ class AppPages {
         page: () => const HomeOptionScreen(),
         binding: HomeOptionBindings()),
     GetPage(
-        name: AppRoutes.productDetail,
-        page: () =>  ProductDetailScreen(),
-        binding: ProductDetailBinding()),
-    GetPage(
         name: AppRoutes.dailyDealProductDetail,
-        page: () =>  DailyDealProduct(),
+        page: () => DailyDealProduct(),
         binding: DailyDealProductBinding()),
     GetPage(
+        name: AppRoutes.frontPageProductDetail,
+        page: () => FrontPageDetailScreen(),
+        binding: FrontPageDetailBinding()),
+    GetPage(
         name: AppRoutes.favouriteDeal,
-        page: () =>  const FavouriteDeals(),
+        page: () => const FavouriteDeals(),
         binding: FavouriteDealsBinding()),
     GetPage(
         name: AppRoutes.aboutDonna,
@@ -65,7 +65,7 @@ class AppPages {
         binding: SplashBinding()),
     GetPage(
         name: AppRoutes.myAccount,
-        page: () =>  const MyAccount(),
+        page: () => const MyAccount(),
         binding: MyAccountBindings()),
     GetPage(
         name: AppRoutes.brands,

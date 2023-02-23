@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/view/home_option/home_option_controller.dart';
 
-import '../../utils/routes/app_routes.dart';
+import '../../../utils/routes/app_routes.dart';
+import '../home_options_main/home_option_controller.dart';
 
 class DonnaFavourite extends StatelessWidget {
   const DonnaFavourite({Key? key}) : super(key: key);
@@ -52,15 +52,15 @@ class DonnaFavourite extends StatelessWidget {
                   child: index != controller.donnaFavouriteDealList.length
                       ? InkWell(
                           onTap: () {
-                            Get.toNamed(AppRoutes.favouriteDeal);
+                            Get.toNamed(AppRoutes.favouriteDeal,
+                                arguments: [details]);
                           },
                           child: SizedBox(
                             height: 220,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(12),
                               child: CommonWidgets.networkImage(
-                                imageUrl: controller
-                                    .donnaFavouriteDealList[index].url!,
+                                imageUrl: details.url!,
                                 alignment: Alignment.center,
                                 width: Get.width,
                                 fit: BoxFit.cover,

@@ -35,12 +35,13 @@ class SplashController extends GetxController {
 
   @override
   void onInit() async {
+    await getTheme();
     await generateToken().then((value) => value
-        ? Future.delayed(const Duration(seconds: 5), () {
+        ? Future.delayed(const Duration(seconds: 3), () {
             getData();
           })
         : showError());
-    isDark.value = await getTheme();
+
     super.onInit();
   }
 
