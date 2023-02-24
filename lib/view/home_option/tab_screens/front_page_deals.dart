@@ -54,7 +54,7 @@ class FrontPageDeals extends StatelessWidget {
                 return Stack(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: 8.pa,
                       child: index != controller.frontPageDealList.length
                           ? frontPageCard(details, index)
                           : Obx(
@@ -74,10 +74,8 @@ class FrontPageDeals extends StatelessWidget {
                         angle: (360 - 45) * 3.1415927 / 180,
                         child: Stack(
                           alignment: Alignment.center,
-                          children: const [
-                            SizedBox(
-                              width: 23,
-                            ),
+                          children: [
+                            23.sw,
                             // CustomPaint(
                             //   size: const Size(220, 40),
                             //   //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
@@ -233,7 +231,7 @@ ItemCard frontPageCard(FrontPageDetails details, int index) {
       Get.toNamed(AppRoutes.frontPageProductDetail, arguments: [details]);
     },
     buttons: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: 15.ph,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

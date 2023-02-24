@@ -38,7 +38,7 @@ class HomeScreenWidgets {
     return PreferredSize(
       preferredSize: const Size.fromHeight(70.0),
       child: Padding(
-        padding: const EdgeInsets.only(top: 8.0),
+        padding: 8.pt,
         child: AppBar(
           centerTitle: false,
           title: CustomSearchBar(
@@ -50,7 +50,7 @@ class HomeScreenWidgets {
           ),
           actions: [
             Padding(
-              padding: const EdgeInsets.only(right: 15),
+              padding: 15.pr,
               child: InkWell(
                 onTap: () {},
                 child: AppIcons.notification(context),
@@ -87,13 +87,13 @@ class HomeScreenWidgets {
                 height: productHeight,
                 width: Get.width,
                 child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 0),
+                    padding: 0.ph,
                     scrollDirection: Axis.horizontal,
                     controller: controller.productScrollController,
                     itemCount: ProductImages.productImagesList.length,
                     itemBuilder: (ctx, index) {
                       return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        padding: 5.ph,
                         child: SizedBox(
                           height: productHeight,
                           width: 80,
@@ -261,7 +261,7 @@ class HomeScreenWidgets {
             color: Colors.grey.shade400,
           ),
           // Divider(color: Colors.black,thickness: 1),
-          SizedBox(height: 10,),
+          10.sh,
         ],
       ),
     );
@@ -382,7 +382,7 @@ class HomeScreenWidgets {
               ),
               5.sw,
               Padding(
-                padding: EdgeInsets.only(top: 2),
+                padding: 2.pt,
                 child: AppIcons.heart(
                   iconColor: Colors.red,
                 ),

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
+import 'package:humble_warrior/utils/common/common_appBar.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
@@ -12,7 +13,7 @@ import '../../../modals/response/donna_favourite_response_model.dart';
 import '../../../utils/app_icons.dart';
 import 'favourite_deals_controller.dart';
 
-class FavouriteDeals extends StatelessWidget {
+class FavouriteDeals extends StatelessWidget with CommonAppBar {
   const FavouriteDeals({Key? key}) : super(key: key);
 
   @override
@@ -22,11 +23,24 @@ class FavouriteDeals extends StatelessWidget {
     FavouriteDealController controller = Get.find();
     DonnaFavouriteDetails donnaFavouriteDetails = Get.arguments[0];
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(110.0),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 12.0),
-          child: AppBar(
+      appBar:AppBarWidget(
+        showBackButton: true,
+              title: CustomSearchBar(
+                focusNode: controller.focusNode,
+                textEditingController: controller.searchTextController,
+              ),),
+
+      // PreferredSize(
+      //   preferredSize: const Size.fromHeight(110.0),
+      //   child: Padding(
+      //     padding: 12.pt,
+      //     child: CommonAppBar().AppBarWidget(
+      //       showBackButton: true,
+      //       title: CustomSearchBar(
+      //         focusNode: controller.focusNode,
+      //         textEditingController: controller.searchTextController,
+      //       ),),
+          /*AppBar(
             leadingWidth: 35,
             centerTitle: false,
             title: CustomSearchBar(
@@ -41,9 +55,9 @@ class FavouriteDeals extends StatelessWidget {
                   padding: 20.pl,
                   child: AppIcons.backArrrowIos(),
                 )),
-          ),
-        ),
-      ),
+          ),*/
+       // ),
+    //  ),
       // CustomAppBar(
       // title: CustomSearchBar(textEditingController: TextEditingController(), focusNode: FocusNode(),),
       // showBackButton: true,

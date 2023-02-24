@@ -195,7 +195,7 @@ class BrandsScreen extends StatelessWidget {
   _aboutButton(context, color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      margin: 40.pb,
+      margin: 20.pb,
       width: MediaQuery.of(Get.context!).size.width,
       decoration: CustomBoxDecorations().shadow(context: context),
       child: Row(

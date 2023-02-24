@@ -34,7 +34,8 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
       child: Container(
         height: 200,
         width: Get.width,
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: 20.ps,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: dialogueThemeExtention.backGroundColor,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
+import 'package:humble_warrior/utils/common/common_appBar.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 
@@ -17,10 +18,16 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
     final DailyDealProductController controller = Get.find();
     final DonnaDealsDetails donnaDealsDetails = Get.arguments[0];
     return Scaffold(
-      appBar: PreferredSize(
+      appBar: CommonAppBar().AppBarWidget(
+        showBackButton: true,
+        title: CustomSearchBar(
+          focusNode: controller.focusNode,
+          textEditingController: controller.searchTextController,
+        ),),
+      /*PreferredSize(
         preferredSize: const Size.fromHeight(110.0),
         child: Padding(
-          padding: const EdgeInsets.only(top: 12.0),
+          padding: 12.pt,
           child: AppBar(
             leadingWidth: 35,
             centerTitle: false,
@@ -38,7 +45,7 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
                 )),
           ),
         ),
-      ),
+      ),*/
       // CustomAppBar(
       //   title: CustomSearchBar(
       //     textEditingController: TextEditingController(),

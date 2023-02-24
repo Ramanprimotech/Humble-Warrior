@@ -117,7 +117,7 @@ class MyAccWidget {
             right: 5,
             top: isSwitchRequired ? 0 : 0,
             bottom: isSwitchRequired ? 0 : 0),
-        margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+        margin: 10.pv,
         width: MediaQuery.of(Get.context!).size.width,
         decoration: CustomBoxDecorations().shadow(context: context,color: accountOptionTheme.backGroundColor,radius: 50),
         // decoration: BoxDecoration(

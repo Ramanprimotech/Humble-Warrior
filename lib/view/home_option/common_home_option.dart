@@ -87,7 +87,7 @@ class ItemCard extends StatelessWidget {
                           end: Alignment.bottomCenter),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: 8.pa,
                       child: AppText(
                         title,
                         fontWeight: FontWeight.w700,

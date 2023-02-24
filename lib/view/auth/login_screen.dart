@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
+import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
 import 'package:humble_warrior/view/auth/auth_widget.dart';
@@ -23,9 +24,7 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 100,
-              ),
+              100.sh,
               ClipRRect(
                 borderRadius: BorderRadius.circular(6.0),
                 child: Image.asset(
@@ -33,16 +32,12 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                   width: Get.width * .65,
                 ),
               ).centered().pLTRB(0, 20, 0, 10),
-              const SizedBox(
-                height: 40,
-              ),
+             40.sh,
               SizedBox(
                 height: 80 * 4,
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    20.sh,
 
                     /// Facebook
                     /*optionWidget(

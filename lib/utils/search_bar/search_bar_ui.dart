@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
+import 'package:humble_warrior/utils/helpers/extensions.dart';
 
 import '../image_path_assets.dart';
 
@@ -131,7 +132,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   }
 }
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget{
   const CustomAppBar({
     Key? key,
     required this.title,
@@ -158,12 +159,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+        padding: 15.ph,
         child: title,
       ),
       leadingWidth: leadWidth??20,
       leading: showBackButton ? Padding(
-          padding: const EdgeInsets.only(left: 20),
+          padding: 20.pl,
           child: GestureDetector(
             onTap: (){
               Get.back();

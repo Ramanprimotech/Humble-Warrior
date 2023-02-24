@@ -68,7 +68,7 @@ class IntroScreen extends StatelessWidget {
             // AppText("Look Good ❤ Feel Good ❤ Do Good",fontSize: TextSizes.large,color: Colors.pinkAccent),
             Container(
               height: 400,
-              margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              margin: 20.ps,
               padding: const EdgeInsets.only(
                   top: 40, bottom: 10, left: 20, right: 20),
               decoration: BoxDecoration(color: Colors.white, boxShadow: [

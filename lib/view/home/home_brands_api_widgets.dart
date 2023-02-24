@@ -53,7 +53,7 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
     return Padding(
       padding: 5.pb,
       child: ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: 20.ph,
         scrollDirection: Axis.horizontal,
         controller: controller.brandScrollController,
         itemCount: dataa.length,
@@ -81,7 +81,7 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
                     decoration: CustomBoxDecorations()
                         .shadow(context: context, color: Colors.grey.shade200),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: 8.pa,
                       child: Image.asset(
                         alignment: Alignment.center,
                         dataa[index].brandImage!,

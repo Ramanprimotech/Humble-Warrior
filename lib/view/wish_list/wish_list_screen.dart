@@ -21,7 +21,7 @@ class WishList extends StatelessWidget {
           child: controller.value == false
               ? Container(
                   height: 150,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  padding: 20.ps,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: dialogueThemeExtention.backGroundColor,
