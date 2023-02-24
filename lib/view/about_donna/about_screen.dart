@@ -20,9 +20,9 @@ class AboutScreen extends StatelessWidget {
     final HomeScreenController controller = Get.find();
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(110.0),
+        preferredSize: const Size.fromHeight(70.0),
         child: Padding(
-          padding: const EdgeInsets.only(top: 12.0),
+          padding: 12.pt,
           child: AppBar(
             leadingWidth: 35,
             centerTitle: false,
@@ -61,17 +61,13 @@ class AboutScreen extends StatelessWidget {
                   _showImg(),
                   _details(context),
                   _seeCopyButton(),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                    15.sh,
                 ]),
               ),
             ),
             HomeScreenWidgets(context: context, controller: controller)
                 .brandsList(),
-            const SizedBox(
-              height: 25,
-            ),
+                25.sh,
           ],
         ),
       ),
@@ -81,7 +77,8 @@ class AboutScreen extends StatelessWidget {
   _aboutButton(context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 15),
+      // padding: 20.ps,
+      margin: 15.pv,
       width: MediaQuery.of(Get.context!).size.width,
       decoration: CustomBoxDecorations().shadow(context: context),
       child: AppText(aboutDonnaTxt,
@@ -108,7 +105,7 @@ class AboutScreen extends StatelessWidget {
   _details(context) {
     return Container(
       padding: 10.pa,
-      margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+      margin: 15.pv,
       width: Get.width,
       decoration: CustomBoxDecorations().shadow(context: context),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

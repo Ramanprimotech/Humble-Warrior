@@ -52,7 +52,7 @@ class DonnaDailyDeals extends StatelessWidget {
                   details = controller.donnaDealList[index];
                 }
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: 8.pa,
                   child: index != controller.donnaDealList.length
                       ? donnaDealsCard(details, index)
                       : Obx(
@@ -184,9 +184,7 @@ ItemCard donnaDealsCard(DonnaDealsDetails details, int index) {
             ),
             !(details.couponCode == null || details.couponCode == "")
                 ? codeButton(code: "${details.couponCode}")
-                : const SizedBox(
-                    width: 80,
-                  ),
+                : 80.sw,
           ],
         ),
         Row(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
 import 'package:humble_warrior/view/home/home_screen_widgets.dart';
 
@@ -24,15 +25,11 @@ class HomeScreen extends StatelessWidget {
             Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 8,
-            ),
+            8.sh,
 
             ///Home Screen Categories List
             homeScreenWidgets.productList(),
-            const SizedBox(
-              height: 8,
-            ),
+            8.sh,
 
             ///Home Option List Future Builder
             homeScreenWidgets.homeOptionListTwo(),

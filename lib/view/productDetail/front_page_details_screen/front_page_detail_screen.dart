@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/common/common_appBar.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/view/productDetail/front_page_details_screen/front_page_detail_controller.dart';
 import 'package:humble_warrior/view/productDetail/product_detail_widget.dart';
@@ -18,10 +19,16 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
     final FrontPageDetailController controller = Get.find();
     final FrontPageDetails details = Get.arguments[0];
     return Scaffold(
-      appBar: PreferredSize(
+      appBar: CommonAppBar().AppBarWidget(
+        showBackButton: true,
+        title: CustomSearchBar(
+          focusNode: controller.focusNode,
+          textEditingController: controller.searchTextController,
+        ),),
+      /*PreferredSize(
         preferredSize: const Size.fromHeight(80.0),
         child: Padding(
-          padding: const EdgeInsets.only(top: 12.0),
+          padding: 12.pt,
           child: AppBar(
             leadingWidth: 35,
             centerTitle: false,
@@ -39,7 +46,7 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
                 )),
           ),
         ),
-      ),
+      ),*/
       // AppBar(
       //   centerTitle: true,
       //   title: CustomSearchBar(

@@ -112,7 +112,7 @@ class ItemCard extends StatelessWidget {
 
 Widget codeButton({required String code}) {
   return IconButton(
-    onPressed: () async {
+    onPressed: ()async{
       CommonUtils().copyToClipboard(copyText: code);
     },
     icon: Container(
@@ -162,6 +162,7 @@ Widget shareButton({required shareUrl}) {
       CommonUtils().share(shareUrl: "$shareUrl");
     },
     icon: AppIcons.share(),
+
   );
 }
 

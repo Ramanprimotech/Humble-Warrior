@@ -23,7 +23,7 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(110.0),
         child: Padding(
-          padding: const EdgeInsets.only(top: 12.0),
+          padding: 12.pt,
           child: AppBar(
             leadingWidth: 35,
             centerTitle: false,
@@ -54,7 +54,7 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
                 ]),
             actions: [
               Padding(
-                padding: const EdgeInsets.only(right: 15),
+                padding: 15.pr,
                 child: InkWell(onTap: () {}, child: AppIcons.filter()),
               )
             ],
