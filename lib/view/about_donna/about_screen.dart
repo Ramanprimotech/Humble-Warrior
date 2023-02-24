@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
+import 'package:humble_warrior/utils/common/common_appBar.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
@@ -19,7 +20,13 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeScreenController controller = Get.find();
     return Scaffold(
-      appBar: PreferredSize(
+      appBar: CommonAppBar().AppBarWidget(
+        showBackButton: true,
+        title: CustomSearchBar(
+          focusNode: controller.focusNode,
+          textEditingController: controller.searchTextController,
+        ),),
+      /*PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
         child: Padding(
           padding: 12.pt,
@@ -40,7 +47,7 @@ class AboutScreen extends StatelessWidget {
                 )),
           ),
         ),
-      ),
+      ),*/
       // CustomAppBar(
       //
       //   title: CustomSearchBar(
