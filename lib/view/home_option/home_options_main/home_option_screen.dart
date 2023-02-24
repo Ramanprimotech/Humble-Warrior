@@ -17,6 +17,7 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
 
   @override
   Widget build(BuildContext context) {
+    const double tabFontSize = 18;
     // final HomeOptionController controller = Get.find();
     return Scaffold(
       appBar: PreferredSize(
@@ -42,9 +43,14 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
                 isScrollable: true,
                 controller: controller.tabController,
                 tabs: <Widget>[
-                  AppText(donnaDailyDealTxt.upperCamelCase),
-                  AppText(donnaFavouriteDealTxt.upperCamelCase),
-                  AppText(donnaFrontPageDealTxt.upperCamelCase)
+                  AppText(
+                    donnaDailyDealTxt.upperCamelCase,
+                    fontSize: tabFontSize,
+                  ),
+                  AppText(donnaFavouriteDealTxt.upperCamelCase,
+                      fontSize: tabFontSize),
+                  AppText(donnaFrontPageDealTxt.upperCamelCase,
+                      fontSize: tabFontSize)
                 ]),
             actions: [
               Padding(

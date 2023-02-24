@@ -1,7 +1,7 @@
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -14,11 +14,13 @@ import '../../utils/theme_extention/custom_notice_theme_extention.dart';
 class WebViewScreenWidget extends StatefulWidget {
   final String url;
   final String? title;
+  final bool? home;
 
   const WebViewScreenWidget({
     Key? key,
     required this.url,
-     this.title,
+    this.title,
+    this.home = true,
   }) : super(key: key);
 
   @override
@@ -31,7 +33,9 @@ class _WebViewScreenWidgetState extends State<WebViewScreenWidget> {
   bool canGoBool = false;
   bool loading = false;
   bool errorBool = false;
-  String  errorText = "";
+  String errorText = "";
+
+  // ValueNotifier<String> loadingText = ValueNotifier("Loading....");
 
   @override
   void initState() {
@@ -43,9 +47,12 @@ class _WebViewScreenWidgetState extends State<WebViewScreenWidget> {
         NavigationDelegate(
           onProgress: (int progress) {
             loading = true;
+            // loadingText.value = "Loading...$progress%";
             // Update loading bar.
           },
           onPageStarted: (String url) {
+            log("Web Page", name: "web Check", error: "url: ${widget.url}");
+
             canGo();
           },
           onPageFinished: (String url) {
@@ -57,7 +64,10 @@ class _WebViewScreenWidgetState extends State<WebViewScreenWidget> {
             errorBool = true;
             errorText = error.description;
             canGo();
-            log(error.description,name : "web Check" ,error : error.description);
+            log(error.description,
+                name: "web Check",
+                error:
+                    "type: ${error.errorType} code: ${error.errorCode} dis: ${error.description} url: ${widget.url}");
             setState(() {});
           },
           onNavigationRequest: (NavigationRequest request) {
@@ -83,6 +93,7 @@ class _WebViewScreenWidgetState extends State<WebViewScreenWidget> {
   Future canGo() async {
     canGoBool = await _webViewController.canGoBack();
     setState(() {});
+    return canGoBool;
   }
 
   @override
@@ -94,17 +105,18 @@ class _WebViewScreenWidgetState extends State<WebViewScreenWidget> {
       appBar: AppBar(
         elevation: 5,
         leading: Visibility(
-          visible: canGoBool,
-          child: IconButton(
-            icon: AppIcons.backArrrowIos(),
-            onPressed: () {
-              _webViewController.goBack();
-            },
-          )
-        ),
+            visible: canGoBool,
+            child: IconButton(
+              icon: AppIcons.backArrrowIos(),
+              onPressed: () {
+                canGo().then((value) {
+                  value ? _webViewController.goBack() : Get.back();
+                });
+              },
+            )),
         automaticallyImplyLeading: canGoBool,
         title: AppText(
-          widget.title??"",
+          widget.title!,
           fontWeight: FontWeight.w700,
         ),
       ),
@@ -116,29 +128,34 @@ class _WebViewScreenWidgetState extends State<WebViewScreenWidget> {
                   height: 150,
                   padding: 20.pa,
                   decoration: CustomBoxDecorations().shadow(context: context),
-                  child: Column(children: [
-                    AppText(errorText,
-                        color: dialogueThemeExtention.textColor, fontSize: 20),
-                    20.sh,
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        elevation: 5,
-                        // fixedSize: const Size(, 35),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        backgroundColor: dialogueThemeExtention.buttonColor,
-                      ),
-                      onPressed: () {
-                        canGo();
-                        loading = true;
-                        errorBool = false;
-                        setState(() {});
-                        _webViewController.reload();
-                      },
-                      child: const AppText(retry,
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                  ]),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        AppText(errorText,
+                            maxLines: 4,
+                            color: dialogueThemeExtention.textColor,
+                            fontSize: 16),
+                        20.sh,
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            elevation: 5,
+                            // fixedSize: const Size(, 35),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            backgroundColor: dialogueThemeExtention.buttonColor,
+                          ),
+                          onPressed: () {
+                            canGo();
+                            loading = true;
+                            errorBool = false;
+                            setState(() {});
+                            _webViewController.clearCache();
+                            _webViewController.reload();
+                          },
+                          child: const AppText(retry,
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ]),
                 ),
               ),
             )
@@ -154,12 +171,21 @@ class _WebViewScreenWidgetState extends State<WebViewScreenWidget> {
                       AppText(
                         "Loading...",
                         fontSize: 24,
-                      )
+                      ),
+                      // ValueListenableBuilder(
+                      //   valueListenable: loadingText,
+                      //   builder: (BuildContext context, value, Widget? widget) {
+                      //     return AppText(
+                      //       value,
+                      //       fontSize: 24,
+                      //     );
+                      //   },
+                      // )
                     ],
                   ),
                 )
               : WebViewWidget(
-                  key:widget.title!=null ? Key(widget.title!) : null,
+                  key: widget.title != null ? Key(widget.title!) : null,
                   controller: _webViewController,
                 ),
     );

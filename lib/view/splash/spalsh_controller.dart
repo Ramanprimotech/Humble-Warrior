@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/network/api_call.dart';
 import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
 import 'package:humble_warrior/utils/shared_prefrence/shared_pref.dart';
+import 'package:humble_warrior/utils/token_generator.dart';
 
 import '../../modals/requests/token_model_request.dart';
 import '../../network/endpoints.dart';
@@ -36,12 +37,10 @@ class SplashController extends GetxController {
   @override
   void onInit() async {
     await getTheme();
-    await generateToken().then((value) => value
-        ? Future.delayed(const Duration(seconds: 3), () {
-            getData();
-          })
-        : showError());
-
+    Future.delayed(const Duration(seconds: 3), () {
+      getData();
+    });
+    TokenManager(onTokenGenerate: () {}, onTokenEror: showError).init();
     super.onInit();
   }
 
@@ -62,6 +61,7 @@ class SplashController extends GetxController {
       }
       Endpoints.token = value.token.toString();
       log(value.token.toString());
+      log(Endpoints.token.toString());
     });
     return true;
   }

@@ -17,168 +17,47 @@ class AppTheme {
 
 ThemeData _lightTheme = ThemeData.from(
   colorScheme: ColorScheme.light(primary: AppColors.primary),
-  textTheme: TextTheme(
-    displayLarge: _textTheme.displayLarge!.copyWith(
-      color: AppColors.gray,
-    ),
-    displayMedium: _textTheme.displayMedium!.copyWith(
-      color: AppColors.gray,
-    ),
-    displaySmall: _textTheme.displaySmall!.copyWith(
-      color: AppColors.gray,
-    ),
-    headlineMedium: _textTheme.headlineMedium!.copyWith(
-      color: AppColors.gray,
-    ),
-    headlineSmall: _textTheme.headlineSmall!.copyWith(
-      color: AppColors.gray,
-    ),
-    titleLarge: _textTheme.titleLarge!.copyWith(
-      color: AppColors.gray,
-    ),
-    titleMedium: _textTheme.titleMedium!.copyWith(
-      color: AppColors.gray,
-    ),
-    titleSmall: _textTheme.titleSmall!.copyWith(
-      color: AppColors.gray,
-    ),
-    bodyLarge: _textTheme.bodyLarge!.copyWith(
-      color: AppColors.gray,
-    ),
-    bodyMedium: _textTheme.bodyMedium!.copyWith(
-      color: AppColors.gray,
-    ),
-    labelLarge: _textTheme.labelLarge!.copyWith(
-      color: AppColors.gray,
-    ),
-    bodySmall: _textTheme.bodySmall!.copyWith(
-      color: AppColors.gray,
-    ),
-    labelSmall: _textTheme.labelSmall!.copyWith(
-      color: AppColors.gray,
-    ),
-  ),
+  textTheme: lightTextTheme,
 ).copyWith(
-  extensions: <ThemeExtension>[
-    ImageIconTheme(textColor: Colors.black, backGroundColor: Colors.black),
-    ShopNowTheme(textColor: AppColors.white, backGroundColor: AppColors.pink),
-    AccountOptionTheme(
-        shadow: AppColors.shadowLight,
-        textColor: AppColors.greyText,
-        backGroundColor: AppColors.white),
-    const ShadowTheme(shadowColor: AppColors.shadowLight),
-    DialogueThemeExtention(
-        backGroundColor: AppColors.white,
-        textColor: AppColors.black,
-        buttonColor: AppColors.primary,
-        shadow: AppColors.shadowDark),
-  ],
-  cupertinoOverrideTheme: CupertinoThemeData(
-      textTheme:
-          CupertinoTextThemeData(textStyle: TextStyle(color: AppColors.black))),
-  scaffoldBackgroundColor: AppColors.white,
-  dialogBackgroundColor: AppColors.white,
-
-  iconTheme: IconThemeData(color: AppColors.primary),
-  useMaterial3: true,
-  floatingActionButtonTheme:
-      const FloatingActionButtonThemeData(backgroundColor: AppColors.white),
-  appBarTheme: AppBarTheme(
-    elevation: 0,
-    centerTitle: true,
-    titleTextStyle: TextStyle(color: AppColors.gray),
-    surfaceTintColor: Colors.transparent,
-    backgroundColor: AppColors.white,
-    iconTheme: IconThemeData(color: AppColors.gray),
-    actionsIconTheme: IconThemeData(color: AppColors.gray),
-    // foregroundColor: AppColors.textLight,
-    //systemOverlayStyle: SystemUiOverlayStyle.dark,
-  ),
-  tabBarTheme: TabBarTheme(
-    labelColor: AppColors.primary,
-    unselectedLabelColor: AppColors.black,
-    indicator: UnderlineTabIndicator(
-        borderSide: BorderSide(width: 3.0, color: AppColors.primary),
-        insets: EdgeInsets.symmetric(horizontal: 150.0)),
-  ),
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    // backgroundColor: ,
-    elevation: 10,
-    showUnselectedLabels: true,
-    selectedItemColor: AppColors.primary,
-    selectedIconTheme: IconThemeData(color: AppColors.primary, size: 32),
-    unselectedIconTheme: IconThemeData(color: AppColors.black, size: 32),
-    selectedLabelStyle: TextStyle(color: AppColors.primary, fontSize: 12),
-    unselectedLabelStyle: TextStyle(color: AppColors.black),
-    type: BottomNavigationBarType.fixed,
-  ),
-  // inputDecorationTheme: InputDecorationTheme(
-  //   alignLabelWithHint: true,
-  //   filled: true,
-  //   fillColor: AppColors.backgroundLight,
-  //   labelStyle: TextStyle(
-  //     color: AppColors.textDark,
-  //     fontFamily: appFontFamily,
-  //   ),
-  //   hintStyle: TextStyle(
-  //     color: AppColors.textDark,
-  //     fontFamily: appFontFamily,
-  //   ),
-  //   isDense: true,
-  // ),
-  // switchTheme: SwitchThemeData(
-  //   thumbColor: MaterialStateProperty.resolveWith(
-  //         () => .contains(MaterialState.selected) ? Colors.white : AppColors.thumbColor,
-  //   ),
-  //   trackColor: MaterialStateProperty.resolveWith(
-  //         () => .contains(MaterialState.selected) ? AppColors.primaryLight : Colors.grey,
-  //   ),
-  // ),
-);
+    extensions: <ThemeExtension>[
+      const ImageIconTheme(
+          textColor: Colors.black, backGroundColor: Colors.black),
+      ShopNowTheme(textColor: AppColors.white, backGroundColor: AppColors.pink),
+      AccountOptionTheme(
+          shadow: AppColors.shadowLight,
+          textColor: AppColors.greyText,
+          backGroundColor: AppColors.white),
+      const ShadowTheme(shadowColor: AppColors.shadowLight),
+      DialogueThemeExtention(
+          backGroundColor: AppColors.white,
+          textColor: AppColors.black,
+          buttonColor: AppColors.primary,
+          shadow: AppColors.shadowDark),
+    ],
+    cupertinoOverrideTheme: const CupertinoThemeData(
+        textTheme: CupertinoTextThemeData(
+            textStyle: TextStyle(color: AppColors.black))),
+    scaffoldBackgroundColor: AppColors.white,
+    dialogBackgroundColor: AppColors.white,
+    iconTheme: IconThemeData(color: AppColors.primary),
+    useMaterial3: true,
+    floatingActionButtonTheme:
+        const FloatingActionButtonThemeData(backgroundColor: AppColors.white),
+    appBarTheme: AppBarTheme(
+      elevation: 0,
+      centerTitle: true,
+      titleTextStyle: TextStyle(color: AppColors.gray),
+      surfaceTintColor: Colors.transparent,
+      backgroundColor: AppColors.white,
+      iconTheme: IconThemeData(color: AppColors.gray),
+      actionsIconTheme: IconThemeData(color: AppColors.gray),
+    ),
+    tabBarTheme: lightTabBarTheme,
+    bottomNavigationBarTheme: lightBottomNavigationBarThemeData);
 
 ThemeData _darkTheme = ThemeData.from(
   colorScheme: ColorScheme.dark(primary: AppColors.primary),
-  textTheme: TextTheme(
-    displayLarge: _textTheme.displayLarge!.copyWith(
-      color: AppColors.white,
-    ),
-    displayMedium: _textTheme.displayMedium!.copyWith(
-      color: AppColors.white,
-    ),
-    displaySmall: _textTheme.displaySmall!.copyWith(
-      color: AppColors.white,
-    ),
-    headlineMedium: _textTheme.headlineMedium!.copyWith(
-      color: AppColors.white,
-    ),
-    headlineSmall: _textTheme.headlineSmall!.copyWith(
-      color: AppColors.white,
-    ),
-    titleLarge: _textTheme.titleLarge!.copyWith(
-      color: AppColors.white,
-    ),
-    titleMedium: _textTheme.titleMedium!.copyWith(
-      color: AppColors.white,
-    ),
-    titleSmall: _textTheme.titleSmall!.copyWith(
-      color: AppColors.white,
-    ),
-    bodyLarge: _textTheme.bodyLarge!.copyWith(
-      color: AppColors.white,
-    ),
-    bodyMedium: _textTheme.bodyMedium!.copyWith(
-      color: AppColors.white,
-    ),
-    labelLarge: _textTheme.labelLarge!.copyWith(
-      color: AppColors.white,
-    ),
-    bodySmall: _textTheme.bodySmall!.copyWith(
-      color: AppColors.white,
-    ),
-    labelSmall: _textTheme.labelSmall!.copyWith(
-      color: AppColors.white,
-    ),
-  ),
+  textTheme: darkTextTheme,
 ).copyWith(
   extensions: <ThemeExtension<dynamic>>[
     ImageIconTheme(textColor: Colors.white, backGroundColor: AppColors.gray),
@@ -194,79 +73,18 @@ ThemeData _darkTheme = ThemeData.from(
         buttonColor: AppColors.primary,
         shadow: AppColors.shadowLight),
   ],
-  cupertinoOverrideTheme: CupertinoThemeData(
+  cupertinoOverrideTheme: const CupertinoThemeData(
       textTheme:
           CupertinoTextThemeData(textStyle: TextStyle(color: AppColors.white))),
   scaffoldBackgroundColor: AppColors.backgroundDark,
   iconTheme: const IconThemeData(color: AppColors.white),
-  floatingActionButtonTheme:
-      FloatingActionButtonThemeData(backgroundColor: AppColors.backgroundDark),
-  // dialogBackgroundColor: AppColors.dialogDark,
-  appBarTheme: AppBarTheme(
-    elevation: 0,
-    centerTitle: true,
-    titleTextStyle: const TextStyle(color: AppColors.white),
-    backgroundColor: AppColors.backgroundDark,
-    surfaceTintColor: Colors.transparent,
-    iconTheme: const IconThemeData(color: AppColors.white),
-    actionsIconTheme: const IconThemeData(color: AppColors.white),
-    foregroundColor: AppColors.gray,
-    // systemOverlayStyle: SystemUiOverlayStyle.light,
-  ),
-  // dialogTheme: DialogTheme(
-  //   backgroundColor: AppColors.dialogDark,
-  //   shape: 12.shape,
-  // ),
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    // backgroundColor: ,
-    elevation: 10,
-    backgroundColor: AppColors.backgroundDark,
-    showUnselectedLabels: true,
-    selectedItemColor: AppColors.primary,
-    selectedIconTheme: IconThemeData(color: AppColors.primary, size: 32),
-    unselectedIconTheme: IconThemeData(color: AppColors.gray, size: 32),
-    selectedLabelStyle: TextStyle(color: AppColors.primary, fontSize: 12),
-    unselectedLabelStyle: TextStyle(color: AppColors.gray),
-    type: BottomNavigationBarType.fixed,
-  ),
-  // checkboxTheme: CheckboxThemeData(
-  //   checkColor: MaterialStateProperty.resolveWith((_) => Colors.white),
-  //   fillColor: MaterialStateProperty.resolveWith(
-  //           () => .contains(MaterialState.selected) ? AppColors.primaryDark : AppColors.textDark),
-  //   shape: 4.shape as OutlinedBorder?,
-  //   visualDensity: VisualDensity.compact,
-  // ),
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: AppColors.backgroundDark),
+  appBarTheme: darkAppBarTheme,
+  bottomNavigationBarTheme: darkBottomNavigationBarThemeData,
   errorColor: AppColors.white,
-  tabBarTheme: TabBarTheme(
-    labelColor: AppColors.primary,
-    unselectedLabelColor: AppColors.white,
-    indicator: UnderlineTabIndicator(
-      borderSide: BorderSide(width: 3.0, color: AppColors.primary),
-    ),
-  ),
+  tabBarTheme: darkTabBarTheme,
   useMaterial3: true,
-  // inputDecorationTheme: InputDecorationTheme(
-  //   alignLabelWithHint: true,
-  //   filled: true,
-  //   fillColor: AppColors.backgroundDark,
-  //   labelStyle: TextStyle(
-  //     color: AppColors.textDark,
-  //     fontFamily: appFontFamily,
-  //   ),
-  //   hintStyle: TextStyle(
-  //     color: AppColors.textDark,
-  //     fontFamily: appFontFamily,
-  //   ),
-  //   isDense: true,
-  // ),
-  // switchTheme: SwitchThemeData(
-  //   thumbColor: MaterialStateProperty.resolveWith(
-  //         () => .contains(MaterialState.selected) ? Colors.white : AppColors.thumbColor,
-  //   ),
-  //   trackColor: MaterialStateProperty.resolveWith(
-  //         () => .contains(MaterialState.selected) ? AppColors.primaryDark : Colors.grey,
-  //   ),
-  // ),
 );
 
 final TextTheme _textTheme = TextTheme(
@@ -332,5 +150,164 @@ final TextTheme _textTheme = TextTheme(
     fontSize: 12,
     fontWeight: FontWeight.w400,
     letterSpacing: 1.5,
+  ),
+);
+
+///====================Text Theme===========================///
+///---Light
+TextTheme lightTextTheme = TextTheme(
+  displayLarge: _textTheme.displayLarge!.copyWith(
+    color: AppColors.gray,
+  ),
+  displayMedium: _textTheme.displayMedium!.copyWith(
+    color: AppColors.gray,
+  ),
+  displaySmall: _textTheme.displaySmall!.copyWith(
+    color: AppColors.gray,
+  ),
+  headlineMedium: _textTheme.headlineMedium!.copyWith(
+    color: AppColors.gray,
+  ),
+  headlineSmall: _textTheme.headlineSmall!.copyWith(
+    color: AppColors.gray,
+  ),
+  titleLarge: _textTheme.titleLarge!.copyWith(
+    color: AppColors.gray,
+  ),
+  titleMedium: _textTheme.titleMedium!.copyWith(
+    color: AppColors.gray,
+  ),
+  titleSmall: _textTheme.titleSmall!.copyWith(
+    color: AppColors.gray,
+  ),
+  bodyLarge: _textTheme.bodyLarge!.copyWith(
+    color: AppColors.gray,
+  ),
+  bodyMedium: _textTheme.bodyMedium!.copyWith(
+    color: AppColors.gray,
+  ),
+  labelLarge: _textTheme.labelLarge!.copyWith(
+    color: AppColors.gray,
+  ),
+  bodySmall: _textTheme.bodySmall!.copyWith(
+    color: AppColors.gray,
+  ),
+  labelSmall: _textTheme.labelSmall!.copyWith(
+    color: AppColors.gray,
+  ),
+);
+
+///---Dark
+TextTheme darkTextTheme = TextTheme(
+  displayLarge: _textTheme.displayLarge!.copyWith(
+    color: AppColors.white,
+  ),
+  displayMedium: _textTheme.displayMedium!.copyWith(
+    color: AppColors.white,
+  ),
+  displaySmall: _textTheme.displaySmall!.copyWith(
+    color: AppColors.white,
+  ),
+  headlineMedium: _textTheme.headlineMedium!.copyWith(
+    color: AppColors.white,
+  ),
+  headlineSmall: _textTheme.headlineSmall!.copyWith(
+    color: AppColors.white,
+  ),
+  titleLarge: _textTheme.titleLarge!.copyWith(
+    color: AppColors.white,
+  ),
+  titleMedium: _textTheme.titleMedium!.copyWith(
+    color: AppColors.white,
+  ),
+  titleSmall: _textTheme.titleSmall!.copyWith(
+    color: AppColors.white,
+  ),
+  bodyLarge: _textTheme.bodyLarge!.copyWith(
+    color: AppColors.white,
+  ),
+  bodyMedium: _textTheme.bodyMedium!.copyWith(
+    color: AppColors.white,
+  ),
+  labelLarge: _textTheme.labelLarge!.copyWith(
+    color: AppColors.white,
+  ),
+  bodySmall: _textTheme.bodySmall!.copyWith(
+    color: AppColors.white,
+  ),
+  labelSmall: _textTheme.labelSmall!.copyWith(
+    color: AppColors.white,
+  ),
+);
+
+///====================Bottom Navigation Theme===========================///
+///---Light
+BottomNavigationBarThemeData lightBottomNavigationBarThemeData =
+    BottomNavigationBarThemeData(
+  elevation: 10,
+  showUnselectedLabels: true,
+  selectedItemColor: AppColors.primary,
+  selectedIconTheme: IconThemeData(color: AppColors.primary, size: 32),
+  unselectedIconTheme: IconThemeData(color: AppColors.black, size: 32),
+  selectedLabelStyle: TextStyle(color: AppColors.primary, fontSize: 12),
+  unselectedLabelStyle: TextStyle(color: AppColors.black),
+  type: BottomNavigationBarType.fixed,
+);
+
+///---Dark
+BottomNavigationBarThemeData darkBottomNavigationBarThemeData =
+    BottomNavigationBarThemeData(
+  elevation: 10,
+  backgroundColor: AppColors.backgroundDark,
+  showUnselectedLabels: true,
+  selectedItemColor: AppColors.primary,
+  selectedIconTheme: IconThemeData(color: AppColors.primary, size: 32),
+  unselectedIconTheme: IconThemeData(color: AppColors.gray, size: 32),
+  selectedLabelStyle: TextStyle(color: AppColors.primary, fontSize: 12),
+  unselectedLabelStyle: TextStyle(color: AppColors.gray),
+  type: BottomNavigationBarType.fixed,
+);
+
+///====================App Bar Theme===========================///
+///---Light
+AppBarTheme lightAppBarTheme = AppBarTheme(
+  elevation: 0,
+  centerTitle: true,
+  titleTextStyle: const TextStyle(color: AppColors.white),
+  backgroundColor: AppColors.backgroundDark,
+  surfaceTintColor: Colors.transparent,
+  iconTheme: const IconThemeData(color: AppColors.white),
+  actionsIconTheme: const IconThemeData(color: AppColors.white),
+  foregroundColor: AppColors.gray,
+);
+
+///---Dark
+AppBarTheme darkAppBarTheme = AppBarTheme(
+  elevation: 0,
+  centerTitle: true,
+  titleTextStyle: const TextStyle(color: AppColors.white),
+  backgroundColor: AppColors.backgroundDark,
+  surfaceTintColor: Colors.transparent,
+  iconTheme: const IconThemeData(color: AppColors.white),
+  actionsIconTheme: const IconThemeData(color: AppColors.white),
+  foregroundColor: AppColors.gray,
+);
+
+///====================Tab Bar Theme===========================///
+///---Light
+TabBarTheme lightTabBarTheme = TabBarTheme(
+  labelColor: AppColors.primary,
+  unselectedLabelColor: AppColors.black,
+  indicator: UnderlineTabIndicator(
+    borderSide: BorderSide(width: 3.0, color: AppColors.primary),
+  ),
+);
+
+///---Dark
+TabBarTheme darkTabBarTheme = TabBarTheme(
+  labelColor: AppColors.primary,
+  unselectedLabelColor: AppColors.white,
+  indicator: UnderlineTabIndicator(
+    borderSide: BorderSide(width: 3.0, color: AppColors.primary),
   ),
 );

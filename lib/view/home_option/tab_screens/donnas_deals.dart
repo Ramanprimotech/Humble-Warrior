@@ -178,10 +178,10 @@ ItemCard donnaDealsCard(DonnaDealsDetails details, int index) {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding:8.pl,
-              child: shopButton(url: "${details.shopUrl}"),
+              padding: 8.pl,
+              child: shopButton(
+                  url: "${details.shopUrl}", title: details.dealName!),
             ),
-
             !(details.couponCode == null || details.couponCode == "")
                 ? codeButton(code: "${details.couponCode}")
                 : const SizedBox(
@@ -190,7 +190,6 @@ ItemCard donnaDealsCard(DonnaDealsDetails details, int index) {
           ],
         ),
         Row(
-
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             IconButton(

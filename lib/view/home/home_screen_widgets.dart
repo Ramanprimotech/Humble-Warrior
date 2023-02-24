@@ -52,7 +52,13 @@ class HomeScreenWidgets {
             Padding(
               padding: const EdgeInsets.only(right: 15),
               child: InkWell(
-                onTap: () {},
+                onTap: () async {
+                  // SharedPreferences _prefs =
+                  //     await SharedPreferences.getInstance();
+                  // _prefs!.setString("token", null);
+                  //
+                  // _prefs!.setString(_TOKEN_EXPIRY_KEY);
+                },
                 child: AppIcons.notification(context),
               ),
             )
@@ -82,7 +88,8 @@ class HomeScreenWidgets {
       children: [
         Row(
           children: [
-            Expanded(// flex: 8,
+            Expanded(
+              // flex: 8,
               child: Container(
                 height: productHeight,
                 width: Get.width,
@@ -125,7 +132,9 @@ class HomeScreenWidgets {
               left: 0,
               child: Container(
                 alignment: Alignment.center,
-                color: Theme.of(context).scaffoldBackgroundColor,height: brandHeight , width: arrowWidth,
+                color: Theme.of(context).scaffoldBackgroundColor,
+                height: brandHeight,
+                width: arrowWidth,
                 padding: EdgeInsets.only(left: productArrowIconPadding),
                 child: GestureDetector(
                   onTap: () {
@@ -150,7 +159,8 @@ class HomeScreenWidgets {
               right: 0,
               child: Container(
                 alignment: Alignment.center,
-                color: Theme.of(context).scaffoldBackgroundColor,height: brandHeight , width: arrowWidth,
+                color: Theme.of(context).scaffoldBackgroundColor,
+                height: brandHeight, width: arrowWidth,
                 // padding: EdgeInsets.only(right: productArrowIconPadding),
                 child: GestureDetector(
                   onTap: () {
@@ -201,7 +211,6 @@ class HomeScreenWidgets {
             children: [
               Row(
                 children: [
-
                   Expanded(
                     flex: 10,
                     child: Container(
@@ -215,42 +224,53 @@ class HomeScreenWidgets {
                       child: brandListAPIBuilder(),
                     ),
                   ),
-
                 ],
               ),
-              Obx(()=>
-                  Visibility(
-                    visible:controller.brandListBack.value ,
-                    child: Positioned(
-                      left: 0,
-                      child: GestureDetector(
-                          onTap: () {
-                            controller.brandScrollController.animateTo(
-                                controller.brandScrollController.offset - (80 * 2),
-                                duration: const Duration(milliseconds: 150),
-                                curve: Curves.linear);
-                          },
-                          child: Container(
-                              alignment: Alignment.center,
-                              padding: productArrowIconPadding.pl,
-                              color: Theme.of(context).scaffoldBackgroundColor,height: brandHeight , width: arrowWidth,child: AppIcons.backArrrowIos(iconColor: imageIconTheme.textColor))),
-                    ),
+              Obx(
+                () => Visibility(
+                  visible: controller.brandListBack.value,
+                  child: Positioned(
+                    left: 0,
+                    child: GestureDetector(
+                        onTap: () {
+                          controller.brandScrollController.animateTo(
+                              controller.brandScrollController.offset -
+                                  (80 * 2),
+                              duration: const Duration(milliseconds: 150),
+                              curve: Curves.linear);
+                        },
+                        child: Container(
+                            alignment: Alignment.center,
+                            padding: productArrowIconPadding.pl,
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                            height: brandHeight,
+                            width: arrowWidth,
+                            child: AppIcons.backArrrowIos(
+                                iconColor: imageIconTheme.textColor))),
                   ),
+                ),
               ),
-              Obx(()=>
-                  Visibility(
-                    visible: controller.brandListForward.value ,
-                    child: Positioned(
-                     right: 0, child: GestureDetector(
-                          onTap: () {
-                            controller.brandScrollController.animateTo(
-                                controller.brandScrollController.offset + (80 * 2),
-                                duration: const Duration(milliseconds: 150),
-                                curve: Curves.linear);
-                          },
-                          child: Container(color: Theme.of(context).scaffoldBackgroundColor,height: brandHeight , width: arrowWidth,child: AppIcons.next(iconColor: imageIconTheme.textColor))),
-                    ),
+              Obx(
+                () => Visibility(
+                  visible: controller.brandListForward.value,
+                  child: Positioned(
+                    right: 0,
+                    child: GestureDetector(
+                        onTap: () {
+                          controller.brandScrollController.animateTo(
+                              controller.brandScrollController.offset +
+                                  (80 * 2),
+                              duration: const Duration(milliseconds: 150),
+                              curve: Curves.linear);
+                        },
+                        child: Container(
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                            height: brandHeight,
+                            width: arrowWidth,
+                            child: AppIcons.next(
+                                iconColor: imageIconTheme.textColor))),
                   ),
+                ),
               ),
             ],
           ),
@@ -261,7 +281,9 @@ class HomeScreenWidgets {
             color: Colors.grey.shade400,
           ),
           // Divider(color: Colors.black,thickness: 1),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
         ],
       ),
     );

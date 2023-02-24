@@ -60,6 +60,7 @@ dependencies:
   share_plus: ^6.3.0
   image_picker: ^0.8.6+1
   flutter_keyboard_visibility: ^5.4.0
+  intl:
 
 
 dev_dependencies:

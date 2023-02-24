@@ -88,11 +88,14 @@ class ItemCard extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: AppText(
-                        title,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 24,
-                        color: Colors.white,
+                      child: SizedBox(
+                        width: Get.width - 60,
+                        child: AppText(
+                          title,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -109,7 +112,7 @@ class ItemCard extends StatelessWidget {
 
 Widget codeButton({required String code}) {
   return IconButton(
-    onPressed: ()async{
+    onPressed: () async {
       CommonUtils().copyToClipboard(copyText: code);
     },
     icon: Container(
@@ -130,15 +133,16 @@ Widget codeButton({required String code}) {
   );
 }
 
-Widget shopButton({required url}) {
+Widget shopButton({required url, required String title}) {
   return IconButton(
-    onPressed: ()async{
-      await CommonUtils().urlLauncher(url: url);
-    },icon: Container(
+    onPressed: () async {
+      await CommonUtils().urlLauncher(url: url, title: title);
+    },
+    icon: Container(
         alignment: Alignment.center,
         // width: 90,
         height: 30,
-        padding:10.ph,
+        padding: 10.ph,
         decoration: BoxDecoration(
             color: AppColors.primary,
             borderRadius: BorderRadius.circular(20),
@@ -158,7 +162,6 @@ Widget shareButton({required shareUrl}) {
       CommonUtils().share(shareUrl: "$shareUrl");
     },
     icon: AppIcons.share(),
-
   );
 }
 
