@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
+import 'package:humble_warrior/utils/decorations.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 
 import '../../modals/response/home_categories_response_model.dart';
@@ -77,7 +77,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         itemBuilder: (ctx, index) {
-      /*    if (index == dataa.length) {
+          /*    if (index == dataa.length) {
             return KeyboardVisibilityBuilder(builder: (context, isKVisible) {
               debugPrint(isKVisible.toString());
               return Visibility(
@@ -144,23 +144,27 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                homeOptions.categoryImage!,
-                width: Get.width,
-                fit: BoxFit.fitWidth,
-                height: 200,
-                alignment: Alignment.topCenter,
-                // width: Get.width,
+            Container(
+              decoration:
+                  CustomBoxDecorations().shadow(context: context, radius: 10),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(
+                  homeOptions.categoryImage!,
+                  width: Get.width,
+                  fit: BoxFit.fitWidth,
+                  height: 200,
+                  alignment: Alignment.topCenter,
+                  // width: Get.width,
+                ),
+                // CommonWidgets.networkImage(
+                //   imageUrl: homeOptions.categoryImage!,
+                //   fit: BoxFit.fitWidth,
+                //   height: 200,
+                //   alignment: Alignment.topCenter,
+                //   // width: Get.width,
+                // ),
               ),
-              // CommonWidgets.networkImage(
-              //   imageUrl: homeOptions.categoryImage!,
-              //   fit: BoxFit.fitWidth,
-              //   height: 200,
-              //   alignment: Alignment.topCenter,
-              //   // width: Get.width,
-              // ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 4),
