@@ -82,7 +82,8 @@ class HomeScreenWidgets {
       children: [
         Row(
           children: [
-            Expanded(// flex: 8,
+            Expanded(
+              // flex: 8,
               child: Container(
                 height: productHeight,
                 width: Get.width,
@@ -204,7 +205,6 @@ class HomeScreenWidgets {
             children: [
               Row(
                 children: [
-
                   Expanded(
                     flex: 10,
                     child: Container(
@@ -218,7 +218,6 @@ class HomeScreenWidgets {
                       child: brandListAPIBuilder(),
                     ),
                   ),
-
                 ],
               ),
               Obx(
