@@ -12,4 +12,5 @@ class AppRoutes {
   static String splashScreen = "/splashScreen";
   static String myAccount = "/myAccount";
   static String brands = "/brands";
+  static String notification = "/notification";
 }
