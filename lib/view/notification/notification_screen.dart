@@ -12,40 +12,39 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-         body: Container(
-           // margin: 20.ph,
-           child: Column(
-             children: [
-             _notificationButton(context),
-               Expanded(
-                 child: ListView.separated(
-                   // shrinkWrap: true,
-                   padding: 15.ph,
-                   scrollDirection: Axis.vertical,
-                   itemBuilder: (context, index) {
-                   return notificationContainer(context);
-                 },
-                   itemCount: 15,
-                   separatorBuilder: (BuildContext context, int index) {
-                   return 20.sh;
-                   },
-                 ),
-               ),
-               // notificationContainer(),
-             ],
-           ),
-         ),
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            _notificationButton(context),
+            const SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: ListView.separated(
+                // shrinkWrap: true,
+                padding: 15.ph,
+                scrollDirection: Axis.vertical,
+                itemBuilder: (context, index) {
+                  return notificationContainer(context);
+                },
+                itemCount: 15,
+                separatorBuilder: (BuildContext context, int index) {
+                  return 20.sh;
+                },
+              ),
+            ),
+            // notificationContainer(),
+          ],
+        ),
       ),
     );
   }
 
   _notificationButton(context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-      width: MediaQuery.of(Get.context!).size.width,
+      height: 50,
+      margin: 15.ph,
       decoration: CustomBoxDecorations().shadow(context: context),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,25 +52,26 @@ class NotificationScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.arrow_back_ios,
                 color: Theme.of(context).textTheme.displaySmall!.color!),
-            onPressed: (){
-            Get.back();
+            onPressed: () {
+              Get.back();
             },
           ),
-          AppText(notificationsTxt,
+          const AppText(notificationsTxt,
               fontWeight: FontWeight.bold,
-              fontSize: 18,
-              color: AppColors.primary,
+              fontSize: 20,
               textAlign: TextAlign.center),
-          SizedBox(),
+          const SizedBox(
+            width: 40,
+          ),
         ],
       ),
     );
   }
 
-  notificationContainer(context){
+  notificationContainer(context) {
     return Container(
       width: Get.width,
-      height: 130,
+      height: 140,
       decoration: CustomBoxDecorations().shadow(context: context),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,37 +81,36 @@ class NotificationScreen extends StatelessWidget {
             child: Stack(
               alignment: Alignment.bottomRight,
               children: [
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      notificationImg(),
-                      notificationDetails(),
-                    ]),
+                Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  notificationImg(),
+                  notificationDetails(),
+                ]),
                 dayButton(),
               ],
             ),
           ),
-
         ],
       ),
     );
   }
 
-  notificationImg(){
+  notificationImg() {
     return ClipRRect(
-      borderRadius: BorderRadius.only(topLeft: Radius.circular(10),
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(10),
         bottomLeft: Radius.circular(10),
       ),
       child: CommonWidgets.networkImage(
-        imageUrl: "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
+        imageUrl:
+            "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
         alignment: Alignment.topCenter,
-        width: Get.width/3.5,
+        width: Get.width / 3.5,
         fit: BoxFit.cover,
       ),
     );
   }
 
-  notificationDetails(){
+  notificationDetails() {
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -130,35 +129,38 @@ class NotificationScreen extends StatelessWidget {
               donnaFavouriteDealTxt.toUpperCase(),
               fontWeight: FontWeight.bold,
               color: Colors.white,
-              fontSize: 11,
+              fontSize: 12,
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 5,left: 15),
-            child: AppText("Style And Savings"*3,
+            padding: EdgeInsets.only(top: 5, left: 15),
+            child: AppText(
+              "Style And Savings" * 3,
               fontWeight: FontWeight.bold,
               maxLines: 2,
-              fontSize: 14,
+              fontSize: 16,
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 15,right: 10,top: 5),
-            child: AppText("These cuties were tough to photograph and honestly my picture doesn't to do justice."*2,
-              fontSize: 11, maxLines: 2,
+            padding: EdgeInsets.only(left: 15, right: 10, top: 5),
+            child: AppText(
+              "These cuties were tough to photograph and honestly my picture doesn't to do justice." *
+                  2,
+              fontSize: 14,
+              maxLines: 2,
             ),
           ),
-        ],),
-
+        ],
+      ),
     );
   }
 
-  dayButton(){
+  dayButton() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-      padding: const EdgeInsets.only(left: 10,right: 10, bottom: 2),
+      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 2),
       decoration: BoxDecoration(
-          color: AppColors.primary,
-          borderRadius: BorderRadius.circular(8)),
+          color: AppColors.primary, borderRadius: BorderRadius.circular(8)),
       child: AppText(
         // homeOptions.categoryName!.toUpperCase(),
         // "Today",
@@ -169,5 +171,4 @@ class NotificationScreen extends StatelessWidget {
       ),
     );
   }
-
 }
