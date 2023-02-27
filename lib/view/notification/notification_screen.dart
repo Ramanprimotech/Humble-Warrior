@@ -16,17 +16,13 @@ class NotificationScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            _notificationButton(context),
-            const SizedBox(
-              height: 20,
-            ),
+            notificationAppBar(context),
             Expanded(
               child: ListView.separated(
-                // shrinkWrap: true,
-                padding: 15.ph,
+                padding: EdgeInsets.only(left: 15, right: 15, bottom: 20, top: 5),
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
-                  return notificationContainer(context);
+                  return notificationCard(context);
                 },
                 itemCount: 15,
                 separatorBuilder: (BuildContext context, int index) {
@@ -34,17 +30,16 @@ class NotificationScreen extends StatelessWidget {
                 },
               ),
             ),
-            // notificationContainer(),
           ],
         ),
       ),
     );
   }
 
-  _notificationButton(context) {
+  notificationAppBar(context) {
     return Container(
       height: 50,
-      margin: 15.ph,
+      margin: 15.pa,
       decoration: CustomBoxDecorations().shadow(context: context),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,29 +63,15 @@ class NotificationScreen extends StatelessWidget {
     );
   }
 
-  notificationContainer(context) {
+  notificationCard(context) {
     return Container(
       width: Get.width,
-      height: 140,
+      height: 160,
       decoration: CustomBoxDecorations().shadow(context: context),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Expanded(
-            child: Stack(
-              alignment: Alignment.bottomRight,
-              children: [
-                Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  notificationImg(),
-                  notificationDetails(),
-                ]),
-                dayButton(),
-              ],
-            ),
-          ),
-        ],
-      ),
+      child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+        notificationImg(),
+        notificationDetails(),
+      ]),
     );
   }
 
@@ -122,10 +103,8 @@ class NotificationScreen extends StatelessWidget {
                 color: AppColors.primary,
                 borderRadius: const BorderRadius.only(
                   bottomRight: Radius.circular(10),
-                  // top: Radius.circular(10),
                 )),
             child: AppText(
-              // homeOptions.categoryName!.toUpperCase(),
               donnaFavouriteDealTxt.toUpperCase(),
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -135,7 +114,7 @@ class NotificationScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 5, left: 15),
             child: AppText(
-              "Style And Savings" * 3,
+              "Style And Savings " * 3,
               fontWeight: FontWeight.bold,
               maxLines: 2,
               fontSize: 16,
@@ -144,30 +123,29 @@ class NotificationScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 10, top: 5),
             child: AppText(
-              "These cuties were tough to photograph and honestly my picture doesn't to do justice." *
-                  2,
+              "These cuties were tough to photograph and honestly my picture doesn't to do justice." * 2,
               fontSize: 14,
               maxLines: 2,
             ),
           ),
-        ],
-      ),
-    );
-  }
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                padding: const EdgeInsets.only(left: 10, right: 10, bottom: 2),
+                decoration: BoxDecoration(
+                    color: AppColors.primary, borderRadius: BorderRadius.circular(8)),
+                child: const AppText(
+                  "Yesterday",
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 12,
+                ),
+              ),
+          ],)
 
-  dayButton() {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 2),
-      decoration: BoxDecoration(
-          color: AppColors.primary, borderRadius: BorderRadius.circular(8)),
-      child: const AppText(
-        // homeOptions.categoryName!.toUpperCase(),
-        // "Today",
-        "Yesterday",
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
-        fontSize: 12,
+        ],
       ),
     );
   }
