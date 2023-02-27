@@ -52,7 +52,9 @@ class HomeScreenWidgets {
             Padding(
               padding: 15.pr,
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(AppRoutes.notification);
+                },
                 child: AppIcons.notification(context),
               ),
             )
