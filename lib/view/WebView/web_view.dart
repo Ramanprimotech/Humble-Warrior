@@ -98,7 +98,6 @@ class _WebViewScreenWidgetState extends State<WebViewScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // initState(() {});
     final DialogueThemeExtention dialogueThemeExtention =
         Theme.of(context).extension<DialogueThemeExtention>()!;
     return Scaffold(
@@ -172,15 +171,6 @@ class _WebViewScreenWidgetState extends State<WebViewScreenWidget> {
                         "Loading...",
                         fontSize: 24,
                       ),
-                      // ValueListenableBuilder(
-                      //   valueListenable: loadingText,
-                      //   builder: (BuildContext context, value, Widget? widget) {
-                      //     return AppText(
-                      //       value,
-                      //       fontSize: 24,
-                      //     );
-                      //   },
-                      // )
                     ],
                   ),
                 )

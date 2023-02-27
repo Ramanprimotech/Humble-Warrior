@@ -10,7 +10,6 @@ import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
 
 import '../../../modals/response/donna_favourite_response_model.dart';
-import '../../../utils/app_icons.dart';
 import 'favourite_deals_controller.dart';
 
 class FavouriteDeals extends StatelessWidget with CommonAppBar {
@@ -23,45 +22,13 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
     FavouriteDealController controller = Get.find();
     DonnaFavouriteDetails donnaFavouriteDetails = Get.arguments[0];
     return Scaffold(
-      appBar:AppBarWidget(
+      appBar: AppBarWidget(
         showBackButton: true,
-              title: CustomSearchBar(
-                focusNode: controller.focusNode,
-                textEditingController: controller.searchTextController,
-              ),),
-
-      // PreferredSize(
-      //   preferredSize: const Size.fromHeight(110.0),
-      //   child: Padding(
-      //     padding: 12.pt,
-      //     child: CommonAppBar().AppBarWidget(
-      //       showBackButton: true,
-      //       title: CustomSearchBar(
-      //         focusNode: controller.focusNode,
-      //         textEditingController: controller.searchTextController,
-      //       ),),
-          /*AppBar(
-            leadingWidth: 35,
-            centerTitle: false,
-            title: CustomSearchBar(
-              focusNode: controller.focusNode,
-              textEditingController: controller.searchTextController,
-            ),
-            leading: InkWell(
-                onTap: () {
-                  Get.back();
-                },
-                child: Padding(
-                  padding: 20.pl,
-                  child: AppIcons.backArrrowIos(),
-                )),
-          ),*/
-       // ),
-    //  ),
-      // CustomAppBar(
-      // title: CustomSearchBar(textEditingController: TextEditingController(), focusNode: FocusNode(),),
-      // showBackButton: true,
-      // ),
+        title: CustomSearchBar(
+          focusNode: controller.focusNode,
+          textEditingController: controller.searchTextController,
+        ),
+      ),
       body: Container(
         padding: 20.ph,
         child: SingleChildScrollView(
@@ -87,7 +54,7 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
                   color: AppColors.primary,
                   borderRadius: BorderRadius.circular(10)),
               child: AppText(
-               " ${donnaFavouriteDetails.productName!}",
+                " ${donnaFavouriteDetails.productName!}",
                 color: Colors.white,
                 textAlign: TextAlign.left,
                 fontWeight: FontWeight.bold,

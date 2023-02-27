@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/image_path_assets.dart';
 
 class AppIcons {
@@ -11,46 +10,47 @@ class AppIcons {
   // static Icon favourite(BuildContext context) => Icon(Icons.favorite_outlined,color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,);
 
   static Image favourite(BuildContext context) => Image.asset(
-    ImagePathAssets.heartIcon,
-    height: 20,
-    color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
-  );
+        ImagePathAssets.heartIcon,
+        height: 20,
+        color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+      );
 
-  static Image unselectedfavourite(BuildContext context , Color color) => Image.asset(
-    ImagePathAssets.heartIcon,
-    height: 20,
-    color:color,
-    // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
-  );
+  static Image unselectedfavourite(BuildContext context, Color color) =>
+      Image.asset(
+        ImagePathAssets.heartIcon,
+        height: 20,
+        color: color,
+        // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+      );
 
   static Icon bag() => const Icon(Icons.shopping_bag);
 
-  static Image check(BuildContext context ) => Image.asset(
+  static Image check(BuildContext context) => Image.asset(
         ImagePathAssets.amazonIcon,
         height: 22,
         color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
       );
-  static Image unselectedCheck(BuildContext context , Color color) => Image.asset(
+  static Image unselectedCheck(BuildContext context, Color color) =>
+      Image.asset(
         ImagePathAssets.amazonIcon,
         height: 20,
-        color:color,
+        color: color,
         // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
       );
 
-  static Image home(BuildContext context ) => Image.asset(
+  static Image home(BuildContext context) => Image.asset(
         ImagePathAssets.homeIcon,
         height: 20,
         color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
       );
-  static Image unselectedHome(BuildContext context , Color color) => Image.asset(
+  static Image unselectedHome(BuildContext context, Color color) => Image.asset(
         ImagePathAssets.homeIcon,
         height: 20,
         color: color,
         // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
       );
 
-  static Image notification(BuildContext context ) =>
-      Image.asset(
+  static Image notification(BuildContext context) => Image.asset(
         // 'assets/image/bell.png',
         //color: Theme.of(context).textTheme.displayLarge!.color!,
         ImagePathAssets.notificationIcon,
@@ -58,33 +58,33 @@ class AppIcons {
         width: 30,
       );
 
-
   static Image join(BuildContext context) => Image.asset(
-    ImagePathAssets.facebookIcon,
-    height: 20,
-    color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
-  );
+        ImagePathAssets.facebookIcon,
+        height: 20,
+        color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+      );
 
-  static Image unselectedJoin(BuildContext context , Color color) => Image.asset(
-    ImagePathAssets.facebookIcon,
-    height: 20,
-    color: color,
-    // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
-  );
+  static Image unselectedJoin(BuildContext context, Color color) => Image.asset(
+        ImagePathAssets.facebookIcon,
+        height: 20,
+        color: color,
+        // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+      );
 
-  static Image person(BuildContext context ) => Image.asset(
-    ImagePathAssets.personIcon,
-    height: 20,
-    // color: AppColors.grey,
-    color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
-  );
+  static Image person(BuildContext context) => Image.asset(
+        ImagePathAssets.personIcon,
+        height: 20,
+        // color: AppColors.grey,
+        color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+      );
 
-  static Image unselectedPerson(BuildContext context , Color color) => Image.asset(
-    ImagePathAssets.personIcon,
-    height: 20,
-    // color: AppColors.grey,
-    color: color,
-  );
+  static Image unselectedPerson(BuildContext context, Color color) =>
+      Image.asset(
+        ImagePathAssets.personIcon,
+        height: 20,
+        // color: AppColors.grey,
+        color: color,
+      );
 
   // static Icon join(BuildContext context) =>  Icon(Icons.facebook, color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,);
 
@@ -98,7 +98,7 @@ class AppIcons {
         color: iconColor,
       );
 
-  static Icon share({Color iconColor = Colors.black}) => Icon(
+  static Icon share({iconColor = Colors.black}) => Icon(
         Icons.share,
         color: iconColor,
       );
@@ -135,9 +135,9 @@ class AppIcons {
       );
 
   static Icon backArrrowIos({Color? iconColor}) => Icon(
-    Icons.arrow_back_ios,
-    color: iconColor,
-  );
+        Icons.arrow_back_ios,
+        color: iconColor,
+      );
 
   static Icon backArrow({Color? iconColor, double size = 24}) =>
       Icon(Icons.arrow_back, size: size, color: iconColor);
@@ -153,7 +153,7 @@ class AppIcons {
   static Icon heart({Color iconColor = Colors.black, double? size}) => Icon(
         Icons.favorite_outlined,
         color: iconColor,
-        size: size??20,
+        size: size ?? 20,
       );
 
   static Icon share2({Color iconColor = Colors.blue}) =>
@@ -185,41 +185,39 @@ class AppIcons {
 }
 
 class Heart extends StatefulWidget {
-   Heart({
-    super.key,
-    required this.size,
-     this.isSelected
-  });
+  Heart(
+      {super.key,
+      this.color = Colors.black,
+      required this.size,
+      this.isSelected});
 
   final double? size;
-   bool? isSelected = false;
+  bool? isSelected = false;
+  Color? color;
 
   @override
   State<Heart> createState() => _HeartState();
 }
 
 class _HeartState extends State<Heart> {
-   bool selected = false;
+  bool selected = false;
   @override
   void initState() {
     selected == widget.isSelected;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) => GestureDetector(
-    key: widget.key,
-    onTap: (){
-      selected = !selected;
-      setState(() {
-
-      });
-    },
-    child: Icon(
-      Icons.favorite_outlined,
-      color: selected?Colors.red:Colors.black,
-      size: widget.size??20,
-    ),
-  );
+        key: widget.key,
+        onTap: () {
+          selected = !selected;
+          setState(() {});
+        },
+        child: Icon(
+          Icons.favorite_outlined,
+          color: selected ? Colors.red : widget.color,
+          size: widget.size ?? 20,
+        ),
+      );
 }
-
-

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/common/common_appBar.dart';
-import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 
 import '../../../modals/response/donna_deals_response.dart';
@@ -23,77 +21,15 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
         title: CustomSearchBar(
           focusNode: controller.focusNode,
           textEditingController: controller.searchTextController,
-        ),),
-      /*PreferredSize(
-        preferredSize: const Size.fromHeight(110.0),
-        child: Padding(
-          padding: 12.pt,
-          child: AppBar(
-            leadingWidth: 35,
-            centerTitle: false,
-            title: CustomSearchBar(
-              focusNode: controller.focusNode,
-              textEditingController: controller.searchTextController,
-            ),
-            leading: InkWell(
-                onTap: () {
-                  Get.back();
-                },
-                child: Padding(
-                  padding: 20.pl,
-                  child: AppIcons.backArrrowIos(),
-                )),
-          ),
         ),
-      ),*/
-      // CustomAppBar(
-      //   title: CustomSearchBar(
-      //     textEditingController: TextEditingController(),
-      //     focusNode: FocusNode(),
-      //   ),
-      //   showBackButton: true,
-      // ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-              child: donnaDealsCard(donnaDealsDetails, 0),
-              // child: ItemCard(
-              //   radius: 10,
-              //   buttons: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: [
-              //       Row(
-              //         children: [
-              //           const SizedBox(
-              //             width: 10,
-              //           ),
-              //           shopButton(url: "${'https://humblewarrior.com'}"),
-              //           const SizedBox(
-              //             width: 10,
-              //           ),
-              //         ],
-              //       ),
-              //       Row(
-              //         children: [
-              //           IconButton(
-              //             onPressed: () {
-              //               // controller.select.value = !controller.select.value;
-              //             },
-              //             icon: Heart(
-              //               size: 28,
-              //             ),
-              //           ),
-              //           shareButton(shareUrl: "shareUrl"),
-              //         ],
-              //       ),
-              //     ],
-              //   ),
-              //   imageUrl: ImagePathNetwork.banner,
-              //   title: 'Title Of Image',
-              // ),
+              child: donnaDealsCard(donnaDealsDetails, 0, context),
             ),
             productText(context, donnaDealsDetails.dealName),
             productDescription(),

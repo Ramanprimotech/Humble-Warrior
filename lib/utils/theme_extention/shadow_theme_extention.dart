@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 
 class ShadowTheme extends ThemeExtension<ShadowTheme> {
   final Color? shadowColor;
+  final Color? background;
 
-  const ShadowTheme({required this.shadowColor});
+  const ShadowTheme({required this.shadowColor, this.background});
 
   @override
   ThemeExtension<ShadowTheme> copyWith(
       {Color? shadowColor, Color? backGroundColor}) {
     return ShadowTheme(
       shadowColor: shadowColor ?? this.shadowColor,
+      background: background ?? this.background,
     );
   }
 
@@ -21,6 +23,7 @@ class ShadowTheme extends ThemeExtension<ShadowTheme> {
     }
     return ShadowTheme(
       shadowColor: Color.lerp(shadowColor, other.shadowColor, t),
+      background: Color.lerp(background, other.background, t),
     );
   }
 }

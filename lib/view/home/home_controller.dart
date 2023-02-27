@@ -31,32 +31,49 @@ class HomeScreenController extends GetxController implements SearchActions {
   @override
   void onInit() {
     productScrollController.addListener(() {
-         listForward.value = productScrollController.offset != productScrollController.position.maxScrollExtent;
-         listBack.value = productScrollController.offset != productScrollController.initialScrollOffset;
+      listForward.value = productScrollController.offset !=
+          productScrollController.position.maxScrollExtent;
+      listBack.value = productScrollController.offset !=
+          productScrollController.initialScrollOffset;
     });
 
     brandScrollController.addListener(() {
-         brandListForward.value = brandScrollController.offset != brandScrollController.position.maxScrollExtent;
-         brandListBack.value = brandScrollController.offset != brandScrollController.initialScrollOffset;
+      brandListForward.value = brandScrollController.offset !=
+          brandScrollController.position.maxScrollExtent;
+      brandListBack.value = brandScrollController.offset !=
+          brandScrollController.initialScrollOffset;
     });
 
     const ProductImages(image: ImagePathAssets.giftIcon, name: giftTxt).add();
-    const ProductImages(image: ImagePathAssets.giftForMomIcon, name: giftForMomTxt).add();
+    const ProductImages(
+            image: ImagePathAssets.giftForMomIcon, name: giftForMomTxt)
+        .add();
     const ProductImages(image: ImagePathAssets.menIcon, name: menTxt).add();
     const ProductImages(image: ImagePathAssets.kidsIcon, name: kidsTxt).add();
-    const ProductImages(image: ImagePathAssets.foodIcon, name: kitchenTxt).add();
-    const ProductImages(image: ImagePathAssets.beautyIcon, name: beautyTxt).add();
-    const ProductImages(image: ImagePathAssets.travelIcon, name: travelTxt).add();
-    const ProductImages(image: ImagePathAssets.healthIcon, name: healthTxt).add();
-    const ProductImages(image: ImagePathAssets.womensFashionIcon, name: womensFashionTxt).add();
-    const ProductImages(image: ImagePathAssets.outdoorIcon, name: outdoorTxt).add();
-    const ProductImages(image: ImagePathAssets.packingIcon, name: packingTxt).add();
-    const ProductImages(image: ImagePathAssets.fitnessIcon, name: fitnessTxt).add();
+    const ProductImages(image: ImagePathAssets.foodIcon, name: kitchenTxt)
+        .add();
+    const ProductImages(image: ImagePathAssets.beautyIcon, name: beautyTxt)
+        .add();
+    const ProductImages(image: ImagePathAssets.travelIcon, name: travelTxt)
+        .add();
+    const ProductImages(image: ImagePathAssets.healthIcon, name: healthTxt)
+        .add();
+    const ProductImages(
+            image: ImagePathAssets.womensFashionIcon, name: womensFashionTxt)
+        .add();
+    const ProductImages(image: ImagePathAssets.outdoorIcon, name: outdoorTxt)
+        .add();
+    const ProductImages(image: ImagePathAssets.packingIcon, name: packingTxt)
+        .add();
+    const ProductImages(image: ImagePathAssets.fitnessIcon, name: fitnessTxt)
+        .add();
     const ProductImages(image: ImagePathAssets.orderIcon, name: foodTxt).add();
-    const ProductImages(image: ImagePathAssets.jewelryIcon, name: jewelryTxt).add();
+    const ProductImages(image: ImagePathAssets.jewelryIcon, name: jewelryTxt)
+        .add();
     const ProductImages(image: ImagePathAssets.babyIcon, name: babyTxt).add();
     const ProductImages(image: ImagePathAssets.booksIcon, name: booksTxt).add();
-    const ProductImages(image: ImagePathAssets.vehicleIcon, name: vehiclesTxt).add();
+    const ProductImages(image: ImagePathAssets.vehicleIcon, name: vehiclesTxt)
+        .add();
     const ProductImages(image: ImagePathAssets.petsIcon, name: petsTxt).add();
 
     focusNode.addListener(() {
@@ -67,12 +84,6 @@ class HomeScreenController extends GetxController implements SearchActions {
     super.onInit();
   }
 
-  // void unfocusNode() {
-  //   log("${focusNode.hasFocus}", name: "${focusNode.hasPrimaryFocus}");
-  //   focusNode.unfocus();
-  //   getKeyBoard(Get.context!);
-  // }
-  //
   // List<String> products = [
   //   "https://www.freepnglogos.com/uploads/shoes-png/mens-shoes-png-transparent-images-images-11.png",
   //   "https://e7.pngegg.com/pngimages/757/605/png-clipart-women-s-yellow-sleeveless-dress-dress-see-through-clothing-top-women-dress-tshirt-orange.png",

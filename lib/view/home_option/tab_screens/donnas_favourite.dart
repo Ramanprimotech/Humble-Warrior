@@ -38,67 +38,70 @@ class DonnaFavourite extends StatelessWidget {
               controller.donnaFavouriteDealsBool.value == false) {
             return CommonWidgets.noData();
           }
-          return ListView.builder(
-              controller: controller.donnaFavouriteDealScrollController,
-              itemCount: controller.donnaFavouriteDealList.length + 1,
-              itemBuilder: (ctx, index) {
-                DonnaFavouriteDetails details = DonnaFavouriteDetails();
-                if (index != controller.donnaFavouriteDealList.length) {
-                  details = controller.donnaFavouriteDealList[index];
-                }
-                return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                  child: index != controller.donnaFavouriteDealList.length
-                      ? InkWell(
-                          onTap: () {
-                            Get.toNamed(AppRoutes.favouriteDeal,
-                                arguments: [details]);
-                          },
-                          child: SizedBox(
-                            height: 220,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: CommonWidgets.networkImage(
-                                imageUrl: details.url!,
-                                alignment: Alignment.center,
-                                width: Get.width,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+          return ListView.separated(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            controller: controller.donnaFavouriteDealScrollController,
+            itemCount: controller.donnaFavouriteDealList.length + 1,
+            itemBuilder: (ctx, index) {
+              DonnaFavouriteDetails details = DonnaFavouriteDetails();
+              if (index != controller.donnaFavouriteDealList.length) {
+                details = controller.donnaFavouriteDealList[index];
+              }
+              return index != controller.donnaFavouriteDealList.length
+                  ? InkWell(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.favouriteDeal,
+                            arguments: [details]);
+                      },
+                      child: SizedBox(
+                        height: 220,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: CommonWidgets.networkImage(
+                            imageUrl: details.url!,
+                            alignment: Alignment.center,
+                            width: Get.width,
+                            fit: BoxFit.cover,
                           ),
-                        )
-                      // ItemCard(
-                      //   onTap: (){
-                      //       Get.toNamed(AppRoutes.favouriteDeal);
-                      //   },
-                      //         buttons: Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //           children: [
-                      //             shopButton(
-                      //                 url: controller
-                      //                     .donnaFavouriteDealList[index].url),
-                      //             // codeButton(code: ""),
-                      //             shareButton(shareUrl: ImagePathNetwork.url),
-                      //             IconButton(
-                      //               onPressed: () {},
-                      //               icon: AppIcons.bookmarks(),
-                      //             ),
-                      //           ],
-                      //         ),
-                      //         imageUrl: details.url!,
-                      //         title: details.productName.toString(),
-                      //       )
-                      : Obx(
-                          () => Visibility(
-                              visible: controller.donnaFavouriteDealsBool.value,
-                              child: Container(
-                                  height: 50,
-                                  alignment: Alignment.center,
-                                  child: CircularProgressIndicator())),
                         ),
-                );
-              });
+                      ),
+                    )
+                  // ItemCard(
+                  //   onTap: (){
+                  //       Get.toNamed(AppRoutes.favouriteDeal);
+                  //   },
+                  //         buttons: Row(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //           children: [
+                  //             shopButton(
+                  //                 url: controller
+                  //                     .donnaFavouriteDealList[index].url),
+                  //             // codeButton(code: ""),
+                  //             shareButton(shareUrl: ImagePathNetwork.url),
+                  //             IconButton(
+                  //               onPressed: () {},
+                  //               icon: AppIcons.bookmarks(),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //         imageUrl: details.url!,
+                  //         title: details.productName.toString(),
+                  //       )
+                  : Obx(
+                      () => Visibility(
+                          visible: controller.donnaFavouriteDealsBool.value,
+                          child: Container(
+                              height: 50,
+                              alignment: Alignment.center,
+                              child: CircularProgressIndicator())),
+                    );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return const SizedBox(
+                height: 25,
+              );
+            },
+          );
         },
       ),
     );

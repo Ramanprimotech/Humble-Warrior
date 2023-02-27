@@ -18,11 +18,7 @@ class HomeScreen extends StatelessWidget {
 
         /// App Bar
         appBar: homeScreenWidgets.appBar(),
-        body: /*Stack(
-          fit: StackFit.passthrough,
-          alignment: Alignment.bottomCenter,
-          children: [*/
-            Column(
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             8.sh,
@@ -38,13 +34,6 @@ class HomeScreen extends StatelessWidget {
             homeScreenWidgets.brandsList(),
           ],
         ),
-        /* KeyboardVisibilityBuilder(builder: (context, isKVisible) {
-              debugPrint(isKVisible.toString());
-              return Visibility(
-                  visible: !isKVisible, child: homeScreenWidgets.brandsList());
-            }),*/
-        //   ],
-        // ),
       ),
     );
   }

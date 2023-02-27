@@ -94,15 +94,7 @@ class ProductDetailWidget {
 
   /// Product Description
   Widget productDescription() {
-    return Container(
-      /*decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(20),
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20),
-        ),
-      ),*/
+    return SizedBox(
       width: MediaQuery.of(Get.context!).size.width * .9,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -40,14 +40,7 @@ class ItemCard extends StatelessWidget {
       onTap: onTap ?? () {},
       child: Container(
         height: imageHeight + buttonbarHeight,
-        decoration: CustomBoxDecorations()
-            .shadow(context: context, color: Colors.white),
-        // BoxDecoration(
-        //     color: Theme.of(context).scaffoldBackgroundColor,
-        //     borderRadius: BorderRadius.circular(radius),
-        //     boxShadow: const [
-        //       BoxShadow(blurRadius: 4, spreadRadius: 0, color: Colors.black38)
-        //     ]),
+        decoration: CustomBoxDecorations().shadow(context: context),
         child: Column(
           children: [
             Stack(
@@ -74,9 +67,6 @@ class ItemCard extends StatelessWidget {
                     height: imageTitleHeight,
                     alignment: Alignment.centerLeft,
                     decoration: const BoxDecoration(
-                      // borderRadius: BorderRadius.only(
-                      //     bottomRight: Radius.circular(15),
-                      //     bottomLeft: Radius.circular(15)),
                       gradient: LinearGradient(
                           colors: [
                             Colors.transparent,
@@ -146,8 +136,8 @@ Widget shopButton({required url, required String title}) {
         decoration: BoxDecoration(
             color: AppColors.primary,
             borderRadius: BorderRadius.circular(20),
-            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 3)]),
-        child: AppText(
+            boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 3)]),
+        child: const AppText(
           shopNowTxt,
           color: Colors.white,
           fontWeight: FontWeight.w700,
@@ -156,12 +146,12 @@ Widget shopButton({required url, required String title}) {
   );
 }
 
-Widget shareButton({required shareUrl}) {
+Widget shareButton({required shareUrl, Color? color = Colors.black}) {
   return IconButton(
     onPressed: () {
       CommonUtils().share(shareUrl: "$shareUrl");
     },
-    icon: AppIcons.share(),
+    icon: AppIcons.share(iconColor: color),
   );
 }
 

@@ -13,6 +13,7 @@ class AppStrings {
   static const String fashionLifestyleTxt = "Fashion & Lifestyle for women";
   static const String lookGoodTxt = "Look Good";
   static const String feelGoodTxt = "Feel Good";
+  static const String myWishListTxt = "My Wishlist";
   static const String doGoodTxt = "Do Good";
   static const String tmTxt = "TM";
 
@@ -22,13 +23,9 @@ class AppStrings {
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 }
 
-
-
-
 /*=================================================== Search Bar strings========================================================*/
 
 const String searchTxt = "Search";
-
 
 /*===================================================Bottom Navigation Bar strings========================================================*/
 
@@ -37,7 +34,6 @@ const String myWishlistTxt = "My Wishlist";
 const String myAmazonTxt = "My Amazon";
 const String joinUsTxt = "Join Us!";
 const String accountTxt = "Account";
-
 
 /*===================================================Home page strings========================================================*/
 
@@ -89,7 +85,6 @@ const String logoutTxt = "Logout";
 const String appVersionTxt = "APP VERSION";
 const String addPhotoTxt = "Add Photo";
 
-
 /*===================================================About Donna Page strings========================================================*/
 
 const String helloGorgeousTxt = 'HELLO GORGEOUS!';
@@ -98,7 +93,6 @@ const String readLessTxt = "read less";
 const String seeCopyHumbleTxt = "See a copy of The Humble Warrior's";
 const String hereTxt = "here";
 const String aboutDonnaTxt = "ABOUT DONNA";
-
 
 /*===================================================On Boarding Page strings========================================================*/
 
@@ -113,7 +107,6 @@ const String doGoodTxt = "Do Good";
 const String tmTxt = "TM";
 const String subscribe = "SUBSCRIBE";
 
-
 /*===================================================Home Option Page strings========================================================*/
 
 const String shopNowTxt = "SHOP NOW";
@@ -122,7 +115,6 @@ const String somethingTxt = "Something Went Wrong";
 const String loadingDealsTxt = " Loading Deals for you...";
 const String noDataFoundTxt = "No Data Found";
 const String donnasOptionTxt = "Donna's Options";
-
 
 /*===================================================Common strings========================================================*/
 
@@ -146,5 +138,3 @@ const String gotoLoginTxt = 'Go to Login';
 const String retry = 'Retry';
 const String myFvrtTxt = 'My Favourite';
 const String buyNowTxt = 'Buy Now';
-
-

@@ -27,7 +27,8 @@ ThemeData _lightTheme = ThemeData.from(
           shadow: AppColors.shadowLight,
           textColor: AppColors.greyText,
           backGroundColor: AppColors.white),
-      const ShadowTheme(shadowColor: AppColors.shadowLight),
+      const ShadowTheme(
+          shadowColor: AppColors.shadowLight, background: AppColors.white),
       DialogueThemeExtention(
           backGroundColor: AppColors.white,
           textColor: AppColors.black,
@@ -60,13 +61,16 @@ ThemeData _darkTheme = ThemeData.from(
   textTheme: darkTextTheme,
 ).copyWith(
   extensions: <ThemeExtension<dynamic>>[
-    ImageIconTheme(textColor: Colors.white, backGroundColor: AppColors.gray),
+    ImageIconTheme(
+        textColor: Colors.white,
+        backGroundColor: AppColors.white.withOpacity(0.9)),
     ShopNowTheme(textColor: AppColors.white, backGroundColor: AppColors.pink),
     AccountOptionTheme(
         shadow: AppColors.shadowDark,
         textColor: AppColors.white,
         backGroundColor: AppColors.gray),
-    const ShadowTheme(shadowColor: AppColors.shadowDark),
+    ShadowTheme(
+        shadowColor: AppColors.shadowDark, background: Colors.grey.shade800),
     DialogueThemeExtention(
         backGroundColor: AppColors.backgroundDark,
         textColor: AppColors.white,
@@ -241,6 +245,7 @@ TextTheme darkTextTheme = TextTheme(
 );
 
 ///====================Bottom Navigation Theme===========================///
+
 ///---Light
 BottomNavigationBarThemeData lightBottomNavigationBarThemeData =
     BottomNavigationBarThemeData(
@@ -248,9 +253,11 @@ BottomNavigationBarThemeData lightBottomNavigationBarThemeData =
   showUnselectedLabels: true,
   selectedItemColor: AppColors.primary,
   selectedIconTheme: IconThemeData(color: AppColors.primary, size: 32),
-  unselectedIconTheme: IconThemeData(color: AppColors.black, size: 32),
-  selectedLabelStyle: TextStyle(color: AppColors.primary, fontSize: 12),
-  unselectedLabelStyle: TextStyle(color: AppColors.black),
+  unselectedIconTheme: const IconThemeData(color: AppColors.black, size: 32),
+  selectedLabelStyle: TextStyle(
+      color: AppColors.primary, fontWeight: FontWeight.w600, fontSize: 12),
+  unselectedLabelStyle:
+      const TextStyle(color: AppColors.black, fontWeight: FontWeight.w600),
   type: BottomNavigationBarType.fixed,
 );
 
@@ -262,13 +269,16 @@ BottomNavigationBarThemeData darkBottomNavigationBarThemeData =
   showUnselectedLabels: true,
   selectedItemColor: AppColors.primary,
   selectedIconTheme: IconThemeData(color: AppColors.primary, size: 32),
-  unselectedIconTheme: IconThemeData(color: AppColors.gray, size: 32),
-  selectedLabelStyle: TextStyle(color: AppColors.primary, fontSize: 12),
-  unselectedLabelStyle: TextStyle(color: AppColors.gray),
+  unselectedIconTheme: const IconThemeData(color: AppColors.white, size: 32),
+  selectedLabelStyle: TextStyle(
+      color: AppColors.primary, fontWeight: FontWeight.w600, fontSize: 12),
+  unselectedLabelStyle:
+      const TextStyle(color: AppColors.white, fontWeight: FontWeight.w600),
   type: BottomNavigationBarType.fixed,
 );
 
 ///====================App Bar Theme===========================///
+
 ///---Light
 AppBarTheme lightAppBarTheme = AppBarTheme(
   elevation: 0,
@@ -294,6 +304,7 @@ AppBarTheme darkAppBarTheme = AppBarTheme(
 );
 
 ///====================Tab Bar Theme===========================///
+
 ///---Light
 TabBarTheme lightTabBarTheme = TabBarTheme(
   labelColor: AppColors.primary,

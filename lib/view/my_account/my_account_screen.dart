@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
@@ -29,10 +28,13 @@ class MyAccount extends StatelessWidget {
                 myAccWidget.divider(),
               ],
               optionSpacing.sh,
+
               ///===> My Account
               myAccWidget.myAccountTextFun(heading: myAccountTxt),
+
               ///Account Details
               myAccWidget.detailsOptions(controller, title: accountDetailsTxt),
+
               ///Notification
               myAccWidget.detailsOptions(controller,
                   title: notificationsTxt,
@@ -41,56 +43,63 @@ class MyAccount extends StatelessWidget {
               optionSpacing.sh,
               myAccWidget.divider(),
               optionSpacing.sh,
+
               ///=====>The Humble Warrior
               myAccWidget.myAccountTextFun(heading: theHumbleWarriorTxt),
+
               ///About Donna
               myAccWidget.detailsOptions(controller, title: aboutDonna,
                   ontap: () {
                 Get.toNamed(AppRoutes.aboutDonna);
               }),
+
               ///Share with friends
               myAccWidget.detailsOptions(controller,
                   title: shareWithFriendsTxt),
               optionSpacing.sh,
               myAccWidget.divider(),
               optionSpacing.sh,
+
               ///====>Settings
               myAccWidget.myAccountTextFun(heading: settingsTxt),
+
               ///Passcode
               myAccWidget.detailsOptions(controller, title: passcodeTxt),
+
               ///Dark Mode
               myAccWidget.detailsOptions(controller,
                   title: darkModeTxt,
                   isSwitchRequired: true,
                   click: controller.darkMode),
+
               ///Help & Support
               myAccWidget.detailsOptions(controller, title: helpSupportTxt),
+
               ///Term & Conditions
               myAccWidget.detailsOptions(controller, title: termsConditionsTxt),
+
               ///Login or Logout
               _loginOrLogout(context),
               10.sh,
-         ]),
+            ]),
           ),
         ),
       ),
     );
   }
-  Widget _loginOrLogout(context){
+
+  /// Login Or Logout
+  Widget _loginOrLogout(context) {
     MyAccountController controller = Get.find();
     MyAccWidget myAccWidget = MyAccWidget(context: context);
-    return
-       controller.userCheck.value == true
-        ? myAccWidget.detailsOptions(controller, title: logoutTxt,
-          ontap: () {
+    return controller.userCheck.value == true
+        ? myAccWidget.detailsOptions(controller, title: logoutTxt, ontap: () {
             DialogHelper.logoutDialog(
                 context: context, onTap: controller.logout);
           })
-          : myAccWidget.detailsOptions(controller, title: login,
-          ontap: () {
+        : myAccWidget.detailsOptions(controller, title: login, ontap: () {
             DialogHelper.logoutDialog(
                 context: context, onTap: controller.loginPage());
           });
   }
-
 }
