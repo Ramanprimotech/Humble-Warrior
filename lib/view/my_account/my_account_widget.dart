@@ -119,18 +119,10 @@ class MyAccWidget {
             bottom: isSwitchRequired ? 0 : 0),
         margin: 10.pv,
         width: MediaQuery.of(Get.context!).size.width,
-        decoration: CustomBoxDecorations().shadow(context: context,color: accountOptionTheme.backGroundColor,radius: 50),
-        // decoration: BoxDecoration(
-        //     color: accountOptionTheme.backGroundColor,
-        //     borderRadius: BorderRadius.circular(25),
-        //     boxShadow: [
-        //       BoxShadow(
-        //         color: Colors.grey.shade600,
-        //         spreadRadius: 1,
-        //         blurRadius: 1,
-        //         offset: const Offset(0, 0),
-        //       )
-        //     ]),
+        decoration: CustomBoxDecorations().shadow(
+            context: context,
+            color: accountOptionTheme.backGroundColor,
+            radius: 50),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -138,14 +130,14 @@ class MyAccWidget {
               AppText(
                 title,
                 fontSize: 15,
-                fontWeight: FontWeight.w400,
-                color: accountOptionTheme.textColor,
+                fontWeight: FontWeight.w500,
+                // color: accountOptionTheme.textColor,
               ),
               isSwitchRequired
                   ? Obx(
                       () => SizedBox(
                         height: 35,
-                        width:60,
+                        width: 60,
                         child: FittedBox(
                           child: Switch(
                             thumbIcon: thumbIcon,

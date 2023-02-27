@@ -96,7 +96,7 @@ class NotificationScreen extends StatelessWidget {
 
   notificationImg() {
     return ClipRRect(
-      borderRadius: BorderRadius.only(
+      borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(10),
         bottomLeft: Radius.circular(10),
       ),
@@ -133,7 +133,7 @@ class NotificationScreen extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 5, left: 15),
+            padding: const EdgeInsets.only(top: 5, left: 15),
             child: AppText(
               "Style And Savings" * 3,
               fontWeight: FontWeight.bold,
@@ -142,7 +142,7 @@ class NotificationScreen extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 15, right: 10, top: 5),
+            padding: const EdgeInsets.only(left: 15, right: 10, top: 5),
             child: AppText(
               "These cuties were tough to photograph and honestly my picture doesn't to do justice." *
                   2,
@@ -157,11 +157,11 @@ class NotificationScreen extends StatelessWidget {
 
   dayButton() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 2),
       decoration: BoxDecoration(
           color: AppColors.primary, borderRadius: BorderRadius.circular(8)),
-      child: AppText(
+      child: const AppText(
         // homeOptions.categoryName!.toUpperCase(),
         // "Today",
         "Yesterday",
