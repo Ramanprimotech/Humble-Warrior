@@ -18,7 +18,6 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
   @override
   Widget build(BuildContext context) {
     const double tabFontSize = 18;
-    // final HomeOptionController controller = Get.find();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,

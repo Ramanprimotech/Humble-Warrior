@@ -79,13 +79,16 @@ class CommonWidgets {
   static Widget errorAPI(
       {required String errorText,
       required BuildContext context,
-      required Function() onPress}) {
+      required Function() onPress,
+      required String buttonTitle,
+        double? height,
+      }) {
     final DialogueThemeExtention dialogueThemeExtention =
         Theme.of(context).extension<DialogueThemeExtention>()!;
     return Center(
       child: Container(
         margin: 20.pa,
-        height: 180,
+        height: height??180,
         width: Get.width,
         padding: 20.pa,
         decoration: CustomBoxDecorations().shadow(context: context),
@@ -105,7 +108,7 @@ class CommonWidgets {
               backgroundColor: dialogueThemeExtention.buttonColor,
             ),
             onPressed: onPress,
-            child: const AppText(retry,
+            child: AppText(buttonTitle,
                 color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ]),
@@ -128,7 +131,6 @@ class CommonWidgets {
             children: [
               AppText(
                 title,
-                // "$brandsTxt I",
                 fontSize: fontSize??18,
                 fontWeight: FontWeight.bold,
               ),
