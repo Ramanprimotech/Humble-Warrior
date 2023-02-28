@@ -31,6 +31,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
         Theme.of(context).extension<DialogueThemeExtention>()!;
     return Expanded(
       child: CommonWidgets.errorAPI(
+          buttonTitle: retryTxt,
           errorText: error.toString(),
           context: context,
           onPress: () => controller.update([Endpoints.homeCategories])),

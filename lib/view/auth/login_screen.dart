@@ -40,14 +40,6 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                     20.sh,
 
                     /// Facebook
-                    /*optionWidget(
-                        bckClr: AppColors.facebookClr,
-                        title: LocalString.signWithFacebook,
-                        textClr: AppColors.white,
-                        imagePath: ImagePathAssets.facebookImg,
-                        onTap: controller.onClickFunction(
-                            action: OnClick.facebook, context: context)),*/
-
                     optionWidget(
                         bckClr: AppColors.facebookClr,
                         title: LocalString.signWithFacebook,
@@ -66,7 +58,6 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                             action: OnClick.google, context: context)),
 
                     /// Apple
-
                     optionWidget(
                         bckClr: AppColors.grey,
                         title: LocalString.signWithApple,
@@ -78,7 +69,6 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                     /// Without Login
                     optionWidget(
                         bckClr: AppColors.twitterClr,
-                        // imagePath: ImagePathAssets.loginImg,
                         title: LocalString.signWithoutLogin,
                         textClr: AppColors.white,
                         onTap: () {
@@ -87,25 +77,6 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                   ],
                 ),
               )
-              /* const Align(
-                      alignment: Alignment.center,
-                      child: AppText("Forgot Password ?"))
-                  .px(40)
-                  .py(20),
-              Container(
-                alignment: Alignment.bottomCenter,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const AppText("Sign up", fontSize: 24),
-                    InkWell(
-                        onTap:  (){
-                          Get.offNamed(AppRoutes.bottomNavigation);
-                        },
-                        child: const AppText("Skip", fontSize: 24)),
-                  ],
-                ),
-              ).px(20).py(30)*/
             ],
           ),
         ),

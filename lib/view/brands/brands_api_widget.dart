@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
 
@@ -28,6 +29,7 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
     DialogueThemeExtention dialogueThemeExtention =
         Theme.of(context).extension<DialogueThemeExtention>()!;
     return CommonWidgets.errorAPI(
+        buttonTitle: retryTxt,
         errorText: error.toString(),
         context: context,
         onPress: () => controller.update([Endpoints.allBrands]));

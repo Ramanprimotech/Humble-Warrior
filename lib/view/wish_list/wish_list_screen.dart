@@ -6,6 +6,7 @@ import 'package:humble_warrior/modals/response/front_page_response_model.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
+import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/decorations.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
@@ -24,25 +25,7 @@ class WishList extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              margin: 20.pa,
-              height: 50,
-              decoration: CustomBoxDecorations().shadow(context: context),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  AppIcons.IosBackIcon(),
-                  const AppText(
-                    myWishlistTxt,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                  ),
-                  const SizedBox(
-                    width: 40,
-                  ),
-                ],
-              ),
-            ),
+            CommonWidgets.titleBar(context, title: myWishlistTxt,fontSize: 20),
             Expanded(
               child: Center(
                 child: controller.value == false
@@ -74,10 +57,19 @@ class WishList extends StatelessWidget {
     );
   }
 
+
+
+
   Widget loginFirst(context) {
-    final DialogueThemeExtention dialogueThemeExtention =
-        Theme.of(context).extension<DialogueThemeExtention>()!;
-    return Container(
+    return CommonWidgets.errorAPI(
+        height: 150,
+        buttonTitle: gotoLoginTxt,
+        errorText: accessingMsgTxt,
+        context: context,
+        onPress: (){
+          Get.offAllNamed(AppRoutes.loginPage);
+        });
+    /*Container(
       height: 150,
       margin: 20.pa,
       padding: 20.ps,
@@ -101,7 +93,7 @@ class WishList extends StatelessWidget {
               color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ]),
-    );
+    );*/
   }
 }
 

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -111,6 +112,7 @@ class _WebViewScreenWidgetState extends State<WebViewScreenWidget> {
       ),
       body: errorBool
           ? CommonWidgets.errorAPI(
+          buttonTitle: retryTxt,
               errorText: errorText,
               context: context,
               onPress: () {

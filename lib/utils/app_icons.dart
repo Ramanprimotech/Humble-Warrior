@@ -36,9 +36,7 @@ class AppIcons {
       Image.asset(
         ImagePathAssets.amazonIcon,
         height: 20,
-        color: color,
-        // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
-      );
+        color: color,);
 
   static Image home(BuildContext context) => Image.asset(
         ImagePathAssets.homeIcon,
@@ -49,12 +47,9 @@ class AppIcons {
         ImagePathAssets.homeIcon,
         height: 20,
         color: color,
-        // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
       );
 
   static Image notification(BuildContext context) => Image.asset(
-        // 'assets/image/bell.png',
-        //color: Theme.of(context).textTheme.displayLarge!.color!,
         ImagePathAssets.notificationIcon,
         height: 40,
         width: 30,
@@ -70,13 +65,11 @@ class AppIcons {
         ImagePathAssets.facebookIcon,
         height: 20,
         color: color,
-        // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
-      );
+  );
 
   static Image person(BuildContext context) => Image.asset(
         ImagePathAssets.personIcon,
         height: 20,
-        // color: AppColors.grey,
         color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
       );
 
@@ -84,7 +77,6 @@ class AppIcons {
       Image.asset(
         ImagePathAssets.personIcon,
         height: 20,
-        // color: AppColors.grey,
         color: color,
       );
 
@@ -106,9 +98,6 @@ class AppIcons {
       );
 
   static Icon sort({Color? iconColor}) => Icon(Icons.sort, color: iconColor);
-
-  // static Icon notification({Color iconColor = Colors.black}) =>
-  //     Icon(Icons.notifications_none_rounded, color: iconColor,size: 30,);
 
   static Icon notificationActice({Color? iconColor, double size = 24}) => Icon(
         Icons.notifications_active,
@@ -138,7 +127,7 @@ class AppIcons {
 
   static Icon backArrrowIos({Color? iconColor}) => Icon(
         Icons.arrow_back_ios,
-        color: iconColor,
+        color: iconColor??Theme.of(Get.context!).textTheme.displaySmall!.color!,
       );
 
   static IconButton IosBackIcon({Color? iconColor, Function()? onPress}) =>
@@ -157,7 +146,7 @@ class AppIcons {
   static Icon cross({Color iconColor = Colors.black, double size = 24}) =>
       Icon(Icons.highlight_off, size: size, color: iconColor);
 
-  //<===========Account Icons
+            /// Account Icons
 
   static Icon clock({Color iconColor = Colors.black}) =>
       Icon(Icons.timer, color: iconColor);

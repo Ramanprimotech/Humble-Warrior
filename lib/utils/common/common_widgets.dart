@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/extensions.dart';
@@ -78,13 +79,16 @@ class CommonWidgets {
   static Widget errorAPI(
       {required String errorText,
       required BuildContext context,
-      required Function() onPress}) {
+      required Function() onPress,
+      required String buttonTitle,
+        double? height,
+      }) {
     final DialogueThemeExtention dialogueThemeExtention =
         Theme.of(context).extension<DialogueThemeExtention>()!;
     return Center(
       child: Container(
         margin: 20.pa,
-        height: 180,
+        height: height??180,
         width: Get.width,
         padding: 20.pa,
         decoration: CustomBoxDecorations().shadow(context: context),
@@ -104,11 +108,46 @@ class CommonWidgets {
               backgroundColor: dialogueThemeExtention.buttonColor,
             ),
             onPressed: onPress,
-            child: const AppText(retry,
+            child: AppText(buttonTitle,
                 color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ]),
       ),
     );
   }
+
+  static Widget titleBar(context, {color, title, icon=false,double? fontSize}) {
+    return Container(
+      height: 50,
+      margin: 20.pa,
+      width: MediaQuery.of(Get.context!).size.width,
+      decoration: CustomBoxDecorations().shadow(context: context),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          AppIcons.IosBackIcon(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AppText(
+                title,
+                fontSize: fontSize??18,
+                fontWeight: FontWeight.bold,
+              ),
+              5.sw,
+              icon?Padding(
+                padding: 2.pt,
+                child: AppIcons.heart(
+                  iconColor: Colors.red,
+                ),
+              ):SizedBox(),
+            ],
+          ),
+          40.sw
+        ],
+      ),
+    );
+  }
+
+
 }

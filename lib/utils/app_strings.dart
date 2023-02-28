@@ -135,6 +135,6 @@ const String readmoreTxt = 'read more';
 const String accessingMsgTxt = 'Please Login for accessing this feature.';
 const String webSiteError = 'Unable to reach the website';
 const String gotoLoginTxt = 'Go to Login';
-const String retry = 'Retry';
+const String retryTxt = 'Retry';
 const String myFvrtTxt = 'My Favourite';
 const String buyNowTxt = 'Buy Now';
