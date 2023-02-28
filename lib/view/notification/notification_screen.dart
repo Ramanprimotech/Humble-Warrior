@@ -17,11 +17,10 @@ class NotificationScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            notificationAppBar(context),
+            CommonWidgets.titleBar(context, title: notificationsTxt,fontSize: 20),
             Expanded(
               child: ListView.separated(
-                padding:
-                    EdgeInsets.only(left: 15, right: 15, bottom: 20, top: 5),
+                padding: const EdgeInsets.only(left: 15, right: 15, bottom: 20, top: 5),
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
                   return notificationCard(context);
@@ -34,27 +33,6 @@ class NotificationScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  notificationAppBar(context) {
-    return Container(
-      height: 50,
-      margin: 15.pa,
-      decoration: CustomBoxDecorations().shadow(context: context),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          AppIcons.IosBackIcon(),
-          const AppText(notificationsTxt,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              textAlign: TextAlign.center),
-          const SizedBox(
-            width: 40,
-          ),
-        ],
       ),
     );
   }

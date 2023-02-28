@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/extensions.dart';
@@ -111,4 +112,40 @@ class CommonWidgets {
       ),
     );
   }
+
+  static Widget titleBar(context, {color, title, icon=false,double? fontSize}) {
+    return Container(
+      height: 50,
+      margin: 20.pa,
+      width: MediaQuery.of(Get.context!).size.width,
+      decoration: CustomBoxDecorations().shadow(context: context),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          AppIcons.IosBackIcon(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AppText(
+                title,
+                // "$brandsTxt I",
+                fontSize: fontSize??18,
+                fontWeight: FontWeight.bold,
+              ),
+              5.sw,
+              icon?Padding(
+                padding: 2.pt,
+                child: AppIcons.heart(
+                  iconColor: Colors.red,
+                ),
+              ):SizedBox(),
+            ],
+          ),
+          40.sw
+        ],
+      ),
+    );
+  }
+
+
 }

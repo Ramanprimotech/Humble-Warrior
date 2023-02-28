@@ -146,13 +146,11 @@ class HomeScreenWidgets {
           () => Visibility(
             visible: controller.listForward.value,
             child: Positioned(
-              // right: -5,
               right: 0,
               child: Container(
                 alignment: Alignment.center,
                 color: Theme.of(context).scaffoldBackgroundColor,
                 height: brandHeight, width: arrowWidth,
-                // padding: EdgeInsets.only(right: productArrowIconPadding),
                 child: GestureDetector(
                   onTap: () {
                     controller.productScrollController.animateTo(

@@ -5,6 +5,7 @@ import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/common/common_appBar.dart';
+import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
@@ -21,6 +22,7 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeScreenController controller = Get.find();
     return Scaffold(
+      /// Common AppBar for search
       appBar: CommonAppBar().AppBarWidget(
         showBackButton: true,
         title: CustomSearchBar(
@@ -28,36 +30,7 @@ class AboutScreen extends StatelessWidget {
           textEditingController: controller.searchTextController,
         ),
       ),
-      /*PreferredSize(
-        preferredSize: const Size.fromHeight(70.0),
-        child: Padding(
-          padding: 12.pt,
-          child: AppBar(
-            leadingWidth: 35,
-            centerTitle: false,
-            title: CustomSearchBar(
-              focusNode: controller.focusNode,
-              textEditingController: controller.searchTextController,
-            ),
-            leading: InkWell(
-                onTap: () {
-                  Get.back();
-                },
-                child: Padding(
-                  padding: 20.pl,
-                  child: AppIcons.backArrrowIos(),
-                )),
-          ),
-        ),
-      ),*/
-      // CustomAppBar(
-      //
-      //   title: CustomSearchBar(
-      //     textEditingController: TextEditingController(),
-      //     focusNode: FocusNode(),
-      //   ),
-      //   showBackButton: true,
-      // ),
+
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -66,14 +39,23 @@ class AboutScreen extends StatelessWidget {
               child: Container(
                 margin: 10.pv,
                 child: Column(children: [
+                  /// About Donna title
                   _aboutButton(context),
+
+                  /// About image
                   _showImg(),
+
+                  /// About Details
                   _details(context),
+
+                  /// See copy of humble warrior button
                   _seeCopyButton(),
                   15.sh,
                 ]),
               ),
             ),
+
+            /// Brands List
             HomeScreenWidgets(context: context, controller: controller)
                 .brandsList(),
             25.sh,
@@ -83,6 +65,7 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
+  /// About Donna title
   _aboutButton(context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -98,11 +81,12 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
+  /// About Donna image
   _showImg() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(5),
-      child: Image.network(
-        "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
+      child: CommonWidgets.networkImage(
+        imageUrl: "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
         fit: BoxFit.fitWidth,
         height: 200,
         alignment: Alignment.topCenter,
@@ -111,6 +95,7 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
+  /// About Details
   _details(context) {
     return Container(
       padding: 10.pa,
@@ -135,6 +120,7 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
+  /// See copy of humble warrior button
   _seeCopyButton() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

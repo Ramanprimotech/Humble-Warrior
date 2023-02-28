@@ -4,6 +4,7 @@ import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
+import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart';
 import 'package:humble_warrior/view/brands/brands_controller.dart';
@@ -36,7 +37,10 @@ class BrandsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _aboutButton(context, shadowTheme.shadowColor!),
+              CommonWidgets.titleBar(context,color: shadowTheme.shadowColor!,
+              title: "$brandsTxt I",icon: true
+              ),
+              // _aboutButton(context, shadowTheme.shadowColor!),
               Expanded(
                 child: Container(
                   padding: 20.ph,
@@ -154,36 +158,5 @@ class BrandsScreen extends StatelessWidget {
     );
   }
 
-  _aboutButton(context, color) {
-    return Container(
-      height: 50,
-      margin: 20.pa,
-      width: MediaQuery.of(Get.context!).size.width,
-      decoration: CustomBoxDecorations().shadow(context: context),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          AppIcons.IosBackIcon(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const AppText(
-                "$brandsTxt I",
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-              5.sw,
-              Padding(
-                padding: 2.pt,
-                child: AppIcons.heart(
-                  iconColor: Colors.red,
-                ),
-              ),
-            ],
-          ),
-          40.sw
-        ],
-      ),
-    );
-  }
+
 }
