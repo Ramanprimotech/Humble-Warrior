@@ -126,9 +126,9 @@ class AboutScreen extends StatelessWidget {
           trimMode: TrimMode.Line,
           trimCollapsedText: readMoreTxt,
           trimExpandedText: readLessTxt,
-          lessStyle: TextStyle(
+          lessStyle: const TextStyle(
               fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
-          moreStyle: TextStyle(
+          moreStyle: const TextStyle(
               fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
         ),
       ]),

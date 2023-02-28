@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
@@ -17,8 +18,10 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
 
   @override
   Widget build(BuildContext context) {
+    FToast().init(context);
     const double tabFontSize = 18;
-    // final HomeOptionController controller = Get.find();
+    final HomeOptionController controller = Get.find();
+    controller.context = context;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,

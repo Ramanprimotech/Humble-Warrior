@@ -79,6 +79,7 @@ class WishList extends StatelessWidget {
         Theme.of(context).extension<DialogueThemeExtention>()!;
     return Container(
       height: 150,
+      margin: 20.pa,
       padding: 20.ps,
       decoration: CustomBoxDecorations().shadow(context: context),
       child: Column(children: [

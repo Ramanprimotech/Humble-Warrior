@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
 import 'package:humble_warrior/modals/response/front_page_response_model.dart';
+import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
 
 import '../../../modals/requests/pagination_modal.dart';
 import '../../../modals/response/donna_deals_response.dart';
@@ -15,6 +16,7 @@ class HomeOptionController extends GetxController
   RxInt selectedIndex = 0.obs;
   RxBool select = false.obs;
   int initialIndex = Get.arguments[0];
+  late BuildContext context;
 
   /// Donna's Deals
   final RxInt donnaDealsLength = 0.obs;
@@ -63,10 +65,13 @@ class HomeOptionController extends GetxController
     PaginationModel paginationModel =
         PaginationModel(page: donnaDealsPage.toString());
     await CallAPI.donnaDeals(payload: paginationModel).then((value) {
-      donnaDealsPage += 1;
-      donnaDealList.addAll(value.data!);
-
-      donnaDealListLength.value = donnaDealList.length;
+      if (value.data == null) {
+        DialogHelper.showToast(context, "No Deals Found");
+      } else {
+        donnaDealsPage += 1;
+        donnaDealList.addAll(value.data!);
+        donnaDealListLength.value = donnaDealList.length;
+      }
       if (value.totalRecords != null) {
         donnaDealsTotalDeals.value = int.parse(value.totalRecords!);
       }
@@ -79,9 +84,14 @@ class HomeOptionController extends GetxController
     PaginationModel paginationModel =
         PaginationModel(page: frontPageDealsPage.toString());
     await CallAPI.frontPage(payload: paginationModel).then((value) {
-      frontPageDealsPage += 1;
-      frontPageDealList.addAll(value.data!);
-      frontPageDealListLength.value = frontPageDealList.length;
+      if (value.data == null) {
+        DialogHelper.showToast(context, "No Deals Found");
+      } else {
+        frontPageDealsPage += 1;
+        frontPageDealList.addAll(value.data!);
+        frontPageDealListLength.value = frontPageDealList.length;
+      }
+
       if (value.totalRecords != null) {
         frontPageDealsTotalDeals.value = int.parse(value.totalRecords!);
       }
@@ -94,9 +104,13 @@ class HomeOptionController extends GetxController
     PaginationModel paginationModel =
         PaginationModel(page: donnaFavouriteDealsPage.toString());
     await CallAPI.donnaFavourite(payload: paginationModel).then((value) {
-      donnaFavouriteDealsPage += 1;
-      donnaFavouriteDealList.addAll(value.data!);
-      donnaFavouriteDealListLength.value = donnaFavouriteDealList.length;
+      if (value.data == null) {
+        DialogHelper.showToast(context, "No Deals Found");
+      } else {
+        donnaFavouriteDealsPage += 1;
+        donnaFavouriteDealList.addAll(value.data!);
+        donnaFavouriteDealListLength.value = donnaFavouriteDealList.length;
+      }
       if (value.totalRecords != null) {
         donnaFavouriteDealsTotalDeals.value = int.parse(value.totalRecords!);
       }
