@@ -33,8 +33,11 @@ class HomeScreenWidgets {
   final double productArrowIconPadding = 8;
   final double arrowWidth = 30;
 
+
   /// App Bar
-  AppBar appBar() {
+  AppBar appBar(BuildContext context) {
+
+    ImageIconTheme imageIconTheme = Theme.of(context).extension<ImageIconTheme>()!;
     return AppBar(
       toolbarHeight: 70,
       centerTitle: false,
@@ -52,7 +55,12 @@ class HomeScreenWidgets {
             onTap: () {
               Get.toNamed(AppRoutes.notification);
             },
-            child: AppIcons.notification(context),
+            child: Badge(
+
+              textColor:Colors.white ,
+                label:  AppText("14",fontSize: 8),
+                alignment: const AlignmentDirectional(15.0,-3.0),
+                child: AppIcons.notificationActive(size: 30,iconColor: imageIconTheme.backGroundColor)),
           ),
         )
       ],

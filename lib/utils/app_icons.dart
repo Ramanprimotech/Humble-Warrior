@@ -99,8 +99,8 @@ class AppIcons {
 
   static Icon sort({Color? iconColor}) => Icon(Icons.sort, color: iconColor);
 
-  static Icon notificationActice({Color? iconColor, double size = 24}) => Icon(
-        Icons.notifications_active,
+  static Icon notificationActive({Color? iconColor, double size = 24}) => Icon(
+        Icons.notifications,
         color: iconColor,
         size: size,
       );

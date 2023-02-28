@@ -34,26 +34,23 @@ class AboutScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: 15.ph,
-              child: Container(
-                margin: 10.pv,
-                child: Column(children: [
-                  /// About Donna title
-                  _aboutButton(context),
+            Column(children: [
+              /// About Donna title
+              CommonWidgets.titleBar(
+                  context, backIcon: false,
+                  title: aboutDonnaTxt,
+                  fontSize: 18, color: AppColors.primary),
 
-                  /// About image
-                  _showImg(),
+              /// About image
+              _showImg(),
 
-                  /// About Details
-                  _details(context),
+              /// About Details
+              _details(context),
 
-                  /// See copy of humble warrior button
-                  _seeCopyButton(),
-                  15.sh,
-                ]),
-              ),
-            ),
+              /// See copy of humble warrior button
+              _seeCopyButton(),
+              25.sh,
+            ]),
 
             /// Brands List
             HomeScreenWidgets(context: context, controller: controller)
@@ -65,32 +62,20 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
-  /// About Donna title
-  _aboutButton(context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      // padding: 20.ps,
-      margin: 15.pv,
-      width: MediaQuery.of(Get.context!).size.width,
-      decoration: CustomBoxDecorations().shadow(context: context),
-      child: AppText(aboutDonnaTxt,
-          fontWeight: FontWeight.bold,
-          fontSize: 18,
-          color: AppColors.primary,
-          textAlign: TextAlign.center),
-    );
-  }
 
   /// About Donna image
   _showImg() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(5),
-      child: CommonWidgets.networkImage(
-        imageUrl: "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
-        fit: BoxFit.fitWidth,
-        height: 200,
-        alignment: Alignment.topCenter,
-        width: Get.width,
+    return Padding(
+      padding: 20.ph,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(5),
+        child: CommonWidgets.networkImage(
+          imageUrl: "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
+          fit: BoxFit.fitWidth,
+          height: 200,
+          alignment: Alignment.topCenter,
+          width: Get.width,
+        ),
       ),
     );
   }
@@ -99,7 +84,7 @@ class AboutScreen extends StatelessWidget {
   _details(context) {
     return Container(
       padding: 10.pa,
-      margin: 15.pv,
+      margin: EdgeInsets.symmetric(vertical: 15,horizontal: 20),
       width: Get.width,
       decoration: CustomBoxDecorations().shadow(context: context),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -123,6 +108,7 @@ class AboutScreen extends StatelessWidget {
   /// See copy of humble warrior button
   _seeCopyButton() {
     return Container(
+      margin: 20.ph,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       width: MediaQuery.of(Get.context!).size.width,
       decoration: BoxDecoration(

@@ -34,6 +34,7 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
         ),
         leading: AppIcons.IosBackIcon(),
         bottom: TabBar(
+          padding: 0.pt,
             isScrollable: true,
             controller: controller.tabController,
             tabs: <Widget>[

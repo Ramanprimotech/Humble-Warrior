@@ -25,7 +25,7 @@ class WishList extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            CommonWidgets.titleBar(context, title: myWishlistTxt,fontSize: 20),
+            CommonWidgets.titleBar(context, title: myWishlistTxt,fontSize: 20,backIcon: false),
             Expanded(
               child: Center(
                 child: controller.value == false

@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
         resizeToAvoidBottomInset: false,
 
         /// App Bar
-        appBar: homeScreenWidgets.appBar(),
+        appBar: homeScreenWidgets.appBar(context),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

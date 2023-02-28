@@ -20,7 +20,7 @@ class NotificationScreen extends StatelessWidget {
             CommonWidgets.titleBar(context, title: notificationsTxt,fontSize: 20),
             Expanded(
               child: ListView.separated(
-                padding: const EdgeInsets.only(left: 15, right: 15, bottom: 20, top: 5),
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 5),
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
                   return notificationCard(context);
