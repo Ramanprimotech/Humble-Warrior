@@ -31,7 +31,7 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
         ),
       ),
       body: Container(
-        padding: 20.ph,
+        padding: 20.pa,
         child: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

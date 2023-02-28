@@ -126,6 +126,7 @@ ItemCard frontPageCard(
     },
     buttons: frontPageButton(details, index, context),
     imageUrl: details.url!,
+    radius: 10,
     title: details.productName.toString(),
   );
 }

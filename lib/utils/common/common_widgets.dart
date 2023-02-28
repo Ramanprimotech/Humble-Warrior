@@ -116,7 +116,7 @@ class CommonWidgets {
     );
   }
 
-  static Widget titleBar(context, {color, title, icon=false,double? fontSize}) {
+  static Widget titleBar(context, {Color? color, title, icon=false,double? fontSize, backIcon=true}) {
     return Container(
       height: 50,
       margin: 20.pa,
@@ -125,13 +125,14 @@ class CommonWidgets {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          AppIcons.IosBackIcon(),
+          backIcon?AppIcons.IosBackIcon():40.sw,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AppText(
                 title,
                 fontSize: fontSize??18,
+                color: color,
                 fontWeight: FontWeight.bold,
               ),
               5.sw,
