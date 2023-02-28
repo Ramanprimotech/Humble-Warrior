@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:humble_warrior/utils/decorations.dart';
 import 'package:humble_warrior/utils/extensions.dart';
-import 'package:humble_warrior/utils/theme_extention/custom_notice_theme_extention.dart';
+import 'package:humble_warrior/view/home/home_controller.dart';
 
 import '../../modals/response/brands_response_mdel.dart';
 import '../../modals/response/home_categories_response_model.dart';
@@ -11,15 +10,16 @@ import '../../utils/app_colors.dart';
 import '../../utils/app_text.dart';
 import '../../utils/common/common_functionality.dart';
 import '../../utils/common/common_widgets.dart';
+import '../../utils/decorations.dart';
 import '../../utils/future_widget/abstract_future_widget.dart';
 import '../../utils/routes/app_routes.dart';
 import '../../utils/shimmer/shimmer_loader.dart';
-import 'home_controller.dart';
+import '../../utils/theme_extention/custom_notice_theme_extention.dart';
 
-class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
+class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   final BuildContext context;
 
-  HomePageBrandAPIWidgets({required this.context});
+  BrandAPIWidgets({required this.context});
 
   final HomeScreenController controller = Get.find();
 
@@ -27,84 +27,70 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   Widget error({Object? error}) {
     DialogueThemeExtention dialogueThemeExtention =
         Theme.of(context).extension<DialogueThemeExtention>()!;
-    return Center(
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          elevation: 5,
-          // fixedSize: const Size(, 35),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          backgroundColor: dialogueThemeExtention.buttonColor,
-        ),
-        onPressed: () {
-          controller.update([Endpoints.allBrands]);
-        },
-        child: const AppText('Retry',
-            color: Colors.white, fontWeight: FontWeight.bold),
-      ),
-    );
+    return CommonWidgets.errorAPI(
+        errorText: error.toString(),
+        context: context,
+        onPress: () => controller.update([Endpoints.allBrands]));
   }
 
   @override
   Widget success({List<BrandDetails>? data}) {
     List<BrandDetails> dataa = data ?? [];
-    return Padding(
-      padding: 5.pb,
-      child: ListView.separated(
-        padding: 20.ph,
-        scrollDirection: Axis.horizontal,
-        controller: controller.brandScrollController,
-        itemCount: dataa.length,
-        itemBuilder: (ctx, index) {
-          return GestureDetector(
-            onTap: () {
-              CommonUtils().urlLauncher(url: dataa[index].brandLink!);
-            },
-            child: SizedBox(
-              height: 50,
-              width: 80,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // CommonWidgets.networkImage(
-                  //   alignment: Alignment.center,
-                  //   imageUrl: dataa[index].brandImage!,
-                  //   fit: BoxFit.contain,
-                  //   height: 60,
-                  //   width: 80,
-                  // ),
-                  Container(
-                    width: 70,
-                    height: 50,
-                    decoration: CustomBoxDecorations()
-                        .shadow(context: context, color: Colors.grey.shade200),
-                    child: Padding(
-                      padding: 8.pa,
-                      child: Image.asset(
-                        alignment: Alignment.center,
-                        dataa[index].brandImage!,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return 5.sw;
-        },
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: 40.0,
+        mainAxisSpacing: 60.0,
+        childAspectRatio: 1.5,
       ),
+      itemCount: dataa.length,
+      itemBuilder: (ctx, index) {
+        BrandDetails brandDetails = dataa[index];
+        return GestureDetector(
+          onTap: () async {
+            await CommonUtils().urlLauncher(url: brandDetails.brandLink!);
+          },
+          child: Column(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: 10.pa,
+                  decoration: CustomBoxDecorations()
+                      .shadow(context: context, color: Colors.grey.shade200),
+                  child: Image.asset(
+                    alignment: Alignment.center,
+                    brandDetails.brandImage!,
+                    fit: BoxFit.contain,
+                    width: Get.width,
+                  ),
+                ),
+                // CommonWidgets.networkImage(
+                //   alignment: Alignment.center,
+                //   imageUrl: data[index].brandImage!,
+                //   fit: BoxFit.contain,
+                //
+                //   width: Get.width,
+                // ),
+              ),
+              // 5.sh,
+              // AppText(data[index].brandName!, fontSize: 16),
+            ],
+          ),
+        );
+      },
     );
   }
 
   @override
   Widget waiting() {
-    return ListView.separated(
-      padding: 20.ph,
-      scrollDirection: Axis.horizontal,
-      itemCount: 25,
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: 40.0,
+        mainAxisSpacing: 60.0,
+        childAspectRatio: 1.5,
+      ),
+      itemCount: 20,
       itemBuilder: (ctx, index) {
         return Container(
           color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
@@ -121,9 +107,6 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
             ],
           ),
         );
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return 20.sw;
       },
     );
   }

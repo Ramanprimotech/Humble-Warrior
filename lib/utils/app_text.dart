@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:humble_warrior/utils/media_querry_size.dart';
 
 class AppText extends StatelessWidget {
   final String label;
@@ -26,17 +26,19 @@ class AppText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: padding ?? EdgeInsets.zero,
-      child: Text(
-        label,
-        textAlign: textAlign,
-        style: TextStyle(
-          color: color,
-          fontSize: fontSize ?? 16,
-          fontWeight: fontWeight,
-          decoration: textDecoration,
+      child: MediaQueryText(
+        child: Text(
+          label,
+          textAlign: textAlign,
+          style: TextStyle(
+            color: color,
+            fontSize: fontSize ?? 16,
+            fontWeight: fontWeight,
+            decoration: textDecoration,
+          ),
+          maxLines: maxLines ?? 1,
+          overflow: TextOverflow.ellipsis,
         ),
-        maxLines: maxLines ?? 1,
-        overflow: TextOverflow.ellipsis,
       ),
     );
   }
@@ -196,20 +198,24 @@ class HeadingText extends StatelessWidget {
     return Padding(
       padding: padding ?? const EdgeInsets.symmetric(vertical: 16),
       child: color == null
-          ?Text(
+          ? MediaQueryText(
+              child: Text(
                 label,
                 style: GoogleFonts.montserrat(
                   color: Colors.black,
                   fontWeight: FontWeight.w700,
                   fontSize: fontSize,
                 ),
-              )
-          : Text(
-              label,
-              style: GoogleFonts.montserrat(
-                color: color,
-                fontWeight: FontWeight.w700,
-                fontSize: fontSize,
+              ),
+            )
+          : MediaQueryText(
+              child: Text(
+                label,
+                style: GoogleFonts.montserrat(
+                  color: color,
+                  fontWeight: FontWeight.w700,
+                  fontSize: fontSize,
+                ),
               ),
             ),
     );

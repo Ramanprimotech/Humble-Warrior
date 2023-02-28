@@ -129,6 +129,7 @@ class HomeScreenController extends GetxController implements SearchActions {
         brandName: gucciTxt,
         brandLink: brandLink));
     return data;
+    // return data;
   }
 
   Future<List<HomeCategoryList>> homeCategories() async {

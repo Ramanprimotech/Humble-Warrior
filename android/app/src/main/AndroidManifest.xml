@@ -17,7 +17,7 @@
     </queries>
 
    <application
-        android:label="humble_warrior"
+        android:label="Humble Warrior"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
        android:usesCleartextTraffic="true"
@@ -39,20 +39,20 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+             <intent-filter>
+                  <action android:name="android.intent.action.MAIN"/>
+                  <category android:name="android.intent.category.LAUNCHER"/>
 
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" />
-                <data android:scheme="http" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+                 <!--    <action android:name="android.intent.action.VIEW" />
+                    <category android:name="android.intent.category.BROWSABLE" />
+                    <data android:scheme="https" />
+                    <data android:scheme="http" />
+                    <category android:name="android.intent.category.DEFAULT" />-->
+              </intent-filter>
+          </activity>
 
-       <!-- Don't delete the meta-data below.
-         This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+         <!-- Don't delete the meta-data below.
+           This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
        <meta-data
            android:name="flutterEmbedding"
            android:value="2" />

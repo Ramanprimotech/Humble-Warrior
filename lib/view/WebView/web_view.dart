@@ -1,15 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/extensions.dart';
+import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../utils/app_icons.dart';
-import '../../utils/app_strings.dart';
 import '../../utils/app_text.dart';
-import '../../utils/decorations.dart';
-import '../../utils/theme_extention/custom_notice_theme_extention.dart';
 
 class WebViewScreenWidget extends StatefulWidget {
   final String url;
@@ -98,21 +94,15 @@ class _WebViewScreenWidgetState extends State<WebViewScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final DialogueThemeExtention dialogueThemeExtention =
-        Theme.of(context).extension<DialogueThemeExtention>()!;
     return Scaffold(
       appBar: AppBar(
         elevation: 5,
         leading: Visibility(
-            visible: canGoBool,
-            child: IconButton(
-              icon: AppIcons.backArrrowIos(),
-              onPressed: () {
-                canGo().then((value) {
-                  value ? _webViewController.goBack() : Get.back();
-                });
-              },
-            )),
+          visible: canGoBool,
+          child: AppIcons.IosBackIcon(onPress: () {
+            _webViewController.goBack();
+          }),
+        ),
         automaticallyImplyLeading: canGoBool,
         title: AppText(
           widget.title!,
@@ -120,44 +110,17 @@ class _WebViewScreenWidgetState extends State<WebViewScreenWidget> {
         ),
       ),
       body: errorBool
-          ? Center(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Container(
-                  height: 150,
-                  padding: 20.pa,
-                  decoration: CustomBoxDecorations().shadow(context: context),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        AppText(errorText,
-                            maxLines: 4,
-                            color: dialogueThemeExtention.textColor,
-                            fontSize: 16),
-                        20.sh,
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            elevation: 5,
-                            // fixedSize: const Size(, 35),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            backgroundColor: dialogueThemeExtention.buttonColor,
-                          ),
-                          onPressed: () {
-                            canGo();
-                            loading = true;
-                            errorBool = false;
-                            setState(() {});
-                            _webViewController.clearCache();
-                            _webViewController.reload();
-                          },
-                          child: const AppText(retry,
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                      ]),
-                ),
-              ),
-            )
+          ? CommonWidgets.errorAPI(
+              errorText: errorText,
+              context: context,
+              onPress: () {
+                canGo();
+                loading = true;
+                errorBool = false;
+                setState(() {});
+                _webViewController.clearCache();
+                _webViewController.reload();
+              })
           : loading
               ? Center(
                   child: Row(

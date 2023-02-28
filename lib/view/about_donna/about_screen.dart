@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
@@ -10,7 +11,7 @@ import 'package:humble_warrior/view/home/home_controller.dart';
 import 'package:humble_warrior/view/home/home_screen_widgets.dart';
 import 'package:readmore/readmore.dart';
 
-import '../../utils/app_icons.dart';
+import '../../utils/common/common_functionality.dart';
 import '../../utils/decorations.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -25,7 +26,8 @@ class AboutScreen extends StatelessWidget {
         title: CustomSearchBar(
           focusNode: controller.focusNode,
           textEditingController: controller.searchTextController,
-        ),),
+        ),
+      ),
       /*PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
         child: Padding(
@@ -68,13 +70,13 @@ class AboutScreen extends StatelessWidget {
                   _showImg(),
                   _details(context),
                   _seeCopyButton(),
-                    15.sh,
+                  15.sh,
                 ]),
               ),
             ),
             HomeScreenWidgets(context: context, controller: controller)
                 .brandsList(),
-                25.sh,
+            25.sh,
           ],
         ),
       ),
@@ -157,9 +159,16 @@ class AboutScreen extends StatelessWidget {
                 fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
           ),
           WidgetSpan(child: 10.sw),
-          const TextSpan(
+          TextSpan(
+              recognizer: TapGestureRecognizer()
+                ..onTap = () async {
+                  await CommonUtils().urlLauncher(
+                      url:
+                          "https://humblewarrior.com/wp-content/uploads/2020/09/humble-warrior-media.pdf",
+                      title: "The Humble Warrior");
+                },
               text: hereTxt,
-              style: TextStyle(
+              style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.blue,
                   fontSize: 16))

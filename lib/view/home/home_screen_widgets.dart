@@ -34,33 +34,28 @@ class HomeScreenWidgets {
   final double arrowWidth = 30;
 
   /// App Bar
-  PreferredSize appBar() {
-    return PreferredSize(
-      preferredSize: const Size.fromHeight(70.0),
-      child: Padding(
-        padding: 8.pt,
-        child: AppBar(
-          centerTitle: false,
-          title: CustomSearchBar(
-            onTap: controller.onTap,
-            onSubmit: controller.onSubmit,
-            onChange: controller.onChange,
-            focusNode: controller.focusNode,
-            textEditingController: controller.searchTextController,
-          ),
-          actions: [
-            Padding(
-              padding: 15.pr,
-              child: InkWell(
-                onTap: () {
-                  Get.toNamed(AppRoutes.notification);
-                },
-                child: AppIcons.notification(context),
-              ),
-            )
-          ],
-        ),
+  AppBar appBar() {
+    return AppBar(
+      toolbarHeight: 70,
+      centerTitle: false,
+      title: CustomSearchBar(
+        onTap: controller.onTap,
+        onSubmit: controller.onSubmit,
+        onChange: controller.onChange,
+        focusNode: controller.focusNode,
+        textEditingController: controller.searchTextController,
       ),
+      actions: [
+        Padding(
+          padding: 15.pr,
+          child: InkWell(
+            onTap: () {
+              Get.toNamed(AppRoutes.notification);
+            },
+            child: AppIcons.notification(context),
+          ),
+        )
+      ],
     );
   }
 

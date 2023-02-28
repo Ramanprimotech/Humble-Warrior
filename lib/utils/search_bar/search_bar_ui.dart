@@ -37,6 +37,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
     final ThemeController themeController = Get.find();
     bool isDark = themeController.themeMode == ThemeMode.dark;
     return Container(
+      margin: 8.pl,
       height: 42,
       width: Get.width,
       decoration: BoxDecoration(
@@ -53,8 +54,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
               !isDark
                   ? ImagePathAssets.hwLogoUnnamed
                   : ImagePathAssets.hwLogoUnnamedDark,
-              height: 36,
-              width: 36,
+              height: 40,
+              width: 40,
             ),
           ),
           Row(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
+import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/decorations.dart';
-import 'package:humble_warrior/utils/extensions.dart';
 
 import '../../modals/response/home_categories_response_model.dart';
 import '../../network/endpoints.dart';
@@ -29,45 +29,50 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
   Widget error({Object? error}) {
     final DialogueThemeExtention dialogueThemeExtention =
         Theme.of(context).extension<DialogueThemeExtention>()!;
-    return Padding(
-      padding: const EdgeInsets.only(top: 80.0, left: 30, right: 30),
-      child: Container(
-        height: 200,
-        width: Get.width,
-        // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        padding: 20.ps,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: dialogueThemeExtention.backGroundColor,
-          boxShadow: [
-            BoxShadow(
-                color: dialogueThemeExtention.shadow!,
-                spreadRadius: 2,
-                blurRadius: 2,
-                offset: Offset(0, 0))
-          ],
-        ),
-        child: Column(children: [
-          AppText(error.toString(), maxLines: 5, fontSize: 20),
-          20.sh,
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              elevation: 5,
-              // fixedSize: const Size(, 35),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              backgroundColor: dialogueThemeExtention.buttonColor,
-            ),
-            onPressed: () {
-              controller.update([Endpoints.homeCategories]);
-            },
-            child: const AppText('Retry',
-                color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-        ]),
-      ),
+    return Expanded(
+      child: CommonWidgets.errorAPI(
+          errorText: error.toString(),
+          context: context,
+          onPress: () => controller.update([Endpoints.homeCategories])),
     );
-    // return const AppText("Something Went Wrong");
+    //   Padding(
+    //   padding: const EdgeInsets.only(top: 80.0, left: 30, right: 30),
+    //   child: Container(
+    //     height: 200,
+    //     width: Get.width,
+    //     // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+    //     padding: 20.ps,
+    //     decoration: BoxDecoration(
+    //       borderRadius: BorderRadius.circular(10),
+    //       color: dialogueThemeExtention.backGroundColor,
+    //       boxShadow: [
+    //         BoxShadow(
+    //             color: dialogueThemeExtention.shadow!,
+    //             spreadRadius: 2,
+    //             blurRadius: 2,
+    //             offset: Offset(0, 0))
+    //       ],
+    //     ),
+    //     child: Column(children: [
+    //       AppText(error.toString(), maxLines: 5, fontSize: 20),
+    //       20.sh,
+    //       ElevatedButton(
+    //         style: ElevatedButton.styleFrom(
+    //           elevation: 5,
+    //           // fixedSize: const Size(, 35),
+    //           shape: RoundedRectangleBorder(
+    //               borderRadius: BorderRadius.circular(10)),
+    //           backgroundColor: dialogueThemeExtention.buttonColor,
+    //         ),
+    //         onPressed: () {
+    //           controller.update([Endpoints.homeCategories]);
+    //         },
+    //         child: const AppText('Retry',
+    //             color: Colors.white, fontWeight: FontWeight.bold),
+    //       ),
+    //     ]),
+    //   ),
+    // );
   }
 
   @override
@@ -77,17 +82,6 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         itemBuilder: (ctx, index) {
-          /*    if (index == dataa.length) {
-            return KeyboardVisibilityBuilder(builder: (context, isKVisible) {
-              debugPrint(isKVisible.toString());
-              return Visibility(
-                visible: !isKVisible,
-                child: SizedBox(
-                  height: brandHeight + brandLoveHeight + 10,
-                ),
-              );
-            });
-          }*/
           return homeOption(homeOptions: dataa[index], index: index);
         },
         itemCount: dataa.length,

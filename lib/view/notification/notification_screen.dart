@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
+import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
@@ -19,7 +20,8 @@ class NotificationScreen extends StatelessWidget {
             notificationAppBar(context),
             Expanded(
               child: ListView.separated(
-                padding: EdgeInsets.only(left: 15, right: 15, bottom: 20, top: 5),
+                padding:
+                    EdgeInsets.only(left: 15, right: 15, bottom: 20, top: 5),
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
                   return notificationCard(context);
@@ -44,13 +46,7 @@ class NotificationScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(
-            icon: Icon(Icons.arrow_back_ios,
-                color: Theme.of(context).textTheme.displaySmall!.color!),
-            onPressed: () {
-              Get.back();
-            },
-          ),
+          AppIcons.IosBackIcon(),
           const AppText(notificationsTxt,
               fontWeight: FontWeight.bold,
               fontSize: 20,
@@ -123,7 +119,8 @@ class NotificationScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 15, right: 10, top: 5),
             child: AppText(
-              "These cuties were tough to photograph and honestly my picture doesn't to do justice." * 2,
+              "These cuties were tough to photograph and honestly my picture doesn't to do justice." *
+                  2,
               fontSize: 14,
               maxLines: 2,
             ),
@@ -135,7 +132,8 @@ class NotificationScreen extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 padding: const EdgeInsets.only(left: 10, right: 10, bottom: 2),
                 decoration: BoxDecoration(
-                    color: AppColors.primary, borderRadius: BorderRadius.circular(8)),
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.circular(8)),
                 child: const AppText(
                   "Yesterday",
                   fontWeight: FontWeight.bold,
@@ -143,8 +141,8 @@ class NotificationScreen extends StatelessWidget {
                   fontSize: 12,
                 ),
               ),
-          ],)
-
+            ],
+          )
         ],
       ),
     );

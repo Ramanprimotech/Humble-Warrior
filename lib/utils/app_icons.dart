@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/image_path_assets.dart';
 
 class AppIcons {
@@ -137,6 +139,16 @@ class AppIcons {
   static Icon backArrrowIos({Color? iconColor}) => Icon(
         Icons.arrow_back_ios,
         color: iconColor,
+      );
+
+  static IconButton IosBackIcon({Color? iconColor, Function()? onPress}) =>
+      IconButton(
+        padding: 20.pl,
+        icon: backArrrowIos(),
+        onPressed: onPress ??
+            () {
+              Get.back();
+            },
       );
 
   static Icon backArrow({Color? iconColor, double size = 24}) =>

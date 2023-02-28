@@ -20,46 +20,32 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
     const double tabFontSize = 18;
     // final HomeOptionController controller = Get.find();
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(110.0),
-        child: Padding(
-          padding: 12.pt,
-          child: AppBar(
-            leadingWidth: 35,
-            centerTitle: false,
-            title: CustomSearchBar(
-              focusNode: controller.focusNode,
-              textEditingController: controller.searchTextController,
-            ),
-            leading: InkWell(
-                onTap: () {
-                  Get.back();
-                },
-                child: Padding(
-                  padding: 20.pl,
-                  child: AppIcons.backArrrowIos(),
-                )),
-            bottom: TabBar(
-                isScrollable: true,
-                controller: controller.tabController,
-                tabs: <Widget>[
-                  AppText(
-                    donnaDailyDealTxt.upperCamelCase,
-                    fontSize: tabFontSize,
-                  ),
-                  AppText(donnaFavouriteDealTxt.upperCamelCase,
-                      fontSize: tabFontSize),
-                  AppText(donnaFrontPageDealTxt.upperCamelCase,
-                      fontSize: tabFontSize)
-                ]),
-            actions: [
-              Padding(
-                padding: 15.pr,
-                child: InkWell(onTap: () {}, child: AppIcons.filter()),
-              )
-            ],
-          ),
+      appBar: AppBar(
+        toolbarHeight: 70,
+        titleSpacing: 15,
+        leadingWidth: 35,
+        centerTitle: false,
+        title: CustomSearchBar(
+          focusNode: controller.focusNode,
+          textEditingController: controller.searchTextController,
         ),
+        leading: AppIcons.IosBackIcon(),
+        bottom: TabBar(
+            isScrollable: true,
+            controller: controller.tabController,
+            tabs: <Widget>[
+              AppText(
+                donnaDailyDealTxt.upperCamelCase,
+                fontSize: tabFontSize,
+              ),
+              AppText(donnaFavouriteDealTxt.upperCamelCase,
+                  fontSize: tabFontSize),
+              AppText(donnaFrontPageDealTxt.upperCamelCase,
+                  fontSize: tabFontSize)
+            ]),
+        actions: [
+          IconButton(padding: 20.pr, onPressed: () {}, icon: AppIcons.filter())
+        ],
       ),
       body: Padding(
         padding: 15.pt,

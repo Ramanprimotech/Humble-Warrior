@@ -24,31 +24,23 @@ class WishList extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Container(
-                height: 50,
-                decoration: CustomBoxDecorations().shadow(context: context),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: 12.pl,
-                      child: AppIcons.backArrrowIos(
-                        iconColor:
-                            Theme.of(context).textTheme.displayMedium!.color,
-                      ),
-                    ),
-                    const AppText(
-                      myWishlistTxt,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 20,
-                    ),
-                    const SizedBox(
-                      width: 40,
-                    ),
-                  ],
-                ),
+            Container(
+              margin: 20.pa,
+              height: 50,
+              decoration: CustomBoxDecorations().shadow(context: context),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AppIcons.IosBackIcon(),
+                  const AppText(
+                    myWishlistTxt,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                  ),
+                  const SizedBox(
+                    width: 40,
+                  ),
+                ],
               ),
             ),
             Expanded(

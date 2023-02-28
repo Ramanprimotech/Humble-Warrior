@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
+import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
 
+import '../decorations.dart';
 import '../image_path_assets.dart';
+import '../theme_extention/custom_notice_theme_extention.dart';
 
 class CommonWidgets {
   static Widget networkImage({
@@ -36,18 +39,23 @@ class CommonWidgets {
           width: width,
         ),
       ),
-      errorWidget: (context, url, error) =>
-      Center(child: Image.asset(ImagePathAssets.noImageFound,alignment: Alignment.center,fit: fit,height: height,))    ,
+      errorWidget: (context, url, error) => Center(
+          child: Image.asset(
+        ImagePathAssets.noImageFound,
+        alignment: Alignment.center,
+        fit: fit,
+        height: height,
+      )),
 
       // Container(
-          // color: Colors.grey,
-          // height: height,
-          // width: width ?? Get.width,
-          // child: const Icon(Icons.error)),
+      // color: Colors.grey,
+      // height: height,
+      // width: width ?? Get.width,
+      // child: const Icon(Icons.error)),
     );
   }
 
-  static Widget noData(){
+  static Widget noData() {
     return const Center(
       child: AppText(
         noDataFoundTxt,
@@ -57,7 +65,7 @@ class CommonWidgets {
     );
   }
 
-  static Widget loading(){
+  static Widget loading() {
     return const Center(
       child: AppText(
         loadingDealsTxt,
@@ -67,4 +75,40 @@ class CommonWidgets {
     );
   }
 
+  static Widget errorAPI(
+      {required String errorText,
+      required BuildContext context,
+      required Function() onPress}) {
+    final DialogueThemeExtention dialogueThemeExtention =
+        Theme.of(context).extension<DialogueThemeExtention>()!;
+    return Center(
+      child: Container(
+        margin: 20.pa,
+        height: 180,
+        width: Get.width,
+        padding: 20.pa,
+        decoration: CustomBoxDecorations().shadow(context: context),
+        child:
+            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          AppText(errorText,
+              maxLines: 4,
+              color: dialogueThemeExtention.textColor,
+              fontSize: 16),
+          20.sh,
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              elevation: 5,
+              // fixedSize: const Size(, 35),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              backgroundColor: dialogueThemeExtention.buttonColor,
+            ),
+            onPressed: onPress,
+            child: const AppText(retry,
+                color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+        ]),
+      ),
+    );
+  }
 }
