@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/common/common_appBar.dart';
 import 'package:humble_warrior/utils/extensions.dart';
+import 'package:humble_warrior/view/home_option/common_home_option.dart';
 import 'package:humble_warrior/view/productDetail/front_page_details_screen/front_page_detail_controller.dart';
 import 'package:humble_warrior/view/productDetail/product_detail_widget.dart';
 import 'package:velocity_x/velocity_x.dart';

@@ -8,6 +8,7 @@ import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
+import 'package:humble_warrior/view/home_option/common_home_option.dart';
 
 import '../../../modals/response/donna_favourite_response_model.dart';
 import 'favourite_deals_controller.dart';
@@ -34,7 +35,11 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
         child: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            SizedBox(
+                favouritePageCard(
+                  height: 250,
+                  imageUrl: donnaFavouriteDetails.url!,
+                ),
+            /*SizedBox(
               height: 250,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
@@ -45,7 +50,7 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
                   fit: BoxFit.cover,
                 ),
               ),
-            ),
+            ),*/
             Container(
               margin: 10.pv,
               padding: 7.pv,

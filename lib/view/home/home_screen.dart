@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
             8.sh,
 
             ///Home Option List Future Builder
-            homeScreenWidgets.homeOptionListTwo(),
+            homeScreenWidgets.homeOptionDeals(),
 
             /// Brand List Future Builder
             homeScreenWidgets.brandsList(),

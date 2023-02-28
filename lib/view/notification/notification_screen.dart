@@ -78,8 +78,7 @@ class NotificationScreen extends StatelessWidget {
         bottomLeft: Radius.circular(10),
       ),
       child: CommonWidgets.networkImage(
-        imageUrl:
-            "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
+        imageUrl: "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
         alignment: Alignment.topCenter,
         width: Get.width / 3.5,
         fit: BoxFit.cover,

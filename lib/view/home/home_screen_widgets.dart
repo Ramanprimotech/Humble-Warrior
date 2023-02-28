@@ -60,7 +60,7 @@ class HomeScreenWidgets {
   }
 
   ///HOme Options List Future Builder
-  Widget homeOptionListTwo() {
+  Widget homeOptionDeals() {
     return GetBuilder(
         id: Endpoints.homeCategories,
         init: controller,

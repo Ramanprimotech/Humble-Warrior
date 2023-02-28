@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/common/common_appBar.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
+import 'package:humble_warrior/view/home_option/common_home_option.dart';
 
 import '../../../modals/response/donna_deals_response.dart';
 import '../../home_option/tab_screens/donnas_deals.dart';

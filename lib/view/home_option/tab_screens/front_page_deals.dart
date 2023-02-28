@@ -105,17 +105,6 @@ class FrontPageDeals extends StatelessWidget {
   }
 }
 
-ItemCard frontPageCard(
-    FrontPageDetails details, int index, BuildContext context) {
-  return ItemCard(
-    onTap: () {
-      Get.toNamed(AppRoutes.frontPageProductDetail, arguments: [details]);
-    },
-    buttons: frontPageButton(details, index, context),
-    imageUrl: details.url!,
-    title: details.productName.toString(),
-  );
-}
 
 Widget frontPageButton(
     FrontPageDetails details, int index, BuildContext context) {
