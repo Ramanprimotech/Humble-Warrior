@@ -74,18 +74,7 @@ class DonnaDailyDeals extends StatelessWidget {
   }
 }
 
-ItemCard donnaDealsCard(
-    DonnaDealsDetails details, int index, BuildContext context) {
-  return ItemCard(
-    onTap: () {
-      Get.toNamed(AppRoutes.dailyDealProductDetail, arguments: [details]);
-    },
-    radius: 10,
-    buttons: donnaDealsButton(details, index, context),
-    imageUrl: details.url!,
-    title: details.dealName!,
-  );
-}
+
 
 Widget donnaDealsButton(
     DonnaDealsDetails details, int index, BuildContext context) {
