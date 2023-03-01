@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
    MyApp({super.key});
 
 ThemeController themeController = Get.put(ThemeController());
-  ValueNotifier theme = ValueNotifier(false);
+  ValueNotifier theme = ValueNotifier(ThemeMode.system == ThemeMode.dark);
 
   void getTheme()async{
     var themeMode =   themeController.getThemeModeFromPreferences();

@@ -9,6 +9,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SplashController controller = Get.find();
+    controller.context = context;
     return SafeArea(
       child: Scaffold(
         body: Container(

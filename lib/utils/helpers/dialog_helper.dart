@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/extensions.dart';
+import 'package:humble_warrior/utils/media_query_widget.dart';
 import 'package:humble_warrior/utils/theme_extention/custom_notice_theme_extention.dart';
 
 import '../app_colors.dart';
@@ -49,38 +50,125 @@ abstract class DialogHelper {
     );
   }
 
-  static Future<void> showConfirmationDialog({
-    String title = "Are you sure?",
-    String? description,
-    required List<Button> actions,
-  }) async {
+
+  static Future<void> showAlertDialog(
+      String message, {
+        String? title,
+        double? textFont,
+        required VoidCallback onTap,
+      }) async {
+    DialogueThemeExtention dialogueThemeExtention =
+    Theme.of(Get.context!).extension<DialogueThemeExtention>()!;
     await Get.dialog(
       Dialog(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0).copyWith(top: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              HeadingText(
-                title,
-                fontSize: 22,
-                padding: const EdgeInsets.all(8),
-              ),
-              if (description != null) ...[
+        shape: 16.shape,
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: dialogueThemeExtention.backGroundColor,
+        child: MediaQueryWidget(
+          child: Padding(
+            padding: 16.pa,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
                 AppText(
-                  description,
+                  title ?? "Humble Warrior",
+                  fontSize: 22,
                   maxLines: 3,
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  fontWeight: FontWeight.bold,
+                  padding: 8.pb,
+                  textAlign: TextAlign.center,
+                ),
+                16.sh,
+                AppText(
+                  message,
+                  fontSize: textFont??18,
+                  maxLines: 6,
+                  textAlign: TextAlign.center,
+                ),
+                32.sh,
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 5,
+                    fixedSize: const Size(180, 35),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    backgroundColor: AppColors.primary,
+                  ),
+                  onPressed: onTap,
+                  child: AppText('OK',
+                    color: Colors.white, fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
               ],
-              const SizedBox(height: 16),
-              ...actions,
-            ],
+            ),
           ),
         ),
       ),
       barrierDismissible: false,
+      // barrierColor: _themeController.isDarkMode ? AppColors.barrierDark : AppColors.barrierLight,
+    );
+  }
+
+  static Future<void> showConfirmationDialog({
+    required BuildContext context, required void Function() action,
+    void Function()? cancelAction,
+    String? actionLabel, String? cancelLabel, String? message,
+  }) async {
+    DialogueThemeExtention dialogueThemeExtention =
+    Theme.of(Get.context!).extension<DialogueThemeExtention>()!;
+    showDialog(
+      barrierDismissible: false,
+      context: Get.context!,
+      builder: (context) => AlertDialog(
+        surfaceTintColor: Colors.transparent,
+        contentPadding:
+        const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        alignment: Alignment.center,
+        actionsAlignment: MainAxisAlignment.spaceAround,
+        backgroundColor: dialogueThemeExtention.backGroundColor,
+        elevation: 5,
+        title: AppText(message??"Are you Sure?",
+            color: dialogueThemeExtention.textColor,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            fontSize: 20),
+        actions: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              elevation: 5,
+              fixedSize: const Size(90, 35),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              backgroundColor: AppColors.primary,
+            ),
+            onPressed: action,
+            child: AppText(actionLabel??'OK',
+                color: Colors.white, fontWeight: FontWeight.bold,
+            fontSize: 14,
+            ),
+          ),
+          OutlinedButton(
+            style: ButtonStyle(
+              elevation: MaterialStateProperty.resolveWith((states) => 5),
+              shape: MaterialStateProperty.resolveWith((states) =>
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10))),
+              // overlayColor: MaterialStateProperty.all(AppColors.primary),
+              side: MaterialStateProperty.resolveWith(
+                    (states) => BorderSide(
+                  color: AppColors.primary,
+                  width: 2,
+                ),
+              ),
+            ),
+            onPressed: cancelAction??() {
+              Get.back();
+            },
+            child: AppText(cancelLabel??'Cancel', fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
     );
   }
 

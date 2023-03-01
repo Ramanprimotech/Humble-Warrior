@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/extensions.dart';
@@ -12,7 +13,9 @@ class MyAccount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FToast().init(context);
     MyAccountController controller = Get.find();
+    controller.context = context;
     MyAccWidget myAccWidget = MyAccWidget(context: context);
     double optionSpacing = 15;
     return Scaffold(
@@ -64,7 +67,9 @@ class MyAccount extends StatelessWidget {
               myAccWidget.myAccountTextFun(heading: settingsTxt),
 
               ///Passcode
-              myAccWidget.detailsOptions(controller, title: passcodeTxt),
+              myAccWidget.detailsOptions(controller, title: passcodeTxt,ontap: (){
+                controller.tapPasscode();
+              }),
 
               ///Dark Mode
               myAccWidget.detailsOptions(controller,

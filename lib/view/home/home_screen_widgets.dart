@@ -56,7 +56,6 @@ class HomeScreenWidgets {
               Get.toNamed(AppRoutes.notification);
             },
             child: Badge(
-
               textColor:Colors.white ,
                 label:  AppText("14",fontSize: 8),
                 alignment: const AlignmentDirectional(15.0,-3.0),
