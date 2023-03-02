@@ -49,9 +49,7 @@ class PaginationWidget extends StatelessWidget {
       },
       child: RefreshIndicator(
           onRefresh: () async {
-            return Future.delayed(Duration(seconds: 2), () async {
-              await api(refresh: true).then((value) => Future.value(0));
-            });
+            await api(refresh: true).then((value) => Future.value(0));
           },
           child: child),
     );
