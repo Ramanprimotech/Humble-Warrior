@@ -121,7 +121,6 @@ const String donnasOptionTxt = "Donna's Options";
 const String cameraTxt = "Camera";
 const String galleryTxt = "Gallery";
 const String cancelTxt = "Cancel";
-const String isLogged = "isLogged";
 const String userData = "userData";
 const String userEmail = "userEmail";
 const String userName = "userName";
@@ -138,3 +137,7 @@ const String gotoLoginTxt = 'Go to Login';
 const String retryTxt = 'Retry';
 const String myFvrtTxt = 'My Favourite';
 const String buyNowTxt = 'Buy Now';
+
+/*===================================================Shared Preference========================================================*/
+const String spIsEntered = 'isEntered';
+const String spIsLogged = "isLogged";

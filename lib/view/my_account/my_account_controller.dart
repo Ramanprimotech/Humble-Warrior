@@ -18,8 +18,7 @@ import '../../utils/app_strings.dart';
 import '../../utils/routes/app_routes.dart';
 import '../../utils/shared_prefrence/shared_pref.dart';
 
-class MyAccountController extends GetxController{
-
+class MyAccountController extends GetxController {
   RxBool check = true.obs;
   RxBool checkNotification = true.obs;
   RxBool checkDark = false.obs;
@@ -32,37 +31,40 @@ class MyAccountController extends GetxController{
   late BuildContext context;
   ThemeController themeController = Get.find();
   final StreamController<bool> _verificationNotifier =
-  StreamController<bool>.broadcast();
+      StreamController<bool>.broadcast();
 
   // Rx<File?> imagePath = File("").obs;
   File? imagePath;
   RxString imageUrl = "".obs;
   Future<void> getImageGallery() async {
-    imagePath = await CommonUtils().getImagePath(imageSource:ImageSource.gallery);
+    imagePath =
+        await CommonUtils().getImagePath(imageSource: ImageSource.gallery);
     imageUrl.value = imagePath!.path;
     debugPrint("Image Pathhh $imagePath");
   }
 
   Future<void> getData() async {
-    userCheck.value = await SharePreferenceData.getBoolValuesSF(isLogged) ?? false;
+    userCheck.value =
+        await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
     user = await SharePreferenceData.getStringValuesSF(userEmail) ?? "";
     username = await SharePreferenceData.getStringValuesSF(userName) ?? "";
-    userPhone = await SharePreferenceData.getStringValuesSF(userPhoneNumber) ?? "";
+    userPhone =
+        await SharePreferenceData.getStringValuesSF(userPhoneNumber) ?? "";
     userImg = await SharePreferenceData.getStringValuesSF(userProfilePic) ?? "";
     debugPrint("user data ---- $username ---- $userPhone ---- $userImg");
   }
 
   Future<void> getImageCamera() async {
-    imagePath = await CommonUtils().getImagePath(imageSource:ImageSource.camera);
+    imagePath =
+        await CommonUtils().getImagePath(imageSource: ImageSource.camera);
     imageUrl.value = imagePath!.path;
   }
 
-  void switchFunc(){
+  void switchFunc() {
     checkNotification.value = !checkNotification.value;
-
   }
 
-  void darkMode(){
+  void darkMode() {
     checkDark.value = !checkDark.value;
     //themeController.changeTheme(check.value);
     Get.changeThemeMode(checkDark.value ? ThemeMode.dark : ThemeMode.light);
@@ -72,24 +74,23 @@ class MyAccountController extends GetxController{
 
     SharePreferenceData.addBoolToSF("mode", checkDark.value);
     update();
-
-
   }
 
-  Future<void>logout() async {
-    await FirebaseAuth.instance.signOut().then((value) async {  await SharePreferenceData.clear();
-     Get.offAllNamed(AppRoutes.loginPage);
+  Future<void> logout() async {
+    await FirebaseAuth.instance.signOut().then((value) async {
+      await SharePreferenceData.clear();
+      await SharePreferenceData.addBoolToSF(spIsEntered, false);
+      Get.offAllNamed(AppRoutes.loginPage);
     });
   }
 
-   loginPage(){
+  loginPage() {
     Get.offAllNamed(AppRoutes.loginPage);
   }
 
-
   @override
   void onInit() {
-  checkDark.value=    themeController.themeMode == ThemeMode.dark;
+    checkDark.value = themeController.themeMode == ThemeMode.dark;
     getData();
     super.onInit();
   }
@@ -114,51 +115,50 @@ class MyAccountController extends GetxController{
       );
     } else {
       DialogHelper.showConfirmationDialog(
-        message: "Do you want to Change Or Remove the Passcode",
-        cancelLabel: "Change",
-        actionLabel: "Remove",
-        cancelAction: () async {
-           Get.back();
-         await _showLockScreen(
-            Get.context!,
-            opaque: false,
-            cancelButton: Text(
-              'Cancel',
-              style: TextStyle(
-                fontSize: 16,
-                color: AppColors.red,
+          message: "Do you want to Change Or Remove the Passcode",
+          cancelLabel: "Change",
+          actionLabel: "Remove",
+          cancelAction: () async {
+            Get.back();
+            await _showLockScreen(
+              Get.context!,
+              opaque: false,
+              cancelButton: Text(
+                'Cancel',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: AppColors.red,
+                ),
+                semanticsLabel: 'Cancel',
               ),
-              semanticsLabel: 'Cancel',
-            ),
-          );
-        },
-         action: () async {
-           // Navigator.of(Get.context!, rootNavigator: true).pop();
-           Get.back(result: true);
-           SharedPreferences sharedPreferences =
-               await SharedPreferences.getInstance();
+            );
+          },
+          action: () async {
+            // Navigator.of(Get.context!, rootNavigator: true).pop();
+            Get.back(result: true);
+            SharedPreferences sharedPreferences =
+                await SharedPreferences.getInstance();
 
-           var pass = sharedPreferences.getString('PASSCODE');
-           if (pass == null || pass == "") {
-             DialogHelper.showToast(context, 'Passcode not set yet');
-           } else {
-             sharedPreferences.remove('PASSCODE');
-             DialogHelper.showToast(
-                 context, 'Successfully removed passcode');
-           }
-         }, context: Get.context!
-      );
+            var pass = sharedPreferences.getString('PASSCODE');
+            if (pass == null || pass == "") {
+              DialogHelper.showToast(context, 'Passcode not set yet');
+            } else {
+              sharedPreferences.remove('PASSCODE');
+              DialogHelper.showToast(context, 'Successfully removed passcode');
+            }
+          },
+          context: Get.context!);
     }
   }
 
   _showLockScreen(
-      BuildContext context, {
-        required bool opaque,
-        CircleUIConfig? circleUIConfig,
-        KeyboardUIConfig? keyboardUIConfig,
-        Widget? cancelButton,
-        List<String>? digits,
-      }) {
+    BuildContext context, {
+    required bool opaque,
+    CircleUIConfig? circleUIConfig,
+    KeyboardUIConfig? keyboardUIConfig,
+    Widget? cancelButton,
+    List<String>? digits,
+  }) {
     Navigator.push(
       context,
       PageRouteBuilder(
@@ -193,7 +193,7 @@ class MyAccountController extends GetxController{
     try {
       if (enteredPasscode != null) {
         SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
+            await SharedPreferences.getInstance();
         sharedPreferences.setString('PASSCODE', enteredPasscode);
 
         if (sharedPreferences.getString('PASSCODE') != null) {
@@ -231,5 +231,4 @@ class MyAccountController extends GetxController{
   _passcodeCancelled() {
     Navigator.maybePop(Get.context!);
   }
-
 }

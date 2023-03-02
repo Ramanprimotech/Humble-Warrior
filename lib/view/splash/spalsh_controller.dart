@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/network/api_call.dart';
 import 'package:humble_warrior/utils/app_text.dart';
@@ -27,17 +25,19 @@ class SplashController extends GetxController {
 
   late BuildContext context;
   DateTime? currentBackPressTime;
-  RxBool isDark = (ThemeMode.system==ThemeMode.dark).obs;
+  RxBool isDark = (ThemeMode.system == ThemeMode.dark).obs;
   final StreamController<bool> _verificationNotifier =
       StreamController<bool>.broadcast();
 
   getTheme() async {
-    isDark.value = await SharePreferenceData.getBoolValuesSF('mode');
-    if(isDark.value == null){
-      await SharePreferenceData.addBoolToSF('mode',ThemeMode.system==ThemeMode.dark);
-     isDark.value = ThemeMode.system == ThemeMode.dark;
+    var mode = await SharePreferenceData.getBoolValuesSF('mode');
+    if (mode == null) {
+      await SharePreferenceData.addBoolToSF(
+          'mode', ThemeMode.system == ThemeMode.dark);
+      isDark.value = ThemeMode.system == ThemeMode.dark;
+    } else {
+      isDark.value = mode;
     }
-
 
     // isDark = themeController.themeMode == ThemeMode.dark;
   }
@@ -45,8 +45,8 @@ class SplashController extends GetxController {
   Future<void> getData() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     print(
-        "Logged value ---- ${await SharePreferenceData.getBoolValuesSF(isLogged)}");
-    if (await SharePreferenceData.getBoolValuesSF(isLogged) != null) {
+        "Logged value ---- ${await SharePreferenceData.getBoolValuesSF(spIsLogged)}");
+    if (await SharePreferenceData.getBoolValuesSF(spIsLogged) != null) {
       Get.offNamed(AppRoutes.bottomNavigation);
     } else {
       final passCode = sharedPreferences.getString("PASSCODE");
@@ -60,7 +60,11 @@ class SplashController extends GetxController {
           ),
         );
       } else {
-        Get.offNamed(AppRoutes.loginPage);
+        if (await SharePreferenceData.getBoolValuesSF(spIsEntered) == true) {
+          Get.offNamed(AppRoutes.bottomNavigation);
+        } else {
+          Get.offNamed(AppRoutes.loginPage);
+        }
       }
     }
   }

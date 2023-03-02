@@ -8,7 +8,6 @@ import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
-import 'package:humble_warrior/view/home_option/common_home_option.dart';
 
 import '../../../modals/response/donna_favourite_response_model.dart';
 import 'favourite_deals_controller.dart';
@@ -35,10 +34,10 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
         child: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                favouritePageCard(
-                  height: 250,
-                  imageUrl: donnaFavouriteDetails.url!,
-                ),
+            favouritePageCard(
+              height: 250,
+              imageUrl: donnaFavouriteDetails.url!,
+            ),
             /*SizedBox(
               height: 250,
               child: ClipRRect(
@@ -110,6 +109,24 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
           ),
         ),
       ],
+    );
+  }
+
+  favouritePageCard({double? height, onTap, imageUrl}) {
+    return InkWell(
+      onTap: onTap ?? () {},
+      child: SizedBox(
+        height: height ?? 220,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: CommonWidgets.networkImage(
+            imageUrl: imageUrl ?? "",
+            alignment: Alignment.center,
+            width: Get.width,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
     );
   }
 }

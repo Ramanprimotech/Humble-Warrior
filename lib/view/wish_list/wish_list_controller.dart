@@ -9,7 +9,7 @@ class WishListController extends GetxController {
   bool value = false;
 
   Future<void> getLoggedValue() async {
-    value = await SharePreferenceData.getBoolValuesSF(isLogged) ?? false;
+    value = await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
   }
 
   @override

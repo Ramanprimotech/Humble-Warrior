@@ -13,15 +13,15 @@ import '../../utils/shared_prefrence/shared_pref.dart';
 
 class LoginController extends GetxController {
   User? user;
-  RxBool platformBool = false.obs;
+  RxBool isPlatformIOS = false.obs;
 
   checkCurrentPlatform() {
     if (Platform.isAndroid) {
-      platformBool.value = false;
-      debugPrint("platform -- if --- ${platformBool.value}");
+      isPlatformIOS.value = false;
+      debugPrint("platform -- if --- ${isPlatformIOS.value}");
     } else if (Platform.isIOS) {
-      platformBool.value = true;
-      debugPrint("platform -- else --- ${platformBool.value}");
+      isPlatformIOS.value = true;
+      debugPrint("platform -- else --- ${isPlatformIOS.value}");
     }
   }
 
@@ -42,13 +42,17 @@ class LoginController extends GetxController {
           user = await AuthManager().facebookLogin();
           if (user != null) {
             Get.snackbar("Login ", "User Login Successfully ");
-            await SharePreferenceData.addBoolToSF(isLogged, true);
-            await SharePreferenceData.addStringToSF(userEmail, "${user?.email}");
-            await SharePreferenceData.addStringToSF(userPhoneNumber, "${user?.phoneNumber}");
-            await SharePreferenceData.addStringToSF(userName, "${user?.displayName}");
-            await SharePreferenceData.addStringToSF(userProfilePic, "${user?.photoURL}");
+            await SharePreferenceData.addBoolToSF(spIsLogged, true);
+            await SharePreferenceData.addStringToSF(
+                userEmail, "${user?.email}");
+            await SharePreferenceData.addStringToSF(
+                userPhoneNumber, "${user?.phoneNumber}");
+            await SharePreferenceData.addStringToSF(
+                userName, "${user?.displayName}");
+            await SharePreferenceData.addStringToSF(
+                userProfilePic, "${user?.photoURL}");
+            await SharePreferenceData.addBoolToSF(spIsEntered, true);
             Get.toNamed(AppRoutes.bottomNavigation);
-
           }
         } catch (e) {
           debugPrint("error --- $e");
@@ -69,13 +73,18 @@ class LoginController extends GetxController {
           if (user != null) {
             Loader.hide();
             Get.snackbar("Login ", "User Login Successfully ");
-            await SharePreferenceData.addBoolToSF(isLogged, true);
-            await SharePreferenceData.addStringToSF(userEmail, "${user?.email}");
-            await SharePreferenceData.addStringToSF(userPhoneNumber, "${user?.phoneNumber}");
-            await SharePreferenceData.addStringToSF(userName, "${user?.displayName}");
-            await SharePreferenceData.addStringToSF(userProfilePic, "${user?.photoURL}");
-            Get.offNamed(AppRoutes.bottomNavigation);
+            await SharePreferenceData.addBoolToSF(spIsLogged, true);
+            await SharePreferenceData.addStringToSF(
+                userEmail, "${user?.email}");
+            await SharePreferenceData.addStringToSF(
+                userPhoneNumber, "${user?.phoneNumber}");
+            await SharePreferenceData.addStringToSF(
+                userName, "${user?.displayName}");
+            await SharePreferenceData.addStringToSF(
+                userProfilePic, "${user?.photoURL}");
+            await SharePreferenceData.addBoolToSF(spIsEntered, true);
 
+            Get.offNamed(AppRoutes.bottomNavigation);
           } else {
             Loader.hide();
           }
@@ -91,23 +100,34 @@ class LoginController extends GetxController {
         user = await AuthManager().appleLogin();
         if (user != null) {
           Get.snackbar("Login ", "User Login Successfully ");
-          await SharePreferenceData.addBoolToSF(isLogged, true);
+          await SharePreferenceData.addBoolToSF(spIsLogged, true);
           await SharePreferenceData.addStringToSF(userEmail, "${user?.email}");
-          await SharePreferenceData.addStringToSF(userPhoneNumber, "${user?.phoneNumber}");
-          await SharePreferenceData.addStringToSF(userName, "${user?.displayName}");
-          await SharePreferenceData.addStringToSF(userProfilePic, "${user?.photoURL}");
-          if(userPhoneNumber.isEmpty || userProfilePic.isEmpty){
+          await SharePreferenceData.addStringToSF(
+              userPhoneNumber, "${user?.phoneNumber}");
+          await SharePreferenceData.addStringToSF(
+              userName, "${user?.displayName}");
+          await SharePreferenceData.addStringToSF(
+              userProfilePic, "${user?.photoURL}");
+          await SharePreferenceData.addBoolToSF(spIsEntered, true);
+
+          if (userPhoneNumber.isEmpty || userProfilePic.isEmpty) {
             Get.toNamed(AppRoutes.bottomNavigation);
           }
           Get.toNamed(AppRoutes.bottomNavigation);
-
         }
       },
+
+      /// Click Continue without login
+      OnClick.continueWithoutLogin: () async {
+        await SharePreferenceData.addBoolToSF(spIsEntered, true);
+        Get.offNamed(AppRoutes.bottomNavigation);
+      }
     };
 
     Function act = actions[action]!;
+
     return act;
   }
 }
 
-enum OnClick { facebook, google, apple }
+enum OnClick { facebook, google, apple, continueWithoutLogin }
