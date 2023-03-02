@@ -48,11 +48,14 @@ class HomeScreenController extends GetxController implements SearchActions {
     const ProductImages(
             image: ImagePathAssets.giftForMomIcon, name: giftForMomTxt)
         .add();
+    const ProductImages(
+        image: ImagePathAssets.houseIcon, name: homeTxt)
+        .add();
+    const ProductImages(image: ImagePathAssets.beautyIcon, name: beautyTxt)
+        .add();
     const ProductImages(image: ImagePathAssets.menIcon, name: menTxt).add();
     const ProductImages(image: ImagePathAssets.kidsIcon, name: kidsTxt).add();
     const ProductImages(image: ImagePathAssets.foodIcon, name: kitchenTxt)
-        .add();
-    const ProductImages(image: ImagePathAssets.beautyIcon, name: beautyTxt)
         .add();
     const ProductImages(image: ImagePathAssets.travelIcon, name: travelTxt)
         .add();

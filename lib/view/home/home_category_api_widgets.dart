@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/decorations.dart';
+import 'package:humble_warrior/utils/helpers/extensions.dart';
 
 import '../../modals/response/home_categories_response_model.dart';
 import '../../network/endpoints.dart';
@@ -81,6 +82,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
     List<HomeCategoryList> dataa = data ?? [];
     return Expanded(
       child: ListView.builder(
+        padding: 10.pb,
         physics: BouncingScrollPhysics(),
         itemBuilder: (ctx, index) {
           return homeOption(homeOptions: dataa[index], index: index);

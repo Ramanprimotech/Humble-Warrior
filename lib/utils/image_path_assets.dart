@@ -14,7 +14,7 @@ class ImagePathAssets {
 
   static const String hwIcon = "assets/icons/humble_icon.png";
   static const String user = "assets/icons/user.svg";
-  static const String bellIcon = "assets/image/bell.png";
+  static const String notificationBellIcon = "assets/image/bell.png";
 
   /*=================================== Authenticaiton Icons/Images ===========================================*/
 
@@ -48,6 +48,7 @@ class ImagePathAssets {
   static const String menIcon = "assets/brands/men.png";
   static const String giftIcon = "assets/brands/gift.png";
   static const String giftForMomIcon = "assets/brands/giftformom.png";
+  static const String houseIcon = "assets/brands/home.png";
   static const String healthIcon = "assets/brands/health.png";
   static const String kidsIcon = "assets/brands/kids.png";
   static const String foodIcon = "assets/brands/food.png";
@@ -71,6 +72,9 @@ class ImagePathAssets {
   static const String noImageFound = "assets/image/image-not-found.png";
   static const String donnaFrontDealImage = "assets/image/donna_front.jpeg";
   static const String commentIcon = "assets/icons/comments.png";
+  static const String bellBlackIcon = "assets/icons/bell_black.png";
+  // static const String bellWhiteIcon = "assets/icons/bell_white.png";
+  static const String bellIcon = "assets/icons/bell.png";
 
 
 

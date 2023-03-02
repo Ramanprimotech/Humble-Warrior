@@ -161,43 +161,43 @@ final TextTheme _textTheme = TextTheme(
 ///---Light
 TextTheme lightTextTheme = TextTheme(
   displayLarge: _textTheme.displayLarge!.copyWith(
-    color: AppColors.gray,
+    color: AppColors.black,
   ),
   displayMedium: _textTheme.displayMedium!.copyWith(
-    color: AppColors.gray,
+    color: AppColors.black,
   ),
   displaySmall: _textTheme.displaySmall!.copyWith(
-    color: AppColors.gray,
+    color: AppColors.black,
   ),
   headlineMedium: _textTheme.headlineMedium!.copyWith(
-    color: AppColors.gray,
+    color: AppColors.black,
   ),
   headlineSmall: _textTheme.headlineSmall!.copyWith(
-    color: AppColors.gray,
+    color: AppColors.black,
   ),
   titleLarge: _textTheme.titleLarge!.copyWith(
-    color: AppColors.gray,
+    color: AppColors.black,
   ),
   titleMedium: _textTheme.titleMedium!.copyWith(
-    color: AppColors.gray,
+    color: AppColors.black,
   ),
   titleSmall: _textTheme.titleSmall!.copyWith(
-    color: AppColors.gray,
+    color: AppColors.black,
   ),
   bodyLarge: _textTheme.bodyLarge!.copyWith(
-    color: AppColors.gray,
+    color: AppColors.black,
   ),
   bodyMedium: _textTheme.bodyMedium!.copyWith(
-    color: AppColors.gray,
+    color: AppColors.black,
   ),
   labelLarge: _textTheme.labelLarge!.copyWith(
-    color: AppColors.gray,
+    color: AppColors.black,
   ),
   bodySmall: _textTheme.bodySmall!.copyWith(
-    color: AppColors.gray,
+    color: AppColors.black,
   ),
   labelSmall: _textTheme.labelSmall!.copyWith(
-    color: AppColors.gray,
+    color: AppColors.black,
   ),
 );
 

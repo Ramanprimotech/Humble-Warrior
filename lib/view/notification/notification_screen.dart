@@ -40,7 +40,7 @@ class NotificationScreen extends StatelessWidget {
   notificationCard(context) {
     return Container(
       width: Get.width,
-      height: 160,
+      height: 150,
       decoration: CustomBoxDecorations().shadow(context: context),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         notificationImg(),
@@ -102,23 +102,26 @@ class NotificationScreen extends StatelessWidget {
               maxLines: 2,
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                padding: const EdgeInsets.only(left: 10, right: 10, bottom: 2),
-                decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(8)),
-                child: const AppText(
-                  "Yesterday",
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontSize: 12,
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                  padding: const EdgeInsets.only(left: 10, right: 10, bottom: 2),
+                  decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(8)),
+                  child: const AppText(
+                    "Yesterday",
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 12,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           )
         ],
       ),

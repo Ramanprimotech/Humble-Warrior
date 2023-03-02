@@ -37,7 +37,7 @@ class BrandsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CommonWidgets.titleBar(context,color: shadowTheme.shadowColor!,
+              CommonWidgets.titleBar(context,
               title: "$brandsTxt I",icon: true
               ),
               // _aboutButton(context, shadowTheme.shadowColor!),
