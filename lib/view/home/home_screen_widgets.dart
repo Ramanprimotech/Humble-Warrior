@@ -4,6 +4,7 @@ import 'package:humble_warrior/network/endpoints.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/future_widget/future_widget.dart';
+import 'package:humble_warrior/utils/image_path_assets.dart';
 import 'package:humble_warrior/utils/theme_extention/image_icon_theme_extention.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
 
@@ -32,12 +33,12 @@ class HomeScreenWidgets {
   final double brandHeight = 60;
   final double productArrowIconPadding = 8;
   final double arrowWidth = 30;
-
+  final int badge = 99;
 
   /// App Bar
   AppBar appBar(BuildContext context) {
-
-    ImageIconTheme imageIconTheme = Theme.of(context).extension<ImageIconTheme>()!;
+    ImageIconTheme imageIconTheme =
+        Theme.of(context).extension<ImageIconTheme>()!;
     return AppBar(
       toolbarHeight: 70,
       centerTitle: false,
@@ -49,6 +50,7 @@ class HomeScreenWidgets {
         textEditingController: controller.searchTextController,
       ),
       actions: [
+
         Padding(
           padding: 15.pr,
           child: InkWell(
@@ -56,12 +58,66 @@ class HomeScreenWidgets {
               Get.toNamed(AppRoutes.notification);
             },
             child: Badge(
-              textColor:Colors.white ,
+                textColor:Colors.white ,
                 label:  AppText("14",fontSize: 8),
                 alignment: const AlignmentDirectional(15.0,-3.0),
-                child: AppIcons.notificationActive(size: 30,iconColor: imageIconTheme.backGroundColor)),
+                child: Image.asset(
+                  ImagePathAssets.bellIcon,
+                  height: 28,
+                  fit: BoxFit.fitHeight,
+                  color: imageIconTheme.backGroundColor,
+                )),
           ),
         )
+
+        /// Do not remove this code, saved for future use
+        /*Padding(
+          padding: 15.pb,
+          child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              Container(
+                  height: 45,
+                  alignment: Alignment.bottomLeft,
+                  width: 50,
+                  child: Image.asset(
+                    ImagePathAssets.bellIcon,
+                    height: 28,
+                    fit: BoxFit.fitHeight,
+                    color: imageIconTheme.backGroundColor,
+                  )),
+              Visibility(
+                visible: badge>0,
+                child: Positioned(
+                  left: 15,
+                  bottom: 15,
+                  child: Container(
+                    padding: 2.pa,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Container(
+                      height: 20,
+                      width: 20,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: imageIconTheme.backGroundColor,
+                        shape: BoxShape.circle,
+                      ),
+                      child: AppText(badge>99?"99+":"$badge",
+                          fontWeight: FontWeight.w600,
+                          fontSize: badge>99?9:10,
+                          color: imageIconTheme.backGroundColor == Colors.black
+                              ? Colors.white
+                              : Colors.black),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )*/
       ],
     );
   }
@@ -92,27 +148,29 @@ class HomeScreenWidgets {
                 height: productHeight,
                 width: Get.width,
                 child: ListView.builder(
-                    padding: 0.ph,
+                    padding: 8.ph,
                     scrollDirection: Axis.horizontal,
                     controller: controller.productScrollController,
                     itemCount: ProductImages.productImagesList.length,
                     itemBuilder: (ctx, index) {
                       return Padding(
                         padding: 5.ph,
-                        child: SizedBox(
+                        child: Container(
+                          padding: 10.ph,
                           height: productHeight,
-                          width: 80,
+                          // width: 80,
                           child: Column(
                             children: [
                               Image.asset(
                                   ProductImages.productImagesList[index].image,
                                   fit: BoxFit.fitHeight,
-                                  height: productHeight - 20,
+                                  height: productHeight - 25,
                                   scale: 0.7),
                               AppText(
                                 ProductImages.productImagesList[index].name,
                                 fontSize: 12,
                                 maxLines: 1,
+                                fontWeight: FontWeight.bold,
                               ),
                             ],
                           ),
@@ -157,7 +215,8 @@ class HomeScreenWidgets {
               child: Container(
                 alignment: Alignment.center,
                 color: Theme.of(context).scaffoldBackgroundColor,
-                height: brandHeight, width: arrowWidth,
+                height: brandHeight,
+                width: arrowWidth,
                 child: GestureDetector(
                   onTap: () {
                     controller.productScrollController.animateTo(
@@ -271,13 +330,11 @@ class HomeScreenWidgets {
             ],
           ),
           Container(
-            margin: 25.ph,
+            margin: const EdgeInsets.only(left: 25,right: 25, top: 10),
             height: 1,
             width: Get.width,
             color: Colors.grey.shade400,
           ),
-          // Divider(color: Colors.black,thickness: 1),
-          10.sh,
         ],
       ),
     );
