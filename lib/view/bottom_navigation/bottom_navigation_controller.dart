@@ -37,7 +37,7 @@ class BottomNavigationController extends GetxController {
   }
 
   Future<void> getLoggedValue() async {
-    value = await SharePreferenceData.getBoolValuesSF(isLogged) ?? false;
+    value = await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
     user = await SharePreferenceData.getStringValuesSF(userEmail) ?? "";
     debugPrint("Logged Value ---- $value --- user --- $user");
   }
@@ -45,7 +45,7 @@ class BottomNavigationController extends GetxController {
   @override
   void onInit() {
     getLoggedValue();
-    if(value != null){
+    if (value != null) {
       userCheck.value = true;
     }
     super.onInit();

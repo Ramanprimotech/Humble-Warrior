@@ -105,6 +105,18 @@ class FrontPageDeals extends StatelessWidget {
   }
 }
 
+ItemCard frontPageCard(
+    FrontPageDetails details, int index, BuildContext context) {
+  return ItemCard(
+    onTap: () {
+      Get.toNamed(AppRoutes.frontPageProductDetail, arguments: [details]);
+    },
+    buttons: frontPageOptionsButton(details, index, context),
+    imageUrl: details.url!,
+    radius: 10,
+    title: details.productName.toString(),
+  );
+}
 
 Widget frontPageButton(
     FrontPageDetails details, int index, BuildContext context) {
@@ -132,6 +144,38 @@ Widget frontPageButton(
           key: Key(index.toString()),
           color: color,
           size: 28,
+        ),
+      ),
+    ],
+  );
+}
+
+Widget frontPageOptionsButton(
+    FrontPageDetails details, int index, BuildContext context) {
+  Color color = Theme.of(context).textTheme.displayMedium!.color!;
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      shareButton(
+        shareUrl: "shareUrl",
+        color: color,
+      ),
+      IconButton(
+        onPressed: () {
+          // controller.select.value = !controller.select.value;
+        },
+        icon: Heart(
+          key: Key(index.toString()),
+          color: color,
+          size: 28,
+        ),
+      ),
+      IconButton(
+        onPressed: () {},
+        icon: Image.asset(
+          color: color,
+          ImagePathAssets.commentIcon,
+          height: 24,
         ),
       ),
     ],
