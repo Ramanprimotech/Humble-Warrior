@@ -12,16 +12,14 @@ class SplashScreen extends StatelessWidget {
     controller.context = context;
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          child: Center(
-            child: Obx(
-              () => Image.asset(
-                controller.isDark.value
-                    ? ImagePathAssets.hwLogoDarkMode
-                    : ImagePathAssets.hwLogo,
-                height: 200,
-                width: 200,
-              ),
+        body: Center(
+          child: Obx(
+            () => Image.asset(
+              controller.isDark.value
+                  ? ImagePathAssets.hwLogoDarkMode
+                  : ImagePathAssets.hwLogo,
+              height: 200,
+              width: 200,
             ),
           ),
         ),

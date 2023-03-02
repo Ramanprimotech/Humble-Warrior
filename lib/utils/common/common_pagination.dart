@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class PaginationWidget extends StatelessWidget {
   final RxBool apiBool;
-  final Function api;
+  final Future Function({bool? refresh}) api;
   final Function update;
   final RxInt length;
   final RxInt totalRecords;
@@ -47,7 +47,13 @@ class PaginationWidget extends StatelessWidget {
         }
         return true;
       },
-      child: child,
+      child: RefreshIndicator(
+          onRefresh: () async {
+            return Future.delayed(Duration(seconds: 2), () async {
+              await api(refresh: true).then((value) => Future.value(0));
+            });
+          },
+          child: child),
     );
   }
 }

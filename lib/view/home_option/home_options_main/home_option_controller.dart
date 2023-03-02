@@ -61,7 +61,13 @@ class HomeOptionController extends GetxController
     super.onInit();
   }
 
-  Future donaDealsAPI() async {
+  Future donaDealsAPI({bool? refresh = false}) async {
+    if (refresh!) {
+      donnaDealsPage = 1;
+      donnaDealsBool.value = true;
+      donnaDealList.clear();
+      update();
+    }
     PaginationModel paginationModel =
         PaginationModel(page: donnaDealsPage.toString());
     await CallAPI.donnaDeals(payload: paginationModel).then((value) {
@@ -80,7 +86,13 @@ class HomeOptionController extends GetxController
     });
   }
 
-  Future frontPageDealsAPI() async {
+  Future frontPageDealsAPI({bool? refresh = false}) async {
+    if (refresh!) {
+      frontPageDealsPage = 1;
+      frontPageDealsBool.value = true;
+      frontPageDealList.clear();
+      update();
+    }
     PaginationModel paginationModel =
         PaginationModel(page: frontPageDealsPage.toString());
     await CallAPI.frontPage(payload: paginationModel).then((value) {
@@ -100,7 +112,13 @@ class HomeOptionController extends GetxController
     });
   }
 
-  Future donnaFavouriteDealsAPI() async {
+  Future donnaFavouriteDealsAPI({bool? refresh = false}) async {
+    if (refresh!) {
+      donnaFavouriteDealsPage = 1;
+      donnaFavouriteDealsBool.value = true;
+      donnaFavouriteDealList.clear();
+      update();
+    }
     PaginationModel paginationModel =
         PaginationModel(page: donnaFavouriteDealsPage.toString());
     await CallAPI.donnaFavourite(payload: paginationModel).then((value) {
