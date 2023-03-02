@@ -76,19 +76,19 @@ class CommonWidgets {
     );
   }
 
-  static Widget errorAPI(
-      {required String errorText,
-      required BuildContext context,
-      required Function() onPress,
-      required String buttonTitle,
-        double? height,
-      }) {
+  static Widget errorAPI({
+    required String errorText,
+    required BuildContext context,
+    required Function() onPress,
+    required String buttonTitle,
+    double? height,
+  }) {
     final DialogueThemeExtention dialogueThemeExtention =
         Theme.of(context).extension<DialogueThemeExtention>()!;
     return Center(
       child: Container(
         margin: 20.pa,
-        height: height??180,
+        height: height ?? 180,
         width: Get.width,
         padding: 20.pa,
         decoration: CustomBoxDecorations().shadow(context: context),
@@ -116,7 +116,8 @@ class CommonWidgets {
     );
   }
 
-  static Widget titleBar(context, {Color? color, title, icon=false,double? fontSize, backIcon=true}) {
+  static Widget titleBar(context,
+      {Color? color, title, icon = false, double? fontSize, backIcon = true}) {
     return Container(
       height: 50,
       margin: 20.pa,
@@ -125,23 +126,25 @@ class CommonWidgets {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          backIcon?AppIcons.IosBackIcon():40.sw,
+          backIcon ? AppIcons.IosBackIcon() : 40.sw,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AppText(
                 title,
-                fontSize: fontSize??18,
+                fontSize: fontSize ?? 18,
                 color: color,
                 fontWeight: FontWeight.bold,
               ),
               5.sw,
-              icon?Padding(
-                padding: 2.pt,
-                child: AppIcons.heart(
-                  iconColor: Colors.red,
-                ),
-              ):SizedBox(),
+              icon
+                  ? Padding(
+                      padding: 2.pt,
+                      child: AppIcons.heart(
+                        iconColor: Colors.red,
+                      ),
+                    )
+                  : SizedBox(),
             ],
           ),
           40.sw
@@ -149,6 +152,4 @@ class CommonWidgets {
       ),
     );
   }
-
-
 }

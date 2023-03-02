@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/decorations.dart';
+import 'package:humble_warrior/utils/helpers/extensions.dart';
 
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_text.dart';
@@ -82,25 +83,30 @@ class WishListCard extends StatelessWidget {
               decoration:
                   CustomBoxDecorations.bottomBorderCurve(context: context),
               height: buttonbarHeight,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppText(
-                      title,
-                      fontSize: 18,
-                      // color: Colors.black,
-                      fontWeight: FontWeight.w600,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: 8.pa,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppText(
+                          title,
+                          fontSize: 16,
+                          // color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        const AppText(
+                          AppStrings.lorem,
+                          // color: Colors.black,
+                          maxLines: 2,
+                        ),
+                      ],
                     ),
-                    const AppText(
-                      AppStrings.lorem,
-                      // color: Colors.black,
-                      maxLines: 2,
-                    ),
-                    Expanded(child: buttons!),
-                  ],
-                ),
+                  ),
+                  Expanded(child: buttons!),
+                ],
               ),
             ),
           ],

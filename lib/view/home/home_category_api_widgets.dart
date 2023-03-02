@@ -9,6 +9,7 @@ import '../../modals/response/home_categories_response_model.dart';
 import '../../network/endpoints.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_text.dart';
+import '../../utils/common/refresh_Indicator.dart';
 import '../../utils/future_widget/abstract_future_widget.dart';
 import '../../utils/routes/app_routes.dart';
 import '../../utils/shimmer/shimmer_loader.dart';
@@ -81,13 +82,20 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
   Widget success({List<HomeCategoryList>? data}) {
     List<HomeCategoryList> dataa = data ?? [];
     return Expanded(
-      child: ListView.builder(
-        padding: 10.pb,
-        physics: BouncingScrollPhysics(),
-        itemBuilder: (ctx, index) {
-          return homeOption(homeOptions: dataa[index], index: index);
+      child: CustomRefreshIndicator(
+        onRefresh: () {
+          return Future.delayed(Duration(seconds: 2), () {
+            return Future.value(0);
+          });
         },
-        itemCount: dataa.length,
+        child: ListView.builder(
+          padding: 10.pb,
+          physics: BouncingScrollPhysics(),
+          itemBuilder: (ctx, index) {
+            return homeOption(homeOptions: dataa[index], index: index);
+          },
+          itemCount: dataa.length,
+        ),
       ),
     );
   }

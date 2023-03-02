@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
-import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/decorations.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
+
+import '../../utils/common/refresh_Indicator.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -17,18 +18,27 @@ class NotificationScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            CommonWidgets.titleBar(context, title: notificationsTxt,fontSize: 20),
+            CommonWidgets.titleBar(context,
+                title: notificationsTxt, fontSize: 20),
             Expanded(
-              child: ListView.separated(
-                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 5),
-                scrollDirection: Axis.vertical,
-                itemBuilder: (context, index) {
-                  return notificationCard(context);
+              child: CustomRefreshIndicator(
+                onRefresh: () {
+                  return Future.delayed(Duration(seconds: 2), () {
+                    return Future.value(0);
+                  });
                 },
-                itemCount: 15,
-                separatorBuilder: (BuildContext context, int index) {
-                  return 20.sh;
-                },
+                child: ListView.separated(
+                  padding: const EdgeInsets.only(
+                      left: 20, right: 20, bottom: 20, top: 5),
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    return notificationCard(context);
+                  },
+                  itemCount: 15,
+                  separatorBuilder: (BuildContext context, int index) {
+                    return 20.sh;
+                  },
+                ),
               ),
             ),
           ],
@@ -56,7 +66,8 @@ class NotificationScreen extends StatelessWidget {
         bottomLeft: Radius.circular(10),
       ),
       child: CommonWidgets.networkImage(
-        imageUrl: "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
+        imageUrl:
+            "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
         alignment: Alignment.topCenter,
         width: Get.width / 3.5,
         fit: BoxFit.cover,
@@ -108,8 +119,10 @@ class NotificationScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                  padding: const EdgeInsets.only(left: 10, right: 10, bottom: 2),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                  padding:
+                      const EdgeInsets.only(left: 10, right: 10, bottom: 2),
                   decoration: BoxDecoration(
                       color: AppColors.primary,
                       borderRadius: BorderRadius.circular(8)),
