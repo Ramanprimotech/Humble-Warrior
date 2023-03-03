@@ -11,9 +11,13 @@ class HiveService extends GetxController {
     await Hive.initFlutter();
     Hive.registerAdapter(WishlistitemAdapter());
     box = await Hive.openBox("wishlist");
-    getWishList();
     // addToWishList();
     super.onInit();
+  }
+
+  deleteItem(String id) {
+    box.delete(id);
+    log("Deleted $id", name: "Wish Keys Deleted");
   }
 
   getWishList() {
@@ -28,17 +32,16 @@ class HiveService extends GetxController {
     });
   }
 
-  addToWishList() {
-    Wishlistitem item = Wishlistitem(
-        image: "fdfdfdf",
-        dealName: "sfdf",
-        type: "Donna Deals",
-        code: "code",
-        productId: "product Id",
-        shop: "Shop");
-    box.add(item);
+  addToWishList(Wishlistitem item) {
+    box.put(item.productId, item);
     // box.l
     getWishList();
+  }
+
+  hasItem(String id) {
+    bool isIt = box.containsKey(id);
+    log(isIt.toString(), name: "Do contain key");
+    return isIt;
   }
 
   removeFromWishList() {}
