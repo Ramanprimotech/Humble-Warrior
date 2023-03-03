@@ -263,26 +263,26 @@ class CallAPI {
     }
   }
 
-  static Future<List<StaticData>> staticPages({required dynamic payload}) async {
+  static Future<List<StaticData>> staticPages(
+      {required dynamic payload}) async {
     try {
       dynamic response = await APIManager()
           .postAPICall(url: Endpoints.staticPages, param: payload);
       log(response);
 
-      StaticPagesResponse staticPagesResponse = StaticPagesResponse.fromJson(response);
+      StaticPagesResponse staticPagesResponse =
+          StaticPagesResponse.fromJson(response);
       if (staticPagesResponse.status == true) {
-log(staticPagesResponse.data![0].pageContent.toString(),name: "Help");
-
-      }else{
-        log(staticPagesResponse.data![0].pageContent.toString(),name: "Help" ,error: "sdfdfdfgdkfjdkfjdkfjdk");
+        log(staticPagesResponse.data![0].pageContent.toString(), name: "Help");
+      } else {
+        log(staticPagesResponse.data![0].pageContent.toString(),
+            name: "Help", error: "sdfdfdfgdkfjdkfjdkfjdk");
       }
       return staticPagesResponse.data!;
     } catch (e) {
-
       return [];
     }
   }
-
 
   /// Product Details
 
