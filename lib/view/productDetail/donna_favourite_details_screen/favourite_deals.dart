@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
@@ -9,7 +10,6 @@ import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
 
-import '../../../modals/response/donna_favourite_response_model.dart';
 import 'favourite_deals_controller.dart';
 
 class FavouriteDeals extends StatelessWidget with CommonAppBar {
@@ -20,7 +20,7 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
     final AccountOptionTheme accountOptionTheme =
         Theme.of(Get.context!).extension<AccountOptionTheme>()!;
     FavouriteDealController controller = Get.find();
-    DonnaFavouriteDetails donnaFavouriteDetails = Get.arguments[0];
+    ProductDetailsResponse donnaFavouriteDetails = Get.arguments[0];
     return Scaffold(
       appBar: AppBarWidget(
         showBackButton: true,
@@ -58,7 +58,7 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
                   color: AppColors.primary,
                   borderRadius: BorderRadius.circular(10)),
               child: AppText(
-                " ${donnaFavouriteDetails.productName!}",
+                donnaFavouriteDetails.itemName!,
                 color: Colors.white,
                 textAlign: TextAlign.left,
                 fontWeight: FontWeight.bold,

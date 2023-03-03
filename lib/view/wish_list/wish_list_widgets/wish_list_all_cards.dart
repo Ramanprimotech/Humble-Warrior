@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:humble_warrior/modals/abstract_enums/donna_options.dart';
+import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/view/wish_list/wish_list_controller.dart';
 import 'package:humble_warrior/view/wish_list/wish_list_widgets/wish_list_all_button.dart';
 import 'package:humble_warrior/view/wish_list/wish_list_widgets/wish_list_single_card.dart';
-
-import '../../../modals/response/donna_deals_response.dart';
-import '../../../modals/response/donna_favourite_response_model.dart';
-import '../../../modals/response/front_page_response_model.dart';
 
 class WishListCards implements DonnaOptions {
   final dynamic details;
@@ -25,11 +22,11 @@ class WishListCards implements DonnaOptions {
 
   @override
   donnaDeals() {
-    DonnaDealsDetails donnaDealsDetails = details;
+    ProductDetailsResponse donnaDealsDetails = details;
     return WishListCard(
       onTap: onTap.donnaDeals,
       imageUrl: donnaDealsDetails.url!,
-      title: donnaDealsDetails.dealName!,
+      title: donnaDealsDetails.itemName!,
       buttons: wishListButton.donnaDeals(),
       deal: donnaDailyDealTxt,
     );
@@ -37,24 +34,24 @@ class WishListCards implements DonnaOptions {
 
   @override
   donnaFavourite() {
-    DonnaFavouriteDetails donnaFavouriteDetails = details;
+    ProductDetailsResponse donnaFavouriteDetails = details;
     return WishListCard(
       onTap: onTap.donnaFavourite,
       deal: donnaFrontPageDealTxt,
       imageUrl: donnaFavouriteDetails.url!,
-      title: donnaFavouriteDetails.productName!,
+      title: donnaFavouriteDetails.itemName!,
       buttons: wishListButton.donnaFavourite(),
     );
   }
 
   @override
   frontPage() {
-    FrontPageDetails frontPageDetails = details;
+    ProductDetailsResponse frontPageDetails = details;
     return WishListCard(
       onTap: onTap.frontPage,
       deal: donnaFrontPageDealTxt,
       imageUrl: frontPageDetails.url!,
-      title: frontPageDetails.productName!,
+      title: frontPageDetails.itemName!,
       buttons: wishListButton.frontPage(),
     );
   }

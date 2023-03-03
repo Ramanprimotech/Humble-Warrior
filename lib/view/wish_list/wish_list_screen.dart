@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:humble_warrior/hive/hive_storage_service.dart';
 import 'package:humble_warrior/modals/response/donna_deals_response.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
 import 'package:humble_warrior/modals/response/front_page_response_model.dart';
+import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
+import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/view/wish_list/wish_list_controller.dart';
@@ -17,7 +21,8 @@ class WishList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WishListController controller = Get.find();
-
+    HiveService service = Get.find<HiveService>();
+    Box<ProductDetailsResponse> box = service.box;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -34,26 +39,42 @@ class WishList extends StatelessWidget {
                             return Future.value(0);
                           });
                         },
-                        child: ListView.separated(
-                          itemBuilder: (BuildContext context, int index) {
-                            dynamic details = modelReturn(index);
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 20),
-                              child: WishListCardSelector(
-                                details: details,
-                                index: index,
-                                context: context,
-                              ),
-                            );
-                          },
-                          itemCount: 20,
-                          separatorBuilder: (BuildContext context, int index) {
-                            return const SizedBox(
-                              height: 20,
-                            );
-                          },
-                        ),
+                        child: ValueListenableBuilder(
+                            valueListenable: box.listenable(),
+                            builder: (context, value, child) {
+                              var keys = value.keys.toList();
+                              var values = value.values.toList();
+                              return values.isEmpty
+                                  ? const Center(
+                                      child: AppText(
+                                        "No Item Added in Favourite",
+                                        fontSize: 20,
+                                      ),
+                                    )
+                                  : ListView.separated(
+                                      itemCount: values.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        ProductDetailsResponse details =
+                                            values[index];
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                          child: WishListCardSelector(
+                                            details: details,
+                                            index: index,
+                                            context: context,
+                                          ),
+                                        );
+                                      },
+                                      separatorBuilder:
+                                          (BuildContext context, int index) {
+                                        return const SizedBox(
+                                          height: 20,
+                                        );
+                                      },
+                                    );
+                            }),
                       ),
               ),
             ),

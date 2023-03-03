@@ -1,22 +1,23 @@
 import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:humble_warrior/hive/wishlistitem.dart';
+import 'package:humble_warrior/modals/response/product_details_response.dart';
 
 class HiveService extends GetxController {
-  late Box<Wishlistitem> box;
+  late Box<ProductDetailsResponse> box;
   @override
   void onInit() async {
     await Hive.initFlutter();
-    Hive.registerAdapter(WishlistitemAdapter());
-    box = await Hive.openBox("wishlist");
+    Hive.registerAdapter(ProductDetailsResponseAdapter());
+    box = await Hive.openBox("Wishlist");
     // addToWishList();
     super.onInit();
   }
 
   deleteItem(String id) {
-    box.delete(id);
-    log("Deleted $id", name: "Wish Keys Deleted");
+    box
+        .delete(id)
+        .then((value) => log("Deleted $id", name: "Wish Keys Deleted"));
   }
 
   getWishList() {
@@ -31,10 +32,12 @@ class HiveService extends GetxController {
     });
   }
 
-  addToWishList(Wishlistitem item) {
-    box.put(item.productId, item);
+  addToWishList(ProductDetailsResponse item) {
+    box.put(item.id.toString(), item);
+    log("${hasItem(item.id.toString())}", name: "Has List Keys");
+
     // box.l
-    getWishList();
+    // getWishList();
   }
 
   hasItem(String id) {
@@ -43,7 +46,15 @@ class HiveService extends GetxController {
     return isIt;
   }
 
-  removeFromWishList() {}
+  favourite({required ProductDetailsResponse item}) {
+    if (hasItem(
+      item.id.toString(),
+    )) {
+      deleteItem(item.id.toString());
+    } else {
+      addToWishList(item);
+    }
+  }
 
   @override
   void onClose() {

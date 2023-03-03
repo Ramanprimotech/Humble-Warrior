@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/view/wish_list/wish_list_widgets/wish_list_all_cards.dart';
 
 class WishListCardSelector extends StatelessWidget {
   final int index;
-  final dynamic details;
+  final ProductDetailsResponse details;
   final BuildContext context;
 
   const WishListCardSelector(
@@ -18,12 +19,12 @@ class WishListCardSelector extends StatelessWidget {
     WishListCards wishListCards =
         WishListCards(details: details, index: index, context: context);
 
-    int type = index % 3;
+    String type = details.catName!;
 
-    if (type == 0) {
+    if (type == "Donna Daily Deals") {
       return wishListCards.donnaDeals();
     }
-    if (type == 1) {
+    if (type == "Favourite Things") {
       return wishListCards.donnaFavourite();
     }
 

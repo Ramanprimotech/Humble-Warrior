@@ -20,6 +20,7 @@ class BottomNavigationController extends GetxController {
   final List<Widget> _navigationItems = [
     const HomeScreen(),
     const WishList(),
+    // const WishlistScreenTest(),
     const AmazonWebView(),
     const FaceBookWebView(),
     const MyAccount(),

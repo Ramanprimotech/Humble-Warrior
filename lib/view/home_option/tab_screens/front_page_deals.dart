@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:humble_warrior/modals/response/front_page_response_model.dart';
+import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
@@ -46,7 +46,7 @@ class FrontPageDeals extends StatelessWidget {
             controller: controller.frontPageDealScrollController,
             itemCount: controller.frontPageDealList.length + 1,
             itemBuilder: (ctx, index) {
-              FrontPageDetails details = FrontPageDetails();
+              ProductDetailsResponse details = ProductDetailsResponse();
               if (index != controller.frontPageDealList.length) {
                 details = controller.frontPageDealList[index];
               }
@@ -106,7 +106,7 @@ class FrontPageDeals extends StatelessWidget {
 }
 
 ItemCard frontPageCard(
-    FrontPageDetails details, int index, BuildContext context) {
+    ProductDetailsResponse details, int index, BuildContext context) {
   return ItemCard(
     onTap: () {
       Get.toNamed(AppRoutes.frontPageProductDetail, arguments: [details]);
@@ -114,12 +114,12 @@ ItemCard frontPageCard(
     buttons: frontPageOptionsButton(details, index, context),
     imageUrl: details.url!,
     radius: 10,
-    title: details.productName.toString(),
+    title: details.itemName.toString(),
   );
 }
 
 Widget frontPageButton(
-    FrontPageDetails details, int index, BuildContext context) {
+    ProductDetailsResponse details, int index, BuildContext context) {
   Color color = Theme.of(context).textTheme.displayMedium!.color!;
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -141,6 +141,8 @@ Widget frontPageButton(
           // controller.select.value = !controller.select.value;
         },
         icon: Heart(
+          id: details.id.toString(),
+          item: details,
           key: Key(index.toString()),
           color: color,
           size: 28,
@@ -151,7 +153,7 @@ Widget frontPageButton(
 }
 
 Widget frontPageOptionsButton(
-    FrontPageDetails details, int index, BuildContext context) {
+    ProductDetailsResponse details, int index, BuildContext context) {
   Color color = Theme.of(context).textTheme.displayMedium!.color!;
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -165,6 +167,8 @@ Widget frontPageOptionsButton(
           // controller.select.value = !controller.select.value;
         },
         icon: Heart(
+          item: details,
+          id: details.id.toString(),
           key: Key(index.toString()),
           color: color,
           size: 28,
