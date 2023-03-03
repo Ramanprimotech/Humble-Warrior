@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/modals/response/donna_deals_response.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
@@ -7,8 +8,10 @@ import 'package:humble_warrior/utils/common/common_functionality.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/decorations.dart';
 import 'package:humble_warrior/utils/extensions.dart';
+import 'package:humble_warrior/utils/routes/app_routes.dart';
 
 import '../../utils/app_text.dart';
+import 'tab_screens/donnas_deals.dart';
 
 class ItemCard extends StatelessWidget {
   final double? cardHeight;
@@ -19,6 +22,7 @@ class ItemCard extends StatelessWidget {
   final double radius;
   final String imageUrl;
   final String title;
+  final bool effect;
   final VoidCallback? onTap;
 
   const ItemCard(
@@ -30,6 +34,7 @@ class ItemCard extends StatelessWidget {
       this.imageTitleHeight = 60,
       this.cardHeight,
       this.onTap,
+        this.effect = true,
       required this.imageUrl,
       required this.title})
       : super(key: key);
@@ -66,15 +71,19 @@ class ItemCard extends StatelessWidget {
                     width: Get.width,
                     height: imageTitleHeight,
                     alignment: Alignment.centerLeft,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
+                    decoration: BoxDecoration(
+                      gradient: effect==true?LinearGradient(
                           colors: [
                             Colors.transparent,
                             Colors.black26,
                             Colors.black
                           ],
                           begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter),
+                          end: Alignment.bottomCenter):
+                      LinearGradient(colors:[
+                        Colors.transparent,
+                        Colors.transparent,
+                      ]),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -99,6 +108,9 @@ class ItemCard extends StatelessWidget {
     );
   }
 }
+
+
+
 
 Widget codeButton({required String code}) {
   return IconButton(
@@ -161,5 +173,21 @@ Widget bookmarkButton({required shareUrl}) {
       CommonUtils().share(shareUrl: "$shareUrl");
     },
     icon: AppIcons.bookmarks(),
+  );
+}
+
+ItemCard categoryListCard(
+    DonnaDealsDetails details, int index, BuildContext context, {bool? categoryCard=false}) {
+  return ItemCard(
+    onTap: () {
+      Get.toNamed(AppRoutes.categoryItemDetail, arguments: [details]);
+    },
+    radius: 10,
+    buttons: donnaDealsButton(details, index, context, categoryCard: categoryCard,
+        cardTitle: details.dealName!, ),
+    imageUrl: details.url!,
+    title: "",
+    effect: false,
+    buttonbarHeight: categoryCard==true?90:50,
   );
 }

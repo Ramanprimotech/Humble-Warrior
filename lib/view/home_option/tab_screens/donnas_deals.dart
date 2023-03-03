@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/modals/response/donna_deals_response.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
+import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/extensions.dart';
@@ -88,37 +89,52 @@ ItemCard donnaDealsCard(
 }
 
 Widget donnaDealsButton(
-    DonnaDealsDetails details, int index, BuildContext context) {
+    DonnaDealsDetails details, int index, BuildContext context, {String? cardTitle, bool? categoryCard=false}) {
   Color color = Theme.of(context).textTheme.displayMedium!.color!;
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
+      categoryCard==true?
+      Padding(
+        padding: EdgeInsets.only(left: 18,top: 5),
+        child: AppText(
+          cardTitle??"",
+          fontWeight: FontWeight.w700,
+          fontSize: 20,
+          color: Colors.black,
+        ),
+      ):SizedBox(),
       Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: 8.pl,
-            child:
-                shopButton(url: "${details.shopUrl}", title: details.dealName!),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: 8.pl,
+                child:
+                    shopButton(url: "${details.shopUrl}", title: details.dealName!),
+              ),
+              !(details.couponCode == null || details.couponCode == "")
+                  ? codeButton(code: "${details.couponCode}")
+                  : 80.sw,
+            ],
           ),
-          !(details.couponCode == null || details.couponCode == "")
-              ? codeButton(code: "${details.couponCode}")
-              : 80.sw,
-        ],
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          shareButton(shareUrl: "shareUrl", color: color),
-          IconButton(
-            onPressed: () {
-              // controller.select.value = !controller.select.value;
-            },
-            icon: Heart(
-              color: color,
-              key: Key(index.toString()),
-              size: 28,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              shareButton(shareUrl: "shareUrl", color: color),
+              IconButton(
+                onPressed: () {
+                  // controller.select.value = !controller.select.value;
+                },
+                icon: Heart(
+                  color: color,
+                  key: Key(index.toString()),
+                  size: 28,
+                ),
+              ),
+            ],
           ),
         ],
       ),

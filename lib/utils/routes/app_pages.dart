@@ -12,6 +12,10 @@ import 'package:humble_warrior/view/landing/intro_screen.dart';
 import 'package:humble_warrior/view/my_account/my_account_screen.dart';
 import 'package:humble_warrior/view/notification/notification_binding.dart';
 import 'package:humble_warrior/view/notification/notification_screen.dart';
+import 'package:humble_warrior/view/productDetail/category_details_list/category_details_list_binding.dart';
+import 'package:humble_warrior/view/productDetail/category_details_list/category_details_list_screen.dart';
+import 'package:humble_warrior/view/productDetail/category_item_detail/category_item_detail_binding.dart';
+import 'package:humble_warrior/view/productDetail/category_item_detail/category_item_detail_screen.dart';
 import 'package:humble_warrior/view/productDetail/daily_deals_details_screen/daily_deal_product.dart';
 import 'package:humble_warrior/view/productDetail/daily_deals_details_screen/daily_deal_product_binding.dart';
 import 'package:humble_warrior/view/productDetail/donna_favourite_details_screen/favourite_deals.dart';
@@ -76,6 +80,14 @@ class AppPages {
     GetPage(
         name: AppRoutes.brands,
         page: () => const BrandsScreen(),
-        binding: BrandsBinding())
+        binding: BrandsBinding()),
+    GetPage(
+        name: AppRoutes.categoryDetailsList,
+        page: () => const CategoryListDetails(),
+        binding: CategoryDetailsListBinding()),
+    GetPage(
+        name: AppRoutes.categoryItemDetail,
+        page: () => CategoryItemDetail(),
+        binding: CategoryItemDetailBinding())
   ];
 }

@@ -155,24 +155,29 @@ class HomeScreenWidgets {
                     itemBuilder: (ctx, index) {
                       return Padding(
                         padding: 5.ph,
-                        child: Container(
-                          padding: 10.ph,
-                          height: productHeight,
-                          // width: 80,
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                  ProductImages.productImagesList[index].image,
-                                  fit: BoxFit.fitHeight,
-                                  height: productHeight - 25,
-                                  scale: 0.7),
-                              AppText(
-                                ProductImages.productImagesList[index].name,
-                                fontSize: 12,
-                                maxLines: 1,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ],
+                        child: GestureDetector(
+                          onTap: (){
+                            Get.toNamed(AppRoutes.categoryDetailsList, arguments: [ProductImages.productImagesList[index].name]);
+                          },
+                          child: Container(
+                            padding: 10.ph,
+                            height: productHeight,
+                            // width: 80,
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                    ProductImages.productImagesList[index].image,
+                                    fit: BoxFit.fitHeight,
+                                    height: productHeight - 25,
+                                    scale: 0.7),
+                                AppText(
+                                  ProductImages.productImagesList[index].name,
+                                  fontSize: 12,
+                                  maxLines: 1,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );

@@ -13,4 +13,6 @@ class AppRoutes {
   static String myAccount = "/myAccount";
   static String brands = "/brands";
   static String notification = "/notification";
+  static String categoryDetailsList = "/categoryList";
+  static String categoryItemDetail = "/categoryItem";
 }

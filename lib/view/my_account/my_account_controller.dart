@@ -54,6 +54,10 @@ class MyAccountController extends GetxController {
     debugPrint("user data ---- $username ---- $userPhone ---- $userImg");
   }
 
+  void message(context){
+    DialogHelper.showToast(context, "Stay tuned");
+  }
+
   Future<void> getImageCamera() async {
     imagePath =
         await CommonUtils().getImagePath(imageSource: ImageSource.camera);
