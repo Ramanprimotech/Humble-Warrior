@@ -64,9 +64,9 @@ class HomeOptionController extends GetxController
   Future donaDealsAPI({bool? refresh = false}) async {
     if (refresh!) {
       donnaDealsPage = 1;
-      donnaDealsBool.value = true;
+      // donnaDealsBool.value = true;
       donnaDealList.clear();
-      update();
+      // update();
     }
     PaginationModel paginationModel =
         PaginationModel(page: donnaDealsPage.toString());
@@ -77,6 +77,9 @@ class HomeOptionController extends GetxController
         donnaDealsPage += 1;
         donnaDealList.addAll(value.data!);
         donnaDealListLength.value = donnaDealList.length;
+        if (refresh) {
+          DialogHelper.showToast(context, "Deals Refreshed");
+        }
       }
       if (value.totalRecords != null) {
         donnaDealsTotalDeals.value = int.parse(value.totalRecords!);
@@ -89,9 +92,7 @@ class HomeOptionController extends GetxController
   Future frontPageDealsAPI({bool? refresh = false}) async {
     if (refresh!) {
       frontPageDealsPage = 1;
-      frontPageDealsBool.value = true;
       frontPageDealList.clear();
-      update();
     }
     PaginationModel paginationModel =
         PaginationModel(page: frontPageDealsPage.toString());
@@ -102,6 +103,9 @@ class HomeOptionController extends GetxController
         frontPageDealsPage += 1;
         frontPageDealList.addAll(value.data!);
         frontPageDealListLength.value = frontPageDealList.length;
+        if (refresh) {
+          DialogHelper.showToast(context, "Deals Refreshed");
+        }
       }
 
       if (value.totalRecords != null) {
@@ -115,9 +119,9 @@ class HomeOptionController extends GetxController
   Future donnaFavouriteDealsAPI({bool? refresh = false}) async {
     if (refresh!) {
       donnaFavouriteDealsPage = 1;
-      donnaFavouriteDealsBool.value = true;
+      // donnaFavouriteDealsBool.value = true;
       donnaFavouriteDealList.clear();
-      update();
+      // update();
     }
     PaginationModel paginationModel =
         PaginationModel(page: donnaFavouriteDealsPage.toString());
@@ -128,6 +132,9 @@ class HomeOptionController extends GetxController
         donnaFavouriteDealsPage += 1;
         donnaFavouriteDealList.addAll(value.data!);
         donnaFavouriteDealListLength.value = donnaFavouriteDealList.length;
+        if (refresh) {
+          DialogHelper.showToast(context, "Deals Refreshed");
+        }
       }
       if (value.totalRecords != null) {
         donnaFavouriteDealsTotalDeals.value = int.parse(value.totalRecords!);
