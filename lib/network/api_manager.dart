@@ -13,7 +13,7 @@ class APIManager {
   Future<dynamic> getAllCall({required String url}) async {
     debugPrint("Calling API: $url");
     Uri urlForPost = Uri.parse("${Endpoints.baseUrl}$url");
-    var   responseJson;
+    var responseJson;
     try {
       final response = await http.get(urlForPost,
           headers: {'Authorization': 'Bearer ${Endpoints.token}'});
@@ -52,7 +52,7 @@ class APIManager {
             'Authorization': 'Bearer ${Endpoints.token}'
           },
           body: jsonEncode(param.toJson()));
-      log(response.body);
+      // log(response.body);
       responseJson = _response(response);
     } on SocketException {
       throw FetchDataException('No Internet connection');
@@ -100,6 +100,9 @@ class APIManager {
       case 403:
         throw UnauthorisedException(response.body.toString());
       case 500:
+        throw FetchDataException(
+            'Internal Server Error with StatusCode: ${response.statusCode}');
+
       default:
         throw FetchDataException(
             'Error occured while Communication with Server with StatusCode: ${response.statusCode}');

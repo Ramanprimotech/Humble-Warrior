@@ -93,14 +93,14 @@ class ProductDetailWidget {
   }
 
   /// Product Description
-  Widget productDescription() {
+  Widget productDescription(String disCription, String itemName) {
     return SizedBox(
       width: MediaQuery.of(Get.context!).size.width * .9,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const AppText(
-            "What is Vine Oh?",
+          AppText(
+            "What is $itemName",
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ).px(6),

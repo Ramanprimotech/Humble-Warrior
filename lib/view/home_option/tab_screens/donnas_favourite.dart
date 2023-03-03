@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
+import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 
@@ -43,7 +43,7 @@ class DonnaFavourite extends StatelessWidget {
             controller: controller.donnaFavouriteDealScrollController,
             itemCount: controller.donnaFavouriteDealList.length + 1,
             itemBuilder: (ctx, index) {
-              DonnaFavouriteDetails details = DonnaFavouriteDetails();
+              ProductDetailsResponse details = ProductDetailsResponse();
               if (index != controller.donnaFavouriteDealList.length) {
                 details = controller.donnaFavouriteDealList[index];
               }

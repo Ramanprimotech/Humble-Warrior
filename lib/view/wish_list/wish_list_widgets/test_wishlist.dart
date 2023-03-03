@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:humble_warrior/hive/hive_storage_service.dart';
-import 'package:humble_warrior/hive/wishlistitem.dart';
+import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 
@@ -12,20 +12,20 @@ class WishlistScreenTest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HiveService service = Get.find<HiveService>();
-    Box<Wishlistitem> box = service.box;
+    Box<ProductDetailsResponse> box = service.box;
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
               onPressed: () {
-                Wishlistitem item = Wishlistitem(
-                    shop: "shopUrl!",
-                    productId: box.length.toString(),
-                    code: "details.couponCode!",
-                    type: '0',
-                    image: "details.url!",
-                    dealName: "details.dealName!");
-                service.box.put(box.length.toString(), item);
+                // ProductDetailsResponse item = ProductDetailsResponse(
+                //     shop: "shopUrl!",
+                //     productId: box.length.toString(),
+                //     code: "details.couponCode!",
+                //     type: '0',
+                //     image: "details.url!",
+                //     dealName: "details.dealName!");
+                // service.box.put(box.length.toString(), item);
               },
               icon: Icon(Icons.add))
         ],

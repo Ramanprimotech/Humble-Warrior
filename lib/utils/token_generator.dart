@@ -94,20 +94,22 @@ class TokenManager {
         // password: "JtB@zCajal87@7MVXjzfyxOd"
         );
     await CallAPI.generateToken(payload: tokenRequestModel).then((value) {
-      String token = value.token!;
-      String tokenExpire = value.tokenExpire!;
-      log("${value.token}", name: "Token API");
-      _token = value.token;
-      _tokenExpirationDuration = value.tokenExpire;
       if (value.token == null) {
         DialogHelper.showToast(
             Get.context!, "Unable to generate authentication token");
         return false;
+      } else {
+        String token = value.token!;
+        String tokenExpire = value.tokenExpire!;
+        log("${value.token}", name: "Token API");
+        _token = value.token;
+        _tokenExpirationDuration = value.tokenExpire;
+
+        Endpoints.token = value.token.toString();
+        _prefs!.setString(_TOKEN_KEY, token);
+        _prefs!.setString(_TOKEN_EXPIRY_KEY, tokenExpire);
+        log(value.token.toString());
       }
-      Endpoints.token = value.token.toString();
-      _prefs!.setString(_TOKEN_KEY, token);
-      _prefs!.setString(_TOKEN_EXPIRY_KEY, tokenExpire);
-      log(value.token.toString());
     });
     return true;
   }

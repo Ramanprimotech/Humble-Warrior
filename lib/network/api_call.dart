@@ -1,10 +1,14 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
+import 'package:humble_warrior/modals/requests/id_model.dart';
 import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
-import 'package:humble_warrior/modals/response/donna_deals_response.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
 import 'package:humble_warrior/modals/response/front_page_response_model.dart';
 import 'package:humble_warrior/modals/response/home_categories_response_model.dart';
+import 'package:humble_warrior/modals/response/product_details_api_response.dart';
+import 'package:humble_warrior/modals/response/product_details_response.dart';
+import 'package:humble_warrior/modals/response/product_list_response.dart';
 import 'package:humble_warrior/modals/response/token_response.dart';
 import 'package:humble_warrior/network/endpoints.dart';
 
@@ -82,7 +86,32 @@ class CallAPI {
     }
   }
 
-  static Future<DonnaDealsResponseModal> donnaDeals(
+  ///  Product List API
+  static Future<ProductListResponse> productListAPI(
+      {required PaginationModel payload, required String url}) async {
+    try {
+      // payload.toString().logRequest(apiName: Endpoints.donnaDeals);
+
+      var response = await APIManager().postAPICall(url: url, param: payload);
+      debugPrint("Step 0");
+      ProductListResponse productListResponse =
+          ProductListResponse.fromJson(response);
+      debugPrint("Step 1");
+      if (response == null) {
+        return ProductListResponse(data: []);
+      }
+      if (productListResponse.status == true) {
+        return productListResponse;
+      }
+      return ProductListResponse(data: []);
+    } catch (e) {
+      log("API", name: "API Deals $url ${payload.page}", error: e);
+      // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
+      return ProductListResponse(data: []);
+    }
+  }
+
+  static Future<ProductListResponse> donnaDeals(
       {required PaginationModel payload}) async {
     try {
       // payload.toString().logRequest(apiName: Endpoints.donnaDeals);
@@ -90,14 +119,14 @@ class CallAPI {
       var response = await APIManager()
           .postAPICall(url: Endpoints.donnaDeals, param: payload);
 
-      DonnaDealsResponseModal donnaDealsResponseModal =
-          DonnaDealsResponseModal.fromJson(response);
+      ProductListResponse donnaDealsResponseModal =
+          ProductListResponse.fromJson(response);
 
       //
       // log(response.toString(), name: "${Endpoints.donnaDeals}");
       // response.toString().logResponse(apiName: Endpoints.donnaDeals);
       if (response == null) {
-        return DonnaDealsResponseModal(data: []);
+        return ProductListResponse(data: []);
       }
 
       // DialogHelper.closeDialog();
@@ -112,10 +141,10 @@ class CallAPI {
       //   title: 'Error Updating',
       //   description: response['msg'],
       // );
-      return DonnaDealsResponseModal(data: []);
+      return ProductListResponse(data: []);
     } catch (e) {
       // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
-      return DonnaDealsResponseModal(data: []);
+      return ProductListResponse(data: []);
     }
   }
 
@@ -214,6 +243,7 @@ class CallAPI {
     }
   }
 
+  /// Home Options Category
   static Future<List<HomeCategoryList>> homeCategory() async {
     try {
       var response =
@@ -226,6 +256,28 @@ class CallAPI {
       }
       if (homeCategoryResponseModel.status == true) {
         return homeCategoryResponseModel.data!;
+      }
+      return [];
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Product Details
+
+  static Future<List<ProductDetailsResponse>> productDetails(String id) async {
+    try {
+      IdModel payload = IdModel(id: id);
+      var response = await APIManager()
+          .postAPICall(url: Endpoints.productDetails, param: payload);
+
+      ProductDetailsApiResponse productDetailsApiResponse =
+          ProductDetailsApiResponse.fromJson(response);
+      if (response == null) {
+        return [];
+      }
+      if (productDetailsApiResponse.status == true) {
+        return productDetailsApiResponse.data!;
       }
       return [];
     } catch (e) {

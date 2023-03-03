@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:humble_warrior/modals/response/donna_deals_response.dart';
+import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
@@ -47,7 +47,7 @@ class DonnaDailyDeals extends StatelessWidget {
             controller: controller.donnaDealScrollController,
             itemCount: controller.donnaDealList.length + 1,
             itemBuilder: (ctx, index) {
-              DonnaDealsDetails details = DonnaDealsDetails();
+              ProductDetailsResponse details = ProductDetailsResponse();
               if (index != controller.donnaDealList.length) {
                 details = controller.donnaDealList[index];
               }
@@ -75,7 +75,7 @@ class DonnaDailyDeals extends StatelessWidget {
 }
 
 ItemCard donnaDealsCard(
-    DonnaDealsDetails details, int index, BuildContext context) {
+    ProductDetailsResponse details, int index, BuildContext context) {
   return ItemCard(
     onTap: () {
       Get.toNamed(AppRoutes.dailyDealProductDetail, arguments: [details]);
@@ -83,12 +83,12 @@ ItemCard donnaDealsCard(
     radius: 10,
     buttons: donnaDealsButton(details, index, context),
     imageUrl: details.url!,
-    title: details.dealName!,
+    title: details.itemName!,
   );
 }
 
 Widget donnaDealsButton(
-    DonnaDealsDetails details, int index, BuildContext context) {
+    ProductDetailsResponse details, int index, BuildContext context) {
   Color color = Theme.of(context).textTheme.displayMedium!.color!;
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -99,7 +99,7 @@ Widget donnaDealsButton(
           Padding(
             padding: 8.pl,
             child:
-                shopButton(url: "${details.shopUrl}", title: details.dealName!),
+                shopButton(url: "${details.shopUrl}", title: details.itemName!),
           ),
           !(details.couponCode == null || details.couponCode == "")
               ? codeButton(code: "${details.couponCode}")
@@ -115,6 +115,8 @@ Widget donnaDealsButton(
               // controller.select.value = !controller.select.value;
             },
             icon: Heart(
+              id: details.id.toString(),
+              item: details,
               color: color,
               key: Key(index.toString()),
               size: 28,

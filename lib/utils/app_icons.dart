@@ -1,5 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:humble_warrior/hive/hive_storage_service.dart';
+import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/image_path_assets.dart';
 
@@ -32,17 +37,20 @@ class AppIcons {
         height: 22,
         color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
       );
+
   static Image unselectedCheck(BuildContext context, Color color) =>
       Image.asset(
         ImagePathAssets.amazonIcon,
         height: 20,
-        color: color,);
+        color: color,
+      );
 
   static Image home(BuildContext context) => Image.asset(
         ImagePathAssets.homeIcon,
         height: 20,
         color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
       );
+
   static Image unselectedHome(BuildContext context, Color color) => Image.asset(
         ImagePathAssets.homeIcon,
         height: 20,
@@ -65,7 +73,7 @@ class AppIcons {
         ImagePathAssets.facebookIcon,
         height: 20,
         color: color,
-  );
+      );
 
   static Image person(BuildContext context) => Image.asset(
         ImagePathAssets.personIcon,
@@ -127,7 +135,8 @@ class AppIcons {
 
   static Icon backArrrowIos({Color? iconColor}) => Icon(
         Icons.arrow_back_ios,
-        color: iconColor??Theme.of(Get.context!).textTheme.displaySmall!.color!,
+        color:
+            iconColor ?? Theme.of(Get.context!).textTheme.displaySmall!.color!,
       );
 
   static IconButton IosBackIcon({Color? iconColor, Function()? onPress}) =>
@@ -146,7 +155,7 @@ class AppIcons {
   static Icon cross({Color iconColor = Colors.black, double size = 24}) =>
       Icon(Icons.highlight_off, size: size, color: iconColor);
 
-            /// Account Icons
+  /// Account Icons
 
   static Icon clock({Color iconColor = Colors.black}) =>
       Icon(Icons.timer, color: iconColor);
@@ -189,36 +198,50 @@ class Heart extends StatefulWidget {
   Heart(
       {super.key,
       this.color = Colors.black,
+      required this.id,
+      required this.item,
       required this.size,
       this.isSelected});
 
   final double? size;
   bool? isSelected = false;
   Color? color;
-
+  String id;
+  ProductDetailsResponse item;
   @override
   State<Heart> createState() => _HeartState();
 }
 
 class _HeartState extends State<Heart> {
-  bool selected = false;
   @override
   void initState() {
-    selected == widget.isSelected;
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
-        key: widget.key,
-        onTap: () {
-          selected = !selected;
-          setState(() {});
-        },
-        child: Icon(
-          Icons.favorite_outlined,
-          color: selected ? Colors.red : widget.color,
-          size: widget.size ?? 20,
-        ),
-      );
+  Widget build(BuildContext context) {
+    HiveService service = Get.find<HiveService>();
+    Box<ProductDetailsResponse> box = service.box;
+    return ValueListenableBuilder(
+      valueListenable: box.listenable(keys: [widget.item.id.toString()]),
+      builder: (context, box, child) {
+        log("${widget.item.itemName}   ${widget.id.toString()}",
+            name: "Update Item");
+
+        return GestureDetector(
+          key: widget.key,
+          onTap: () {
+            service.favourite(item: widget.item);
+          },
+          child: Icon(
+            Icons.favorite_outlined,
+            color: service.hasItem(widget.item.id.toString())
+                ? Colors.red
+                : widget.color,
+            size: widget.size ?? 20,
+          ),
+        );
+      },
+    );
+  }
 }

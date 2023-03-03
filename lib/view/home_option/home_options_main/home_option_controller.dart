@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
-import 'package:humble_warrior/modals/response/front_page_response_model.dart';
+import 'package:humble_warrior/modals/response/product_details_response.dart';
+import 'package:humble_warrior/network/endpoints.dart';
 import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
 
 import '../../../hive/hive_storage_service.dart';
-import '../../../hive/wishlistitem.dart';
 import '../../../modals/requests/pagination_modal.dart';
-import '../../../modals/response/donna_deals_response.dart';
 import '../../../network/api_call.dart';
 
 class HomeOptionController extends GetxController
@@ -21,23 +19,6 @@ class HomeOptionController extends GetxController
   late BuildContext context;
   HiveService service = Get.find<HiveService>();
 
-  favourite({required Wishlistitem item, index}) {
-    if (service.hasItem(
-      index.toString(),
-    )) {
-      service.deleteItem(index.toString());
-    } else {
-      // Wishlistitem item = Wishlistitem(
-      //     shop: details.shopUrl!,
-      //     productId: index.toString(),
-      //     code: details.couponCode!,
-      //     type: '0',
-      //     image: details.url!,
-      //     dealName: details.dealName!);
-      service.addToWishList(item);
-    }
-  }
-
   ///Storage has item
   bool hasItemInDatabase(String id) {
     return service.hasItem(
@@ -48,7 +29,7 @@ class HomeOptionController extends GetxController
   /// Donna's Deals
   final RxInt donnaDealsLength = 0.obs;
   final RxBool donnaDealsBool = true.obs;
-  List<DonnaDealsDetails> donnaDealList = [];
+  List<ProductDetailsResponse> donnaDealList = [];
   RxInt donnaDealListLength = 0.obs;
   int donnaDealsPage = 1;
   RxInt donnaDealsTotalDeals = 20.obs;
@@ -59,7 +40,7 @@ class HomeOptionController extends GetxController
   final RxInt frontPageDealsLength = 0.obs;
   final RxBool frontPageDealsBool = true.obs;
   RxInt frontPageDealsTotalDeals = 20.obs;
-  List<FrontPageDetails> frontPageDealList = [];
+  List<ProductDetailsResponse> frontPageDealList = [];
   RxInt frontPageDealListLength = 0.obs;
   int frontPageDealsPage = 1;
   final ScrollController frontPageDealScrollController =
@@ -68,7 +49,7 @@ class HomeOptionController extends GetxController
   /// Donna's Favourite
   final RxInt donnaFavouriteDealsLength = 0.obs;
   final RxBool donnaFavouriteDealsBool = true.obs;
-  List<DonnaFavouriteDetails> donnaFavouriteDealList = [];
+  List<ProductDetailsResponse> donnaFavouriteDealList = [];
   RxInt donnaFavouriteDealsTotalDeals = 20.obs;
   int donnaFavouriteDealsPage = 1;
   RxInt donnaFavouriteDealListLength = 0.obs;
@@ -97,7 +78,9 @@ class HomeOptionController extends GetxController
     }
     PaginationModel paginationModel =
         PaginationModel(page: donnaDealsPage.toString());
-    await CallAPI.donnaDeals(payload: paginationModel).then((value) {
+    await CallAPI.productListAPI(
+            payload: paginationModel, url: Endpoints.donnaDeals)
+        .then((value) {
       if (value.data == null) {
         DialogHelper.showToast(context, "No Deals Found");
       } else {
@@ -123,7 +106,9 @@ class HomeOptionController extends GetxController
     }
     PaginationModel paginationModel =
         PaginationModel(page: frontPageDealsPage.toString());
-    await CallAPI.frontPage(payload: paginationModel).then((value) {
+    await CallAPI.productListAPI(
+            payload: paginationModel, url: Endpoints.frontPage)
+        .then((value) {
       if (value.data == null) {
         DialogHelper.showToast(context, "No Deals Found");
       } else {
@@ -152,7 +137,9 @@ class HomeOptionController extends GetxController
     }
     PaginationModel paginationModel =
         PaginationModel(page: donnaFavouriteDealsPage.toString());
-    await CallAPI.donnaFavourite(payload: paginationModel).then((value) {
+    await CallAPI.productListAPI(
+            payload: paginationModel, url: Endpoints.donnaFavourite)
+        .then((value) {
       if (value.data == null) {
         DialogHelper.showToast(context, "No Deals Found");
       } else {
