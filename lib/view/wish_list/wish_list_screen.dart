@@ -72,31 +72,6 @@ class WishList extends StatelessWidget {
         onPress: () {
           Get.offAllNamed(AppRoutes.loginPage);
         });
-    /*Container(
-      height: 150,
-      margin: 20.pa,
-      padding: 20.ps,
-      decoration: CustomBoxDecorations().shadow(context: context),
-      child: Column(children: [
-        AppText(accessingMsgTxt,
-            color: dialogueThemeExtention.textColor, fontSize: 20),
-        20.sh,
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            elevation: 5,
-            // fixedSize: const Size(, 35),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            backgroundColor: dialogueThemeExtention.buttonColor,
-          ),
-          onPressed: () {
-            Get.offAllNamed(AppRoutes.loginPage);
-          },
-          child: const AppText(gotoLoginTxt,
-              color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-      ]),
-    );*/
   }
 }
 

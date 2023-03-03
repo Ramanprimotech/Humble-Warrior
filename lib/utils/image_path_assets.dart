@@ -76,6 +76,8 @@ class ImagePathAssets {
   // static const String bellWhiteIcon = "assets/icons/bell_white.png";
   static const String bellIcon = "assets/icons/bell.png";
 
+  static const String backgroundImg = "assets/image/background.jpg";
+
 
 
 

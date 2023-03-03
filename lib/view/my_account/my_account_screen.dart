@@ -36,7 +36,10 @@ class MyAccount extends StatelessWidget {
               myAccWidget.myAccountTextFun(heading: myAccountTxt),
 
               ///Account Details
-              myAccWidget.detailsOptions(controller, title: accountDetailsTxt),
+              myAccWidget.detailsOptions(controller, title: accountDetailsTxt,
+                  ontap: (){
+                Get.toNamed(AppRoutes.accountDetails);
+                  }),
 
               ///Notification
               myAccWidget.detailsOptions(controller,

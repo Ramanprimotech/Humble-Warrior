@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/decorations.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
+import 'package:humble_warrior/utils/routes/app_pages.dart';
+import 'package:humble_warrior/utils/routes/app_routes.dart';
 
 import '../../utils/app_strings.dart';
 import '../../utils/app_text.dart';
@@ -34,7 +36,7 @@ class MyAccWidget {
             child: controller.imageUrl.isEmpty
                 ? InkWell(
                     onTap: () {
-                      // _openBottomSheet();
+                      Get.toNamed(AppRoutes.accountDetails);
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -80,9 +82,9 @@ class MyAccWidget {
     );
   }
 
-  divider() {
+  divider({color}) {
     return Divider(
-      color: Colors.grey.shade200,
+      color: color??Colors.grey.shade200,
       height: 2,
     );
   }
@@ -160,33 +162,5 @@ class MyAccWidget {
     );
   }
 
-  Future<void> _openBottomSheet() async {
-    return showCupertinoModalPopup<void>(
-      context: Get.context!,
-      builder: (BuildContext context) {
-        return CupertinoActionSheet(
-          title: CommonUtils.header(),
-          actions: <Widget>[
-            CommonUtils.actionButton(
-              cameraTxt,
-              onTap: () {
-                controller.getImageCamera();
-                //  CommonUtils().getImagePath(imageSource: ImageSource.camera);
-                Navigator.pop(context);
-              },
-            ),
-            CommonUtils.actionButton(
-              galleryTxt,
-              onTap: () {
-                controller.getImageGallery();
-                //  CommonUtils().getImagePath(imageSource: ImageSource.gallery);
-                Navigator.pop(context);
-              },
-            ),
-          ],
-          cancelButton: CommonUtils.cancelButton(),
-        );
-      },
-    );
-  }
+
 }

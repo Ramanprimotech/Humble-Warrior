@@ -46,7 +46,8 @@ class LoginController extends GetxController {
             await SharePreferenceData.addStringToSF(
                 userEmail, "${user?.email}");
             await SharePreferenceData.addStringToSF(
-                userPhoneNumber, "${user?.phoneNumber}");
+                userPhoneNumber, "${user!.phoneNumber}");
+
             await SharePreferenceData.addStringToSF(
                 userName, "${user?.displayName}");
             await SharePreferenceData.addStringToSF(
@@ -78,6 +79,7 @@ class LoginController extends GetxController {
                 userEmail, "${user?.email}");
             await SharePreferenceData.addStringToSF(
                 userPhoneNumber, "${user?.phoneNumber}");
+            print("User phone number ${user?.phoneNumber}");
             await SharePreferenceData.addStringToSF(
                 userName, "${user?.displayName}");
             await SharePreferenceData.addStringToSF(

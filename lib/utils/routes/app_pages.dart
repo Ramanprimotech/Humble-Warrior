@@ -9,6 +9,8 @@ import 'package:humble_warrior/view/brands/brands_screen.dart';
 import 'package:humble_warrior/view/home_option/home_options_main/home_option_binging.dart';
 import 'package:humble_warrior/view/landing/intro_binding.dart';
 import 'package:humble_warrior/view/landing/intro_screen.dart';
+import 'package:humble_warrior/view/my_account/account_details/account_details_binding.dart';
+import 'package:humble_warrior/view/my_account/account_details/account_details_screen.dart';
 import 'package:humble_warrior/view/my_account/my_account_screen.dart';
 import 'package:humble_warrior/view/notification/notification_binding.dart';
 import 'package:humble_warrior/view/notification/notification_screen.dart';
@@ -88,6 +90,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.categoryItemDetail,
         page: () => CategoryItemDetail(),
-        binding: CategoryItemDetailBinding())
+        binding: CategoryItemDetailBinding()),
+    GetPage(
+        name: AppRoutes.accountDetails,
+        page: () => const AccountDetails(),
+        binding: AccountDetailsBindings())
   ];
 }
