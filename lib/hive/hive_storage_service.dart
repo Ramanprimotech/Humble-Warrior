@@ -16,8 +16,9 @@ class HiveService extends GetxController {
   }
 
   deleteItem(String id) {
-    box.delete(id);
-    log("Deleted $id", name: "Wish Keys Deleted");
+    box
+        .delete(id)
+        .then((value) => log("Deleted $id", name: "Wish Keys Deleted"));
   }
 
   getWishList() {
