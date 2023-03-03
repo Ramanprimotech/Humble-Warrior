@@ -16,4 +16,5 @@ class AppRoutes {
   static String categoryDetailsList = "/categoryList";
   static String categoryItemDetail = "/categoryItem";
   static String accountDetails = "/accountDetail";
+  static String staticPages = "/staticPages";
 }

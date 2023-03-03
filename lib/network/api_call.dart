@@ -5,6 +5,7 @@ import 'package:humble_warrior/modals/response/donna_deals_response.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
 import 'package:humble_warrior/modals/response/front_page_response_model.dart';
 import 'package:humble_warrior/modals/response/home_categories_response_model.dart';
+import 'package:humble_warrior/modals/response/static_page_model.dart';
 import 'package:humble_warrior/modals/response/token_response.dart';
 import 'package:humble_warrior/network/endpoints.dart';
 
@@ -232,4 +233,25 @@ class CallAPI {
       rethrow;
     }
   }
+
+  static Future<List<StaticData>> staticPages({required dynamic payload}) async {
+    try {
+      dynamic response = await APIManager()
+          .postAPICall(url: Endpoints.staticPages, param: payload);
+      log(response);
+
+      StaticPagesResponse staticPagesResponse = StaticPagesResponse.fromJson(response);
+      if (staticPagesResponse.status == true) {
+log(staticPagesResponse.data![0].pageContent.toString(),name: "Help");
+
+      }else{
+        log(staticPagesResponse.data![0].pageContent.toString(),name: "Help" ,error: "sdfdfdfgdkfjdkfjdkfjdk");
+      }
+      return staticPagesResponse.data!;
+    } catch (e) {
+
+      return [];
+    }
+  }
+
 }

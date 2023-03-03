@@ -81,10 +81,18 @@ class MyAccount extends StatelessWidget {
                   click: controller.darkMode),
 
               ///Help & Support
-              myAccWidget.detailsOptions(controller, title: helpSupportTxt),
+              myAccWidget.detailsOptions(controller, title: helpSupportTxt,
+              ontap: (){
+                Get.toNamed(AppRoutes.staticPages,arguments: ["40429"]);
+              }
+              ),
 
               ///Term & Conditions
-              myAccWidget.detailsOptions(controller, title: termsConditionsTxt),
+              myAccWidget.detailsOptions(controller, title: termsConditionsTxt,
+                  ontap: (){
+                    Get.toNamed(AppRoutes.staticPages,arguments: ["40427"]);
+                  }
+              ),
 
               ///Login or Logout
               _loginOrLogout(context),
