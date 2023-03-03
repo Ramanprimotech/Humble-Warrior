@@ -4,6 +4,8 @@ import 'package:humble_warrior/modals/response/donna_favourite_response_model.da
 import 'package:humble_warrior/modals/response/front_page_response_model.dart';
 import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
 
+import '../../../hive/hive_storage_service.dart';
+import '../../../hive/wishlistitem.dart';
 import '../../../modals/requests/pagination_modal.dart';
 import '../../../modals/response/donna_deals_response.dart';
 import '../../../network/api_call.dart';
@@ -17,6 +19,31 @@ class HomeOptionController extends GetxController
   RxBool select = false.obs;
   int initialIndex = Get.arguments[0];
   late BuildContext context;
+  HiveService service = Get.find<HiveService>();
+
+  favourite({required Wishlistitem item, index}) {
+    if (service.hasItem(
+      index.toString(),
+    )) {
+      service.deleteItem(index.toString());
+    } else {
+      // Wishlistitem item = Wishlistitem(
+      //     shop: details.shopUrl!,
+      //     productId: index.toString(),
+      //     code: details.couponCode!,
+      //     type: '0',
+      //     image: details.url!,
+      //     dealName: details.dealName!);
+      service.addToWishList(item);
+    }
+  }
+
+  ///Storage has item
+  bool hasItemInDatabase(String id) {
+    return service.hasItem(
+      id,
+    );
+  }
 
   /// Donna's Deals
   final RxInt donnaDealsLength = 0.obs;

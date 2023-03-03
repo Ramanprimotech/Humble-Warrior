@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:get/get.dart';
+import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -98,6 +100,8 @@ class TokenManager {
       _token = value.token;
       _tokenExpirationDuration = value.tokenExpire;
       if (value.token == null) {
+        DialogHelper.showToast(
+            Get.context!, "Unable to generate authentication token");
         return false;
       }
       Endpoints.token = value.token.toString();

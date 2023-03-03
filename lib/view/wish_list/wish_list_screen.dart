@@ -3,16 +3,13 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/modals/response/donna_deals_response.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
 import 'package:humble_warrior/modals/response/front_page_response_model.dart';
-import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/decorations.dart';
-import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
-import 'package:humble_warrior/utils/theme_extention/custom_notice_theme_extention.dart';
 import 'package:humble_warrior/view/wish_list/wish_list_controller.dart';
 import 'package:humble_warrior/view/wish_list/wish_list_widgets/wish_list_card_selector.dart';
+
+import '../../utils/common/refresh_Indicator.dart';
 
 class WishList extends StatelessWidget {
   const WishList({Key? key}) : super(key: key);
@@ -25,29 +22,38 @@ class WishList extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            CommonWidgets.titleBar(context, title: myWishlistTxt,fontSize: 20,backIcon: false),
+            CommonWidgets.titleBar(context,
+                title: myWishlistTxt, fontSize: 20, backIcon: false),
             Expanded(
               child: Center(
                 child: controller.value == false
                     ? loginFirst(context)
-                    : ListView.separated(
-                        itemBuilder: (BuildContext context, int index) {
-                          dynamic details = modelReturn(index);
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: WishListCardSelector(
-                              details: details,
-                              index: index,
-                              context: context,
-                            ),
-                          );
+                    : CustomRefreshIndicator(
+                        onRefresh: () {
+                          return Future.delayed(Duration(seconds: 2), () {
+                            return Future.value(0);
+                          });
                         },
-                        itemCount: 20,
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const SizedBox(
-                            height: 20,
-                          );
-                        },
+                        child: ListView.separated(
+                          itemBuilder: (BuildContext context, int index) {
+                            dynamic details = modelReturn(index);
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: WishListCardSelector(
+                                details: details,
+                                index: index,
+                                context: context,
+                              ),
+                            );
+                          },
+                          itemCount: 20,
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const SizedBox(
+                              height: 20,
+                            );
+                          },
+                        ),
                       ),
               ),
             ),
@@ -57,16 +63,13 @@ class WishList extends StatelessWidget {
     );
   }
 
-
-
-
   Widget loginFirst(context) {
     return CommonWidgets.errorAPI(
         height: 150,
         buttonTitle: gotoLoginTxt,
         errorText: accessingMsgTxt,
         context: context,
-        onPress: (){
+        onPress: () {
           Get.offAllNamed(AppRoutes.loginPage);
         });
     /*Container(
