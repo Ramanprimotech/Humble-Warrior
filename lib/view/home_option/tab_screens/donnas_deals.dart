@@ -53,7 +53,7 @@ class DonnaDailyDeals extends StatelessWidget {
                 details = controller.donnaDealList[index];
               }
               return index != controller.donnaDealList.length
-                  ? donnaDealsCard(details, index, context)
+                  ? donnaDealsCard(details, index, context, dailyDeals: true)
                   : Obx(
                       () => Visibility(
                           visible: controller.donnaDealsBool.value,
@@ -76,13 +76,13 @@ class DonnaDailyDeals extends StatelessWidget {
 }
 
 ItemCard donnaDealsCard(
-    ProductDetailsResponse details, int index, BuildContext context) {
+    ProductDetailsResponse details, int index, BuildContext context, {dailyDeals}) {
   return ItemCard(
     onTap: () {
       Get.toNamed(AppRoutes.dailyDealProductDetail, arguments: [details]);
     },
     radius: 10,
-    buttons: donnaDealsButton(details, index, context),
+    buttons: donnaDealsButton(details, index, context, dailyDeals: dailyDeals),
     imageUrl: details.url!,
     title: details.itemName!,
   );
@@ -90,7 +90,7 @@ ItemCard donnaDealsCard(
 
 Widget donnaDealsButton(
     ProductDetailsResponse details, int index, BuildContext context,
-    {bool? categoryCard = false}) {
+    {bool? categoryCard = false, bool? dailyDeals = false}) {
   Color color = Theme.of(context).textTheme.displayMedium!.color!;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,6 +120,26 @@ Widget donnaDealsButton(
                   : 80.sw,
             ],
           ),
+          dailyDeals==true?
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                onPressed: () {
+                  // controller.select.value = !controller.select.value;
+                },
+                icon: Heart(
+                  id: details.id.toString(),
+                  item: details,
+                  color: color,
+                  key: Key(index.toString()),
+                  size: 28,
+                ),
+              ),
+              shareButton(shareUrl: "shareUrl", color: color),
+            ],
+          )
+          :
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
