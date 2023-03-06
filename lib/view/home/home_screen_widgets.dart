@@ -18,6 +18,7 @@ import '../../utils/search_bar/search_bar_ui.dart';
 import '../../utils/theme_extention/shadow_theme_extention.dart';
 import 'home_brands_api_widgets.dart';
 import 'home_category_api_widgets.dart';
+import 'home_product_category_api_widgets.dart';
 
 class HomeScreenWidgets {
   final HomeScreenController controller;
@@ -50,7 +51,6 @@ class HomeScreenWidgets {
         textEditingController: controller.searchTextController,
       ),
       actions: [
-
         Padding(
           padding: 15.pr,
           child: InkWell(
@@ -58,9 +58,9 @@ class HomeScreenWidgets {
               Get.toNamed(AppRoutes.notification);
             },
             child: Badge(
-                textColor:Colors.white ,
-                label:  AppText("14",fontSize: 8),
-                alignment: const AlignmentDirectional(15.0,-3.0),
+                textColor: Colors.white,
+                label: AppText("14", fontSize: 8),
+                alignment: const AlignmentDirectional(15.0, -3.0),
                 child: Image.asset(
                   ImagePathAssets.bellIcon,
                   height: 28,
@@ -156,8 +156,11 @@ class HomeScreenWidgets {
                       return Padding(
                         padding: 5.ph,
                         child: GestureDetector(
-                          onTap: (){
-                            Get.toNamed(AppRoutes.categoryDetailsList, arguments: [ProductImages.productImagesList[index].name]);
+                          onTap: () {
+                            Get.toNamed(AppRoutes.categoryDetailsList,
+                                arguments: [
+                                  ProductImages.productImagesList[index].name
+                                ]);
                           },
                           child: Container(
                             padding: 10.ph,
@@ -166,7 +169,8 @@ class HomeScreenWidgets {
                             child: Column(
                               children: [
                                 Image.asset(
-                                    ProductImages.productImagesList[index].image,
+                                    ProductImages
+                                        .productImagesList[index].image,
                                     fit: BoxFit.fitHeight,
                                     height: productHeight - 25,
                                     scale: 0.7),
@@ -335,7 +339,7 @@ class HomeScreenWidgets {
             ],
           ),
           Container(
-            margin: const EdgeInsets.only(left: 25,right: 25, top: 10),
+            margin: const EdgeInsets.only(left: 25, right: 25, top: 10),
             height: 1,
             width: Get.width,
             color: Colors.grey.shade400,
@@ -344,6 +348,22 @@ class HomeScreenWidgets {
       ),
     );
     // );
+  }
+
+  /// Product Categories API Builder
+  GetBuilder<HomeScreenController> productCategoryListAPIBuilder() {
+    return GetBuilder<HomeScreenController>(
+        id: Endpoints.productCategories,
+        init: controller,
+        builder: (controller) {
+          return FutureWidget<List<BrandDetails>>().builder(
+              futureWidgets: HomePageProductCategoryAPIWidgets(
+                  context: context,
+                  brandHeight: brandHeight,
+                  productHeight: productHeight),
+              future: controller.allBrands(),
+              context: context);
+        });
   }
 
   /// Brand List API Builder
@@ -357,75 +377,6 @@ class HomeScreenWidgets {
               future: controller.allBrands(),
               context: context);
         });
-    // return FutureBuilder<List<BrandDetails>>(
-    //     future: controller.allBrands(),
-    //     builder: (context, snapshot) {
-    //       if (snapshot.connectionState == ConnectionState.waiting) {
-    //         return ListView.separated(
-    //           padding: const EdgeInsets.symmetric(horizontal: 20),
-    //           scrollDirection: Axis.horizontal,
-    //           itemCount: 25,
-    //           itemBuilder: (ctx, index) {
-    //             return Container(
-    //               color: Theme.of(context)
-    //                   .floatingActionButtonTheme
-    //                   .backgroundColor,
-    //               height: 60,
-    //               width: 80,
-    //               child: Column(
-    //                 children: const [
-    //                   ShimmerLoader(
-    //                       child: AppText(
-    //                     "HW",
-    //                     fontWeight: FontWeight.w900,
-    //                     fontSize: 35,
-    //                   )),
-    //                 ],
-    //               ),
-    //             );
-    //           },
-    //           separatorBuilder: (BuildContext context, int index) {
-    //             return 20.sw;
-    //           },
-    //         );
-    //       }
-    //       if (snapshot.hasError) {
-    //         return const AppText("Something Went Wrong");
-    //       }
-    //       List<BrandDetails> data = snapshot.data ?? [];
-    //       return ListView.separated(
-    //         // physics: BouncingScrollPhysics(),
-    //         padding: const EdgeInsets.symmetric(horizontal: 20),
-    //         scrollDirection: Axis.horizontal,
-    //         controller: controller.brandScrollController,
-    //         itemCount: data.length,
-    //         itemBuilder: (ctx, index) {
-    //           return GestureDetector(
-    //             onTap: () {
-    //               CommonUtils().urlLauncher(url: data[index].brandLink!);
-    //             },
-    //             child: SizedBox(
-    //               height: 60,
-    //               width: 80,
-    //               child: Column(
-    //                 children: [
-    //                   CommonWidgets.networkImage(
-    //                     alignment: Alignment.center,
-    //                     imageUrl: data[index].brandImage!,
-    //                     fit: BoxFit.contain,
-    //                     height: 60,
-    //                     width: 80,
-    //                   ),
-    //                 ],
-    //               ),
-    //             ),
-    //           );
-    //         },
-    //         separatorBuilder: (BuildContext context, int index) {
-    //           return 20.sw;
-    //         },
-    //       );
-    //     });
   }
 
   /// Brand Title Row
