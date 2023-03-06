@@ -7,6 +7,7 @@ import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
 import 'package:humble_warrior/utils/theme_extention/custom_notice_theme_extention.dart';
 
+import '../../network/endpoints.dart';
 import '../../utils/app_text.dart';
 import '../../utils/future_widget/abstract_future_widget.dart';
 import '../../utils/routes/app_routes.dart';
@@ -39,8 +40,8 @@ class HomePageProductCategoryAPIWidgets
           backgroundColor: dialogueThemeExtention.buttonColor,
         ),
         onPressed: () {
-          // controller.update([Endpoints.productCategories]);
-          Get.toNamed(AppRoutes.categoryDetailsList, arguments: ["sd", "66"]);
+          controller.update([Endpoints.productCategories]);
+          // Get.toNamed(AppRoutes.categoryDetailsList, arguments: ["sd", "66"]);
         },
         child: const AppText('Retry',
             color: Colors.white, fontWeight: FontWeight.bold),
