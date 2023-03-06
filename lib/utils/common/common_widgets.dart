@@ -56,12 +56,24 @@ class CommonWidgets {
     );
   }
 
-  static Widget noData() {
-    return const Center(
-      child: AppText(
-        noDataFoundTxt,
-        fontSize: 24,
-        fontWeight: FontWeight.w700,
+  static Widget noData({required Function update}) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        update();
+        return Future.value(0);
+      },
+      child: ListView(
+        children: [
+          Container(
+            height: Get.height - 250,
+            alignment: Alignment.center,
+            child: AppText(
+              noDataFoundTxt,
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
       ),
     );
   }

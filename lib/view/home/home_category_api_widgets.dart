@@ -84,9 +84,9 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
     return Expanded(
       child: CustomRefreshIndicator(
         onRefresh: () {
-          return Future.delayed(Duration(seconds: 2), () {
-            return Future.value(0);
-          });
+          controller.update([Endpoints.homeCategories]);
+
+          return Future.value(0);
         },
         child: ListView.builder(
           padding: 10.pb,
@@ -154,21 +154,22 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
                   CustomBoxDecorations().shadow(context: context, radius: 10),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  homeOptions.categoryImage!,
-                  width: Get.width,
+                child:
+                    // Image.asset(
+                    //   homeOptions.categoryImage!,
+                    //   width: Get.width,
+                    //   fit: BoxFit.fitWidth,
+                    //   height: 200,
+                    //   alignment: Alignment.topCenter,
+                    //   // width: Get.width,
+                    // ),
+                    CommonWidgets.networkImage(
+                  imageUrl: homeOptions.categoryImage!,
                   fit: BoxFit.fitWidth,
                   height: 200,
                   alignment: Alignment.topCenter,
                   // width: Get.width,
                 ),
-                // CommonWidgets.networkImage(
-                //   imageUrl: homeOptions.categoryImage!,
-                //   fit: BoxFit.fitWidth,
-                //   height: 200,
-                //   alignment: Alignment.topCenter,
-                //   // width: Get.width,
-                // ),
               ),
             ),
             Container(

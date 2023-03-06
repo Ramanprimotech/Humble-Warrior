@@ -39,7 +39,7 @@ class FrontPageDeals extends StatelessWidget {
           }
           if (controller.frontPageDealList.isEmpty &&
               controller.frontPageDealsBool.value == false) {
-            return CommonWidgets.noData();
+            return CommonWidgets.noData(update: controller.update);
           }
           return ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

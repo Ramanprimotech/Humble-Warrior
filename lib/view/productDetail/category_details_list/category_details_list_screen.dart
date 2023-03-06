@@ -45,7 +45,7 @@ class CategoryListDetails extends StatelessWidget {
                     }
                     if (controller.categoryList.isEmpty &&
                         controller.categoryListBool.value == false) {
-                      return CommonWidgets.noData();
+                      return CommonWidgets.noData(update: controller.update);
                     }
                     return ListView.separated(
                       padding: const EdgeInsets.symmetric(
@@ -67,7 +67,8 @@ class CategoryListDetails extends StatelessWidget {
                                     child: Container(
                                         height: 80,
                                         alignment: Alignment.center,
-                                        child: CircularProgressIndicator())),
+                                        child:
+                                            const CircularProgressIndicator())),
                               );
                       },
                       separatorBuilder: (BuildContext context, int index) {

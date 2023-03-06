@@ -6,6 +6,7 @@ import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
 import 'package:humble_warrior/modals/response/front_page_response_model.dart';
 import 'package:humble_warrior/modals/response/home_categories_response_model.dart';
+import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/modals/response/product_details_api_response.dart';
 import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/modals/response/product_list_response.dart';
@@ -236,6 +237,27 @@ class CallAPI {
 
       if (brandsResponseModel.status == true) {
         return brandsResponseModel.data!;
+      }
+
+      return [];
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<List<ProductCategoryItem>> productCategoryAPI() async {
+    try {
+      var response = await APIManager()
+          .postAllCallNonParam(url: Endpoints.productCategories);
+
+      ProductCategoriesResponse productCategoriesResponse =
+          ProductCategoriesResponse.fromJson(response);
+      if (response == null) {
+        return [];
+      }
+
+      if (productCategoriesResponse.status == true) {
+        return productCategoriesResponse.data!;
       }
 
       return [];

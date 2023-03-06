@@ -3,9 +3,7 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/modals/abstract_enums/search_bar.dart';
 import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/modals/response/home_categories_response_model.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/image_path_assets.dart';
-import 'package:velocity_x/velocity_x.dart';
+import 'package:humble_warrior/network/api_call.dart';
 
 class HomeScreenController extends GetxController implements SearchActions {
   final TextEditingController searchTextController = TextEditingController();
@@ -44,41 +42,6 @@ class HomeScreenController extends GetxController implements SearchActions {
           brandScrollController.initialScrollOffset;
     });
 
-    const ProductImages(image: ImagePathAssets.giftIcon, name: giftTxt).add();
-    const ProductImages(
-            image: ImagePathAssets.giftForMomIcon, name: giftForMomTxt)
-        .add();
-    const ProductImages(
-        image: ImagePathAssets.houseIcon, name: homeTxt)
-        .add();
-    const ProductImages(image: ImagePathAssets.beautyIcon, name: beautyTxt)
-        .add();
-    const ProductImages(image: ImagePathAssets.menIcon, name: menTxt).add();
-    const ProductImages(image: ImagePathAssets.kidsIcon, name: kidsTxt).add();
-    const ProductImages(image: ImagePathAssets.foodIcon, name: kitchenTxt)
-        .add();
-    const ProductImages(image: ImagePathAssets.travelIcon, name: travelTxt)
-        .add();
-    const ProductImages(image: ImagePathAssets.healthIcon, name: healthTxt)
-        .add();
-    const ProductImages(
-            image: ImagePathAssets.womensFashionIcon, name: womensFashionTxt)
-        .add();
-    const ProductImages(image: ImagePathAssets.outdoorIcon, name: outdoorTxt)
-        .add();
-    const ProductImages(image: ImagePathAssets.packingIcon, name: packingTxt)
-        .add();
-    const ProductImages(image: ImagePathAssets.fitnessIcon, name: fitnessTxt)
-        .add();
-    const ProductImages(image: ImagePathAssets.orderIcon, name: foodTxt).add();
-    const ProductImages(image: ImagePathAssets.jewelryIcon, name: jewelryTxt)
-        .add();
-    const ProductImages(image: ImagePathAssets.babyIcon, name: babyTxt).add();
-    const ProductImages(image: ImagePathAssets.booksIcon, name: booksTxt).add();
-    const ProductImages(image: ImagePathAssets.vehicleIcon, name: vehiclesTxt)
-        .add();
-    const ProductImages(image: ImagePathAssets.petsIcon, name: petsTxt).add();
-
     focusNode.addListener(() {
       debugPrint("${focusNode.hasFocus}");
       getKeyBoard(Get.context!);
@@ -98,59 +61,97 @@ class HomeScreenController extends GetxController implements SearchActions {
   //   return await CallAPI.allBrands();
   // }
   Future<List<BrandDetails>> allBrands() async {
-    List<BrandDetails> data = [];
-    data.add(BrandDetails(
-        brandImage: ImagePathAssets.nikeIcon,
-        brandName: nikeTxt,
-        brandLink: brandLink));
-    data.add(BrandDetails(
-        brandImage: ImagePathAssets.adidasIcon,
-        brandName: adidasTxt,
-        brandLink: brandLink));
-    data.add(BrandDetails(
-        brandImage: ImagePathAssets.reebokIcon,
-        brandName: reebokTxt,
-        brandLink: brandLink));
-    data.add(BrandDetails(
-        brandImage: ImagePathAssets.gucciIcon,
-        brandName: gucciTxt,
-        brandLink: brandLink));
-    data.add(BrandDetails(
-        brandImage: ImagePathAssets.nikeIcon,
-        brandName: nikeTxt,
-        brandLink: brandLink));
-    data.add(BrandDetails(
-        brandImage: ImagePathAssets.adidasIcon,
-        brandName: adidasTxt,
-        brandLink: brandLink));
-    data.add(BrandDetails(
-        brandImage: ImagePathAssets.reebokIcon,
-        brandName: reebokTxt,
-        brandLink: brandLink));
-    data.add(BrandDetails(
-        brandImage: ImagePathAssets.gucciIcon,
-        brandName: gucciTxt,
-        brandLink: brandLink));
-    return data;
+    // List<BrandDetails> data = [];
+    // data.add(BrandDetails(
+    //     brandImage: ImagePathAssets.nikeIcon,
+    //     brandName: nikeTxt,
+    //     brandLink: brandLink));
+    // data.add(BrandDetails(
+    //     brandImage: ImagePathAssets.adidasIcon,
+    //     brandName: adidasTxt,
+    //     brandLink: brandLink));
+    // data.add(BrandDetails(
+    //     brandImage: ImagePathAssets.reebokIcon,
+    //     brandName: reebokTxt,
+    //     brandLink: brandLink));
+    // data.add(BrandDetails(
+    //     brandImage: ImagePathAssets.gucciIcon,
+    //     brandName: gucciTxt,
+    //     brandLink: brandLink));
+    // data.add(BrandDetails(
+    //     brandImage: ImagePathAssets.nikeIcon,
+    //     brandName: nikeTxt,
+    //     brandLink: brandLink));
+    // data.add(BrandDetails(
+    //     brandImage: ImagePathAssets.adidasIcon,
+    //     brandName: adidasTxt,
+    //     brandLink: brandLink));
+    // data.add(BrandDetails(
+    //     brandImage: ImagePathAssets.reebokIcon,
+    //     brandName: reebokTxt,
+    //     brandLink: brandLink));
+    // data.add(BrandDetails(
+    //     brandImage: ImagePathAssets.gucciIcon,
+    //     brandName: gucciTxt,
+    //     brandLink: brandLink));
     // return data;
+    // return data;
+    return CallAPI.allBrands();
   }
 
+  // Future<List<ProductCategoryItem>> productCategoryAPI() async {
+  //   const ProductImages(image: ImagePathAssets.giftIcon, name: giftTxt).add();
+  //   const ProductImages(
+  //           image: ImagePathAssets.giftForMomIcon, name: giftForMomTxt)
+  //       .add();
+  //   const ProductImages(image: ImagePathAssets.houseIcon, name: homeTxt).add();
+  //   const ProductImages(image: ImagePathAssets.beautyIcon, name: beautyTxt)
+  //       .add();
+  //   const ProductImages(image: ImagePathAssets.menIcon, name: menTxt).add();
+  //   const ProductImages(image: ImagePathAssets.kidsIcon, name: kidsTxt).add();
+  //   const ProductImages(image: ImagePathAssets.foodIcon, name: kitchenTxt)
+  //       .add();
+  //   const ProductImages(image: ImagePathAssets.travelIcon, name: travelTxt)
+  //       .add();
+  //   const ProductImages(image: ImagePathAssets.healthIcon, name: healthTxt)
+  //       .add();
+  //   const ProductImages(
+  //           image: ImagePathAssets.womensFashionIcon, name: womensFashionTxt)
+  //       .add();
+  //   const ProductImages(image: ImagePathAssets.outdoorIcon, name: outdoorTxt)
+  //       .add();
+  //   const ProductImages(image: ImagePathAssets.packingIcon, name: packingTxt)
+  //       .add();
+  //   const ProductImages(image: ImagePathAssets.fitnessIcon, name: fitnessTxt)
+  //       .add();
+  //   const ProductImages(image: ImagePathAssets.orderIcon, name: foodTxt).add();
+  //   const ProductImages(image: ImagePathAssets.jewelryIcon, name: jewelryTxt)
+  //       .add();
+  //   const ProductImages(image: ImagePathAssets.babyIcon, name: babyTxt).add();
+  //   const ProductImages(image: ImagePathAssets.booksIcon, name: booksTxt).add();
+  //   const ProductImages(image: ImagePathAssets.vehicleIcon, name: vehiclesTxt)
+  //       .add();
+  //   const ProductImages(image: ImagePathAssets.petsIcon, name: petsTxt).add();
+  //
+  //   return CallAPI.productCategoryAPI();
+  // }
+
   Future<List<HomeCategoryList>> homeCategories() async {
-    List<HomeCategoryList> data = [];
-    data.add(HomeCategoryList(
-        categoryName: donnaDailyDealTxt.upperCamelCase,
-        categoryImage: ImagePathAssets.donnaDailyDealImage,
-        id: 0));
-    data.add(HomeCategoryList(
-        categoryName: donnaFavouriteDealTxt.upperCamelCase,
-        categoryImage: ImagePathAssets.donnaFavDealImage,
-        id: 1));
-    data.add(HomeCategoryList(
-        categoryName: donnaFrontPageDealTxt.upperCamelCase,
-        categoryImage: ImagePathAssets.donnaFrontDealImage,
-        id: 2));
-    return data;
-    // return await CallAPI.homeCategory();
+    // List<HomeCategoryList> data = [];
+    // data.add(HomeCategoryList(
+    //     categoryName: donnaDailyDealTxt.upperCamelCase,
+    //     categoryImage: ImagePathAssets.donnaDailyDealImage,
+    //     id: 0));
+    // data.add(HomeCategoryList(
+    //     categoryName: donnaFavouriteDealTxt.upperCamelCase,
+    //     categoryImage: ImagePathAssets.donnaFavDealImage,
+    //     id: 1));
+    // data.add(HomeCategoryList(
+    //     categoryName: donnaFrontPageDealTxt.upperCamelCase,
+    //     categoryImage: ImagePathAssets.donnaFrontDealImage,
+    //     id: 2));
+    // return data;
+    return await CallAPI.homeCategory();
   }
 
   @override

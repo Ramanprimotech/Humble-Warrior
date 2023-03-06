@@ -66,13 +66,6 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // CommonWidgets.networkImage(
-                  //   alignment: Alignment.center,
-                  //   imageUrl: dataa[index].brandImage!,
-                  //   fit: BoxFit.contain,
-                  //   height: 60,
-                  //   width: 80,
-                  // ),
                   Container(
                     width: 70,
                     height: 50,
@@ -80,11 +73,16 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
                         .shadow(context: context, color: Colors.grey.shade200),
                     child: Padding(
                       padding: 8.pa,
-                      child: Image.asset(
+                      child: CommonWidgets.networkImage(
                         alignment: Alignment.center,
-                        dataa[index].brandImage!,
+                        imageUrl: dataa[index].brandImage!,
                         fit: BoxFit.contain,
                       ),
+                      // Image.asset(
+                      //   alignment: Alignment.center,
+                      //   dataa[index].brandImage!,
+                      //   fit: BoxFit.contain,
+                      // ),
                     ),
                   ),
                 ],

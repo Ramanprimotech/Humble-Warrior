@@ -40,7 +40,7 @@ class DonnaDailyDeals extends StatelessWidget {
           }
           if (controller.donnaDealList.isEmpty &&
               controller.donnaDealsBool.value == false) {
-            return CommonWidgets.noData();
+            return CommonWidgets.noData(update: controller.update);
           }
           return ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
