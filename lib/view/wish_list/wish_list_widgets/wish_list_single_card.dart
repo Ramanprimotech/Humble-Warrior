@@ -23,7 +23,7 @@ class WishListCard extends StatelessWidget {
   const WishListCard(
       {Key? key,
       this.buttons,
-      this.buttonbarHeight = 130,
+      this.buttonbarHeight = 135,
       this.radius = 10,
       this.imageHeight = 220,
       this.imageTitleHeight = 60,

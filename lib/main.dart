@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:humble_warrior/hive/hive_storage_service.dart';
 import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/utils/app_themes/app_theme.dart';
 import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
@@ -12,6 +13,8 @@ import 'utils/routes/app_pages.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  Get.put(HiveService());
   await Hive.initFlutter();
   Hive.registerAdapter(ProductDetailsResponseAdapter());
   await Firebase.initializeApp(

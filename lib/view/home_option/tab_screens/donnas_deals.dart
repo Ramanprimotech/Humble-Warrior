@@ -41,7 +41,14 @@ class DonnaDailyDeals extends StatelessWidget {
           }
           if (controller.donnaDealList.isEmpty &&
               controller.donnaDealsBool.value == false) {
-            return CommonWidgets.noData(update: controller.update);
+            return CommonWidgets.noData(
+                update: controller.update,
+                context: context,
+                onTap: () {
+                  controller.donnaDealsBool.value = true;
+                  controller.update();
+                  controller.donaDealsAPI();
+                });
           }
           return ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -76,7 +83,8 @@ class DonnaDailyDeals extends StatelessWidget {
 }
 
 ItemCard donnaDealsCard(
-    ProductDetailsResponse details, int index, BuildContext context, {dailyDeals}) {
+    ProductDetailsResponse details, int index, BuildContext context,
+    {dailyDeals}) {
   return ItemCard(
     onTap: () {
       Get.toNamed(AppRoutes.dailyDealProductDetail, arguments: [details]);
@@ -120,44 +128,43 @@ Widget donnaDealsButton(
                   : 80.sw,
             ],
           ),
-          dailyDeals==true?
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              IconButton(
-                onPressed: () {
-                  // controller.select.value = !controller.select.value;
-                },
-                icon: Heart(
-                  id: details.id.toString(),
-                  item: details,
-                  color: color,
-                  key: Key(index.toString()),
-                  size: 28,
+          dailyDeals == true
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        // controller.select.value = !controller.select.value;
+                      },
+                      icon: Heart(
+                        id: details.id.toString(),
+                        item: details,
+                        color: color,
+                        key: Key(index.toString()),
+                        size: 28,
+                      ),
+                    ),
+                    shareButton(shareUrl: "shareUrl", color: color),
+                  ],
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    shareButton(shareUrl: "shareUrl", color: color),
+                    IconButton(
+                      onPressed: () {
+                        // controller.select.value = !controller.select.value;
+                      },
+                      icon: Heart(
+                        id: details.id.toString(),
+                        item: details,
+                        color: color,
+                        key: Key(index.toString()),
+                        size: 28,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              shareButton(shareUrl: "shareUrl", color: color),
-            ],
-          )
-          :
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              shareButton(shareUrl: "shareUrl", color: color),
-              IconButton(
-                onPressed: () {
-                  // controller.select.value = !controller.select.value;
-                },
-                icon: Heart(
-                  id: details.id.toString(),
-                  item: details,
-                  color: color,
-                  key: Key(index.toString()),
-                  size: 28,
-                ),
-              ),
-            ],
-          ),
         ],
       ),
     ],

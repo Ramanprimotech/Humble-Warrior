@@ -19,7 +19,7 @@ class WishListCardSelector extends StatelessWidget {
     WishListCards wishListCards =
         WishListCards(details: details, index: index, context: context);
 
-    String type = details.catName!;
+    String type = details.catName ?? "";
 
     if (type == "Donna Daily Deals") {
       return wishListCards.donnaDeals();
@@ -27,7 +27,10 @@ class WishListCardSelector extends StatelessWidget {
     if (type == "Favourite Things") {
       return wishListCards.donnaFavourite();
     }
+    if (type == "Front Page Deals") {
+      return wishListCards.frontPage();
+    }
 
-    return wishListCards.frontPage();
+    return SizedBox(height: 0,);
   }
 }

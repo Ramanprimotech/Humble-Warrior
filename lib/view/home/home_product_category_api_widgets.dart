@@ -1,17 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/response/product_category_response.dart';
-import 'package:humble_warrior/utils/app_icons.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/extensions.dart';
-import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
-import 'package:humble_warrior/utils/theme_extention/custom_notice_theme_extention.dart';
 
 import '../../network/endpoints.dart';
-import '../../utils/app_text.dart';
-import '../../utils/future_widget/abstract_future_widget.dart';
-import '../../utils/routes/app_routes.dart';
-import 'home_controller.dart';
 
 class HomePageProductCategoryAPIWidgets
     extends FutureAPI<List<ProductCategoryItem>> {
@@ -54,115 +44,179 @@ class HomePageProductCategoryAPIWidgets
     List<ProductCategoryItem> dataa = data ?? [];
     dataa.sort((a, b) => a.id!.compareTo(b.id!));
     const double productArrowIconPadding = 8;
-    const double arrowWidth = 30;
+    const double arrowWidth = 40;
     return Stack(
       alignment: Alignment.center,
       children: [
         Row(
           children: [
+            Obx(
+              () => Visibility(
+                visible: controller.listBack.value,
+                child: Container(
+                  alignment: Alignment.center,
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  height: brandHeight,
+                  width: arrowWidth,
+                  padding: EdgeInsets.only(left: productArrowIconPadding),
+                  child: GestureDetector(
+                    onTap: () {
+                      controller.productScrollController.animateTo(
+                          controller.productScrollController.offset - (60 * 3),
+                          duration: const Duration(milliseconds: 150),
+                          curve: Curves.linear);
+                    },
+                    child: AppIcons.backArrrowIos(
+                        iconColor:
+                            Theme.of(context).textTheme.displaySmall!.color!),
+                  ),
+                ),
+              ),
+            ),
             Expanded(
               // flex: 8,
               child: Container(
                 height: productHeight,
                 width: Get.width,
                 child: ListView.builder(
-                    padding: 8.ph,
+                    padding: 15.pr,
                     scrollDirection: Axis.horizontal,
                     controller: controller.productScrollController,
                     itemCount: dataa.length,
                     itemBuilder: (ctx, index) {
-                      return Padding(
-                        padding: 5.ph,
-                        child: GestureDetector(
-                          onTap: () {
-                            Get.toNamed(AppRoutes.categoryDetailsList,
-                                arguments: [
-                                  dataa[index].categoryName,
-                                  dataa[index].id.toString(),
-                                ]);
-                          },
-                          child: Container(
-                            padding: 10.ph,
-                            height: productHeight,
-                            // width: 80,
-                            child: Column(
-                              children: [
-                                CommonWidgets.networkImage(
-                                    imageUrl: dataa[index].categoryImage ?? "",
+                      return GestureDetector(
+                        onTap: () {
+                          Get.toNamed(AppRoutes.categoryDetailsList,
+                              arguments: [
+                                dataa[index].categoryName,
+                                dataa[index].id.toString(),
+                              ]);
+                        },
+                        child: Container(
+                          padding: 20.pl,
+                          height: productHeight,
+                          // width: 80,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: productHeight - 25,
+                                child: Image.network(
+                                    errorBuilder: (context, error, stackTrace) {
+                                  return Center(
+                                      child: Image.asset(
+                                    ImagePathAssets.noImageFound,
+                                    alignment: Alignment.center,
                                     fit: BoxFit.fitHeight,
-                                    height: productHeight - 25,
-                                    scale: 0.7),
-                                // Image.asset(dataa[index].categoryImage ?? "",
-                                //     fit: BoxFit.fitHeight,
-                                //     height: productHeight - 25,
-                                //     scale: 0.7),
-                                AppText(
-                                  dataa[index].categoryName ?? "",
-                                  fontSize: 12,
-                                  maxLines: 1,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ],
-                            ),
+                                    // height: height,
+                                  ));
+                                }, dataa[index].categoryImage ?? ""),
+                              ),
+
+                              // ///
+                              // SizedBox(
+                              //   height: productHeight - 25,
+                              //   child: CommonWidgets.networkImage(
+                              //       // imageUrl: dataa[index].categoryImage ?? "",
+                              //       imageUrl:
+                              //           "http://112.196.54.37/Development/HW/wp-content/uploads/2023/02/fav.jpg",
+                              //       fit: BoxFit.fitHeight,
+                              //       height: productHeight - 25,
+                              //       scale: 0.7),
+                              // ),
+
+                              ///
+                              // Image.asset(ImagePathAssets.adidasIcon,
+                              //     fit: BoxFit.fitHeight,
+                              //     height: productHeight - 25,
+                              //     scale: 0.7),
+                              AppText(
+                                dataa[index].categoryName ?? "",
+                                fontSize: 12,
+                                maxLines: 1,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ],
                           ),
                         ),
                       );
                     }),
               ),
             ),
+            Obx(
+              () => Visibility(
+                visible: controller.listForward.value,
+                child: Container(
+                  alignment: Alignment.center,
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  height: brandHeight,
+                  width: arrowWidth,
+                  child: GestureDetector(
+                    onTap: () {
+                      controller.productScrollController.animateTo(
+                          controller.productScrollController.offset + (60 * 3),
+                          duration: const Duration(milliseconds: 150),
+                          curve: Curves.linear);
+                    },
+                    child: AppIcons.next(
+                        iconColor:
+                            Theme.of(context).textTheme.displaySmall!.color!),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
-        Obx(
-          () => Visibility(
-            visible: controller.listBack.value,
-            child: Positioned(
-              left: 0,
-              child: Container(
-                alignment: Alignment.center,
-                color: Theme.of(context).scaffoldBackgroundColor,
-                height: brandHeight,
-                width: arrowWidth,
-                padding: EdgeInsets.only(left: productArrowIconPadding),
-                child: GestureDetector(
-                  onTap: () {
-                    controller.productScrollController.animateTo(
-                        controller.productScrollController.offset - (60 * 3),
-                        duration: const Duration(milliseconds: 150),
-                        curve: Curves.linear);
-                  },
-                  child: AppIcons.backArrrowIos(
-                      iconColor:
-                          Theme.of(context).textTheme.displaySmall!.color!),
-                ),
-              ),
-            ),
-          ),
-        ),
-        Obx(
-          () => Visibility(
-            visible: controller.listForward.value,
-            child: Positioned(
-              right: 0,
-              child: Container(
-                alignment: Alignment.center,
-                color: Theme.of(context).scaffoldBackgroundColor,
-                height: brandHeight,
-                width: arrowWidth,
-                child: GestureDetector(
-                  onTap: () {
-                    controller.productScrollController.animateTo(
-                        controller.productScrollController.offset + (60 * 3),
-                        duration: const Duration(milliseconds: 150),
-                        curve: Curves.linear);
-                  },
-                  child: AppIcons.next(
-                      iconColor:
-                          Theme.of(context).textTheme.displaySmall!.color!),
-                ),
-              ),
-            ),
-          ),
-        )
+        // Obx(
+        //   () => Visibility(
+        //     visible: controller.listBack.value,
+        //     child: Positioned(
+        //       left: 8,
+        //       child: Container(
+        //         alignment: Alignment.center,
+        //         color: Theme.of(context).scaffoldBackgroundColor,
+        //         height: brandHeight,
+        //         width: arrowWidth,
+        //         padding: EdgeInsets.only(left: productArrowIconPadding),
+        //         child: GestureDetector(
+        //           onTap: () {
+        //             controller.productScrollController.animateTo(
+        //                 controller.productScrollController.offset - (60 * 3),
+        //                 duration: const Duration(milliseconds: 150),
+        //                 curve: Curves.linear);
+        //           },
+        //           child: AppIcons.backArrrowIos(
+        //               iconColor:
+        //                   Theme.of(context).textTheme.displaySmall!.color!),
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
+        // Obx(
+        //   () => Visibility(
+        //     visible: controller.listForward.value,
+        //     child: Positioned(
+        //       right: 8,
+        //       child: Container(
+        //         alignment: Alignment.center,
+        //         color: Theme.of(context).scaffoldBackgroundColor,
+        //         height: brandHeight,
+        //         width: arrowWidth,
+        //         child: GestureDetector(
+        //           onTap: () {
+        //             controller.productScrollController.animateTo(
+        //                 controller.productScrollController.offset + (60 * 3),
+        //                 duration: const Duration(milliseconds: 150),
+        //                 curve: Curves.linear);
+        //           },
+        //           child: AppIcons.next(
+        //               iconColor:
+        //                   Theme.of(context).textTheme.displaySmall!.color!),
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // )
       ],
     );
   }

@@ -30,8 +30,9 @@ class HomeScreenController extends GetxController implements SearchActions {
   @override
   void onInit() {
     productScrollController.addListener(() {
-      listForward.value = productScrollController.offset !=
-          productScrollController.position.maxScrollExtent;
+      listForward.value =
+          productScrollController.position.maxScrollExtent - 20 >
+              productScrollController.offset;
       listBack.value = productScrollController.offset !=
           productScrollController.initialScrollOffset;
     });
