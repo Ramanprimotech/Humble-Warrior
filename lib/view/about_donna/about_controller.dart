@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+import 'package:humble_warrior/hw.dart';
 
 class AboutScreenController extends GetxController{
 

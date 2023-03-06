@@ -28,3 +28,7 @@ class FrontPageBanner extends CustomPainter {
     return true;
   }
 }
+
+///TODO remove
+
+///TODO remove

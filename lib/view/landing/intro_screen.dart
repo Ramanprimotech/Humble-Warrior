@@ -19,7 +19,7 @@ class IntroScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            50.sh,
+            50.shb,
             RichText(
                 text: TextSpan(children: [
               TextSpan(
@@ -44,24 +44,24 @@ class IntroScreen extends StatelessWidget {
             // AppText("The Humble Warrior",fontSize: 36,color: Colors.grey.shade600),
             const AppText(fashionLifestyleTxt,
                 fontSize: 16, color: Colors.black),
-            30.sh,
+            30.shb,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _title(text: lookGoodTxt),
-                5.sw,
+                5.swb,
                 Icon(
                   Icons.favorite,
                   color: Colors.pinkAccent.shade100,
                 ),
-                5.sw,
+                5.swb,
                 _title(text: feelGoodTxt),
-                5.sw,
+                5.swb,
                 Icon(
                   Icons.favorite,
                   color: Colors.pinkAccent.shade100,
                 ),
-                5.sw,
+                5.swb,
                 _title(text: doGoodTxt),
               ],
             ),
@@ -93,7 +93,7 @@ class IntroScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  40.sh,
+                  40.shb,
                   Transform.scale(
                       scale: .6,
                       child: SmoothPageIndicator(
@@ -137,7 +137,7 @@ class IntroScreen extends StatelessWidget {
                               )),
                         ],
                       ))),
-                  10.sh,
+                  10.shb
                 ],
               ),
             ),

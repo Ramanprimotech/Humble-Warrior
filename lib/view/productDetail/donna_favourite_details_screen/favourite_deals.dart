@@ -1,16 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:humble_warrior/modals/response/product_details_response.dart';
-import 'package:humble_warrior/utils/app_colors.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/common/common_appBar.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/helpers/extensions.dart';
-import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
-import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
-
-import 'favourite_deals_controller.dart';
+import 'package:humble_warrior/hw.dart';
 
 class FavouriteDeals extends StatelessWidget with CommonAppBar {
   const FavouriteDeals({Key? key}) : super(key: key);
@@ -93,7 +82,7 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
     return Row(
       children: [
         AppText("${title} ------->"),
-        10.sw,
+        10.swb,
         Container(
           margin: 10.pv,
           padding: 8.ph,

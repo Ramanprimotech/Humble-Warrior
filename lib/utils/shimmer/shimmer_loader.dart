@@ -1,6 +1,4 @@
-
-import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:humble_warrior/hw.dart';
 
 class ShimmerLoader extends StatefulWidget {
   final Widget child;

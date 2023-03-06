@@ -1,9 +1,8 @@
-import 'package:get/get.dart';
-import 'about_controller.dart';
+import 'package:humble_warrior/hw.dart';
 
-class AboutBinding implements Bindings{
+class AboutBinding implements Bindings {
   @override
-  void dependencies(){
+  void dependencies() {
     Get.lazyPut(() => AboutScreenController());
   }
 }

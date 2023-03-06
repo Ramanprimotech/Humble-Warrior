@@ -15,6 +15,9 @@ import 'package:readmore/readmore.dart';
 import '../../utils/common/common_functionality.dart';
 import '../../utils/decorations.dart';
 
+
+import 'package:humble_warrior/hw.dart';
+
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);
 
@@ -49,13 +52,13 @@ class AboutScreen extends StatelessWidget {
 
               /// See copy of humble warrior button
               _seeCopyButton(),
-              25.sh,
+              25.shb,
             ]),
 
             /// Brands List
             HomeScreenWidgets(context: context, controller: controller)
                 .brandsList(),
-            25.sh,
+            25.shb,
           ],
         ),
       ),
@@ -130,7 +133,7 @@ class AboutScreen extends StatelessWidget {
             style: TextStyle(
                 fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
           ),
-          WidgetSpan(child: 10.sw),
+          WidgetSpan(child: 10.swb),
           TextSpan(
               recognizer: TapGestureRecognizer()
                 ..onTap = () async {

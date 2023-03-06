@@ -1,19 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_colors.dart';
-import 'package:humble_warrior/utils/decorations.dart';
-import 'package:humble_warrior/utils/helpers/extensions.dart';
-import 'package:humble_warrior/utils/routes/app_pages.dart';
-import 'package:humble_warrior/utils/routes/app_routes.dart';
-
-import '../../utils/app_strings.dart';
-import '../../utils/app_text.dart';
-import '../../utils/common/common_functionality.dart';
-import '../../utils/theme_extention/account_option_theme_extentions.dart';
-import 'my_account_controller.dart';
+import 'package:humble_warrior/hw.dart';
 
 class MyAccWidget {
   final BuildContext context;
@@ -60,7 +47,7 @@ class MyAccWidget {
                   ),
           ),
         ),
-        10.sh,
+        10.shb,
         AppText(controller.username),
         AppText(controller.user),
       ],
@@ -84,7 +71,7 @@ class MyAccWidget {
 
   divider({color}) {
     return Divider(
-      color: color??Colors.grey.shade200,
+      color: color ?? Colors.grey.shade200,
       height: 2,
     );
   }
@@ -161,6 +148,4 @@ class MyAccWidget {
       ),
     );
   }
-
-
 }
