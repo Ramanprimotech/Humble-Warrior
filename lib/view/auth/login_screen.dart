@@ -22,7 +22,7 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              100.sh,
+              100.shb,
               ClipRRect(
                 borderRadius: BorderRadius.circular(6.0),
                 child: Image.asset(
@@ -32,12 +32,12 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                   width: Get.width * .65,
                 ),
               ).centered().pLTRB(0, 20, 0, 10),
-              40.sh,
+              40.shb,
               SizedBox(
                 height: 80 * 4,
                 child: Column(
                   children: [
-                    20.sh,
+                    20.shb,
 
                     /// Facebook
                     optionWidget(

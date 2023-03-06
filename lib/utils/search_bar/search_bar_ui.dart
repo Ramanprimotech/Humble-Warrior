@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
-import 'package:humble_warrior/utils/helpers/extensions.dart';
-
-import '../image_path_assets.dart';
+import 'package:humble_warrior/hw.dart';
 
 class CustomSearchBar extends StatefulWidget {
   final TextEditingController? textEditingController;

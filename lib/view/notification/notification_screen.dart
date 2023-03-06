@@ -1,13 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_colors.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/decorations.dart';
-import 'package:humble_warrior/utils/helpers/extensions.dart';
-
 import '../../utils/common/refresh_Indicator.dart';
+
+import 'package:humble_warrior/hw.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -36,7 +29,7 @@ class NotificationScreen extends StatelessWidget {
                   },
                   itemCount: 15,
                   separatorBuilder: (BuildContext context, int index) {
-                    return 20.sh;
+                    return 20.shb;
                   },
                 ),
               ),

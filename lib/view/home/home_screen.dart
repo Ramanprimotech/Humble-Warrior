@@ -21,11 +21,11 @@ class HomeScreen extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            8.sh,
+            8.shb,
 
             ///Home Screen Categories List
             homeScreenWidgets.productList(),
-            8.sh,
+            8.shb,
 
             ///Home Option List Future Builder
             homeScreenWidgets.homeOptionDeals(),

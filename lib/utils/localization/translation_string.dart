@@ -1,5 +1,4 @@
-import 'package:get/get.dart';
-import 'localization_string.dart';
+import 'package:humble_warrior/hw.dart';
 
 class TranslationString extends Translations {
   @override
