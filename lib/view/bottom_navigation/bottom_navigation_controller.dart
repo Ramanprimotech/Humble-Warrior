@@ -1,5 +1,5 @@
-import 'package:humble_warrior/view/wish_list/wish_list_screen.dart';
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/view/wish_list/wish_list_screen.dart';
 
 class BottomNavigationController extends GetxController {
   final HomeScreenController controller = Get.find();
@@ -13,8 +13,8 @@ class BottomNavigationController extends GetxController {
 
     /// Amazon view
     const WebViewScreenWidget(
-        title: myAmazonTxt,
-        key: Key(myAmazonTxt),
+        title: hwAmazonTxt,
+        key: Key(hwAmazonTxt),
         url: "https://www.amazon.com/shop/influencer-1604f2b0"),
 
     /// Facebook View
