@@ -10,9 +10,11 @@ import 'utils/routes/app_pages.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   Get.put(ThemeController());
   runApp(MyApp());
 }

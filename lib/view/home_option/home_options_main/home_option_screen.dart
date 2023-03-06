@@ -34,7 +34,7 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
         ),
         leading: AppIcons.IosBackIcon(),
         bottom: TabBar(
-          padding: 0.pt,
+            padding: 0.pt,
             isScrollable: true,
             controller: controller.tabController,
             tabs: <Widget>[
@@ -42,10 +42,10 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
                 donnaDailyDealTxt.upperCamelCase,
                 fontSize: tabFontSize,
               ),
+              AppText(donnaFrontPageDealTxt.upperCamelCase,
+                  fontSize: tabFontSize),
               AppText(donnaFavouriteDealTxt.upperCamelCase,
                   fontSize: tabFontSize),
-              AppText(donnaFrontPageDealTxt.upperCamelCase,
-                  fontSize: tabFontSize)
             ]),
         actions: [
           IconButton(padding: 20.pr, onPressed: () {}, icon: AppIcons.filter())
@@ -57,8 +57,8 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
           controller: controller.tabController,
           children: const [
             DonnaDailyDeals(),
-            DonnaFavourite(),
             FrontPageDeals(),
+            DonnaFavourite(),
           ],
         ),
       ),

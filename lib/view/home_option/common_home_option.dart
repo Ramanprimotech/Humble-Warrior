@@ -187,6 +187,6 @@ ItemCard categoryListCard(
     imageUrl: details.url!,
     title: "",
     effect: false,
-    buttonbarHeight: categoryCard == true ? 90 : 50,
+    buttonbarHeight: categoryCard == true ? 85 : 50,
   );
 }

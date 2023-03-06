@@ -93,8 +93,17 @@ Widget donnaDealsButton(
     {bool? categoryCard = false}) {
   Color color = Theme.of(context).textTheme.displayMedium!.color!;
   return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      if (categoryCard == true) AppText("${details.itemName!}"),
+      if (categoryCard == true)
+        Padding(
+          padding: const EdgeInsets.only(left: 15.0, top: 8.0),
+          child: AppText(
+            "${details.itemName!}",
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

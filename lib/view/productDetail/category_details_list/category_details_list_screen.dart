@@ -15,6 +15,7 @@ class CategoryListDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final CategoryDetailsListController controller = Get.find();
     String title = Get.arguments[0];
+    controller.context = context;
     controller.id = Get.arguments[1];
     controller.categoryListApi();
     debugPrint("${title} mm");

@@ -51,6 +51,7 @@ class HomePageProductCategoryAPIWidgets
   @override
   Widget success({List<ProductCategoryItem>? data}) {
     List<ProductCategoryItem> dataa = data ?? [];
+    dataa.sort((a, b) => a.id!.compareTo(b.id!));
     const double productArrowIconPadding = 8;
     const double arrowWidth = 30;
     return Stack(

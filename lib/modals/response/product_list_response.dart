@@ -16,7 +16,7 @@ class ProductListResponse {
 
   ProductListResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    totalRecords = json['total_records'];
+    totalRecords = "${json['total_records']}";
     if (json['data'] != null) {
       data = <ProductDetailsResponse>[];
       json['data'].forEach((v) {
