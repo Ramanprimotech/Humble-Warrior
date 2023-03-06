@@ -17,6 +17,6 @@ class AmazonWebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- return const WebViewScreenWidget(title: myAmazonTxt,url: "https://www.amazon.com/shop/influencer-1604f2b0",key: Key(myAmazonTxt),);
+ return const WebViewScreenWidget(title: hwAmazonTxt,url: "https://www.amazon.com/shop/influencer-1604f2b0",key: Key(hwAmazonTxt),);
   }
 }

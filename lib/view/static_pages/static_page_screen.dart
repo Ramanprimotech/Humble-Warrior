@@ -14,36 +14,42 @@ class StaticPagesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     StaticPagesController controller = Get.find<StaticPagesController>();
     controller.id = Get.arguments[0];
+    String title = Get.arguments[1];
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(children: [
-          20.sh,
-          CommonWidgets.titleBar(context,
-              title: "Help & support", fontSize: 20),
-          20.sh,
+      body: Column(children: [
+        20.sh,
+        CommonWidgets.titleBar(context,
+            title: "${title}", fontSize: 20),
+        // 20.sh,
    FutureBuilder<List<StaticData>>(
-         future:controller.staticPageApi(controller.id),
-         builder: (context ,snapshot){
+       future:controller.staticPageApi(controller.id),
+       builder: (context ,snapshot){
      if(snapshot.connectionState == ConnectionState.waiting){
-         return CircularProgressIndicator();
+       return const CircularProgressIndicator();
      }
      List<StaticData> staticResponse = snapshot.data!;
-     return AppText(staticResponse[0].pageContent.toString(),maxLines: 20,);
+     return Expanded(
+       child: SingleChildScrollView(
+         child: Padding(
+           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+           child: AppText(staticResponse[0].pageContent.toString(),maxLines: 100,),
+         ),
+       ),
+     );
    }),
-          // Obx(()=> controller.staticPagesResponse.value.isEmpty ? CircularProgressIndicator(): AppText("${controller.staticPagesResponse.value[0].pageContent.toString()}"))
-          // Obx(
-          //   ()=> controller.staticPagesResponse.value.isEmpty ? CircularProgressIndicator():
-          //   Padding(
-          //     padding: 20.ph,
-          //     child:
-          //     // AppText("${controller.staticPagesResponse.value[0].pageContent.toString()}",maxLines: 20),
-          //     AppText(
-          //       AppStrings.lorem*10,maxLines: 20,
-          //     ),
-          //   ),
-          // ),
-        ]),
-      ),
+        // Obx(()=> controller.staticPagesResponse.value.isEmpty ? CircularProgressIndicator(): AppText("${controller.staticPagesResponse.value[0].pageContent.toString()}"))
+        // Obx(
+        //   ()=> controller.staticPagesResponse.value.isEmpty ? CircularProgressIndicator():
+        //   Padding(
+        //     padding: 20.ph,
+        //     child:
+        //     // AppText("${controller.staticPagesResponse.value[0].pageContent.toString()}",maxLines: 20),
+        //     AppText(
+        //       AppStrings.lorem*10,maxLines: 20,
+        //     ),
+        //   ),
+        // ),
+      ]),
     );
   }
 }

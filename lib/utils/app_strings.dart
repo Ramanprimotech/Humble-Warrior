@@ -31,7 +31,7 @@ const String searchTxt = "Search";
 
 const String homeTxt = "Home";
 const String myWishlistTxt = "My Wishlist";
-const String myAmazonTxt = "My Amazon";
+const String hwAmazonTxt = "HW Amazon";
 const String joinUsTxt = "Join Us!";
 const String accountTxt = "Account";
 
@@ -62,8 +62,8 @@ const String adidasTxt = "Adidas";
 const String reebokTxt = "Reebok";
 const String gucciTxt = "Gucci";
 const String donnaDailyDealTxt = "Donna's Daily Deals";
-const String donnaFavouriteDealTxt = "Donna's Favourite Deals";
-const String donnaFrontPageDealTxt = "Donna's Front Page Deals";
+const String donnaFavouriteDealTxt = "My Favourite Deals";
+const String donnaFrontPageDealTxt = "Front Page Deals";
 
 const String brandLink = "https://humblewarrior.com/";
 

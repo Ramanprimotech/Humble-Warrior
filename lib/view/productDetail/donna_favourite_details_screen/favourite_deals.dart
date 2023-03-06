@@ -57,7 +57,7 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
               ),
             ),
             Container(
-              padding: 15.pv,
+              padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
               width: MediaQuery.of(Get.context!).size.width * .9,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,25 +79,28 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
   }
 
   Widget _buyNow({title}) {
-    return Row(
-      children: [
-        AppText("${title} ------->"),
-        10.swb,
-        Container(
-          margin: 10.pv,
-          padding: 8.ph,
-          decoration: BoxDecoration(
-              color: AppColors.primary,
-              borderRadius: BorderRadius.circular(10)),
-          child: const AppText(
-            buyNowTxt,
-            color: Colors.white,
-            textAlign: TextAlign.center,
-            fontWeight: FontWeight.bold,
-            fontSize: 12,
+    return Padding(
+      padding: 10.ph,
+      child: Row(
+        children: [
+          AppText("${title} ------->", fontSize: 14),
+          10.swb,
+          Container(
+            margin: 10.pv,
+            padding: 8.ph,
+            decoration: BoxDecoration(
+                color: AppColors.primary,
+                borderRadius: BorderRadius.circular(10)),
+            child: const AppText(
+              buyNowTxt,
+              color: Colors.white,
+              textAlign: TextAlign.center,
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

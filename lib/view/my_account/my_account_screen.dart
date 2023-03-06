@@ -83,14 +83,14 @@ class MyAccount extends StatelessWidget {
               ///Help & Support
               myAccWidget.detailsOptions(controller, title: helpSupportTxt,
               ontap: (){
-                Get.toNamed(AppRoutes.staticPages,arguments: ["40429"]);
+                Get.toNamed(AppRoutes.staticPages,arguments: ["40429","Help & Support"]);
               }
               ),
 
               ///Term & Conditions
               myAccWidget.detailsOptions(controller, title: termsConditionsTxt,
                   ontap: (){
-                    Get.toNamed(AppRoutes.staticPages,arguments: ["40427"]);
+                    Get.toNamed(AppRoutes.staticPages,arguments: ["40427","Term & Conditions"]);
                   }
               ),
 

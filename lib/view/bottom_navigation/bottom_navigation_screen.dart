@@ -44,7 +44,7 @@ class BottomNavigationScreen extends GetView<BottomNavigationController> {
                     BottomNavigationBarItem(
                       icon: AppIcons.unselectedCheck(context, iconColor),
                       activeIcon: AppIcons.check(context),
-                      label: myAmazonTxt,
+                      label: hwAmazonTxt,
                     ),
                     BottomNavigationBarItem(
                       icon: AppIcons.unselectedJoin(context, iconColor),
