@@ -6,21 +6,22 @@ import 'package:humble_warrior/network/api_call.dart';
 
 class StaticPagesController extends GetxController{
 
-  String id = Get.arguments;
+  late String id;
 
   RxList<StaticData> staticPagesResponse = <StaticData>[].obs;
 
   @override
   void onInit() {
-    staticPageApi(id);
+    // staticPageApi(id);
 
     super.onInit();
   }
 
-  Future<void> staticPageApi(String id) async {
+  Future<List<StaticData>> staticPageApi(String id) async {
     StaticPageID payload = StaticPageID(id: id);
-    staticPagesResponse.value = await CallAPI.staticPages(payload: payload);
-    log(staticPagesResponse.value.toString(),name: "Help" ,error: "sdfdfdfgdkfjdkfjdkfjdk");
+    log(staticPagesResponse.value.toString(),name: "Help" ,error: "$id sdfdfdfgdkfjdkfjdkfjdk");
+
+    return staticPagesResponse.value = await CallAPI.staticPages(payload: payload);
 
   }
 

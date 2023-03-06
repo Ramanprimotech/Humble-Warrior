@@ -13,34 +13,35 @@ class StaticPagesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     StaticPagesController controller = Get.find<StaticPagesController>();
+    controller.id = Get.arguments[0];
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(children: [
           20.sh,
           CommonWidgets.titleBar(context,
-              title: "Help & Support", fontSize: 20),
+              title: "Help & support", fontSize: 20),
           20.sh,
-  /* FutureBuilder<StaticPagesResponse?>(
-         future:controller.staticPageApi("40427") ,
+   FutureBuilder<List<StaticData>>(
+         future:controller.staticPageApi(controller.id),
          builder: (context ,snapshot){
      if(snapshot.connectionState == ConnectionState.waiting){
          return CircularProgressIndicator();
      }
-     StaticPagesResponse staticResponse = snapshot.data!;
-     return AppText(staticResponse.data![0].pageContent.toString());
-   }),*/
+     List<StaticData> staticResponse = snapshot.data!;
+     return AppText(staticResponse[0].pageContent.toString(),maxLines: 20,);
+   }),
           // Obx(()=> controller.staticPagesResponse.value.isEmpty ? CircularProgressIndicator(): AppText("${controller.staticPagesResponse.value[0].pageContent.toString()}"))
-          Obx(
-            ()=> controller.staticPagesResponse.value.isEmpty ? CircularProgressIndicator():
-            Padding(
-              padding: 20.ph,
-              child:
-              // AppText("${controller.staticPagesResponse.value[0].pageContent.toString()}",maxLines: 20),
-              AppText(
-                AppStrings.lorem*10,maxLines: 20,
-              ),
-            ),
-          ),
+          // Obx(
+          //   ()=> controller.staticPagesResponse.value.isEmpty ? CircularProgressIndicator():
+          //   Padding(
+          //     padding: 20.ph,
+          //     child:
+          //     // AppText("${controller.staticPagesResponse.value[0].pageContent.toString()}",maxLines: 20),
+          //     AppText(
+          //       AppStrings.lorem*10,maxLines: 20,
+          //     ),
+          //   ),
+          // ),
         ]),
       ),
     );

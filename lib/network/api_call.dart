@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
@@ -268,18 +269,21 @@ class CallAPI {
     try {
       dynamic response = await APIManager()
           .postAPICall(url: Endpoints.staticPages, param: payload);
-      log(response);
 
       StaticPagesResponse staticPagesResponse =
           StaticPagesResponse.fromJson(response);
+      log(staticPagesResponse.status.toString(), name: "static page");
       if (staticPagesResponse.status == true) {
         log(staticPagesResponse.data![0].pageContent.toString(), name: "Help");
       } else {
         log(staticPagesResponse.data![0].pageContent.toString(),
             name: "Help", error: "sdfdfdfgdkfjdkfjdkfjdk");
+        print("${staticPagesResponse.status.toString()}==============");
       }
       return staticPagesResponse.data!;
     } catch (e) {
+      log("API",
+          name: "Help", error:e.toString());
       return [];
     }
   }
