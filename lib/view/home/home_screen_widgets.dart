@@ -263,8 +263,8 @@ class HomeScreenWidgets {
         Container(
       height: brandHeight + brandLoveHeight + 20,
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+        // borderRadius: const BorderRadius.only(
+        //     topRight: Radius.circular(15), topLeft: Radius.circular(15)),
         color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
       ),
       child: Column(
@@ -388,8 +388,8 @@ class HomeScreenWidgets {
       padding: const EdgeInsets.only(top: 15, right: 20, left: 20, bottom: 10),
       decoration: BoxDecoration(
           color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-          borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+          // borderRadius: const BorderRadius.only(
+          //     topRight: Radius.circular(15), topLeft: Radius.circular(15)),
           boxShadow: [
             BoxShadow(
                 offset: const Offset(-1, -1),
@@ -407,15 +407,12 @@ class HomeScreenWidgets {
             children: [
               const AppText(
                 "${brandsTxt} I",
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
-              5.sw,
-              Padding(
-                padding: 2.pt,
-                child: AppIcons.heart(
-                  iconColor: Colors.red,
-                ),
+              2.sw,
+              AppIcons.heart(
+                iconColor: Colors.red,
               ),
             ],
           ),

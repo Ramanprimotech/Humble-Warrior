@@ -66,7 +66,7 @@ class ItemCard extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  bottom: 0,
+                  bottom: -10,
                   child: Container(
                     width: Get.width,
                     height: imageTitleHeight,
@@ -93,8 +93,9 @@ class ItemCard extends StatelessWidget {
                         child: AppText(
                           title,
                           fontWeight: FontWeight.w700,
-                          fontSize: 20,
+                          fontSize: 16,
                           color: Colors.white,
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),
@@ -126,7 +127,7 @@ Widget codeButton({required String code}) {
             boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 3)]),
         child: AppText(
           code,
-          color: Colors.white,
+          color: Colors.black,
           fontWeight: FontWeight.w700,
           fontSize: 12,
         )),

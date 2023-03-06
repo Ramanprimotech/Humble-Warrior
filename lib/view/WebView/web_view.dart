@@ -137,6 +137,43 @@ class _WebViewScreenWidgetState extends State<WebViewScreenWidget> {
                   key: widget.title != null ? Key(widget.title!) : null,
                   controller: _webViewController,
                 ),
+
+      /*WebView(
+        navigationDelegate: (NavigationRequest request) {
+            if (request.url.startsWith('https://www.youtube.com/')) {
+              return NavigationDecision.prevent;
+            }
+            return NavigationDecision.navigate;
+          },
+          initialUrl: "${widget.url}",
+           javascriptMode: JavascriptMode.unrestricted,
+          backgroundColor: const Color(0x00000000),
+          onPageFinished: (String url) {
+            loading = false;
+            canGo();
+          },
+          onProgress: (int progress) {
+            loading = true;
+            // loadingText.value = "Loading...$progress%";
+            // Update loading bar.
+          },
+          onPageStarted: (String url) {
+            log("Web Page", name: "web Check", error: "url: ${widget.url}");
+
+            canGo();
+          },
+          onWebResourceError: (WebResourceError error) {
+            loading = false;
+            errorBool = true;
+            errorText = error.description;
+            canGo();
+            log(error.description,
+                name: "web Check",
+                error:
+                "type: ${error.errorType} code: ${error.errorCode} dis: ${error.description} url: ${widget.url}");
+            setState(() {});
+          },
+      ),*/
     );
   }
 }

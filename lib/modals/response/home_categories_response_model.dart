@@ -32,6 +32,11 @@ class HomeCategoryList {
   String? categoryImage;
   int? id;
 
+  @override
+  String toString() {
+    return 'HomeCategoryList{categoryName: $categoryName, categoryImage: $categoryImage, id: $id}';
+  }
+
   HomeCategoryList({this.categoryName, this.categoryImage, this.id});
 
   HomeCategoryList.fromJson(Map<String, dynamic> json) {
