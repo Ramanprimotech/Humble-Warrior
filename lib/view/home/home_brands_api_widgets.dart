@@ -69,8 +69,8 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
                   Container(
                     width: 70,
                     height: 50,
-                    decoration: CustomBoxDecorations()
-                        .shadow(context: context, color: Colors.grey.shade200),
+                    // decoration: CustomBoxDecorations()
+                    //     .shadow(context: context, color: Colors.grey.shade200),
                     child: Padding(
                       padding: 8.pa,
                       child: CommonWidgets.networkImage(

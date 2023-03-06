@@ -43,8 +43,8 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
               Expanded(
                 child: Container(
                   padding: 10.pa,
-                  decoration: CustomBoxDecorations()
-                      .shadow(context: context, color: Colors.grey.shade200),
+                  // decoration: CustomBoxDecorations()
+                  //     .shadow(context: context, color: Colors.grey.shade200),
                   child: CommonWidgets.networkImage(
                     alignment: Alignment.center,
                     imageUrl: dataa[index].brandImage!,
