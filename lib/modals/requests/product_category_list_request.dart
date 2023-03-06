@@ -1,10 +1,10 @@
-class PaginationModel {
+class ProductCategoriesListRequest {
   String? categoryId;
   String? page;
 
-  PaginationModel({this.categoryId, this.page});
+  ProductCategoriesListRequest({this.categoryId, this.page});
 
-  PaginationModel.fromJson(Map<String, dynamic> json) {
+  ProductCategoriesListRequest.fromJson(Map<String, dynamic> json) {
     categoryId = json['category_id'];
     page = json['page'];
   }

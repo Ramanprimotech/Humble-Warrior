@@ -182,7 +182,8 @@ ItemCard categoryListCard(
       Get.toNamed(AppRoutes.categoryItemDetail, arguments: [details]);
     },
     radius: 10,
-    buttons: donnaDealsButton(details, index, context),
+    buttons:
+        donnaDealsButton(details, index, context, categoryCard: categoryCard),
     imageUrl: details.url!,
     title: "",
     effect: false,

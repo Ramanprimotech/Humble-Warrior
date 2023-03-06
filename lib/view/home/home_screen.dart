@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
             8.shb,
 
             ///Home Screen Categories List
-            homeScreenWidgets.productList(),
+            homeScreenWidgets.productCategoryListAPIBuilder(),
             8.shb,
 
             ///Home Option List Future Builder

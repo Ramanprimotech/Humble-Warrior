@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/network/endpoints.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/extensions.dart';
@@ -356,12 +357,12 @@ class HomeScreenWidgets {
         id: Endpoints.productCategories,
         init: controller,
         builder: (controller) {
-          return FutureWidget<List<BrandDetails>>().builder(
+          return FutureWidget<List<ProductCategoryItem>>().builder(
               futureWidgets: HomePageProductCategoryAPIWidgets(
                   context: context,
                   brandHeight: brandHeight,
                   productHeight: productHeight),
-              future: controller.allBrands(),
+              future: controller.productCategoryAPI(),
               context: context);
         });
   }

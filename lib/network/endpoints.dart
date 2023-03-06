@@ -8,6 +8,8 @@ class Endpoints {
   static const String donnaFavourite = "/hwapi/get_favourite_things";
   static const String allBrands = "/hwapi/get_all_brands";
   static const String productCategories = "/hwapi/get_all_product_categories";
+  static const String productCategoriesItemList =
+      "/hwapi/get_all_products_by_category";
   static const String homeCategories = "/hwapi/get_all_home_categories";
   static const String staticPages = "/hwapi/get_page_content";
   static const String productDetails = "/hwapi/get_product_detail";

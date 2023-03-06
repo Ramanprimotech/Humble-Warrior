@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/modals/abstract_enums/search_bar.dart';
 import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/modals/response/home_categories_response_model.dart';
+import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/network/api_call.dart';
 
 class HomeScreenController extends GetxController implements SearchActions {
@@ -99,42 +100,42 @@ class HomeScreenController extends GetxController implements SearchActions {
     return CallAPI.allBrands();
   }
 
-  // Future<List<ProductCategoryItem>> productCategoryAPI() async {
-  //   const ProductImages(image: ImagePathAssets.giftIcon, name: giftTxt).add();
-  //   const ProductImages(
-  //           image: ImagePathAssets.giftForMomIcon, name: giftForMomTxt)
-  //       .add();
-  //   const ProductImages(image: ImagePathAssets.houseIcon, name: homeTxt).add();
-  //   const ProductImages(image: ImagePathAssets.beautyIcon, name: beautyTxt)
-  //       .add();
-  //   const ProductImages(image: ImagePathAssets.menIcon, name: menTxt).add();
-  //   const ProductImages(image: ImagePathAssets.kidsIcon, name: kidsTxt).add();
-  //   const ProductImages(image: ImagePathAssets.foodIcon, name: kitchenTxt)
-  //       .add();
-  //   const ProductImages(image: ImagePathAssets.travelIcon, name: travelTxt)
-  //       .add();
-  //   const ProductImages(image: ImagePathAssets.healthIcon, name: healthTxt)
-  //       .add();
-  //   const ProductImages(
-  //           image: ImagePathAssets.womensFashionIcon, name: womensFashionTxt)
-  //       .add();
-  //   const ProductImages(image: ImagePathAssets.outdoorIcon, name: outdoorTxt)
-  //       .add();
-  //   const ProductImages(image: ImagePathAssets.packingIcon, name: packingTxt)
-  //       .add();
-  //   const ProductImages(image: ImagePathAssets.fitnessIcon, name: fitnessTxt)
-  //       .add();
-  //   const ProductImages(image: ImagePathAssets.orderIcon, name: foodTxt).add();
-  //   const ProductImages(image: ImagePathAssets.jewelryIcon, name: jewelryTxt)
-  //       .add();
-  //   const ProductImages(image: ImagePathAssets.babyIcon, name: babyTxt).add();
-  //   const ProductImages(image: ImagePathAssets.booksIcon, name: booksTxt).add();
-  //   const ProductImages(image: ImagePathAssets.vehicleIcon, name: vehiclesTxt)
-  //       .add();
-  //   const ProductImages(image: ImagePathAssets.petsIcon, name: petsTxt).add();
-  //
-  //   return CallAPI.productCategoryAPI();
-  // }
+  Future<List<ProductCategoryItem>> productCategoryAPI() async {
+    // const ProductImages(image: ImagePathAssets.giftIcon, name: giftTxt).add();
+    // const ProductImages(
+    //         image: ImagePathAssets.giftForMomIcon, name: giftForMomTxt)
+    //     .add();
+    // const ProductImages(image: ImagePathAssets.houseIcon, name: homeTxt).add();
+    // const ProductImages(image: ImagePathAssets.beautyIcon, name: beautyTxt)
+    //     .add();
+    // const ProductImages(image: ImagePathAssets.menIcon, name: menTxt).add();
+    // const ProductImages(image: ImagePathAssets.kidsIcon, name: kidsTxt).add();
+    // const ProductImages(image: ImagePathAssets.foodIcon, name: kitchenTxt)
+    //     .add();
+    // const ProductImages(image: ImagePathAssets.travelIcon, name: travelTxt)
+    //     .add();
+    // const ProductImages(image: ImagePathAssets.healthIcon, name: healthTxt)
+    //     .add();
+    // const ProductImages(
+    //         image: ImagePathAssets.womensFashionIcon, name: womensFashionTxt)
+    //     .add();
+    // const ProductImages(image: ImagePathAssets.outdoorIcon, name: outdoorTxt)
+    //     .add();
+    // const ProductImages(image: ImagePathAssets.packingIcon, name: packingTxt)
+    //     .add();
+    // const ProductImages(image: ImagePathAssets.fitnessIcon, name: fitnessTxt)
+    //     .add();
+    // const ProductImages(image: ImagePathAssets.orderIcon, name: foodTxt).add();
+    // const ProductImages(image: ImagePathAssets.jewelryIcon, name: jewelryTxt)
+    //     .add();
+    // const ProductImages(image: ImagePathAssets.babyIcon, name: babyTxt).add();
+    // const ProductImages(image: ImagePathAssets.booksIcon, name: booksTxt).add();
+    // const ProductImages(image: ImagePathAssets.vehicleIcon, name: vehiclesTxt)
+    //     .add();
+    // const ProductImages(image: ImagePathAssets.petsIcon, name: petsTxt).add();
+
+    return CallAPI.productCategoryAPI();
+  }
 
   Future<List<HomeCategoryList>> homeCategories() async {
     // List<HomeCategoryList> data = [];

@@ -6,6 +6,7 @@ import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
 import 'package:humble_warrior/modals/response/front_page_response_model.dart';
 import 'package:humble_warrior/modals/response/home_categories_response_model.dart';
+import 'package:humble_warrior/modals/response/product_category_list_response.dart';
 import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/modals/response/product_details_api_response.dart';
 import 'package:humble_warrior/modals/response/product_details_response.dart';
@@ -110,6 +111,33 @@ class CallAPI {
       log("API", name: "API Deals $url ${payload.page}", error: e);
       // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
       return ProductListResponse(data: []);
+    }
+  }
+
+  ///  Product Category Item List API
+  static Future<ProductCategoriesListResponse> productCategoryList(
+      {required PaginationModel payload}) async {
+    try {
+      var response = await APIManager().postAPICall(
+          url: Endpoints.productCategoriesItemList, param: payload);
+      debugPrint("Step 0");
+      ProductCategoriesListResponse productCategoriesListResponse =
+          ProductCategoriesListResponse.fromJson(response);
+      debugPrint("Step 1");
+      if (response == null) {
+        return ProductCategoriesListResponse(data: []);
+      }
+      if (productCategoriesListResponse.status == true) {
+        return productCategoriesListResponse;
+      }
+      return ProductCategoriesListResponse(data: []);
+    } catch (e) {
+      log("API",
+          name:
+              "API Deals ${Endpoints.productCategoriesItemList} ${payload.page}",
+          error: e);
+      // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
+      return ProductCategoriesListResponse(data: []);
     }
   }
 

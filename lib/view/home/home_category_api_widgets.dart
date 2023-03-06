@@ -13,7 +13,6 @@ import '../../utils/common/refresh_Indicator.dart';
 import '../../utils/future_widget/abstract_future_widget.dart';
 import '../../utils/routes/app_routes.dart';
 import '../../utils/shimmer/shimmer_loader.dart';
-import '../../utils/theme_extention/custom_notice_theme_extention.dart';
 import 'home_controller.dart';
 
 class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
@@ -29,8 +28,6 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
 
   @override
   Widget error({Object? error}) {
-    final DialogueThemeExtention dialogueThemeExtention =
-        Theme.of(context).extension<DialogueThemeExtention>()!;
     return Expanded(
       child: CommonWidgets.errorAPI(
           buttonTitle: retryTxt,

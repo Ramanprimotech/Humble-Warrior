@@ -13,12 +13,13 @@ class CategoryDetailsListController extends GetxController {
   int categoryListPage = 1;
   RxInt categoryListTotalDeals = 20.obs;
   late BuildContext context;
+  late String id;
   final ScrollController categoryListScrollController =
       ScrollController(initialScrollOffset: 0.0);
 
   @override
   void onInit() {
-    categoryListApi();
+    // categoryListApi();
     super.onInit();
   }
 
@@ -30,9 +31,9 @@ class CategoryDetailsListController extends GetxController {
       // update();
     }
     PaginationModel paginationModel =
-        PaginationModel(page: categoryListPage.toString());
+        PaginationModel(page: categoryListPage.toString(), categoryId: id);
     await CallAPI.productListAPI(
-            payload: paginationModel, url: Endpoints.donnaDeals)
+            payload: paginationModel, url: Endpoints.productCategoriesItemList)
         .then((value) {
       if (value.data == null) {
         DialogHelper.showToast(context, "No Deals Found");

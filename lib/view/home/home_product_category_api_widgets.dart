@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
+import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/extensions.dart';
+import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
 import 'package:humble_warrior/utils/theme_extention/custom_notice_theme_extention.dart';
 
-import '../../modals/response/brands_response_mdel.dart';
-import '../../modals/response/home_categories_response_model.dart';
-import '../../network/endpoints.dart';
-import '../../utils/app_colors.dart';
 import '../../utils/app_text.dart';
-import '../../utils/common/common_widgets.dart';
 import '../../utils/future_widget/abstract_future_widget.dart';
 import '../../utils/routes/app_routes.dart';
-import '../../utils/shimmer/shimmer_loader.dart';
 import 'home_controller.dart';
 
-class HomePageProductCategoryAPIWidgets extends FutureAPI<List<BrandDetails>> {
+class HomePageProductCategoryAPIWidgets
+    extends FutureAPI<List<ProductCategoryItem>> {
   final BuildContext context;
   final double productHeight;
   final double brandHeight;
@@ -41,7 +39,8 @@ class HomePageProductCategoryAPIWidgets extends FutureAPI<List<BrandDetails>> {
           backgroundColor: dialogueThemeExtention.buttonColor,
         ),
         onPressed: () {
-          controller.update([Endpoints.productCategories]);
+          // controller.update([Endpoints.productCategories]);
+          Get.toNamed(AppRoutes.categoryDetailsList, arguments: ["sd", "66"]);
         },
         child: const AppText('Retry',
             color: Colors.white, fontWeight: FontWeight.bold),
@@ -50,8 +49,8 @@ class HomePageProductCategoryAPIWidgets extends FutureAPI<List<BrandDetails>> {
   }
 
   @override
-  Widget success({List<BrandDetails>? data}) {
-    List<BrandDetails> dataa = data ?? [];
+  Widget success({List<ProductCategoryItem>? data}) {
+    List<ProductCategoryItem> dataa = data ?? [];
     const double productArrowIconPadding = 8;
     const double arrowWidth = 30;
     return Stack(
@@ -68,7 +67,7 @@ class HomePageProductCategoryAPIWidgets extends FutureAPI<List<BrandDetails>> {
                     padding: 8.ph,
                     scrollDirection: Axis.horizontal,
                     controller: controller.productScrollController,
-                    itemCount: ProductImages.productImagesList.length,
+                    itemCount: dataa.length,
                     itemBuilder: (ctx, index) {
                       return Padding(
                         padding: 5.ph,
@@ -76,7 +75,8 @@ class HomePageProductCategoryAPIWidgets extends FutureAPI<List<BrandDetails>> {
                           onTap: () {
                             Get.toNamed(AppRoutes.categoryDetailsList,
                                 arguments: [
-                                  ProductImages.productImagesList[index].name
+                                  dataa[index].categoryName,
+                                  dataa[index].id.toString(),
                                 ]);
                           },
                           child: Container(
@@ -85,14 +85,17 @@ class HomePageProductCategoryAPIWidgets extends FutureAPI<List<BrandDetails>> {
                             // width: 80,
                             child: Column(
                               children: [
-                                Image.asset(
-                                    ProductImages
-                                        .productImagesList[index].image,
+                                CommonWidgets.networkImage(
+                                    imageUrl: dataa[index].categoryImage ?? "",
                                     fit: BoxFit.fitHeight,
                                     height: productHeight - 25,
                                     scale: 0.7),
+                                // Image.asset(dataa[index].categoryImage ?? "",
+                                //     fit: BoxFit.fitHeight,
+                                //     height: productHeight - 25,
+                                //     scale: 0.7),
                                 AppText(
-                                  ProductImages.productImagesList[index].name,
+                                  dataa[index].categoryName ?? "",
                                   fontSize: 12,
                                   maxLines: 1,
                                   fontWeight: FontWeight.bold,
@@ -164,73 +167,95 @@ class HomePageProductCategoryAPIWidgets extends FutureAPI<List<BrandDetails>> {
 
   @override
   Widget waiting() {
-    return ListView.separated(
-      padding: 20.ph,
-      scrollDirection: Axis.horizontal,
-      itemCount: 25,
-      itemBuilder: (ctx, index) {
-        return Container(
-          color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-          height: 60,
-          width: 80,
-          child: Column(
-            children: const [
-              ShimmerLoader(
-                  child: AppText(
-                "HW",
-                fontWeight: FontWeight.w900,
-                fontSize: 35,
-              )),
-            ],
-          ),
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return 20.sw;
-      },
-    );
-  }
-
-  /// Home Options
-  Widget homeOption(
-      {required HomeCategoryList homeOptions, required int index}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-      child: GestureDetector(
-        onTap: () {
-          Get.toNamed(AppRoutes.homeOptions, arguments: <int>[homeOptions.id!]);
-        },
-        child: Stack(
-          alignment: Alignment.bottomLeft,
+    const double productArrowIconPadding = 8;
+    const double arrowWidth = 30;
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Row(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: CommonWidgets.networkImage(
-                imageUrl: homeOptions.categoryImage!,
-                fit: BoxFit.fitWidth,
-                height: 200,
-                alignment: Alignment.topCenter,
-                // width: Get.width,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(15),
-                    topRight: Radius.circular(20),
-                  )),
-              child: AppText(
-                homeOptions.categoryName!.toUpperCase(),
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontSize: 14,
+            Expanded(
+              // flex: 8,
+              child: Container(
+                height: productHeight,
+                width: Get.width,
+                child: ListView.builder(
+                    padding: 8.ph,
+                    scrollDirection: Axis.horizontal,
+                    controller: controller.productScrollController,
+                    itemCount: 10,
+                    itemBuilder: (ctx, index) {
+                      return Padding(
+                        padding: 5.ph,
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: ShimmerLoader(
+                            child: Container(
+                              padding: 10.ph,
+                              height: productHeight,
+                              color: Colors.grey,
+                              width: 80,
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
               ),
             ),
           ],
         ),
-      ),
+        Obx(
+          () => Visibility(
+            visible: controller.listBack.value,
+            child: Positioned(
+              left: 0,
+              child: Container(
+                alignment: Alignment.center,
+                color: Theme.of(context).scaffoldBackgroundColor,
+                height: brandHeight,
+                width: arrowWidth,
+                padding: EdgeInsets.only(left: productArrowIconPadding),
+                child: GestureDetector(
+                  onTap: () {
+                    controller.productScrollController.animateTo(
+                        controller.productScrollController.offset - (60 * 3),
+                        duration: const Duration(milliseconds: 150),
+                        curve: Curves.linear);
+                  },
+                  child: AppIcons.backArrrowIos(
+                      iconColor:
+                          Theme.of(context).textTheme.displaySmall!.color!),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Obx(
+          () => Visibility(
+            visible: controller.listForward.value,
+            child: Positioned(
+              right: 0,
+              child: Container(
+                alignment: Alignment.center,
+                color: Theme.of(context).scaffoldBackgroundColor,
+                height: brandHeight,
+                width: arrowWidth,
+                child: GestureDetector(
+                  onTap: () {
+                    controller.productScrollController.animateTo(
+                        controller.productScrollController.offset + (60 * 3),
+                        duration: const Duration(milliseconds: 150),
+                        curve: Curves.linear);
+                  },
+                  child: AppIcons.next(
+                      iconColor:
+                          Theme.of(context).textTheme.displaySmall!.color!),
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 }
