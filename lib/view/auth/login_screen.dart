@@ -1,5 +1,3 @@
-import 'package:velocity_x/velocity_x.dart';
-
 import 'package:humble_warrior/hw.dart';
 
 class LoginScreen extends GetView<LoginController> with AuthWidget {

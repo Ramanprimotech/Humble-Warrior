@@ -1,10 +1,4 @@
 import 'dart:io';
-
-import 'package:authentication/authentication.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
-
-
 import 'package:humble_warrior/hw.dart';
 
 class LoginController extends GetxController {

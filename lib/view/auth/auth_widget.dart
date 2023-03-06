@@ -1,5 +1,4 @@
 import 'package:velocity_x/velocity_x.dart';
-
 import 'package:humble_warrior/hw.dart';
 
 class AuthWidget {
@@ -10,7 +9,7 @@ class AuthWidget {
       String? imagePath,
       required Function onTap}) {
     final AccountOptionTheme accountOptionTheme =
-    Theme.of(Get.context!).extension<AccountOptionTheme>()!;
+        Theme.of(Get.context!).extension<AccountOptionTheme>()!;
     return InkWell(
       onTap: () => onTap(),
       child: Container(
@@ -35,7 +34,9 @@ class AuthWidget {
                     width: 30,
                   ).centered().p(2).px(4),
             AppText(title!,
-                color: accountOptionTheme.textColor, fontSize: 14, fontWeight: FontWeight.w600),
+                color: accountOptionTheme.textColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w600),
             const SizedBox(width: 40),
           ],
         ),
