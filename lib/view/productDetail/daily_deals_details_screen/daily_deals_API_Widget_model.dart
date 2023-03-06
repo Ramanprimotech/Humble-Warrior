@@ -121,8 +121,9 @@ class DailyDealsAPIWidgets extends FutureAPI<List<ProductDetailsResponse>>
               child: donnaDealsCard(details, 0, context),
             ),
             productText(context, details.itemName.toString()),
-            productDescription(details.productDescription.toString(),
-                details.itemName.toString()),
+            productDescription(
+                discription: details.productDescription.toString(),
+                itemName: details.itemName.toString()),
           ],
         ),
       ),

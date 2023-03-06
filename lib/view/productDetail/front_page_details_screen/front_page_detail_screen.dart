@@ -33,7 +33,9 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
               child: frontPageCard(details, 0, context),
             ),
             productText(context, details.itemName),
-            productDescription(details.itemName!, details.productDescription!),
+            productDescription(
+                itemName: details.itemName,
+                discription: details.productDescription),
           ],
         ).p(10),
       ),

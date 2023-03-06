@@ -32,8 +32,9 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
               child: donnaDealsCard(donnaDealsDetails, 0, context),
             ),
             productText(context, donnaDealsDetails.itemName),
-            productDescription(donnaDealsDetails.productDescription.toString(),
-                donnaDealsDetails.itemName.toString()),
+            productDescription(
+                discription: donnaDealsDetails.productDescription,
+                itemName: donnaDealsDetails.itemName),
           ],
         ),
       ),

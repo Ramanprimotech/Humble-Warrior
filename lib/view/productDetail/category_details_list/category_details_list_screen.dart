@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:humble_warrior/modals/response/donna_deals_response.dart';
+import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/view/home_option/common_home_option.dart';
-import 'package:humble_warrior/view/home_option/tab_screens/donnas_deals.dart';
 import 'package:humble_warrior/view/productDetail/category_details_list/category_details_list_controller.dart';
-
-import '../../home/home_controller.dart';
 
 class CategoryListDetails extends StatelessWidget {
   const CategoryListDetails({Key? key}) : super(key: key);
@@ -24,62 +20,65 @@ class CategoryListDetails extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            CommonWidgets.titleBar(context, title: title,fontSize: 20),
+            CommonWidgets.titleBar(context, title: title, fontSize: 20),
             Expanded(
               child: PaginationWidget(
-          length: controller.categoryListLength,
-          apiBool: controller.categoryListBool,
-          api: controller.categoryListApi,
-          update: controller.update,
-          scrollController: controller.categoryListScrollController,
-          totalRecords: controller.categoryListTotalDeals,
-          child: GetBuilder<CategoryDetailsListController>(
-              init: controller,
-              builder: (ctx) {
-                if (controller.categoryList.isEmpty &&
-                    controller.categoryListBool.value == true) {
-                  return Center(
-                      child: Row(
+                length: controller.categoryListLength,
+                apiBool: controller.categoryListBool,
+                api: controller.categoryListApi,
+                update: controller.update,
+                scrollController: controller.categoryListScrollController,
+                totalRecords: controller.categoryListTotalDeals,
+                child: GetBuilder<CategoryDetailsListController>(
+                  init: controller,
+                  builder: (ctx) {
+                    if (controller.categoryList.isEmpty &&
+                        controller.categoryListBool.value == true) {
+                      return Center(
+                          child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CircularProgressIndicator(),
                           CommonWidgets.loading(),
                         ],
                       ));
-                }
-                if (controller.categoryList.isEmpty &&
-                    controller.categoryListBool.value == false) {
-                  return CommonWidgets.noData();
-                }
-                return ListView.separated(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  controller: controller.categoryListScrollController,
-                  itemCount: controller.categoryList.length + 1,
-                  itemBuilder: (ctx, index) {
-                    DonnaDealsDetails details = DonnaDealsDetails();
-                    if (index != controller.categoryList.length) {
-                      details = controller.categoryList[index];
                     }
-                    return index != controller.categoryList.length
-                        ? categoryListCard(details, index, context, categoryCard: true)
-                        : Obx(
-                          () => Visibility(
-                          visible: controller.categoryListBool.value,
-                          child: Container(
-                              height: 80,
-                              alignment: Alignment.center,
-                              child: CircularProgressIndicator())),
+                    if (controller.categoryList.isEmpty &&
+                        controller.categoryListBool.value == false) {
+                      return CommonWidgets.noData();
+                    }
+                    return ListView.separated(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      controller: controller.categoryListScrollController,
+                      itemCount: controller.categoryList.length + 1,
+                      itemBuilder: (ctx, index) {
+                        ProductDetailsResponse details =
+                            ProductDetailsResponse();
+                        if (index != controller.categoryList.length) {
+                          details = controller.categoryList[index];
+                        }
+                        return index != controller.categoryList.length
+                            ? categoryListCard(details, index, context,
+                                categoryCard: true)
+                            : Obx(
+                                () => Visibility(
+                                    visible: controller.categoryListBool.value,
+                                    child: Container(
+                                        height: 80,
+                                        alignment: Alignment.center,
+                                        child: CircularProgressIndicator())),
+                              );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(
+                          height: 25,
+                        );
+                      },
                     );
                   },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(
-                      height: 25,
-                    );
-                  },
-                );
-              },
-          ),
-        ),
+                ),
+              ),
             ),
           ],
         ),
@@ -103,14 +102,13 @@ class CategoryListDetails extends StatelessWidget {
     );
   }*/
 
-
   Widget loginFirst(context) {
     return CommonWidgets.errorAPI(
         height: 150,
         buttonTitle: gotoLoginTxt,
         errorText: accessingMsgTxt,
         context: context,
-        onPress: (){
+        onPress: () {
           Get.offAllNamed(AppRoutes.loginPage);
         });
     /*Container(
@@ -139,7 +137,4 @@ class CategoryListDetails extends StatelessWidget {
       ]),
     );*/
   }
-
 }
-
-
