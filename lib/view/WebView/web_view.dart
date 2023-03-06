@@ -1,12 +1,6 @@
 import 'dart:developer';
-
-import 'package:flutter/material.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
-import '../../utils/app_icons.dart';
-import '../../utils/app_text.dart';
+import 'package:humble_warrior/hw.dart';
 
 class WebViewScreenWidget extends StatefulWidget {
   final String url;
@@ -112,7 +106,7 @@ class _WebViewScreenWidgetState extends State<WebViewScreenWidget> {
       ),
       body: errorBool
           ? CommonWidgets.errorAPI(
-          buttonTitle: retryTxt,
+              buttonTitle: retryTxt,
               errorText: errorText,
               context: context,
               onPress: () {

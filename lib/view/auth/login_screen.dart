@@ -1,14 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
-import 'package:humble_warrior/utils/helpers/extensions.dart';
-import 'package:humble_warrior/view/auth/auth_widget.dart';
-import 'package:humble_warrior/view/auth/login_controller.dart';
-import 'package:velocity_x/velocity_x.dart';
-
-import '../../utils/app_colors.dart';
-import '../../utils/image_path_assets.dart';
-import '../../utils/localization/localization_string.dart';
+import 'package:humble_warrior/hw.dart';
 
 class LoginScreen extends GetView<LoginController> with AuthWidget {
   const LoginScreen({super.key});

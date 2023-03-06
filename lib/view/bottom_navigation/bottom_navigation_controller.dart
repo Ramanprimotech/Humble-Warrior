@@ -1,15 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/view/home/home_controller.dart';
-import 'package:humble_warrior/view/home/home_screen.dart';
 import 'package:humble_warrior/view/wish_list/wish_list_screen.dart';
-
-import '../../utils/app_strings.dart';
-import '../../utils/shared_prefrence/shared_pref.dart';
-import '../WebView/join_us_facebook/facebook.dart';
-import '../WebView/my_amazone/amazone.dart';
-import '../my_account/my_account_screen.dart';
+import 'package:humble_warrior/hw.dart';
 
 class BottomNavigationController extends GetxController {
   final HomeScreenController controller = Get.find();
@@ -20,9 +10,19 @@ class BottomNavigationController extends GetxController {
   final List<Widget> _navigationItems = [
     const HomeScreen(),
     const WishList(),
-    // const WishlistScreenTest(),
-    const AmazonWebView(),
-    const FaceBookWebView(),
+
+    /// Amazon view
+    const WebViewScreenWidget(
+        title: myAmazonTxt,
+        key: Key(myAmazonTxt),
+        url: "https://www.amazon.com/shop/influencer-1604f2b0"),
+
+    /// Facebook View
+    const WebViewScreenWidget(
+      title: joinUsTxt,
+      url: "https://www.facebook.com/groups/209617206226617",
+      key: Key(joinUsTxt),
+    ),
     const MyAccount(),
   ];
 

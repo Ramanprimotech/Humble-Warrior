@@ -1,21 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/extensions.dart';
-import 'package:humble_warrior/view/home/home_controller.dart';
-
 import '../../modals/response/brands_response_mdel.dart';
 import '../../modals/response/home_categories_response_model.dart';
 import '../../network/endpoints.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/app_text.dart';
-import '../../utils/common/common_functionality.dart';
-import '../../utils/common/common_widgets.dart';
-import '../../utils/decorations.dart';
-import '../../utils/future_widget/abstract_future_widget.dart';
-import '../../utils/routes/app_routes.dart';
-import '../../utils/shimmer/shimmer_loader.dart';
-import '../../utils/theme_extention/custom_notice_theme_extention.dart';
+import 'package:humble_warrior/hw.dart';
 
 class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   final BuildContext context;

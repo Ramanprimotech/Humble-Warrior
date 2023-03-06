@@ -1,9 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:humble_warrior/hw.dart';
 
 class AuthWidget {
   Widget optionWidget(
@@ -13,7 +9,7 @@ class AuthWidget {
       String? imagePath,
       required Function onTap}) {
     final AccountOptionTheme accountOptionTheme =
-    Theme.of(Get.context!).extension<AccountOptionTheme>()!;
+        Theme.of(Get.context!).extension<AccountOptionTheme>()!;
     return InkWell(
       onTap: () => onTap(),
       child: Container(
@@ -23,13 +19,6 @@ class AuthWidget {
           color: accountOptionTheme.backGroundColor,
           borderRadius: BorderRadius.circular(30),
           border: Border.all(color: Colors.black, width: 1),
-          // boxShadow: [
-          //   BoxShadow(
-          //       color: Colors.grey.shade800,
-          //       blurRadius: 2,
-          //       spreadRadius: 2,
-          //       offset: const Offset(0.0, 0.75)),
-          // ],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,7 +34,9 @@ class AuthWidget {
                     width: 30,
                   ).centered().p(2).px(4),
             AppText(title!,
-                color: accountOptionTheme.textColor, fontSize: 14, fontWeight: FontWeight.w600),
+                color: accountOptionTheme.textColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w600),
             const SizedBox(width: 40),
           ],
         ),

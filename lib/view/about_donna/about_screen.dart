@@ -1,21 +1,3 @@
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_colors.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/common/common_appBar.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/helpers/extensions.dart';
-import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
-import 'package:humble_warrior/view/home/home_controller.dart';
-import 'package:humble_warrior/view/home/home_screen_widgets.dart';
-import 'package:readmore/readmore.dart';
-
-import '../../utils/common/common_functionality.dart';
-import '../../utils/decorations.dart';
-
-
 import 'package:humble_warrior/hw.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -25,7 +7,6 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeScreenController controller = Get.find();
     return Scaffold(
-      /// Common AppBar for search
       appBar: CommonAppBar().AppBarWidget(
         showBackButton: true,
         title: CustomSearchBar(
@@ -33,16 +14,16 @@ class AboutScreen extends StatelessWidget {
           textEditingController: controller.searchTextController,
         ),
       ),
-
       body: SingleChildScrollView(
         child: Column(
           children: [
             Column(children: [
               /// About Donna title
-              CommonWidgets.titleBar(
-                  context, backIcon: false,
+              CommonWidgets.titleBar(context,
+                  backIcon: false,
                   title: aboutDonnaTxt,
-                  fontSize: 18, color: AppColors.primary),
+                  fontSize: 18,
+                  color: AppColors.primary),
 
               /// About image
               _showImg(),
@@ -65,7 +46,6 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
-
   /// About Donna image
   _showImg() {
     return Padding(
@@ -73,7 +53,8 @@ class AboutScreen extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(5),
         child: CommonWidgets.networkImage(
-          imageUrl: "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
+          imageUrl:
+              "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
           fit: BoxFit.fitWidth,
           height: 200,
           alignment: Alignment.topCenter,
@@ -87,7 +68,7 @@ class AboutScreen extends StatelessWidget {
   _details(context) {
     return Container(
       padding: 10.pa,
-      margin: EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+      margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
       width: Get.width,
       decoration: CustomBoxDecorations().shadow(context: context),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

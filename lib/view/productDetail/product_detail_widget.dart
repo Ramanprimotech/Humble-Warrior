@@ -1,4 +1,3 @@
-import 'package:velocity_x/velocity_x.dart';
 import '../../utils/sizes/sizes_config.dart';
 
 import 'package:humble_warrior/hw.dart';

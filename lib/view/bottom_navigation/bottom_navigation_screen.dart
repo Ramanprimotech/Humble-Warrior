@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_icons.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/theme_extention/image_icon_theme_extention.dart';
-import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart';
-import 'package:humble_warrior/view/bottom_navigation/bottom_navigation_controller.dart';
+import 'package:humble_warrior/hw.dart';
 
 class BottomNavigationScreen extends GetView<BottomNavigationController> {
   const BottomNavigationScreen({super.key});
