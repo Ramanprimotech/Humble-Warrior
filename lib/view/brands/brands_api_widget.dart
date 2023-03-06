@@ -28,7 +28,7 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         crossAxisSpacing: 40.0,
-        mainAxisSpacing: 60.0,
+        mainAxisSpacing: 40.0,
         childAspectRatio: 1.5,
       ),
       itemCount: dataa.length,
@@ -42,6 +42,8 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
             children: [
               Expanded(
                 child: Container(
+                  height: 100,
+                  width: 100,
                   padding: 10.pa,
                   // decoration: CustomBoxDecorations()
                   //     .shadow(context: context, color: Colors.grey.shade200),
@@ -73,7 +75,7 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         crossAxisSpacing: 40.0,
-        mainAxisSpacing: 60.0,
+        mainAxisSpacing: 40.0,
         childAspectRatio: 1.5,
       ),
       itemCount: 20,

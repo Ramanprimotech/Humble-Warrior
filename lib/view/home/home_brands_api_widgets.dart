@@ -61,14 +61,14 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
               CommonUtils().urlLauncher(url: dataa[index].brandLink!);
             },
             child: SizedBox(
-              height: 50,
-              width: 80,
+              // height: 100,
+              // width: 80,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: 70,
-                    height: 50,
+                    width: 100,
+                    height: 60,
                     // decoration: CustomBoxDecorations()
                     //     .shadow(context: context, color: Colors.grey.shade200),
                     child: Padding(
