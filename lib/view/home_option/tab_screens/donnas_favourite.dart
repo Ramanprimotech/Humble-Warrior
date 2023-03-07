@@ -36,7 +36,14 @@ class DonnaFavourite extends StatelessWidget {
           }
           if (controller.donnaFavouriteDealList.isEmpty &&
               controller.donnaFavouriteDealsBool.value == false) {
-            return CommonWidgets.noData(update: controller.update);
+            return CommonWidgets.noData(
+                update: controller.update,
+                context: context,
+                onTap: () {
+                  controller.donnaFavouriteDealsBool.value = true;
+                  controller.update();
+                  controller.donnaFavouriteDealsAPI();
+                });
           }
           return ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

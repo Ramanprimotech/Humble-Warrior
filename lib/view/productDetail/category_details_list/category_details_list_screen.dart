@@ -48,7 +48,14 @@ class CategoryListDetails extends StatelessWidget {
                     }
                     if (controller.categoryList.isEmpty &&
                         controller.categoryListBool.value == false) {
-                      return CommonWidgets.noData(update: controller.update);
+                      return CommonWidgets.noData(
+                          update: controller.update,
+                          context: context,
+                          onTap: () {
+                            controller.categoryListBool.value = true;
+                            controller.update();
+                            controller.categoryListApi();
+                          });
                     }
                     return ListView.separated(
                       padding: const EdgeInsets.symmetric(

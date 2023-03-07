@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:humble_warrior/modals/response/product_details_response.dart';
@@ -8,7 +9,7 @@ class HiveService extends GetxController {
   @override
   void onInit() async {
     await Hive.initFlutter();
-    Hive.registerAdapter(ProductDetailsResponseAdapter());
+    // Hive.registerAdapter(ProductDetailsResponseAdapter());
     box = await Hive.openBox("Wishlist");
     // addToWishList();
     super.onInit();

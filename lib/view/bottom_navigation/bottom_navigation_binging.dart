@@ -4,7 +4,6 @@ class BottomNavigationBindings implements Bindings {
   @override
   void dependencies() {
     Get.put(ThemeController());
-    Get.put(HiveService());
     Get.put(HomeScreenController());
     Get.put(BottomNavigationController());
     Get.put(FrontPageDetailController());

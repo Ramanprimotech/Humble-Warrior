@@ -56,26 +56,36 @@ class CommonWidgets {
     );
   }
 
-  static Widget noData({required Function update}) {
-    return RefreshIndicator(
-      onRefresh: () async {
-        update();
-        return Future.value(0);
-      },
-      child: ListView(
-        children: [
-          Container(
-            height: Get.height - 250,
-            alignment: Alignment.center,
-            child: AppText(
-              noDataFoundTxt,
-              fontSize: 24,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ],
-      ),
-    );
+  // static Widget noData({required Function update}) {
+  //   return RefreshIndicator(
+  //     onRefresh: () async {
+  //       update();
+  //       return Future.value(0);
+  //     },
+  //     child: ListView(
+  //       children: [
+  //         Container(
+  //           height: Get.height - 250,
+  //           alignment: Alignment.center,
+  //           child: AppText(
+  //             noDataFoundTxt,
+  //             fontSize: 24,
+  //             fontWeight: FontWeight.w700,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+  static Widget noData(
+      {required Function update,
+      required BuildContext context,
+      required Function() onTap}) {
+    return CommonWidgets.errorAPI(
+        buttonTitle: retryTxt,
+        errorText: noDataFoundTxt.toString(),
+        context: context,
+        onPress: onTap);
   }
 
   static Widget loading() {
