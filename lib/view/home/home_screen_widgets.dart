@@ -32,7 +32,7 @@ class HomeScreenWidgets {
 
   final double productHeight = 60;
   final double brandLoveHeight = 50;
-  final double brandHeight = 60;
+  final double brandHeight = 70;
   final double productArrowIconPadding = 8;
   final double arrowWidth = 30;
   final int badge = 99;
@@ -261,7 +261,7 @@ class HomeScreenWidgets {
         // },
         // child:
         Container(
-      height: brandHeight + brandLoveHeight + 20,
+      height: brandHeight + brandLoveHeight + 10,
       decoration: BoxDecoration(
         // borderRadius: const BorderRadius.only(
         //     topRight: Radius.circular(15), topLeft: Radius.circular(15)),
@@ -277,7 +277,7 @@ class HomeScreenWidgets {
               Row(
                 children: [
                   Expanded(
-                    flex: 10,
+                    flex:10,
                     child: Container(
                       color: Theme.of(context)
                           .floatingActionButtonTheme
@@ -339,12 +339,12 @@ class HomeScreenWidgets {
               ),
             ],
           ),
-          Container(
+         /* Container(
             margin: const EdgeInsets.only(left: 25, right: 25, top: 10),
             height: 1,
             width: Get.width,
             color: Colors.grey.shade400,
-          ),
+          ),*/
         ],
       ),
     );
