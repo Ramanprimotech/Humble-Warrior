@@ -21,6 +21,8 @@ import 'package:humble_warrior/view/productDetail/category_item_detail/category_
 import 'package:humble_warrior/view/productDetail/daily_deals_details_screen/daily_deal_product.dart';
 import 'package:humble_warrior/view/productDetail/daily_deals_details_screen/daily_deal_product_binding.dart';
 import 'package:humble_warrior/view/productDetail/donna_favourite_details_screen/favourite_deals.dart';
+import 'package:humble_warrior/view/sorting/sort_binding.dart';
+import 'package:humble_warrior/view/sorting/sort_screen.dart';
 import 'package:humble_warrior/view/splash/splash_binding.dart';
 import 'package:humble_warrior/view/splash/splash_screen.dart';
 import 'package:humble_warrior/view/static_pages/static_page_binding.dart';
@@ -100,6 +102,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.staticPages,
         page: () => const StaticPagesScreen(),
-        binding: StaticPagesBindings())
+        binding: StaticPagesBindings()),
+    GetPage(
+        name: AppRoutes.sortPages,
+        page: () => Sort(),
+        binding: SortBindings())
   ];
 }

@@ -62,7 +62,7 @@ const String adidasTxt = "Adidas";
 const String reebokTxt = "Reebok";
 const String gucciTxt = "Gucci";
 const String donnaDailyDealTxt = "Donna's Daily Deals";
-const String donnaFavouriteDealTxt = "My Favourite Deals";
+const String donnaFavouriteDealTxt = "Donna's Favourite Deals";
 const String donnaFrontPageDealTxt = "Front Page Deals";
 
 const String brandLink = "https://humblewarrior.com/";
@@ -137,6 +137,7 @@ const String gotoLoginTxt = 'Go to Login';
 const String retryTxt = 'Retry';
 const String myFvrtTxt = 'My Favourite';
 const String buyNowTxt = 'Buy Now';
+const String sortTxt = "Sort";
 
 /*===================================================Shared Preference========================================================*/
 const String spIsEntered = 'isEntered';
