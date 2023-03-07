@@ -3,11 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>340829922874-r63ac8cku8jdtgd6epcpu6rfosaqa96r.apps.googleusercontent.com</string>
+	<string>340829922874-o8qpij3h27hbmn0fjai7di4k31pnj1c1.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.340829922874-r63ac8cku8jdtgd6epcpu6rfosaqa96r</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>340829922874-ka1risobh4v7gs1kbgjhsl6oge2j7c2b.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.340829922874-o8qpij3h27hbmn0fjai7di4k31pnj1c1</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAfi551nKdVc8D1__iDiLIiy0exnBvvHpE</string>
 	<key>GCM_SENDER_ID</key>
@@ -15,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.humble.warrior</string>
+	<string>com.example.humbleWarrior</string>
 	<key>PROJECT_ID</key>
 	<string>hwapp-78661</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:340829922874:ios:3c000c87aa1f844fec7703</string>
+	<string>1:340829922874:ios:83560ad0e0b4bd2bec7703</string>
 	<key>DATABASE_URL</key>
 	<string>https://hwapp-78661-default-rtdb.firebaseio.com</string>
 </dict>

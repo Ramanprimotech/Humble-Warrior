@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:humble_warrior/hive/hive_storage_service.dart';
 import 'package:humble_warrior/modals/response/donna_deals_response.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
 import 'package:humble_warrior/modals/response/front_page_response_model.dart';
 import 'package:humble_warrior/modals/response/product_details_response.dart';
+import 'package:humble_warrior/services/hive_storage_service.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
@@ -59,7 +59,7 @@ class WishList extends StatelessWidget {
                                             values[index];
                                         return Padding(
                                           padding: const EdgeInsets.only(
-                                              left: 20,right: 20, bottom: 20),
+                                              left: 20, right: 20, bottom: 20),
                                           child: WishListCardSelector(
                                             details: details,
                                             index: index,

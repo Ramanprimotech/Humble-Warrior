@@ -51,7 +51,7 @@ dependencies:
   velocity_x: ^3.6.0
   smooth_page_indicator: ^1.0.0+2
   cached_network_image: ^3.2.3
-  firebase_core: ^2.4.1
+  firebase_core:
   firebase_auth: ^4.2.5
   flutter_overlay_loader: ^2.0.0
   readmore: ^2.2.0
@@ -63,6 +63,8 @@ dependencies:
   intl:
   hive: ^2.2.3
   hive_flutter: 1.1.0
+  firebase_messaging:
+  firebase_analytics: ^10.1.0
   flutter_local_notifications: ^13.0.0
 
 

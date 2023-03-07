@@ -9,9 +9,7 @@ class HiveService extends GetxController {
   @override
   void onInit() async {
     await Hive.initFlutter();
-    // Hive.registerAdapter(ProductDetailsResponseAdapter());
     box = await Hive.openBox("Wishlist");
-    // addToWishList();
     super.onInit();
   }
 
@@ -22,11 +20,6 @@ class HiveService extends GetxController {
   }
 
   getWishList() {
-    // List<Wishlistitem> wishList = box.values.toList();
-    // wishList.forEach((element) {
-    //
-    //   log("${element.toString()}", name: "Wish List Items");
-    // });
     var data = box.toMap();
     data.forEach((key, element) {
       log("$key   ${element.toString()}", name: "Wish List Keys");
@@ -59,6 +52,7 @@ class HiveService extends GetxController {
 
   @override
   void onClose() {
+    box.close();
     super.onClose();
   }
 }

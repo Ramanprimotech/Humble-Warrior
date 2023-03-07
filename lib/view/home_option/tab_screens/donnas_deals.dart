@@ -120,8 +120,12 @@ Widget donnaDealsButton(
             children: [
               Padding(
                 padding: 8.pl,
-                child: shopButton(
-                    url: "${details.shopUrl}", title: details.itemName!),
+                child: (details.shopUrl == "" ||
+                        details.shopUrl == "null" ||
+                        details.shopUrl == null)
+                    ? 0.sh
+                    : shopButton(
+                        url: "${details.shopUrl}", title: details.itemName!),
               ),
               !(details.couponCode == null || details.couponCode == "")
                   ? codeButton(code: "${details.couponCode}")

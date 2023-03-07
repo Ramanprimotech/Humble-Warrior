@@ -58,14 +58,25 @@ class DefaultFirebaseOptions {
     storageBucket: 'hwapp-78661.appspot.com',
   );
 
+  // static const FirebaseOptions ios = FirebaseOptions(
+  //   apiKey: 'AIzaSyAfi551nKdVc8D1__iDiLIiy0exnBvvHpE',
+  //   appId: '1:340829922874:ios:83560ad0e0b4bd2bec7703',
+  //   messagingSenderId: '340829922874',
+  //   projectId: 'hwapp-78661',
+  //   databaseURL: 'https://hwapp-78661-default-rtdb.firebaseio.com',
+  //   storageBucket: 'hwapp-78661.appspot.com',
+  //   iosClientId: '340829922874-o8qpij3h27hbmn0fjai7di4k31pnj1c1.apps.googleusercontent.com',
+  //   iosBundleId: 'com.example.humbleWarrior',
+  // );
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAfi551nKdVc8D1__iDiLIiy0exnBvvHpE',
-    appId: '1:340829922874:ios:83560ad0e0b4bd2bec7703',
+    appId: '1:340829922874:ios:3c000c87aa1f844fec7703',
     messagingSenderId: '340829922874',
     projectId: 'hwapp-78661',
     databaseURL: 'https://hwapp-78661-default-rtdb.firebaseio.com',
     storageBucket: 'hwapp-78661.appspot.com',
-    iosClientId: '340829922874-o8qpij3h27hbmn0fjai7di4k31pnj1c1.apps.googleusercontent.com',
-    iosBundleId: 'com.example.humbleWarrior',
+    iosClientId:
+        '340829922874-r63ac8cku8jdtgd6epcpu6rfosaqa96r.apps.googleusercontent.com',
+    iosBundleId: 'com.humble.warrior',
   );
 }
