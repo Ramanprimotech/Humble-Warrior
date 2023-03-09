@@ -31,14 +31,9 @@ class StaticPagesResponse {
 class StaticData {
   String? pageTitle;
   String? pageContent;
-  bool? pageImage;
+  dynamic pageImage;
 
   StaticData({this.pageTitle, this.pageContent, this.pageImage});
-
-  @override
-  String toString() {
-    return 'StaticData{pageTitle: $pageTitle, pageContent: $pageContent, pageImage: $pageImage}';
-  }
 
   StaticData.fromJson(Map<String, dynamic> json) {
     pageTitle = json['page_title'];
@@ -54,6 +49,10 @@ class StaticData {
     return data;
   }
 }
+
+
+
+
 
 
 

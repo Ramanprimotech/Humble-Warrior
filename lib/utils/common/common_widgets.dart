@@ -139,16 +139,17 @@ class CommonWidgets {
   }
 
   static Widget titleBar(context,
-      {Color? color, title, icon = false, double? fontSize, backIcon = true}) {
+      {Color? color, title, Widget? widget, icon = false, double? fontSize,Function()? onPress, backIcon = true}) {
     return Container(
       height: 50,
       margin: 20.pa,
+      // padding: const EdgeInsets.only(right: 20),
       width: MediaQuery.of(Get.context!).size.width,
       decoration: CustomBoxDecorations().shadow(context: context),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          backIcon ? AppIcons.IosBackIcon() : 40.sw,
+          backIcon ? AppIcons.IosBackIcon(onPress: onPress) : 40.sw,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -169,7 +170,7 @@ class CommonWidgets {
                   : SizedBox(),
             ],
           ),
-          40.sw
+          widget??40.sw
         ],
       ),
     );

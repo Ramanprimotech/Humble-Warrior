@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
@@ -25,7 +26,7 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,
-        titleSpacing: 15,
+        titleSpacing: 5,
         leadingWidth: 35,
         centerTitle: false,
         title: CustomSearchBar(
@@ -48,7 +49,9 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
                   fontSize: tabFontSize),
             ]),
         actions: [
-          IconButton(padding: 20.pr, onPressed: () {}, icon: AppIcons.filter())
+          IconButton(padding: 15.pr, onPressed: () {
+            Get.toNamed(AppRoutes.sortPages);
+          }, icon: AppIcons.filter(size: 35))
         ],
       ),
       body: Padding(

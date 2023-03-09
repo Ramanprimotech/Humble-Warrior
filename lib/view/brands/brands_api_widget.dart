@@ -39,7 +39,6 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
             await CommonUtils().urlLauncher(url: brandDetails.brandLink!);
           },
           child: Container(
-            padding: 5.pa,
             decoration: CustomBoxDecorations()
                 .shadow(context: context, color: Colors.grey.shade200),
             child: CommonWidgets.networkImage(
@@ -64,25 +63,29 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        crossAxisSpacing: 40.0,
-        mainAxisSpacing: 40.0,
+        crossAxisSpacing: 20.0,
+        mainAxisSpacing: 20.0,
         childAspectRatio: 1.5,
       ),
-      itemCount: 20,
+      itemCount: 21,
       itemBuilder: (ctx, index) {
-        return Container(
-          color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-          height: 60,
-          width: 80,
-          child: Column(
-            children: const [
-              ShimmerLoader(
-                  child: AppText(
-                "HW",
-                fontWeight: FontWeight.w900,
-                fontSize: 35,
-              )),
-            ],
+        return ShimmerLoader(
+          child: Container(
+            decoration: CustomBoxDecorations().shadow(context: context, color: Theme.of(context).floatingActionButtonTheme.backgroundColor,),
+            // color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+            // height: 60,
+            // width: 80,
+            // child:
+            /*Column(
+              children: const [
+                ShimmerLoader(
+                    child: AppText(
+                  "HW",
+                  fontWeight: FontWeight.w900,
+                  fontSize: 35,
+                )),
+              ],
+            ),*/
           ),
         );
       },
