@@ -71,7 +71,11 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
       itemBuilder: (ctx, index) {
         return ShimmerLoader(
           child: Container(
-            decoration: CustomBoxDecorations().shadow(context: context, color: Theme.of(context).floatingActionButtonTheme.backgroundColor,),
+            decoration: CustomBoxDecorations().shadow(
+              context: context,
+              color:
+                  Theme.of(context).floatingActionButtonTheme.backgroundColor,
+            ),
             // color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
             // height: 60,
             // width: 80,

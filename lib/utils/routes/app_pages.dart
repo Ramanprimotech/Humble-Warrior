@@ -1,25 +1,14 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/view/my_account/account_details/account_details_binding.dart';
 import 'package:humble_warrior/view/my_account/account_details/account_details_screen.dart';
-import 'package:humble_warrior/view/my_account/my_account_screen.dart';
-import 'package:humble_warrior/view/notification/notification_binding.dart';
-import 'package:humble_warrior/view/notification/notification_screen.dart';
 import 'package:humble_warrior/view/productDetail/category_details_list/category_details_list_binding.dart';
 import 'package:humble_warrior/view/productDetail/category_details_list/category_details_list_screen.dart';
 import 'package:humble_warrior/view/productDetail/category_item_detail/category_item_detail_binding.dart';
 import 'package:humble_warrior/view/productDetail/category_item_detail/category_item_detail_screen.dart';
-import 'package:humble_warrior/view/productDetail/daily_deals_details_screen/daily_deal_product.dart';
-import 'package:humble_warrior/view/productDetail/daily_deals_details_screen/daily_deal_product_binding.dart';
-import 'package:humble_warrior/view/productDetail/donna_favourite_details_screen/favourite_deals.dart';
 import 'package:humble_warrior/view/sorting/sort_binding.dart';
 import 'package:humble_warrior/view/sorting/sort_screen.dart';
-import 'package:humble_warrior/view/splash/splash_binding.dart';
-import 'package:humble_warrior/view/splash/splash_screen.dart';
 import 'package:humble_warrior/view/static_pages/static_page_binding.dart';
 import 'package:humble_warrior/view/static_pages/static_page_screen.dart';
-
-import '../../view/static_pages/static_page_binding.dart';
-import '../../view/static_pages/static_page_screen.dart';
 
 class AppPages {
   static String initialRoute = AppRoutes.splashScreen;
@@ -89,10 +78,7 @@ class AppPages {
         page: () => const StaticPagesScreen(),
         binding: StaticPagesBindings()),
     GetPage(
-        name: AppRoutes.sortPages,
-        page: () => Sort(),
-        binding: SortBindings())
-        binding: StaticPagesBindings()),
+        name: AppRoutes.sortPages, page: () => Sort(), binding: SortBindings()),
     GetPage(
         name: AppRoutes.searchView,
         page: () => const SearchView(),
