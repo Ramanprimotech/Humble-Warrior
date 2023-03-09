@@ -1,11 +1,14 @@
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/modals/response/static_page_model.dart';
+import 'package:humble_warrior/view/static_pages/static_page_controller.dart';
 
 class AboutScreen extends StatelessWidget {
-  const AboutScreen({Key? key}) : super(key: key);
+  AboutScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final HomeScreenController controller = Get.find();
+    final StaticPagesController staticController = Get.find<StaticPagesController>();
     return Scaffold(
       appBar: CommonAppBar().AppBarWidget(
         showBackButton: true,
@@ -14,47 +17,68 @@ class AboutScreen extends StatelessWidget {
           textEditingController: controller.searchTextController,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
+      body: FutureBuilder<List<StaticData>>(
+        future: staticController.staticPageApi("40324"),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if(snapshot.connectionState == ConnectionState.waiting){
+            return Center(child: const CircularProgressIndicator());
+          }
+          print(" ${ snapshot.data.toString()}");
+          if(snapshot.hasError){
+            return CommonWidgets.errorAPI(errorText: "${snapshot.error}",
+                context: context,
+                onPress: (){Get.back();},
+                buttonTitle: "OK");
+          }
+          List<StaticData> staticResponse = snapshot.data!;
+        return staticResponse.isNotEmpty?Column(
           children: [
-            Column(children: [
-              /// About Donna title
-              CommonWidgets.titleBar(context,
-                  backIcon: false,
-                  title: aboutDonnaTxt,
-                  fontSize: 18,
-                  color: AppColors.primary),
+            Expanded(
+              child: ListView(children: [
+                /// About Donna title
+                CommonWidgets.titleBar(context,
+                    backIcon: false,
+                    title: aboutDonnaTxt,
+                    fontSize: 18,
+                    color: AppColors.primary),
 
-              /// About image
-              _showImg(),
+                /// About image
+                _showImg(staticResponse),
 
-              /// About Details
-              _details(context),
+                /// About Details
+                _details(context, staticResponse),
 
-              /// See copy of humble warrior button
-              _seeCopyButton(),
-              25.shb,
-            ]),
+                /// See copy of humble warrior button
+                _seeCopyButton(),
+                25.shb,
+              ]),
+            ),
 
             /// Brands List
             HomeScreenWidgets(context: context, controller: controller)
                 .brandsList(),
             25.shb,
           ],
-        ),
+        ):Center(
+          child: CommonWidgets.errorAPI(errorText: "${snapshot.error}",
+          context: context,
+          onPress: (){Get.back();},
+          buttonTitle: "OK")
+          );
+        },
       ),
     );
   }
 
   /// About Donna image
-  _showImg() {
+  _showImg(staticResponse) {
     return Padding(
       padding: 20.ph,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(5),
         child: CommonWidgets.networkImage(
-          imageUrl:
-              "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
+          imageUrl: staticResponse[0].pageImage.toString(),
+              // "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
           fit: BoxFit.fitWidth,
           height: 200,
           alignment: Alignment.topCenter,
@@ -65,7 +89,7 @@ class AboutScreen extends StatelessWidget {
   }
 
   /// About Details
-  _details(context) {
+  _details(context, staticResponse) {
     return Container(
       padding: 10.pa,
       margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
@@ -75,7 +99,7 @@ class AboutScreen extends StatelessWidget {
         const AppText(helloGorgeousTxt, fontWeight: FontWeight.bold),
         ReadMoreText(
           style: Theme.of(context).textTheme.bodyMedium,
-          AppStrings.lorem,
+          staticResponse[0].pageContent.toString(),
           trimLines: 10,
           trimMode: TrimMode.Line,
           trimCollapsedText: readMoreTxt,

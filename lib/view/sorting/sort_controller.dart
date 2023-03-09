@@ -8,30 +8,48 @@ class SortController extends GetxController{
     FilterModal(header: "Sort", subHeader: ["Recent", "A-Z", "Z-A"]),
   ];
 
-  RxInt check = (-1).obs;
   RxBool isSelected = false.obs;
+  RxBool isItemSelected = false.obs;
+   List<FilterModal> filterSelectionList = [];
 
-  click(int id){
-      check.value = id;
+  filterInitialData(){
+    filterData.clear();
+    filterData.addAll(filterSelectionList);
+  }
+
+  checkFilter(){
+    Iterable<FilterModal> data = filterData.where((element) => element.selected != -1);
+    isItemSelected.value = data.length != 0;
+  }
+
+  back(){
+    filterData.clear();
+    filterData.addAll(filterSelectionList);
+    Get.back();
   }
 
   reset(){
-    check.value=-1;
+    filterData[headerIndex.value].selected=-1;
+    headerIndex = 0.obs;
     filterData.forEach((element) {element.selected=(-1);});
+    checkFilter();
+  }
+
+  apply(){
+    filterSelectionList.clear();
+    filterSelectionList.addAll(filterData);
+    Get.back();
   }
 
   RxInt headerIndex = 0.obs;
-  RxInt _sortIndex = 0.obs;
 
+   @override
+  void onInit() {
+     filterSelectionList.addAll(filterData);
+     checkFilter();
+      filterData.forEach((element) {
+  });
 
-
+  }
 }
 
-/*
-enum Sort{
-  sort,
-  price,
-  alpha,
-  popularity,
-  defult
-}*/

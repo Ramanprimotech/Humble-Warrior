@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
+import 'package:humble_warrior/utils/common/common_functionality.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
@@ -61,7 +62,13 @@ class MyAccount extends StatelessWidget {
 
               ///Share with friends
               myAccWidget.detailsOptions(controller,
-                  title: shareWithFriendsTxt),
+                  title: shareWithFriendsTxt,
+                  ontap: () async {
+                await CommonUtils().urlLauncher(
+                url:
+                "https://www.humblewarrior.com/",
+                title: "The Humble Warrior");
+                },),
               optionSpacing.sh,
               myAccWidget.divider(),
               optionSpacing.sh,

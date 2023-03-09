@@ -25,7 +25,7 @@ class StaticPagesScreen extends StatelessWidget {
        future:controller.staticPageApi(controller.id),
        builder: (context ,snapshot){
      if(snapshot.connectionState == ConnectionState.waiting){
-       return Center(child: const CircularProgressIndicator());
+       return Expanded(child: Center(child: const CircularProgressIndicator()));
      }
      print("id ---- ${controller.id } ${ snapshot.data}");
      if(snapshot.hasError){
@@ -35,18 +35,19 @@ class StaticPagesScreen extends StatelessWidget {
            buttonTitle: "OK");
      }
      List<StaticData> staticResponse = snapshot.data!;
-    return  staticResponse.isNotEmpty?Expanded(
-       child: SingleChildScrollView(
-         child: Padding(
-           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-           child: AppText(staticResponse[0].pageContent.toString(),maxLines: 100,),
-         ),
-       ),
-     ):Center(
-      child: CommonWidgets.errorAPI(errorText: "${snapshot.error}",
-          context: context,
-          onPress: (){Get.back();},
-          buttonTitle: "OK")
+    return  staticResponse.isNotEmpty?
+    Expanded(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: AppText(staticResponse[0].pageContent.toString(),maxLines: 100,),
+      ),
+    ):Expanded(
+      child: Center(
+        child: CommonWidgets.errorAPI(errorText: "${snapshot.error}",
+            context: context,
+            onPress: (){Get.back();},
+            buttonTitle: "OK")
+      ),
     );
    }),
         // Obx(()=> controller.staticPagesResponse.value.isEmpty ? CircularProgressIndicator(): AppText("${controller.staticPagesResponse.value[0].pageContent.toString()}"))

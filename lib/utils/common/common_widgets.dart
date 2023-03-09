@@ -139,7 +139,7 @@ class CommonWidgets {
   }
 
   static Widget titleBar(context,
-      {Color? color, title, Widget? widget, icon = false, double? fontSize, backIcon = true}) {
+      {Color? color, title, Widget? widget, icon = false, double? fontSize,Function()? onPress, backIcon = true}) {
     return Container(
       height: 50,
       margin: 20.pa,
@@ -149,7 +149,7 @@ class CommonWidgets {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          backIcon ? AppIcons.IosBackIcon() : 40.sw,
+          backIcon ? AppIcons.IosBackIcon(onPress: onPress) : 40.sw,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

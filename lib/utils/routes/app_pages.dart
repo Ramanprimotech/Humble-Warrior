@@ -69,7 +69,7 @@ class AppPages {
         binding: FavouriteDealsBinding()),
     GetPage(
         name: AppRoutes.aboutDonna,
-        page: () => const AboutScreen(),
+        page: () => AboutScreen(),
         binding: AboutBinding()),
     GetPage(
         name: AppRoutes.splashScreen,

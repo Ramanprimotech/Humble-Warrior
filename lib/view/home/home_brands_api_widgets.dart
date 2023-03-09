@@ -60,38 +60,29 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
             onTap: () {
               CommonUtils().urlLauncher(url: dataa[index].brandLink!);
             },
-            child: SizedBox(
-              // height: 100,
-              // width: 80,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 100,
-                    height: 60,
-                    // decoration: CustomBoxDecorations()
-                    //     .shadow(context: context, color: Colors.grey.shade200),
-                    child: Padding(
-                      padding: 8.pa,
-                      child: CommonWidgets.networkImage(
-                        alignment: Alignment.center,
-                        imageUrl: dataa[index].brandImage!,
-                        fit: BoxFit.contain,
-                      ),
-                      // Image.asset(
-                      //   alignment: Alignment.center,
-                      //   dataa[index].brandImage!,
-                      //   fit: BoxFit.contain,
-                      // ),
-                    ),
-                  ),
-                ],
+            child: Container(
+              width: 100,
+              height: 60,
+              decoration: CustomBoxDecorations()
+                  .shadow(context: context, color: Colors.grey.shade200),
+              child: Padding(
+                padding: 8.pa,
+                child: CommonWidgets.networkImage(
+                  alignment: Alignment.center,
+                  imageUrl: dataa[index].brandImage!,
+                  fit: BoxFit.contain,
+                ),
+                // Image.asset(
+                //   alignment: Alignment.center,
+                //   dataa[index].brandImage!,
+                //   fit: BoxFit.contain,
+                // ),
               ),
             ),
           );
         },
         separatorBuilder: (BuildContext context, int index) {
-          return 5.sw;
+          return 10.sw;
         },
       ),
     );
@@ -104,24 +95,29 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
       scrollDirection: Axis.horizontal,
       itemCount: 25,
       itemBuilder: (ctx, index) {
-        return Container(
-          color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-          height: 60,
-          width: 80,
-          child: Column(
-            children: const [
-              ShimmerLoader(
-                  child: AppText(
-                "HW",
-                fontWeight: FontWeight.w900,
-                fontSize: 35,
-              )),
-            ],
+        return ShimmerLoader(
+          child: Container(
+            width: 100,
+            height: 60,
+            // color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+            decoration: CustomBoxDecorations().shadow(context: context, color: Theme.of(context).floatingActionButtonTheme.backgroundColor,),
+            /*height: 60,
+            width: 80,
+            child: Column(
+              children: const [
+                ShimmerLoader(
+                    child: AppText(
+                  "HW",
+                  fontWeight: FontWeight.w900,
+                  fontSize: 35,
+                )),
+              ],
+            ),*/
           ),
         );
       },
       separatorBuilder: (BuildContext context, int index) {
-        return 20.sw;
+        return 10.sw;
       },
     );
   }
