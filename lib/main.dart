@@ -1,16 +1,27 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/services/hive_storage_service.dart';
+import 'package:humble_warrior/services/notification_manager.dart';
 import 'package:humble_warrior/utils/app_themes/app_theme.dart';
 import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
 
 import 'firebase_options.dart';
 import 'utils/routes/app_pages.dart';
+
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', // id
+    'High Importance Notifications', // title
+    //  'This channel is used for important notifications.', // description
+    importance: Importance.max,
+    playSound: true);
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 Future<void> _messageHandler(RemoteMessage message) async {
   debugPrint('background message ${message.notification!.body}');
@@ -23,9 +34,16 @@ Future main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseMessaging.onBackgroundMessage(_messageHandler);
+
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+
+  NotificationManager.initialize(flutterLocalNotificationsPlugin);
+
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
       badge: true, alert: true, sound: true);
-
   await Hive.initFlutter();
   Hive.registerAdapter(ProductDetailsResponseAdapter());
   Get.put(HiveService());
@@ -54,6 +72,7 @@ class MyApp extends StatelessWidget {
             valueListenable: theme,
             builder: (BuildContext context, value, Widget? child) {
               return GetMaterialApp(
+                navigatorKey: GlobalVariable.navState,
                 title: 'Flutter Demo',
                 debugShowCheckedModeBanner: false,
                 theme: AppTheme.lightTheme,
@@ -66,4 +85,10 @@ class MyApp extends StatelessWidget {
           );
         });
   }
+}
+
+class GlobalVariable {
+  /// This global key is used in material app for navigation through firebase notifications.
+  /// [navState] usage can be found in [notification_notifier.dart] file.
+  static final GlobalKey<NavigatorState> navState = GlobalKey<NavigatorState>();
 }

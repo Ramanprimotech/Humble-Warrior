@@ -1,6 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/services/notification_service.dart';
+import 'package:humble_warrior/services/notification_manager.dart';
 import 'package:humble_warrior/view/wish_list/wish_list_screen.dart';
 
 class BottomNavigationController extends GetxController {
@@ -48,12 +48,10 @@ class BottomNavigationController extends GetxController {
   @override
   void onInit() {
     getLoggedValue();
-    NotificationService.initialize();
-
     FirebaseMessaging.instance.getToken().then((token) {
       debugPrint("token ---- $token");
     });
-    firebaseNotification();
+    NotificationManager.messageListener();
     if (value != null) {
       userCheck.value = true;
     }
@@ -76,11 +74,11 @@ class BottomNavigationController extends GetxController {
     return Future.value(true);
   }
 
-  /// local and firebase notification
-  firebaseNotification() {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      debugPrint("message ----- $message");
-      NotificationService.showNotification(message);
-    });
-  }
+  // /// local and firebase notification
+  // firebaseNotification() {
+  //   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  //     debugPrint("message ----- $message");
+  //     NotificationService.showNotification(message);
+  //   });
+  // }
 }
