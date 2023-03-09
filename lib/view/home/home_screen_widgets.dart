@@ -1,23 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:humble_warrior/network/endpoints.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/extensions.dart';
-import 'package:humble_warrior/utils/future_widget/future_widget.dart';
-import 'package:humble_warrior/utils/image_path_assets.dart';
-import 'package:humble_warrior/utils/theme_extention/image_icon_theme_extention.dart';
-import 'package:humble_warrior/view/home/home_controller.dart';
-
 import '../../modals/response/brands_response_mdel.dart';
 import '../../modals/response/home_categories_response_model.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/app_icons.dart';
-import '../../utils/app_text.dart';
-import '../../utils/routes/app_routes.dart';
-import '../../utils/search_bar/search_bar_ui.dart';
-import '../../utils/theme_extention/shadow_theme_extention.dart';
-import 'home_brands_api_widgets.dart';
-import 'home_category_api_widgets.dart';
+import 'package:humble_warrior/hw.dart';
 
 class HomeScreenWidgets {
   final HomeScreenController controller;
@@ -42,13 +26,14 @@ class HomeScreenWidgets {
     return AppBar(
       toolbarHeight: 70,
       centerTitle: false,
-      title: CustomSearchBar(
-        onTap: controller.onTap,
-        onSubmit: controller.onSubmit,
-        onChange: controller.onChange,
-        focusNode: controller.focusNode,
-        textEditingController: controller.searchTextController,
-      ),
+      title: SearchBar(),
+      // CustomSearchBar(
+      //   onTap: controller.onTap,
+      //   onSubmit: controller.onSubmit,
+      //   onChange: controller.onChange,
+      //   focusNode: controller.focusNode,
+      //   textEditingController: controller.searchTextController,
+      // ),
       actions: [
 
         Padding(
@@ -59,7 +44,7 @@ class HomeScreenWidgets {
             },
             child: Badge(
                 textColor:Colors.white ,
-                label:  AppText("14",fontSize: 8),
+                label:  const AppText("14",fontSize: 8),
                 alignment: const AlignmentDirectional(15.0,-3.0),
                 child: Image.asset(
                   ImagePathAssets.bellIcon,
@@ -458,7 +443,7 @@ class HomeScreenWidgets {
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
-              5.sw,
+              5.swb,
               Padding(
                 padding: 2.pt,
                 child: AppIcons.heart(

@@ -30,70 +30,30 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
     final ThemeController themeController = Get.find();
     bool isDark = themeController.themeMode == ThemeMode.dark;
     return Container(
-      margin: 8.pl,
-      height: 42,
-      width: Get.width,
+      height: 50,
+      width: double.infinity,
+      padding: 8.pa,
+      // margin: 8.pa,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        border: Border.all(
-            color: Theme.of(context).textTheme.displaySmall!.color!, width: 1),
-      ),
+          border: Border.all(
+              width: 1,
+              color: Theme.of(context).textTheme.displaySmall!.color!),
+          borderRadius: BorderRadius.circular(24)),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Image.asset(
-              !isDark
-                  ? ImagePathAssets.hwLogoUnnamed
-                  : ImagePathAssets.hwLogoUnnamedDark,
-              height: 40,
-              width: 40,
-            ),
-          ),
-          Row(
-            children: const [
-              Icon(Icons.search),
-              AppText(
-                searchTxt,
-                fontWeight: FontWeight.w700,
-              ),
-            ],
-          ),
-          const SizedBox(
+          Image.asset(
+            !isDark
+                ? ImagePathAssets.hwLogoUnnamed
+                : ImagePathAssets.hwLogoUnnamedDark,
+            height: 40,
             width: 40,
           ),
+          const Spacer(),
+          const Icon(Icons.search),
+          const AppText(searchTxt, fontWeight: FontWeight.w700),
+          const Spacer(),
         ],
       ),
-
-      // TextField(
-      //   textAlign: TextAlign.center,
-      //   focusNode: widget.focusNode,
-      //   controller: widget.textEditingController,
-      //   decoration: InputDecoration(
-      //     contentPadding: EdgeInsets.all(12),
-      //     prefixIcon: Padding(
-      //       padding: const EdgeInsets.only(left: 10.0),
-      //       child: Image.asset(
-      //         ImagePathAssets.hwLogoUnnamed,
-      //         height: 40,
-      //         width: 40,
-      //       ),
-      //     ),
-      //     hintText: "Search",
-      //
-      //     suffixIcon: Visibility(
-      //         visible: widget.focusNode.hasFocus, child: AppIcons.cross()),
-      //     border: OutlineInputBorder(
-      //         borderRadius: BorderRadius.circular(50),
-      //         borderSide:
-      //             const BorderSide(color: AppColors.black, width: 1)),
-      //     focusedBorder: OutlineInputBorder(
-      //         borderRadius: BorderRadius.circular(50),
-      //         borderSide:
-      //             const BorderSide(color: AppColors.black, width: 1)),
-      //   ),
-      // ),
     );
   }
 }
