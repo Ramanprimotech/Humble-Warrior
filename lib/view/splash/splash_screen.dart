@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/image_path_assets.dart';
-import 'package:humble_warrior/view/splash/spalsh_controller.dart';
+import 'package:humble_warrior/hw.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -10,17 +7,15 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SplashController controller = Get.find();
     controller.context = context;
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: Obx(
-            () => Image.asset(
-              controller.isDark.value
-                  ? ImagePathAssets.hwLogoDarkMode
-                  : ImagePathAssets.hwLogo,
-              height: 200,
-              width: 200,
-            ),
+    return Scaffold(
+      body: Center(
+        child: Obx(
+          () => Image.asset(
+            controller.isDark.value
+                ? ImagePathAssets.hwLogoDarkMode
+                : ImagePathAssets.hwLogo,
+            height: 200,
+            width: 200,
           ),
         ),
       ),

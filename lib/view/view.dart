@@ -66,7 +66,11 @@ export 'splash/splash_screen.dart';
 export 'splash/spalsh_controller.dart';
 
 export 'WebView/web_view.dart';
-export '';
+
+
+export 'search/view.dart';
+export 'search/widgets.dart';
+
 export '';
 export '';
 export '';
