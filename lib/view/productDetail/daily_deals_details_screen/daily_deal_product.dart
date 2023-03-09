@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/utils/common/common_appBar.dart';
 import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 
-import '../../home_option/tab_screens/donnas_deals.dart';
 import '../product_detail_widget.dart';
 import 'daily_deal_product_controller.dart';
 
@@ -14,7 +12,7 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
   @override
   Widget build(BuildContext context) {
     final DailyDealProductController controller = Get.find();
-    final ProductDetailsResponse donnaDealsDetails = Get.arguments[0];
+    final int donnaDealsDetails = Get.arguments[0];
     return Scaffold(
       appBar: CommonAppBar().AppBarWidget(
         showBackButton: true,
@@ -23,21 +21,23 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
           textEditingController: controller.searchTextController,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-              child: donnaDealsCard(donnaDealsDetails, 0, context, dailyDeals: true),
-            ),
-            productText(context, donnaDealsDetails.itemName),
-            productDescription(
-                discription: donnaDealsDetails.productDescription,
-                itemName: donnaDealsDetails.itemName),
-          ],
-        ),
-      ),
+      // body: SingleChildScrollView(
+      //
+      //
+      //   child: Column(
+      //     children: [
+      //       Padding(
+      //         padding:
+      //             const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+      //         child: donnaDealsCard(donnaDealsDetails, 0, context, dailyDeals: true),
+      //       ),
+      //       productText(context, donnaDealsDetails.itemName),
+      //       productDescription(
+      //           discription: donnaDealsDetails.productDescription,
+      //           itemName: donnaDealsDetails.itemName),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }

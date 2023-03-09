@@ -54,3 +54,65 @@ class Godds {
     return data;
   }
 }
+
+class SingleProductDetailsResponse {
+  bool? status;
+  List<ProDetailItem>? data;
+  String? message;
+
+  SingleProductDetailsResponse({this.status, this.data, this.message});
+
+  SingleProductDetailsResponse.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    if (json['data'] != null) {
+      data = <ProDetailItem>[];
+      json['data'].forEach((v) {
+        data!.add(new ProDetailItem.fromJson(v));
+      });
+    }
+    message = json['message'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['status'] = this.status;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    data['message'] = this.message;
+    return data;
+  }
+}
+
+class ProDetailItem {
+  String? productName;
+  dynamic? url;
+  String? ribbonName;
+  String? productDescription;
+  String? ribbonColor;
+
+  ProDetailItem(
+      {this.productName,
+      this.url,
+      this.ribbonName,
+      this.productDescription,
+      this.ribbonColor});
+
+  ProDetailItem.fromJson(Map<String, dynamic> json) {
+    productName = json['product_name'];
+    url = json['url'];
+    ribbonName = json['ribbon_name'];
+    productDescription = json['product_description'];
+    ribbonColor = json['ribbon_color'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['product_name'] = this.productName;
+    data['url'] = this.url;
+    data['ribbon_name'] = this.ribbonName;
+    data['product_description'] = this.productDescription;
+    data['ribbon_color'] = this.ribbonColor;
+    return data;
+  }
+}

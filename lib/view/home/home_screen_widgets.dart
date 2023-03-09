@@ -1,17 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/response/product_category_response.dart';
-import 'package:humble_warrior/network/endpoints.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/extensions.dart';
-import 'package:humble_warrior/utils/future_widget/future_widget.dart';
-import 'package:humble_warrior/utils/image_path_assets.dart';
-import 'package:humble_warrior/utils/theme_extention/image_icon_theme_extention.dart';
-import 'package:humble_warrior/view/home/home_controller.dart';
+import 'package:humble_warrior/view/home/home_product_category_api_widgets.dart';
 
 import '../../modals/response/brands_response_mdel.dart';
 import '../../modals/response/home_categories_response_model.dart';
-import 'package:humble_warrior/hw.dart';
 
 class HomeScreenWidgets {
   final HomeScreenController controller;
@@ -45,7 +37,6 @@ class HomeScreenWidgets {
       //   textEditingController: controller.searchTextController,
       // ),
       actions: [
-
         Padding(
           padding: 15.pr,
           child: InkWell(
@@ -53,9 +44,9 @@ class HomeScreenWidgets {
               Get.toNamed(AppRoutes.notification);
             },
             child: Badge(
-                textColor:Colors.white ,
-                label:  AppText("14",fontSize: 8),
-                alignment: const AlignmentDirectional(15.0,-3.0),
+                textColor: Colors.white,
+                label: AppText("14", fontSize: 8),
+                alignment: const AlignmentDirectional(15.0, -3.0),
                 child: Image.asset(
                   ImagePathAssets.bellIcon,
                   height: 28,
@@ -151,8 +142,11 @@ class HomeScreenWidgets {
                       return Padding(
                         padding: 5.ph,
                         child: GestureDetector(
-                          onTap: (){
-                            Get.toNamed(AppRoutes.categoryDetailsList, arguments: [ProductImages.productImagesList[index].name]);
+                          onTap: () {
+                            Get.toNamed(AppRoutes.categoryDetailsList,
+                                arguments: [
+                                  ProductImages.productImagesList[index].name
+                                ]);
                           },
                           child: Container(
                             padding: 10.ph,
@@ -161,7 +155,8 @@ class HomeScreenWidgets {
                             child: Column(
                               children: [
                                 Image.asset(
-                                    ProductImages.productImagesList[index].image,
+                                    ProductImages
+                                        .productImagesList[index].image,
                                     fit: BoxFit.fitHeight,
                                     height: productHeight - 25,
                                     scale: 0.7),
@@ -267,7 +262,7 @@ class HomeScreenWidgets {
               Row(
                 children: [
                   Expanded(
-                    flex:10,
+                    flex: 10,
                     child: Container(
                       color: Theme.of(context)
                           .floatingActionButtonTheme
@@ -329,7 +324,7 @@ class HomeScreenWidgets {
               ),
             ],
           ),
-         /* Container(
+          /* Container(
             margin: const EdgeInsets.only(left: 25, right: 25, top: 10),
             height: 1,
             width: Get.width,

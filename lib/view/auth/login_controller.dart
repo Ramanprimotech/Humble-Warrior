@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:humble_warrior/hw.dart';
 
 class LoginController extends GetxController {
@@ -77,6 +78,7 @@ class LoginController extends GetxController {
             await SharePreferenceData.addBoolToSF(spIsEntered, true);
 
             Get.offNamed(AppRoutes.bottomNavigation);
+            "${user!.uid.toString()}".log();
           } else {
             Loader.hide();
           }
