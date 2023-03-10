@@ -77,10 +77,8 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
 
   @override
   Widget success({List<HomeCategoryList>? data}) {
-    List<HomeCategoryList> dataa = data!?? [];
-    print("before ${dataa.toString()}");
-    dataa.sort((a,b)=> a.id!.compareTo(b.id!));
-    print("after ${dataa.toString()}");
+    List<HomeCategoryList> dataa = data! ?? [];
+    dataa.sort((a, b) => a.id!.compareTo(b.id!));
     return Expanded(
       child: CustomRefreshIndicator(
         onRefresh: () {

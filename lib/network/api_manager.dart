@@ -63,11 +63,11 @@ class APIManager {
   }
 
   Future<dynamic> postAPICallNoBearer(
-      {required String url, required var param}) async {
+      {required String url, required var param, String? baseUrl}) async {
     debugPrint("Calling API: $url");
     debugPrint("Calling parameters: $param");
 
-    Uri urlForPost = Uri.parse("${Endpoints.baseUrl}$url");
+    Uri urlForPost = Uri.parse("${baseUrl ?? Endpoints.baseUrl}$url");
     var responseJson;
     try {
       final response = await http.post(urlForPost,
@@ -77,6 +77,7 @@ class APIManager {
           },
           body: jsonEncode(param.toJson()));
       log(response.body);
+      log(response.statusCode.toString(), name: "AAPI Status $url");
       responseJson = _response(response);
     } on SocketException {
       throw FetchDataException('No Internet connection');

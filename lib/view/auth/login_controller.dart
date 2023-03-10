@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/modals/requests/auth_data_request.dart';
+import 'package:humble_warrior/network/api_call.dart';
 
 class LoginController extends GetxController {
   User? user;
@@ -25,10 +28,17 @@ class LoginController extends GetxController {
   /// Click
   Function onClickFunction(
       {required OnClick action, required BuildContext context}) {
+    /// Platform
+    String platform = Platform.isAndroid ? "Android" : "iOS";
+
     Map<OnClick, void Function()> actions = {
       /// Click  facebook
       OnClick.facebook: () async {
         debugPrint("bbhbhnbnjnjnj");
+
+        /// User Firebase Token
+        String? tokenFirebase = await FirebaseMessaging.instance.getToken();
+
         try {
           user = await AuthManager().facebookLogin();
           if (user != null) {
@@ -45,6 +55,9 @@ class LoginController extends GetxController {
                 userProfilePic, "${user?.photoURL}");
             await SharePreferenceData.addBoolToSF(spIsEntered, true);
             Get.toNamed(AppRoutes.bottomNavigation);
+
+            /// Auth Data API
+            await authAPI(platform, tokenFirebase);
           }
         } catch (e) {
           debugPrint("error --- $e");
@@ -55,6 +68,9 @@ class LoginController extends GetxController {
       OnClick.google: () async {
         try {
           Loader.show(context);
+
+          /// User Firebase Token
+          String? tokenFirebase = await FirebaseMessaging.instance.getToken();
 
           user = await AuthManager().googleLogin(
               androidClientId:
@@ -79,6 +95,9 @@ class LoginController extends GetxController {
 
             Get.offNamed(AppRoutes.bottomNavigation);
             "${user!.uid.toString()}".log();
+
+            /// Auth Data API
+            await authAPI(platform, tokenFirebase);
           } else {
             Loader.hide();
           }
@@ -91,6 +110,10 @@ class LoginController extends GetxController {
       /// Click apple
       OnClick.apple: () async {
         debugPrint("apple ");
+
+        /// User Firebase Token
+        String? tokenFirebase = await FirebaseMessaging.instance.getToken();
+
         user = await AuthManager().appleLogin();
         if (user != null) {
           Get.snackbar("Login ", "User Login Successfully ");
@@ -103,11 +126,13 @@ class LoginController extends GetxController {
           await SharePreferenceData.addStringToSF(
               userProfilePic, "${user?.photoURL}");
           await SharePreferenceData.addBoolToSF(spIsEntered, true);
-
           if (userPhoneNumber.isEmpty || userProfilePic.isEmpty) {
             Get.toNamed(AppRoutes.bottomNavigation);
           }
           Get.toNamed(AppRoutes.bottomNavigation);
+
+          /// Auth Data API
+          await authAPI(platform, tokenFirebase);
         }
       },
 
@@ -121,6 +146,12 @@ class LoginController extends GetxController {
     Function act = actions[action]!;
 
     return act;
+  }
+
+  Future<void> authAPI(String platform, String? tokenFirebase) async {
+    AuthDataRequest payload =
+        AuthDataRequest(userId: user!.uid, os: platform, token: tokenFirebase);
+    await CallAPI.authDataAPI(payload: payload);
   }
 }
 

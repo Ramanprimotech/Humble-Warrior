@@ -60,7 +60,10 @@ class _SearchViewState extends State<SearchView> {
                             color: Colors.black,
                             size: 20.sp,
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            controller.clear();
+                            setState(() {});
+                          },
                         ),
                       ),
                     ),

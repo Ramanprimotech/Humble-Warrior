@@ -1,7 +1,7 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
+import 'package:humble_warrior/modals/requests/auth_data_request.dart';
 import 'package:humble_warrior/modals/requests/id_model.dart';
 import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
@@ -23,35 +23,11 @@ class CallAPI {
   static Future<TokenResponseModel> generateToken(
       {required TokenRequestModel payload}) async {
     try {
-      // payload.toString().logRequest(apiName: Endpoints.generateToken);
-
       final response = await APIManager()
           .postAPICallNoBearer(url: Endpoints.generateToken, param: payload);
-
       var tokenResponseModel = TokenResponseModel.fromJson(response);
-      // log(response.toString(), name: "${Endpoints.generateToken}");
-      // response.toString().logResponse(apiName: Endpoints.generateToken);
-      // if (response == null) {
-      //   return response.;
-      // }
-
-      // DialogHelper.closeDialog();
-
-      // if (response['status'] == 1) {
-      //   // _userController.userModel = UserModel.fromMap(response['data']);
-      //   // DialogHelper.showToast(Get.context!, response['msg']);
-      //   return true;
-      // }
-      // Endpoints.generateToken
-      //     .logError(apiName: Endpoints.generateToken, error: response);
-      // DialogHelper.showErrorDialog(
-      //   title: 'Error Updating',
-      //   description: response['msg'],
-      // );
       return tokenResponseModel;
     } catch (e) {
-      // Endpoints.generateToken
-      //     .logError(apiName: Endpoints.generateToken, error: e);
       log(e.toString());
       return TokenResponseModel();
     }
@@ -59,32 +35,16 @@ class CallAPI {
 
   static Future verifyToken({required double payload}) async {
     try {
-      // payload.toString().logRequest(apiName: Endpoints.verifyToken);
-
       dynamic response = await APIManager()
           .postAPICall(url: Endpoints.verifyToken, param: payload);
-
-      // log(response.toString(), name: "${Endpoints.verifyToken}");
-      // response.toString().logResponse(apiName: Endpoints.verifyToken);
       if (response == null) {
         return false;
       }
-
-      // DialogHelper.closeDialog();
-
       if (response['status'] == 1) {
-        // _userController.userModel = UserModel.fromMap(response['data']);
-        // DialogHelper.showToast(Get.context!, response['msg']);
         return true;
       }
-      // Endpoints.verifyToken.logError( apiName : Endpoints.verifyToken ,error: response);
-      // DialogHelper.showErrorDialog(
-      //   title: 'Error Updating',
-      //   description: response['msg'],
-      // );
       return false;
     } catch (e) {
-      // Endpoints.verifyToken.logError(apiName: Endpoints.verifyToken, error: e);
       return false;
     }
   }
@@ -304,8 +264,7 @@ class CallAPI {
       }
       return staticPagesResponse.data!;
     } catch (e) {
-      log("API",
-          name: "Help", error:e.toString());
+      log("API", name: "Help", error: e.toString());
       return [];
     }
   }
@@ -329,6 +288,21 @@ class CallAPI {
       return [];
     } catch (e) {
       rethrow;
+    }
+  }
+
+  static Future authDataAPI({required AuthDataRequest payload}) async {
+    try {
+      final response = await APIManager().postAPICallNoBearer(
+          baseUrl: "http://112.196.54.37/Development/HW",
+          url: Endpoints.authData,
+          param: payload);
+
+      log("${payload.toString()}", name: "Auth Data");
+      return Future.value(0);
+    } catch (e) {
+      log(e.toString());
+      return Future.value(0);
     }
   }
 }

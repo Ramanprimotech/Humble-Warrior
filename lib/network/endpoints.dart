@@ -13,5 +13,6 @@ class Endpoints {
   static const String homeCategories = "/hwapi/get_all_home_categories";
   static const String staticPages = "/hwapi/get_page_content";
   static const String productDetails = "/hwapi/get_product_detail";
+  static const String authData = "/pnfw/register";
   static String token = "";
 }
