@@ -9,7 +9,6 @@ import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/decorations.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
-
 import '../../utils/app_text.dart';
 import 'tab_screens/donnas_deals.dart';
 
@@ -73,7 +72,7 @@ class ItemCard extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     decoration: BoxDecoration(
                       gradient: effect == true
-                          ? LinearGradient(
+                          ? const LinearGradient(
                               colors: [
                                   Colors.transparent,
                                   Colors.black26,
@@ -81,7 +80,7 @@ class ItemCard extends StatelessWidget {
                                 ],
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter)
-                          : LinearGradient(colors: [
+                          : const LinearGradient(colors: [
                               Colors.transparent,
                               Colors.transparent,
                             ]),
@@ -124,7 +123,7 @@ Widget codeButton({required String code}) {
         decoration: BoxDecoration(
             color: AppColors.appGreen,
             borderRadius: BorderRadius.circular(20),
-            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 3)]),
+            boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 3)]),
         child: AppText(
           code,
           color: Colors.black,

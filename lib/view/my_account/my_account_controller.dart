@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +12,6 @@ import 'package:humble_warrior/view/my_account/keyboard.dart';
 import 'package:humble_warrior/view/my_account/passcode_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../utils/app_strings.dart';
 import '../../utils/routes/app_routes.dart';
 import '../../utils/shared_prefrence/shared_pref.dart';
@@ -70,7 +68,6 @@ class MyAccountController extends GetxController {
 
   void darkMode() {
     checkDark.value = !checkDark.value;
-    //themeController.changeTheme(check.value);
     Get.changeThemeMode(checkDark.value ? ThemeMode.dark : ThemeMode.light);
     themeController.upgradeFun(checkDark.value);
     themeController
@@ -107,7 +104,7 @@ class MyAccountController extends GetxController {
       _showLockScreen(
         Get.context!,
         opaque: false,
-        cancelButton: Text(
+        cancelButton: const Text(
           'Cancel',
           style: TextStyle(
             fontSize: 16,
@@ -138,7 +135,6 @@ class MyAccountController extends GetxController {
             );
           },
           action: () async {
-            // Navigator.of(Get.context!, rootNavigator: true).pop();
             Get.back(result: true);
             SharedPreferences sharedPreferences =
                 await SharedPreferences.getInstance();
@@ -168,7 +164,7 @@ class MyAccountController extends GetxController {
       PageRouteBuilder(
         opaque: opaque,
         pageBuilder: (context, animation, secondaryAnimation) => PasscodeScreen(
-          title: Text(
+          title: const Text(
             'Set Passcode',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white, fontSize: 28),
@@ -178,9 +174,9 @@ class MyAccountController extends GetxController {
           passwordEnteredCallback: _passcodeEntered,
           // cancelButton: cancelButton!,
           cancelButton: cancelButton!,
-          deleteButton: Text(
+          deleteButton: const Text(
             'Delete',
-            style: const TextStyle(fontSize: 16, color: Colors.white),
+            style: TextStyle(fontSize: 16, color: Colors.white),
             semanticsLabel: 'Delete',
           ),
           shouldTriggerVerification: _verificationNotifier.stream,
@@ -199,27 +195,20 @@ class MyAccountController extends GetxController {
         SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
         sharedPreferences.setString('PASSCODE', enteredPasscode);
-
         if (sharedPreferences.getString('PASSCODE') != null) {
-          // DialogHelper.showToast(Get.context!, 'Successfully set app passcode',);
           DialogHelper.showAlertDialog(
             'Successfully set app passcode',
             onTap: () {
               Get.back(result: true);
               Get.back(result: true);
-              // Navigator.of(Get.context!, rootNavigator: true).pop();
-              // Navigator.of(Get.context!, rootNavigator: true).pop();
             },
           );
         } else {
-          // DialogHelper.showToast(Get.context!, 'Successfully set app passcode',);
           DialogHelper.showAlertDialog(
             'Successfully reset app passcode',
             onTap: () {
               Get.back(result: true);
               Get.back(result: true);
-              // Navigator.of(context, rootNavigator: true).pop();
-              // Navigator.of(context, rootNavigator: true).pop();
             },
           );
         }
@@ -227,7 +216,6 @@ class MyAccountController extends GetxController {
       return;
     } catch (err) {
       DialogHelper.showErrorDialog();
-      // Utility().errorToast(AppMessages.defaultError, Colors.red);
       return;
     }
   }

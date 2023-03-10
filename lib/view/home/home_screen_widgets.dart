@@ -1,7 +1,6 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/view/home/home_product_category_api_widgets.dart';
-
 import '../../modals/response/brands_response_mdel.dart';
 import '../../modals/response/home_categories_response_model.dart';
 
@@ -28,14 +27,7 @@ class HomeScreenWidgets {
     return AppBar(
       toolbarHeight: 70,
       centerTitle: false,
-      title: SearchBar(),
-      // CustomSearchBar(
-      //   onTap: controller.onTap,
-      //   onSubmit: controller.onSubmit,
-      //   onChange: controller.onChange,
-      //   focusNode: controller.focusNode,
-      //   textEditingController: controller.searchTextController,
-      // ),
+      title: const SearchBar(),
       actions: [
         Padding(
           padding: 15.pr,
@@ -45,7 +37,7 @@ class HomeScreenWidgets {
             },
             child: Badge(
                 textColor: Colors.white,
-                label: AppText("14", fontSize: 8),
+                label: const AppText("14", fontSize: 8),
                 alignment: const AlignmentDirectional(15.0, -3.0),
                 child: Image.asset(
                   ImagePathAssets.bellIcon,
@@ -130,7 +122,7 @@ class HomeScreenWidgets {
           children: [
             Expanded(
               // flex: 8,
-              child: Container(
+              child: SizedBox(
                 height: productHeight,
                 width: Get.width,
                 child: ListView.builder(
@@ -363,75 +355,6 @@ class HomeScreenWidgets {
               future: controller.allBrands(),
               context: context);
         });
-    // return FutureBuilder<List<BrandDetails>>(
-    //     future: controller.allBrands(),
-    //     builder: (context, snapshot) {
-    //       if (snapshot.connectionState == ConnectionState.waiting) {
-    //         return ListView.separated(
-    //           padding: const EdgeInsets.symmetric(horizontal: 20),
-    //           scrollDirection: Axis.horizontal,
-    //           itemCount: 25,
-    //           itemBuilder: (ctx, index) {
-    //             return Container(
-    //               color: Theme.of(context)
-    //                   .floatingActionButtonTheme
-    //                   .backgroundColor,
-    //               height: 60,
-    //               width: 80,
-    //               child: Column(
-    //                 children: const [
-    //                   ShimmerLoader(
-    //                       child: AppText(
-    //                     "HW",
-    //                     fontWeight: FontWeight.w900,
-    //                     fontSize: 35,
-    //                   )),
-    //                 ],
-    //               ),
-    //             );
-    //           },
-    //           separatorBuilder: (BuildContext context, int index) {
-    //             return 20.sw;
-    //           },
-    //         );
-    //       }
-    //       if (snapshot.hasError) {
-    //         return const AppText("Something Went Wrong");
-    //       }
-    //       List<BrandDetails> data = snapshot.data ?? [];
-    //       return ListView.separated(
-    //         // physics: BouncingScrollPhysics(),
-    //         padding: const EdgeInsets.symmetric(horizontal: 20),
-    //         scrollDirection: Axis.horizontal,
-    //         controller: controller.brandScrollController,
-    //         itemCount: data.length,
-    //         itemBuilder: (ctx, index) {
-    //           return GestureDetector(
-    //             onTap: () {
-    //               CommonUtils().urlLauncher(url: data[index].brandLink!);
-    //             },
-    //             child: SizedBox(
-    //               height: 60,
-    //               width: 80,
-    //               child: Column(
-    //                 children: [
-    //                   CommonWidgets.networkImage(
-    //                     alignment: Alignment.center,
-    //                     imageUrl: data[index].brandImage!,
-    //                     fit: BoxFit.contain,
-    //                     height: 60,
-    //                     width: 80,
-    //                   ),
-    //                 ],
-    //               ),
-    //             ),
-    //           );
-    //         },
-    //         separatorBuilder: (BuildContext context, int index) {
-    //           return 20.sw;
-    //         },
-    //       );
-    //     });
   }
 
   /// Brand Title Row
@@ -460,7 +383,7 @@ class HomeScreenWidgets {
           Row(
             children: [
               const AppText(
-                "${brandsTxt} I",
+                "$brandsTxt I",
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),

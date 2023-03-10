@@ -47,18 +47,18 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
 
   @override
   Widget success({List<BrandDetails>? data}) {
-    List<BrandDetails> dataa = data ?? [];
+    List<BrandDetails> record = data ?? [];
     return Padding(
       padding: 5.pb,
       child: ListView.separated(
         padding: 20.ph,
         scrollDirection: Axis.horizontal,
         controller: controller.brandScrollController,
-        itemCount: dataa.length,
+        itemCount: record.length,
         itemBuilder: (ctx, index) {
           return GestureDetector(
             onTap: () {
-              CommonUtils().urlLauncher(url: dataa[index].brandLink!);
+              CommonUtils().urlLauncher(url: record[index].brandLink!);
             },
             child: Container(
               width: 100,
@@ -69,14 +69,10 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
                 padding: 8.pa,
                 child: CommonWidgets.networkImage(
                   alignment: Alignment.center,
-                  imageUrl: dataa[index].brandImage!,
+                  imageUrl: record[index].brandImage!,
                   fit: BoxFit.contain,
                 ),
-                // Image.asset(
-                //   alignment: Alignment.center,
-                //   dataa[index].brandImage!,
-                //   fit: BoxFit.contain,
-                // ),
+
               ),
             ),
           );

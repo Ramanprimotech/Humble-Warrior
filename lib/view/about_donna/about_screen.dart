@@ -3,7 +3,7 @@ import 'package:humble_warrior/modals/response/static_page_model.dart';
 import 'package:humble_warrior/view/static_pages/static_page_controller.dart';
 
 class AboutScreen extends StatelessWidget {
-  AboutScreen({Key? key}) : super(key: key);
+  const AboutScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +21,8 @@ class AboutScreen extends StatelessWidget {
         future: staticController.staticPageApi("40324"),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if(snapshot.connectionState == ConnectionState.waiting){
-            return Center(child: const CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
-          print(" ${ snapshot.data.toString()}");
           if(snapshot.hasError){
             return CommonWidgets.errorAPI(errorText: "${snapshot.error}",
                 context: context,
@@ -92,7 +91,7 @@ class AboutScreen extends StatelessWidget {
   _details(context, staticResponse) {
     return Container(
       padding: 10.pa,
-      margin: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+      margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
       width: Get.width,
       decoration: CustomBoxDecorations().shadow(context: context),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

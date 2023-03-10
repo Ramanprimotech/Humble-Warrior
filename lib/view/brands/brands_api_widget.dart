@@ -12,8 +12,6 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
 
   @override
   Widget error({Object? error}) {
-    DialogueThemeExtention dialogueThemeExtention =
-        Theme.of(context).extension<DialogueThemeExtention>()!;
     return CommonWidgets.errorAPI(
         buttonTitle: retryTxt,
         errorText: error.toString(),

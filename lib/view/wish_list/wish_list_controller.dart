@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:humble_warrior/modals/abstract_enums/donna_options.dart';
 import 'package:humble_warrior/utils/shared_prefrence/shared_pref.dart';
-
 import '../../utils/app_strings.dart';
 import '../../utils/routes/app_routes.dart';
 

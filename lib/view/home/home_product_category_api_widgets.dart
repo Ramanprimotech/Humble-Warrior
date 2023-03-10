@@ -1,8 +1,6 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/response/product_category_response.dart';
 
-import '../../network/endpoints.dart';
-
 class HomePageProductCategoryAPIWidgets
     extends FutureAPI<List<ProductCategoryItem>> {
   final BuildContext context;
@@ -41,8 +39,8 @@ class HomePageProductCategoryAPIWidgets
 
   @override
   Widget success({List<ProductCategoryItem>? data}) {
-    List<ProductCategoryItem> dataa = data ?? [];
-    dataa.sort((a, b) => a.id!.compareTo(b.id!));
+    List<ProductCategoryItem> record = data ?? [];
+    record.sort((a, b) => a.id!.compareTo(b.id!));
     const double productArrowIconPadding = 8;
     const double arrowWidth = 40;
     return Stack(
@@ -58,7 +56,7 @@ class HomePageProductCategoryAPIWidgets
                   color: Theme.of(context).scaffoldBackgroundColor,
                   height: brandHeight,
                   width: arrowWidth,
-                  padding: EdgeInsets.only(left: productArrowIconPadding),
+                  padding: const EdgeInsets.only(left: productArrowIconPadding),
                   child: GestureDetector(
                     onTap: () {
                       controller.productScrollController.animateTo(
@@ -74,28 +72,26 @@ class HomePageProductCategoryAPIWidgets
               ),
             ),
             Expanded(
-              // flex: 8,
-              child: Container(
+              child: SizedBox(
                 height: productHeight,
                 width: Get.width,
                 child: ListView.builder(
                     padding: 15.pr,
                     scrollDirection: Axis.horizontal,
                     controller: controller.productScrollController,
-                    itemCount: dataa.length,
+                    itemCount: record.length,
                     itemBuilder: (ctx, index) {
                       return GestureDetector(
                         onTap: () {
                           Get.toNamed(AppRoutes.categoryDetailsList,
                               arguments: [
-                                dataa[index].categoryName,
-                                dataa[index].id.toString(),
+                                record[index].categoryName,
+                                record[index].id.toString(),
                               ]);
                         },
                         child: Container(
                           padding: 20.pl,
                           height: productHeight,
-                          // width: 80,
                           child: Column(
                             children: [
                               SizedBox(
@@ -109,28 +105,10 @@ class HomePageProductCategoryAPIWidgets
                                     fit: BoxFit.fitHeight,
                                     // height: height,
                                   ));
-                                }, dataa[index].categoryImage ?? ""),
+                                }, record[index].categoryImage ?? ""),
                               ),
-
-                              // ///
-                              // SizedBox(
-                              //   height: productHeight - 25,
-                              //   child: CommonWidgets.networkImage(
-                              //       // imageUrl: dataa[index].categoryImage ?? "",
-                              //       imageUrl:
-                              //           "http://112.196.54.37/Development/HW/wp-content/uploads/2023/02/fav.jpg",
-                              //       fit: BoxFit.fitHeight,
-                              //       height: productHeight - 25,
-                              //       scale: 0.7),
-                              // ),
-
-                              ///
-                              // Image.asset(ImagePathAssets.adidasIcon,
-                              //     fit: BoxFit.fitHeight,
-                              //     height: productHeight - 25,
-                              //     scale: 0.7),
                               AppText(
-                                dataa[index].categoryName ?? "",
+                                record[index].categoryName ?? "",
                                 fontSize: 12,
                                 maxLines: 1,
                                 fontWeight: FontWeight.bold,
@@ -166,57 +144,6 @@ class HomePageProductCategoryAPIWidgets
             )
           ],
         ),
-        // Obx(
-        //   () => Visibility(
-        //     visible: controller.listBack.value,
-        //     child: Positioned(
-        //       left: 8,
-        //       child: Container(
-        //         alignment: Alignment.center,
-        //         color: Theme.of(context).scaffoldBackgroundColor,
-        //         height: brandHeight,
-        //         width: arrowWidth,
-        //         padding: EdgeInsets.only(left: productArrowIconPadding),
-        //         child: GestureDetector(
-        //           onTap: () {
-        //             controller.productScrollController.animateTo(
-        //                 controller.productScrollController.offset - (60 * 3),
-        //                 duration: const Duration(milliseconds: 150),
-        //                 curve: Curves.linear);
-        //           },
-        //           child: AppIcons.backArrrowIos(
-        //               iconColor:
-        //                   Theme.of(context).textTheme.displaySmall!.color!),
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        // Obx(
-        //   () => Visibility(
-        //     visible: controller.listForward.value,
-        //     child: Positioned(
-        //       right: 8,
-        //       child: Container(
-        //         alignment: Alignment.center,
-        //         color: Theme.of(context).scaffoldBackgroundColor,
-        //         height: brandHeight,
-        //         width: arrowWidth,
-        //         child: GestureDetector(
-        //           onTap: () {
-        //             controller.productScrollController.animateTo(
-        //                 controller.productScrollController.offset + (60 * 3),
-        //                 duration: const Duration(milliseconds: 150),
-        //                 curve: Curves.linear);
-        //           },
-        //           child: AppIcons.next(
-        //               iconColor:
-        //                   Theme.of(context).textTheme.displaySmall!.color!),
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // )
       ],
     );
   }
@@ -232,7 +159,7 @@ class HomePageProductCategoryAPIWidgets
           children: [
             Expanded(
               // flex: 8,
-              child: Container(
+              child: SizedBox(
                 height: productHeight,
                 width: Get.width,
                 child: ListView.builder(
@@ -270,7 +197,7 @@ class HomePageProductCategoryAPIWidgets
                 color: Theme.of(context).scaffoldBackgroundColor,
                 height: brandHeight,
                 width: arrowWidth,
-                padding: EdgeInsets.only(left: productArrowIconPadding),
+                padding: const EdgeInsets.only(left: productArrowIconPadding),
                 child: GestureDetector(
                   onTap: () {
                     controller.productScrollController.animateTo(

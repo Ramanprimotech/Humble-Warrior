@@ -62,13 +62,13 @@ class Keyboard extends StatelessWidget {
         ? screenSize.height / 2
         : screenSize.height - 80;
     final keyboardWidth = keyboardHeight * 3 / 4;
-    final keyboardSize = this.keyboardUIConfig.keyboardSize != null
-        ? this.keyboardUIConfig.keyboardSize!
+    final keyboardSize = keyboardUIConfig.keyboardSize != null
+        ? keyboardUIConfig.keyboardSize!
         : Size(keyboardWidth, keyboardHeight);
     return Container(
       width: keyboardSize.width,
       height: keyboardSize.height,
-      margin: EdgeInsets.only(top: 16),
+      margin: const EdgeInsets.only(top: 16),
       child: RawKeyboardListener(
         focusNode: _focusNode,
         autofocus: true,

@@ -27,18 +27,6 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
               height: 250,
               imageUrl: donnaFavouriteDetails.url!,
             ),
-            /*SizedBox(
-              height: 250,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: CommonWidgets.networkImage(
-                  imageUrl: donnaFavouriteDetails.url!,
-                  alignment: Alignment.topCenter,
-                  width: Get.width,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),*/
             Container(
               margin: 10.pv,
               padding: 7.pv,
@@ -83,7 +71,7 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
       padding: 10.ph,
       child: Row(
         children: [
-          AppText("${title} ------->", fontSize: 14),
+          AppText("$title ------->", fontSize: 14),
           10.swb,
           Container(
             margin: 10.pv,

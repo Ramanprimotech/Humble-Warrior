@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/requests/auth_data_request.dart';
-import 'package:humble_warrior/network/api_call.dart';
 
 class LoginController extends GetxController {
   User? user;

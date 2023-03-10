@@ -1,13 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/filter_modal.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/tap_handler.dart';
 import 'package:humble_warrior/view/sorting/sort_controller.dart';
 
 class Sort extends StatefulWidget {
-   Sort({Key? key}) : super(key: key);
+   const Sort({Key? key}) : super(key: key);
 
   @override
   State<Sort> createState() => _SortState();
@@ -59,7 +55,7 @@ class _SortState extends State<Sort> {
                           child: Column(children: [
                           Row(
                           children: [
-                          Expanded(
+                          const Expanded(
                           child: SizedBox(
                             height: double.maxFinite,
                             child: _BuildHeaders(),
@@ -70,7 +66,7 @@ class _SortState extends State<Sort> {
                           width: 5.w,
                           thickness: 0.2,
                       ),
-                      Expanded(
+                      const Expanded(
                           flex: 2,
                           child: SizedBox(
                             height: double.maxFinite,
@@ -98,7 +94,7 @@ class _SortState extends State<Sort> {
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [BoxShadow(color: Colors.grey.shade200, spreadRadius: 3,blurRadius: 2)]
                   ),*/
-                  child: AppText(
+                  child: const AppText(
                     "Apply",
                     fontSize: 22,
                     color: Colors.white,
@@ -134,7 +130,7 @@ class _BuildHeaders extends StatelessWidget {
           child: Obx(
             () => Card(
               color: controller.headerIndex.value==index?AppColors.primary:Colors.transparent,
-              shape: StadiumBorder(),
+              shape: const StadiumBorder(),
               elevation: 0,
               margin: 0.pa.r,
               child: Padding(

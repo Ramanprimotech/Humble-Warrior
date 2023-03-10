@@ -1,8 +1,6 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
@@ -11,7 +9,6 @@ import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/image_path_assets.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 import 'package:humble_warrior/view/my_account/account_details/account_details_controller.dart';
-import 'package:humble_warrior/view/my_account/my_account_controller.dart';
 import 'package:humble_warrior/view/my_account/my_account_widget.dart';
 
 class AccountDetails extends StatelessWidget {
@@ -20,8 +17,6 @@ class AccountDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AccountDetailsController accountController = Get.find();
-    MyAccountController controller = Get.find();
-    MyAccWidget myAccWidget = MyAccWidget(context: context);
     return Scaffold(
       body: SafeArea(
           child: Obx(
@@ -80,55 +75,6 @@ class AccountDetails extends StatelessWidget {
                 ],
               ),
       )
-          /*Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CommonWidgets.titleBar(context,
-                  title: accountDetailsTxt, fontSize: 20),
-               Expanded(
-                 child: accountController.userCheck.value == false
-                     ? Column(
-                   mainAxisAlignment: MainAxisAlignment.center,
-                       children: [
-                         Center(child: loginFirst(context)),
-                         150.sh,
-                       ],
-                     )
-                         :Padding(
-                     padding: 20.ph,
-                     child: SingleChildScrollView(
-                     child: Column(
-                     crossAxisAlignment: CrossAxisAlignment.start,
-                     // mainAxisAlignment: MainAxisAlignment.center,
-                     children: [
-                       Container(
-                         child:
-
-                       Column(children: [
-                         accountController.userCheck.value == true?profileImg():SizedBox(),
-                         30.sh,
-                         accountController.userCheck.value == true?myAccWidget.divider():SizedBox(),
-                       ]),),
-                           30.sh,
-                           heading(headingTitle: "Name"),
-                           5.sh,
-                           subTitle(title: accountController.username),
-                           20.sh,
-                           heading(headingTitle: "Email"),
-                            5.sh,
-                           subTitle(title: accountController.user),
-                           20.sh,
-                           heading(headingTitle: 'Phone Number'),
-                            5.sh,
-                           subTitle(title: accountController.userPhone.toString()),
-                           20.sh,
-              ],),
-                       ),
-                     ),
-               ),
-            ],
-          ),*/
-
           ),
     );
   }
@@ -137,7 +83,7 @@ class AccountDetails extends StatelessWidget {
     return Padding(
       padding: 20.pl,
       child: AppText(
-        '${headingTitle}',
+        '$headingTitle',
         fontSize: 14,
       ),
     );
@@ -145,12 +91,12 @@ class AccountDetails extends StatelessWidget {
 
   subTitle({title}) {
     return Padding(
-      padding: EdgeInsets.only(left: 20, right: 80),
+      padding: const EdgeInsets.only(left: 20, right: 80),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppText(
-            '${title}',
+            '$title',
             fontSize: 18,
           ),
           Divider(
@@ -175,7 +121,7 @@ class AccountDetails extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: AppColors.primary,
-              boxShadow: [BoxShadow(
+              boxShadow: const [BoxShadow(
                 color: Colors.black26,
                 blurRadius: 10,
                 spreadRadius: 1,
@@ -192,10 +138,6 @@ class AccountDetails extends StatelessWidget {
                       children: [
                         myAccWidget.profileText(
                             firstName: accountController.username),
-                        // const Icon(Icons.camera_alt,
-                        //     color: Colors.black, size: 40),
-                        // 5.sh,
-                        // const AppText(addPhotoTxt),
                       ],
                     ),
                   )

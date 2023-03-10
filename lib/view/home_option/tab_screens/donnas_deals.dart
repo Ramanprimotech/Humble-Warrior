@@ -7,7 +7,6 @@ import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
-
 import '../common_home_option.dart';
 import '../home_options_main/home_option_controller.dart';
 
@@ -34,7 +33,7 @@ class DonnaDailyDeals extends StatelessWidget {
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircularProgressIndicator(),
+                const CircularProgressIndicator(),
                 CommonWidgets.loading(),
               ],
             ));
@@ -67,7 +66,7 @@ class DonnaDailyDeals extends StatelessWidget {
                           child: Container(
                               height: 80,
                               alignment: Alignment.center,
-                              child: CircularProgressIndicator())),
+                              child: const CircularProgressIndicator())),
                     );
             },
             separatorBuilder: (BuildContext context, int index) {

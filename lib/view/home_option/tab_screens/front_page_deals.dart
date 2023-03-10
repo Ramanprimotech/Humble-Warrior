@@ -5,7 +5,6 @@ import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/image_path_assets.dart';
-
 import '../../../utils/routes/app_routes.dart';
 import '../common_home_option.dart';
 import '../home_options_main/home_option_controller.dart';
@@ -32,7 +31,7 @@ class FrontPageDeals extends StatelessWidget {
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircularProgressIndicator(),
+                const CircularProgressIndicator(),
                 CommonWidgets.loading(),
               ],
             ));
@@ -70,7 +69,7 @@ class FrontPageDeals extends StatelessWidget {
                                   child: const CircularProgressIndicator())),
                         ),
 
-                  ///Banner Ribbon
+                  ///Do not remove code for future use Banner Ribbon
                   // Positioned(
                   //   top: (220 / 4) - 4,
                   //   left: (-220 / 4) + 16,

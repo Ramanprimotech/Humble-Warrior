@@ -18,7 +18,7 @@ class CategoryListDetails extends StatelessWidget {
     controller.context = context;
     controller.id = Get.arguments[1];
     controller.categoryListApi();
-    debugPrint("${title} mm");
+    debugPrint("$title mm");
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -41,7 +41,7 @@ class CategoryListDetails extends StatelessWidget {
                           child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          CircularProgressIndicator(),
+                          const CircularProgressIndicator(),
                           CommonWidgets.loading(),
                         ],
                       ));

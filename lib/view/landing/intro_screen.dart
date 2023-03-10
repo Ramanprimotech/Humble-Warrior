@@ -4,7 +4,6 @@ import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../utils/image_path_network.dart';
 import 'intro_controller.dart';
 
