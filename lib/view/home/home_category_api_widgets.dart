@@ -35,7 +35,6 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
           context: context,
           onPress: () => controller.update([Endpoints.homeCategories])),
     );
-
   }
 
   @override
@@ -67,8 +66,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
       child: ListView.builder(
         itemBuilder: (ctx, index) {
           if (index == 3) {
-            return
-                SizedBox(
+            return SizedBox(
               height: brandHeight + brandLoveHeight + 10,
             );
           }
