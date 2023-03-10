@@ -159,7 +159,8 @@ Widget shopButton({required url, required String title}) {
 Widget shareButton({required shareUrl, Color? color = Colors.black}) {
   return IconButton(
     onPressed: () {
-      CommonUtils().share(shareUrl: "$shareUrl");
+      // CommonUtils().share(shareUrl: "$shareUrl");
+      CommonUtils().share(shareUrl: "https://humblewarrior.com/");
     },
     icon: AppIcons.share(iconColor: color),
   );
@@ -169,6 +170,7 @@ Widget bookmarkButton({required shareUrl}) {
   return IconButton(
     onPressed: () {
       CommonUtils().share(shareUrl: "$shareUrl");
+      CommonUtils().share(shareUrl: "https://humblewarrior.com/");
     },
     icon: AppIcons.bookmarks(),
   );

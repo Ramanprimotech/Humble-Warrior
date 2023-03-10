@@ -33,7 +33,7 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
           elevation: 5,
           // fixedSize: const Size(, 35),
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           backgroundColor: dialogueThemeExtention.buttonColor,
         ),
         onPressed: () {
