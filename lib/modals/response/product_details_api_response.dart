@@ -1,4 +1,4 @@
-import 'package:humble_warrior/modals/response/product_details_response.dart';
+import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 
 /// status : true
 /// data : [{"product_name":"The Classic Coatigan","url":"http://112.196.54.37/Development/HW/wp-content/uploads/2023/01/Angashion-coat-cardigan-01-12-23-LIVE-PIC-SMFT.jpg","ribbon_name":null,"product_description":"","ribbon_color":null}]

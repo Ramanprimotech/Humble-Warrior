@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:humble_warrior/modals/response/product_details_response.dart';
+import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
@@ -9,6 +9,7 @@ import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/decorations.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
+
 import '../../utils/app_text.dart';
 import 'tab_screens/donnas_deals.dart';
 
@@ -110,10 +111,10 @@ class ItemCard extends StatelessWidget {
   }
 }
 
-Widget codeButton({required String code}) {
+Widget codeButton({required String code, required BuildContext context}) {
   return IconButton(
     onPressed: () async {
-      CommonUtils().copyToClipboard(copyText: code);
+      CommonUtils().copyToClipboard(copyText: code, context: context);
     },
     icon: Container(
         alignment: Alignment.center,

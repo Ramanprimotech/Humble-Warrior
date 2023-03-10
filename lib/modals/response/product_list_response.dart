@@ -1,4 +1,4 @@
-import 'package:humble_warrior/modals/response/product_details_response.dart';
+import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 
 /// status : true
 /// total_records : "16129"

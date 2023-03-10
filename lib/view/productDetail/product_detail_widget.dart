@@ -1,5 +1,6 @@
-import '../../utils/sizes/sizes_config.dart';
 import 'package:humble_warrior/hw.dart';
+
+import '../../utils/sizes/sizes_config.dart';
 
 class ProductDetailWidget {
   final AccountOptionTheme accountOptionTheme =
@@ -40,7 +41,8 @@ class ProductDetailWidget {
   Widget shopSubButton(
       {required String shopNowUrl,
       required String subscribeUrl,
-      required String shareUrl}) {
+      required String shareUrl,
+      required BuildContext context}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -51,7 +53,7 @@ class ProductDetailWidget {
             child: button(title: shopNowTxt, backClr: AppColors.secondary)),
         Row(
           children: [
-            codeButton(code: "dfdh45"),
+            codeButton(code: "dfdh45", context: context),
             GestureDetector(
               onTap: () {
                 CommonUtils().share(shareUrl: shareUrl);

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
+import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/modals/requests/auth_data_request.dart';
 import 'package:humble_warrior/modals/requests/id_model.dart';
 import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
@@ -9,7 +10,6 @@ import 'package:humble_warrior/modals/response/front_page_response_model.dart';
 import 'package:humble_warrior/modals/response/home_categories_response_model.dart';
 import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/modals/response/product_details_api_response.dart';
-import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/modals/response/product_list_response.dart';
 import 'package:humble_warrior/modals/response/static_page_model.dart';
 import 'package:humble_warrior/modals/response/token_response.dart';
@@ -293,12 +293,12 @@ class CallAPI {
 
   static Future authDataAPI({required AuthDataRequest payload}) async {
     try {
+      log("${payload.toString()}", name: "Auth Data");
       final response = await APIManager().postAPICallNoBearer(
           baseUrl: "http://112.196.54.37/Development/HW",
           url: Endpoints.authData,
           param: payload);
 
-      log("${payload.toString()}", name: "Auth Data");
       return Future.value(0);
     } catch (e) {
       log(e.toString());

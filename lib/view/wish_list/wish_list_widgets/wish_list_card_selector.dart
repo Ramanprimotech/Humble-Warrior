@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:humble_warrior/modals/response/product_details_response.dart';
+import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/view/home_option/common_home_option.dart';
 import 'package:humble_warrior/view/wish_list/wish_list_widgets/wish_list_all_cards.dart';
 

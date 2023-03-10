@@ -1,5 +1,5 @@
-import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 
 class FavouriteDeals extends StatelessWidget with CommonAppBar {
   const FavouriteDeals({Key? key}) : super(key: key);
@@ -45,7 +45,7 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
               width: MediaQuery.of(Get.context!).size.width * .9,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

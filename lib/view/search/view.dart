@@ -1,4 +1,6 @@
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/modals/hive_modal/recent_search_model.dart';
 import 'package:humble_warrior/view/search/api_services.dart';
 import 'package:humble_warrior/view/search/model.dart';
 
@@ -11,23 +13,45 @@ class SearchView extends StatefulWidget {
 
 class _SearchViewState extends State<SearchView> {
   TextEditingController controller = TextEditingController();
+  FocusNode focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
+    FToast().init(context);
+    HiveService hiveService = Get.find();
+    Box<RecentSearch> box = hiveService.recentBox;
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             Row(
               children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(Icons.arrow_back_ios,
+                          color:
+                              Theme.of(context).textTheme.displayMedium!.color,
+                          size: 24.sp)
+                      .paddingOnly(left: 20),
+                ),
                 Expanded(
                   child: SearchBar(
                     margin: 16.pl,
                     padding: 8.pv,
                     child: TextFormField(
+                      focusNode: focusNode,
                       controller: controller,
-                      onChanged: (value) {
-                        setState(() {});
+                      onFieldSubmitted: (value) {
+                        if (value.length >= 3) {
+                          hiveService.addToRecentList(
+                              RecentSearch(productSearched: controller.text));
+                          setState(() {});
+                        } else {
+                          DialogHelper.showToast(
+                              context, "Enter at least three characters");
+                        }
                       },
                       decoration: InputDecoration(
                         contentPadding:
@@ -47,17 +71,32 @@ class _SearchViewState extends State<SearchView> {
                         prefixIcon: IconButton(
                           padding: 8.pl,
                           onPressed: () {
-                            Get.back();
+                            if (controller.text.length >= 3) {
+                              hiveService.addToRecentList(RecentSearch(
+                                  productSearched: controller.text));
+                              setState(() {});
+                            } else {
+                              focusNode.unfocus();
+                              DialogHelper.showToast(
+                                  context, "Enter at least three characters");
+                            }
                           },
-                          icon: Icon(Icons.arrow_back_ios,
-                              color: Colors.black, size: 18.sp),
+                          icon: Icon(Icons.search,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .displayMedium!
+                                  .color,
+                              size: 24.sp),
                         ),
 
                         // suffixIcon:
                         suffixIcon: GestureDetector(
                           child: Icon(
                             Icons.close,
-                            color: Colors.black,
+                            color: Theme.of(context)
+                                .textTheme
+                                .displayMedium!
+                                .color,
                             size: 20.sp,
                           ),
                           onTap: () {
@@ -71,10 +110,18 @@ class _SearchViewState extends State<SearchView> {
                 ),
                 Padding(
                   padding: 16.ph,
-                  child: CircleAvatar(
-                    maxRadius: 20.r,
-                    backgroundColor: Colors.black26,
-                    child: Icon(Icons.tune, color: Colors.black, size: 22.sp),
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.sortPages);
+                    },
+                    child: CircleAvatar(
+                      maxRadius: 20.r,
+                      backgroundColor: Colors.black26,
+                      child: Icon(Icons.tune,
+                          color:
+                              Theme.of(context).textTheme.displayMedium!.color,
+                          size: 22.sp),
+                    ),
                   ),
                 ),
               ],
@@ -85,44 +132,79 @@ class _SearchViewState extends State<SearchView> {
                 future: FetchSearchList().productDetails(controller.text),
                 builder: (ctx, snapshot) {
                   if (controller.text.length == 0) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const AppText(
-                          "Recent Searches",
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
-                        ).paddingSymmetric(horizontal: 20, vertical: 20),
-                        Expanded(
-                          child: ListView.separated(
-                            itemCount: 6,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                height: 40,
-                                padding: 10.ph,
-                                margin: 20.ph,
-                                decoration: CustomBoxDecorations()
-                                    .shadow(context: context),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: const [
-                                    AppText("Shoes"),
-                                    Icon(Icons.cancel_outlined),
-                                  ],
+                    return ValueListenableBuilder(
+                        valueListenable: box.listenable(),
+                        builder: (context, value, child) {
+                          var data = value.values.toList();
+                          var dataKeys = value.keys.toList();
+                          if (box.isEmpty) {
+                            return const Center(
+                              child: AppText(
+                                "Search Deals...",
+                                fontSize: 18,
+                              ),
+                            );
+                          }
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const AppText(
+                                "Recent",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                              ).paddingSymmetric(horizontal: 20, vertical: 20),
+                              Expanded(
+                                child: ListView.separated(
+                                  itemCount: box.length,
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        controller.text =
+                                            data[index].productSearched!;
+                                        setState(() {});
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        padding: 10.ph,
+                                        margin: 20.ph,
+                                        decoration: CustomBoxDecorations()
+                                            .shadow(context: context),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Icon(Icons.history),
+                                            AppText("${data[index].productSearched}")
+                                                .paddingOnly(left: 10),
+                                            const Spacer(),
+                                            InkWell(
+                                              child: const Icon(
+                                                Icons.cancel_outlined,
+                                              ),
+                                              onTap: () {
+                                                hiveService
+                                                    .deleteRecentSearchItem(
+                                                        dataKeys[index]
+                                                            .toString());
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return const SizedBox(
+                                      height: 20,
+                                    );
+                                  },
                                 ),
-                              );
-                            },
-                            separatorBuilder: (context, index) {
-                              return const SizedBox(
-                                height: 20,
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    );
+                              ),
+                            ],
+                          );
+                        });
                   }
+
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   }

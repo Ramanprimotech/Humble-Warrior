@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:humble_warrior/modals/abstract_enums/donna_options.dart';
-import 'package:humble_warrior/modals/response/product_details_response.dart';
+import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/view/home_option/tab_screens/donnas_deals.dart';
+
 import '../../home_option/tab_screens/front_page_deals.dart';
 
 class WishListButton implements DonnaOptions {

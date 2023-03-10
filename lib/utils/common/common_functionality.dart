@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/extensions.dart';
+import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -36,14 +37,10 @@ class CommonUtils {
   }
 
   /// Copy To Clipboard
-  void copyToClipboard({required String copyText}) {
+  void copyToClipboard(
+      {required String copyText, required BuildContext context}) {
     Clipboard.setData(ClipboardData(text: copyText)).then((value) {
-      Get.snackbar(
-        "Copied to Clipboard",
-        "",
-        backgroundColor: Colors.pinkAccent,
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      DialogHelper.showToast(context, "Copied to Clipboard");
     });
   }
 

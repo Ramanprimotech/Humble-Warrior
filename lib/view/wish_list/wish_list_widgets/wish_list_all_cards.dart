@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:humble_warrior/modals/abstract_enums/donna_options.dart';
-import 'package:humble_warrior/modals/response/product_details_response.dart';
+import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/view/wish_list/wish_list_controller.dart';
 import 'package:humble_warrior/view/wish_list/wish_list_widgets/wish_list_all_button.dart';

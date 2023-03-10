@@ -5,7 +5,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:humble_warrior/modals/response/product_details_response.dart';
+import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
+import 'package:humble_warrior/modals/hive_modal/recent_search_model.dart';
 import 'package:humble_warrior/services/hive_storage_service.dart';
 import 'package:humble_warrior/services/notification_manager.dart';
 import 'package:humble_warrior/utils/app_themes/app_theme.dart';
@@ -46,6 +47,7 @@ Future main() async {
       badge: true, alert: true, sound: true);
   await Hive.initFlutter();
   Hive.registerAdapter(ProductDetailsResponseAdapter());
+  Hive.registerAdapter(RecentSearchAdapter());
   Get.put(HiveService());
   Get.put(ThemeController());
   runApp(MyApp());
