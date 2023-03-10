@@ -32,60 +32,19 @@ class DailyDealsAPIWidgets extends FutureAPI<List<ProductDetailsResponse>>
           context: context,
           onPress: () => controller.update([Endpoints.productDetails])),
     );
-    //   Padding(
-    //   padding: const EdgeInsets.only(top: 80.0, left: 30, right: 30),
-    //   child: Container(
-    //     height: 200,
-    //     width: Get.width,
-    //     // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-    //     padding: 20.ps,
-    //     decoration: BoxDecoration(
-    //       borderRadius: BorderRadius.circular(10),
-    //       color: dialogueThemeExtention.backGroundColor,
-    //       boxShadow: [
-    //         BoxShadow(
-    //             color: dialogueThemeExtention.shadow!,
-    //             spreadRadius: 2,
-    //             blurRadius: 2,
-    //             offset: Offset(0, 0))
-    //       ],
-    //     ),
-    //     child: Column(children: [
-    //       AppText(error.toString(), maxLines: 5, fontSize: 20),
-    //       20.sh,
-    //       ElevatedButton(
-    //         style: ElevatedButton.styleFrom(
-    //           elevation: 5,
-    //           // fixedSize: const Size(, 35),
-    //           shape: RoundedRectangleBorder(
-    //               borderRadius: BorderRadius.circular(10)),
-    //           backgroundColor: dialogueThemeExtention.buttonColor,
-    //         ),
-    //         onPressed: () {
-    //           controller.update([Endpoints.homeCategories]);
-    //         },
-    //         child: const AppText('Retry',
-    //             color: Colors.white, fontWeight: FontWeight.bold),
-    //       ),
-    //     ]),
-    //   ),
-    // );
   }
 
   @override
   Widget success({List<ProductDetailsResponse>? data}) {
-    List<ProductDetailsResponse> dataa = data ?? [];
-    // return Placeholder(
-    //   color: Colors.red,
-    // );
+    List<ProductDetailsResponse> record = data ?? [];
     return Expanded(
       child: CustomRefreshIndicator(
         onRefresh: () {
-          return Future.delayed(Duration(seconds: 2), () {
+          return Future.delayed(const Duration(seconds: 2), () {
             return Future.value(0);
           });
         },
-        child: productDetails(details: dataa[0], index: 0),
+        child: productDetails(details: record[0], index: 0),
       ),
     );
   }

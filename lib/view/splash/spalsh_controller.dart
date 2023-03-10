@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -13,7 +12,6 @@ import 'package:humble_warrior/view/my_account/circle.dart';
 import 'package:humble_warrior/view/my_account/keyboard.dart';
 import 'package:humble_warrior/view/my_account/passcode_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../modals/requests/token_model_request.dart';
 import '../../network/endpoints.dart';
 import '../../utils/app_strings.dart';
@@ -54,7 +52,7 @@ class SplashController extends GetxController {
         _showLockScreen(
           Get.context!,
           opaque: false,
-          cancelButton: AppText(
+          cancelButton: const AppText(
             'Cancel',
             fontSize: 16,
           ),
@@ -113,7 +111,7 @@ class SplashController extends GetxController {
             opaque: opaque,
             pageBuilder: (context, animation, secondaryAnimation) =>
                 PasscodeScreen(
-                  title: AppText(
+                  title: const AppText(
                     'Enter Passcode',
                     textAlign: TextAlign.center,
                     fontSize: 28,
@@ -122,7 +120,7 @@ class SplashController extends GetxController {
                   keyboardUIConfig: keyboardUIConfig,
                   passwordEnteredCallback: _passcodeEntered,
                   cancelButton: cancelButton!,
-                  deleteButton: AppText(
+                  deleteButton: const AppText(
                     'Delete',
                     fontSize: 16,
                   ),

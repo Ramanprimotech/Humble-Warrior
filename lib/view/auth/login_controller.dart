@@ -70,15 +70,12 @@ class LoginController extends GetxController {
                 userEmail, "${user?.email}");
             await SharePreferenceData.addStringToSF(
                 userPhoneNumber, "${user?.phoneNumber}");
-            print("User phone number ${user?.phoneNumber}");
             await SharePreferenceData.addStringToSF(
                 userName, "${user?.displayName}");
             await SharePreferenceData.addStringToSF(
                 userProfilePic, "${user?.photoURL}");
             await SharePreferenceData.addBoolToSF(spIsEntered, true);
-
             Get.offNamed(AppRoutes.bottomNavigation);
-            "${user!.uid.toString()}".log();
           } else {
             Loader.hide();
           }

@@ -14,7 +14,7 @@ class NotificationScreen extends StatelessWidget {
             Expanded(
               child: CustomRefreshIndicator(
                 onRefresh: () {
-                  return Future.delayed(Duration(seconds: 2), () {
+                  return Future.delayed(const Duration(seconds: 2), () {
                     return Future.value(0);
                   });
                 },

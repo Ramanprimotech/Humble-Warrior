@@ -35,14 +35,13 @@ class WishList extends StatelessWidget {
                     ? loginFirst(context)
                     : CustomRefreshIndicator(
                         onRefresh: () {
-                          return Future.delayed(Duration(seconds: 2), () {
+                          return Future.delayed(const Duration(seconds: 2), () {
                             return Future.value(0);
                           });
                         },
                         child: ValueListenableBuilder(
                             valueListenable: box.listenable(),
                             builder: (context, value, child) {
-                              var keys = value.keys.toList();
                               var values = value.values.toList();
                               return values.isEmpty
                                   ? const Center(

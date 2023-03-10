@@ -35,52 +35,13 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
           context: context,
           onPress: () => controller.update([Endpoints.homeCategories])),
     );
-    //   Padding(
-    //   padding: const EdgeInsets.only(top: 80.0, left: 30, right: 30),
-    //   child: Container(
-    //     height: 200,
-    //     width: Get.width,
-    //     // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-    //     padding: 20.ps,
-    //     decoration: BoxDecoration(
-    //       borderRadius: BorderRadius.circular(10),
-    //       color: dialogueThemeExtention.backGroundColor,
-    //       boxShadow: [
-    //         BoxShadow(
-    //             color: dialogueThemeExtention.shadow!,
-    //             spreadRadius: 2,
-    //             blurRadius: 2,
-    //             offset: Offset(0, 0))
-    //       ],
-    //     ),
-    //     child: Column(children: [
-    //       AppText(error.toString(), maxLines: 5, fontSize: 20),
-    //       20.sh,
-    //       ElevatedButton(
-    //         style: ElevatedButton.styleFrom(
-    //           elevation: 5,
-    //           // fixedSize: const Size(, 35),
-    //           shape: RoundedRectangleBorder(
-    //               borderRadius: BorderRadius.circular(10)),
-    //           backgroundColor: dialogueThemeExtention.buttonColor,
-    //         ),
-    //         onPressed: () {
-    //           controller.update([Endpoints.homeCategories]);
-    //         },
-    //         child: const AppText('Retry',
-    //             color: Colors.white, fontWeight: FontWeight.bold),
-    //       ),
-    //     ]),
-    //   ),
-    // );
+
   }
 
   @override
   Widget success({List<HomeCategoryList>? data}) {
-    List<HomeCategoryList> dataa = data!?? [];
-    print("before ${dataa.toString()}");
-    dataa.sort((a,b)=> a.id!.compareTo(b.id!));
-    print("after ${dataa.toString()}");
+    List<HomeCategoryList> record = data ?? [];
+    record.sort((a,b)=> a.id!.compareTo(b.id!));
     return Expanded(
       child: CustomRefreshIndicator(
         onRefresh: () {
@@ -90,11 +51,11 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
         },
         child: ListView.builder(
           padding: 10.pb,
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           itemBuilder: (ctx, index) {
-            return homeOption(homeOptions: dataa[index], index: index);
+            return homeOption(homeOptions: record[index], index: index);
           },
-          itemCount: dataa.length,
+          itemCount: record.length,
         ),
       ),
     );
@@ -107,20 +68,9 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
         itemBuilder: (ctx, index) {
           if (index == 3) {
             return
-                // ValueListenableBuilder(
-                // valueListenable: controller.keyboardIsOpened,
-                // builder: (context, value, child) {
-                //   return
-                //     Visibility(
-                //     visible: value,
-                //     child:
                 SizedBox(
               height: brandHeight + brandLoveHeight + 10,
             );
-
-            // );
-            // },
-            // );1
           }
           return ShimmerLoader(
             child: homeOption(
@@ -154,16 +104,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
                   CustomBoxDecorations().shadow(context: context, radius: 10),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child:
-                    // Image.asset(
-                    //   homeOptions.categoryImage!,
-                    //   width: Get.width,
-                    //   fit: BoxFit.fitWidth,
-                    //   height: 200,
-                    //   alignment: Alignment.topCenter,
-                    //   // width: Get.width,
-                    // ),
-                    CommonWidgets.networkImage(
+                child: CommonWidgets.networkImage(
                   imageUrl: homeOptions.categoryImage!,
                   fit: BoxFit.fitWidth,
                   height: 200,

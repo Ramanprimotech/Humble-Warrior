@@ -4,7 +4,6 @@ import 'package:humble_warrior/modals/response/product_details_response.dart';
 import 'package:humble_warrior/network/endpoints.dart';
 import 'package:humble_warrior/services/hive_storage_service.dart';
 import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
-
 import '../../../modals/requests/pagination_modal.dart';
 import '../../../network/api_call.dart';
 

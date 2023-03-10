@@ -52,16 +52,6 @@ class HomeScreenController extends GetxController implements SearchActions {
     super.onInit();
   }
 
-  // List<String> products = [
-  //   "https://www.freepnglogos.com/uploads/shoes-png/mens-shoes-png-transparent-images-images-11.png",
-  //   "https://e7.pngegg.com/pngimages/757/605/png-clipart-women-s-yellow-sleeveless-dress-dress-see-through-clothing-top-women-dress-tshirt-orange.png",
-  //   "https://www.pngfind.com/pngs/m/162-1629667_18-handbag-hd-png-download.png",
-  //   "https://www.pngfind.com/pngs/m/505-5055598_your-engagement-pre-engagement-ring-hd-png-download.png"
-  // ];
-
-  // Future<List<BrandDetails>> allBrands() async {
-  //   return await CallAPI.allBrands();
-  // }
   Future<List<BrandDetails>> allBrands() async {
     // List<BrandDetails> data = [];
     // data.add(BrandDetails(

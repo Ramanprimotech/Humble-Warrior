@@ -1,7 +1,6 @@
 library passcode_screen;
 
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:humble_warrior/utils/shake_curve.dart';
@@ -32,7 +31,7 @@ class PasscodeScreen extends StatefulWidget {
   final Widget? bottomWidget;
   final List<String>? digits;
 
-  PasscodeScreen({
+  const PasscodeScreen({
     Key? key,
     required this.title,
     this.passwordDigits = 6,
@@ -142,38 +141,36 @@ class _PasscodeScreenState extends State<PasscodeScreen>
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                child: Stack(
-                  children: <Widget>[
-                    Positioned(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            widget.title,
-                            Container(
-                              margin: const EdgeInsets.only(top: 20),
-                              height: 40,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: _buildCircles(),
-                              ),
+              Stack(
+                children: <Widget>[
+                  Positioned(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          widget.title,
+                          Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            height: 40,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: _buildCircles(),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                    widget.bottomWidget != null
-                        ? Positioned(
-                      child: Align(
-                          alignment: Alignment.topCenter,
-                          child: widget.bottomWidget),
-                    )
-                        : Container()
-                  ],
-                ),
+                  ),
+                  widget.bottomWidget != null
+                      ? Positioned(
+                    child: Align(
+                        alignment: Alignment.topCenter,
+                        child: widget.bottomWidget),
+                  )
+                      : Container()
+                ],
               ),
               _buildKeyboard(),
             ],
@@ -189,12 +186,10 @@ class _PasscodeScreenState extends State<PasscodeScreen>
     ],
   );
 
-  _buildKeyboard() => Container(
-    child: Keyboard(
-      onKeyboardTap: _onKeyboardButtonPressed,
-      keyboardUIConfig: widget.keyboardUIConfig,
-      digits: widget.digits,
-    ),
+  _buildKeyboard() => Keyboard(
+    onKeyboardTap: _onKeyboardButtonPressed,
+    keyboardUIConfig: widget.keyboardUIConfig,
+    digits: widget.digits,
   );
 
   List<Widget> _buildCircles() {
@@ -204,7 +199,7 @@ class _PasscodeScreenState extends State<PasscodeScreen>
     for (int i = 0; i < widget.passwordDigits; i++) {
       list.add(
         Container(
-          margin: EdgeInsets.all(8),
+          margin: const EdgeInsets.all(8),
           child: Circle(
             filled: i < enteredPasscode.length,
             circleUIConfig: config,

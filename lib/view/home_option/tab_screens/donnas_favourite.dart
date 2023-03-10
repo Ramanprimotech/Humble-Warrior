@@ -29,7 +29,7 @@ class DonnaFavourite extends StatelessWidget {
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircularProgressIndicator(),
+                const CircularProgressIndicator(),
                 CommonWidgets.loading(),
               ],
             ));
@@ -68,7 +68,7 @@ class DonnaFavourite extends StatelessWidget {
                           child: Container(
                               height: 50,
                               alignment: Alignment.center,
-                              child: CircularProgressIndicator())),
+                              child: const CircularProgressIndicator())),
                     );
             },
             separatorBuilder: (BuildContext context, int index) {

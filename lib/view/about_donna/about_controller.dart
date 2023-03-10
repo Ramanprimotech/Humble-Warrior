@@ -9,10 +9,5 @@ class AboutScreenController extends GetxController {
     isOpen.value = !isOpen.value;
   }
 
-  @override
-  void onInit() {
-
-    super.onInit();
-  }
 
 }

@@ -1,5 +1,4 @@
 import '../../utils/sizes/sizes_config.dart';
-
 import 'package:humble_warrior/hw.dart';
 
 class ProductDetailWidget {
@@ -90,7 +89,7 @@ class ProductDetailWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppText(
-            "What is ${itemName}",
+            "What is $itemName",
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ).px(6),
