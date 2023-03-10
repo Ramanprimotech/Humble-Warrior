@@ -42,7 +42,7 @@ class LoginController extends GetxController {
         try {
           user = await AuthManager().facebookLogin();
           if (user != null) {
-            Get.snackbar("Login ", "User Login Successfully ");
+            // Get.snackbar("Login ", "User Login Successfully ");
             await SharePreferenceData.addBoolToSF(spIsLogged, true);
             await SharePreferenceData.addStringToSF(
                 userEmail, "${user?.email}");
@@ -77,7 +77,8 @@ class LoginController extends GetxController {
 
           if (user != null) {
             Loader.hide();
-            Get.snackbar("Login ", "User Login Successfully ");
+            // DialogHelper.showToast(context, "User Login Successfully");
+            // Get.snackbar("Login ", "User Login Successfully ");
             await SharePreferenceData.addBoolToSF(spIsLogged, true);
             await SharePreferenceData.addStringToSF(
                 userEmail, "${user?.email}");
@@ -110,7 +111,7 @@ class LoginController extends GetxController {
 
         user = await AuthManager().appleLogin();
         if (user != null) {
-          Get.snackbar("Login ", "User Login Successfully ");
+          // Get.snackbar("Login ", "User Login Successfully ");
           await SharePreferenceData.addBoolToSF(spIsLogged, true);
           await SharePreferenceData.addStringToSF(userEmail, "${user?.email}");
           await SharePreferenceData.addStringToSF(
@@ -150,10 +151,11 @@ class LoginController extends GetxController {
     String? tokenFirebase = await FirebaseMessaging.instance.getToken();
 
     AuthDataRequest payload = AuthDataRequest(
-        userId: user!.uid,
-        os: platform,
-        token: tokenFirebase,
-        email: user!.email);
+        token:
+            "fySpxrqohkWot05MRnjKFy:APA91bEvxkdE4Vl7I5nrxo9foGMZmYxHLTt_4mL8x0nIS18LgGJyjWzNKtyxqfIMSQfcnOrqXeVxOavDxOo1lnr2pm1-j9fh8iaqp_tCtmP09g7ouMFoxW6bcBzIj6FkL3KjZVtpHr1C",
+        // os: "iOS",
+        userId: "7NanqxSoDdOoeWNL7uaLuJNvNvC3",
+        email: "bm6532076@gmail.com");
     await CallAPI.authDataAPI(payload: payload);
   }
 }

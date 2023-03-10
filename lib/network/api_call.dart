@@ -293,16 +293,16 @@ class CallAPI {
 
   static Future authDataAPI({required AuthDataRequest payload}) async {
     try {
-      log("${payload.toString()}", name: "Auth Data");
+      log("|${payload.toJson()}|", name: "Auth Data");
       final response = await APIManager().postAPICallNoBearer(
-          baseUrl: "http://112.196.54.37/Development/HW",
-          url: Endpoints.authData,
+          baseUrl: "http://112.196.54.37/Development/HW/pnfw/register",
+          url: "",
           param: payload);
 
-      return Future.value(0);
+      return;
     } catch (e) {
       log(e.toString());
-      return Future.value(0);
+      return;
     }
   }
 }

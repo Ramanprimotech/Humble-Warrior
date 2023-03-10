@@ -76,7 +76,7 @@ class APIManager {
             // 'Authorization': 'Bearer ${Endpoints.token}'
           },
           body: jsonEncode(param.toJson()));
-      log(response.body);
+      log(response.body, name: "AAPI Body $url");
       log(response.statusCode.toString(), name: "AAPI Status $url");
       responseJson = _response(response);
     } on SocketException {

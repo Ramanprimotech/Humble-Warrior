@@ -87,7 +87,7 @@ ItemCard donnaDealsCard(
     {dailyDeals}) {
   return ItemCard(
     onTap: () {
-      Get.toNamed(AppRoutes.dailyDealProductDetail, arguments: [details.id]);
+      Get.toNamed(AppRoutes.dailyDealProductDetail, arguments: [details]);
     },
     radius: 10,
     buttons: donnaDealsButton(details, index, context, dailyDeals: dailyDeals),
