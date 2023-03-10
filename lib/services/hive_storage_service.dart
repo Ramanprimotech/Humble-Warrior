@@ -74,6 +74,7 @@ class HiveService extends GetxController {
   @override
   void onClose() {
     box.close();
+    recentBox.close();
     super.onClose();
   }
 }
