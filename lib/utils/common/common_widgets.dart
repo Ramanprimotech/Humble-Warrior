@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
@@ -139,10 +140,17 @@ class CommonWidgets {
   }
 
   static Widget titleBar(context,
-      {Color? color, title, Widget? widget, icon = false, double? fontSize,Function()? onPress, backIcon = true}) {
+      {Color? color,
+      title,
+      Widget? widget,
+      icon = false,
+      double? fontSize,
+      Function()? onPress,
+      backIcon = true}) {
     return Container(
-      height: 50,
-      margin: 20.pa,
+      height: 45,
+      margin: EdgeInsets.only(top: 10, bottom: 20, left: 20, right: 20),
+
       // padding: const EdgeInsets.only(right: 20),
       width: MediaQuery.of(Get.context!).size.width,
       decoration: CustomBoxDecorations().shadow(context: context),
@@ -155,8 +163,8 @@ class CommonWidgets {
             children: [
               AppText(
                 title,
-                fontSize: fontSize ?? 18,
-                color: color,
+                fontSize: fontSize ?? 16,
+                color: color ?? AppColors.primary,
                 fontWeight: FontWeight.bold,
               ),
               5.sw,
@@ -170,7 +178,7 @@ class CommonWidgets {
                   : SizedBox(),
             ],
           ),
-          widget??40.sw
+          widget ?? 40.sw
         ],
       ),
     );

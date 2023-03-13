@@ -1,6 +1,7 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/view/home/home_product_category_api_widgets.dart';
+
 import '../../modals/response/brands_response_mdel.dart';
 import '../../modals/response/home_categories_response_model.dart';
 
@@ -25,12 +26,11 @@ class HomeScreenWidgets {
     ImageIconTheme imageIconTheme =
         Theme.of(context).extension<ImageIconTheme>()!;
     return AppBar(
-      toolbarHeight: 70,
       centerTitle: false,
       title: const SearchBar(),
       actions: [
         Padding(
-          padding: 15.pr,
+          padding: 25.pr,
           child: InkWell(
             onTap: () {
               Get.toNamed(AppRoutes.notification);
@@ -389,7 +389,7 @@ class HomeScreenWidgets {
               ),
               5.swb,
               Padding(
-                padding: 2.pt,
+                padding: 2.pb,
                 child: AppIcons.heart(
                   iconColor: Colors.red,
                 ),
@@ -410,6 +410,4 @@ class HomeScreenWidgets {
       ),
     );
   }
-
-
 }

@@ -8,62 +8,65 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeScreenController controller = Get.find();
-    final StaticPagesController staticController = Get.find<StaticPagesController>();
+    final StaticPagesController staticController =
+        Get.find<StaticPagesController>();
     return Scaffold(
-      appBar: CommonAppBar().AppBarWidget(
-        showBackButton: true,
-        title: CustomSearchBar(
-          focusNode: controller.focusNode,
-          textEditingController: controller.searchTextController,
-        ),
-      ),
       body: FutureBuilder<List<StaticData>>(
         future: staticController.staticPageApi("40324"),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if(snapshot.connectionState == ConnectionState.waiting){
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
-          if(snapshot.hasError){
-            return CommonWidgets.errorAPI(errorText: "${snapshot.error}",
+          if (snapshot.hasError) {
+            return CommonWidgets.errorAPI(
+                errorText: "${snapshot.error}",
                 context: context,
-                onPress: (){Get.back();},
+                onPress: () {
+                  Get.back();
+                },
                 buttonTitle: "OK");
           }
           List<StaticData> staticResponse = snapshot.data!;
-        return staticResponse.isNotEmpty?Column(
-          children: [
-            Expanded(
-              child: ListView(children: [
-                /// About Donna title
-                CommonWidgets.titleBar(context,
-                    backIcon: false,
-                    title: aboutDonnaTxt,
-                    fontSize: 18,
-                    color: AppColors.primary),
+          return staticResponse.isNotEmpty
+              ? Column(
+                  children: [
+                    Expanded(
+                      child: ListView(children: [
+                        /// About Donna title
+                        CommonWidgets.titleBar(
+                          context,
+                          backIcon: true,
+                          title: aboutDonnaTxt,
+                          fontSize: 18,
+                          color: AppColors.primary,
+                        ),
 
-                /// About image
-                _showImg(staticResponse),
+                        /// About image
+                        _showImg(staticResponse),
 
-                /// About Details
-                _details(context, staticResponse),
+                        /// About Details
+                        _details(context, staticResponse),
 
-                /// See copy of humble warrior button
-                _seeCopyButton(),
-                25.shb,
-              ]),
-            ),
+                        /// See copy of humble warrior button
+                        _seeCopyButton(),
+                        25.shb,
+                      ]),
+                    ),
 
-            /// Brands List
-            HomeScreenWidgets(context: context, controller: controller)
-                .brandsList(),
-            25.shb,
-          ],
-        ):Center(
-          child: CommonWidgets.errorAPI(errorText: "${snapshot.error}",
-          context: context,
-          onPress: (){Get.back();},
-          buttonTitle: "OK")
-          );
+                    /// Brands List
+                    HomeScreenWidgets(context: context, controller: controller)
+                        .brandsList(),
+                    25.shb,
+                  ],
+                )
+              : Center(
+                  child: CommonWidgets.errorAPI(
+                      errorText: "${snapshot.error}",
+                      context: context,
+                      onPress: () {
+                        Get.back();
+                      },
+                      buttonTitle: "OK"));
         },
       ),
     );
@@ -77,7 +80,7 @@ class AboutScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
         child: CommonWidgets.networkImage(
           imageUrl: staticResponse[0].pageImage.toString(),
-              // "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
+          // "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
           fit: BoxFit.fitWidth,
           height: 200,
           alignment: Alignment.topCenter,

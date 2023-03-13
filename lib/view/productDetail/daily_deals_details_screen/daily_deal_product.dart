@@ -1,12 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/utils/common/common_appBar.dart';
-import 'package:humble_warrior/utils/search_bar/search_bar_ui.dart';
 
-import '../../home_option/tab_screens/donnas_deals.dart';
-import '../product_detail_widget.dart';
-import 'daily_deal_product_controller.dart';
+import '../../../hw.dart';
 
 class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
   DailyDealProduct({Key? key}) : super(key: key);
@@ -16,23 +10,27 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
     final DailyDealProductController controller = Get.find();
     final ProductDetailsResponse donnaDealsDetails = Get.arguments[0];
     return Scaffold(
-      appBar: CommonAppBar().AppBarWidget(
-        showBackButton: true,
-        title: CustomSearchBar(
-          focusNode: controller.focusNode,
-          textEditingController: controller.searchTextController,
-        ),
-      ),
-      body: SingleChildScrollView(
+      body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-              child: donnaDealsCard(donnaDealsDetails, 0, context),
+            CommonWidgets.titleBar(context,
+                title: "Product Details", fontSize: 20, backIcon: true),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 20),
+                      child: donnaDealsCard(donnaDealsDetails, 0, context,
+                          isDetails: true),
+                    ),
+                    productText(context, donnaDealsDetails.itemName.toString()),
+                    productDescription(),
+                  ],
+                ),
+              ),
             ),
-            productText(context, donnaDealsDetails.itemName.toString()),
-            productDescription(),
           ],
         ),
       ),

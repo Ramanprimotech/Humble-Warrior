@@ -52,7 +52,8 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
           padding: 10.pb,
           physics: const BouncingScrollPhysics(),
           itemBuilder: (ctx, index) {
-            return homeOption(homeOptions: record[index], index: index);
+            return homeOption(homeOptions: record[index], index: index)
+                .paddingOnly(bottom: index == record.length - 1 ? 40 : 0);
           },
           itemCount: record.length,
         ),
@@ -105,7 +106,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
                 child: CommonWidgets.networkImage(
                   imageUrl: homeOptions.categoryImage!,
                   fit: BoxFit.fitWidth,
-                  height: 200,
+                  height: 220,
                   alignment: Alignment.topCenter,
                   // width: Get.width,
                 ),

@@ -43,7 +43,6 @@ class FetchSearchList {
       var response = await APIManager()
           .postAPICall(url: Endpoints.productDetails, param: payload);
 
-      print("Search =====  $response");
       SingleProductDetailsResponse productDetailsApiResponse =
           SingleProductDetailsResponse.fromJson(response);
 

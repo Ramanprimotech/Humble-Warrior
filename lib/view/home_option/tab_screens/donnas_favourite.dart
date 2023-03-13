@@ -86,7 +86,8 @@ class DonnaFavourite extends StatelessWidget {
     return InkWell(
       onTap: onTap ?? () {},
       child: SizedBox(
-        height: height ?? 220,
+        // height: height ?? 160 + 50,
+        height: Get.width - 40,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12),
           child: CommonWidgets.networkImage(

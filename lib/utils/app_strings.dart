@@ -34,6 +34,7 @@ const String myWishlistTxt = "My Wishlist";
 const String hwAmazonTxt = "HW Amazon";
 const String joinUsTxt = "Join Us!";
 const String accountTxt = "Account";
+const String photoViewerTxt = "Photo Viewer";
 
 /*===================================================Home page strings========================================================*/
 

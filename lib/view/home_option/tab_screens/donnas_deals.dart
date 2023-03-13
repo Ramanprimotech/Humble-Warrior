@@ -5,6 +5,7 @@ import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
+import 'package:humble_warrior/utils/common/photo_viewer.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 
@@ -84,10 +85,16 @@ class DonnaDailyDeals extends StatelessWidget {
 
 ItemCard donnaDealsCard(
     ProductDetailsResponse details, int index, BuildContext context,
-    {dailyDeals}) {
+    {dailyDeals, bool isDetails = false}) {
   return ItemCard(
     onTap: () {
-      Get.toNamed(AppRoutes.dailyDealProductDetail, arguments: [details]);
+      if (isDetails) {
+        if (details.url != "" || details.url != null) {
+          Get.to(CustomPhotoViewer(url: details.url!));
+        }
+      } else {
+        Get.toNamed(AppRoutes.dailyDealProductDetail, arguments: [details]);
+      }
     },
     radius: 10,
     buttons: donnaDealsButton(details, index, context, dailyDeals: dailyDeals),

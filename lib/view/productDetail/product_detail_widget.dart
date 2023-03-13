@@ -95,18 +95,22 @@ class ProductDetailWidget {
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ).px(6),
-          const ReadMoreText(
+          const AppText(
             AppStrings.lorem,
-            trimLines: 20,
-            colorClickableText: Colors.pink,
-            trimMode: TrimMode.Length,
-            trimCollapsedText: readmoreTxt,
-            trimExpandedText: readlessTxt,
-            lessStyle: TextStyle(
-                fontSize: 15, fontWeight: FontWeight.bold, color: Colors.blue),
-            moreStyle: TextStyle(
-                fontSize: 15, fontWeight: FontWeight.bold, color: Colors.blue),
-          ).p(6)
+            maxLines: 90,
+          ).p(6),
+          // const ReadMoreText(
+          //   AppStrings.lorem,
+          //   trimLines: 20,
+          //   colorClickableText: Colors.pink,
+          //   trimMode: TrimMode.Length,
+          //   trimCollapsedText: readmoreTxt,
+          //   trimExpandedText: readlessTxt,
+          //   lessStyle: TextStyle(
+          //       fontSize: 15, fontWeight: FontWeight.bold, color: Colors.blue),
+          //   moreStyle: TextStyle(
+          //       fontSize: 15, fontWeight: FontWeight.bold, color: Colors.blue),
+          // ).p(6)
         ],
       ).p(6),
     ).py(6);

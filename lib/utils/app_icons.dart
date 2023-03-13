@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -225,9 +223,6 @@ class _HeartState extends State<Heart> {
     return ValueListenableBuilder(
       valueListenable: box.listenable(keys: [widget.item.id.toString()]),
       builder: (context, box, child) {
-        log("${widget.item.itemName}   ${widget.id.toString()}",
-            name: "Update Item");
-
         return GestureDetector(
           key: widget.key,
           onTap: () {

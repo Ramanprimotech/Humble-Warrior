@@ -6,6 +6,7 @@ import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_functionality.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
+import 'package:humble_warrior/utils/common/photo_viewer.dart';
 import 'package:humble_warrior/utils/decorations.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
@@ -30,7 +31,7 @@ class ItemCard extends StatelessWidget {
       this.buttons,
       this.buttonbarHeight = 50,
       this.radius = 15,
-      this.imageHeight = 220,
+      this.imageHeight = 160,
       this.imageTitleHeight = 60,
       this.cardHeight,
       this.onTap,
@@ -44,14 +45,16 @@ class ItemCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap ?? () {},
       child: Container(
-        height: imageHeight + buttonbarHeight,
+        // height: imageHeight + buttonbarHeight,
+        height: Get.width - 40,
         decoration: CustomBoxDecorations().shadow(context: context),
         child: Column(
           children: [
             Stack(
               children: [
                 SizedBox(
-                  height: imageHeight,
+                  // height: imageHeight,
+                  height: Get.width - buttonbarHeight - 40,
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(radius),
@@ -59,7 +62,7 @@ class ItemCard extends StatelessWidget {
                     ),
                     child: CommonWidgets.networkImage(
                       imageUrl: imageUrl,
-                      alignment: Alignment.topCenter,
+                      alignment: Alignment.center,
                       width: Get.width,
                       fit: BoxFit.cover,
                     ),
@@ -179,10 +182,16 @@ Widget bookmarkButton({required shareUrl}) {
 
 ItemCard categoryListCard(
     ProductDetailsResponse details, int index, BuildContext context,
-    {bool? categoryCard = false}) {
+    {bool? categoryCard = false, bool isDetails = false}) {
   return ItemCard(
     onTap: () {
-      Get.toNamed(AppRoutes.categoryItemDetail, arguments: [details]);
+      if (isDetails) {
+        if (details.url != "" || details.url != null) {
+          Get.to(CustomPhotoViewer(url: details.url!));
+        }
+      } else {
+        Get.toNamed(AppRoutes.categoryItemDetail, arguments: [details]);
+      }
     },
     radius: 10,
     buttons:

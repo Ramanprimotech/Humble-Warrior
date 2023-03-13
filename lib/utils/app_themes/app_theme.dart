@@ -44,15 +44,7 @@ ThemeData _lightTheme = ThemeData.from(
     useMaterial3: true,
     floatingActionButtonTheme:
         const FloatingActionButtonThemeData(backgroundColor: AppColors.white),
-    appBarTheme: AppBarTheme(
-      elevation: 0,
-      centerTitle: true,
-      titleTextStyle: TextStyle(color: AppColors.gray),
-      surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.white,
-      iconTheme: IconThemeData(color: AppColors.gray),
-      actionsIconTheme: IconThemeData(color: AppColors.gray),
-    ),
+    appBarTheme: lightAppBarTheme,
     tabBarTheme: lightTabBarTheme,
     bottomNavigationBarTheme: lightBottomNavigationBarThemeData);
 
@@ -281,18 +273,19 @@ BottomNavigationBarThemeData darkBottomNavigationBarThemeData =
 
 ///---Light
 AppBarTheme lightAppBarTheme = AppBarTheme(
+  toolbarHeight: 70,
   elevation: 0,
   centerTitle: true,
-  titleTextStyle: const TextStyle(color: AppColors.white),
-  backgroundColor: AppColors.backgroundDark,
+  titleTextStyle: TextStyle(color: AppColors.gray),
   surfaceTintColor: Colors.transparent,
-  iconTheme: const IconThemeData(color: AppColors.white),
-  actionsIconTheme: const IconThemeData(color: AppColors.white),
-  foregroundColor: AppColors.gray,
+  backgroundColor: AppColors.white,
+  iconTheme: IconThemeData(color: AppColors.gray),
+  actionsIconTheme: IconThemeData(color: AppColors.gray),
 );
 
 ///---Dark
 AppBarTheme darkAppBarTheme = AppBarTheme(
+  toolbarHeight: 70,
   elevation: 0,
   centerTitle: true,
   titleTextStyle: const TextStyle(color: AppColors.white),

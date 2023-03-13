@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/modals/response/donna_deals_response.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
 import 'package:humble_warrior/modals/response/front_page_response_model.dart';
-import 'package:humble_warrior/services/hive_storage_service.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
@@ -21,8 +19,6 @@ class WishList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WishListController controller = Get.find();
-    HiveService service = Get.find<HiveService>();
-    Box<ProductDetailsResponse> box = service.box;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -31,51 +27,82 @@ class WishList extends StatelessWidget {
                 title: myWishlistTxt, fontSize: 20, backIcon: false),
             Expanded(
               child: Center(
-                child: controller.value == false
-                    ? loginFirst(context)
-                    : CustomRefreshIndicator(
-                        onRefresh: () {
-                          return Future.delayed(const Duration(seconds: 2), () {
-                            return Future.value(0);
-                          });
-                        },
-                        child: ValueListenableBuilder(
-                            valueListenable: box.listenable(),
-                            builder: (context, value, child) {
-                              var values = value.values.toList();
-                              return values.isEmpty
-                                  ? const Center(
-                                      child: AppText(
-                                        "No Item Added in Favourite",
-                                        fontSize: 20,
-                                      ),
-                                    )
-                                  : ListView.separated(
-                                      itemCount: values.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        ProductDetailsResponse details =
-                                            values[index];
-                                        return Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 20, right: 20, bottom: 20),
-                                          child: WishListCardSelector(
-                                            details: details,
-                                            index: index,
-                                            context: context,
-                                          ),
-                                        );
-                                      },
-                                      separatorBuilder:
-                                          (BuildContext context, int index) {
-                                        return const SizedBox(
-                                          height: 20,
-                                        );
-                                      },
-                                    );
-                            }),
-                      ),
-              ),
+                  child: controller.value == false
+                      ? loginFirst(context)
+                      : CustomRefreshIndicator(
+                          onRefresh: () async {
+                            return Future.delayed(Duration(seconds: 1), () {
+                              controller.getWishList();
+                              return Future.value(0);
+                            });
+                          },
+                          // child: ValueListenableBuilder(
+                          //     valueListenable: box.listenable(),
+                          //     builder: (context, value, child) {
+                          //       var values = value.values.toList();
+                          //       return values.isEmpty
+                          //           ? const Center(
+                          //               child: AppText(
+                          //                 "No Item Added in Favourite",
+                          //                 fontSize: 20,
+                          //               ),
+                          //             )
+                          //           : ListView.separated(
+                          //               itemCount: values.length,
+                          //               itemBuilder:
+                          //                   (BuildContext context, int index) {
+                          //                 ProductDetailsResponse details =
+                          //                     values[index];
+                          //                 return Padding(
+                          //                   padding: const EdgeInsets.only(
+                          //                       left: 20, right: 20, bottom: 20),
+                          //                   child: WishListCardSelector(
+                          //                     details: details,
+                          //                     index: index,
+                          //                     context: context,
+                          //                   ),
+                          //                 );
+                          //               },
+                          //               separatorBuilder:
+                          //                   (BuildContext context, int index) {
+                          //                 return const SizedBox(
+                          //                   height: 20,
+                          //                 );
+                          //               },
+                          //             );
+                          //     }),
+                          child: Obx(
+                            () => controller.data.value.isEmpty
+                                ? const Center(
+                                    child: AppText(
+                                      "No Item Added in Favourite",
+                                      fontSize: 20,
+                                    ),
+                                  )
+                                : ListView.separated(
+                                    itemCount: controller.data.value.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      ProductDetailsResponse details =
+                                          controller.data.value[index];
+                                      return Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 20, right: 20, bottom: 20),
+                                        child: WishListCardSelector(
+                                          details: details,
+                                          index: index,
+                                          context: context,
+                                        ),
+                                      );
+                                    },
+                                    separatorBuilder:
+                                        (BuildContext context, int index) {
+                                      return const SizedBox(
+                                        height: 20,
+                                      );
+                                    },
+                                  ),
+                          ))),
             ),
           ],
         ),

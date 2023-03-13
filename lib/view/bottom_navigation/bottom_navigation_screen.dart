@@ -5,7 +5,8 @@ class BottomNavigationScreen extends GetView<BottomNavigationController> {
 
   @override
   Widget build(BuildContext context) {
-    final ImageIconTheme imageIconTheme = Theme.of(context).extension<ImageIconTheme>()!;
+    final ImageIconTheme imageIconTheme =
+        Theme.of(context).extension<ImageIconTheme>()!;
     final Color iconColor = imageIconTheme.backGroundColor!;
     final ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
     return WillPopScope(
@@ -26,7 +27,7 @@ class BottomNavigationScreen extends GetView<BottomNavigationController> {
                   elevation: 10,
                   items: <BottomNavigationBarItem>[
                     BottomNavigationBarItem(
-                      icon: AppIcons.unselectedHome(context , iconColor),
+                      icon: AppIcons.unselectedHome(context, iconColor),
                       activeIcon: AppIcons.home(context),
                       label: homeTxt,
                     ),

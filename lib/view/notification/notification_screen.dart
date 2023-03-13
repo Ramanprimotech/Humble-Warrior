@@ -23,7 +23,7 @@ class NotificationScreen extends StatelessWidget {
                       left: 20, right: 20, bottom: 20, top: 5),
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
-                    return notificationCard(context);
+                    return notificationCard(context, index);
                   },
                   itemCount: 15,
                   separatorBuilder: (BuildContext context, int index) {
@@ -38,14 +38,15 @@ class NotificationScreen extends StatelessWidget {
     );
   }
 
-  notificationCard(context) {
+  notificationCard(context, index) {
     return Container(
       width: Get.width,
       height: 150,
-      decoration: CustomBoxDecorations().shadow(context: context),
+      decoration: CustomBoxDecorations().shadow(
+          context: context, color: index < 5 ? AppColors.readBox : null),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         notificationImg(),
-        notificationDetails(),
+        notificationDetails(index),
       ]),
     );
   }
@@ -66,7 +67,7 @@ class NotificationScreen extends StatelessWidget {
     );
   }
 
-  notificationDetails() {
+  notificationDetails(int index) {
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -91,6 +92,7 @@ class NotificationScreen extends StatelessWidget {
             child: AppText(
               "Style And Savings " * 3,
               fontWeight: FontWeight.bold,
+              color: index < 5 ? Colors.black : null,
               maxLines: 2,
               fontSize: 16,
             ),
@@ -101,6 +103,7 @@ class NotificationScreen extends StatelessWidget {
               "These cuties were tough to photograph and honestly my picture doesn't to do justice." *
                   2,
               fontSize: 14,
+              color: index < 5 ? Colors.black : null,
               maxLines: 2,
             ),
           ),

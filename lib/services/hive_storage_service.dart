@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
@@ -8,6 +6,7 @@ import 'package:humble_warrior/modals/hive_modal/recent_search_model.dart';
 class HiveService extends GetxController {
   late Box<ProductDetailsResponse> box;
   late Box<RecentSearch> recentBox;
+
   @override
   void onInit() async {
     await Hive.initFlutter();
@@ -17,29 +16,20 @@ class HiveService extends GetxController {
   }
 
   deleteItem(String id) {
-    box
-        .delete(id)
-        .then((value) => log("Deleted $id", name: "Wish Keys Deleted"));
+    box.delete(id);
   }
 
   getWishList() {
-    var data = box.toMap();
-    data.forEach((key, element) {
-      log("$key   ${element.toString()}", name: "Wish List Keys");
-    });
+    var data = box.values;
+    return data;
   }
 
   addToWishList(ProductDetailsResponse item) {
     box.put(item.id.toString(), item);
-    log("${hasItem(item.id.toString())}", name: "Has List Keys");
-
-    // box.l
-    // getWishList();
   }
 
   hasItem(String id) {
     bool isIt = box.containsKey(id);
-    log(isIt.toString(), name: "Do contain key");
     return isIt;
   }
 
@@ -61,10 +51,8 @@ class HiveService extends GetxController {
 
   deleteRecentSearchItem(String id) {
     bool isIt = recentBox.containsKey(id);
-    log(isIt.toString(), name: "Do contain key");
 
-    recentBox.delete(id).then(
-        (value) => log("Deleted $id", name: "Recent Search Keys Deleted"));
+    recentBox.delete(id);
   }
 
   addToRecentList(RecentSearch item) {

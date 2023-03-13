@@ -21,112 +21,196 @@ class _SearchViewState extends State<SearchView> {
     HiveService hiveService = Get.find();
     Box<RecentSearch> box = hiveService.recentBox;
     return Scaffold(
+      appBar: AppBar(
+        titleSpacing: 5,
+        leadingWidth: 35,
+        centerTitle: false,
+        title: Expanded(
+          child: SearchBar(
+            padding: 8.pv,
+            child: TextFormField(
+              focusNode: focusNode,
+              controller: controller,
+              onFieldSubmitted: (value) {
+                if (value.length >= 3) {
+                  hiveService.addToRecentList(
+                      RecentSearch(productSearched: controller.text));
+                  setState(() {});
+                } else {
+                  DialogHelper.showToast(
+                      context, "Enter at least three characters");
+                }
+              },
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 10.0).r,
+                counterText: "",
+                hintText: "Search HW",
+                // hintStyle:
+                isDense: true,
+                focusedBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide.none,
+                ),
+                enabledBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide.none,
+                ),
+
+                /// prefixIcon
+                prefixIcon: IconButton(
+                  padding: 8.pl,
+                  onPressed: () {
+                    if (controller.text.length >= 3) {
+                      hiveService.addToRecentList(
+                          RecentSearch(productSearched: controller.text));
+                      setState(() {});
+                    } else {
+                      focusNode.unfocus();
+                      DialogHelper.showToast(
+                          context, "Enter at least three characters");
+                    }
+                  },
+                  icon: Icon(Icons.search,
+                      color: Theme.of(context).textTheme.displayMedium!.color,
+                      size: 24.sp),
+                ),
+
+                // suffixIcon:
+                suffixIcon: GestureDetector(
+                  child: Icon(
+                    Icons.close,
+                    color: Theme.of(context).textTheme.displayMedium!.color,
+                    size: 20.sp,
+                  ),
+                  onTap: () {
+                    controller.clear();
+                    setState(() {});
+                  },
+                ),
+              ),
+            ),
+          ),
+        ),
+        leading: AppIcons.IosBackIcon(),
+        actions: [
+          IconButton(
+            padding: 15.pr,
+            onPressed: () {
+              Get.toNamed(AppRoutes.sortPages);
+            },
+            icon: CircleAvatar(
+              maxRadius: 20.r,
+              backgroundColor: Colors.black26,
+              child: Icon(Icons.tune,
+                  color: Theme.of(context).textTheme.displayMedium!.color,
+                  size: 22.sp),
+            ),
+          )
+        ],
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Icon(Icons.arrow_back_ios,
-                          color:
-                              Theme.of(context).textTheme.displayMedium!.color,
-                          size: 24.sp)
-                      .paddingOnly(left: 20),
-                ),
-                Expanded(
-                  child: SearchBar(
-                    margin: 16.pl,
-                    padding: 8.pv,
-                    child: TextFormField(
-                      focusNode: focusNode,
-                      controller: controller,
-                      onFieldSubmitted: (value) {
-                        if (value.length >= 3) {
-                          hiveService.addToRecentList(
-                              RecentSearch(productSearched: controller.text));
-                          setState(() {});
-                        } else {
-                          DialogHelper.showToast(
-                              context, "Enter at least three characters");
-                        }
-                      },
-                      decoration: InputDecoration(
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 10.0).r,
-                        counterText: "",
-                        hintText: "Search HW",
-                        // hintStyle:
-                        isDense: true,
-                        focusedBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide.none,
-                        ),
-                        enabledBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide.none,
-                        ),
-
-                        /// prefixIcon
-                        prefixIcon: IconButton(
-                          padding: 8.pl,
-                          onPressed: () {
-                            if (controller.text.length >= 3) {
-                              hiveService.addToRecentList(RecentSearch(
-                                  productSearched: controller.text));
-                              setState(() {});
-                            } else {
-                              focusNode.unfocus();
-                              DialogHelper.showToast(
-                                  context, "Enter at least three characters");
-                            }
-                          },
-                          icon: Icon(Icons.search,
-                              color: Theme.of(context)
-                                  .textTheme
-                                  .displayMedium!
-                                  .color,
-                              size: 24.sp),
-                        ),
-
-                        // suffixIcon:
-                        suffixIcon: GestureDetector(
-                          child: Icon(
-                            Icons.close,
-                            color: Theme.of(context)
-                                .textTheme
-                                .displayMedium!
-                                .color,
-                            size: 20.sp,
-                          ),
-                          onTap: () {
-                            controller.clear();
-                            setState(() {});
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: 16.ph,
-                  child: InkWell(
-                    onTap: () {
-                      Get.toNamed(AppRoutes.sortPages);
-                    },
-                    child: CircleAvatar(
-                      maxRadius: 20.r,
-                      backgroundColor: Colors.black26,
-                      child: Icon(Icons.tune,
-                          color:
-                              Theme.of(context).textTheme.displayMedium!.color,
-                          size: 22.sp),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            16.shb,
+            // Row(
+            //   children: [
+            //     GestureDetector(
+            //       onTap: () {
+            //         Get.back();
+            //       },
+            //       child: Icon(Icons.arrow_back_ios,
+            //               color:
+            //                   Theme.of(context).textTheme.displayMedium!.color,
+            //               size: 24.sp)
+            //           .paddingOnly(left: 20),
+            //     ),
+            //     Expanded(
+            //       child: SearchBar(
+            //         padding: 8.pv,
+            //         child: TextFormField(
+            //           focusNode: focusNode,
+            //           controller: controller,
+            //           onFieldSubmitted: (value) {
+            //             if (value.length >= 3) {
+            //               hiveService.addToRecentList(
+            //                   RecentSearch(productSearched: controller.text));
+            //               setState(() {});
+            //             } else {
+            //               DialogHelper.showToast(
+            //                   context, "Enter at least three characters");
+            //             }
+            //           },
+            //           decoration: InputDecoration(
+            //             contentPadding:
+            //                 const EdgeInsets.symmetric(horizontal: 10.0).r,
+            //             counterText: "",
+            //             hintText: "Search HW",
+            //             // hintStyle:
+            //             isDense: true,
+            //             focusedBorder: const UnderlineInputBorder(
+            //               borderSide: BorderSide.none,
+            //             ),
+            //             enabledBorder: const UnderlineInputBorder(
+            //               borderSide: BorderSide.none,
+            //             ),
+            //
+            //             /// prefixIcon
+            //             prefixIcon: IconButton(
+            //               padding: 8.pl,
+            //               onPressed: () {
+            //                 if (controller.text.length >= 3) {
+            //                   hiveService.addToRecentList(RecentSearch(
+            //                       productSearched: controller.text));
+            //                   setState(() {});
+            //                 } else {
+            //                   focusNode.unfocus();
+            //                   DialogHelper.showToast(
+            //                       context, "Enter at least three characters");
+            //                 }
+            //               },
+            //               icon: Icon(Icons.search,
+            //                   color: Theme.of(context)
+            //                       .textTheme
+            //                       .displayMedium!
+            //                       .color,
+            //                   size: 24.sp),
+            //             ),
+            //
+            //             // suffixIcon:
+            //             suffixIcon: GestureDetector(
+            //               child: Icon(
+            //                 Icons.close,
+            //                 color: Theme.of(context)
+            //                     .textTheme
+            //                     .displayMedium!
+            //                     .color,
+            //                 size: 20.sp,
+            //               ),
+            //               onTap: () {
+            //                 controller.clear();
+            //                 setState(() {});
+            //               },
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: 16.ph,
+            //       child: InkWell(
+            //         onTap: () {
+            //           Get.toNamed(AppRoutes.sortPages);
+            //         },
+            //         child: CircleAvatar(
+            //           maxRadius: 20.r,
+            //           backgroundColor: Colors.black26,
+            //           child: Icon(Icons.tune,
+            //               color:
+            //                   Theme.of(context).textTheme.displayMedium!.color,
+            //               size: 22.sp),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            // 16.shb,
             Expanded(
               child: FutureBuilder<List<ProDetailItem>>(
                 future: FetchSearchList().productDetails(controller.text),
@@ -226,6 +310,7 @@ class _SearchViewState extends State<SearchView> {
                   }
 
                   return ListView.separated(
+                      padding: 15.pt,
                       itemCount: snapshot.data!.length,
                       separatorBuilder: (BuildContext context, int index) {
                         return 10.shb;

@@ -134,10 +134,10 @@ class LoginController extends GetxController {
       /// Click Continue without login
       OnClick.continueWithoutLogin: () async {
         await SharePreferenceData.addBoolToSF(spIsEntered, true);
-        Get.offNamed(AppRoutes.bottomNavigation);
 
         /// Auth Data API
         await authAPI();
+        Get.offNamed(AppRoutes.bottomNavigation);
       }
     };
 
@@ -148,12 +148,12 @@ class LoginController extends GetxController {
 
   Future<void> authAPI() async {
     /// User Firebase Token
-    String? tokenFirebase = await FirebaseMessaging.instance.getToken();
+    // String? tokenFirebase = await FirebaseMessaging.instance.getToken();
 
     AuthDataRequest payload = AuthDataRequest(
         token:
             "fySpxrqohkWot05MRnjKFy:APA91bEvxkdE4Vl7I5nrxo9foGMZmYxHLTt_4mL8x0nIS18LgGJyjWzNKtyxqfIMSQfcnOrqXeVxOavDxOo1lnr2pm1-j9fh8iaqp_tCtmP09g7ouMFoxW6bcBzIj6FkL3KjZVtpHr1C",
-        // os: "iOS",
+        os: "iOS",
         userId: "7NanqxSoDdOoeWNL7uaLuJNvNvC3",
         email: "bm6532076@gmail.com");
     await CallAPI.authDataAPI(payload: payload);

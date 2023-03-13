@@ -4,6 +4,7 @@ import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
+import 'package:humble_warrior/utils/common/photo_viewer.dart';
 import 'package:humble_warrior/utils/image_path_assets.dart';
 
 import '../../../utils/routes/app_routes.dart';
@@ -113,10 +114,15 @@ class FrontPageDeals extends StatelessWidget {
 }
 
 ItemCard frontPageCard(
-    ProductDetailsResponse details, int index, BuildContext context) {
+    ProductDetailsResponse details, int index, BuildContext context,
+    {bool isDetails = false}) {
   return ItemCard(
     onTap: () {
-      Get.toNamed(AppRoutes.frontPageProductDetail, arguments: [details]);
+      if (isDetails) {
+        Get.to(CustomPhotoViewer(url: details.url!));
+      } else {
+        Get.toNamed(AppRoutes.frontPageProductDetail, arguments: [details]);
+      }
     },
     buttons: frontPageOptionsButton(details, index, context),
     imageUrl: details.url!,

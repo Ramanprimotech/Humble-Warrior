@@ -1,6 +1,7 @@
 import 'dart:developer';
-import 'package:webview_flutter/webview_flutter.dart';
+
 import 'package:humble_warrior/hw.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewScreenWidget extends StatefulWidget {
   final String url;
@@ -92,6 +93,7 @@ class _WebViewScreenWidgetState extends State<WebViewScreenWidget> {
     return Scaffold(
       appBar: AppBar(
         elevation: 5,
+        centerTitle: true,
         leading: Visibility(
           visible: canGoBool,
           child: AppIcons.IosBackIcon(onPress: () {
@@ -100,6 +102,7 @@ class _WebViewScreenWidgetState extends State<WebViewScreenWidget> {
         ),
         automaticallyImplyLeading: canGoBool,
         title: AppText(
+          fontSize: 20,
           widget.title!,
           fontWeight: FontWeight.w700,
         ),

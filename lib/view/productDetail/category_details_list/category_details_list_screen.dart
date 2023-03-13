@@ -1,11 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/common/common_pagination.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/routes/app_routes.dart';
-import 'package:humble_warrior/view/home_option/common_home_option.dart';
 import 'package:humble_warrior/view/productDetail/category_details_list/category_details_list_controller.dart';
 
 class CategoryListDetails extends StatelessWidget {
@@ -13,17 +7,27 @@ class CategoryListDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FToast().init(context);
     final CategoryDetailsListController controller = Get.find();
     String title = Get.arguments[0];
     controller.context = context;
     controller.id = Get.arguments[1];
     controller.categoryListApi();
-    debugPrint("$title mm");
     return Scaffold(
+      // appBar: AppBar(
+      //   titleSpacing: 5,
+      //   leadingWidth: 35,
+      //   centerTitle: false,
+      //   title: SearchBar(
+      //     margin: 15.pr,
+      //   ),
+      //   leading: AppIcons.IosBackIcon(),
+      // ),
       body: SafeArea(
         child: Column(
           children: [
-            CommonWidgets.titleBar(context, title: title, fontSize: 20),
+            CommonWidgets.titleBar(context,
+                title: title, fontSize: 20, backIcon: true),
             Expanded(
               child: PaginationWidget(
                 length: controller.categoryListLength,

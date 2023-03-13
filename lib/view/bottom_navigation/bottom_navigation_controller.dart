@@ -36,6 +36,10 @@ class BottomNavigationController extends GetxController {
 
   void onItemTap(int? index) {
     selectedIndex = index!;
+    if (index == 1) {
+      var controller = Get.find<WishListController>();
+      controller.getWishList();
+    }
     update();
   }
 
