@@ -61,7 +61,7 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
               width: 90,
               height: 60,
               padding: 5.pa,
-              margin: 2.pa,
+              margin: 3.pa,
               decoration: CustomBoxDecorations()
                   .shadow(context: context, color: Colors.grey.shade200),
               child: CommonWidgets.networkImage(
@@ -88,8 +88,10 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
       itemBuilder: (ctx, index) {
         return ShimmerLoader(
           child: Container(
-            width: 100,
-            height: 60,
+            padding: 5.pa,
+            margin: 3.pa,
+            width: 90,
+            height: 65,
             // color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
             decoration: CustomBoxDecorations().shadow(
               context: context,

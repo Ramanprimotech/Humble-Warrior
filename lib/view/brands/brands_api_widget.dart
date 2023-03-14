@@ -37,6 +37,7 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
             await CommonUtils().urlLauncher(url: brandDetails.brandLink!);
           },
           child: Container(
+            margin: 3.pa,
             decoration: CustomBoxDecorations()
                 .shadow(context: context, color: Colors.grey.shade200),
             child: CommonWidgets.networkImage(
@@ -69,6 +70,7 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
       itemBuilder: (ctx, index) {
         return ShimmerLoader(
           child: Container(
+            margin: 3.pa,
             decoration: CustomBoxDecorations().shadow(
               context: context,
               color:
