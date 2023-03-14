@@ -30,22 +30,26 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
                                 url: donnaFavouriteDetails.url!));
                           }
                         }),
-                    Container(
-                      margin: 10.pv,
-                      padding: 7.pv,
-                      width: Get.width,
-                      decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: AppText(
-                        "${donnaFavouriteDetails.itemName!}",
-                        color: Colors.white,
-                        textAlign: TextAlign.left,
-                        fontWeight: FontWeight.bold,
-                        padding: 5.pl,
-                        maxLines: 2,
-                        fontSize: 18,
-                      ).px4(),
+                    Visibility(
+                      visible: donnaFavouriteDetails.itemName != null &&
+                          donnaFavouriteDetails.itemName != "",
+                      child: Container(
+                        margin: 10.pv,
+                        padding: 7.pv,
+                        width: Get.width,
+                        decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: AppText(
+                          donnaFavouriteDetails.itemName!,
+                          color: Colors.white,
+                          textAlign: TextAlign.left,
+                          fontWeight: FontWeight.bold,
+                          padding: 5.pl,
+                          maxLines: 2,
+                          fontSize: 18,
+                        ).px4(),
+                      ),
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(

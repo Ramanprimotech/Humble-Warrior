@@ -83,7 +83,7 @@ class AboutScreen extends StatelessWidget {
           imageUrl: staticResponse[0].pageImage.toString(),
           // "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
           fit: BoxFit.fitWidth,
-          height: 200,
+          height: Get.width - 40,
           alignment: Alignment.topCenter,
           width: Get.width,
         ),

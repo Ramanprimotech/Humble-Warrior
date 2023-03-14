@@ -96,7 +96,7 @@ class ItemCard extends StatelessWidget {
                         child: AppText(
                           title,
                           fontWeight: FontWeight.w700,
-                          fontSize: 16,
+                          fontSize: 18,
                           color: Colors.white,
                           textAlign: TextAlign.center,
                         ),

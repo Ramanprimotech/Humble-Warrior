@@ -38,9 +38,9 @@ class MyAccount extends StatelessWidget {
 
               ///Account Details
               myAccWidget.detailsOptions(controller, title: accountDetailsTxt,
-                  ontap: (){
+                  ontap: () {
                 Get.toNamed(AppRoutes.accountDetails);
-                  }),
+              }),
 
               ///Notification
               myAccWidget.detailsOptions(controller,
@@ -61,14 +61,15 @@ class MyAccount extends StatelessWidget {
               }),
 
               ///Share with friends
-              myAccWidget.detailsOptions(controller,
-                  title: shareWithFriendsTxt,
-                  ontap: () async {
-                await CommonUtils().urlLauncher(
-                url:
-                "https://www.humblewarrior.com/",
-                title: "The Humble Warrior");
-                },),
+              myAccWidget.detailsOptions(
+                controller,
+                title: shareWithFriendsTxt,
+                ontap: () async {
+                  await CommonUtils().urlLauncher(
+                      url: "https://www.humblewarrior.com/",
+                      title: "The Humble Warrior");
+                },
+              ),
               optionSpacing.sh,
               myAccWidget.divider(),
               optionSpacing.sh,
@@ -77,7 +78,8 @@ class MyAccount extends StatelessWidget {
               myAccWidget.myAccountTextFun(heading: settingsTxt),
 
               ///Passcode
-              myAccWidget.detailsOptions(controller, title: passcodeTxt,ontap: (){
+              myAccWidget.detailsOptions(controller, title: passcodeTxt,
+                  ontap: () {
                 controller.tapPasscode();
               }),
 
@@ -89,17 +91,17 @@ class MyAccount extends StatelessWidget {
 
               ///Help & Support
               myAccWidget.detailsOptions(controller, title: helpSupportTxt,
-              ontap: (){
-                Get.toNamed(AppRoutes.staticPages,arguments: ["40429","Help & Support"]);
-              }
-              ),
+                  ontap: () {
+                Get.toNamed(AppRoutes.staticPages,
+                    arguments: ["40429", "Help & Support"]);
+              }),
 
               ///Term & Conditions
               myAccWidget.detailsOptions(controller, title: termsConditionsTxt,
-                  ontap: (){
-                    Get.toNamed(AppRoutes.staticPages,arguments: ["40427","Term & Conditions"]);
-                  }
-              ),
+                  ontap: () {
+                Get.toNamed(AppRoutes.staticPages,
+                    arguments: ["40427", "Term & Conditions"]);
+              }),
 
               ///Login or Logout
               _loginOrLogout(context),
