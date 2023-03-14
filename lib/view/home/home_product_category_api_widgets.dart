@@ -76,7 +76,7 @@ class HomePageProductCategoryAPIWidgets
                 height: productHeight,
                 width: Get.width,
                 child: ListView.builder(
-                    padding: 15.pr,
+                    padding: 30.pr,
                     scrollDirection: Axis.horizontal,
                     controller: controller.productScrollController,
                     itemCount: record.length,
@@ -90,12 +90,13 @@ class HomePageProductCategoryAPIWidgets
                               ]);
                         },
                         child: Container(
-                          padding: 20.pl,
+                          padding: 30.pl,
                           height: productHeight,
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SizedBox(
-                                height: productHeight - 25,
+                                height: productHeight - 20,
                                 child: Image.network(
                                     errorBuilder: (context, error, stackTrace) {
                                   return Center(
@@ -107,6 +108,7 @@ class HomePageProductCategoryAPIWidgets
                                   ));
                                 }, record[index].categoryImage ?? ""),
                               ),
+                              // 4.shb,
                               AppText(
                                 record[index].categoryName ?? "",
                                 fontSize: 12,
