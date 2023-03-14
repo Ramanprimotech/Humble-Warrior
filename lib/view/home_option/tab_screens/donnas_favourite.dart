@@ -46,7 +46,7 @@ class DonnaFavourite extends StatelessWidget {
                 });
           }
           return ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             controller: controller.donnaFavouriteDealScrollController,
             itemCount: controller.donnaFavouriteDealList.length + 1,
             itemBuilder: (ctx, index) {

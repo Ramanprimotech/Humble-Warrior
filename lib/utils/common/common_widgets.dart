@@ -149,7 +149,7 @@ class CommonWidgets {
       backIcon = true}) {
     return Container(
       height: 45,
-      margin: EdgeInsets.only(top: 10, bottom: 20, left: 20, right: 20),
+      margin: EdgeInsets.only(top: 10, bottom: 20, left: 16, right: 16),
 
       // padding: const EdgeInsets.only(right: 20),
       width: MediaQuery.of(Get.context!).size.width,
@@ -170,8 +170,9 @@ class CommonWidgets {
               5.sw,
               icon
                   ? Padding(
-                      padding: 2.pt,
+                      padding: 3.pb,
                       child: AppIcons.heart(
+                        size: 22,
                         iconColor: Colors.red,
                       ),
                     )

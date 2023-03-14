@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
+import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/modals/requests/auth_data_request.dart';
 import 'package:humble_warrior/modals/requests/id_model.dart';
 import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
@@ -13,7 +13,6 @@ import 'package:humble_warrior/modals/response/product_details_api_response.dart
 import 'package:humble_warrior/modals/response/product_list_response.dart';
 import 'package:humble_warrior/modals/response/static_page_model.dart';
 import 'package:humble_warrior/modals/response/token_response.dart';
-import 'package:humble_warrior/network/endpoints.dart';
 
 import '../modals/requests/pagination_modal.dart';
 import '../modals/requests/token_model_request.dart';
@@ -291,13 +290,16 @@ class CallAPI {
     }
   }
 
-  static Future authDataAPI({required AuthDataRequest payload}) async {
+  static Future authDataAPI({required Map payload}) async {
     try {
-      log("|${payload.toJson()}|", name: "Auth Data");
-      final response = await APIManager().postAPICallNoBearer(
-          baseUrl: "http://112.196.54.37/Development/HW/pnfw/register",
-          url: "",
-          param: payload);
+      final response = await http.post(
+          Uri.parse("http://112.196.54.37/Development/HW/pnfw/register"),
+          body: payload);
+      if (response.statusCode != 200) {
+        // if (context.mounted) {
+        //   DialogHelper.showToast(context, "Error sending user login data");
+        // }
+      }
 
       return;
     } catch (e) {

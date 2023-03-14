@@ -5,6 +5,7 @@ import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/view/home/home_controller.dart';
+
 import '../../network/endpoints.dart';
 import '../../utils/future_widget/future_widget.dart';
 import 'brands_api_widget.dart';
@@ -22,8 +23,7 @@ class BrandsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CommonWidgets.titleBar(context,
-              title: "$brandsTxt I",icon: true
-              ),
+                  title: "$brandsTxt I", icon: true, fontSize: 20),
               Expanded(
                 child: Container(
                   padding: 20.ph,
@@ -47,6 +47,4 @@ class BrandsScreen extends StatelessWidget {
       ),
     );
   }
-
-
 }

@@ -1,10 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/services/hive_storage_service.dart';
-import 'package:humble_warrior/utils/extensions.dart';
-import 'package:humble_warrior/utils/image_path_assets.dart';
 
 class AppIcons {
   // IconData
@@ -225,8 +221,22 @@ class _HeartState extends State<Heart> {
       builder: (context, box, child) {
         return GestureDetector(
           key: widget.key,
-          onTap: () {
-            service.favourite(item: widget.item);
+          onTap: () async {
+            bool value =
+                await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
+            if (value) {
+              service.favourite(item: widget.item);
+            } else {
+              if (context.mounted) {
+                DialogHelper.showConfirmationDialog(
+                    message: loginWishTxt,
+                    actionLabel: login,
+                    action: () {
+                      Get.toNamed(AppRoutes.loginPage);
+                    },
+                    context: context);
+              }
+            }
           },
           child: Icon(
             Icons.favorite_outlined,

@@ -362,7 +362,7 @@ class HomeScreenWidgets {
     final ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
     return Container(
       height: height,
-      padding: const EdgeInsets.only(top: 15, right: 20, left: 20, bottom: 10),
+      padding: const EdgeInsets.only(top: 15, right: 16, left: 16, bottom: 10),
       decoration: BoxDecoration(
           color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
           // borderRadius: const BorderRadius.only(

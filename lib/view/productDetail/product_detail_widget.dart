@@ -16,6 +16,7 @@ class ProductDetailWidget {
           AppText(
             "$title",
             fontWeight: FontWeight.bold,
+            maxLines: 2,
             fontSize: 18,
           ),
           RichText(
@@ -93,12 +94,13 @@ class ProductDetailWidget {
           AppText(
             "What is $itemName",
             fontSize: 18,
+            maxLines: 2,
             fontWeight: FontWeight.bold,
-          ).px(6),
+          ),
           const AppText(
             AppStrings.lorem,
             maxLines: 90,
-          ).p(6),
+          ),
           // const ReadMoreText(
           //   AppStrings.lorem,
           //   trimLines: 20,

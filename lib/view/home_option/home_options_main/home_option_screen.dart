@@ -33,7 +33,7 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
             ]),
         actions: [
           IconButton(
-              padding: 15.pr,
+              padding: 16.pr,
               onPressed: () {
                 Get.toNamed(AppRoutes.sortPages);
               },

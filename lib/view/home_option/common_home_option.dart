@@ -79,7 +79,7 @@ class ItemCard extends StatelessWidget {
                           ? const LinearGradient(
                               colors: [
                                   Colors.transparent,
-                                  Colors.black26,
+                                  Colors.black45,
                                   Colors.black
                                 ],
                               begin: Alignment.topCenter,

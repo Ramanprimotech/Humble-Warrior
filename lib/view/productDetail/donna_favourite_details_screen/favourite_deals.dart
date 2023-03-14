@@ -18,57 +18,57 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
             CommonWidgets.titleBar(context,
                 title: "Product Details", fontSize: 20, backIcon: true),
             Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      favouritePageCard(
-                          height: 160 + 50,
-                          imageUrl: donnaFavouriteDetails.url!,
-                          onTap: () {
-                            if (!donnaFavouriteDetails.url.isEmptyOrNull) {
-                              Get.to(CustomPhotoViewer(
-                                  url: donnaFavouriteDetails.url!));
-                            }
-                          }),
-                      Container(
-                        margin: 10.pv,
-                        padding: 7.pv,
-                        width: Get.width,
-                        decoration: BoxDecoration(
-                            color: AppColors.primary,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: AppText(
-                          " ${donnaFavouriteDetails.itemName!}",
-                          color: Colors.white,
-                          textAlign: TextAlign.left,
-                          fontWeight: FontWeight.bold,
-                          padding: 5.pl,
-                          maxLines: 2,
-                          fontSize: 18,
-                        ),
+              child: ListView(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  children: [
+                    favouritePageCard(
+                        height: 160 + 50,
+                        imageUrl: donnaFavouriteDetails.url!,
+                        onTap: () {
+                          if (!donnaFavouriteDetails.url.isEmptyOrNull) {
+                            Get.to(CustomPhotoViewer(
+                                url: donnaFavouriteDetails.url!));
+                          }
+                        }),
+                    Container(
+                      margin: 10.pv,
+                      padding: 7.pv,
+                      width: Get.width,
+                      decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: AppText(
+                        "${donnaFavouriteDetails.itemName!}",
+                        color: Colors.white,
+                        textAlign: TextAlign.left,
+                        fontWeight: FontWeight.bold,
+                        padding: 5.pl,
+                        maxLines: 2,
+                        fontSize: 18,
+                      ).px4(),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15, horizontal: 10),
+                      width: MediaQuery.of(Get.context!).size.width * .9,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppStrings.lorem,
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: accountOptionTheme.textColor),
+                          ),
+                          _buyNow(title: 'Mobile App here'),
+                          _buyNow(title: 'Standard View'),
+                          _buyNow(title: 'Standard View'),
+                        ],
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 10),
-                        width: MediaQuery.of(Get.context!).size.width * .9,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              AppStrings.lorem,
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: accountOptionTheme.textColor),
-                            )
-                          ],
-                        ),
-                      ),
-                      _buyNow(title: 'Mobile App here'),
-                      _buyNow(title: 'Standard View'),
-                    ]),
-              ),
-            ).px(20).py(10),
+                    ),
+                  ]),
+            )
+            // .px(20).py(10),
           ],
         ),
       ),

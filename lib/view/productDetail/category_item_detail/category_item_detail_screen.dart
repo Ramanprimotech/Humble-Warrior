@@ -8,7 +8,6 @@ import 'package:humble_warrior/utils/decorations.dart';
 import 'package:humble_warrior/view/home_option/common_home_option.dart';
 import 'package:humble_warrior/view/productDetail/category_item_detail/category_item_detail_controller.dart';
 import 'package:humble_warrior/view/productDetail/product_detail_widget.dart';
-import 'package:readmore/readmore.dart';
 
 class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
   CategoryItemDetail({Key? key}) : super(key: key);
@@ -65,17 +64,10 @@ class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       width: MediaQuery.of(Get.context!).size.width * .9,
-      child: const ReadMoreText(
+      child: const AppText(
         AppStrings.lorem,
-        trimLines: 20,
-        colorClickableText: Colors.pink,
-        trimMode: TrimMode.Length,
-        trimCollapsedText: readmoreTxt,
-        trimExpandedText: readlessTxt,
-        lessStyle: TextStyle(
-            fontSize: 15, fontWeight: FontWeight.bold, color: Colors.blue),
-        moreStyle: TextStyle(
-            fontSize: 15, fontWeight: FontWeight.bold, color: Colors.blue),
+        fontSize: 16,
+        maxLines: 150,
       ),
     );
   }

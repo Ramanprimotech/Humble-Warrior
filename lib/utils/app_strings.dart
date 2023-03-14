@@ -139,6 +139,8 @@ const String retryTxt = 'Retry';
 const String myFvrtTxt = 'My Favourite';
 const String buyNowTxt = 'Buy Now';
 const String sortTxt = "Sort";
+const String notNowTxt = "Not Now";
+const String loginWishTxt = "Login to add items to wishlist";
 
 /*===================================================Shared Preference========================================================*/
 const String spIsEntered = 'isEntered';

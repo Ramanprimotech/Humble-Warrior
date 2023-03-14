@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/requests/auth_data_request.dart';
 import 'package:humble_warrior/network/api_call.dart';
 
 class LoginController extends GetxController {
@@ -54,7 +53,7 @@ class LoginController extends GetxController {
             await SharePreferenceData.addStringToSF(
                 userProfilePic, "${user?.photoURL}");
             await SharePreferenceData.addBoolToSF(spIsEntered, true);
-            Get.toNamed(AppRoutes.bottomNavigation);
+            Get.offAllNamed(AppRoutes.bottomNavigation);
 
             /// Auth Data API
             await authAPI();
@@ -91,7 +90,7 @@ class LoginController extends GetxController {
                 userProfilePic, "${user?.photoURL}");
             await SharePreferenceData.addBoolToSF(spIsEntered, true);
 
-            Get.offNamed(AppRoutes.bottomNavigation);
+            Get.offAllNamed(AppRoutes.bottomNavigation);
             "${user!.uid.toString()}".log();
 
             /// Auth Data API
@@ -122,9 +121,9 @@ class LoginController extends GetxController {
               userProfilePic, "${user?.photoURL}");
           await SharePreferenceData.addBoolToSF(spIsEntered, true);
           if (userPhoneNumber.isEmpty || userProfilePic.isEmpty) {
-            Get.toNamed(AppRoutes.bottomNavigation);
+            Get.offAllNamed(AppRoutes.bottomNavigation);
           }
-          Get.toNamed(AppRoutes.bottomNavigation);
+          Get.offAllNamed(AppRoutes.bottomNavigation);
 
           /// Auth Data API
           await authAPI();
@@ -137,7 +136,8 @@ class LoginController extends GetxController {
 
         /// Auth Data API
         await authAPI();
-        Get.offNamed(AppRoutes.bottomNavigation);
+
+        Get.offAllNamed(AppRoutes.bottomNavigation);
       }
     };
 
@@ -148,14 +148,19 @@ class LoginController extends GetxController {
 
   Future<void> authAPI() async {
     /// User Firebase Token
-    // String? tokenFirebase = await FirebaseMessaging.instance.getToken();
+    String? tokenFirebase = await FirebaseMessaging.instance.getToken();
 
-    AuthDataRequest payload = AuthDataRequest(
-        token:
-            "fySpxrqohkWot05MRnjKFy:APA91bEvxkdE4Vl7I5nrxo9foGMZmYxHLTt_4mL8x0nIS18LgGJyjWzNKtyxqfIMSQfcnOrqXeVxOavDxOo1lnr2pm1-j9fh8iaqp_tCtmP09g7ouMFoxW6bcBzIj6FkL3KjZVtpHr1C",
-        os: "iOS",
-        userId: "7NanqxSoDdOoeWNL7uaLuJNvNvC3",
-        email: "bm6532076@gmail.com");
+    var payload = {
+      "token": tokenFirebase,
+      "device": platform ?? "Android",
+      "user_id": user == null ? "" : user!.uid,
+      "email": user == null ? "" : user!.email ?? ""
+    };
+    // AuthDataRequest payload = AuthDataRequest(
+    //     token: tokenFirebase,
+    //     device: platform,
+    //     userId: user == null ? "" : user!.uid,
+    //     email: user == null ? "" : user!.email ?? "");
     await CallAPI.authDataAPI(payload: payload);
   }
 }

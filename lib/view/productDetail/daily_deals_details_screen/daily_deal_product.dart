@@ -21,7 +21,7 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 20),
+                          vertical: 8.0, horizontal: 16),
                       child: donnaDealsCard(donnaDealsDetails, 0, context,
                           isDetails: true),
                     ),
