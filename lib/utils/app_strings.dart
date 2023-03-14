@@ -25,7 +25,7 @@ class AppStrings {
 
 /*=================================================== Search Bar strings========================================================*/
 
-const String searchTxt = "Search";
+const String searchTxt = "Search Humble Warrior";
 
 /*===================================================Bottom Navigation Bar strings========================================================*/
 

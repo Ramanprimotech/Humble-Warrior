@@ -44,7 +44,8 @@ class _SearchViewState extends State<SearchView> {
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10.0).r,
                 counterText: "",
-                hintText: "Search HW",
+                hintText: searchTxt,
+                hintStyle: TextStyle(color: Theme.of(context).textTheme.displayMedium!.color?.withOpacity(0.6), fontSize: 15),
                 // hintStyle:
                 isDense: true,
                 focusedBorder: const UnderlineInputBorder(
@@ -55,9 +56,9 @@ class _SearchViewState extends State<SearchView> {
                 ),
 
                 /// prefixIcon
-                prefixIcon: IconButton(
-                  padding: 8.pl,
-                  onPressed: () {
+                prefixIcon: GestureDetector(
+                  // padding: 4.pl,
+                  onTap: () {
                     if (controller.text.length >= 3) {
                       hiveService.addToRecentList(
                           RecentSearch(productSearched: controller.text));
@@ -68,7 +69,7 @@ class _SearchViewState extends State<SearchView> {
                           context, "Enter at least three characters");
                     }
                   },
-                  icon: Icon(Icons.search,
+                  child: Icon(Icons.search,
                       color: Theme.of(context).textTheme.displayMedium!.color,
                       size: 24.sp),
                 ),
