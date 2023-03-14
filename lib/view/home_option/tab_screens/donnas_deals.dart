@@ -73,7 +73,7 @@ class DonnaDailyDeals extends StatelessWidget {
             },
             separatorBuilder: (BuildContext context, int index) {
               return const SizedBox(
-                height: 25,
+                height: 18,
               );
             },
           );
@@ -99,7 +99,9 @@ ItemCard donnaDealsCard(
     radius: 10,
     buttons: donnaDealsButton(details, index, context, dailyDeals: dailyDeals),
     imageUrl: details.url!,
-    title: details.itemName!,
+    title: details.ribbonName != null
+        ? details.ribbonName!
+        : details.itemName.toString(),
   );
 }
 

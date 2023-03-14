@@ -15,8 +15,8 @@ class HomeScreenWidgets {
   });
 
   final double productHeight = 60;
-  final double brandLoveHeight = 50;
-  final double brandHeight = 70;
+  final double brandLoveHeight = 45;
+  final double brandHeight = 65;
   final double productArrowIconPadding = 8;
   final double arrowWidth = 30;
   final int badge = 99;
@@ -362,7 +362,7 @@ class HomeScreenWidgets {
     final ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
     return Container(
       height: height,
-      padding: const EdgeInsets.only(top: 15, right: 16, left: 16, bottom: 10),
+      padding: const EdgeInsets.only(top: 8, right: 16, left: 16, bottom: 8),
       decoration: BoxDecoration(
           color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
           // borderRadius: const BorderRadius.only(
@@ -402,7 +402,7 @@ class HomeScreenWidgets {
             },
             child: const AppText(
               viewAllTxt,
-              fontSize: 16,
+              fontSize: 14,
               color: AppColors.blue,
             ),
           ),

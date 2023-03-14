@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_icons.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
@@ -164,7 +163,7 @@ class CommonWidgets {
               AppText(
                 title,
                 fontSize: fontSize ?? 16,
-                color: color ?? AppColors.primary,
+                color: color,
                 fontWeight: FontWeight.bold,
               ),
               5.sw,

@@ -9,6 +9,8 @@ part 'product_details_response.g.dart';
 /// shop_url : "Shop Url"
 /// coupon_code : "Coupon Code"
 /// product_description : "Detailsd pf the product"
+/// ribbon_name: "Men's Products",
+/// ribbon_color: "#00addd"
 @HiveType(typeId: 1)
 class ProductDetailsResponse {
   @HiveField(0)
@@ -25,6 +27,10 @@ class ProductDetailsResponse {
   String? couponCode;
   @HiveField(6)
   String? productDescription;
+  @HiveField(7)
+  String? ribbonName;
+  @HiveField(8)
+  String? ribbonColor;
   ProductDetailsResponse(
       {this.id,
       this.itemName,
@@ -32,6 +38,8 @@ class ProductDetailsResponse {
       this.url,
       this.shopUrl,
       this.couponCode,
+      this.ribbonName,
+      this.ribbonColor,
       this.productDescription});
 
   ProductDetailsResponse.fromJson(Map<String, dynamic> json) {
@@ -42,6 +50,8 @@ class ProductDetailsResponse {
     shopUrl = json['shop_url'];
     couponCode = json['coupon_code'];
     productDescription = json['product_description'];
+    ribbonName = json['ribbon_name'];
+    ribbonColor = json['ribbon_color'];
   }
 
   Map<String, dynamic> toJson() {
@@ -53,6 +63,8 @@ class ProductDetailsResponse {
     data['shop_url'] = this.shopUrl;
     data['coupon_code'] = this.couponCode;
     data['product_description'] = this.productDescription;
+    data['ribbon_name'] = this.ribbonName;
+    data['ribbon_color'] = this.ribbonColor;
     return data;
   }
 }

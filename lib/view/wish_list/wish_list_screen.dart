@@ -87,7 +87,9 @@ class WishList extends StatelessWidget {
                                           controller.data.value[index];
                                       return Padding(
                                         padding: const EdgeInsets.only(
-                                            left: 20, right: 20, bottom: 20),
+                                          left: 20,
+                                          right: 20,
+                                        ),
                                         child: WishListCardSelector(
                                           details: details,
                                           index: index,
@@ -98,7 +100,7 @@ class WishList extends StatelessWidget {
                                     separatorBuilder:
                                         (BuildContext context, int index) {
                                       return const SizedBox(
-                                        height: 20,
+                                        height: 18,
                                       );
                                     },
                                   ),

@@ -26,7 +26,10 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
                           isDetails: true),
                     ),
                     productText(context, donnaDealsDetails.itemName.toString()),
-                    productDescription(),
+                    productDescription(
+                        itemName: donnaDealsDetails.itemName.toString(),
+                        discription:
+                            donnaDealsDetails.productDescription.toString()),
                   ],
                 ),
               ),

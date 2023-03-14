@@ -73,7 +73,7 @@ class DonnaFavourite extends StatelessWidget {
             },
             separatorBuilder: (BuildContext context, int index) {
               return const SizedBox(
-                height: 25,
+                height: 18,
               );
             },
           );

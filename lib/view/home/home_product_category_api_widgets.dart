@@ -111,9 +111,9 @@ class HomePageProductCategoryAPIWidgets
                               // 4.shb,
                               AppText(
                                 record[index].categoryName ?? "",
-                                fontSize: 12,
+                                fontSize: 14,
                                 maxLines: 1,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w600,
                               ),
                             ],
                           ),

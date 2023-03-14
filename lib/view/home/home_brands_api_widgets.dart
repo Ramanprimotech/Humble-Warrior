@@ -58,7 +58,7 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
               CommonUtils().urlLauncher(url: record[index].brandLink!);
             },
             child: Container(
-              width: 100,
+              width: 90,
               height: 60,
               padding: 5.pa,
               margin: 2.pa,

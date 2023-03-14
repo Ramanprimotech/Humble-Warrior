@@ -11,63 +11,64 @@ class AboutScreen extends StatelessWidget {
     final StaticPagesController staticController =
         Get.find<StaticPagesController>();
     return Scaffold(
-      body: FutureBuilder<List<StaticData>>(
-        future: staticController.staticPageApi("40324"),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (snapshot.hasError) {
-            return CommonWidgets.errorAPI(
-                errorText: "${snapshot.error}",
-                context: context,
-                onPress: () {
-                  Get.back();
-                },
-                buttonTitle: "OK");
-          }
-          List<StaticData> staticResponse = snapshot.data!;
-          return staticResponse.isNotEmpty
-              ? Column(
-                  children: [
-                    Expanded(
-                      child: ListView(children: [
-                        /// About Donna title
-                        CommonWidgets.titleBar(
-                          context,
-                          backIcon: true,
-                          title: aboutDonnaTxt,
-                          fontSize: 18,
-                          color: AppColors.primary,
-                        ),
+      body: SafeArea(
+        child: FutureBuilder<List<StaticData>>(
+          future: staticController.staticPageApi("40324"),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.hasError) {
+              return CommonWidgets.errorAPI(
+                  errorText: "${snapshot.error}",
+                  context: context,
+                  onPress: () {
+                    Get.back();
+                  },
+                  buttonTitle: "OK");
+            }
+            List<StaticData> staticResponse = snapshot.data!;
+            return staticResponse.isNotEmpty
+                ? Column(
+                    children: [
+                      /// About Donna title
+                      CommonWidgets.titleBar(
+                        context,
+                        backIcon: true,
+                        title: aboutDonnaTxt,
+                        fontSize: 18,
+                      ),
+                      Expanded(
+                        child: ListView(children: [
+                          /// About image
+                          _showImg(staticResponse),
 
-                        /// About image
-                        _showImg(staticResponse),
+                          /// About Details
+                          _details(context, staticResponse),
 
-                        /// About Details
-                        _details(context, staticResponse),
+                          /// See copy of humble warrior button
+                          _seeCopyButton(),
+                          25.shb,
+                        ]),
+                      ),
 
-                        /// See copy of humble warrior button
-                        _seeCopyButton(),
-                        25.shb,
-                      ]),
-                    ),
-
-                    /// Brands List
-                    HomeScreenWidgets(context: context, controller: controller)
-                        .brandsList(),
-                    25.shb,
-                  ],
-                )
-              : Center(
-                  child: CommonWidgets.errorAPI(
-                      errorText: "${snapshot.error}",
-                      context: context,
-                      onPress: () {
-                        Get.back();
-                      },
-                      buttonTitle: "OK"));
-        },
+                      /// Brands List
+                      HomeScreenWidgets(
+                              context: context, controller: controller)
+                          .brandsList(),
+                      25.shb,
+                    ],
+                  )
+                : Center(
+                    child: CommonWidgets.errorAPI(
+                        errorText: "${snapshot.error}",
+                        context: context,
+                        onPress: () {
+                          Get.back();
+                        },
+                        buttonTitle: "OK"));
+          },
+        ),
       ),
     );
   }

@@ -103,7 +103,7 @@ class FrontPageDeals extends StatelessWidget {
             },
             separatorBuilder: (BuildContext context, int index) {
               return const SizedBox(
-                height: 25,
+                height: 18,
               );
             },
           );
@@ -127,7 +127,9 @@ ItemCard frontPageCard(
     buttons: frontPageOptionsButton(details, index, context),
     imageUrl: details.url!,
     radius: 10,
-    title: details.itemName.toString(),
+    title: details.ribbonName != null
+        ? details.ribbonName!
+        : details.itemName.toString(),
   );
 }
 

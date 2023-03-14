@@ -45,7 +45,13 @@ class _SearchViewState extends State<SearchView> {
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10.0).r,
                 counterText: "",
                 hintText: searchTxt,
-                hintStyle: TextStyle(color: Theme.of(context).textTheme.displayMedium!.color?.withOpacity(0.6), fontSize: 15),
+                hintStyle: TextStyle(
+                    color: Theme.of(context)
+                        .textTheme
+                        .displayMedium!
+                        .color
+                        ?.withOpacity(0.6),
+                    fontSize: 14),
                 // hintStyle:
                 isDense: true,
                 focusedBorder: const UnderlineInputBorder(
