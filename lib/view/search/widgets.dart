@@ -49,10 +49,3 @@ class SearchBar extends StatelessWidget {
     );
   }
 }
-
-class SearchViewBindings implements Bindings {
-  @override
-  void dependencies() {
-    Get.lazyPut(() => const SearchView());
-  }
-}

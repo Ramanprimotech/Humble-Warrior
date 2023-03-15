@@ -25,73 +25,71 @@ class _SearchViewState extends State<SearchView> {
         titleSpacing: 5,
         leadingWidth: 35,
         centerTitle: false,
-        title: Expanded(
-          child: SearchBar(
-            padding: 8.pv,
-            child: TextFormField(
-              focusNode: focusNode,
-              controller: controller,
-              onFieldSubmitted: (value) {
-                if (value.length >= 3) {
-                  hiveService.addToRecentList(
-                      RecentSearch(productSearched: controller.text));
-                  setState(() {});
-                } else {
-                  DialogHelper.showToast(
-                      context, "Enter at least three characters");
-                }
-              },
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 10.0).r,
-                counterText: "",
-                hintText: searchTxt,
-                hintStyle: TextStyle(
-                    color: Theme.of(context)
-                        .textTheme
-                        .displayMedium!
-                        .color
-                        ?.withOpacity(0.6),
-                    fontSize: 14),
-                // hintStyle:
-                isDense: true,
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide.none,
-                ),
-                enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide.none,
-                ),
+        title: SearchBar(
+          padding: 8.pv,
+          child: TextFormField(
+            focusNode: focusNode,
+            controller: controller,
+            onFieldSubmitted: (value) {
+              if (value.length >= 3) {
+                hiveService.addToRecentList(
+                    RecentSearch(productSearched: controller.text));
+                setState(() {});
+              } else {
+                DialogHelper.showToast(
+                    context, "Enter at least three characters");
+              }
+            },
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 10.0).r,
+              counterText: "",
+              hintText: searchTxt,
+              hintStyle: TextStyle(
+                  color: Theme.of(context)
+                      .textTheme
+                      .displayMedium!
+                      .color
+                      ?.withOpacity(0.6),
+                  fontSize: 14),
+              // hintStyle:
+              isDense: true,
+              focusedBorder: const UnderlineInputBorder(
+                borderSide: BorderSide.none,
+              ),
+              enabledBorder: const UnderlineInputBorder(
+                borderSide: BorderSide.none,
+              ),
 
-                /// prefixIcon
-                prefixIcon: GestureDetector(
-                  // padding: 4.pl,
-                  onTap: () {
-                    if (controller.text.length >= 3) {
-                      hiveService.addToRecentList(
-                          RecentSearch(productSearched: controller.text));
-                      setState(() {});
-                    } else {
-                      focusNode.unfocus();
-                      DialogHelper.showToast(
-                          context, "Enter at least three characters");
-                    }
-                  },
-                  child: Icon(Icons.search,
-                      color: Theme.of(context).textTheme.displayMedium!.color,
-                      size: 24.sp),
-                ),
-
-                // suffixIcon:
-                suffixIcon: GestureDetector(
-                  child: Icon(
-                    Icons.close,
-                    color: Theme.of(context).textTheme.displayMedium!.color,
-                    size: 20.sp,
-                  ),
-                  onTap: () {
-                    controller.clear();
+              /// prefixIcon
+              prefixIcon: GestureDetector(
+                // padding: 4.pl,
+                onTap: () {
+                  if (controller.text.length >= 3) {
+                    hiveService.addToRecentList(
+                        RecentSearch(productSearched: controller.text));
                     setState(() {});
-                  },
+                  } else {
+                    focusNode.unfocus();
+                    DialogHelper.showToast(
+                        context, "Enter at least three characters");
+                  }
+                },
+                child: Icon(Icons.search,
+                    color: Theme.of(context).textTheme.displayMedium!.color,
+                    size: 24.sp),
+              ),
+
+              // suffixIcon:
+              suffixIcon: GestureDetector(
+                child: Icon(
+                  Icons.close,
+                  color: Theme.of(context).textTheme.displayMedium!.color,
+                  size: 20.sp,
                 ),
+                onTap: () {
+                  controller.clear();
+                  setState(() {});
+                },
               ),
             ),
           ),

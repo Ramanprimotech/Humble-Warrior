@@ -1,5 +1,4 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/view/sorting/sort_controller.dart';
 
 class BottomNavigationBindings implements Bindings {
   @override
@@ -10,6 +9,5 @@ class BottomNavigationBindings implements Bindings {
     Get.put(FrontPageDetailController());
     Get.put(MyAccountController());
     Get.put(WishListController());
-    Get.put(SortController());
   }
 }

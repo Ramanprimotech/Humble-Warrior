@@ -16,5 +16,6 @@ class Endpoints {
   static const String productDetails = "/wp-jsonhwapi/get_product_detail";
   static const String registerUser = "/pnfw/register";
   static const String notificationStatus = "/pnfw/posts";
+  static const String notificationList = "/pnfw/posts";
   static String token = "";
 }

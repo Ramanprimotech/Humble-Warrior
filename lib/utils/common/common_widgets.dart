@@ -92,8 +92,8 @@ class CommonWidgets {
     return const Center(
       child: AppText(
         loadingDealsTxt,
-        fontSize: 20,
-        fontWeight: FontWeight.w700,
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
       ),
     );
   }

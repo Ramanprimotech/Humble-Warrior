@@ -2,13 +2,14 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/modals/filter_modal.dart';
 
 class SortController extends GetxController {
+  Function? additionalApplySort;
   List<FilterModal> filterData = [
-    FilterModal(header: "Sort", subHeader: {
-      "Latest": "DECS",
-      "Oldest": "ASC",
-      "A-Z": "ASC",
-      "Z-A": "DECS"
-    }),
+    FilterModal(header: "Sort", subHeader: [
+      const SortItem(itemnName: "Latest", itemValue: "DECS", type: "date"),
+      const SortItem(itemnName: "Oldest", itemValue: "ASC", type: "date"),
+      const SortItem(itemnName: "A-Z", itemValue: "ASC", type: "name"),
+      const SortItem(itemnName: "Z-A", itemValue: "DECS", type: "name")
+    ]),
     // FilterModal(header: "Name", subHeader: ["A-Z", "Z-A"]),
   ];
 
@@ -25,6 +26,7 @@ class SortController extends GetxController {
     Iterable<FilterModal> data =
         filterData.where((element) => element.selected != -1);
     isItemSelected.value = data.length != 0;
+    return isItemSelected.value;
   }
 
   back() {
@@ -46,6 +48,9 @@ class SortController extends GetxController {
   apply() {
     filterSelectionList.clear();
     filterSelectionList.addAll(filterData);
+    if (additionalApplySort != null) {
+      additionalApplySort!();
+    }
     Get.back();
   }
 

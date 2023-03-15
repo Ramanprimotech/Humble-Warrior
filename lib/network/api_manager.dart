@@ -52,7 +52,6 @@ class APIManager {
             'Authorization': 'Bearer ${Endpoints.token}'
           },
           body: jsonEncode(param.toJson()));
-      // log(response.body);
       responseJson = _response(response);
     } on SocketException {
       throw FetchDataException('No Internet connection');

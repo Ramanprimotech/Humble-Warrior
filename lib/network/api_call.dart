@@ -9,6 +9,7 @@ import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
 import 'package:humble_warrior/modals/response/front_page_response_model.dart';
 import 'package:humble_warrior/modals/response/home_categories_response_model.dart';
+import 'package:humble_warrior/modals/response/notification_response_model.dart';
 import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/modals/response/product_details_api_response.dart';
 import 'package:humble_warrior/modals/response/product_list_response.dart';
@@ -300,9 +301,6 @@ class CallAPI {
         var data = jsonDecode(response.body);
         await SharePreferenceData.addStringToSF(
             spRegisterUserId, "${data['user_id']}");
-        log("${jsonDecode(response.body)}", name: "Register Response");
-        log("${jsonDecode(response.body)['user_id']}",
-            name: "Register Response");
         // if (context.mounted) {
         //   DialogHelper.showToast(context, "Error sending user login data");
         // }
@@ -312,6 +310,37 @@ class CallAPI {
     } catch (e) {
       log(e.toString());
       return;
+    }
+  }
+
+  ///  Notification List API
+  static Future<NotificationResponseModel> notificationListAPI(
+      {required Map payload}) async {
+    try {
+      // payload.toString().logRequest(apiName: Endpoints.donnaDeals);
+
+      log("${payload.toString()}", name: "Notification ");
+      final response = await http.post(
+          Uri.parse("${Endpoints.baseUrl}${Endpoints.notificationList}"),
+          body: payload);
+      NotificationResponseModel notificationResponseModel =
+          NotificationResponseModel(posts: []);
+      if (response.statusCode == 200) {
+        notificationResponseModel =
+            NotificationResponseModel.fromJson(jsonDecode(response.body));
+      }
+      log("${response}", name: "Notification  Response");
+
+      if (response == null) {
+        return notificationResponseModel;
+      }
+      return notificationResponseModel;
+
+      return NotificationResponseModel(posts: []);
+    } catch (e) {
+      log("API", name: "API Deals  ${payload}", error: e);
+      // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
+      return NotificationResponseModel(posts: []);
     }
   }
 }

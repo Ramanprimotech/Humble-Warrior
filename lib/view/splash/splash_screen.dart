@@ -12,6 +12,8 @@ class SplashScreen extends StatelessWidget {
         child: Obx(
           () => Image.asset(
             controller.isDark.value
+                //     ? ImagePathAssets.logoAnimation
+                //     : ImagePathAssets.logoAnimation,
                 ? ImagePathAssets.hwLogoDarkMode
                 : ImagePathAssets.hwLogo,
             height: 200,

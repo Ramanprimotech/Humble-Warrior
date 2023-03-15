@@ -10,7 +10,7 @@ class ImagePathAssets {
 
   static const String loginImg = "assets/image/login.png";
   static const String callImg = "assets/image/call.png";
-
+  static const String logoAnimation = "assets/image/logo-animation.gif";
 
   static const String hwIcon = "assets/icons/humble_icon.png";
   static const String user = "assets/icons/user.svg";
@@ -25,22 +25,20 @@ class ImagePathAssets {
   static const String appleImg = "assets/image/apple2.png";
   static const String twitterImg = "assets/image/twiiter.png";
 
-
   /*=================================== Search Bar Icons/Images ===========================================*/
 
   static const String hwLogoUnnamed = "assets/icons/logo.png";
-  static const String hwLogoUnnamedDark = "assets/icons/humble_icon_darkmode.png";
+  static const String hwLogoUnnamedDark =
+      "assets/icons/humble_icon_darkmode.png";
   static const String notificationIcon = 'assets/icons/notification.png';
-
 
   /*=================================== Bottom Navigation Bar Icons ===========================================*/
 
-  static const String homeIcon =  "assets/icons/home.png";
+  static const String homeIcon = "assets/icons/home.png";
   static const String amazonIcon = "assets/icons/amazon_bot.png";
   static const String heartIcon = "assets/icons/heart.png";
   static const String facebookIcon = "assets/icons/facebook.png";
   static const String personIcon = "assets/icons/person.png";
-
 
   /*=================================== Home Page Icons/Images ===========================================*/
 
@@ -61,12 +59,12 @@ class ImagePathAssets {
   static const String jewelryIcon = "assets/brands/jewelry.png";
   static const String babyIcon = "assets/brands/baby.png";
   static const String booksIcon = "assets/brands/books.png";
-  static const String vehicleIcon =  "assets/brands/vehicle.png";
-  static const String petsIcon =  "assets/brands/pets.png";
-  static const String nikeIcon =  "assets/categories/nike.png";
-  static const String reebokIcon =  "assets/categories/reebok.png";
-  static const String gucciIcon =  "assets/categories/guchi.png";
-  static const String adidasIcon =   "assets/categories/adidas.png";
+  static const String vehicleIcon = "assets/brands/vehicle.png";
+  static const String petsIcon = "assets/brands/pets.png";
+  static const String nikeIcon = "assets/categories/nike.png";
+  static const String reebokIcon = "assets/categories/reebok.png";
+  static const String gucciIcon = "assets/categories/guchi.png";
+  static const String adidasIcon = "assets/categories/adidas.png";
   static const String donnaDailyDealImage = "assets/image/donna_deals.jpeg";
   static const String donnaFavDealImage = "assets/image/donna_fav.jpg";
   static const String noImageFound = "assets/image/image-not-found.png";
@@ -77,31 +75,4 @@ class ImagePathAssets {
   static const String bellIcon = "assets/icons/bell.png";
 
   static const String backgroundImg = "assets/image/background.jpg";
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

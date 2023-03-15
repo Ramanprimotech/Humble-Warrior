@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/modals/filter_modal.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/network/endpoints.dart';
 import 'package:humble_warrior/services/hive_storage_service.dart';
 import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
+import 'package:humble_warrior/view/sorting/sort_controller.dart';
 
 import '../../../modals/requests/pagination_modal.dart';
 import '../../../network/api_call.dart';
@@ -18,6 +22,7 @@ class HomeOptionController extends GetxController
   int initialIndex = Get.arguments[0];
   late BuildContext context;
   HiveService service = Get.find<HiveService>();
+  SortController _sortController = Get.find();
 
   ///Storage has item
   bool hasItemInDatabase(String id) {
@@ -58,6 +63,7 @@ class HomeOptionController extends GetxController
 
   @override
   void onInit() {
+    _sortController.additionalApplySort = functionSort;
     debugPrint("$initialIndex");
     tabController =
         TabController(length: 3, initialIndex: initialIndex, vsync: this);
@@ -76,8 +82,11 @@ class HomeOptionController extends GetxController
       donnaDealList.clear();
       // update();
     }
-    PaginationModel paginationModel =
-        PaginationModel(page: donnaDealsPage.toString());
+    SortItem item = sort();
+    PaginationModel paginationModel = PaginationModel(
+        page: donnaDealsPage.toString(),
+        sortName: item.type,
+        sortOrder: item.itemValue);
     await CallAPI.productListAPI(
             payload: paginationModel, url: Endpoints.donnaDeals)
         .then((value) {
@@ -104,8 +113,11 @@ class HomeOptionController extends GetxController
       frontPageDealsPage = 1;
       frontPageDealList.clear();
     }
-    PaginationModel paginationModel =
-        PaginationModel(page: frontPageDealsPage.toString());
+    SortItem item = sort();
+    PaginationModel paginationModel = PaginationModel(
+        page: frontPageDealsPage.toString(),
+        sortName: item.type,
+        sortOrder: item.itemValue);
     await CallAPI.productListAPI(
             payload: paginationModel, url: Endpoints.frontPage)
         .then((value) {
@@ -135,8 +147,12 @@ class HomeOptionController extends GetxController
       donnaFavouriteDealList.clear();
       // update();
     }
-    PaginationModel paginationModel =
-        PaginationModel(page: donnaFavouriteDealsPage.toString());
+    SortItem item = sort();
+    PaginationModel paginationModel = PaginationModel(
+        page: donnaFavouriteDealsPage.toString(),
+        sortName: item.type,
+        sortOrder: item.itemValue);
+    // log(paginationModel.toString(), name: "Sort");
     await CallAPI.productListAPI(
             payload: paginationModel, url: Endpoints.donnaFavourite)
         .then((value) {
@@ -157,6 +173,33 @@ class HomeOptionController extends GetxController
       donnaFavouriteDealsBool.value = false;
       update();
     });
+  }
+
+  SortItem sort() {
+    log(_sortController.checkFilter().toString(), name: "Is Seleced");
+    if (!_sortController.checkFilter()) {
+      return SortItem(itemnName: "", itemValue: "", type: "");
+    } else {
+      return _sortController
+              .filterData[_sortController.headerIndex.value].subHeader[
+          _sortController
+              .filterData[_sortController.headerIndex.value].selected!];
+    }
+  }
+
+  functionSort() {
+    donnaFavouriteDealsPage = 1;
+    donnaFavouriteDealList.clear();
+    frontPageDealsPage = 1;
+    frontPageDealList.clear();
+    donnaDealsPage = 1;
+    donnaDealList.clear();
+    frontPageDealsBool.value = true;
+    donnaDealsBool.value = true;
+    donnaFavouriteDealsBool.value = true;
+    update();
+    Future.wait(
+        [donaDealsAPI(), donnaFavouriteDealsAPI(), frontPageDealsAPI()]);
   }
 
   @override

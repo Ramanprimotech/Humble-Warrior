@@ -5,6 +5,7 @@ import 'package:humble_warrior/view/productDetail/category_details_list/category
 import 'package:humble_warrior/view/productDetail/category_details_list/category_details_list_screen.dart';
 import 'package:humble_warrior/view/productDetail/category_item_detail/category_item_detail_binding.dart';
 import 'package:humble_warrior/view/productDetail/category_item_detail/category_item_detail_screen.dart';
+import 'package:humble_warrior/view/search/search_binding.dart';
 import 'package:humble_warrior/view/sorting/sort_binding.dart';
 import 'package:humble_warrior/view/sorting/sort_screen.dart';
 import 'package:humble_warrior/view/static_pages/static_page_binding.dart';

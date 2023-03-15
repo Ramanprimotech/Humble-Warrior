@@ -1,8 +1,15 @@
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/modals/response/notification_response_model.dart';
 
-class NotificationScreen extends StatelessWidget {
+class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
 
+  @override
+  State<NotificationScreen> createState() => _NotificationScreenState();
+}
+
+class _NotificationScreenState extends State<NotificationScreen> {
+  final NotificationController _notificationController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,20 +21,58 @@ class NotificationScreen extends StatelessWidget {
             Expanded(
               child: CustomRefreshIndicator(
                 onRefresh: () {
-                  return Future.delayed(const Duration(seconds: 2), () {
-                    return Future.value(0);
-                  });
+                  setState(() {});
+                  return Future.value(0);
                 },
-                child: ListView.separated(
-                  padding: const EdgeInsets.only(
-                      left: 20, right: 20, bottom: 20, top: 5),
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) {
-                    return notificationCard(context, index);
-                  },
-                  itemCount: 15,
-                  separatorBuilder: (BuildContext context, int index) {
-                    return 20.shb;
+                child: FutureBuilder<NotificationResponseModel>(
+                  future: _notificationController.notificationList(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return ListView.separated(
+                        padding: const EdgeInsets.only(
+                            left: 20, right: 20, bottom: 20, top: 5),
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          return ShimmerLoader(
+                              child: notificationCard(context, Posts()));
+                        },
+                        itemCount: 15,
+                        separatorBuilder: (BuildContext context, int index) {
+                          return 15.shb;
+                        },
+                      );
+                    }
+                    if (snapshot.hasError) {
+                      return const Center(
+                        child: AppText(
+                          "No notifications found",
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      );
+                    }
+                    if (snapshot.data!.posts!.isEmpty) {
+                      return const Center(
+                        child: AppText(
+                          "No notifications found",
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      );
+                    }
+                    return ListView.separated(
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 20, top: 5),
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (context, index) {
+                        return notificationCard(
+                            context, snapshot.data!.posts![index]);
+                      },
+                      itemCount: snapshot.data!.posts!.length,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return 15.shb;
+                      },
+                    );
                   },
                 ),
               ),
@@ -38,28 +83,29 @@ class NotificationScreen extends StatelessWidget {
     );
   }
 
-  notificationCard(context, index) {
+  notificationCard(context, Posts data) {
     return Container(
       width: Get.width,
       height: 150,
       decoration: CustomBoxDecorations().shadow(
-          context: context, color: index < 5 ? AppColors.readBox : null),
+          context: context,
+          color: data.read == false ? AppColors.readBox : null),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        notificationImg(),
-        notificationDetails(index),
+        notificationImg(data.thumbnail ?? "null"),
+        notificationDetails(data),
       ]),
     );
   }
 
-  notificationImg() {
+  notificationImg(String url) {
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(10),
         bottomLeft: Radius.circular(10),
       ),
       child: CommonWidgets.networkImage(
-        imageUrl:
-            "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
+        imageUrl: url,
+        // "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
         alignment: Alignment.topCenter,
         width: Get.width / 3.5,
         fit: BoxFit.cover,
@@ -67,7 +113,7 @@ class NotificationScreen extends StatelessWidget {
     );
   }
 
-  notificationDetails(int index) {
+  notificationDetails(Posts data) {
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -90,9 +136,9 @@ class NotificationScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 5, left: 15),
             child: AppText(
-              "Style And Savings " * 3,
+              data.title ?? "null",
               fontWeight: FontWeight.bold,
-              color: index < 5 ? Colors.black : null,
+              color: data.read == false ? Colors.black : null,
               maxLines: 2,
               fontSize: 16,
             ),
@@ -103,7 +149,7 @@ class NotificationScreen extends StatelessWidget {
               "These cuties were tough to photograph and honestly my picture doesn't to do justice." *
                   2,
               fontSize: 14,
-              color: index < 5 ? Colors.black : null,
+              color: data.read == false ? Colors.black : null,
               maxLines: 2,
             ),
           ),
