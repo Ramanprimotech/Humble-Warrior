@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
@@ -293,9 +294,15 @@ class CallAPI {
   static Future authDataAPI({required Map payload}) async {
     try {
       final response = await http.post(
-          Uri.parse("http://112.196.54.37/Development/HW/pnfw/register"),
+          Uri.parse("${Endpoints.baseUrl}${Endpoints.registerUser}"),
           body: payload);
-      if (response.statusCode != 200) {
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        await SharePreferenceData.addStringToSF(
+            spRegisterUserId, "${data['user_id']}");
+        log("${jsonDecode(response.body)}", name: "Register Response");
+        log("${jsonDecode(response.body)['user_id']}",
+            name: "Register Response");
         // if (context.mounted) {
         //   DialogHelper.showToast(context, "Error sending user login data");
         // }

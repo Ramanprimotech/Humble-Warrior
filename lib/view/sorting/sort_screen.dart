@@ -218,8 +218,9 @@ class _BuildSortState extends State<_BuildSort> {
                   ),
                   4.swb,
                   AppText(
-                    controller.filterData[controller.headerIndex.value]
-                        .subHeader[index],
+                    controller
+                        .filterData[controller.headerIndex.value].subHeader.keys
+                        .elementAt(index),
                     color: controller.filterData[controller.headerIndex.value]
                                 .selected ==
                             index

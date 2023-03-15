@@ -1,7 +1,7 @@
 class FilterModal {
   String header;
   int? selected;
-  List<String> subHeader;
+  Map<String, String> subHeader;
 
   FilterModal({
     required this.header,

@@ -145,3 +145,4 @@ const String loginWishTxt = "Login to add items to wishlist";
 /*===================================================Shared Preference========================================================*/
 const String spIsEntered = 'isEntered';
 const String spIsLogged = "isLogged";
+const String spRegisterUserId = "registerUserId";

@@ -3,8 +3,13 @@ import 'package:humble_warrior/modals/filter_modal.dart';
 
 class SortController extends GetxController {
   List<FilterModal> filterData = [
-    FilterModal(header: "Price", subHeader: ["Low to High", "High to Low"]),
-    FilterModal(header: "Sort", subHeader: ["Recent", "A-Z", "Z-A"]),
+    FilterModal(header: "Sort", subHeader: {
+      "Latest": "DECS",
+      "Oldest": "ASC",
+      "A-Z": "ASC",
+      "Z-A": "DECS"
+    }),
+    // FilterModal(header: "Name", subHeader: ["A-Z", "Z-A"]),
   ];
 
   RxBool isSelected = false.obs;
