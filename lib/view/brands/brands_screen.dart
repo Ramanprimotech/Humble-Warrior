@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
@@ -17,13 +18,18 @@ class BrandsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     HomeScreenController homeScreenController = Get.find();
     return Scaffold(
+      appBar: AppBar(
+        titleSpacing: 5,
+        leadingWidth: 34,
+        title: const SearchBar(),),
       body: SafeArea(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CommonWidgets.titleBar(context,
-                  title: "$brandsTxt I", icon: true, fontSize: 20),
+              16.shb,
+              // CommonWidgets.titleBar(context,
+              //     title: "$brandsTxt I", icon: true, fontSize: 20),
               Expanded(
                 child: Container(
                   padding: 20.ph,

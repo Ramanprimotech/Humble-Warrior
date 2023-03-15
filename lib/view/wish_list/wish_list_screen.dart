@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/modals/response/donna_deals_response.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
@@ -20,11 +21,14 @@ class WishList extends StatelessWidget {
   Widget build(BuildContext context) {
     WishListController controller = Get.find();
     return Scaffold(
+      appBar: AppBar(
+        title: const SearchBar(),),
       body: SafeArea(
         child: Column(
           children: [
-            CommonWidgets.titleBar(context,
-                title: myWishlistTxt, fontSize: 20, backIcon: false),
+            // CommonWidgets.titleBar(context,
+            //     title: myWishlistTxt, fontSize: 20, backIcon: false),
+            12.shb,
             Expanded(
               child: Center(
                   child: controller.value == false

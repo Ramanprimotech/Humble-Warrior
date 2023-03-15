@@ -23,11 +23,16 @@ class CategoryListDetails extends StatelessWidget {
       //   ),
       //   leading: AppIcons.IosBackIcon(),
       // ),
+      appBar: AppBar(
+        titleSpacing: 5,
+        leadingWidth: 34,
+        title: const SearchBar( margin: EdgeInsets.only(right: 15)),),
       body: SafeArea(
         child: Column(
           children: [
-            CommonWidgets.titleBar(context,
-                title: title, fontSize: 20, backIcon: true),
+            // CommonWidgets.titleBar(context,
+            //     title: title, fontSize: 20, backIcon: true),
+            12.shb,
             Expanded(
               child: PaginationWidget(
                 length: controller.categoryListLength,
