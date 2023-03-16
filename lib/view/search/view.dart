@@ -304,13 +304,13 @@ class _SearchViewState extends State<SearchView> {
                   }
                   if (snapshot.data == []) {
                     return const Center(
-                      child: AppText("No Data found"),
+                      child: AppText("No Deals found"),
                     );
                   }
                   if (snapshot.data![0].productName == null ||
                       snapshot.data![0].productName == "") {
                     return const Center(
-                      child: AppText("No Data found"),
+                      child: AppText("No Deals found"),
                     );
                   }
 

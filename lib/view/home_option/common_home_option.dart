@@ -122,7 +122,7 @@ Widget codeButton({required String code, required BuildContext context}) {
     icon: Container(
         alignment: Alignment.center,
         // width: 90,
-        height: 30,
+        height: 32,
         padding: 10.ph,
         decoration: BoxDecoration(
             color: AppColors.appGreen,
@@ -132,7 +132,7 @@ Widget codeButton({required String code, required BuildContext context}) {
           code,
           color: Colors.black,
           fontWeight: FontWeight.w700,
-          fontSize: 12,
+          fontSize: 14,
         )),
   );
 }
@@ -145,7 +145,7 @@ Widget shopButton({required url, required String title}) {
     icon: Container(
         alignment: Alignment.center,
         // width: 90,
-        height: 30,
+        height: 32,
         padding: 10.ph,
         decoration: BoxDecoration(
             color: AppColors.primary,
@@ -155,7 +155,7 @@ Widget shopButton({required url, required String title}) {
           shopNowTxt,
           color: Colors.white,
           fontWeight: FontWeight.w700,
-          fontSize: 12,
+          fontSize: 14,
         )),
   );
 }

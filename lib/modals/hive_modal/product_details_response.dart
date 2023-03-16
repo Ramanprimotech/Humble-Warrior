@@ -42,6 +42,11 @@ class ProductDetailsResponse {
       this.ribbonColor,
       this.productDescription});
 
+  @override
+  String toString() {
+    return 'ProductDetailsResponse{id: $id, itemName: $itemName, catName: $catName, url: $url, shopUrl: $shopUrl, couponCode: $couponCode, productDescription: $productDescription, ribbonName: $ribbonName, ribbonColor: $ribbonColor}';
+  }
+
   ProductDetailsResponse.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     itemName = json['item_name'];

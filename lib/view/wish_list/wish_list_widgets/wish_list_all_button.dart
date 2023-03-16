@@ -34,7 +34,6 @@ class WishListButton implements DonnaOptions {
             item: details,
             color: Theme.of(context).textTheme.displayMedium!.color,
             key: Key(index.toString()),
-            size: 28,
           ),
         ],
       ),

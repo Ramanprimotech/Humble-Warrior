@@ -6,6 +6,7 @@ import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/common/photo_viewer.dart';
 import 'package:humble_warrior/utils/image_path_assets.dart';
+import 'package:humble_warrior/utils/sizes/sizes_config.dart';
 
 import '../../../utils/routes/app_routes.dart';
 import '../common_home_option.dart';
@@ -148,7 +149,7 @@ Widget frontPageButton(
         icon: Image.asset(
           color: color,
           ImagePathAssets.commentIcon,
-          height: 24,
+          height: Dimens.mediumIcon,
         ),
       ),
       IconButton(
@@ -160,7 +161,6 @@ Widget frontPageButton(
           item: details,
           key: Key(index.toString()),
           color: color,
-          size: 28,
         ),
       ),
     ],
@@ -186,7 +186,6 @@ Widget frontPageOptionsButton(
           id: details.id.toString(),
           key: Key(index.toString()),
           color: color,
-          size: 28,
         ),
       ),
       IconButton(
@@ -194,7 +193,7 @@ Widget frontPageOptionsButton(
         icon: Image.asset(
           color: color,
           ImagePathAssets.commentIcon,
-          height: 24,
+          height: Dimens.mediumIcon,
         ),
       ),
     ],

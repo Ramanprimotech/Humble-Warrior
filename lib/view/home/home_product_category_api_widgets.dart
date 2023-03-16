@@ -96,7 +96,7 @@ class HomePageProductCategoryAPIWidgets
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SizedBox(
-                                height: productHeight - 20,
+                                height: productHeight - 25,
                                 child: Image.network(
                                     errorBuilder: (context, error, stackTrace) {
                                   return Center(
@@ -111,7 +111,7 @@ class HomePageProductCategoryAPIWidgets
                               // 4.shb,
                               AppText(
                                 record[index].categoryName ?? "",
-                                fontSize: 14,
+                                fontSize: 13,
                                 maxLines: 1,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -162,7 +162,7 @@ class HomePageProductCategoryAPIWidgets
             Expanded(
               // flex: 8,
               child: SizedBox(
-                height: productHeight,
+                height: productHeight - 25,
                 width: Get.width,
                 child: ListView.builder(
                     padding: 8.ph,

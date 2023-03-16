@@ -91,7 +91,7 @@ class HomeOptionController extends GetxController
             payload: paginationModel, url: Endpoints.donnaDeals)
         .then((value) {
       if (value.data == null) {
-        DialogHelper.showToast(context, "No Deals Found");
+        DialogHelper.showToast(context, "No More Deals");
       } else {
         donnaDealsPage += 1;
         donnaDealList.addAll(value.data!);
@@ -122,7 +122,7 @@ class HomeOptionController extends GetxController
             payload: paginationModel, url: Endpoints.frontPage)
         .then((value) {
       if (value.data == null) {
-        DialogHelper.showToast(context, "No Deals Found");
+        DialogHelper.showToast(context, "No More Deals");
       } else {
         frontPageDealsPage += 1;
         frontPageDealList.addAll(value.data!);
@@ -157,7 +157,7 @@ class HomeOptionController extends GetxController
             payload: paginationModel, url: Endpoints.donnaFavourite)
         .then((value) {
       if (value.data == null) {
-        DialogHelper.showToast(context, "No Deals Found");
+        DialogHelper.showToast(context, "No More Deals");
       } else {
         donnaFavouriteDealsPage += 1;
         donnaFavouriteDealList.addAll(value.data!);

@@ -99,9 +99,9 @@ ItemCard donnaDealsCard(
     radius: 10,
     buttons: donnaDealsButton(details, index, context, dailyDeals: dailyDeals),
     imageUrl: details.url!,
-    title: details.ribbonName != null
-        ? details.ribbonName!
-        : details.itemName.toString(),
+    title: details.ribbonName == null || details.ribbonName == ""
+        ? details.itemName.toString()
+        : details.ribbonName.toString(),
   );
 }
 
@@ -154,7 +154,6 @@ Widget donnaDealsButton(
                         item: details,
                         color: color,
                         key: Key(index.toString()),
-                        size: 28,
                       ),
                     ),
                     shareButton(shareUrl: "shareUrl", color: color),
@@ -173,7 +172,6 @@ Widget donnaDealsButton(
                         item: details,
                         color: color,
                         key: Key(index.toString()),
-                        size: 28,
                       ),
                     ),
                   ],

@@ -1,12 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/decorations.dart';
-import 'package:humble_warrior/utils/helpers/extensions.dart';
-
-import '../../../utils/app_colors.dart';
-import '../../../utils/app_text.dart';
+import 'package:humble_warrior/hw.dart';
 
 class WishListCard extends StatelessWidget {
   final double? cardHeight;
@@ -23,7 +15,7 @@ class WishListCard extends StatelessWidget {
   const WishListCard(
       {Key? key,
       this.buttons,
-      this.buttonbarHeight = 135,
+      this.buttonbarHeight = 75,
       this.radius = 10,
       this.imageHeight = 220,
       this.imageTitleHeight = 60,
@@ -85,27 +77,32 @@ class WishListCard extends StatelessWidget {
               height: buttonbarHeight,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Padding(
-                    padding: 8.pa,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AppText(
-                          title,
-                          fontSize: 16,
-                          // color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        const AppText(
-                          AppStrings.lorem,
-                          // color: Colors.black,
-                          maxLines: 2,
-                        ),
-                      ],
-                    ),
+                  4.shb,
+                  AppText(
+                    padding: 10.ph,
+                    title,
+                    fontSize: 16,
+                    // color: Colors.black,
+                    fontWeight: FontWeight.w600,
                   ),
-                  Expanded(child: buttons!),
+                  // Padding(
+                  //   padding: 0.pa,
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //
+                  //       // const AppText(
+                  //       //   AppStrings.lorem,
+                  //       //   // color: Colors.black,
+                  //       //   maxLines: 2,
+                  //       // ),
+                  //     ],
+                  //   ),
+                  // ),
+                  buttons!,
+                  // Expanded(child: ),
                 ],
               ),
             ),

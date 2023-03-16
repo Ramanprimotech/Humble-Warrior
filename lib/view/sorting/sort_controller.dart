@@ -37,6 +37,8 @@ class SortController extends GetxController {
 
   reset() {
     filterData[headerIndex.value].selected = -1;
+    filterData.clear();
+    filterData.addAll(filterSelectionList);
     headerIndex.value = 0;
     filterData.forEach((element) {
       element.selected = (-1);

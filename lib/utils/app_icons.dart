@@ -1,6 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
+import 'package:humble_warrior/utils/sizes/sizes_config.dart';
 
 class AppIcons {
   // IconData
@@ -96,6 +97,7 @@ class AppIcons {
 
   static Icon share({iconColor = Colors.black}) => Icon(
         Icons.share,
+        size: Dimens.mediumIcon,
         color: iconColor,
       );
 
@@ -157,7 +159,7 @@ class AppIcons {
   static Icon heart({Color iconColor = Colors.black, double? size}) => Icon(
         Icons.favorite_outlined,
         color: iconColor,
-        size: size ?? 20,
+        size: size ?? Dimens.largeIcon,
       );
 
   static Icon share2({Color iconColor = Colors.blue}) =>
@@ -194,7 +196,7 @@ class Heart extends StatefulWidget {
       this.color = Colors.black,
       required this.id,
       required this.item,
-      required this.size,
+      this.size,
       this.isSelected});
 
   final double? size;
@@ -243,7 +245,7 @@ class _HeartState extends State<Heart> {
             color: service.hasItem(widget.item.id.toString())
                 ? Colors.red
                 : widget.color,
-            size: widget.size ?? 20,
+            size: widget.size ?? Dimens.largeIcon,
           ),
         );
       },
