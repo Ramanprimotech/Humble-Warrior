@@ -440,6 +440,7 @@ class HomeScreenWidgets {
               viewAllTxt,
               fontSize: 14,
               color: AppColors.blue,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ],
