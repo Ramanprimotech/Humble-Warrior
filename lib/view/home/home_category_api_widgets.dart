@@ -53,7 +53,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
           physics: const BouncingScrollPhysics(),
           itemBuilder: (ctx, index) {
             return homeOption(homeOptions: record[index], index: index)
-                .paddingOnly(bottom: index == record.length - 1 ? 40 : 0);
+                .paddingOnly(bottom: index == record.length - 1 ? 20 : 0);
           },
           itemCount: record.length,
         ),
@@ -90,7 +90,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
   Widget homeOption(
       {required HomeCategoryList homeOptions, required int index}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10, top: 6),
       child: GestureDetector(
         onTap: () {
           Get.toNamed(AppRoutes.homeOptions, arguments: <int>[homeOptions.id!]);

@@ -148,7 +148,7 @@ class CommonWidgets {
       backIcon = true}) {
     return Container(
       height: 45,
-      margin: EdgeInsets.only(top: 10, bottom: 20, left: 16, right: 16),
+      margin: EdgeInsets.only(top: 10, bottom: 10, left: 16, right: 16),
 
       // padding: const EdgeInsets.only(right: 20),
       width: MediaQuery.of(Get.context!).size.width,

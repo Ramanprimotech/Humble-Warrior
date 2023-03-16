@@ -162,7 +162,7 @@ class HomePageProductCategoryAPIWidgets
             Expanded(
               // flex: 8,
               child: SizedBox(
-                height: productHeight - 25,
+                height: productHeight,
                 width: Get.width,
                 child: ListView.builder(
                     padding: 8.ph,

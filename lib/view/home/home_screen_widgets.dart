@@ -1,6 +1,7 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/response/notification_response_model.dart';
 import 'package:humble_warrior/modals/response/product_category_response.dart';
+import 'package:humble_warrior/utils/sizes/sizes_config.dart';
 import 'package:humble_warrior/view/home/home_product_category_api_widgets.dart';
 
 import '../../modals/response/brands_response_mdel.dart';
@@ -16,8 +17,8 @@ class HomeScreenWidgets {
   });
 
   final double productHeight = 60;
-  final double brandLoveHeight = 45;
-  final double brandHeight = 65;
+  final double brandLoveHeight = 39;
+  final double brandHeight = 63;
   final double productArrowIconPadding = 8;
   final double arrowWidth = 30;
   final int badge = 99;
@@ -398,7 +399,7 @@ class HomeScreenWidgets {
     final ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
     return Container(
       height: height,
-      padding: const EdgeInsets.only(top: 8, right: 16, left: 16, bottom: 8),
+      padding: const EdgeInsets.only(top: 4, right: 16, left: 16, bottom: 8),
       decoration: BoxDecoration(
           color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
           // borderRadius: const BorderRadius.only(
@@ -425,10 +426,9 @@ class HomeScreenWidgets {
               ),
               5.swb,
               Padding(
-                padding: 2.pb,
+                padding: 3.pb,
                 child: AppIcons.heart(
-                  iconColor: Colors.red,
-                ),
+                    iconColor: Colors.red, size: Dimens.smallIcon),
               ),
             ],
           ),

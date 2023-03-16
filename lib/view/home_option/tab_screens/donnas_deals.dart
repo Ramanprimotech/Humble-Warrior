@@ -52,7 +52,8 @@ class DonnaDailyDeals extends StatelessWidget {
                 });
           }
           return ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            padding:
+                const EdgeInsets.only(left: 16, right: 16, bottom: 10, top: 6),
             controller: controller.donnaDealScrollController,
             itemCount: controller.donnaDealList.length + 1,
             itemBuilder: (ctx, index) {

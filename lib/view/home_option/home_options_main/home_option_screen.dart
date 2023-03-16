@@ -41,7 +41,7 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
         ],
       ),
       body: Padding(
-        padding: 15.pt,
+        padding: 10.pt,
         child: TabBarView(
           controller: controller.tabController,
           children: const [
