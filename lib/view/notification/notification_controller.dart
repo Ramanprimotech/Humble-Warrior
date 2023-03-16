@@ -25,9 +25,13 @@ class NotificationController extends GetxController {
       "user_id": userId,
       "device": platform
     };
-    NotificationResponseModel notificationResponseModel =
-        await CallAPI.notificationListAPI(payload: payload);
-    return notificationResponseModel;
+    if (userId != null) {
+      NotificationResponseModel notificationResponseModel =
+          await CallAPI.notificationListAPI(payload: payload);
+      return notificationResponseModel;
+    } else {
+      return NotificationResponseModel(posts: []);
+    }
   }
 
   /// Notification Status API
