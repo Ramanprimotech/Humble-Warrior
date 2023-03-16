@@ -13,7 +13,7 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: FutureBuilder<List<StaticData>>(
-          future: staticController.staticPageApi("40324"),
+          future: staticController.staticPageApi("40424"),
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());

@@ -1,4 +1,5 @@
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/modals/response/notification_response_model.dart';
 import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/view/home/home_product_category_api_widgets.dart';
 
@@ -21,6 +22,8 @@ class HomeScreenWidgets {
   final double arrowWidth = 30;
   final int badge = 99;
 
+  final NotificationController _notificationController = Get.find();
+
   /// App Bar
   AppBar appBar(BuildContext context) {
     ImageIconTheme imageIconTheme =
@@ -35,16 +38,49 @@ class HomeScreenWidgets {
             onTap: () {
               Get.toNamed(AppRoutes.notification);
             },
-            child: Badge(
-                textColor: Colors.white,
-                label: const AppText("14", fontSize: 8),
-                alignment: const AlignmentDirectional(15.0, -3.0),
-                child: Image.asset(
-                  ImagePathAssets.bellIcon,
-                  height: 28,
-                  fit: BoxFit.fitHeight,
-                  color: imageIconTheme.backGroundColor,
-                )),
+            child: FutureBuilder<NotificationResponseModel>(
+                future: _notificationController.notificationList(),
+                builder: (context, snapshot) {
+                  NotificationResponseModel data =
+                      snapshot.data ?? NotificationResponseModel(posts: []);
+                  int notificationCount = data.posts!
+                      .where((element) => element.read == false)
+                      .length;
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Image.asset(
+                      ImagePathAssets.bellIcon,
+                      height: 28,
+                      fit: BoxFit.fitHeight,
+                      color: imageIconTheme.backGroundColor,
+                    );
+                  }
+                  if (snapshot.hasError) {
+                    return Image.asset(
+                      ImagePathAssets.bellIcon,
+                      height: 28,
+                      fit: BoxFit.fitHeight,
+                      color: imageIconTheme.backGroundColor,
+                    );
+                  }
+                  if (data.posts!.isEmpty) {
+                    return Image.asset(
+                      ImagePathAssets.bellIcon,
+                      height: 28,
+                      fit: BoxFit.fitHeight,
+                      color: imageIconTheme.backGroundColor,
+                    );
+                  }
+                  return Badge(
+                      textColor: Colors.white,
+                      label: AppText("$notificationCount", fontSize: 8),
+                      alignment: const AlignmentDirectional(15.0, -3.0),
+                      child: Image.asset(
+                        ImagePathAssets.bellIcon,
+                        height: 28,
+                        fit: BoxFit.fitHeight,
+                        color: imageIconTheme.backGroundColor,
+                      ));
+                }),
           ),
         )
 

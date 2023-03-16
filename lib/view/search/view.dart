@@ -220,7 +220,7 @@ class _SearchViewState extends State<SearchView> {
               child: FutureBuilder<List<ProDetailItem>>(
                 future: FetchSearchList().productDetails(controller.text),
                 builder: (ctx, snapshot) {
-                  if (controller.text.length == 0) {
+                  if (controller.text.isEmpty) {
                     return ValueListenableBuilder(
                         valueListenable: box.listenable(),
                         builder: (context, value, child) {

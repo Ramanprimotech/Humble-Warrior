@@ -1,43 +1,84 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/decorations.dart';
-import 'package:humble_warrior/view/home_option/common_home_option.dart';
-import 'package:humble_warrior/view/productDetail/category_item_detail/category_item_detail_controller.dart';
-import 'package:humble_warrior/view/productDetail/product_detail_widget.dart';
+import 'package:humble_warrior/view/productDetail/product_detail_controller.dart';
 
 class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
   CategoryItemDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final CategoryItemDetailController controller = Get.find();
-    final ProductDetailsResponse donnaDealsDetails = Get.arguments[0];
+    final ProductDetailsResponse details = Get.arguments[0];
+    ProductDetailController controller = Get.find();
+    Future<List<ProductDetailsResponse>> _futureInstance =
+        controller.productDetailsAPI(idData: details.id.toString());
+
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             CommonWidgets.titleBar(context,
                 title: "Product Details", fontSize: 20, backIcon: true),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 20),
-                      child: categoryListCard(donnaDealsDetails, 0, context,
-                          categoryCard: false, isDetails: true),
+            FutureBuilder<List<ProductDetailsResponse>>(
+                future: _futureInstance,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Expanded(
+                      child: ShimmerLoader(
+                        child: Column(
+                          children: [
+                            Container(
+                              width: Get.width,
+                              height: Get.width - 40,
+                              decoration: CustomBoxDecorations()
+                                  .shadow(context: context),
+                            ),
+                            Container(
+                              margin: 10.pv,
+                              padding: 7.pv,
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                  color: AppColors.primary,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: AppText(
+                                "",
+                                color: Colors.white,
+                                textAlign: TextAlign.left,
+                                fontWeight: FontWeight.bold,
+                                padding: 5.pl,
+                                maxLines: 2,
+                                fontSize: 18,
+                              ).px4(),
+                            ),
+                          ],
+                        ).px(16),
+                      ),
+                    );
+                  }
+                  if (snapshot.hasError || snapshot.data!.isEmpty) {
+                    return const Expanded(
+                      child: Center(
+                        child: AppText("Something Went Wrong"),
+                      ),
+                    );
+                  }
+                  ProductDetailsResponse data = snapshot.data![0];
+                  return Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 20),
+                            child: categoryListCard(data, 0, context,
+                                categoryCard: false, isDetails: true),
+                          ),
+                          productTitleDetail(context, data.itemName),
+                          productDesc(data.productDescription),
+                        ],
+                      ),
                     ),
-                    productTitleDetail(context, donnaDealsDetails.itemName),
-                    productDesc(),
-                  ],
-                ),
-              ),
-            ),
+                  );
+                }),
           ],
         ),
       ),
@@ -60,12 +101,12 @@ class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
   }
 
   /// Product Description
-  Widget productDesc() {
+  Widget productDesc(String? dis) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       width: MediaQuery.of(Get.context!).size.width * .9,
-      child: const AppText(
-        AppStrings.lorem,
+      child: AppText(
+        dis ?? "",
         fontSize: 16,
         maxLines: 150,
       ),

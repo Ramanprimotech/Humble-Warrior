@@ -20,93 +20,95 @@ class MyAccount extends StatelessWidget {
     MyAccWidget myAccWidget = MyAccWidget(context: context);
     double optionSpacing = 15;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.only(top: 60, left: 20, right: 20),
-          child: Obx(
-            () => Column(children: [
-              ///Image and account details
-              if (controller.userCheck.value == true) ...[
-                myAccWidget.profileImage(),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            child: Obx(
+              () => Column(children: [
+                ///Image and account details
+                if (controller.userCheck.value == true) ...[
+                  myAccWidget.profileImage(),
+                  optionSpacing.sh,
+                  myAccWidget.divider(),
+                ],
+                optionSpacing.sh,
+
+                ///===> My Account
+                myAccWidget.myAccountTextFun(heading: myAccountTxt),
+
+                ///Account Details
+                myAccWidget.detailsOptions(controller, title: accountDetailsTxt,
+                    ontap: () {
+                  Get.toNamed(AppRoutes.accountDetails);
+                }),
+
+                ///Notification
+                myAccWidget.detailsOptions(controller,
+                    title: notificationsTxt,
+                    isSwitchRequired: true,
+                    click: controller.switchFunc),
                 optionSpacing.sh,
                 myAccWidget.divider(),
-              ],
-              optionSpacing.sh,
+                optionSpacing.sh,
 
-              ///===> My Account
-              myAccWidget.myAccountTextFun(heading: myAccountTxt),
+                ///=====>The Humble Warrior
+                myAccWidget.myAccountTextFun(heading: theHumbleWarriorTxt),
 
-              ///Account Details
-              myAccWidget.detailsOptions(controller, title: accountDetailsTxt,
-                  ontap: () {
-                Get.toNamed(AppRoutes.accountDetails);
-              }),
+                ///About Donna
+                myAccWidget.detailsOptions(controller, title: aboutDonna,
+                    ontap: () {
+                  Get.toNamed(AppRoutes.aboutDonna);
+                }),
 
-              ///Notification
-              myAccWidget.detailsOptions(controller,
-                  title: notificationsTxt,
-                  isSwitchRequired: true,
-                  click: controller.switchFunc),
-              optionSpacing.sh,
-              myAccWidget.divider(),
-              optionSpacing.sh,
+                ///Share with friends
+                myAccWidget.detailsOptions(
+                  controller,
+                  title: shareWithFriendsTxt,
+                  ontap: () async {
+                    await CommonUtils().urlLauncher(
+                        url: "https://www.humblewarrior.com/",
+                        title: "The Humble Warrior");
+                  },
+                ),
+                optionSpacing.sh,
+                myAccWidget.divider(),
+                optionSpacing.sh,
 
-              ///=====>The Humble Warrior
-              myAccWidget.myAccountTextFun(heading: theHumbleWarriorTxt),
+                ///====>Settings
+                myAccWidget.myAccountTextFun(heading: settingsTxt),
 
-              ///About Donna
-              myAccWidget.detailsOptions(controller, title: aboutDonna,
-                  ontap: () {
-                Get.toNamed(AppRoutes.aboutDonna);
-              }),
+                ///Passcode
+                myAccWidget.detailsOptions(controller, title: passcodeTxt,
+                    ontap: () {
+                  controller.tapPasscode();
+                }),
 
-              ///Share with friends
-              myAccWidget.detailsOptions(
-                controller,
-                title: shareWithFriendsTxt,
-                ontap: () async {
-                  await CommonUtils().urlLauncher(
-                      url: "https://www.humblewarrior.com/",
-                      title: "The Humble Warrior");
-                },
-              ),
-              optionSpacing.sh,
-              myAccWidget.divider(),
-              optionSpacing.sh,
+                ///Dark Mode
+                myAccWidget.detailsOptions(controller,
+                    title: darkModeTxt,
+                    isSwitchRequired: true,
+                    click: controller.darkMode),
 
-              ///====>Settings
-              myAccWidget.myAccountTextFun(heading: settingsTxt),
+                ///Help & Support
+                myAccWidget.detailsOptions(controller, title: helpSupportTxt,
+                    ontap: () {
+                  Get.toNamed(AppRoutes.staticPages,
+                      arguments: ["40429", "Help & Support"]);
+                }),
 
-              ///Passcode
-              myAccWidget.detailsOptions(controller, title: passcodeTxt,
-                  ontap: () {
-                controller.tapPasscode();
-              }),
+                ///Term & Conditions
+                myAccWidget.detailsOptions(controller,
+                    title: termsConditionsTxt, ontap: () {
+                  Get.toNamed(AppRoutes.staticPages,
+                      arguments: ["40427", "Term & Conditions"]);
+                }),
 
-              ///Dark Mode
-              myAccWidget.detailsOptions(controller,
-                  title: darkModeTxt,
-                  isSwitchRequired: true,
-                  click: controller.darkMode),
-
-              ///Help & Support
-              myAccWidget.detailsOptions(controller, title: helpSupportTxt,
-                  ontap: () {
-                Get.toNamed(AppRoutes.staticPages,
-                    arguments: ["40429", "Help & Support"]);
-              }),
-
-              ///Term & Conditions
-              myAccWidget.detailsOptions(controller, title: termsConditionsTxt,
-                  ontap: () {
-                Get.toNamed(AppRoutes.staticPages,
-                    arguments: ["40427", "Term & Conditions"]);
-              }),
-
-              ///Login or Logout
-              _loginOrLogout(context),
-              10.sh,
-            ]),
+                ///Login or Logout
+                _loginOrLogout(context),
+                10.sh,
+              ]),
+            ),
           ),
         ),
       ),

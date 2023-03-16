@@ -27,16 +27,24 @@ class NotificationResponseModel {
 class Posts {
   int? id;
   String? title;
-  int? date;
+  String? date;
+  String? categoryName;
   String? thumbnail;
   bool? read;
 
-  Posts({this.id, this.title, this.date, this.thumbnail, this.read});
+  Posts(
+      {this.id,
+      this.title,
+      this.date,
+      this.categoryName,
+      this.thumbnail,
+      this.read});
 
   Posts.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     date = json['date'];
+    categoryName = json['category_name'];
     thumbnail = json['thumbnail'];
     read = json['read'];
   }
@@ -46,6 +54,7 @@ class Posts {
     data['id'] = this.id;
     data['title'] = this.title;
     data['date'] = this.date;
+    data['category_name'] = this.categoryName;
     data['thumbnail'] = this.thumbnail;
     data['read'] = this.read;
     return data;

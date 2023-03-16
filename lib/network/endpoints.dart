@@ -13,7 +13,7 @@ class Endpoints {
       "/wp-json/hwapi/get_all_products_by_category";
   static const String homeCategories = "/wp-json/hwapi/get_all_home_categories";
   static const String staticPages = "/wp-json/hwapi/get_page_content";
-  static const String productDetails = "/wp-jsonhwapi/get_product_detail";
+  static const String productDetails = "/wp-json/hwapi/get_product_detail";
   static const String registerUser = "/pnfw/register";
   static const String notificationStatus = "/pnfw/posts";
   static const String notificationList = "/pnfw/posts";

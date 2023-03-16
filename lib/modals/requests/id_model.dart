@@ -7,6 +7,11 @@ class IdModel {
     id = json['id'];
   }
 
+  @override
+  String toString() {
+    return 'IdModel{id: $id}';
+  }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;

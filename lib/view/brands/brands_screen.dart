@@ -1,15 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/helpers/extensions.dart';
-import 'package:humble_warrior/view/home/home_controller.dart';
-
-import '../../network/endpoints.dart';
-import '../../utils/future_widget/future_widget.dart';
-import 'brands_api_widget.dart';
 
 class BrandsScreen extends StatelessWidget {
   const BrandsScreen({Key? key}) : super(key: key);
@@ -19,9 +9,12 @@ class BrandsScreen extends StatelessWidget {
     HomeScreenController homeScreenController = Get.find();
     return Scaffold(
       appBar: AppBar(
-        titleSpacing: 5,
+        titleSpacing: 20,
         leadingWidth: 34,
-        title: const SearchBar(),),
+        centerTitle: false,
+        leading: AppIcons.IosBackIcon(),
+        title: const SearchBar(),
+      ),
       body: SafeArea(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

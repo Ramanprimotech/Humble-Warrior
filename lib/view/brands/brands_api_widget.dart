@@ -24,9 +24,9 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
     List<BrandDetails> dataa = data ?? [];
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        crossAxisSpacing: 20.0,
-        mainAxisSpacing: 20.0,
+        crossAxisCount: 2,
+        crossAxisSpacing: 8.0,
+        mainAxisSpacing: 8.0,
         childAspectRatio: 1.5,
       ),
       itemCount: dataa.length,
@@ -38,6 +38,7 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
           },
           child: Container(
             margin: 3.pa,
+            padding: 8.pa,
             decoration: CustomBoxDecorations()
                 .shadow(context: context, color: Colors.grey.shade200),
             child: CommonWidgets.networkImage(
@@ -61,9 +62,9 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   Widget waiting() {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        crossAxisSpacing: 20.0,
-        mainAxisSpacing: 20.0,
+        crossAxisCount: 2,
+        crossAxisSpacing: 8.0,
+        mainAxisSpacing: 8.0,
         childAspectRatio: 1.5,
       ),
       itemCount: 21,

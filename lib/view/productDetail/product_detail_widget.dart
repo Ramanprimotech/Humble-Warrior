@@ -97,8 +97,8 @@ class ProductDetailWidget {
             maxLines: 2,
             fontWeight: FontWeight.bold,
           ),
-          const AppText(
-            AppStrings.lorem,
+          AppText(
+            discription ?? "",
             maxLines: 90,
           ),
           // const ReadMoreText(

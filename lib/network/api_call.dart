@@ -288,6 +288,7 @@ class CallAPI {
       }
       return [];
     } catch (e) {
+      log("$e", name: "Details");
       rethrow;
     }
   }
@@ -323,13 +324,13 @@ class CallAPI {
       final response = await http.post(
           Uri.parse("${Endpoints.baseUrl}${Endpoints.notificationList}"),
           body: payload);
+      log("${response.body}", name: "Notification Data");
       NotificationResponseModel notificationResponseModel =
           NotificationResponseModel(posts: []);
       if (response.statusCode == 200) {
         notificationResponseModel =
             NotificationResponseModel.fromJson(jsonDecode(response.body));
       }
-      log("${response}", name: "Notification  Response");
 
       if (response == null) {
         return notificationResponseModel;
@@ -338,9 +339,34 @@ class CallAPI {
 
       return NotificationResponseModel(posts: []);
     } catch (e) {
-      log("API", name: "API Deals  ${payload}", error: e);
+      log("API", name: "API Deals 1 $payload", error: e);
       // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
       return NotificationResponseModel(posts: []);
+    }
+  }
+
+  ///  Notification Status API
+  static Future<bool> notificationStatusAPI({required Map payload}) async {
+    try {
+      // payload.toString().logRequest(apiName: Endpoints.donnaDeals);
+
+      log("${payload.toString()}", name: "Notification ");
+      final response = await http.post(
+          Uri.parse("${Endpoints.baseUrl}${Endpoints.notificationList}"),
+          body: payload);
+      log("${response.body}", name: "Notification Response");
+      if (response.statusCode == 200) {
+        return true;
+      }
+
+      if (response == null) {
+        return false;
+      }
+      return true;
+    } catch (e) {
+      log("API", name: "API Deals 2 $payload", error: e);
+      // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
+      return false;
     }
   }
 }

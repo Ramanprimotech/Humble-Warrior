@@ -1,6 +1,7 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/utils/common/photo_viewer.dart';
+import 'package:humble_warrior/view/productDetail/product_detail_controller.dart';
 
 class FavouriteDeals extends StatelessWidget with CommonAppBar {
   const FavouriteDeals({Key? key}) : super(key: key);
@@ -9,70 +10,110 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
   Widget build(BuildContext context) {
     final AccountOptionTheme accountOptionTheme =
         Theme.of(Get.context!).extension<AccountOptionTheme>()!;
-    FavouriteDealController controller = Get.find();
+    ProductDetailController controller = Get.find();
     ProductDetailsResponse donnaFavouriteDetails = Get.arguments[0];
+    Future<List<ProductDetailsResponse>> _futureInstance = controller
+        .productDetailsAPI(idData: donnaFavouriteDetails.id.toString());
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             CommonWidgets.titleBar(context,
                 title: "Product Details", fontSize: 20, backIcon: true),
-            Expanded(
-              child: ListView(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  children: [
-                    favouritePageCard(
-                        height: 160 + 50,
-                        imageUrl: donnaFavouriteDetails.url!,
-                        onTap: () {
-                          if (!donnaFavouriteDetails.url.isEmptyOrNull) {
-                            Get.to(CustomPhotoViewer(
-                                url: donnaFavouriteDetails.url!));
-                          }
-                        }),
-                    Visibility(
-                      visible: donnaFavouriteDetails.itemName != null &&
-                          donnaFavouriteDetails.itemName != "",
-                      child: Container(
-                        margin: 10.pv,
-                        padding: 7.pv,
-                        width: Get.width,
-                        decoration: BoxDecoration(
-                            color: AppColors.primary,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: AppText(
-                          donnaFavouriteDetails.itemName!,
-                          color: Colors.white,
-                          textAlign: TextAlign.left,
-                          fontWeight: FontWeight.bold,
-                          padding: 5.pl,
-                          maxLines: 2,
-                          fontSize: 18,
-                        ).px4(),
+            FutureBuilder<List<ProductDetailsResponse>>(
+                future: _futureInstance,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Expanded(
+                      child: ShimmerLoader(
+                        child: Column(
+                          children: [
+                            Container(
+                              width: Get.width,
+                              height: Get.width - 40,
+                              decoration: CustomBoxDecorations()
+                                  .shadow(context: context),
+                            ),
+                            Container(
+                              margin: 10.pv,
+                              padding: 7.pv,
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                  color: AppColors.primary,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: AppText(
+                                "",
+                                color: Colors.white,
+                                textAlign: TextAlign.left,
+                                fontWeight: FontWeight.bold,
+                                padding: 5.pl,
+                                maxLines: 2,
+                                fontSize: 18,
+                              ).px4(),
+                            ),
+                          ],
+                        ).px(16),
                       ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 10),
-                      width: MediaQuery.of(Get.context!).size.width * .9,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    );
+                  }
+                  if (snapshot.hasError || snapshot.data!.isEmpty) {
+                    return const Expanded(
+                      child: Center(
+                        child: AppText("Something Went Wrong"),
+                      ),
+                    );
+                  }
+                  ProductDetailsResponse data = snapshot.data![0];
+                  return Expanded(
+                    child: ListView(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 16),
                         children: [
-                          Text(
-                            AppStrings.lorem,
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: accountOptionTheme.textColor),
+                          favouritePageCard(
+                              height: Get.width - 40,
+                              imageUrl: data.url!,
+                              onTap: () {
+                                if (!data.url.isEmptyOrNull) {
+                                  Get.to(CustomPhotoViewer(
+                                      url: donnaFavouriteDetails.url!));
+                                }
+                              }),
+                          Visibility(
+                            visible:
+                                data.itemName != null && data.itemName != "",
+                            child: Container(
+                              margin: 10.pv,
+                              padding: 7.pv,
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                  color: AppColors.primary,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: AppText(
+                                data.itemName!,
+                                color: Colors.white,
+                                textAlign: TextAlign.left,
+                                fontWeight: FontWeight.bold,
+                                padding: 5.pl,
+                                maxLines: 2,
+                                fontSize: 18,
+                              ).px4(),
+                            ),
                           ),
-                          _buyNow(title: 'Mobile App here'),
-                          _buyNow(title: 'Standard View'),
-                          _buyNow(title: 'Standard View'),
-                        ],
-                      ),
-                    ),
-                  ]),
-            )
-            // .px(20).py(10),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 10),
+                            width: MediaQuery.of(Get.context!).size.width * .9,
+                            child: Text(
+                              data.productDescription ?? "",
+                              maxLines: 100,
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: accountOptionTheme.textColor),
+                            ),
+                          ),
+                        ]),
+                  );
+                }),
           ],
         ),
       ),
