@@ -2,12 +2,13 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/services/notification_manager.dart';
 import 'package:humble_warrior/view/wish_list/wish_list_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BottomNavigationController extends GetxController {
   final HomeScreenController controller = Get.find();
 
   RxBool userCheck = false.obs;
-
+  bool isNavigated = false;
   DateTime? currentBackPressTime;
   final List<Widget> _navigationItems = [
     const HomeScreen(),
@@ -36,29 +37,21 @@ class BottomNavigationController extends GetxController {
   bool value = false;
   String? user;
 
-  void onItemTap(int? index) async{
-    if (index!=2 && index!=3) {
+  void onItemTap(int? index) async {
+    if (index != 2 && index != 3) {
       selectedIndex = index!;
       if (index == 1) {
         var controller = Get.find<WishListController>();
         controller.getWishList();
       }
-      update();
-      Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
-    }else{
-       index==2?amazon():facebook();
+      if (isNavigated) {
+        isNavigated = false;
+        Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
       }
-  void onItemTap(int? index) {
-    selectedIndex = index!;
-    if (index == 1) {
-      var controller = Get.find<WishListController>();
-      controller.getWishList();
+    } else {
+      index == 2 ? amazon() : facebook();
     }
     update();
-    if (isNavigated) {
-      isNavigated = false;
-      Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
-    }
   }
 
   ///--------------Check if user is logged in-------------///
@@ -68,13 +61,17 @@ class BottomNavigationController extends GetxController {
   }
 
   amazon() async {
-    const url = 'com.amazon.mobile.shopping://www.amazon.in/shop/influencer-1604f2b0'; // or add your URL here
-    await launchUrl(Uri.parse(url), mode: LaunchMode.externalNonBrowserApplication);
+    const url =
+        'com.amazon.mobile.shopping://www.amazon.in/shop/influencer-1604f2b0'; // or add your URL here
+    await launchUrl(Uri.parse(url),
+        mode: LaunchMode.externalNonBrowserApplication);
   }
 
   facebook() async {
-    const url = "fb://facewebmodal/f?href=https://www.facebook.com/groups/209617206226617";
-    await launchUrl(Uri.parse(url),mode: LaunchMode.externalNonBrowserApplication);
+    const url =
+        "fb://facewebmodal/f?href=https://www.facebook.com/groups/209617206226617";
+    await launchUrl(Uri.parse(url),
+        mode: LaunchMode.externalNonBrowserApplication);
   }
 
   @override

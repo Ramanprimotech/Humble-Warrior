@@ -27,6 +27,7 @@ class CategoryListDetails extends StatelessWidget {
       appBar: AppBar(
         titleSpacing: 5,
         leadingWidth: 34,
+        leading: AppIcons.IosBackIcon(),
         title: const SearchBar(margin: EdgeInsets.only(right: 15)),
       ),
       body: SafeArea(

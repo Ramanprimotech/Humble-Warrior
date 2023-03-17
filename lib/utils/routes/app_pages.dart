@@ -13,7 +13,8 @@ import 'package:humble_warrior/view/static_pages/static_page_screen.dart';
 
 class AppPages {
   static String initialRoute = AppRoutes.splashScreen;
-  static BottomNavigationController _bottomNavigationController = Get.find();
+  static final BottomNavigationController _bottomNavigationController =
+      Get.put(BottomNavigationController(), permanent: true);
   static final List<GetPage<dynamic>> routes = [
     GetPage(
         name: AppRoutes.introScreen,
@@ -86,7 +87,10 @@ class AppPages {
         binding: BrandsBinding()),
     GetPage(
         name: AppRoutes.categoryDetailsList,
-        page: () => const CategoryListDetails(),
+        page: () {
+          _bottomNavigationController.isNavigated = true;
+          return CategoryListDetails();
+        },
         binding: CategoryDetailsListBinding()),
     GetPage(
         name: AppRoutes.categoryItemDetail,
