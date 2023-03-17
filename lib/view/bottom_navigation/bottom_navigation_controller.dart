@@ -38,16 +38,16 @@ class BottomNavigationController extends GetxController {
   bool value = false;
   String? user;
 
-  void onItemTap(int? index) {
-    selectedIndex = index!;
-    if (index == 1) {
-      var controller = Get.find<WishListController>();
-      controller.getWishList();
-    }
-    update();
-    Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
-  }
-  void onItemTap2(int? index) async{
+  // void onItemTap(int? index) {
+  //   selectedIndex = index!;
+  //   if (index == 1) {
+  //     var controller = Get.find<WishListController>();
+  //     controller.getWishList();
+  //   }
+  //   update();
+  //   Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
+  // }
+  void onItemTap(int? index) async{
     if (index!=2 && index!=3) {
       selectedIndex = index!;
       if (index == 1) {
@@ -55,23 +55,26 @@ class BottomNavigationController extends GetxController {
         controller.getWishList();
       }
       update();
-      Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
+      if (isNavigated) {
+        isNavigated = false;
+        Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
+      }
     }else{
       index==2?amazon():facebook();
     }
   }
-  void onItemTap1(int? index) {
-    selectedIndex = index!;
-    if (index == 1) {
-      var controller = Get.find<WishListController>();
-      controller.getWishList();
-    }
-    update();
-    if (isNavigated) {
-      isNavigated = false;
-      Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
-    }
-  }
+  // void onItemTap1(int? index) {
+  //   selectedIndex = index!;
+  //   if (index == 1) {
+  //     var controller = Get.find<WishListController>();
+  //     controller.getWishList();
+  //   }
+  //   update();
+  //   if (isNavigated) {
+  //     isNavigated = false;
+  //     Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
+  //   }
+  // }
   ///--------------Check if user is logged in-------------///
   Future<void> getLoggedValue() async {
     value = await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;

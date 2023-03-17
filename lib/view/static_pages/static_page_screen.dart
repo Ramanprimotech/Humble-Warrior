@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
+
+import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/utils/common/html.dart';
 import 'package:simple_html_css/simple_html_css.dart';
-import 'package:get/get.dart';
 import 'package:humble_warrior/modals/response/static_page_model.dart';
-import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/view/static_pages/static_page_controller.dart';
 
 class StaticPagesScreen extends StatelessWidget {
@@ -17,7 +15,7 @@ class StaticPagesScreen extends StatelessWidget {
     String title = Get.arguments[1];
     return Scaffold(
       body: Column(children: [
-        20.sh,
+        SizedBox(height: 20),
         CommonWidgets.titleBar(context,
             title: title, fontSize: 20),
         // 20.sh,
@@ -42,8 +40,11 @@ class StaticPagesScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: HTML.toRichText(context, staticResponse[0].pageContent.toString(),
-          )
+          child: HtmlData().htmlString(context, staticResponse[0].pageContent.toString()),
+          // HTML.toRichText(context, ,
+          //   linksCallback: (dynamic link) {
+          //     CommonUtils().urlLauncher(url: link.toString());
+          //   },)
 
           // AppText(staticResponse[0].pageContent.toString(),maxLines: 100,),
         ),
