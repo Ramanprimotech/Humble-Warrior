@@ -1,20 +1,10 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/modals/hive_modal/recent_search_model.dart';
-import 'package:humble_warrior/services/hive_storage_service.dart';
 import 'package:humble_warrior/services/notification_manager.dart';
-import 'package:humble_warrior/utils/app_themes/app_theme.dart';
-import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
-
-import 'firebase_options.dart';
-import 'utils/routes/app_pages.dart';
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
@@ -89,6 +79,16 @@ class MyApp extends StatelessWidget {
           );
         });
   }
+}
+
+dependencies() {
+  Get.put(NotificationController());
+  Get.put(ThemeController());
+  Get.put(HomeScreenController());
+  Get.put(BottomNavigationController());
+  Get.put(FrontPageDetailController());
+  Get.put(MyAccountController());
+  Get.put(WishListController());
 }
 
 class GlobalVariable {

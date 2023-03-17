@@ -41,6 +41,7 @@ class BottomNavigationController extends GetxController {
       controller.getWishList();
     }
     update();
+    Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
   }
 
   ///--------------Check if user is logged in-------------///

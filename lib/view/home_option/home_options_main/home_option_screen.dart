@@ -9,8 +9,9 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
     FToast().init(context);
     const double tabFontSize = 18;
     final HomeOptionController controller = Get.find();
-    controller.context = context;
+
     return Scaffold(
+      bottomNavigationBar: bottomNavigationWidget(context),
       appBar: AppBar(
         titleSpacing: 5,
         leadingWidth: 35,

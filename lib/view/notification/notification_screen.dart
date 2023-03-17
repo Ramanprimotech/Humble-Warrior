@@ -15,6 +15,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
         child: Column(
           children: [

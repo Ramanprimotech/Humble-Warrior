@@ -1,18 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/modals/response/donna_deals_response.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
 import 'package:humble_warrior/modals/response/front_page_response_model.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/routes/app_routes.dart';
-import 'package:humble_warrior/view/wish_list/wish_list_controller.dart';
 import 'package:humble_warrior/view/wish_list/wish_list_widgets/wish_list_card_selector.dart';
-
-import '../../utils/common/refresh_Indicator.dart';
 
 class WishList extends StatelessWidget {
   const WishList({Key? key}) : super(key: key);
@@ -22,7 +13,8 @@ class WishList extends StatelessWidget {
     WishListController controller = Get.find();
     return Scaffold(
       appBar: AppBar(
-        title: const SearchBar(),),
+        title: const SearchBar(),
+      ),
       body: SafeArea(
         child: Column(
           children: [

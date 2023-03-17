@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
@@ -8,6 +9,7 @@ import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/image_path_assets.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
+import 'package:humble_warrior/view/bottom_navigation/bottom_navigation_widget.dart';
 import 'package:humble_warrior/view/my_account/account_details/account_details_controller.dart';
 import 'package:humble_warrior/view/my_account/my_account_widget.dart';
 
@@ -18,6 +20,7 @@ class AccountDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     AccountDetailsController accountController = Get.find();
     return Scaffold(
+      bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
           child: Obx(
         () => accountController.userCheck.value == false
@@ -38,7 +41,7 @@ class AccountDetails extends StatelessWidget {
                     decoration: const BoxDecoration(
                         image: DecorationImage(
                       fit: BoxFit.fill,
-                      opacity:0.7,
+                      opacity: 0.7,
                       image: AssetImage(ImagePathAssets.backgroundImg),
                     )),
                     child: Column(
@@ -74,8 +77,7 @@ class AccountDetails extends StatelessWidget {
                   ),
                 ],
               ),
-      )
-          ),
+      )),
     );
   }
 
@@ -119,15 +121,16 @@ class AccountDetails extends StatelessWidget {
             alignment: Alignment.center,
             height: 120,
             decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.primary,
-              boxShadow: const [BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10,
-                spreadRadius: 1,
-                offset: Offset(0,3),
-              )]
-            ),
+                shape: BoxShape.circle,
+                color: AppColors.primary,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 10,
+                    spreadRadius: 1,
+                    offset: Offset(0, 3),
+                  )
+                ]),
             child: accountController.imageUrl.isEmpty
                 ? InkWell(
                     onTap: () {

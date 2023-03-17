@@ -9,6 +9,7 @@ export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:fluttertoast/fluttertoast.dart';
 export 'package:get/get.dart';
 export 'package:humble_warrior/utils/helpers/extensions.dart';
+export 'package:humble_warrior/view/bottom_navigation/bottom_navigation_widget.dart';
 export 'package:humble_warrior/view/wish_list/wish_list_controller.dart';
 export 'package:readmore/readmore.dart';
 export 'package:shimmer/shimmer.dart';
