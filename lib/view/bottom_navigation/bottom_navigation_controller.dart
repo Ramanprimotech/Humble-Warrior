@@ -7,6 +7,7 @@ class BottomNavigationController extends GetxController {
   final HomeScreenController controller = Get.find();
 
   RxBool userCheck = false.obs;
+  bool isNavigated = false;
 
   DateTime? currentBackPressTime;
   final List<Widget> _navigationItems = [
@@ -41,7 +42,10 @@ class BottomNavigationController extends GetxController {
       controller.getWishList();
     }
     update();
-    Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
+    if (isNavigated) {
+      isNavigated = false;
+      Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
+    }
   }
 
   ///--------------Check if user is logged in-------------///

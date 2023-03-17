@@ -13,6 +13,7 @@ import 'package:humble_warrior/view/static_pages/static_page_screen.dart';
 
 class AppPages {
   static String initialRoute = AppRoutes.splashScreen;
+  static BottomNavigationController _bottomNavigationController = Get.find();
   static final List<GetPage<dynamic>> routes = [
     GetPage(
         name: AppRoutes.introScreen,
@@ -28,23 +29,38 @@ class AppPages {
         binding: BottomNavigationBindings()),
     GetPage(
         name: AppRoutes.homeOptions,
-        page: () => const HomeOptionScreen(),
+        page: () {
+          _bottomNavigationController.isNavigated = true;
+          return const HomeOptionScreen();
+        },
         binding: HomeOptionBindings()),
     GetPage(
         name: AppRoutes.dailyDealProductDetail,
-        page: () => DailyDealProduct(),
+        page: () {
+          _bottomNavigationController.isNavigated = true;
+          return DailyDealProduct();
+        },
         binding: DailyDealProductBinding()),
     GetPage(
         name: AppRoutes.frontPageProductDetail,
-        page: () => FrontPageDetailScreen(),
+        page: () {
+          _bottomNavigationController.isNavigated = true;
+          return FrontPageDetailScreen();
+        },
         binding: FrontPageDetailBinding()),
     GetPage(
         name: AppRoutes.favouriteDeal,
-        page: () => const FavouriteDeals(),
+        page: () {
+          _bottomNavigationController.isNavigated = true;
+          return const FavouriteDeals();
+        },
         binding: FavouriteDealsBinding()),
     GetPage(
         name: AppRoutes.aboutDonna,
-        page: () => AboutScreen(),
+        page: () {
+          _bottomNavigationController.isNavigated = true;
+          return const AboutScreen();
+        },
         binding: AboutBinding()),
     GetPage(
         name: AppRoutes.splashScreen,
@@ -56,11 +72,17 @@ class AppPages {
         binding: MyAccountBindings()),
     GetPage(
         name: AppRoutes.notification,
-        page: () => const NotificationScreen(),
+        page: () {
+          _bottomNavigationController.isNavigated = true;
+          return const NotificationScreen();
+        },
         binding: NotificationBindings()),
     GetPage(
         name: AppRoutes.brands,
-        page: () => const BrandsScreen(),
+        page: () {
+          _bottomNavigationController.isNavigated = true;
+          return const BrandsScreen();
+        },
         binding: BrandsBinding()),
     GetPage(
         name: AppRoutes.categoryDetailsList,
@@ -68,21 +90,38 @@ class AppPages {
         binding: CategoryDetailsListBinding()),
     GetPage(
         name: AppRoutes.categoryItemDetail,
-        page: () => CategoryItemDetail(),
+        page: () {
+          _bottomNavigationController.isNavigated = true;
+          return CategoryItemDetail();
+        },
         binding: CategoryItemDetailBinding()),
     GetPage(
         name: AppRoutes.accountDetails,
-        page: () => const AccountDetails(),
+        page: () {
+          _bottomNavigationController.isNavigated = true;
+          return const AccountDetails();
+        },
         binding: AccountDetailsBindings()),
     GetPage(
         name: AppRoutes.staticPages,
-        page: () => const StaticPagesScreen(),
+        page: () {
+          _bottomNavigationController.isNavigated = true;
+          return const StaticPagesScreen();
+        },
         binding: StaticPagesBindings()),
     GetPage(
-        name: AppRoutes.sortPages, page: () => Sort(), binding: SortBindings()),
+        name: AppRoutes.sortPages,
+        page: () {
+          _bottomNavigationController.isNavigated = true;
+          return const Sort();
+        },
+        binding: SortBindings()),
     GetPage(
         name: AppRoutes.searchView,
-        page: () => const SearchView(),
+        page: () {
+          _bottomNavigationController.isNavigated = true;
+          return const SearchView();
+        },
         binding: SearchViewBindings())
   ];
 }
