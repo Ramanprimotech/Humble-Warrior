@@ -49,8 +49,8 @@ class MyAccount extends StatelessWidget {
                     isSwitchRequired: true,
                     click: controller.switchFunc),
                 optionSpacing.sh,
-                myAccWidget.divider(),
-                optionSpacing.sh,
+                // myAccWidget.divider(),
+                // optionSpacing.sh,
 
                 ///=====>The Humble Warrior
                 myAccWidget.myAccountTextFun(heading: theHumbleWarriorTxt),
@@ -71,8 +71,8 @@ class MyAccount extends StatelessWidget {
                         title: "The Humble Warrior");
                   },
                 ),
-                optionSpacing.sh,
-                myAccWidget.divider(),
+                // // optionSpacing.sh,
+                // myAccWidget.divider(),
                 optionSpacing.sh,
 
                 ///====>Settings
