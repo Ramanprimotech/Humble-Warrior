@@ -60,7 +60,7 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
                   if (snapshot.hasError || snapshot.data!.isEmpty) {
                     return const Expanded(
                       child: Center(
-                        child: AppText("Something Went Wrong"),
+                        child: AppText(somethingWentWrongTxt),
                       ),
                     );
                   }

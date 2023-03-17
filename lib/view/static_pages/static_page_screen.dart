@@ -1,7 +1,5 @@
-
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/utils/common/html.dart';
-import 'package:simple_html_css/simple_html_css.dart';
 import 'package:humble_warrior/modals/response/static_page_model.dart';
 import 'package:humble_warrior/view/static_pages/static_page_controller.dart';
 
@@ -15,7 +13,7 @@ class StaticPagesScreen extends StatelessWidget {
     String title = Get.arguments[1];
     return Scaffold(
       body: Column(children: [
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         CommonWidgets.titleBar(context,
             title: title, fontSize: 20),
         // 20.sh,
@@ -25,12 +23,11 @@ class StaticPagesScreen extends StatelessWidget {
      if(snapshot.connectionState == ConnectionState.waiting){
        return const Expanded(child: Center(child: CircularProgressIndicator()));
      }
-     print("id ---- ${controller.id } ${ snapshot.data}");
      if(snapshot.hasError){
        return CommonWidgets.errorAPI(errorText: "${snapshot.error}",
            context: context,
            onPress: (){Get.back();},
-           buttonTitle: "OK");
+           buttonTitle: okTxt);
      }
 
      List<StaticData> staticResponse = snapshot.data!;
@@ -54,7 +51,7 @@ class StaticPagesScreen extends StatelessWidget {
         child: CommonWidgets.errorAPI(errorText: "${snapshot.error}",
             context: context,
             onPress: (){Get.back();},
-            buttonTitle: "OK")
+            buttonTitle: okTxt)
       ),
     );
    }),

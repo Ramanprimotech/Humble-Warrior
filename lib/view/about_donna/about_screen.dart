@@ -27,7 +27,7 @@ class AboutScreen extends StatelessWidget {
                   onPress: () {
                     Get.back();
                   },
-                  buttonTitle: "OK");
+                  buttonTitle: okTxt);
             }
             List<StaticData> staticResponse = snapshot.data!;
             return staticResponse.isNotEmpty
@@ -68,7 +68,7 @@ class AboutScreen extends StatelessWidget {
                         onPress: () {
                           Get.back();
                         },
-                        buttonTitle: "OK"));
+                        buttonTitle: okTxt));
           },
         ),
       ),
