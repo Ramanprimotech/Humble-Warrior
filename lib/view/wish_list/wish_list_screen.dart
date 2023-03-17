@@ -22,85 +22,87 @@ class WishList extends StatelessWidget {
             //     title: myWishlistTxt, fontSize: 20, backIcon: false),
             12.shb,
             Expanded(
-              child: Center(
-                  child: controller.value == false
-                      ? loginFirst(context)
-                      : CustomRefreshIndicator(
-                          onRefresh: () async {
-                            return Future.delayed(Duration(seconds: 1), () {
-                              controller.getWishList();
-                              return Future.value(0);
-                            });
-                          },
-                          // child: ValueListenableBuilder(
-                          //     valueListenable: box.listenable(),
-                          //     builder: (context, value, child) {
-                          //       var values = value.values.toList();
-                          //       return values.isEmpty
-                          //           ? const Center(
-                          //               child: AppText(
-                          //                 "No Item Added in Favourite",
-                          //                 fontSize: 20,
-                          //               ),
-                          //             )
-                          //           : ListView.separated(
-                          //               itemCount: values.length,
-                          //               itemBuilder:
-                          //                   (BuildContext context, int index) {
-                          //                 ProductDetailsResponse details =
-                          //                     values[index];
-                          //                 return Padding(
-                          //                   padding: const EdgeInsets.only(
-                          //                       left: 20, right: 20, bottom: 20),
-                          //                   child: WishListCardSelector(
-                          //                     details: details,
-                          //                     index: index,
-                          //                     context: context,
-                          //                   ),
-                          //                 );
-                          //               },
-                          //               separatorBuilder:
-                          //                   (BuildContext context, int index) {
-                          //                 return const SizedBox(
-                          //                   height: 20,
-                          //                 );
-                          //               },
-                          //             );
-                          //     }),
-                          child: Obx(
-                            () => controller.data.value.isEmpty
-                                ? const Center(
-                                    child: AppText(
-                                      "No Item Added in Favourite",
-                                      fontSize: 20,
+              child: Obx(
+                () => Center(
+                    child: controller.loggedIn.value == false
+                        ? loginFirst(context)
+                        : CustomRefreshIndicator(
+                            onRefresh: () async {
+                              return Future.delayed(Duration(seconds: 1), () {
+                                controller.getWishList();
+                                return Future.value(0);
+                              });
+                            },
+                            // child: ValueListenableBuilder(
+                            //     valueListenable: box.listenable(),
+                            //     builder: (context, value, child) {
+                            //       var values = value.values.toList();
+                            //       return values.isEmpty
+                            //           ? const Center(
+                            //               child: AppText(
+                            //                 "No Item Added in Favourite",
+                            //                 fontSize: 20,
+                            //               ),
+                            //             )
+                            //           : ListView.separated(
+                            //               itemCount: values.length,
+                            //               itemBuilder:
+                            //                   (BuildContext context, int index) {
+                            //                 ProductDetailsResponse details =
+                            //                     values[index];
+                            //                 return Padding(
+                            //                   padding: const EdgeInsets.only(
+                            //                       left: 20, right: 20, bottom: 20),
+                            //                   child: WishListCardSelector(
+                            //                     details: details,
+                            //                     index: index,
+                            //                     context: context,
+                            //                   ),
+                            //                 );
+                            //               },
+                            //               separatorBuilder:
+                            //                   (BuildContext context, int index) {
+                            //                 return const SizedBox(
+                            //                   height: 20,
+                            //                 );
+                            //               },
+                            //             );
+                            //     }),
+                            child: Obx(
+                              () => controller.data.value.isEmpty
+                                  ? const Center(
+                                      child: AppText(
+                                        "No Item Added in Favourite",
+                                        fontSize: 20,
+                                      ),
+                                    )
+                                  : ListView.separated(
+                                      itemCount: controller.data.value.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        ProductDetailsResponse details =
+                                            controller.data.value[index];
+                                        return Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 20,
+                                            right: 20,
+                                          ),
+                                          child: WishListCardSelector(
+                                            details: details,
+                                            index: index,
+                                            context: context,
+                                          ),
+                                        );
+                                      },
+                                      separatorBuilder:
+                                          (BuildContext context, int index) {
+                                        return const SizedBox(
+                                          height: 18,
+                                        );
+                                      },
                                     ),
-                                  )
-                                : ListView.separated(
-                                    itemCount: controller.data.value.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      ProductDetailsResponse details =
-                                          controller.data.value[index];
-                                      return Padding(
-                                        padding: const EdgeInsets.only(
-                                          left: 20,
-                                          right: 20,
-                                        ),
-                                        child: WishListCardSelector(
-                                          details: details,
-                                          index: index,
-                                          context: context,
-                                        ),
-                                      );
-                                    },
-                                    separatorBuilder:
-                                        (BuildContext context, int index) {
-                                      return const SizedBox(
-                                        height: 18,
-                                      );
-                                    },
-                                  ),
-                          ))),
+                            ))),
+              ),
             ),
           ],
         ),

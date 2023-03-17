@@ -8,6 +8,7 @@ class BottomNavigationController extends GetxController {
   final HomeScreenController controller = Get.find();
 
   RxBool userCheck = false.obs;
+  bool isNavigated = false;
 
   DateTime? currentBackPressTime;
   final List<Widget> _navigationItems = [
@@ -37,7 +38,16 @@ class BottomNavigationController extends GetxController {
   bool value = false;
   String? user;
 
-  void onItemTap(int? index) async{
+  void onItemTap(int? index) {
+    selectedIndex = index!;
+    if (index == 1) {
+      var controller = Get.find<WishListController>();
+      controller.getWishList();
+    }
+    update();
+    Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
+  }
+  void onItemTap2(int? index) async{
     if (index!=2 && index!=3) {
       selectedIndex = index!;
       if (index == 1) {
@@ -47,10 +57,21 @@ class BottomNavigationController extends GetxController {
       update();
       Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
     }else{
-       index==2?amazon():facebook();
-      }
+      index==2?amazon():facebook();
+    }
   }
-
+  void onItemTap1(int? index) {
+    selectedIndex = index!;
+    if (index == 1) {
+      var controller = Get.find<WishListController>();
+      controller.getWishList();
+    }
+    update();
+    if (isNavigated) {
+      isNavigated = false;
+      Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
+    }
+  }
   ///--------------Check if user is logged in-------------///
   Future<void> getLoggedValue() async {
     value = await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;

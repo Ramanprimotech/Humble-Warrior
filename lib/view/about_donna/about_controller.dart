@@ -8,6 +8,4 @@ class AboutScreenController extends GetxController {
   viewFunc() {
     isOpen.value = !isOpen.value;
   }
-
-
 }

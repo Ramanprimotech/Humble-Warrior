@@ -48,7 +48,7 @@ Future main() async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
   ThemeController themeController = Get.put(ThemeController());
-  ValueNotifier theme = ValueNotifier(ThemeMode.system == ThemeMode.dark);
+  ValueNotifier theme = ValueNotifier(false);
 
   void getTheme() async {
     var themeMode = themeController.getThemeModeFromPreferences();

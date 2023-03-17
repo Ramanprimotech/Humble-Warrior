@@ -15,6 +15,7 @@ class BrandsScreen extends StatelessWidget {
         leading: AppIcons.IosBackIcon(),
         title: const SearchBar(),
       ),
+      bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
