@@ -16,6 +16,7 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
         productDetailController.productDetailsAPI(
             idData: donnaDealsDetails.id.toString());
     return Scaffold(
+      bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
         child: Column(
           children: [

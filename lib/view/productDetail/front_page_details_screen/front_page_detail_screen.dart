@@ -1,16 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/utils/app_colors.dart';
-import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/decorations.dart';
-import 'package:humble_warrior/utils/extensions.dart';
-import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
 import 'package:humble_warrior/view/productDetail/product_detail_controller.dart';
-import 'package:humble_warrior/view/productDetail/product_detail_widget.dart';
-import 'package:velocity_x/velocity_x.dart';
 
+import '../../../hw.dart';
 import '../../home_option/tab_screens/front_page_deals.dart';
 
 class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
@@ -24,6 +15,7 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
         controller.productDetailsAPI(idData: details.id.toString());
 
     return Scaffold(
+      bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
         child: Column(
           children: [

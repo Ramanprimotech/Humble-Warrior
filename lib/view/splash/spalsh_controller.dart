@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ import 'package:humble_warrior/view/my_account/circle.dart';
 import 'package:humble_warrior/view/my_account/keyboard.dart';
 import 'package:humble_warrior/view/my_account/passcode_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../modals/requests/token_model_request.dart';
 import '../../network/endpoints.dart';
 import '../../utils/app_strings.dart';
@@ -30,9 +32,11 @@ class SplashController extends GetxController {
   getTheme() async {
     var mode = await SharePreferenceData.getBoolValuesSF('mode');
     if (mode == null) {
-      await SharePreferenceData.addBoolToSF(
-          'mode', ThemeMode.system == ThemeMode.dark);
-      isDark.value = ThemeMode.system == ThemeMode.dark;
+      // await SharePreferenceData.addBoolToSF(
+      //     'mode', ThemeMode.system == ThemeMode.dark);
+      await SharePreferenceData.addBoolToSF('mode', false);
+      // isDark.value = ThemeMode.system == ThemeMode.dark;
+      isDark.value = false;
     } else {
       isDark.value = mode;
     }

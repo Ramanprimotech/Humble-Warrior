@@ -14,6 +14,7 @@ class CategoryListDetails extends StatelessWidget {
     controller.id = Get.arguments[1];
     controller.categoryListApi();
     return Scaffold(
+      bottomNavigationBar: bottomNavigationWidget(context),
       // appBar: AppBar(
       //   titleSpacing: 5,
       //   leadingWidth: 35,
@@ -26,7 +27,8 @@ class CategoryListDetails extends StatelessWidget {
       appBar: AppBar(
         titleSpacing: 5,
         leadingWidth: 34,
-        title: const SearchBar( margin: EdgeInsets.only(right: 15)),),
+        title: const SearchBar(margin: EdgeInsets.only(right: 15)),
+      ),
       body: SafeArea(
         child: Column(
           children: [

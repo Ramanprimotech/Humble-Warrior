@@ -15,6 +15,7 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
     Future<List<ProductDetailsResponse>> _futureInstance = controller
         .productDetailsAPI(idData: donnaFavouriteDetails.id.toString());
     return Scaffold(
+      bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
         child: Column(
           children: [
