@@ -22,10 +22,7 @@ class AppIcons {
         ImagePathAssets.heartIcon,
         height: 20,
         color: color,
-        // color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
       );
-
-  static Icon bag() => const Icon(Icons.shopping_bag);
 
   static Image check(BuildContext context) => Image.asset(
         ImagePathAssets.amazonIcon,
@@ -83,30 +80,14 @@ class AppIcons {
         color: color,
       );
 
-  // static Icon join(BuildContext context) =>  Icon(Icons.facebook, color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,);
-
-  // static Icon person(BuildContext context) =>  Icon(Icons.person, color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,);
-
   //<=========== Bottom Navigation
 
   //Action Bar ===========>
-  static Icon refresh({Color iconColor = Colors.black}) => Icon(
-        Icons.refresh,
-        color: iconColor,
-      );
 
   static Icon share({iconColor = Colors.black}) => Icon(
         Icons.share,
         size: Dimens.mediumIcon,
         color: iconColor,
-      );
-
-  static Icon sort({Color? iconColor}) => Icon(Icons.sort, color: iconColor);
-
-  static Icon notificationActive({Color? iconColor, double size = 24}) => Icon(
-        Icons.notifications,
-        color: iconColor,
-        size: size,
       );
 
   static Icon filter({Color? iconColor, double size = 24}) => Icon(
@@ -118,11 +99,6 @@ class AppIcons {
   //<=========Action Bar
 
   //Account Icons===========>
-  static Icon accountIcon({Color iconColor = Colors.black}) =>
-      Icon(Icons.login, color: iconColor);
-
-  static Icon rightArrow({Color iconColor = Colors.black}) =>
-      Icon(Icons.chevron_right, color: iconColor);
 
   static Icon next({Color? iconColor}) => Icon(
         Icons.arrow_forward_ios,
@@ -145,16 +121,7 @@ class AppIcons {
             },
       );
 
-  static Icon backArrow({Color? iconColor, double size = 24}) =>
-      Icon(Icons.arrow_back, size: size, color: iconColor);
-
-  static Icon cross({Color iconColor = Colors.black, double size = 24}) =>
-      Icon(Icons.highlight_off, size: size, color: iconColor);
-
   /// Account Icons
-
-  static Icon clock({Color iconColor = Colors.black}) =>
-      Icon(Icons.timer, color: iconColor);
 
   static Icon heart({Color iconColor = Colors.black, double? size}) => Icon(
         Icons.favorite_outlined,
@@ -162,32 +129,9 @@ class AppIcons {
         size: size ?? Dimens.largeIcon,
       );
 
-  static Icon share2({Color iconColor = Colors.blue}) =>
-      Icon(Icons.share, color: iconColor);
-
-  static Icon comment({Color iconColor = Colors.black}) =>
-      Icon(Icons.comment, color: iconColor);
-
-  static Icon language({Color iconColor = Colors.black}) =>
-      Icon(Icons.language, color: iconColor);
-
-  static Icon google({Color iconColor = Colors.white}) =>
-      Icon(Icons.g_mobiledata, color: iconColor);
-
-  static Icon facebook({Color iconColor = Colors.white}) =>
-      Icon(Icons.facebook, color: iconColor);
-
   static Icon bookmarks({Color iconColor = Colors.black}) =>
       Icon(Icons.bookmarks, color: iconColor);
 
-  static Icon copy({Color iconColor = Colors.black}) =>
-      Icon(Icons.copy, color: iconColor);
-
-  static Icon edit({Color iconColor = Colors.black, double size = 24}) =>
-      Icon(Icons.edit, size: size, color: iconColor);
-
-  static Icon cut({Color iconColor = Colors.black, double size = 18}) =>
-      Icon(Icons.cut, size: size, color: iconColor);
 }
 
 class Heart extends StatefulWidget {
