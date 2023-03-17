@@ -1,6 +1,7 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/response/static_page_model.dart';
 import 'package:humble_warrior/view/static_pages/static_page_controller.dart';
+import 'package:simple_html_css/simple_html_css.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -100,18 +101,19 @@ class AboutScreen extends StatelessWidget {
       decoration: CustomBoxDecorations().shadow(context: context),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const AppText(helloGorgeousTxt, fontWeight: FontWeight.bold),
-        ReadMoreText(
-          style: Theme.of(context).textTheme.bodyMedium,
-          staticResponse[0].pageContent.toString(),
-          trimLines: 10,
-          trimMode: TrimMode.Line,
-          trimCollapsedText: readMoreTxt,
-          trimExpandedText: readLessTxt,
-          lessStyle: const TextStyle(
-              fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
-          moreStyle: const TextStyle(
-              fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
-        ),
+        HTML.toRichText(context, staticResponse[0].pageContent.toString(),),
+        // ReadMoreText(
+        //   style: Theme.of(context).textTheme.bodyMedium,
+        //   staticResponse[0].pageContent.toString(),
+        //   trimLines: 10,
+        //   trimMode: TrimMode.Line,
+        //   trimCollapsedText: readMoreTxt,
+        //   trimExpandedText: readLessTxt,
+        //   lessStyle: const TextStyle(
+        //       fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
+        //   moreStyle: const TextStyle(
+        //       fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
+        // ),
       ]),
     );
   }

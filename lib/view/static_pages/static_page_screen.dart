@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_html_css/simple_html_css.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/modals/response/static_page_model.dart';
 import 'package:humble_warrior/utils/app_text.dart';
@@ -33,13 +34,18 @@ class StaticPagesScreen extends StatelessWidget {
            onPress: (){Get.back();},
            buttonTitle: "OK");
      }
+
      List<StaticData> staticResponse = snapshot.data!;
     return  staticResponse.isNotEmpty?
     Expanded(
+
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: AppText(staticResponse[0].pageContent.toString(),maxLines: 100,),
+          child: HTML.toRichText(context, staticResponse[0].pageContent.toString(),
+          )
+
+          // AppText(staticResponse[0].pageContent.toString(),maxLines: 100,),
         ),
       ),
     ):Expanded(

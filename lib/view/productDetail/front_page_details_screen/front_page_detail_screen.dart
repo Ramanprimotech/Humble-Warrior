@@ -84,6 +84,7 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
                           ),
                           productText(context, data.itemName),
                           productDescription(
+                            context: context,
                               itemName: data.itemName,
                               discription: data.productDescription),
                         ],

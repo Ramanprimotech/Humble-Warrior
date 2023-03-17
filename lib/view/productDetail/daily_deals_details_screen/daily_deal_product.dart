@@ -77,6 +77,7 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
                           ),
                           productText(context, data.itemName.toString()),
                           productDescription(
+                            context: context,
                               itemName: data.itemName.toString(),
                               discription: data.productDescription),
                         ],
