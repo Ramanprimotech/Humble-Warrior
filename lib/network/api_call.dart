@@ -350,11 +350,9 @@ class CallAPI {
     try {
       // payload.toString().logRequest(apiName: Endpoints.donnaDeals);
 
-      log("${payload.toString()}", name: "Notification ");
       final response = await http.post(
           Uri.parse("${Endpoints.baseUrl}${Endpoints.notificationList}"),
           body: payload);
-      log("${response.body}", name: "Notification Response");
       if (response.statusCode == 200) {
         return true;
       }

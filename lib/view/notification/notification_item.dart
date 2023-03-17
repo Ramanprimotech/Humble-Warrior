@@ -11,21 +11,20 @@ class NotificationItem extends StatefulWidget {
 }
 
 class _NotificationItemState extends State<NotificationItem> {
+  final NotificationController _notificationController = Get.find();
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        width: Get.width,
-        height: Get.width / 3.5 + 15,
-        decoration: CustomBoxDecorations().shadow(
-            context: context,
-            color: widget.data.read == false ? AppColors.readBox : null),
-        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          notificationImg(widget.data.thumbnail ?? "null"),
-          notificationDetails(widget.data),
-        ]),
-      ),
+    return Container(
+      width: Get.width,
+      height: Get.width / 3.5 + 18,
+      decoration: CustomBoxDecorations().shadow(
+          context: context,
+          color: widget.data.read == false ? AppColors.readBox : null),
+      child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+        notificationImg(widget.data.thumbnail ?? "null"),
+        notificationDetails(widget.data),
+      ]),
     );
   }
 

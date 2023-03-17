@@ -2,7 +2,6 @@ import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/response/static_page_model.dart';
 import 'package:humble_warrior/utils/common/html.dart';
 import 'package:humble_warrior/view/static_pages/static_page_controller.dart';
-import 'package:simple_html_css/simple_html_css.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -13,6 +12,7 @@ class AboutScreen extends StatelessWidget {
     final StaticPagesController staticController =
         Get.find<StaticPagesController>();
     return Scaffold(
+      bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
         child: FutureBuilder<List<StaticData>>(
           future: staticController.staticPageApi("40424"),
@@ -102,7 +102,8 @@ class AboutScreen extends StatelessWidget {
       decoration: CustomBoxDecorations().shadow(context: context),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const AppText(helloGorgeousTxt, fontWeight: FontWeight.bold),
-        HtmlData().htmlString(context, staticResponse[0].pageContent.toString()),
+        HtmlData()
+            .htmlString(context, staticResponse[0].pageContent.toString()),
         // HTML.toRichText(context, staticResponse[0].pageContent.toString(),),
         // ReadMoreText(
         //   style: Theme.of(context).textTheme.bodyMedium,

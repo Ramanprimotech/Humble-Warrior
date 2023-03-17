@@ -1,5 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/modals/hive_modal/recent_search_model.dart';
 import 'package:humble_warrior/view/search/api_services.dart';
 import 'package:humble_warrior/view/search/model.dart';
@@ -321,45 +322,57 @@ class _SearchViewState extends State<SearchView> {
                         return 10.shb;
                       },
                       itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          height: 80,
-                          margin: 20.ph,
-                          decoration:
-                              CustomBoxDecorations().shadow(context: context),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    AppText(
-                                      snapshot.data![index].itemName.toString(),
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16,
-                                    ),
-                                    // AppText(
-                                    //   snapshot.data![index].
-                                    //       .toString(),
-                                    //   fontSize: 14,
-                                    //   maxLines: 2,
-                                    // ),
-                                  ],
-                                ).paddingSymmetric(horizontal: 8, vertical: 4),
-                              ),
-                              ClipRRect(
-                                borderRadius: const BorderRadius.only(
-                                    topRight: Radius.circular(10),
-                                    bottomRight: Radius.circular(10)),
-                                child: CommonWidgets.networkImage(
-                                    height: 80,
-                                    width: Get.width * .3,
-                                    imageUrl:
-                                        snapshot.data![index].url.toString(),
-                                    fit: BoxFit.cover),
-                              ),
-                            ],
+                        return GestureDetector(
+                          onTap: () {
+                            Get.toNamed(AppRoutes.dailyDealProductDetail,
+                                arguments: [
+                                  ProductDetailsResponse(
+                                      id: snapshot.data![index].id)
+                                ]);
+                          },
+                          child: Container(
+                            height: 80,
+                            margin: 20.ph,
+                            decoration:
+                                CustomBoxDecorations().shadow(context: context),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      AppText(
+                                        snapshot.data![index].itemName
+                                            .toString(),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16,
+                                      ),
+                                      // AppText(
+                                      //   snapshot.data![index].
+                                      //       .toString(),
+                                      //   fontSize: 14,
+                                      //   maxLines: 2,
+                                      // ),
+                                    ],
+                                  ).paddingSymmetric(
+                                      horizontal: 8, vertical: 4),
+                                ),
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                      topRight: Radius.circular(10),
+                                      bottomRight: Radius.circular(10)),
+                                  child: CommonWidgets.networkImage(
+                                      height: 80,
+                                      width: Get.width * .3,
+                                      imageUrl:
+                                          snapshot.data![index].url.toString(),
+                                      fit: BoxFit.cover),
+                                ),
+                              ],
+                            ),
                           ),
                         );
 
