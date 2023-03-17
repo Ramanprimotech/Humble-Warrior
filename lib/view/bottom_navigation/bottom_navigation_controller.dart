@@ -9,6 +9,7 @@ class BottomNavigationController extends GetxController {
 
   RxBool userCheck = false.obs;
   bool isNavigated = false;
+
   DateTime? currentBackPressTime;
   final List<Widget> _navigationItems = [
     const HomeScreen(),

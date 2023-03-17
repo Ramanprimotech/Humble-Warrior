@@ -1,4 +1,5 @@
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/utils/common/html.dart';
 import 'package:simple_html_css/simple_html_css.dart';
 
 import '../../utils/sizes/sizes_config.dart';
@@ -98,7 +99,12 @@ class ProductDetailWidget {
             maxLines: 2,
             fontWeight: FontWeight.bold,
           ),
-      HTML.toRichText(context, discription.toString(),),
+          // HTML.toRichText(context, discription.toString(),
+          //   linksCallback: (dynamic link) {
+          //     CommonUtils().urlLauncher(url: link.toString());
+          //   },)
+          HtmlData().htmlString(context, discription.toString()),
+      // HTML.toRichText(context, discription.toString(),),
           // AppText(
           //   discription ?? "",
           //   maxLines: 90,
