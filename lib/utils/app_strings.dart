@@ -127,3 +127,11 @@ const String loginWishTxt = "Login to add items to wishlist";
 const String spIsEntered = 'isEntered';
 const String spIsLogged = "isLogged";
 const String spRegisterUserId = "registerUserId";
+
+const String okTxt = "OK";
+const String somethingWentWrongTxt = "Something Went Wrong";
+const String recentTxt = "Recent";
+const String searchDealsTxt = "Search Deals...";
+const String enterThreeTxt = "Enter at least three characters";
+const String noDealsTxt = "No Deals found";
+const String resetTxt = 'Reset';

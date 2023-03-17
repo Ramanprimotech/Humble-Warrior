@@ -38,7 +38,7 @@ class _SearchViewState extends State<SearchView> {
                 setState(() {});
               } else {
                 DialogHelper.showToast(
-                    context, "Enter at least three characters");
+                    context, enterThreeTxt);
               }
             },
             decoration: InputDecoration(
@@ -72,7 +72,7 @@ class _SearchViewState extends State<SearchView> {
                   } else {
                     focusNode.unfocus();
                     DialogHelper.showToast(
-                        context, "Enter at least three characters");
+                        context, enterThreeTxt);
                   }
                 },
                 child: Icon(Icons.search,
@@ -230,7 +230,7 @@ class _SearchViewState extends State<SearchView> {
                           if (box.isEmpty) {
                             return const Center(
                               child: AppText(
-                                "Search Deals...",
+                                searchDealsTxt,
                                 fontSize: 18,
                               ),
                             );
@@ -239,7 +239,7 @@ class _SearchViewState extends State<SearchView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const AppText(
-                                "Recent",
+                                recentTxt,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18,
                               ).paddingSymmetric(horizontal: 20, vertical: 20),
@@ -305,7 +305,7 @@ class _SearchViewState extends State<SearchView> {
                   }
                   if (snapshot.data == []) {
                     return const Center(
-                      child: AppText("No Deals found"),
+                      child: AppText(noDealsTxt),
                     );
                   }
                   // if (snapshot.data![0].itemName == null ||

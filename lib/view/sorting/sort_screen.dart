@@ -46,7 +46,7 @@ class _SortState extends State<Sort> {
                           padding: 20.pr,
                           child: Obx(
                             () => AppText(
-                              'Reset',
+                              resetTxt,
                               color: controller.isItemSelected.value
                                   ? AppColors.primary
                                   : Colors.transparent,
