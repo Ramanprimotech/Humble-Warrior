@@ -81,6 +81,7 @@ class DailyDealsAPIWidgets extends FutureAPI<List<ProductDetailsResponse>>
             ),
             productText(context, details.itemName.toString()),
             productDescription(
+              context: context,
                 discription: details.productDescription.toString(),
                 itemName: details.itemName.toString()),
           ],

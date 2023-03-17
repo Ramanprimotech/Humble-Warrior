@@ -43,6 +43,7 @@ dependencies:
   get: ^4.6.5
   google_fonts: ^4.0.3
   flutter_screenutil: ^5.6.1
+  simple_html_css: ^4.0.0
   shared_preferences: ^2.0.17
   email_validator: ^2.1.17
   shimmer: ^2.0.0
@@ -55,7 +56,8 @@ dependencies:
   firebase_auth: ^4.2.5
   flutter_overlay_loader: ^2.0.0
   readmore: ^2.2.0
-  webview_flutter: ^4.0.1
+#  webview_flutter:
+#  webview_flutter: ^2.0.4
   url_launcher: ^6.1.9
   share_plus: ^6.3.0
   image_picker: ^0.8.6+1

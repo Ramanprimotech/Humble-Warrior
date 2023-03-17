@@ -1,4 +1,5 @@
 import 'package:humble_warrior/hw.dart';
+import 'package:simple_html_css/simple_html_css.dart';
 
 import '../../utils/sizes/sizes_config.dart';
 
@@ -85,7 +86,7 @@ class ProductDetailWidget {
   }
 
   /// Product Description
-  Widget productDescription({String? discription, String? itemName}) {
+  Widget productDescription({String? discription, String? itemName,required BuildContext context}) {
     return SizedBox(
       width: MediaQuery.of(Get.context!).size.width * .9,
       child: Column(
@@ -97,10 +98,11 @@ class ProductDetailWidget {
             maxLines: 2,
             fontWeight: FontWeight.bold,
           ),
-          AppText(
-            discription ?? "",
-            maxLines: 90,
-          ),
+      HTML.toRichText(context, discription.toString(),),
+          // AppText(
+          //   discription ?? "",
+          //   maxLines: 90,
+          // ),
           // const ReadMoreText(
           //   AppStrings.lorem,
           //   trimLines: 20,
