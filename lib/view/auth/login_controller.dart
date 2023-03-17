@@ -9,15 +9,14 @@ class LoginController extends GetxController {
   RxBool isPlatformIOS = false.obs;
   String? platform;
 
+  ///----------Check Current Platform----------///
   checkCurrentPlatform() {
     if (Platform.isAndroid) {
       isPlatformIOS.value = false;
       platform = "Android";
-      debugPrint("platform -- if --- ${isPlatformIOS.value}");
     } else if (Platform.isIOS) {
       isPlatformIOS.value = true;
       platform = "iOS";
-      debugPrint("platform -- else --- ${isPlatformIOS.value}");
     }
   }
 
@@ -27,32 +26,18 @@ class LoginController extends GetxController {
     super.onInit();
   }
 
-  /// Click
+  ///---------------------Click Login Button Functionality-----------------------///
   Function onClickFunction(
       {required OnClick action, required BuildContext context}) {
     Map<OnClick, void Function()> actions = {
-      /// Click  facebook
+      ///--------Click  facebook
       OnClick.facebook: () async {
-        debugPrint("bbhbhnbnjnjnj");
-
-        /// User Firebase Token
-        String? tokenFirebase = await FirebaseMessaging.instance.getToken();
-
         try {
           user = await AuthManager().facebookLogin();
           if (user != null) {
-            // Get.snackbar("Login ", "User Login Successfully ");
-            await SharePreferenceData.addBoolToSF(spIsLogged, true);
-            await SharePreferenceData.addStringToSF(
-                userEmail, "${user?.email}");
-            await SharePreferenceData.addStringToSF(
-                userPhoneNumber, "${user!.phoneNumber}");
+            /// Save User Info to Local Storage
+            await saveUserToLocalStorage();
 
-            await SharePreferenceData.addStringToSF(
-                userName, "${user?.displayName}");
-            await SharePreferenceData.addStringToSF(
-                userProfilePic, "${user?.photoURL}");
-            await SharePreferenceData.addBoolToSF(spIsEntered, true);
             Get.offAllNamed(AppRoutes.bottomNavigation);
 
             /// Auth Data API
@@ -63,7 +48,7 @@ class LoginController extends GetxController {
         }
       },
 
-      /// Click Google
+      ///------------ Click Google
       OnClick.google: () async {
         try {
           Loader.show(context);
@@ -76,22 +61,11 @@ class LoginController extends GetxController {
 
           if (user != null) {
             Loader.hide();
-            // DialogHelper.showToast(context, "User Login Successfully");
-            // Get.snackbar("Login ", "User Login Successfully ");
-            await SharePreferenceData.addBoolToSF(spIsLogged, true);
-            await SharePreferenceData.addStringToSF(
-                userEmail, "${user?.email}");
-            await SharePreferenceData.addStringToSF(
-                userPhoneNumber, "${user?.phoneNumber}");
-            print("User phone number ${user?.phoneNumber}");
-            await SharePreferenceData.addStringToSF(
-                userName, "${user?.displayName}");
-            await SharePreferenceData.addStringToSF(
-                userProfilePic, "${user?.photoURL}");
-            await SharePreferenceData.addBoolToSF(spIsEntered, true);
+
+            /// Save User Info to Local Storage
+            await saveUserToLocalStorage();
 
             Get.offAllNamed(AppRoutes.bottomNavigation);
-            "${user!.uid.toString()}".log();
 
             /// Auth Data API
             await authAPI();
@@ -100,26 +74,15 @@ class LoginController extends GetxController {
           }
         } catch (e) {
           Loader.hide();
-          Get.snackbar("Error ", "$e ");
+          // Get.snackbar("Error ", "$e ");
         }
       },
 
-      /// Click apple
+      /// ----------- Click apple
       OnClick.apple: () async {
-        debugPrint("apple ");
-
         user = await AuthManager().appleLogin();
         if (user != null) {
-          // Get.snackbar("Login ", "User Login Successfully ");
-          await SharePreferenceData.addBoolToSF(spIsLogged, true);
-          await SharePreferenceData.addStringToSF(userEmail, "${user?.email}");
-          await SharePreferenceData.addStringToSF(
-              userPhoneNumber, "${user?.phoneNumber}");
-          await SharePreferenceData.addStringToSF(
-              userName, "${user?.displayName}");
-          await SharePreferenceData.addStringToSF(
-              userProfilePic, "${user?.photoURL}");
-          await SharePreferenceData.addBoolToSF(spIsEntered, true);
+          await saveUserToLocalStorage();
           if (userPhoneNumber.isEmpty || userProfilePic.isEmpty) {
             Get.offAllNamed(AppRoutes.bottomNavigation);
           }
@@ -132,20 +95,31 @@ class LoginController extends GetxController {
 
       /// Click Continue without login
       OnClick.continueWithoutLogin: () async {
+        /// Save User Info to Local Storage
         await SharePreferenceData.addBoolToSF(spIsEntered, true);
 
         /// Auth Data API
         await authAPI();
-
         Get.offAllNamed(AppRoutes.bottomNavigation);
       }
     };
-
     Function act = actions[action]!;
-
     return act;
   }
 
+  ///-----------------------Save User Info to Local Storage--------------------------///
+  Future<void> saveUserToLocalStorage() async {
+    await SharePreferenceData.addBoolToSF(spIsLogged, true);
+    await SharePreferenceData.addStringToSF(userEmail, "${user?.email}");
+    await SharePreferenceData.addStringToSF(
+        userPhoneNumber, "${user?.phoneNumber}");
+    await SharePreferenceData.addStringToSF(userName, "${user?.displayName}");
+    await SharePreferenceData.addStringToSF(
+        userProfilePic, "${user?.photoURL}");
+    await SharePreferenceData.addBoolToSF(spIsEntered, true);
+  }
+
+  ///---------------Send User info to server and get notification user_id------------------///
   Future<void> authAPI() async {
     /// User Firebase Token
     String? tokenFirebase = await FirebaseMessaging.instance.getToken();
@@ -156,11 +130,7 @@ class LoginController extends GetxController {
       "user_id": user == null ? "" : user!.uid,
       "email": user == null ? "" : user!.email ?? ""
     };
-    // AuthDataRequest payload = AuthDataRequest(
-    //     token: tokenFirebase,
-    //     device: platform,
-    //     userId: user == null ? "" : user!.uid,
-    //     email: user == null ? "" : user!.email ?? "");
+
     await CallAPI.authDataAPI(payload: payload);
   }
 }

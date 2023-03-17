@@ -9,11 +9,13 @@ import 'package:humble_warrior/network/api_call.dart';
 class HomeScreenController extends GetxController implements SearchActions {
   final TextEditingController searchTextController = TextEditingController();
 
+  ///----Scroll Controllers
   final ScrollController brandScrollController =
       ScrollController(initialScrollOffset: 0.0);
   final ScrollController productScrollController =
       ScrollController(initialScrollOffset: 0.0);
 
+  /// Scroll Controller Icons Visibility
   RxBool listBack = false.obs;
   RxBool listForward = true.obs;
   RxBool brandListBack = false.obs;
@@ -29,6 +31,14 @@ class HomeScreenController extends GetxController implements SearchActions {
 
   @override
   void onInit() {
+    scrollControllerListener();
+    focusNode.addListener(() {
+      getKeyBoard(Get.context!);
+    });
+    super.onInit();
+  }
+
+  void scrollControllerListener() {
     productScrollController.addListener(() {
       listForward.value =
           productScrollController.position.maxScrollExtent - 40 >
@@ -43,12 +53,6 @@ class HomeScreenController extends GetxController implements SearchActions {
       brandListBack.value = brandScrollController.offset !=
           brandScrollController.initialScrollOffset;
     });
-
-    focusNode.addListener(() {
-      getKeyBoard(Get.context!);
-    });
-
-    super.onInit();
   }
 
   Future<List<BrandDetails>> allBrands() async {

@@ -8,6 +8,13 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
 
   BrandAPIWidgets({required this.context});
 
+  /// Grid Parameters
+  final int crossAxisCount = 2;
+  final double crossAxisSpacing = 8.0;
+  final double mainAxisSpacing = 8.0;
+  final double childAspectRatio = 1.5;
+
+  /// Home Controller
   final HomeScreenController controller = Get.find();
 
   @override
@@ -23,11 +30,11 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   Widget success({List<BrandDetails>? data}) {
     List<BrandDetails> dataa = data ?? [];
     return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 8.0,
-        mainAxisSpacing: 8.0,
-        childAspectRatio: 1.5,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisSpacing: crossAxisSpacing,
+        crossAxisCount: crossAxisCount,
+        mainAxisSpacing: mainAxisSpacing,
+        childAspectRatio: childAspectRatio,
       ),
       itemCount: dataa.length,
       itemBuilder: (ctx, index) {
@@ -46,12 +53,6 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
               imageUrl: dataa[index].brandImage!,
               fit: BoxFit.contain,
             ),
-            // Image.asset(
-            //   alignment: Alignment.center,
-            //   brandDetails.brandImage!,
-            //   fit: BoxFit.contain,
-            //   width: Get.width,
-            // ),
           ),
         );
       },
@@ -61,13 +62,13 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   @override
   Widget waiting() {
     return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 8.0,
-        mainAxisSpacing: 8.0,
-        childAspectRatio: 1.5,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
+        crossAxisSpacing: crossAxisSpacing,
+        mainAxisSpacing: mainAxisSpacing,
+        childAspectRatio: childAspectRatio,
       ),
-      itemCount: 21,
+      itemCount: 5,
       itemBuilder: (ctx, index) {
         return ShimmerLoader(
           child: Container(
@@ -77,20 +78,6 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
               color:
                   Theme.of(context).floatingActionButtonTheme.backgroundColor,
             ),
-            // color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-            // height: 60,
-            // width: 80,
-            // child:
-            /*Column(
-              children: const [
-                ShimmerLoader(
-                    child: AppText(
-                  "HW",
-                  fontWeight: FontWeight.w900,
-                  fontSize: 35,
-                )),
-              ],
-            ),*/
           ),
         );
       },

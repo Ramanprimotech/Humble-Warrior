@@ -18,6 +18,18 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
 
   HomePageBrandAPIWidgets({required this.context});
 
+  /// Brands Item Params
+  final double width = 90;
+  final double height = 65;
+  final EdgeInsets padding = 5.pa;
+  final EdgeInsets margin = 3.pa;
+
+  /// Brands List Params
+  final double separatorHeight = 10;
+  final EdgeInsets listPadding =
+      const EdgeInsets.only(left: 20, right: 20, bottom: 5);
+
+  /// Home Screen Controller
   final HomeScreenController controller = Get.find();
 
   @override
@@ -45,76 +57,60 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   @override
   Widget success({List<BrandDetails>? data}) {
     List<BrandDetails> record = data ?? [];
-    return Padding(
-      padding: 5.pb,
-      child: ListView.separated(
-        padding: 16.ph,
-        scrollDirection: Axis.horizontal,
-        controller: controller.brandScrollController,
-        itemCount: record.length,
-        itemBuilder: (ctx, index) {
-          return GestureDetector(
-            onTap: () {
-              CommonUtils().urlLauncher(url: record[index].brandLink!);
-            },
-            child: Container(
-              width: 90,
-              height: 60,
-              padding: 5.pa,
-              margin: 3.pa,
-              decoration: CustomBoxDecorations()
-                  .shadow(context: context, color: Colors.grey.shade200),
-              child: CommonWidgets.networkImage(
-                alignment: Alignment.center,
-                imageUrl: record[index].brandImage!,
-                fit: BoxFit.contain,
-              ),
+    return ListView.separated(
+      padding: listPadding,
+      scrollDirection: Axis.horizontal,
+      controller: controller.brandScrollController,
+      itemCount: record.length,
+      itemBuilder: (ctx, index) {
+        return GestureDetector(
+          onTap: () {
+            CommonUtils().urlLauncher(url: record[index].brandLink!);
+          },
+          child: Container(
+            width: width,
+            height: height,
+            padding: padding,
+            margin: margin,
+            decoration: CustomBoxDecorations()
+                .shadow(context: context, color: Colors.grey.shade200),
+            child: CommonWidgets.networkImage(
+              alignment: Alignment.center,
+              imageUrl: record[index].brandImage!,
+              fit: BoxFit.contain,
             ),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return 10.sw;
-        },
-      ),
+          ),
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return separatorHeight.sw;
+      },
     );
   }
 
   @override
   Widget waiting() {
     return ListView.separated(
-      padding: 20.ph,
+      padding: listPadding,
       scrollDirection: Axis.horizontal,
-      itemCount: 25,
+      itemCount: 10,
       itemBuilder: (ctx, index) {
         return ShimmerLoader(
           child: Container(
-            padding: 5.pa,
-            margin: 3.pa,
-            width: 90,
-            height: 65,
-            // color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
+            width: width,
+            height: height,
+            padding: padding,
+            margin: margin,
             decoration: CustomBoxDecorations().shadow(
               context: context,
               color:
                   Theme.of(context).floatingActionButtonTheme.backgroundColor,
             ),
-            /*height: 60,
-            width: 80,
-            child: Column(
-              children: const [
-                ShimmerLoader(
-                    child: AppText(
-                  "HW",
-                  fontWeight: FontWeight.w900,
-                  fontSize: 35,
-                )),
-              ],
-            ),*/
           ),
         );
       },
       separatorBuilder: (BuildContext context, int index) {
-        return 10.sw;
+        return separatorHeight.sw;
       },
     );
   }

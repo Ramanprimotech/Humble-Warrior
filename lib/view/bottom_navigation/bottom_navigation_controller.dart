@@ -43,10 +43,10 @@ class BottomNavigationController extends GetxController {
     update();
   }
 
+  ///--------------Check if user is logged in-------------///
   Future<void> getLoggedValue() async {
     value = await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
     user = await SharePreferenceData.getStringValuesSF(userEmail) ?? "";
-    debugPrint("Logged Value ---- $value --- user --- $user");
   }
 
   @override
@@ -63,11 +63,6 @@ class BottomNavigationController extends GetxController {
   }
 
   Future<bool> onWillPop() {
-    // controller.unfocusNode();
-    // if (controller.focusNode.hasFocus) {
-    //   controller.unfocusNode();
-    //   return Future.value(false);
-    // }
     DateTime now = DateTime.now();
     if (currentBackPressTime == null ||
         now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
@@ -77,12 +72,4 @@ class BottomNavigationController extends GetxController {
     }
     return Future.value(true);
   }
-
-  // /// local and firebase notification
-  // firebaseNotification() {
-  //   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-  //     debugPrint("message ----- $message");
-  //     NotificationService.showNotification(message);
-  //   });
-  // }
 }

@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:humble_warrior/utils/media_querry_size.dart';
+import 'package:humble_warrior/hw.dart';
 
 class AppText extends StatelessWidget {
   final String label;
@@ -26,7 +25,7 @@ class AppText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: padding ?? EdgeInsets.zero,
-      child: MediaQueryText(
+      child: MediaQueryWidget(
         child: Text(
           label,
           textAlign: textAlign,
@@ -65,7 +64,7 @@ class HeadingText extends StatelessWidget {
     return Padding(
       padding: padding ?? const EdgeInsets.symmetric(vertical: 16),
       child: color == null
-          ? MediaQueryText(
+          ? MediaQueryWidget(
               child: Text(
                 label,
                 style: GoogleFonts.montserrat(
@@ -75,7 +74,7 @@ class HeadingText extends StatelessWidget {
                 ),
               ),
             )
-          : MediaQueryText(
+          : MediaQueryWidget(
               child: Text(
                 label,
                 style: GoogleFonts.montserrat(

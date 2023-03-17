@@ -74,10 +74,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
           return ShimmerLoader(
             child: homeOption(
                 homeOptions: HomeCategoryList(
-                    categoryImage:
-                        "https://www.pngfind.com/pngs/m/415-4156288_image-nike-logo-just-do-it-orange-hd.png",
-                    categoryName: donnasOptionTxt,
-                    id: 0),
+                    categoryImage: "", categoryName: donnasOptionTxt, id: 0),
                 index: index),
           );
         },
