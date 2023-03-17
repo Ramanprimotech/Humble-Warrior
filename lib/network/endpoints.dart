@@ -17,5 +17,7 @@ class Endpoints {
   static const String registerUser = "/pnfw/register";
   static const String notificationStatus = "/pnfw/posts";
   static const String notificationList = "/pnfw/posts";
+  static const String search = "/wp-json/wp/v2/search";
+
   static String token = "";
 }

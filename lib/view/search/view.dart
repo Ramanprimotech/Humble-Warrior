@@ -217,7 +217,7 @@ class _SearchViewState extends State<SearchView> {
             // ),
             // 16.shb,
             Expanded(
-              child: FutureBuilder<List<ProDetailItem>>(
+              child: FutureBuilder<List<SearchPosts>>(
                 future: FetchSearchList().productDetails(controller.text),
                 builder: (ctx, snapshot) {
                   if (controller.text.isEmpty) {
@@ -307,15 +307,15 @@ class _SearchViewState extends State<SearchView> {
                       child: AppText("No Deals found"),
                     );
                   }
-                  if (snapshot.data![0].productName == null ||
-                      snapshot.data![0].productName == "") {
-                    return const Center(
-                      child: AppText("No Deals found"),
-                    );
-                  }
+                  // if (snapshot.data![0].itemName == null ||
+                  //     snapshot.data![0].itemName == "") {
+                  //   return const Center(
+                  //     child: AppText("No Deals found"),
+                  //   );
+                  // }
 
                   return ListView.separated(
-                      padding: 15.pt,
+                      padding: 15.pv,
                       itemCount: snapshot.data!.length,
                       separatorBuilder: (BuildContext context, int index) {
                         return 10.shb;
@@ -335,17 +335,16 @@ class _SearchViewState extends State<SearchView> {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     AppText(
-                                      snapshot.data![index].productName
-                                          .toString(),
+                                      snapshot.data![index].itemName.toString(),
                                       fontWeight: FontWeight.w600,
                                       fontSize: 16,
                                     ),
-                                    AppText(
-                                      snapshot.data![index].productDescription
-                                          .toString(),
-                                      fontSize: 14,
-                                      maxLines: 2,
-                                    ),
+                                    // AppText(
+                                    //   snapshot.data![index].
+                                    //       .toString(),
+                                    //   fontSize: 14,
+                                    //   maxLines: 2,
+                                    // ),
                                   ],
                                 ).paddingSymmetric(horizontal: 8, vertical: 4),
                               ),
