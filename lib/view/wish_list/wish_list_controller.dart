@@ -2,12 +2,14 @@ import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/abstract_enums/donna_options.dart';
 
 class WishListController extends GetxController {
-  bool value = false;
+  RxBool loggedIn = true.obs;
   RxList data = [].obs;
 
   HiveService _hiveService = Get.find();
   Future<void> getLoggedValue() async {
-    value = await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
+    loggedIn.value =
+        await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
+    print("LoggedIN-------- $loggedIn.value");
   }
 
   getWishList() {
@@ -16,8 +18,8 @@ class WishListController extends GetxController {
   }
 
   @override
-  void onInit() {
-    getLoggedValue();
+  void onInit() async {
+    await getLoggedValue();
     getWishList();
     super.onInit();
   }

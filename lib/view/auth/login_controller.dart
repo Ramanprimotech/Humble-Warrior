@@ -130,7 +130,7 @@ class LoginController extends GetxController {
       "user_id": user == null ? "" : user!.uid,
       "email": user == null ? "" : user!.email ?? ""
     };
-
+    print("Apple-------------$payload");
     await CallAPI.authDataAPI(payload: payload);
   }
 }
