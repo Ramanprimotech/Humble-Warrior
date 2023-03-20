@@ -8,7 +8,7 @@ import 'package:humble_warrior/utils/common/common_functionality.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/common/photo_viewer.dart';
 import 'package:humble_warrior/utils/decorations.dart';
-import 'package:humble_warrior/utils/extensions.dart';
+import 'package:humble_warrior/utils/helpers/extensions.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
 
 import '../../utils/app_text.dart';
@@ -128,11 +128,21 @@ Widget codeButton({required String code, required BuildContext context}) {
             color: AppColors.appGreen,
             borderRadius: BorderRadius.circular(20),
             boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 3)]),
-        child: AppText(
-          code,
-          color: Colors.black,
-          fontWeight: FontWeight.w700,
-          fontSize: 14,
+        child: Row(
+          children: [
+            Icon(
+              Icons.cut,
+              size: 20,
+              color: AppColors.black,
+            ),
+            2.swb,
+            AppText(
+              code,
+              color: Colors.black,
+              fontWeight: FontWeight.w700,
+              fontSize: 14,
+            ),
+          ],
         )),
   );
 }

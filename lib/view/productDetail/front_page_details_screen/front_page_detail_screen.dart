@@ -1,8 +1,8 @@
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
+import 'package:humble_warrior/utils/common/photo_viewer.dart';
 import 'package:humble_warrior/view/productDetail/product_detail_controller.dart';
 
 import '../../../hw.dart';
-import '../../home_option/tab_screens/front_page_deals.dart';
 
 class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
   FrontPageDetailScreen({super.key});
@@ -70,13 +70,25 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
                       child: Column(
                         children: [
                           Padding(
-                            padding: 8.ph,
-                            child: frontPageCard(data, 0, context,
-                                isDetails: true),
-                          ),
+                              padding: 8.ph,
+                              child: CardView(
+                                details: data,
+                                onTap: () {
+                                  if (data.url != "" || data.url != null) {
+                                    Get.to(CustomPhotoViewer(url: data.url!));
+                                  }
+                                },
+                                imgUrl: details.url!,
+                                title: details.ribbonName != null
+                                    ? details.ribbonName!
+                                    : details.itemName.toString(),
+                              )
+                              // frontPageCard(data, 0, context,
+                              //     isDetails: true),
+                              ),
                           productText(context, data.itemName),
                           productDescription(
-                            context: context,
+                              context: context,
                               itemName: data.itemName,
                               discription: data.productDescription),
                         ],

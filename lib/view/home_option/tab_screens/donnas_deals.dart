@@ -1,16 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/utils/app_icons.dart';
-import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/common/common_pagination.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/common/photo_viewer.dart';
-import 'package:humble_warrior/utils/extensions.dart';
-import 'package:humble_warrior/utils/routes/app_routes.dart';
-
-import '../common_home_option.dart';
-import '../home_options_main/home_option_controller.dart';
 
 class DonnaDailyDeals extends StatelessWidget {
   const DonnaDailyDeals({Key? key}) : super(key: key);
@@ -62,7 +52,17 @@ class DonnaDailyDeals extends StatelessWidget {
                 details = controller.donnaDealList[index];
               }
               return index != controller.donnaDealList.length
-                  ? donnaDealsCard(details, index, context, dailyDeals: true)
+                  ? CardView(
+                      index: index,
+                      details: details,
+                      onTap: () {
+                        Get.toNamed(AppRoutes.dailyDealProductDetail,
+                            arguments: [details]);
+                      },
+                      imgUrl: details.url!,
+                      title: details.itemName!,
+                    )
+                  // donnaDealsCard(details, index, context, dailyDeals: true)
                   : Obx(
                       () => Visibility(
                           visible: controller.donnaDealsBool.value,
@@ -133,13 +133,13 @@ Widget donnaDealsButton(
                 child: (details.shopUrl == "" ||
                         details.shopUrl == "null" ||
                         details.shopUrl == null)
-                    ? 0.sh
+                    ? 0.shb
                     : shopButton(
                         url: "${details.shopUrl}", title: details.itemName!),
               ),
               !(details.couponCode == null || details.couponCode == "")
                   ? codeButton(code: "${details.couponCode}", context: context)
-                  : 80.sw,
+                  : 80.swb,
             ],
           ),
           dailyDeals == true

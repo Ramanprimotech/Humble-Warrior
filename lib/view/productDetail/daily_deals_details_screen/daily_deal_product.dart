@@ -1,4 +1,5 @@
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
+import 'package:humble_warrior/utils/common/photo_viewer.dart';
 import 'package:humble_warrior/view/productDetail/product_detail_controller.dart';
 
 import '../../../hw.dart';
@@ -73,12 +74,22 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 8.0, horizontal: 16),
-                            child: donnaDealsCard(data, 0, context,
-                                isDetails: true),
+                            child: CardView(
+                              details: data,
+                              onTap: () {
+                                if (data.url != "" || data.url != null) {
+                                  Get.to(CustomPhotoViewer(url: data.url!));
+                                }
+                              },
+                              imgUrl: data.url!,
+                              title: data.itemName!,
+                            ),
+                            // donnaDealsCard(data, 0, context,
+                            //     isDetails: true),
                           ),
                           productText(context, data.itemName.toString()),
                           productDescription(
-                            context: context,
+                              context: context,
                               itemName: data.itemName.toString(),
                               discription: data.productDescription),
                         ],

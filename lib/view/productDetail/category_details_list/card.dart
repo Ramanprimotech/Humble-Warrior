@@ -1,16 +1,34 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 
 class CardView extends StatelessWidget {
-  const CardView({Key? key, this.imgUrl, this.title, this.onTap, this.shopUrl})
+  const CardView(
+      {Key? key,
+      this.imgUrl,
+      this.title,
+      this.onTap,
+      this.shopUrl,
+      this.cardtitle,
+      this.index,
+      required this.details,
+      this.cardText = false,
+      this.imageText = true,
+      this.effect = true})
       : super(key: key);
   final String? imgUrl;
   final String? title;
+  final String? cardtitle;
   final String? shopUrl;
+  final bool? cardText;
+  final bool? imageText;
+  final bool? effect;
+  final int? index;
   final void Function()? onTap;
+  final ProductDetailsResponse? details;
 
   @override
   Widget build(BuildContext context) {
-    const bool tIcon = true;
     return GestureDetector(
       onTap: onTap ?? () {},
       child: Container(
@@ -29,14 +47,47 @@ class CardView extends StatelessWidget {
                   ),
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(
+                    image: CachedNetworkImageProvider(
                       imgUrl ?? "",
                     ),
                   ),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [AppText("label", color: Colors.white,)],
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                            width: double.infinity,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              gradient: effect == true
+                                  ? const LinearGradient(
+                                      colors: [
+                                          Colors.transparent,
+                                          Colors.black45,
+                                          Colors.black
+                                        ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter)
+                                  : const LinearGradient(colors: [
+                                      Colors.transparent,
+                                      Colors.transparent,
+                                    ]),
+                            ),
+                            child: imageText == true
+                                ? AppText(
+                                    title ?? "",
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 18,
+                                    textAlign: TextAlign.center,
+                                  )
+                                : SizedBox()),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -45,19 +96,21 @@ class CardView extends StatelessWidget {
                   const EdgeInsets.only(top: 8, right: 16, left: 8, bottom: 8),
               child: Row(
                 children: [
-                  Expanded(
-                      child: AppText(
-                    title ?? "",
-                    fontWeight: FontWeight.w700,
-                    fontSize: 18,
-                    textAlign: TextAlign.center,
-                  )),
-                  if (tIcon == true) ...[
+                  if (cardText == true) ...[
+                    Expanded(
+                        child: AppText(
+                      cardtitle ?? title ?? "",
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      textAlign: TextAlign.left,
+                    )),
+                  ],
+                  if (cardText == true) ...[
                     16.swb,
-                    const Icon(
-                      Icons.favorite_outlined,
-                      color: Colors.red,
-                      size: 27,
+                    Heart(
+                      item: details!,
+                      id: details!.id.toString(),
+                      key: Key(index.toString()),
                     ),
                     12.swb,
                     AppIcons.share(iconColor: Colors.black),
@@ -65,22 +118,35 @@ class CardView extends StatelessWidget {
                 ],
               ),
             ),
-            if (tIcon == false)
+            if (cardText == false)
               Padding(
                 padding: 8.pr,
                 child: Row(
                   children: [
-                    shopButton(url: shopUrl, title: "Shop Now"),
-                    codeButton(code: "C Code", context: context),
+                    Padding(
+                      padding: 8.pl,
+                      child: (details?.shopUrl == "" ||
+                              details?.shopUrl == "null" ||
+                              details?.shopUrl == null)
+                          ? 0.shb
+                          : shopButton(
+                              url: "${details?.shopUrl}",
+                              title: "${details?.itemName!}"),
+                    ),
+                    !(details?.couponCode == null || details?.couponCode == "")
+                        ? codeButton(
+                            code: "${details?.couponCode}", context: context)
+                        : 80.swb,
+                    // codeButton(code: "C Code", context: context),
                     const Spacer(),
                     IconButton(
                       onPressed: () {
                         // controller.select.value = !controller.select.value;
                       },
-                      icon: const Icon(
-                        Icons.favorite_outlined,
-                        color: Colors.red,
-                        size: 27,
+                      icon: Heart(
+                        item: details!,
+                        id: details!.id.toString(),
+                        key: Key(index.toString()),
                       ),
                     ),
                     shareButton(shareUrl: "shareUrl", color: Colors.black),

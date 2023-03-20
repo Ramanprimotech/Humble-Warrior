@@ -78,7 +78,8 @@ class CategoryListDetails extends StatelessWidget {
                           });
                     }
                     return ListView.separated(
-                      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 1),
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 10, top: 1),
                       controller: controller.categoryListScrollController,
                       itemCount: controller.categoryList.length + 1,
                       itemBuilder: (ctx, index) {
@@ -88,10 +89,22 @@ class CategoryListDetails extends StatelessWidget {
                           details = controller.categoryList[index];
                         }
                         return index != controller.categoryList.length
-                            ? CardView(imgUrl: details.url,)
+                            ? CardView(
+                                index: index,
+                                imgUrl: details.url,
+                                title: details.itemName,
+                                effect: false,
+                                cardText: true,
+                                imageText: false,
+                                details: details,
+                                onTap: () {
+                                  Get.toNamed(AppRoutes.dailyDealProductDetail,
+                                      arguments: [details]);
+                                },
+                              )
 
-                        // categoryListCard(details, index, context,
-                        //         categoryCard: true)
+                            // categoryListCard(details, index, context,
+                            //         categoryCard: true)
                             : Obx(
                                 () => Visibility(
                                     visible: controller.categoryListBool.value,
