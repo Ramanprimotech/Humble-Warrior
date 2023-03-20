@@ -92,10 +92,7 @@ class CategoryListDetails extends StatelessWidget {
                             ? CardView(
                                 index: index,
                                 imgUrl: details.url,
-                                title: details.itemName,
-                                effect: false,
-                                cardText: true,
-                                imageText: false,
+                                cardText: details.itemName,
                                 details: details,
                                 onTap: () {
                                   Get.toNamed(AppRoutes.dailyDealProductDetail,
