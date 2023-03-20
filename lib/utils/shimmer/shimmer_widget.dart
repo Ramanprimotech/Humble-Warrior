@@ -1,8 +1,8 @@
 import 'package:humble_warrior/hw.dart';
 
 class CustomShimmer extends StatelessWidget {
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final margin;
   final child;
   final double? borderRadius;

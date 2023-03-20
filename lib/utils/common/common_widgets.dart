@@ -25,7 +25,7 @@ class CommonWidgets {
         ),
       ),
       placeholder: (context, url) =>
-          CustomShimmer(height: height!, width: width!),
+          CustomShimmer(height: height, width: width),
       errorWidget: (context, url, error) => Center(
           child: Image.asset(
         ImagePathAssets.noImageFound,
