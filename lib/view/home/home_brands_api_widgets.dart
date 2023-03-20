@@ -1,17 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/decorations.dart';
-import 'package:humble_warrior/utils/extensions.dart';
-import 'package:humble_warrior/utils/theme_extention/custom_notice_theme_extention.dart';
-
 import '../../modals/response/brands_response_mdel.dart';
-import '../../network/endpoints.dart';
-import '../../utils/app_text.dart';
-import '../../utils/common/common_functionality.dart';
-import '../../utils/common/common_widgets.dart';
-import '../../utils/future_widget/abstract_future_widget.dart';
-import '../../utils/shimmer/shimmer_loader.dart';
-import 'home_controller.dart';
+import 'package:humble_warrior/hw.dart';
 
 class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   final BuildContext context;
@@ -83,7 +71,7 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
         );
       },
       separatorBuilder: (BuildContext context, int index) {
-        return separatorHeight.sw;
+        return separatorHeight.swb;
       },
     );
   }
@@ -95,22 +83,10 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
       scrollDirection: Axis.horizontal,
       itemCount: 10,
       itemBuilder: (ctx, index) {
-        return ShimmerLoader(
-          child: Container(
-            width: width,
-            height: height,
-            padding: padding,
-            margin: margin,
-            decoration: CustomBoxDecorations().shadow(
-              context: context,
-              color:
-                  Theme.of(context).floatingActionButtonTheme.backgroundColor,
-            ),
-          ),
-        );
+        return CustomShimmer.rectangular(width: width, height: height);
       },
       separatorBuilder: (BuildContext context, int index) {
-        return separatorHeight.sw;
+        return separatorHeight.swb;
       },
     );
   }
