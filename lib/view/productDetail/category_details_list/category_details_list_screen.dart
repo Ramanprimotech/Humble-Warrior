@@ -28,14 +28,22 @@ class CategoryListDetails extends StatelessWidget {
         titleSpacing: 5,
         leadingWidth: 34,
         leading: AppIcons.IosBackIcon(),
-        title: const SearchBar(margin: EdgeInsets.only(right: 15)),
+        title: const SearchBar(margin: EdgeInsets.only(right: 4)),
+        actions: [
+          IconButton(
+              padding: 16.pr,
+              onPressed: () {
+                // Get.toNamed(AppRoutes.sortPages);
+              },
+              icon: AppIcons.filter(size: 35))
+        ],
       ),
       body: SafeArea(
         child: Column(
           children: [
             // CommonWidgets.titleBar(context,
             //     title: title, fontSize: 20, backIcon: true),
-            12.shb,
+            // 12.shb,
             Expanded(
               child: PaginationWidget(
                 length: controller.categoryListLength,
@@ -70,8 +78,7 @@ class CategoryListDetails extends StatelessWidget {
                           });
                     }
                     return ListView.separated(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
+                      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 1),
                       controller: controller.categoryListScrollController,
                       itemCount: controller.categoryList.length + 1,
                       itemBuilder: (ctx, index) {
@@ -81,8 +88,10 @@ class CategoryListDetails extends StatelessWidget {
                           details = controller.categoryList[index];
                         }
                         return index != controller.categoryList.length
-                            ? categoryListCard(details, index, context,
-                                categoryCard: true)
+                            ? CardView(imgUrl: details.url,)
+
+                        // categoryListCard(details, index, context,
+                        //         categoryCard: true)
                             : Obx(
                                 () => Visibility(
                                     visible: controller.categoryListBool.value,

@@ -9,11 +9,19 @@ class BrandsScreen extends StatelessWidget {
     HomeScreenController homeScreenController = Get.find();
     return Scaffold(
       appBar: AppBar(
-        titleSpacing: 20,
+        titleSpacing: 5,
         leadingWidth: 34,
         centerTitle: false,
         leading: AppIcons.IosBackIcon(),
         title: const SearchBar(),
+        actions: [
+          IconButton(
+              padding: 16.pr,
+              onPressed: () {
+                // Get.toNamed(AppRoutes.sortPages);
+              },
+              icon: AppIcons.filter(size: 35))
+        ],
       ),
       bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(

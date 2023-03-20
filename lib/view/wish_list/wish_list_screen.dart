@@ -14,6 +14,14 @@ class WishList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const SearchBar(),
+        actions: [
+          IconButton(
+              padding: 16.pr,
+              onPressed: () {
+                // Get.toNamed(AppRoutes.sortPages);
+              },
+              icon: AppIcons.filter(size: 35))
+        ],
       ),
       body: SafeArea(
         child: Column(

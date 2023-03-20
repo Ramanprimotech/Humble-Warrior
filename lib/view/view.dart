@@ -71,3 +71,5 @@ export 'WebView/web_view.dart';
 export 'search/view.dart';
 export 'search/widgets.dart';
 
+export 'productDetail/category_details_list/card.dart';
+

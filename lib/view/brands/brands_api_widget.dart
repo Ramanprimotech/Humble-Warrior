@@ -68,7 +68,7 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
         mainAxisSpacing: mainAxisSpacing,
         childAspectRatio: childAspectRatio,
       ),
-      itemCount: 5,
+      itemCount: 20,
       itemBuilder: (ctx, index) {
         return ShimmerLoader(
           child: Container(

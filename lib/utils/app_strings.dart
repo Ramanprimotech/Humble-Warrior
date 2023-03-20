@@ -132,6 +132,7 @@ const String okTxt = "OK";
 const String somethingWentWrongTxt = "Something Went Wrong";
 const String recentTxt = "Recent";
 const String searchDealsTxt = "Search Deals...";
+const String CS = "Coming Soon...";
 const String enterThreeTxt = "Enter at least three characters";
 const String noDealsTxt = "No Deals found";
 const String resetTxt = 'Reset';
