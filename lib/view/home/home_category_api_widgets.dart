@@ -1,19 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/decorations.dart';
-import 'package:humble_warrior/utils/helpers/extensions.dart';
-
 import '../../modals/response/home_categories_response_model.dart';
-import '../../network/endpoints.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/app_text.dart';
-import '../../utils/common/refresh_Indicator.dart';
-import '../../utils/future_widget/abstract_future_widget.dart';
-import '../../utils/routes/app_routes.dart';
-import '../../utils/shimmer/shimmer_loader.dart';
-import 'home_controller.dart';
+import 'package:humble_warrior/hw.dart';
 
 class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
   final BuildContext context;
@@ -65,20 +51,15 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
   Widget waiting() {
     return Expanded(
       child: ListView.builder(
+        itemCount: 3,
+        physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (ctx, index) {
-          if (index == 3) {
-            return SizedBox(
-              height: brandHeight + brandLoveHeight + 10,
-            );
-          }
-          return ShimmerLoader(
-            child: homeOption(
-                homeOptions: HomeCategoryList(
-                    categoryImage: "", categoryName: donnasOptionTxt, id: 0),
-                index: index),
+          return const CustomShimmer.rectangular(
+            height: 220,
+            margin:
+                EdgeInsets.only(left: 16, right: 16, bottom: 10, top: 6),
           );
         },
-        itemCount: 4,
       ),
     );
   }

@@ -7,6 +7,11 @@ class CustomShimmer extends StatelessWidget {
   final child;
   final double? borderRadius;
 
+  const CustomShimmer({super.key,
+    this.width = double.infinity,
+    this.height = double.infinity,
+    this.margin, this.child, this.borderRadius = 5
+  });
 
   const CustomShimmer.rectangular({super.key,
     this.width = double.infinity,
@@ -22,8 +27,8 @@ class CustomShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Shimmer.fromColors(
-    baseColor: Colors.black.withOpacity(0.8),
-    highlightColor: Colors.white,
+    baseColor: Colors.grey[400]!,
+    highlightColor: Colors.grey[100]!,
     period: const Duration(seconds: 2),
     child: Container(
       margin: margin ?? 0.pa,
@@ -31,7 +36,7 @@ class CustomShimmer extends StatelessWidget {
       height: height,
       child: child,
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.1),
+        color:  Colors.white.withOpacity(0.7),
         borderRadius: BorderRadius.circular(borderRadius!),
       ),
     ),

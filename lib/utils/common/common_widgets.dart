@@ -1,27 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_icons.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/extensions.dart';
-import 'package:humble_warrior/utils/shimmer/shimmer_loader.dart';
-
-import '../decorations.dart';
-import '../image_path_assets.dart';
-import '../theme_extention/custom_notice_theme_extention.dart';
+import 'package:humble_warrior/hw.dart';
 
 class CommonWidgets {
-  static Widget networkImage({
-    required String imageUrl,
-    double? height,
-    double? width,
-    BoxFit? fit,
-    double scale = 1,
-    Alignment? alignment,
-   EdgeInsets? margin
-
-  }) {
+  static Widget networkImage(
+      {required String imageUrl,
+      double? height,
+      double? width,
+      BoxFit? fit,
+      double scale = 1,
+      Alignment? alignment,
+      EdgeInsets? margin}) {
     return CachedNetworkImage(
       height: height,
       width: width,
@@ -36,13 +24,8 @@ class CommonWidgets {
           ),
         ),
       ),
-      placeholder: (context, url) => ShimmerLoader(
-        child: Container(
-          color: Colors.grey,
-          height: height,
-          width: width,
-        ),
-      ),
+      placeholder: (context, url) =>
+          CustomShimmer(height: height!, width: width!),
       errorWidget: (context, url, error) => Center(
           child: Image.asset(
         ImagePathAssets.noImageFound,
@@ -123,7 +106,7 @@ class CommonWidgets {
               maxLines: 4,
               color: dialogueThemeExtention.textColor,
               fontSize: 16),
-          20.sh,
+          20.shb,
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               elevation: 5,
@@ -151,7 +134,7 @@ class CommonWidgets {
       backIcon = true}) {
     return Container(
       height: 45,
-      margin: EdgeInsets.only(top: 10, bottom: 10, left: 16, right: 16),
+      margin: const EdgeInsets.only(top: 10, bottom: 10, left: 16, right: 16),
 
       // padding: const EdgeInsets.only(right: 20),
       width: MediaQuery.of(Get.context!).size.width,
@@ -159,7 +142,7 @@ class CommonWidgets {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          backIcon ? AppIcons.IosBackIcon(onPress: onPress) : 40.sw,
+          backIcon ? AppIcons.IosBackIcon(onPress: onPress) : 40.swb,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -169,7 +152,7 @@ class CommonWidgets {
                 color: color,
                 fontWeight: FontWeight.bold,
               ),
-              5.sw,
+              5.swb,
               icon
                   ? Padding(
                       padding: 3.pb,
@@ -178,10 +161,10 @@ class CommonWidgets {
                         iconColor: Colors.red,
                       ),
                     )
-                  : SizedBox(),
+                  : const SizedBox(),
             ],
           ),
-          widget ?? 40.sw
+          widget ?? 40.swb
         ],
       ),
     );
