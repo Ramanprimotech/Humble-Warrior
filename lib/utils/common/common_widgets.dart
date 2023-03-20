@@ -19,12 +19,15 @@ class CommonWidgets {
     BoxFit? fit,
     double scale = 1,
     Alignment? alignment,
+   EdgeInsets? margin
+
   }) {
     return CachedNetworkImage(
       height: height,
       width: width,
       imageUrl: imageUrl,
       imageBuilder: (context, imageProvider) => Container(
+        margin: margin ?? 0.pa,
         decoration: BoxDecoration(
           image: DecorationImage(
             alignment: alignment ?? Alignment.center,

@@ -31,9 +31,7 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
     List<BrandDetails> dataa = data ?? [];
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisSpacing: crossAxisSpacing,
         crossAxisCount: crossAxisCount,
-        mainAxisSpacing: mainAxisSpacing,
         childAspectRatio: childAspectRatio,
       ),
       itemCount: dataa.length,
@@ -43,12 +41,12 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
           onTap: () async {
             await CommonUtils().urlLauncher(url: brandDetails.brandLink!);
           },
-          child: Container(
-            margin: 3.pa,
-            padding: 8.pa,
-            decoration: CustomBoxDecorations()
-                .shadow(context: context, color: Colors.grey.shade200),
+          child: Card(
+            elevation: 8,
+            margin: 8.pa,
+            color: Colors.grey.shade200,
             child: CommonWidgets.networkImage(
+              margin: 8.pa,
               alignment: Alignment.center,
               imageUrl: dataa[index].brandImage!,
               fit: BoxFit.contain,
@@ -64,21 +62,15 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
-        crossAxisSpacing: crossAxisSpacing,
-        mainAxisSpacing: mainAxisSpacing,
         childAspectRatio: childAspectRatio,
       ),
       itemCount: 20,
       itemBuilder: (ctx, index) {
-        return ShimmerLoader(
-          child: Container(
-            margin: 3.pa,
-            decoration: CustomBoxDecorations().shadow(
-              context: context,
-              color:
-                  Theme.of(context).floatingActionButtonTheme.backgroundColor,
-            ),
-          ),
+        return Card(
+          elevation: 8,
+          margin: 8.pa,
+          color: Colors.grey.shade200,
+          child: const CustomShimmer.rectangular(),
         );
       },
     );
@@ -103,7 +95,6 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
                 fit: BoxFit.fitWidth,
                 height: 200,
                 alignment: Alignment.topCenter,
-                // width: Get.width,
               ),
             ),
             Container(
