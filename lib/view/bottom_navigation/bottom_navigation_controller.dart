@@ -61,18 +61,30 @@ class BottomNavigationController extends GetxController {
     user = await SharePreferenceData.getStringValuesSF(userEmail) ?? "";
   }
 
-  amazon() async {
+  Future<void> amazon() async {
+    // await CommonUtils().urlLauncher(
+    //     url:
+    //         'com.amazon.mobile.shopping://www.amazon.in/shop/influencer-1604f2b0',
+    //     title: "The Humble Warrior");
     const url =
         'com.amazon.mobile.shopping://www.amazon.in/shop/influencer-1604f2b0'; // or add your URL here
-    await launchUrl(Uri.parse(url),
-        mode: LaunchMode.externalNonBrowserApplication);
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $uri');
+    }
+    // await launchUrl(Uri.parse(url),
+    //     mode: LaunchMode.externalNonBrowserApplication);
   }
 
-  facebook() async {
+  Future<void> facebook() async {
     const url =
         "fb://facewebmodal/f?href=https://www.facebook.com/groups/209617206226617";
-    await launchUrl(Uri.parse(url),
-        mode: LaunchMode.externalNonBrowserApplication);
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $uri');
+    }
+    // await launchUrl(Uri.parse(url),
+    //     mode: LaunchMode.externalNonBrowserApplication);
   }
 
   @override
