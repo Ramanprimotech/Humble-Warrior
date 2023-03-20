@@ -21,6 +21,7 @@ export 'search_bar/search_bar_ui.dart';
 export 'search_bar/search-bar_controller.dart';
 export 'shared_prefrence/shared_pref.dart';
 export 'shimmer/shimmer_loader.dart';
+export 'shimmer/shimmer_widget.dart';
 export 'theme_extention/account_option_theme_extentions.dart';
 export 'theme_extention/custom_notice_theme_extention.dart';
 export 'theme_extention/image_icon_theme_extention.dart';

@@ -90,7 +90,7 @@ class HomePageProductCategoryAPIWidgets
                               ]);
                         },
                         child: Container(
-                          padding: 30.pl,
+                          padding: 16.pl,
                           height: productHeight,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -152,95 +152,28 @@ class HomePageProductCategoryAPIWidgets
 
   @override
   Widget waiting() {
-    const double productArrowIconPadding = 8;
-    const double arrowWidth = 30;
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Row(
-          children: [
-            Expanded(
-              // flex: 8,
-              child: SizedBox(
-                height: productHeight,
-                width: Get.width,
-                child: ListView.builder(
-                    padding: 8.ph,
-                    scrollDirection: Axis.horizontal,
-                    controller: controller.productScrollController,
-                    itemCount: 10,
-                    itemBuilder: (ctx, index) {
-                      return Padding(
-                        padding: 5.ph,
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: ShimmerLoader(
-                            child: Container(
-                              padding: 10.ph,
-                              height: productHeight,
-                              color: Colors.grey,
-                              width: 80,
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
+    return SizedBox(
+      height: productHeight,
+      width: Get.width,
+      child: ListView.builder(
+          padding: 8.ph,
+          scrollDirection: Axis.horizontal,
+          controller: controller.productScrollController,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: 10,
+          itemBuilder: (ctx, index) {
+            return Padding(
+              padding: 16.pl,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  CustomShimmer.circular(height: 45, width: 45),
+                  CustomShimmer.rectangular(height: 10, width: 60),
+                ],
               ),
-            ),
-          ],
-        ),
-        Obx(
-          () => Visibility(
-            visible: controller.listBack.value,
-            child: Positioned(
-              left: 0,
-              child: Container(
-                alignment: Alignment.center,
-                color: Theme.of(context).scaffoldBackgroundColor,
-                height: brandHeight,
-                width: arrowWidth,
-                padding: const EdgeInsets.only(left: productArrowIconPadding),
-                child: GestureDetector(
-                  onTap: () {
-                    controller.productScrollController.animateTo(
-                        controller.productScrollController.offset - (60 * 3),
-                        duration: const Duration(milliseconds: 150),
-                        curve: Curves.linear);
-                  },
-                  child: AppIcons.backArrrowIos(
-                      iconColor:
-                          Theme.of(context).textTheme.displaySmall!.color!),
-                ),
-              ),
-            ),
-          ),
-        ),
-        Obx(
-          () => Visibility(
-            visible: controller.listForward.value,
-            child: Positioned(
-              right: 0,
-              child: Container(
-                alignment: Alignment.center,
-                color: Theme.of(context).scaffoldBackgroundColor,
-                height: brandHeight,
-                width: arrowWidth,
-                child: GestureDetector(
-                  onTap: () {
-                    controller.productScrollController.animateTo(
-                        controller.productScrollController.offset + (60 * 3),
-                        duration: const Duration(milliseconds: 150),
-                        curve: Curves.linear);
-                  },
-                  child: AppIcons.next(
-                      iconColor:
-                          Theme.of(context).textTheme.displaySmall!.color!),
-                ),
-              ),
-            ),
-          ),
-        )
-      ],
+            );
+          }),
     );
   }
 }
