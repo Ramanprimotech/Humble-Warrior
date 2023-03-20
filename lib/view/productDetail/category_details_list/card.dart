@@ -23,7 +23,7 @@ class CardView extends StatelessWidget {
               aspectRatio: 1 / .7,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(16),
                     topLeft: Radius.circular(16),
                   ),
