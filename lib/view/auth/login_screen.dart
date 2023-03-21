@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:humble_warrior/hw.dart';
 
 class LoginScreen extends GetView<LoginController> with AuthWidget {
@@ -48,6 +50,7 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                             action: OnClick.google, context: context)),
 
                     /// Apple
+                    if(Platform.isIOS)
                     optionWidget(
                         bckClr: AppColors.grey,
                         title: LocalString.signWithApple,

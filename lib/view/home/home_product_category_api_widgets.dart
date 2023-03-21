@@ -90,13 +90,13 @@ class HomePageProductCategoryAPIWidgets
                               ]);
                         },
                         child: Container(
-                          padding: 16.pl,
+                          padding: 30.pl,
                           height: productHeight,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SizedBox(
-                                height: productHeight - 25,
+                                height: productHeight - 20,
                                 child: Image.network(
                                     errorBuilder: (context, error, stackTrace) {
                                   return Center(
@@ -111,7 +111,7 @@ class HomePageProductCategoryAPIWidgets
                               // 4.shb,
                               AppText(
                                 record[index].categoryName ?? "",
-                                fontSize: 13,
+                                fontSize: 14,
                                 maxLines: 1,
                                 fontWeight: FontWeight.w600,
                               ),
