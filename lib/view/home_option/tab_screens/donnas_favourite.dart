@@ -25,7 +25,8 @@ class DonnaFavourite extends StatelessWidget {
         builder: (ctx) {
           if (controller.donnaFavouriteDealList.isEmpty &&
               controller.donnaFavouriteDealsBool.value == true) {
-            return Center(
+            return
+            Center(
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

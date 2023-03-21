@@ -85,6 +85,7 @@ class WishList extends StatelessWidget {
                                       ),
                                     )
                                   : ListView.separated(
+                                padding: 20.pb,
                                       itemCount: controller.data.value.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
@@ -109,6 +110,7 @@ class WishList extends StatelessWidget {
                                         );
                                       },
                                     ),
+
                             ))),
               ),
             ),
