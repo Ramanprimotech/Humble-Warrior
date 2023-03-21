@@ -10,14 +10,22 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Obx(
-          () => Image.asset(
-            controller.isDark.value
-                //     ? ImagePathAssets.logoAnimation
-                //     : ImagePathAssets.logoAnimation,
-                ? ImagePathAssets.hwLogoDarkMode
-                : ImagePathAssets.hwLogo,
-            height: 200,
-            width: 200,
+          () => TweenAnimationBuilder(
+            builder: (BuildContext context, double? value, Widget? child) {
+              return Transform.scale(scale: value,child: child);
+
+            },
+            tween: Tween(begin: .2, end: 1.5),
+            duration: const Duration(seconds: 2),
+            child: Image.asset(
+              controller.isDark.value
+                  //     ? ImagePathAssets.logoAnimation
+                  //     : ImagePathAssets.logoAnimation,
+                  ? ImagePathAssets.hwLogoDarkMode
+                  : ImagePathAssets.hwLogo,
+              height: 200,
+              width: 200,
+            ),
           ),
         ),
       ),

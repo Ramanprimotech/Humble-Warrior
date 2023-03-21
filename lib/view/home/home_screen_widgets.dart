@@ -16,7 +16,7 @@ class HomeScreenWidgets {
     required this.context,
   });
 
-  final double productHeight = 60;
+  final double productHeight = 65;
   final double brandLoveHeight = 39;
   final double brandHeight = 63;
   final double productArrowIconPadding = 8;
@@ -188,7 +188,7 @@ class HomeScreenWidgets {
                                         .productImagesList[index].image,
                                     fit: BoxFit.fitHeight,
                                     height: productHeight - 25,
-                                    scale: 0.7),
+                                    scale: 0.6),
                                 AppText(
                                   ProductImages.productImagesList[index].name,
                                   fontSize: 12,

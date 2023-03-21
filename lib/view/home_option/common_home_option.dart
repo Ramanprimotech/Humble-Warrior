@@ -120,38 +120,41 @@ Widget codeButton({required String code, required BuildContext context}) {
     onTap: () async {
       CommonUtils().copyToClipboard(copyText: code, context: context);
     },
-    child: DottedBorder(
-      color: AppColors.grey,
-      borderType: BorderType.RRect,
-      radius: Radius.circular(20),
-      child: Container(
+    child: Container(
           alignment: Alignment.center,
           // width: 90,
-          height: 30,
-          padding: 10.ph,
+          // height: 35,
+          padding: 1.pa,
           decoration: BoxDecoration(
               color: AppColors.appGreen,
               borderRadius: BorderRadius.circular(20),
               boxShadow: const [
                 BoxShadow(color: Colors.black12, blurRadius: 3)
               ]),
-          child: Row(
-            children: [
-              const Icon(
-                Icons.cut,
-                size: 20,
-                color: AppColors.black,
-              ),
-              2.swb,
-              AppText(
-                code,
-                color: Colors.black,
-                fontWeight: FontWeight.w700,
-                fontSize: 14,
-              ),
-            ],
+          child:  DottedBorder(
+            color: Colors.green,
+            borderType: BorderType.RRect,
+            strokeWidth: 2,
+            dashPattern: [3,3],
+            radius: const Radius.circular(20),
+            padding: const EdgeInsets.only(left: 10,right: 10,top: 5,bottom: 5),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.cut,
+                  size: 17,
+                  color: AppColors.black,
+                ),
+                2.swb,
+                AppText(
+                  code,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
+                ),
+              ],
+            ),
           )),
-    ),
   );
 }
 
