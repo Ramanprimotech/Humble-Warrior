@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/utils/common/common_pagination.dart';
 import 'package:humble_warrior/utils/common/common_widgets.dart';
+import 'package:humble_warrior/utils/helpers/extensions.dart';
+import 'package:humble_warrior/utils/shimmer/shimmer_widget.dart';
 
 import '../../../utils/routes/app_routes.dart';
 import '../home_options_main/home_option_controller.dart';
@@ -25,14 +27,20 @@ class DonnaFavourite extends StatelessWidget {
         builder: (ctx) {
           if (controller.donnaFavouriteDealList.isEmpty &&
               controller.donnaFavouriteDealsBool.value == true) {
-            return
-            Center(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CircularProgressIndicator(),
-                CommonWidgets.loading(),
-              ],
+            return Center(
+                child: ListView.separated(
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (ctx, index) {
+                return const CustomShimmer.rectangular(
+                  height: 290,
+                  borderRadius: 15,
+                  margin: EdgeInsets.symmetric(horizontal: 15),
+                );
+              },
+              itemCount: 10,
+              separatorBuilder: (BuildContext context, int index) {
+                return 18.shb;
+              },
             ));
           }
           if (controller.donnaFavouriteDealList.isEmpty &&
