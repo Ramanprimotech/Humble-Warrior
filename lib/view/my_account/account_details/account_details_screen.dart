@@ -9,6 +9,7 @@ import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/extensions.dart';
 import 'package:humble_warrior/utils/image_path_assets.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
+import 'package:humble_warrior/view/bottom_navigation/bottom_navigation_widget.dart';
 import 'package:humble_warrior/view/my_account/account_details/account_details_controller.dart';
 import 'package:humble_warrior/view/my_account/my_account_widget.dart';
 
@@ -19,70 +20,69 @@ class AccountDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     AccountDetailsController accountController = Get.find();
     return Scaffold(
-        body: SafeArea(
-      child: Obx(
-        () => accountController.userCheck.value == false
-            ? SafeArea(
-                child: Column(
-                  children: [
-                    // 50.sh,
-                    CommonWidgets.titleBar(context,
-                        title: accountDetailsTxt, fontSize: 20),
-                    150.sh,
-                    loginFirst(context),
-                  ],
-                ),
-              )
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: Get.width,
-                    height: Get.height / 2.5,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                      fit: BoxFit.fill,
-                      opacity: 0.7,
-                      image: AssetImage(ImagePathAssets.backgroundImg),
-                    )),
-                    child: Column(
-                      children: [
-                        50.sh,
-                        CommonWidgets.titleBar(context,
-                            title: accountDetailsTxt, fontSize: 20),
-                        Spacer(),
-                        profileImg(),
-                        Spacer(),
-                      ],
-                    ),
+      bottomNavigationBar: bottomNavigationWidget(context),
+        body: Obx(
+          () => accountController.userCheck.value == false
+              ? SafeArea(
+                  child: Column(
+                    children: [
+                      // 50.sh,
+                      CommonWidgets.titleBar(context,
+                          title: accountDetailsTxt, fontSize: 20),
+                      150.sh,
+                      loginFirst(context),
+                    ],
                   ),
-                  Expanded(
-                    child: SingleChildScrollView(
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: Get.width,
+                      height: Get.height / 2.5,
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                        fit: BoxFit.fill,
+                        opacity: 0.7,
+                        image: AssetImage(ImagePathAssets.backgroundImg),
+                      )),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           50.sh,
-                          heading(headingTitle: "Name"),
-                          5.sh,
-                          subTitle(title: accountController.username),
-                          20.sh,
-                          heading(headingTitle: "Email"),
-                          5.sh,
-                          subTitle(title: accountController.user),
-                          20.sh,
-                          heading(headingTitle: 'Phone Number'),
-                          5.sh,
-                          subTitle(
-                              title: accountController.userPhone.toString()),
-                          20.sh,
+                          CommonWidgets.titleBar(context,
+                              title: accountDetailsTxt, fontSize: 20),
+                          Spacer(),
+                          profileImg(),
+                          Spacer(),
                         ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-      ),
-    ));
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            50.sh,
+                            heading(headingTitle: "Name"),
+                            5.sh,
+                            subTitle(title: accountController.username),
+                            20.sh,
+                            heading(headingTitle: "Email"),
+                            5.sh,
+                            subTitle(title: accountController.user),
+                            20.sh,
+                            heading(headingTitle: 'Phone Number'),
+                            5.sh,
+                            subTitle(
+                                title: accountController.userPhone.toString()),
+                            20.sh,
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+        ));
   }
 
   heading({headingTitle}) {
