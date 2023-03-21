@@ -78,10 +78,10 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
                                     Get.to(CustomPhotoViewer(url: data.url!));
                                   }
                                 },
-                                imgUrl: details.url!,
-                                title: details.ribbonName != null
-                                    ? details.ribbonName!
-                                    : details.itemName.toString(),
+                                imgUrl: data.url!,
+                                title: data.ribbonName != null
+                                    ? data.ribbonName!
+                                    : data.itemName.toString(),
                               )
                               // frontPageCard(data, 0, context,
                               //     isDetails: true),

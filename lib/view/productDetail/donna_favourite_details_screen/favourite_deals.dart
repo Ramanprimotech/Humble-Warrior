@@ -76,8 +76,7 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
                               imageUrl: data.url!,
                               onTap: () {
                                 if (!data.url.isEmptyOrNull) {
-                                  Get.to(CustomPhotoViewer(
-                                      url: donnaFavouriteDetails.url!));
+                                  Get.to(CustomPhotoViewer(url: data.url!));
                                 }
                               }),
                           Visibility(

@@ -31,6 +31,7 @@ class Posts {
   String? categoryName;
   String? thumbnail;
   bool? read;
+  String? productDescription;
 
   Posts(
       {this.id,
@@ -38,6 +39,7 @@ class Posts {
       this.date,
       this.categoryName,
       this.thumbnail,
+      this.productDescription,
       this.read});
 
   Posts.fromJson(Map<String, dynamic> json) {
@@ -46,6 +48,7 @@ class Posts {
     date = json['date'];
     categoryName = json['category_name'];
     thumbnail = json['thumbnail'];
+    productDescription = json['product_description'];
     read = json['read'];
   }
 
@@ -56,6 +59,7 @@ class Posts {
     data['date'] = this.date;
     data['category_name'] = this.categoryName;
     data['thumbnail'] = this.thumbnail;
+    data['product_description'] = this.productDescription;
     data['read'] = this.read;
     return data;
   }
