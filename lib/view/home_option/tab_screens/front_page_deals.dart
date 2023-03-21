@@ -8,6 +8,7 @@ class FrontPageDeals extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FToast().init(context);
     final HomeOptionController controller = Get.find();
     return PaginationWidget(
       apiBool: controller.frontPageDealsBool,
