@@ -157,13 +157,13 @@ Widget donnaDealsButton(
                         key: Key(index.toString()),
                       ),
                     ),
-                    shareButton(shareUrl: "shareUrl", color: color),
+                    shareButton(shareUrl: details.linkUrl, color: color),
                   ],
                 )
               : Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    shareButton(shareUrl: "shareUrl", color: color),
+                    shareButton(shareUrl: details.linkUrl, color: color),
                     IconButton(
                       onPressed: () {
                         // controller.select.value = !controller.select.value;

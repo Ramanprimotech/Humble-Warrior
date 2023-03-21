@@ -149,7 +149,7 @@ class CardView extends StatelessWidget {
                     ),
                   ),
                   8.swb,
-                  shareButton(shareUrl: "shareUrl", color: Colors.black),
+                  shareButton(shareUrl: details!.linkUrl, color: Colors.black),
                 ],
               ),
             ),

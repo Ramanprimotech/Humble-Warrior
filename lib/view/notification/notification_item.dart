@@ -17,7 +17,7 @@ class _NotificationItemState extends State<NotificationItem> {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      height: Get.width / 3.5 + 18,
+      height: Get.width / 3,
       decoration: CustomBoxDecorations().shadow(
           context: context,
           color: widget.data.read == false ? AppColors.readBox : null),
@@ -82,7 +82,7 @@ class _NotificationItemState extends State<NotificationItem> {
                   2,
               fontSize: 14,
               color: data.read == false ? Colors.black : null,
-              maxLines: 2,
+              maxLines: 1,
             ),
           ),
           Expanded(
@@ -99,7 +99,7 @@ class _NotificationItemState extends State<NotificationItem> {
                       color: AppColors.primary,
                       borderRadius: BorderRadius.circular(8)),
                   child: AppText(
-                    data.date != null ? data.date!.split(" ")[0] : "",
+                    data.date != null ? data.date! : "",
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                     fontSize: 12,

@@ -79,7 +79,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                       await _notificationController
                                           .notificationDetailsNavigator(
                                               posts.categoryName, posts.id)
-                                          .then((value) => setState(() {}));
+                                          .then((value) => setState(() {
+                                                _notificationController
+                                                    .update();
+                                              }));
                                     },
                                     child: NotificationItem(data: posts));
                               },

@@ -105,7 +105,8 @@ class FavouriteDeals extends StatelessWidget with CommonAppBar {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 15, horizontal: 10),
                             width: MediaQuery.of(Get.context!).size.width * .9,
-                            child: HtmlData().htmlString(context, data.productDescription),
+                            child: HtmlData()
+                                .htmlString(context, data.productDescription),
                             /*Text(
                               data.productDescription ?? "",
                               maxLines: 100,
