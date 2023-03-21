@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/utils/app_strings.dart';
 import 'package:humble_warrior/utils/app_text.dart';
@@ -39,6 +40,7 @@ class CommonUtils {
   /// Copy To Clipboard
   void copyToClipboard(
       {required String copyText, required BuildContext context}) {
+    FToast().init(context);
     Clipboard.setData(ClipboardData(text: copyText)).then((value) {
       DialogHelper.showToast(context, "Copied to Clipboard");
     });

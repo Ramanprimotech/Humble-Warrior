@@ -39,49 +39,54 @@ class HomeScreenWidgets {
             onTap: () {
               Get.toNamed(AppRoutes.notification);
             },
-            child: FutureBuilder<NotificationResponseModel>(
-                future: _notificationController.notificationList(),
-                builder: (context, snapshot) {
-                  NotificationResponseModel data =
-                      snapshot.data ?? NotificationResponseModel(posts: []);
-                  int notificationCount = data.posts!
-                      .where((element) => element.read == false)
-                      .length;
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Image.asset(
-                      ImagePathAssets.bellIcon,
-                      height: 28,
-                      fit: BoxFit.fitHeight,
-                      color: imageIconTheme.backGroundColor,
-                    );
-                  }
-                  if (snapshot.hasError) {
-                    return Image.asset(
-                      ImagePathAssets.bellIcon,
-                      height: 28,
-                      fit: BoxFit.fitHeight,
-                      color: imageIconTheme.backGroundColor,
-                    );
-                  }
-                  if (data.posts!.isEmpty) {
-                    return Image.asset(
-                      ImagePathAssets.bellIcon,
-                      height: 28,
-                      fit: BoxFit.fitHeight,
-                      color: imageIconTheme.backGroundColor,
-                    );
-                  }
-                  return Badge(
-                      textColor: Colors.white,
-                      label: AppText("$notificationCount", fontSize: 8),
-                      alignment: const AlignmentDirectional(15.0, -3.0),
-                      child: Image.asset(
-                        ImagePathAssets.bellIcon,
-                        height: 28,
-                        fit: BoxFit.fitHeight,
-                        color: imageIconTheme.backGroundColor,
-                      ));
-                }),
+            child: GetBuilder<NotificationController>(
+              init: _notificationController,
+              builder: (ctx) {
+                return FutureBuilder<NotificationResponseModel>(
+                    future: ctx.notificationList(),
+                    builder: (context, snapshot) {
+                      NotificationResponseModel data =
+                          snapshot.data ?? NotificationResponseModel(posts: []);
+                      int notificationCount = data.posts!
+                          .where((element) => element.read == false)
+                          .length;
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Image.asset(
+                          ImagePathAssets.bellIcon,
+                          height: 28,
+                          fit: BoxFit.fitHeight,
+                          color: imageIconTheme.backGroundColor,
+                        );
+                      }
+                      if (snapshot.hasError) {
+                        return Image.asset(
+                          ImagePathAssets.bellIcon,
+                          height: 28,
+                          fit: BoxFit.fitHeight,
+                          color: imageIconTheme.backGroundColor,
+                        );
+                      }
+                      if (data.posts!.isEmpty) {
+                        return Image.asset(
+                          ImagePathAssets.bellIcon,
+                          height: 28,
+                          fit: BoxFit.fitHeight,
+                          color: imageIconTheme.backGroundColor,
+                        );
+                      }
+                      return Badge(
+                          textColor: Colors.white,
+                          label: AppText("$notificationCount", fontSize: 8),
+                          alignment: const AlignmentDirectional(15.0, -3.0),
+                          child: Image.asset(
+                            ImagePathAssets.bellIcon,
+                            height: 28,
+                            fit: BoxFit.fitHeight,
+                            color: imageIconTheme.backGroundColor,
+                          ));
+                    });
+              },
+            ),
           ),
         )
 

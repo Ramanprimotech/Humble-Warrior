@@ -148,7 +148,7 @@ Widget frontPageButton(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       shareButton(
-        shareUrl: "shareUrl",
+        shareUrl: details.linkUrl,
         color: color,
       ),
       IconButton(

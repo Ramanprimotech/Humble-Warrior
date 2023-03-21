@@ -182,7 +182,7 @@ Widget shareButton({required shareUrl, Color? color = Colors.black}) {
   return GestureDetector(
     onTap: () {
       // CommonUtils().share(shareUrl: "$shareUrl");
-      CommonUtils().share(shareUrl: "https://humblewarrior.com/");
+      CommonUtils().share(shareUrl: shareUrl);
     },
     child: AppIcons.share(iconColor: color),
   );
@@ -192,7 +192,7 @@ Widget bookmarkButton({required shareUrl}) {
   return IconButton(
     onPressed: () {
       CommonUtils().share(shareUrl: "$shareUrl");
-      CommonUtils().share(shareUrl: "https://humblewarrior.com/");
+      // CommonUtils().share(shareUrl: "https://humblewarrior.com/");
     },
     icon: AppIcons.bookmarks(),
   );

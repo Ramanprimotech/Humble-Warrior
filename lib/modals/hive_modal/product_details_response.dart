@@ -31,6 +31,8 @@ class ProductDetailsResponse {
   String? ribbonName;
   @HiveField(8)
   String? ribbonColor;
+  @HiveField(9)
+  String? linkUrl;
   ProductDetailsResponse(
       {this.id,
       this.itemName,
@@ -40,11 +42,12 @@ class ProductDetailsResponse {
       this.couponCode,
       this.ribbonName,
       this.ribbonColor,
+      this.linkUrl,
       this.productDescription});
 
   @override
   String toString() {
-    return 'ProductDetailsResponse{id: $id, itemName: $itemName, catName: $catName, url: $url, shopUrl: $shopUrl, couponCode: $couponCode, productDescription: $productDescription, ribbonName: $ribbonName, ribbonColor: $ribbonColor}';
+    return 'ProductDetailsResponse{id: $id, itemName: $itemName, catName: $catName, url: $url, shopUrl: $shopUrl, couponCode: $couponCode, productDescription: $productDescription, linkUrl: $linkUrl, ribbonName: $ribbonName, ribbonColor: $ribbonColor}';
   }
 
   ProductDetailsResponse.fromJson(Map<String, dynamic> json) {
@@ -57,6 +60,7 @@ class ProductDetailsResponse {
     productDescription = json['product_description'];
     ribbonName = json['ribbon_name'];
     ribbonColor = json['ribbon_color'];
+    linkUrl = json['link_url'];
   }
 
   Map<String, dynamic> toJson() {
@@ -70,6 +74,7 @@ class ProductDetailsResponse {
     data['product_description'] = this.productDescription;
     data['ribbon_name'] = this.ribbonName;
     data['ribbon_color'] = this.ribbonColor;
+    data['link_url'] = this.linkUrl;
     return data;
   }
 }

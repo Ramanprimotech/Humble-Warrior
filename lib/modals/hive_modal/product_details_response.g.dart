@@ -26,6 +26,7 @@ class ProductDetailsResponseAdapter
       couponCode: fields[5] as String?,
       ribbonName: fields[7] as String?,
       ribbonColor: fields[8] as String?,
+      linkUrl: fields[9] as String?,
       productDescription: fields[6] as String?,
     );
   }
@@ -33,7 +34,7 @@ class ProductDetailsResponseAdapter
   @override
   void write(BinaryWriter writer, ProductDetailsResponse obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -51,7 +52,9 @@ class ProductDetailsResponseAdapter
       ..writeByte(7)
       ..write(obj.ribbonName)
       ..writeByte(8)
-      ..write(obj.ribbonColor);
+      ..write(obj.ribbonColor)
+      ..writeByte(9)
+      ..write(obj.linkUrl);
   }
 
   @override

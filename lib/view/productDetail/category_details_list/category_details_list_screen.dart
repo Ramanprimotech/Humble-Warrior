@@ -79,7 +79,7 @@ class CategoryListDetails extends StatelessWidget {
                     }
                     return ListView.separated(
                       padding: const EdgeInsets.only(
-                          left: 20, right: 20, bottom: 10, top: 1),
+                          left: 20, right: 20, bottom: 10, top: 4),
                       controller: controller.categoryListScrollController,
                       itemCount: controller.categoryList.length + 1,
                       itemBuilder: (ctx, index) {
@@ -114,7 +114,7 @@ class CategoryListDetails extends StatelessWidget {
                       },
                       separatorBuilder: (BuildContext context, int index) {
                         return const SizedBox(
-                          height: 25,
+                          height: 18,
                         );
                       },
                     );
