@@ -29,7 +29,6 @@ class BrandsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              16.shb,
               // CommonWidgets.titleBar(context,
               //     title: "$brandsTxt I", icon: true, fontSize: 20),
               Expanded(

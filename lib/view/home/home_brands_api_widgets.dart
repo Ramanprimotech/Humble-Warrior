@@ -1,5 +1,6 @@
-import '../../modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/hw.dart';
+
+import '../../modals/response/brands_response_mdel.dart';
 
 class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   final BuildContext context;
@@ -7,8 +8,8 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   HomePageBrandAPIWidgets({required this.context});
 
   /// Brands Item Params
-  final double width = 90;
-  final double height = 65;
+  final double width = 80;
+  final double height = 60;
   final EdgeInsets padding = 5.pa;
   final EdgeInsets margin = 3.pa;
 
