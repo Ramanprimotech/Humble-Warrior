@@ -58,6 +58,7 @@ class AboutScreen extends StatelessWidget {
                       HomeScreenWidgets(
                               context: context, controller: controller)
                           .brandsList(),
+
                     ],
                   )
                 : Center(

@@ -23,13 +23,16 @@ class FrontPageDeals extends StatelessWidget {
           if (controller.frontPageDealList.isEmpty &&
               controller.frontPageDealsBool.value == true) {
             return Center(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CircularProgressIndicator(),
-                CommonWidgets.loading(),
-              ],
-            ));
+                child: ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (ctx, index){
+                    return const  CustomShimmer.rectangular(height: 290,borderRadius: 15,
+                      margin: EdgeInsets.symmetric(horizontal: 15),
+                    );
+                  },
+                  itemCount: 10, separatorBuilder: (BuildContext context, int index) {
+                  return 18.shb;
+                },));
           }
           if (controller.frontPageDealList.isEmpty &&
               controller.frontPageDealsBool.value == false) {
@@ -73,10 +76,12 @@ class FrontPageDeals extends StatelessWidget {
                       : Obx(
                           () => Visibility(
                               visible: controller.frontPageDealsBool.value,
-                              child: Container(
+                              child:
+                             Container(
                                   height: 80,
                                   alignment: Alignment.center,
-                                  child: const CircularProgressIndicator())),
+                                  child: const CircularProgressIndicator()),
+                          ),
                         ),
 
                   ///Do not remove code for future use Banner Ribbon
