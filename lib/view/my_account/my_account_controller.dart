@@ -1,21 +1,9 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/utils/app_colors.dart';
-import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
-import 'package:humble_warrior/utils/common/common_functionality.dart';
-import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
-import 'package:humble_warrior/view/my_account/circle.dart';
-import 'package:humble_warrior/view/my_account/keyboard.dart';
-import 'package:humble_warrior/view/my_account/passcode_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../utils/app_strings.dart';
-import '../../utils/routes/app_routes.dart';
-import '../../utils/shared_prefrence/shared_pref.dart';
 
 class MyAccountController extends GetxController {
   RxBool check = true.obs;
@@ -53,7 +41,7 @@ class MyAccountController extends GetxController {
     debugPrint("user data ---- $username ---- $userPhone ---- $userImg");
   }
 
-  void message(context){
+  void message(context) {
     DialogHelper.showToast(context, "Stay tuned");
   }
 
@@ -85,7 +73,6 @@ class MyAccountController extends GetxController {
       await SharePreferenceData.addBoolToSF(spIsEntered, false);
       controller.selectedIndex = 0;
       Get.offAllNamed(AppRoutes.loginPage);
-
     });
   }
 
