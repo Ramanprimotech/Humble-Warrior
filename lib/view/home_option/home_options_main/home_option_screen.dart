@@ -36,7 +36,7 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
           IconButton(
               padding: 16.pr,
               onPressed: () {
-                Get.toNamed(AppRoutes.sortPages);
+                // Get.toNamed(AppRoutes.sortPages);
               },
               icon: AppIcons.filter(size: 35))
         ],

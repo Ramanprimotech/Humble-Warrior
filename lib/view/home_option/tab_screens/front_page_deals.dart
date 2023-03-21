@@ -145,20 +145,8 @@ Widget frontPageButton(
     ProductDetailsResponse details, int index, BuildContext context) {
   Color color = Theme.of(context).textTheme.displayMedium!.color!;
   return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    mainAxisAlignment: MainAxisAlignment.end,
     children: [
-      shareButton(
-        shareUrl: details.linkUrl,
-        color: color,
-      ),
-      IconButton(
-        onPressed: () {},
-        icon: Image.asset(
-          color: color,
-          ImagePathAssets.commentIcon,
-          height: Dimens.mediumIcon,
-        ),
-      ),
       IconButton(
         onPressed: () {
           // controller.select.value = !controller.select.value;
@@ -170,8 +158,20 @@ Widget frontPageButton(
           color: color,
         ),
       ),
+      shareButton(
+        shareUrl: details.linkUrl,
+        color: color,
+      ),
+      // IconButton(
+      //   onPressed: () {},
+      //   icon: Image.asset(
+      //     color: color,
+      //     ImagePathAssets.commentIcon,
+      //     height: Dimens.mediumIcon,
+      //   ),
+      // ),
     ],
-  );
+  ).px8();
 }
 
 Widget frontPageOptionsButton(
