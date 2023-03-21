@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
@@ -115,44 +116,51 @@ class ItemCard extends StatelessWidget {
 }
 
 Widget codeButton({required String code, required BuildContext context}) {
-  return IconButton(
-    onPressed: () async {
+  return GestureDetector(
+    onTap: () async {
       CommonUtils().copyToClipboard(copyText: code, context: context);
     },
-    icon: Container(
-        alignment: Alignment.center,
-        // width: 90,
-        height: 32,
-        padding: 10.ph,
-        decoration: BoxDecoration(
-            color: AppColors.appGreen,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 3)]),
-        child: Row(
-          children: [
-            Icon(
-              Icons.cut,
-              size: 20,
-              color: AppColors.black,
-            ),
-            2.swb,
-            AppText(
-              code,
-              color: Colors.black,
-              fontWeight: FontWeight.w700,
-              fontSize: 14,
-            ),
-          ],
-        )),
+    child: DottedBorder(
+      color: AppColors.grey,
+      borderType: BorderType.RRect,
+      radius: Radius.circular(20),
+      child: Container(
+          alignment: Alignment.center,
+          // width: 90,
+          height: 30,
+          padding: 10.ph,
+          decoration: BoxDecoration(
+              color: AppColors.appGreen,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: const [
+                BoxShadow(color: Colors.black12, blurRadius: 3)
+              ]),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.cut,
+                size: 20,
+                color: AppColors.black,
+              ),
+              2.swb,
+              AppText(
+                code,
+                color: Colors.black,
+                fontWeight: FontWeight.w700,
+                fontSize: 14,
+              ),
+            ],
+          )),
+    ),
   );
 }
 
 Widget shopButton({required url, required String title}) {
-  return IconButton(
-    onPressed: () async {
+  return GestureDetector(
+    onTap: () async {
       await CommonUtils().urlLauncher(url: url, title: title);
     },
-    icon: Container(
+    child: Container(
         alignment: Alignment.center,
         // width: 90,
         height: 32,
@@ -171,12 +179,12 @@ Widget shopButton({required url, required String title}) {
 }
 
 Widget shareButton({required shareUrl, Color? color = Colors.black}) {
-  return IconButton(
-    onPressed: () {
+  return GestureDetector(
+    onTap: () {
       // CommonUtils().share(shareUrl: "$shareUrl");
       CommonUtils().share(shareUrl: "https://humblewarrior.com/");
     },
-    icon: AppIcons.share(iconColor: color),
+    child: AppIcons.share(iconColor: color),
   );
 }
 

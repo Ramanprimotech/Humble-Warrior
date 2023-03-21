@@ -60,7 +60,7 @@ class DonnaDailyDeals extends StatelessWidget {
                             arguments: [details]);
                       },
                       imgUrl: details.url!,
-                      title: details.itemName!,
+                      cardText: details.itemName!,
                     )
                   // donnaDealsCard(details, index, context, dailyDeals: true)
                   : Obx(

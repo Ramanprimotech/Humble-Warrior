@@ -12,7 +12,7 @@ class CardView extends StatelessWidget {
       this.cardtitle,
       this.index,
       required this.details,
-      this.cardText = false,
+      this.cardText = "",
       this.imageText = true,
       this.effect = true})
       : super(key: key);
@@ -20,7 +20,7 @@ class CardView extends StatelessWidget {
   final String? title;
   final String? cardtitle;
   final String? shopUrl;
-  final bool? cardText;
+  final String? cardText;
   final bool? imageText;
   final bool? effect;
   final int? index;
@@ -52,107 +52,107 @@ class CardView extends StatelessWidget {
                     ),
                   ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                            width: double.infinity,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              gradient: effect == true
-                                  ? const LinearGradient(
+                child: cardText != ""
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
+                                  gradient: LinearGradient(
                                       colors: [
-                                          Colors.transparent,
-                                          Colors.black45,
-                                          Colors.black
-                                        ],
+                                    Colors.transparent,
+                                    Colors.black54,
+                                    Colors.black
+                                  ],
                                       begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter)
-                                  : const LinearGradient(colors: [
-                                      Colors.transparent,
-                                      Colors.transparent,
-                                    ]),
-                            ),
-                            child: imageText == true
-                                ? AppText(
-                                    title ?? "",
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 18,
-                                    textAlign: TextAlign.center,
-                                  )
-                                : SizedBox()),
-                      ],
-                    ),
-                  ],
-                ),
+                                      end: Alignment.bottomCenter)),
+                              child: Center(
+                                child: AppText(
+                                  cardText!,
+                                  padding: 8.pa,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 18,
+                                  maxLines: 2,
+                                  textAlign: TextAlign.center,
+                                ),
+                              )),
+                        ],
+                      )
+                    : SizedBox(),
               ),
             ),
-            Padding(
-              padding:
-                  const EdgeInsets.only(top: 8, right: 16, left: 8, bottom: 8),
-              child: Row(
-                children: [
-                  if (cardText == true) ...[
-                    Expanded(
-                        child: AppText(
-                      cardtitle ?? title ?? "",
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                      textAlign: TextAlign.left,
-                    )),
-                  ],
-                  if (cardText == true) ...[
-                    16.swb,
-                    Heart(
-                      item: details!,
-                      id: details!.id.toString(),
-                      key: Key(index.toString()),
-                    ),
-                    12.swb,
-                    AppIcons.share(iconColor: Colors.black),
-                  ]
-                ],
-              ),
-            ),
-            if (cardText == false)
+            // if (title != "")
+            if (details?.shopUrl == "" &&
+                details?.shopUrl == "null" &&
+                details?.shopUrl == null &&
+                (details?.couponCode == null || details?.couponCode == ""))
               Padding(
-                padding: 8.pr,
+                padding: 8.pa,
                 child: Row(
                   children: [
-                    Padding(
-                      padding: 8.pl,
-                      child: (details?.shopUrl == "" ||
-                              details?.shopUrl == "null" ||
-                              details?.shopUrl == null)
-                          ? 0.shb
-                          : shopButton(
-                              url: "${details?.shopUrl}",
-                              title: "${details?.itemName!}"),
-                    ),
-                    !(details?.couponCode == null || details?.couponCode == "")
-                        ? codeButton(
-                            code: "${details?.couponCode}", context: context)
-                        : 80.swb,
-                    // codeButton(code: "C Code", context: context),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        // controller.select.value = !controller.select.value;
-                      },
-                      icon: Heart(
+                    if (title != "")
+                      Expanded(
+                          child: AppText(
+                        title ?? "",
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                        textAlign: TextAlign.left,
+                      )),
+                    if (details?.shopUrl == "" &&
+                        details?.shopUrl == "null" &&
+                        details?.shopUrl == null &&
+                        (details?.couponCode == null ||
+                            details?.couponCode == "")) ...[
+                      8.swb,
+                      Heart(
                         item: details!,
                         id: details!.id.toString(),
                         key: Key(index.toString()),
                       ),
-                    ),
-                    shareButton(shareUrl: "shareUrl", color: Colors.black),
+                      8.swb,
+                      AppIcons.share(iconColor: Colors.black),
+                    ],
                   ],
                 ),
               ),
+            Padding(
+              padding: 8.pa,
+              child: Row(
+                children: [
+                  if (details?.shopUrl != "" &&
+                      details?.shopUrl != "null" &&
+                      details?.shopUrl != null) ...[
+                    Padding(
+                      padding: 8.pr,
+                      child: shopButton(
+                          url: "${details?.shopUrl}",
+                          title: "${details?.itemName!}"),
+                    ),
+                  ],
+
+                  !(details?.couponCode == null || details?.couponCode == "")
+                      ? codeButton(
+                          code: "${details?.couponCode}", context: context)
+                      : 80.swb,
+                  // codeButton(code: "C Code", context: context),
+                  const Spacer(),
+                  GestureDetector(
+                    onTap: () {
+                      // controller.select.value = !controller.select.value;
+                    },
+                    child: Heart(
+                      item: details!,
+                      id: details!.id.toString(),
+                      key: Key(index.toString()),
+                    ),
+                  ),
+                  8.swb,
+                  shareButton(shareUrl: "shareUrl", color: Colors.black),
+                ],
+              ),
+            ),
           ],
         ),
       ),

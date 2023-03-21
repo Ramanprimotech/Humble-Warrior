@@ -61,9 +61,9 @@ class FrontPageDeals extends StatelessWidget {
                             Get.toNamed(AppRoutes.frontPageProductDetail,
                                 arguments: [details]);
                           },
-                          cardText: true,
+                          cardText: details.ribbonName,
+                          imageText: true,
                           imgUrl: details.url!,
-                          cardtitle: details.itemName.toString(),
                           title: details.ribbonName != null
                               ? details.ribbonName!
                               : details.itemName.toString(),
