@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/utils/app_colors.dart';
 import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
 import 'package:humble_warrior/utils/common/common_functionality.dart';
@@ -78,10 +79,13 @@ class MyAccountController extends GetxController {
   }
 
   Future<void> logout() async {
+    BottomNavigationController controller = Get.find();
     await FirebaseAuth.instance.signOut().then((value) async {
       await SharePreferenceData.clear();
       await SharePreferenceData.addBoolToSF(spIsEntered, false);
+      controller.selectedIndex = 0;
       Get.offAllNamed(AppRoutes.loginPage);
+
     });
   }
 
