@@ -96,7 +96,7 @@ class HomePageProductCategoryAPIWidgets
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SizedBox(
-                                height: productHeight - 20,
+                                height: productHeight - 25,
                                 child: Image.network(
                                     errorBuilder: (context, error, stackTrace) {
                                   return Center(

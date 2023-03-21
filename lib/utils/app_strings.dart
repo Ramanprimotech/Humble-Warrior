@@ -77,7 +77,7 @@ const String readMoreTxt = "read more";
 const String readLessTxt = "read less";
 const String seeCopyHumbleTxt = "See a copy of The Humble Warrior's";
 const String hereTxt = "here";
-const String aboutDonnaTxt = "ABOUT DONNA";
+const String aboutDonnaTxt = "About Donna";
 
 /*===================================================On Boarding Page strings========================================================*/
 

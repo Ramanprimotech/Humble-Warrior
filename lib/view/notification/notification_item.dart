@@ -17,7 +17,7 @@ class _NotificationItemState extends State<NotificationItem> {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      height: Get.width / 3,
+      height: Get.width / 3 - 20,
       decoration: CustomBoxDecorations().shadow(
           context: context,
           color: widget.data.read == false ? AppColors.readBox : null),
