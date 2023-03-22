@@ -66,9 +66,7 @@ class MyAccount extends StatelessWidget {
                   controller,
                   title: shareWithFriendsTxt,
                   ontap: () async {
-                    await CommonUtils().urlLauncher(
-                        url: "https://www.humblewarrior.com/",
-                        title: "The Humble Warrior");
+                    CommonUtils().share(shareUrl: "https://humblewarrior.com/");
                   },
                 ),
                 // // optionSpacing.sh,

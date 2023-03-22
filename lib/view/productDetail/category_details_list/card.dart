@@ -29,15 +29,16 @@ class CardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap ?? () {},
-      child: Container(
-        decoration:
-            // BoxDecoration(borderRadius: BorderRadius.circular(16)),
-            CustomBoxDecorations().shadow(context: context, radius: 16),
-        child: Column(
-          children: [
-            AspectRatio(
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(width: 2, color: Colors.black.withOpacity(.2),),),
+      // CustomBoxDecorations().shadow(context: context, radius: 16),
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: onTap ?? () {},
+            child: AspectRatio(
               aspectRatio: 1 / .7,
               child: Container(
                 decoration: BoxDecoration(
@@ -83,40 +84,44 @@ class CardView extends StatelessWidget {
                     : SizedBox(),
               ),
             ),
-            // if (title != "")
-            if (details?.shopUrl == "" &&
-                details?.shopUrl == "null" &&
-                details?.shopUrl == null &&
-                (details?.couponCode == null || details?.couponCode == ""))
-              Padding(
-                padding: 8.pa,
-                child: Row(
-                  children: [
-                    if (title != "")
-                      Expanded(
-                          child: AppText(
-                        title ?? "",
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        textAlign: TextAlign.left,
-                      )),
-                    if (details?.shopUrl == "" &&
-                        details?.shopUrl == "null" &&
-                        details?.shopUrl == null &&
-                        (details?.couponCode == null ||
-                            details?.couponCode == "")) ...[
-                      8.swb,
-                      Heart(
-                        item: details!,
-                        id: details!.id.toString(),
-                        key: Key(index.toString()),
-                      ),
-                      8.swb,
-                      AppIcons.share(iconColor: Colors.black),
-                    ],
-                  ],
-                ),
-              ),
+          ),
+          // if (details?.shopUrl == "" &&
+          //     details?.shopUrl == "null" &&
+          //     details?.shopUrl == null &&
+          //     (details?.couponCode == null || details?.couponCode == ""))
+          //   Padding(
+          //     padding: 8.pa,
+          //     child: Row(
+          //       children: [
+          //         if (title != "")
+          //           Expanded(
+          //               child: AppText(
+          //             title ?? "",
+          //             fontWeight: FontWeight.w600,
+          //             fontSize: 16,
+          //             textAlign: TextAlign.left,
+          //           )),
+          //         if (details?.shopUrl == "" &&
+          //             details?.shopUrl == "null" &&
+          //             details?.shopUrl == null &&
+          //             (details?.couponCode == null ||
+          //                 details?.couponCode == "")) ...[
+          //           8.swb,
+          //           Heart(
+          //             item: details!,
+          //             id: details!.id.toString(),
+          //             key: Key(index.toString()),
+          //           ),
+          //           8.swb,
+          //           AppIcons.share(iconColor: Colors.black),
+          //         ],
+          //       ],
+          //     ),
+          //   ),
+          if ((details?.shopUrl != "" &&
+                  details?.shopUrl != "null" &&
+                  details?.shopUrl != null) ||
+              !(details?.couponCode == null || details?.couponCode == ""))
             Padding(
               padding: 8.pa,
               child: Row(
@@ -149,12 +154,59 @@ class CardView extends StatelessWidget {
                     ),
                   ),
                   8.swb,
-                  shareButton(shareUrl: details!.linkUrl, color: Colors.black),
+                  shareButton(
+                      shareUrl: details!.linkUrl, color: Colors.black),
                 ],
               ),
             ),
-          ],
-        ),
+          if (!details!.shopUrl.isNotEmptyAndNotNull
+              // ||
+              //     (details?.couponCode == null || details?.couponCode == "")
+          )
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                    child: iconWithText(
+                        title: 'Add to Wishlist',
+                        child: Heart(
+                          item: details!,
+                          id: details!.id.toString(),
+                          key: Key(index.toString()),
+                        ))),
+                Container(
+                    width: 2,
+                    height: 50,
+                    color: Colors.black.withOpacity(.2)),
+                Expanded(
+                  child: iconWithText(
+                    title: 'Share',
+                    child: shareButton(
+                        shareUrl: details!.linkUrl, color: Colors.black),
+                  ),
+                ),
+              ],
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget iconWithText({required String title, required Widget child}) {
+    return Padding(
+      padding: 0.pv,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          child,
+          8.swb,
+          AppText(
+            title,
+            fontSize: 16,
+          ),
+        ],
       ),
     );
   }
