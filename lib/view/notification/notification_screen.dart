@@ -40,8 +40,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     left: 20, right: 20, bottom: 20, top: 5),
                                 scrollDirection: Axis.vertical,
                                 itemBuilder: (context, index) {
-                                  return ShimmerLoader(
-                                      child: NotificationItem(data: Posts()));
+                                  return CustomShimmer.rectangular(height: 100, width: double.infinity,);
                                 },
                                 itemCount: 15,
                                 separatorBuilder:
