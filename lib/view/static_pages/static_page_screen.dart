@@ -12,51 +12,72 @@ class StaticPagesScreen extends StatelessWidget {
     controller.id = Get.arguments[0];
     String title = Get.arguments[1];
     return Scaffold(
-      body: Column(children: [
-        const SizedBox(height: 20),
-        CommonWidgets.titleBar(context,
-            title: title, fontSize: 20),
-        // 20.sh,
+      body: SafeArea(
+        child: Column(children: [
+          CommonWidgets.titleBar(context,
+              title: title, fontSize: 20),
+          // 20.sh,
    FutureBuilder<List<StaticData>>(
-       future:controller.staticPageApi(controller.id),
-       builder: (context ,snapshot){
+         future:controller.staticPageApi(controller.id),
+         builder: (context ,snapshot){
      if(snapshot.connectionState == ConnectionState.waiting){
-       return const Expanded(child: Center(child: CircularProgressIndicator()));
+         return Expanded(
+           child: Center(
+               child: ListView.separated(
+                 physics: const NeverScrollableScrollPhysics(),
+                 itemBuilder: (ctx, index){
+                   return Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                     children: const [
+                       CustomShimmer.rectangular(height: 150,borderRadius: 15,
+                         margin: EdgeInsets.only(left: 15,right: 15,top: 5,bottom: 20),
+                       ),
+                       CustomShimmer.rectangular(height: 30,width: 250,borderRadius: 8,
+                         margin: EdgeInsets.symmetric(horizontal: 15),
+                       ),
+                     ],
+                   );
+                 },
+                 itemCount: 10, separatorBuilder: (BuildContext context, int index) {
+                 return 5.shb;
+               },)),
+         );
      }
      if(snapshot.hasError){
-       return CommonWidgets.errorAPI(errorText: "${snapshot.error}",
-           context: context,
-           onPress: (){Get.back();},
-           buttonTitle: okTxt);
+         return CommonWidgets.errorAPI(errorText: "${snapshot.error}",
+             context: context,
+             onPress: (){Get.back();},
+             buttonTitle: okTxt);
      }
 
      List<StaticData> staticResponse = snapshot.data!;
     return  staticResponse.isNotEmpty?
     Expanded(
 
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: HtmlData().htmlString(context, staticResponse[0].pageContent.toString()),
-          // HTML.toRichText(context, ,
-          //   linksCallback: (dynamic link) {
-          //     CommonUtils().urlLauncher(url: link.toString());
-          //   },)
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: HtmlData().htmlString(context, staticResponse[0].pageContent.toString()),
+            // HTML.toRichText(context, ,
+            //   linksCallback: (dynamic link) {
+            //     CommonUtils().urlLauncher(url: link.toString());
+            //   },)
 
-          // AppText(staticResponse[0].pageContent.toString(),maxLines: 100,),
+            // AppText(staticResponse[0].pageContent.toString(),maxLines: 100,),
+          ),
         ),
-      ),
     ):Expanded(
-      child: Center(
-        child: CommonWidgets.errorAPI(errorText: "${snapshot.error}",
-            context: context,
-            onPress: (){Get.back();},
-            buttonTitle: okTxt)
-      ),
+        child: Center(
+          child: CommonWidgets.errorAPI(errorText: "${snapshot.error}",
+              context: context,
+              onPress: (){Get.back();},
+              buttonTitle: okTxt)
+        ),
     );
    }),
 
-      ]),
+        ]),
+      ),
     );
   }
 }

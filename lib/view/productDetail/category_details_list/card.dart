@@ -29,60 +29,120 @@ class CardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HiveService service = Get.find<HiveService>();
+    Color color = Theme.of(context).textTheme.displayMedium!.color!;
+    ShadowTheme shadowColor = Theme.of(context).extension<ShadowTheme>()!;
     return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(width: 2, color: Colors.black.withOpacity(.2),),),
-      // CustomBoxDecorations().shadow(context: context, radius: 16),
+      decoration:
+      // BoxDecoration(
+      //   color: shadowColor.background,
+      //     borderRadius: BorderRadius.circular(16),
+      //     border: Border.all(width: 2, color: Colors.black.withOpacity(.2),),),
+      CustomBoxDecorations().shadow(context: context, radius: 16),
       child: Column(
         children: [
           GestureDetector(
             onTap: onTap ?? () {},
-            child: AspectRatio(
-              aspectRatio: 1 / .7,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(16),
-                    topLeft: Radius.circular(16),
-                  ),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: CachedNetworkImageProvider(
-                      imgUrl ?? "",
+            child: Stack(
+              children: [
+                AspectRatio(
+                  aspectRatio: 1 / .7,
+                  child:ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(16),
+                      topLeft: Radius.circular(16),
                     ),
+                    child: CommonWidgets.networkImage(imageUrl: imgUrl??"",fit: BoxFit.cover),
+
                   ),
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: const BorderRadius.only(
+                  //       topRight: Radius.circular(16),
+                  //       topLeft: Radius.circular(16),
+                  //     ),
+                  //     image: DecorationImage(
+                  //       fit: BoxFit.cover,
+                  //       image: CachedNetworkImageProvider(
+                  //         imgUrl ?? "",
+                  //         /*errorListener: (){
+                  //            ShimmerLoader(
+                  //                child: AspectRatio(
+                  //                  aspectRatio: 1 / .7,
+                  //                  child: Container(
+                  //                    decoration: const BoxDecoration(
+                  //                      borderRadius: BorderRadius.only(
+                  //                        topRight: Radius.circular(16),
+                  //                        topLeft: Radius.circular(16),
+                  //                      ),
+                  //                    ),
+                  //                  ),
+                  //                ));
+                  //         },*/
+                  //       ),
+                  //     ),
+                  //   ),
+                  //   child: cardText != ""
+                  //       ? Column(
+                  //           mainAxisAlignment: MainAxisAlignment.end,
+                  //           children: [
+                  //             Container(
+                  //                 width: double.infinity,
+                  //                 decoration: const BoxDecoration(
+                  //                     gradient: LinearGradient(
+                  //                         colors: [
+                  //                       Colors.transparent,
+                  //                       Colors.black54,
+                  //                       Colors.black
+                  //                     ],
+                  //                         begin: Alignment.topCenter,
+                  //                         end: Alignment.bottomCenter)),
+                  //                 child: Center(
+                  //                   child: AppText(
+                  //                     cardText!,
+                  //                     padding: 8.pa,
+                  //                     color: Colors.white,
+                  //                     fontWeight: FontWeight.w700,
+                  //                     fontSize: 18,
+                  //                     maxLines: 2,
+                  //                     textAlign: TextAlign.center,
+                  //                   ),
+                  //                 )),
+                  //           ],
+                  //         )
+                  //       : SizedBox(),
+                  // ),
                 ),
-                child: cardText != ""
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
-                              width: double.infinity,
-                              decoration: const BoxDecoration(
-                                  gradient: LinearGradient(
-                                      colors: [
-                                    Colors.transparent,
-                                    Colors.black54,
-                                    Colors.black
-                                  ],
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter)),
-                              child: Center(
-                                child: AppText(
-                                  cardText!,
-                                  padding: 8.pa,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18,
-                                  maxLines: 2,
-                                  textAlign: TextAlign.center,
-                                ),
-                              )),
-                        ],
-                      )
-                    : SizedBox(),
-              ),
+
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  child: cardText != ""
+                    ? Container(
+                    height: 50,
+                        width: Get.width,
+                        decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                                colors: [
+                                  Colors.transparent,
+                                  Colors.black54,
+                                  Colors.black
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter)),
+                        child: Center(
+                          child: AppText(
+                            cardText!,
+                            padding: 8.pa,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18,
+                            maxLines: 2,
+                            textAlign: TextAlign.center,
+                          ),
+                        ))
+                    : SizedBox(),)
+              ],
             ),
           ),
           // if (details?.shopUrl == "" &&
@@ -151,11 +211,12 @@ class CardView extends StatelessWidget {
                       item: details!,
                       id: details!.id.toString(),
                       key: Key(index.toString()),
+                      color: color,
                     ),
                   ),
                   8.swb,
                   shareButton(
-                      shareUrl: details!.linkUrl, color: Colors.black),
+                      shareUrl: details!.linkUrl, color: color),
                 ],
               ),
             ),
@@ -168,22 +229,33 @@ class CardView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
-                    child: iconWithText(
-                        title: 'Add to Wishlist',
-                        child: Heart(
-                          item: details!,
-                          id: details!.id.toString(),
-                          key: Key(index.toString()),
-                        ))),
+                    child: GestureDetector(
+                      onTap: (){
+                        service.favourite(item: details!);
+                      },
+                      child: iconWithText(
+                          title: 'Add to Wishlist',
+                          child: Heart(
+                            item: details!,
+                            id: details!.id.toString(),
+                            key: Key(index.toString()),
+                            color: color,
+                          )),
+                    )),
                 Container(
                     width: 2,
                     height: 50,
                     color: Colors.black.withOpacity(.2)),
                 Expanded(
-                  child: iconWithText(
-                    title: 'Share',
-                    child: shareButton(
-                        shareUrl: details!.linkUrl, color: Colors.black),
+                  child:GestureDetector(
+                    onTap: (){
+                      CommonUtils().share(shareUrl: details!.linkUrl.toString());
+                    },
+                    child: iconWithText(
+                      title: 'Share',
+                      child: shareButton(
+                          shareUrl: details!.linkUrl, color: color),
+                    ),
                   ),
                 ),
               ],
@@ -192,22 +264,22 @@ class CardView extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget iconWithText({required String title, required Widget child}) {
-    return Padding(
-      padding: 0.pv,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          child,
-          8.swb,
-          AppText(
-            title,
-            fontSize: 16,
-          ),
-        ],
-      ),
-    );
-  }
+Widget iconWithText({required String title, required Widget child}) {
+  return Padding(
+    padding: 0.pv,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        child,
+        8.swb,
+        AppText(
+          title,
+          fontSize: 16,
+        ),
+      ],
+    ),
+  );
 }

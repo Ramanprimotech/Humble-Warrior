@@ -148,6 +148,7 @@ ItemCard frontPageCard(
 
 Widget frontPageButton(
     ProductDetailsResponse details, int index, BuildContext context) {
+  HiveService service = Get.find<HiveService>();
   Color color = Theme.of(context).textTheme.displayMedium!.color!;
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,
@@ -177,6 +178,41 @@ Widget frontPageButton(
       // ),
     ],
   ).px8();
+    /*Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+            child: GestureDetector(
+              onTap: (){
+                service.favourite(item: details!);
+              },
+              child: iconWithText(
+                  title: 'Add to Wishlist',
+                  child: Heart(
+                    item: details!,
+                    id: details!.id.toString(),
+                    key: Key(index.toString()),
+                  )),
+            )),
+        Container(
+            width: 2,
+            height: 50,
+            color: Colors.black.withOpacity(.2)),
+        Expanded(
+          child:GestureDetector(
+            onTap: (){
+              CommonUtils().share(shareUrl: details!.linkUrl.toString());
+            },
+            child: iconWithText(
+              title: 'Share',
+              child: shareButton(
+                  shareUrl: details!.linkUrl, color: Colors.black),
+            ),
+          ),
+        ),
+      ],
+    ).px8();*/
 }
 
 Widget frontPageOptionsButton(
