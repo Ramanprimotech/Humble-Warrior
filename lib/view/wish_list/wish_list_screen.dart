@@ -85,12 +85,13 @@ class WishList extends StatelessWidget {
                                       ),
                                     )
                                   : ListView.separated(
-                                padding: 20.pb,
+                                      padding: 20.pb,
                                       itemCount: controller.data.value.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         ProductDetailsResponse details =
-                                            controller.data.value[index];
+                                            controller.data.value.reversed
+                                                .toList()[index];
                                         return Padding(
                                           padding: const EdgeInsets.only(
                                             left: 20,
@@ -110,7 +111,6 @@ class WishList extends StatelessWidget {
                                         );
                                       },
                                     ),
-
                             ))),
               ),
             ),

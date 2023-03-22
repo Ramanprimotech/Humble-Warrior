@@ -47,7 +47,7 @@ class WishListCard extends StatelessWidget {
                     ),
                     child: CommonWidgets.networkImage(
                       imageUrl: imageUrl,
-                      alignment: Alignment.topCenter,
+                      alignment: Alignment.center,
                       width: Get.width,
                       fit: BoxFit.cover,
                     ),
