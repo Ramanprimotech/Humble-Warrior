@@ -117,9 +117,10 @@ class CardView extends StatelessWidget {
                 Positioned(
                   bottom: 0,
                   left: 0,
+                  right: 0,
                   child: cardText != ""
                     ? Container(
-                    height: 50,
+                    height: 70,
                         width: Get.width,
                         decoration: const BoxDecoration(
                             gradient: LinearGradient(
@@ -229,25 +230,26 @@ class CardView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
-                    child: GestureDetector(
-                      onTap: (){
-                        service.favourite(item: details!);
-                      },
-                      child: iconWithText(
-                          title: 'Add to Wishlist',
-                          child: Heart(
-                            item: details!,
-                            id: details!.id.toString(),
-                            key: Key(index.toString()),
-                            color: color,
-                          )),
-                    )),
+                  child: InkWell(
+                    onTap: (){
+                      service.favourite(item: details!);
+                    },
+                    child: iconWithText(
+                        title: 'Add to Wishlist',
+                        child: Heart(
+                          item: details!,
+                          id: details!.id.toString(),
+                          key: Key(index.toString()),
+                          color: color,
+                        )),
+                  ),
+                ),
                 Container(
                     width: 2,
                     height: 50,
                     color: Colors.black.withOpacity(.2)),
                 Expanded(
-                  child:GestureDetector(
+                  child: InkWell(
                     onTap: (){
                       CommonUtils().share(shareUrl: details!.linkUrl.toString());
                     },
