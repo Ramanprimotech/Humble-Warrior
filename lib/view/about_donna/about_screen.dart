@@ -20,7 +20,29 @@ class AboutScreen extends StatelessWidget {
           future: staticController.staticPageApi("40424"),
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return Column(
+                children: [
+                  /// About Donna title
+                  CommonWidgets.titleBar(
+                    context,
+                    backIcon: true,
+                    title: aboutDonnaTxt,
+                    fontSize: 18,
+                  ),
+                  Expanded(
+                    child: ListView.separated(
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (ctx, index){
+                        return const  CustomShimmer.rectangular(height: 290,borderRadius: 15,
+                          margin: EdgeInsets.symmetric(horizontal: 15),
+                        );
+                      },
+                      itemCount: 10, separatorBuilder: (BuildContext context, int index) {
+                      return 16.shb;
+                    },),
+                  ),
+                ],
+              );
             }
             if (snapshot.hasError) {
               return CommonWidgets.errorAPI(

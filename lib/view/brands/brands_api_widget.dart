@@ -70,7 +70,7 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
           elevation: 8,
           margin: 8.pa,
           color: Colors.grey.shade200,
-          child: const CustomShimmer.rectangular(),
+          child: const CustomShimmer.rectangular(borderRadius: 15),
         );
       },
     );
