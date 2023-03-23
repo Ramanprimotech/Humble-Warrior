@@ -136,3 +136,5 @@ const String CS = "Coming Soon...";
 const String enterThreeTxt = "Enter at least three characters";
 const String noDealsTxt = "No Deals found";
 const String resetTxt = 'Reset';
+const String addToWishlistTxt = 'Add to Wishlist';
+const String shareTxt = 'Share';

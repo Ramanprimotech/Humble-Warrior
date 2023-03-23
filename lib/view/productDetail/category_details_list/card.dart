@@ -142,7 +142,7 @@ class CardView extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                         ))
-                    : SizedBox(),)
+                    : const SizedBox(),)
               ],
             ),
           ),
@@ -202,7 +202,6 @@ class CardView extends StatelessWidget {
                       ? codeButton(
                           code: "${details?.couponCode}", context: context)
                       : 80.swb,
-                  // codeButton(code: "C Code", context: context),
                   const Spacer(),
                   GestureDetector(
                     onTap: () {
@@ -235,7 +234,7 @@ class CardView extends StatelessWidget {
                       service.favourite(item: details!);
                     },
                     child: iconWithText(
-                        title: 'Add to Wishlist',
+                        title: addToWishlistTxt,
                         child: Heart(
                           item: details!,
                           id: details!.id.toString(),
@@ -254,7 +253,7 @@ class CardView extends StatelessWidget {
                       CommonUtils().share(shareUrl: details!.linkUrl.toString());
                     },
                     child: iconWithText(
-                      title: 'Share',
+                      title: shareTxt,
                       child: shareButton(
                           shareUrl: details!.linkUrl, color: color),
                     ),
