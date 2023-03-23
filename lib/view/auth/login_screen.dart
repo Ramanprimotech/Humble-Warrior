@@ -8,9 +8,9 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
   @override
   Widget build(BuildContext context) {
     ThemeController themeController = Get.find();
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -50,14 +50,14 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                             action: OnClick.google, context: context)),
 
                     /// Apple
-                    if(Platform.isIOS)
-                    optionWidget(
-                        bckClr: AppColors.grey,
-                        title: LocalString.signWithApple,
-                        textClr: AppColors.white,
-                        imagePath: ImagePathAssets.appleImg,
-                        onTap: controller.onClickFunction(
-                            action: OnClick.apple, context: context)),
+                    if (Platform.isIOS)
+                      optionWidget(
+                          bckClr: AppColors.grey,
+                          title: LocalString.signWithApple,
+                          textClr: AppColors.white,
+                          imagePath: ImagePathAssets.appleImg,
+                          onTap: controller.onClickFunction(
+                              action: OnClick.apple, context: context)),
 
                     /// Without Login
                     optionWidget(
