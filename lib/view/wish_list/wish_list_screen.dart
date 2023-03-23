@@ -11,6 +11,7 @@ class WishList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WishListController controller = Get.find();
+    AppBarTheme statusBarColor = AppBarTheme();
     return Scaffold(
       appBar: AppBar(
         title: const SearchBar(),
