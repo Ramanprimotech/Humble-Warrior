@@ -50,33 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBnM-Y6B6Xqm3hVLdNgvXa6UHuSOO9EGas',
-    appId: '1:340829922874:android:062f81e74783000dec7703',
-    messagingSenderId: '340829922874',
-    projectId: 'hwapp-78661',
-    databaseURL: 'https://hwapp-78661-default-rtdb.firebaseio.com',
-    storageBucket: 'hwapp-78661.appspot.com',
+    apiKey: 'AIzaSyA0mLm2yaiiuX-_ujLNu5v8rLQUYmRaVmg',
+    appId: '1:11517768711:android:5eea7fb7d6d43e336e66a2',
+    messagingSenderId: '11517768711',
+    projectId: 'humble-warrior-c70b5',
+    storageBucket: 'humble-warrior-c70b5.appspot.com',
   );
 
-  // static const FirebaseOptions ios = FirebaseOptions(
-  //   apiKey: 'AIzaSyAfi551nKdVc8D1__iDiLIiy0exnBvvHpE',
-  //   appId: '1:340829922874:ios:83560ad0e0b4bd2bec7703',
-  //   messagingSenderId: '340829922874',
-  //   projectId: 'hwapp-78661',
-  //   databaseURL: 'https://hwapp-78661-default-rtdb.firebaseio.com',
-  //   storageBucket: 'hwapp-78661.appspot.com',
-  //   iosClientId: '340829922874-o8qpij3h27hbmn0fjai7di4k31pnj1c1.apps.googleusercontent.com',
-  //   iosBundleId: 'com.example.humbleWarrior',
-  // );
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAfi551nKdVc8D1__iDiLIiy0exnBvvHpE',
-    appId: '1:340829922874:ios:3c000c87aa1f844fec7703',
-    messagingSenderId: '340829922874',
-    projectId: 'hwapp-78661',
-    databaseURL: 'https://hwapp-78661-default-rtdb.firebaseio.com',
-    storageBucket: 'hwapp-78661.appspot.com',
-    iosClientId:
-        '340829922874-r63ac8cku8jdtgd6epcpu6rfosaqa96r.apps.googleusercontent.com',
-    iosBundleId: 'com.humble.warrior',
+    apiKey: 'AIzaSyCNlQikRE9QvcDMN1ZNtKFyQbctSPwH1M8',
+    appId: '1:11517768711:ios:4787a138004be0236e66a2',
+    messagingSenderId: '11517768711',
+    projectId: 'humble-warrior-c70b5',
+    storageBucket: 'humble-warrior-c70b5.appspot.com',
+    androidClientId: '11517768711-l3vb1jrbek38h4tms9a3f7olp2vo9223.apps.googleusercontent.com',
+    iosClientId: '11517768711-972i9vlsus07hb0pq8ea1rfr3nfbsm7p.apps.googleusercontent.com',
+    iosBundleId: 'com.hw.int',
   );
 }

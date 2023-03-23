@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 
@@ -34,11 +33,11 @@ class CardView extends StatelessWidget {
     ShadowTheme shadowColor = Theme.of(context).extension<ShadowTheme>()!;
     return Container(
       decoration:
-      // BoxDecoration(
-      //   color: shadowColor.background,
-      //     borderRadius: BorderRadius.circular(16),
-      //     border: Border.all(width: 2, color: Colors.black.withOpacity(.2),),),
-      CustomBoxDecorations().shadow(context: context, radius: 16),
+          // BoxDecoration(
+          //   color: shadowColor.background,
+          //     borderRadius: BorderRadius.circular(16),
+          //     border: Border.all(width: 2, color: Colors.black.withOpacity(.2),),),
+          CustomBoxDecorations().shadow(context: context, radius: 16),
       child: Column(
         children: [
           GestureDetector(
@@ -47,13 +46,13 @@ class CardView extends StatelessWidget {
               children: [
                 AspectRatio(
                   aspectRatio: 1 / .7,
-                  child:ClipRRect(
+                  child: ClipRRect(
                     borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(16),
                       topLeft: Radius.circular(16),
                     ),
-                    child: CommonWidgets.networkImage(imageUrl: imgUrl??"",fit: BoxFit.cover),
-
+                    child: CommonWidgets.networkImage(
+                        imageUrl: imgUrl ?? "", fit: BoxFit.cover),
                   ),
                   // Container(
                   //   decoration: BoxDecoration(
@@ -113,36 +112,37 @@ class CardView extends StatelessWidget {
                   //       : SizedBox(),
                   // ),
                 ),
-
                 Positioned(
                   bottom: 0,
                   left: 0,
                   right: 0,
                   child: cardText != ""
-                    ? Container(
-                    height: 70,
-                        width: Get.width,
-                        decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                                colors: [
-                                  Colors.transparent,
-                                  Colors.black54,
-                                  Colors.black
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter)),
-                        child: Center(
-                          child: AppText(
-                            cardText!,
-                            padding: 8.pa,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
-                            maxLines: 2,
-                            textAlign: TextAlign.center,
-                          ),
-                        ))
-                    : SizedBox(),)
+                      ? Container(
+                          height: 60,
+                          alignment: Alignment.center,
+                          width: Get.width,
+                          decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                  colors: [
+                                Colors.transparent,
+                                Colors.black54,
+                                Colors.black
+                              ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter)),
+                          child: Center(
+                            child: AppText(
+                              cardText!,
+                              padding: 8.pa,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 16,
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                            ),
+                          ))
+                      : SizedBox(),
+                )
               ],
             ),
           ),
@@ -216,14 +216,13 @@ class CardView extends StatelessWidget {
                     ),
                   ),
                   8.swb,
-                  shareButton(
-                      shareUrl: details!.linkUrl, color: color),
+                  shareButton(shareUrl: details!.linkUrl, color: color),
                 ],
               ),
             ),
           if (!details!.shopUrl.isNotEmptyAndNotNull
-              // ||
-              //     (details?.couponCode == null || details?.couponCode == "")
+          // ||
+          //     (details?.couponCode == null || details?.couponCode == "")
           )
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -231,7 +230,7 @@ class CardView extends StatelessWidget {
               children: [
                 Expanded(
                   child: InkWell(
-                    onTap: (){
+                    onTap: () {
                       service.favourite(item: details!);
                     },
                     child: iconWithText(
@@ -245,18 +244,17 @@ class CardView extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    width: 2,
-                    height: 50,
-                    color: Colors.black.withOpacity(.2)),
+                    width: 2, height: 50, color: Colors.black.withOpacity(.2)),
                 Expanded(
                   child: InkWell(
-                    onTap: (){
-                      CommonUtils().share(shareUrl: details!.linkUrl.toString());
+                    onTap: () {
+                      CommonUtils()
+                          .share(shareUrl: details!.linkUrl.toString());
                     },
                     child: iconWithText(
                       title: 'Share',
-                      child: shareButton(
-                          shareUrl: details!.linkUrl, color: color),
+                      child:
+                          shareButton(shareUrl: details!.linkUrl, color: color),
                     ),
                   ),
                 ),

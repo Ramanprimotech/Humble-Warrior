@@ -32,14 +32,18 @@ class AboutScreen extends StatelessWidget {
                   Expanded(
                     child: ListView.separated(
                       physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (ctx, index){
-                        return const  CustomShimmer.rectangular(height: 290,borderRadius: 15,
+                      itemBuilder: (ctx, index) {
+                        return const CustomShimmer.rectangular(
+                          height: 290,
+                          borderRadius: 15,
                           margin: EdgeInsets.symmetric(horizontal: 15),
                         );
                       },
-                      itemCount: 10, separatorBuilder: (BuildContext context, int index) {
-                      return 16.shb;
-                    },),
+                      itemCount: 10,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return 16.shb;
+                      },
+                    ),
                   ),
                 ],
               );
@@ -72,6 +76,7 @@ class AboutScreen extends StatelessWidget {
                           /// About Less
                           Obx(
                             () => Visibility(
+                              key: Key("less"),
                               visible: aboutScreenController.readMore.value,
                               child: _detailsLess(context, staticResponse),
                             ),
@@ -80,6 +85,7 @@ class AboutScreen extends StatelessWidget {
                           /// About Details
                           Obx(
                             () => Visibility(
+                              key: Key("more"),
                               visible: !aboutScreenController.readMore.value,
                               child: _details(context, staticResponse),
                             ),
@@ -89,6 +95,7 @@ class AboutScreen extends StatelessWidget {
                           _showImgBottom(staticResponse),
 
                           /// See copy of humble warrior button
+                          15.shb,
                           _seeCopyButton(),
                           25.shb,
                         ]),
@@ -152,8 +159,8 @@ class AboutScreen extends StatelessWidget {
           child: CommonWidgets.networkImage(
             imageUrl: staticResponse[0].page_bottom_image.toString(),
             // "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
-            fit: BoxFit.fitWidth,
-            height: 250,
+            fit: BoxFit.fill,
+            height: 170,
             alignment: Alignment.topCenter,
             width: Get.width,
           ),

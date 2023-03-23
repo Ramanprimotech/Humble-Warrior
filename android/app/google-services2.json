@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "11517768711",
+    "project_id": "humble-warrior-c70b5",
+    "storage_bucket": "humble-warrior-c70b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11517768711:android:5eea7fb7d6d43e336e66a2",
+        "android_client_info": {
+          "package_name": "com.humble.warrior"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "11517768711-l3vb1jrbek38h4tms9a3f7olp2vo9223.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.humble.warrior",
+            "certificate_hash": "f16bf9b46428264af7cac1a628dbb08df7824c4a"
+          }
+        },
+        {
+          "client_id": "11517768711-k3lbbct403mvnak7nasagctitejkls22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0mLm2yaiiuX-_ujLNu5v8rLQUYmRaVmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "11517768711-80vpq8bcnej8scscm0gkeo88qip3sc53.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "11517768711-972i9vlsus07hb0pq8ea1rfr3nfbsm7p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hw.int"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
