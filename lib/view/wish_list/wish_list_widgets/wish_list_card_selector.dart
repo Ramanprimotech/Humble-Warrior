@@ -36,8 +36,7 @@ class WishListCardSelector extends StatelessWidget {
       return wishListCards.frontPage();
     }
 
-    return categoryListWishListCard(details, index, context,
-        categoryCard: true);
+    return wishListCards.frontPage();
   }
 }
 
