@@ -230,8 +230,22 @@ class CardView extends StatelessWidget {
               children: [
                 Expanded(
                   child: InkWell(
-                    onTap: () {
-                      service.favourite(item: details!);
+                    onTap: () async {
+                      bool value =
+                          await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
+                      if (value) {
+                        service.favourite(item: details!);
+                      } else {
+                        if (context.mounted) {
+                          DialogHelper.showConfirmationDialog(
+                              message: loginWishTxt,
+                              actionLabel: login,
+                              action: () {
+                                Get.toNamed(AppRoutes.loginPage);
+                              },
+                              context: context);
+                        }
+                      }
                     },
                     child: iconWithText(
                         title: addToWishlistTxt,
