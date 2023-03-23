@@ -16,7 +16,6 @@ class StaticPagesScreen extends StatelessWidget {
         child: Column(children: [
           CommonWidgets.titleBar(context,
               title: title, fontSize: 20),
-          // 20.sh,
    FutureBuilder<List<StaticData>>(
          future:controller.staticPageApi(controller.id),
          builder: (context ,snapshot){

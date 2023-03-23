@@ -98,7 +98,7 @@ class CategoryListDetails extends StatelessWidget {
                                 cardText: details.itemName,
                                 details: details,
                                 onTap: () {
-                                  Get.toNamed(AppRoutes.dailyDealProductDetail,
+                                  Get.toNamed(AppRoutes.frontPageProductDetail,
                                       arguments: [details]);
                                 },
                               )

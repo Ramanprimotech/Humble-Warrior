@@ -1,5 +1,7 @@
+import 'package:flutter_html/flutter_html.dart';
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
+import 'package:humble_warrior/utils/common/html.dart';
 
 class CardView extends StatelessWidget {
   const CardView(
@@ -118,6 +120,7 @@ class CardView extends StatelessWidget {
                   right: 0,
                   child: cardText != ""
                       ? Container(
+                    alignment: Alignment.bottomCenter,
                           height: 70,
                           width: Get.width,
                           decoration: const BoxDecoration(
@@ -129,16 +132,14 @@ class CardView extends StatelessWidget {
                               ],
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter)),
-                          child: Center(
-                            child: AppText(
-                              cardText!,
-                              padding: 8.pa,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18,
-                              maxLines: 2,
-                              textAlign: TextAlign.center,
-                            ),
+                          child: AppText(
+                            cardText!,
+                            padding: 8.pa,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18,
+                            maxLines: 2,
+                            textAlign: TextAlign.center,
                           ))
                       : SizedBox(),
                 )
