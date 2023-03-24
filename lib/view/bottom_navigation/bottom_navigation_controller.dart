@@ -71,7 +71,7 @@ class BottomNavigationController extends GetxController {
           'com.amazon.mobile.shopping://www.amazon.com/shop/influencer-1604f2b0'; // or add your URL here
       final Uri uri = Uri.parse(url);
       if (!await launchUrl(uri,
-          mode: LaunchMode.externalNonBrowserApplication)) {
+          mode: LaunchMode.externalApplication)) {
         // throw Exception('Could not launch $uri');
 
         if (!await launchUrl(
@@ -81,8 +81,8 @@ class BottomNavigationController extends GetxController {
         }
       }
     } catch (e) {
-      // launchUrl(Uri.parse('https://www.amazon.com/shop/influencer-1604f2b0'),
-      //     mode: LaunchMode.externalApplication);
+      launchUrl(Uri.parse('https://www.amazon.com/shop/influencer-1604f2b0'),
+          mode: LaunchMode.externalApplication);
       print(e);
     }
 
@@ -139,8 +139,8 @@ class BottomNavigationController extends GetxController {
         }
       }
     } catch (e) {
-      // launchUrl(Uri.parse('https://www.facebook.com/groups/209617206226617'),
-      //     mode: LaunchMode.externalApplication);
+      launchUrl(Uri.parse('https://www.facebook.com/groups/209617206226617'),
+          mode: LaunchMode.externalApplication);
       print(e);
     }
 

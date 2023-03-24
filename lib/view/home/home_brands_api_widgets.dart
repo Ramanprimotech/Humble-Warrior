@@ -84,7 +84,9 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
       scrollDirection: Axis.horizontal,
       itemCount: 10,
       itemBuilder: (ctx, index) {
-        return CustomShimmer.rectangular(width: width, height: height);
+        return
+          // Container();
+          CustomShimmer.rectangular(width: width, height: height);
       },
       separatorBuilder: (BuildContext context, int index) {
         return separatorHeight.swb;
