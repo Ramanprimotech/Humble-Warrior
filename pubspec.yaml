@@ -31,14 +31,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-#  authentication:
-#    git:
-#      url: https://username@github.com/KiranPrimotech/authentication.git
-#      ref: master
   authentication:
     git:
-      url: https://github.com/Ramanprimotech/SocialAuth.git
+      url: https://username@github.com/KiranPrimotech/authentication.git
       ref: master
+#  authentication:
+#    git:
+#      url: https://github.com/Ramanprimotech/SocialAuth.git
+#      ref: master
 
 
   # The following adds the Cupertino Icons font to your application.
