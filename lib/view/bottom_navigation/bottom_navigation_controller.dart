@@ -71,7 +71,7 @@ class BottomNavigationController extends GetxController {
           'com.amazon.mobile.shopping://www.amazon.com/shop/influencer-1604f2b0'; // or add your URL here
       final Uri uri = Uri.parse(url);
       if (!await launchUrl(uri,
-          mode: LaunchMode.externalApplication)) {
+          mode: LaunchMode.externalNonBrowserApplication)) {
         // throw Exception('Could not launch $uri');
 
         if (!await launchUrl(
