@@ -16,10 +16,13 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
         titleSpacing: 5,
         leadingWidth: 35,
         centerTitle: false,
-        title: const SearchBar(),
+        title: Obx(
+          () => SearchBar(
+            postType: controller.postType(controller.selectedIndex.value),
+          ),
+        ),
         leading: AppIcons.IosBackIcon(),
-        bottom:
-        PreferredSize(
+        bottom: PreferredSize(
           preferredSize: const Size.fromHeight(40),
           child: TabBar(
               padding: 0.pt,

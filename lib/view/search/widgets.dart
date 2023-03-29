@@ -1,12 +1,14 @@
 import 'package:humble_warrior/hw.dart';
 
 class SearchBar extends StatelessWidget {
-  const SearchBar({Key? key, this.child, this.margin, this.padding})
+  const SearchBar(
+      {Key? key, this.child, this.margin, this.padding, this.postType})
       : super(key: key);
 
   final Widget? child;
   final EdgeInsets? margin;
   final EdgeInsets? padding;
+  final String? postType;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,8 @@ class SearchBar extends StatelessWidget {
             ),
       ),
       onTap: () {
-        Get.toNamed(AppRoutes.searchView);
+        Get.toNamed(AppRoutes.searchView,
+            arguments: postType.isEmptyOrNull ? [""] : [postType.toString()]);
       },
     );
   }
