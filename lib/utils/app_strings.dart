@@ -47,7 +47,7 @@ const String viewAllTxt = "VIEW ALL";
 // const String reebokTxt = "Reebok";
 // const String gucciTxt = "Gucci";
 const String donnaDailyDealTxt = "Donna's Daily Deals";
-const String donnaFavouriteDealTxt = "Donna's Favourite Deals";
+const String donnaFavouriteDealTxt = "Donna's Favourite Things";
 const String donnaFrontPageDealTxt = "Front Page Deals";
 
 // const String brandLink = "https://humblewarrior.com/";

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/main.dart';
 import 'package:humble_warrior/network/api_call.dart';
 
 class LoginController extends GetxController {
@@ -109,6 +110,7 @@ class LoginController extends GetxController {
 
   ///-----------------------Save User Info to Local Storage--------------------------///
   Future<void> saveUserToLocalStorage() async {
+    isLoggedIn =
     await SharePreferenceData.addBoolToSF(spIsLogged, true);
     await SharePreferenceData.addStringToSF(userEmail, "${user?.email}");
     await SharePreferenceData.addStringToSF(

@@ -1,5 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/main.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/utils/sizes/sizes_config.dart';
 
@@ -152,9 +153,20 @@ class Heart extends StatefulWidget {
 }
 
 class _HeartState extends State<Heart> {
+
   @override
   void initState() {
+
+
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    setState(() {
+
+    });
+    super.didChangeDependencies();
   }
 
   @override
@@ -163,6 +175,7 @@ class _HeartState extends State<Heart> {
     Box<ProductDetailsResponse> box = service.box;
     // List<dynamic> keys = service.findKey(widget.item.id.toString());
     // print(keys);
+
     return ValueListenableBuilder(
       valueListenable: box.listenable(),
       builder: (context, box, child) {
@@ -187,7 +200,7 @@ class _HeartState extends State<Heart> {
           },
           child: Icon(
             Icons.favorite_outlined,
-            color: service.hasItem(widget.item.id.toString())
+            color:isLoggedIn && service.hasItem(widget.item.id.toString())
                 ? Colors.red
                 : widget.color,
             size: widget.size ?? Dimens.largeIcon,

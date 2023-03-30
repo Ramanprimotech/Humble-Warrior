@@ -139,6 +139,7 @@ Widget donnaDealsButton(
                         details.shopUrl == null)
                     ? 0.shb
                     : shopButton(
+                  context: context,
                         url: "${details.shopUrl}", title: details.itemName!),
               ),
               !(details.couponCode == null || details.couponCode == "")
@@ -161,7 +162,7 @@ Widget donnaDealsButton(
                         key: Key(index.toString()),
                       ),
                     ),
-                    shareButton(shareUrl: details.linkUrl, color: color),
+                    shareButton(shareUrl: details.linkUrl, color: color, context: context),
                   ],
                 )
               : Row(
@@ -178,7 +179,7 @@ Widget donnaDealsButton(
                         key: Key(index.toString()),
                       ),
                     ),
-                    shareButton(shareUrl: details.linkUrl, color: color),
+                    shareButton(shareUrl: details.linkUrl, color: color, context: context),
                   ],
                 ).px8(),
         ],

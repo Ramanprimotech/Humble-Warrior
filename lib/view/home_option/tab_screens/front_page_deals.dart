@@ -167,6 +167,7 @@ Widget frontPageButton(
       shareButton(
         shareUrl: details.linkUrl,
         color: color,
+        context: context,
       ),
       // IconButton(
       //   onPressed: () {},
@@ -224,6 +225,7 @@ Widget frontPageOptionsButton(
       shareButton(
         shareUrl: "shareUrl",
         color: color,
+        context: context,
       ),
       IconButton(
         onPressed: () {

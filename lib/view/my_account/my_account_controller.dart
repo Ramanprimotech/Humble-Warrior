@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -70,6 +71,7 @@ class MyAccountController extends GetxController {
     BottomNavigationController controller = Get.find();
     await FirebaseAuth.instance.signOut().then((value) async {
       await SharePreferenceData.clear();
+      isLoggedIn = false;
       await SharePreferenceData.addBoolToSF(spIsEntered, false);
       controller.selectedIndex = 0;
       Get.offAllNamed(AppRoutes.loginPage);

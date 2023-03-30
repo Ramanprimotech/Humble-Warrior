@@ -33,7 +33,8 @@ class WishList extends StatelessWidget {
             Expanded(
               child: Obx(
                 () => Center(
-                    child: controller.loggedIn.value == false
+                    child:
+                    controller.loggedIn.value == false
                         ? loginFirst(context)
                         : CustomRefreshIndicator(
                             onRefresh: () async {
