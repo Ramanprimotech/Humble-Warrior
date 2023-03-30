@@ -1,4 +1,5 @@
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/view/filter/filter_ui.dart';
 import 'package:humble_warrior/view/my_account/account_details/account_details_binding.dart';
 import 'package:humble_warrior/view/my_account/account_details/account_details_screen.dart';
 import 'package:humble_warrior/view/productDetail/category_details_list/category_details_list_binding.dart';
@@ -126,6 +127,13 @@ class AppPages {
           _bottomNavigationController.isNavigated = true;
           return const SearchView();
         },
-        binding: SearchViewBindings())
+        binding: SearchViewBindings()),
+    GetPage(
+      name: AppRoutes.filterView,
+      page: () {
+        _bottomNavigationController.isNavigated = true;
+        return FilterScreen();
+      },
+    )
   ];
 }

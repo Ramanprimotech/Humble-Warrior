@@ -154,14 +154,17 @@ class SearchPosts {
   String? itemName;
   String? postType;
   String? url;
+  String? categoryName;
 
-  SearchPosts({this.id, this.itemName, this.postType, this.url});
+  SearchPosts(
+      {this.id, this.itemName, this.postType, this.url, this.categoryName});
 
   SearchPosts.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     itemName = json['item_name'];
     postType = json['post_type'];
     url = json['url'];
+    categoryName = json['category_name'];
   }
 
   Map<String, dynamic> toJson() {
@@ -170,6 +173,7 @@ class SearchPosts {
     data['item_name'] = this.itemName;
     data['post_type'] = this.postType;
     data['url'] = this.url;
+    data['category_name'] = this.categoryName;
     return data;
   }
 }

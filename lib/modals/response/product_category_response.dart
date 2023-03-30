@@ -47,4 +47,22 @@ class ProductCategoryItem {
     data['id'] = this.id;
     return data;
   }
+
+  @override
+  String toString() {
+    return 'ProductCategoryItem{categoryName: $categoryName, categoryImage: $categoryImage, id: $id}';
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ProductCategoryItem &&
+          runtimeType == other.runtimeType &&
+          categoryName == other.categoryName &&
+          categoryImage == other.categoryImage &&
+          id == other.id;
+
+  @override
+  int get hashCode =>
+      categoryName.hashCode ^ categoryImage.hashCode ^ id.hashCode;
 }

@@ -16,6 +16,7 @@ class _SearchViewState extends State<SearchView> {
   TextEditingController controller = TextEditingController();
   FocusNode focusNode = FocusNode();
   String postType = Get.arguments[0];
+  List<int> selectedCategories = [];
 
   @override
   Widget build(BuildContext context) {
@@ -65,13 +66,17 @@ class _SearchViewState extends State<SearchView> {
               prefixIcon: GestureDetector(
                 // padding: 4.pl,
                 onTap: () {
-                  if (controller.text.length >= 3) {
-                    hiveService.addToRecentList(
-                        RecentSearch(productSearched: controller.text));
-                    setState(() {});
+                  if (selectedCategories.isEmpty) {
+                    if (controller.text.length >= 3) {
+                      hiveService.addToRecentList(
+                          RecentSearch(productSearched: controller.text));
+                      setState(() {});
+                    } else {
+                      focusNode.unfocus();
+                      DialogHelper.showToast(context, enterThreeTxt);
+                    }
                   } else {
-                    focusNode.unfocus();
-                    DialogHelper.showToast(context, enterThreeTxt);
+                    setState(() {});
                   }
                 },
                 child: Icon(Icons.search,
@@ -96,12 +101,28 @@ class _SearchViewState extends State<SearchView> {
         ),
         leading: AppIcons.IosBackIcon(),
         actions: [
-          IconButton(
-              padding: 16.pr,
-              onPressed: () {
-                // Get.toNamed(AppRoutes.sortPages);
-              },
-              icon: AppIcons.filter(size: 35))
+          Badge(
+            alignment: const AlignmentDirectional(20.0, 3.0),
+            label: AppText(
+              "${selectedCategories.length}",
+              fontSize: 10,
+              color: Colors.white,
+            ),
+            child: IconButton(
+                padding: 16.pr,
+                onPressed: () async {
+                  var data = await Get.toNamed(AppRoutes.filterView);
+                  if (data != null) {
+                    List<int> values = [];
+                    data.forEach((e) => values.add(e.id!));
+                    selectedCategories.clear();
+                    selectedCategories.addAll(values);
+
+                    setState(() {});
+                  }
+                },
+                icon: AppIcons.filter(size: 35)),
+          )
         ],
       ),
       body:
@@ -227,10 +248,10 @@ class _SearchViewState extends State<SearchView> {
             // 16.shb,
             Expanded(
               child: FutureBuilder<List<SearchPosts>>(
-                future:
-                    FetchSearchList().productDetails(controller.text, postType),
+                future: FetchSearchList().productDetails(
+                    controller.text, postType, selectedCategories),
                 builder: (ctx, snapshot) {
-                  if (controller.text.isEmpty) {
+                  if (controller.text.isEmpty && selectedCategories.isEmpty) {
                     return ValueListenableBuilder(
                         valueListenable: box.listenable(),
                         builder: (context, value, child) {
@@ -345,40 +366,59 @@ class _SearchViewState extends State<SearchView> {
                             decoration:
                                 CustomBoxDecorations().shadow(context: context),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      AppText(
-                                        snapshot.data![index].itemName
-                                            .toString(),
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 16,
-                                      ),
-                                      // AppText(
-                                      //   snapshot.data![index].
-                                      //       .toString(),
-                                      //   fontSize: 14,
-                                      //   maxLines: 2,
-                                      // ),
-                                    ],
-                                  ).paddingSymmetric(
-                                      horizontal: 8, vertical: 4),
-                                ),
                                 ClipRRect(
                                   borderRadius: const BorderRadius.only(
-                                      topRight: Radius.circular(10),
-                                      bottomRight: Radius.circular(10)),
+                                      topLeft: Radius.circular(10),
+                                      bottomLeft: Radius.circular(10)),
                                   child: CommonWidgets.networkImage(
                                       height: 80,
                                       width: Get.width * .3,
                                       imageUrl:
                                           snapshot.data![index].url.toString(),
                                       fit: BoxFit.cover),
+                                ),
+                                SizedBox(
+                                  height: 80,
+                                  width: Get.width * .7 - 40,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12, vertical: 3),
+                                        decoration: BoxDecoration(
+                                            color: AppColors.primary,
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              bottomRight: Radius.circular(10),
+                                            )),
+                                        child: AppText(
+                                          snapshot.data![index].categoryName!
+                                              .toUpperCase(),
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: Get.width * .7 - 40,
+                                        child: AppText(
+                                          snapshot.data![index].itemName
+                                              .toString(),
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14,
+                                          maxLines: 2,
+                                        ).paddingSymmetric(
+                                            horizontal: 8, vertical: 4),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),

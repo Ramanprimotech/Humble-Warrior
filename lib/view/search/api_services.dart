@@ -34,11 +34,13 @@ class FetchSearchList {
 
   /// Product Details
 
-  Future<List<SearchPosts>> productDetails(String id, String postType) async {
+  Future<List<SearchPosts>> productDetails(
+      String id, String postType, List<int> searchCat) async {
     try {
       // IdModel payload = IdModel(id: id);
-      PaginationModel payload =
-          PaginationModel(search: id, page: "1", postType: postType);
+      PaginationModel payload = PaginationModel(
+          search: id, page: "1", postType: postType, catIds: searchCat);
+      payload.toString();
       var response =
           await APIManager().postAPICall(url: Endpoints.search, param: payload);
 

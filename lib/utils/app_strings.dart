@@ -57,6 +57,7 @@ const String donnaFrontPageDealTxt = "Front Page Deals";
 const String myAccountTxt = "MY ACCOUNT";
 const String accountDetailsTxt = "Account Details";
 const String notificationsTxt = "Notifications";
+const String filterTxt = "Filter";
 const String theHumbleWarriorTxt = "THE HUMBLE WARRIOR";
 const String aboutDonna = "About Donna";
 const String shareWithFriendsTxt = "Share with friends";

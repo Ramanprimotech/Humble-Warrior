@@ -5,6 +5,7 @@ class PaginationModel {
   String? sortOrder;
   String? search;
   String? postType;
+  List<int>? catIds;
 
   PaginationModel(
       {this.categoryId,
@@ -12,7 +13,8 @@ class PaginationModel {
       this.sortName,
       this.sortOrder,
       this.search,
-      this.postType});
+      this.postType,
+      this.catIds});
 
   PaginationModel.fromJson(Map<String, dynamic> json) {
     categoryId = json['category_id'];
@@ -21,6 +23,7 @@ class PaginationModel {
     sortOrder = json['sortorder'];
     search = json['search'];
     postType = json['post_type'];
+    catIds = json['cat_ids'].cast<int>();
   }
 
   Map<String, dynamic> toJson() {
@@ -31,11 +34,12 @@ class PaginationModel {
     data['sortorder'] = this.sortOrder;
     data['search'] = this.search;
     data['post_type'] = this.postType;
+    data['cat_ids'] = this.catIds;
     return data;
   }
 
   @override
   String toString() {
-    return 'PaginationModel{categoryId: $categoryId, page: $page,search: $search, sortName: $sortName, sortOrder: $sortOrder , postType: $postType}';
+    return 'PaginationModel{categoryId: $categoryId, page: $page,search: $search, sortName: $sortName, sortOrder: $sortOrder , postType: $postType, catIDs : $catIds}';
   }
 }
