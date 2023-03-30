@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>11517768711-972i9vlsus07hb0pq8ea1rfr3nfbsm7p.apps.googleusercontent.com</string>
+	<string>340829922874-r63ac8cku8jdtgd6epcpu6rfosaqa96r.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.11517768711-972i9vlsus07hb0pq8ea1rfr3nfbsm7p</string>
+	<string>com.googleusercontent.apps.340829922874-r63ac8cku8jdtgd6epcpu6rfosaqa96r</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>11517768711-l3vb1jrbek38h4tms9a3f7olp2vo9223.apps.googleusercontent.com</string>
+	<string>340829922874-ka1risobh4v7gs1kbgjhsl6oge2j7c2b.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCNlQikRE9QvcDMN1ZNtKFyQbctSPwH1M8</string>
+	<string>AIzaSyAfi551nKdVc8D1__iDiLIiy0exnBvvHpE</string>
 	<key>GCM_SENDER_ID</key>
-	<string>11517768711</string>
+	<string>340829922874</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.hw.int</string>
+	<string>com.humble.warrior</string>
 	<key>PROJECT_ID</key>
-	<string>humble-warrior-c70b5</string>
+	<string>hwapp-78661</string>
 	<key>STORAGE_BUCKET</key>
-	<string>humble-warrior-c70b5.appspot.com</string>
+	<string>hwapp-78661.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:11517768711:ios:4787a138004be0236e66a2</string>
+	<string>1:340829922874:ios:3c000c87aa1f844fec7703</string>
+	<key>DATABASE_URL</key>
+	<string>https://hwapp-78661-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

@@ -67,10 +67,10 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
       itemCount: 20,
       itemBuilder: (ctx, index) {
         return Card(
-          elevation: 8,
+          elevation: 5,
           margin: 8.pa,
           color: Colors.grey.shade200,
-          child: const CustomShimmer.rectangular(),
+          child: const CustomShimmer.rectangular(borderRadius: 10),
         );
       },
     );

@@ -58,13 +58,16 @@ class CategoryListDetails extends StatelessWidget {
                     if (controller.categoryList.isEmpty &&
                         controller.categoryListBool.value == true) {
                       return Center(
-                          child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const CircularProgressIndicator(),
-                          CommonWidgets.loading(),
-                        ],
-                      ));
+                          child: ListView.separated(
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (ctx, index){
+                              return const  CustomShimmer.rectangular(height: 290,borderRadius: 15,
+                                margin: EdgeInsets.symmetric(horizontal: 15),
+                              );
+                            },
+                            itemCount: 10, separatorBuilder: (BuildContext context, int index) {
+                            return 18.shb;
+                          },));
                     }
                     if (controller.categoryList.isEmpty &&
                         controller.categoryListBool.value == false) {
@@ -95,7 +98,7 @@ class CategoryListDetails extends StatelessWidget {
                                 cardText: details.itemName,
                                 details: details,
                                 onTap: () {
-                                  Get.toNamed(AppRoutes.dailyDealProductDetail,
+                                  Get.toNamed(AppRoutes.frontPageProductDetail,
                                       arguments: [details]);
                                 },
                               )

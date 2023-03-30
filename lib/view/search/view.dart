@@ -1,9 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/modals/hive_modal/recent_search_model.dart';
-import 'package:humble_warrior/view/search/api_services.dart';
-import 'package:humble_warrior/view/search/model.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
@@ -32,13 +29,13 @@ class _SearchViewState extends State<SearchView> {
               focusNode: focusNode,
               controller: controller,
               onFieldSubmitted: (value) {
-                if (value.length >= 3) {
-                  hiveService.addToRecentList(
-                      RecentSearch(productSearched: controller.text));
-                  setState(() {});
-                } else {
-                  DialogHelper.showToast(context, enterThreeTxt);
-                }
+                // if (value.length >= 3) {
+                //   hiveService.addToRecentList(
+                //       RecentSearch(productSearched: controller.text));
+                //   setState(() {});
+                // } else {
+                //   DialogHelper.showToast(context, enterThreeTxt);
+                // }
               },
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10.0).r,
@@ -64,14 +61,14 @@ class _SearchViewState extends State<SearchView> {
                 prefixIcon: GestureDetector(
                   // padding: 4.pl,
                   onTap: () {
-                    if (controller.text.length >= 3) {
-                      hiveService.addToRecentList(
-                          RecentSearch(productSearched: controller.text));
-                      setState(() {});
-                    } else {
-                      focusNode.unfocus();
-                      DialogHelper.showToast(context, enterThreeTxt);
-                    }
+                    // if (controller.text.length >= 3) {
+                    //   hiveService.addToRecentList(
+                    //       RecentSearch(productSearched: controller.text));
+                    //   setState(() {});
+                    // } else {
+                    //   focusNode.unfocus();
+                    //   DialogHelper.showToast(context, enterThreeTxt);
+                    // }
                   },
                   child: Icon(Icons.search,
                       color: Theme.of(context).textTheme.displayMedium!.color,
@@ -108,7 +105,7 @@ class _SearchViewState extends State<SearchView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
-            children:  [
+            children: [
               const AppText(
                 "Coming Soon...",
                 fontWeight: FontWeight.bold,

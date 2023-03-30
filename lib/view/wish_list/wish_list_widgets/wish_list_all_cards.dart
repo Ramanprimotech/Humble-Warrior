@@ -25,9 +25,12 @@ class WishListCards implements DonnaOptions {
     ProductDetailsResponse donnaDealsDetails = details;
     // return donnaDealsCard(donnaDealsDetails, 0, context);
     return WishListCard(
+      details: details,
       onTap: onTap.donnaDeals,
       imageUrl: donnaDealsDetails.url!,
-      title: donnaDealsDetails.ribbonName!=null ? donnaDealsDetails.ribbonName!:donnaDealsDetails.itemName!,
+      title: donnaDealsDetails.ribbonName != null
+          ? donnaDealsDetails.ribbonName!
+          : donnaDealsDetails.itemName!,
       buttons: wishListButton.donnaDeals(),
       deal: donnaDailyDealTxt,
     );
@@ -38,11 +41,13 @@ class WishListCards implements DonnaOptions {
     ProductDetailsResponse donnaFavouriteDetails = details;
     // return /favouritePageCard();
     return WishListCard(
+      details: details,
       onTap: onTap.donnaFavourite,
       deal: donnaFrontPageDealTxt,
       imageUrl: donnaFavouriteDetails.url!,
-      title: donnaFavouriteDetails.ribbonName != null ? donnaFavouriteDetails
-          .ribbonName! : donnaFavouriteDetails.itemName!,
+      title: donnaFavouriteDetails.ribbonName != null
+          ? donnaFavouriteDetails.ribbonName!
+          : donnaFavouriteDetails.itemName!,
       buttons: wishListButton.donnaFavourite(),
     );
   }
@@ -52,11 +57,13 @@ class WishListCards implements DonnaOptions {
     ProductDetailsResponse frontPageDetails = details;
     // return frontPageCard(details, index, context);
     return WishListCard(
+      details: details,
       onTap: onTap.frontPage,
       deal: donnaFrontPageDealTxt,
       imageUrl: frontPageDetails.url!,
-      title: frontPageDetails.ribbonName != null ? frontPageDetails
-          .ribbonName! : frontPageDetails.itemName!,
+      title: frontPageDetails.ribbonName != null
+          ? frontPageDetails.ribbonName!
+          : frontPageDetails.itemName!,
       buttons: wishListButton.frontPage(),
     );
   }

@@ -131,7 +131,6 @@ class AppIcons {
 
   static Icon bookmarks({Color iconColor = Colors.black}) =>
       Icon(Icons.bookmarks, color: iconColor);
-
 }
 
 class Heart extends StatefulWidget {
@@ -162,8 +161,10 @@ class _HeartState extends State<Heart> {
   Widget build(BuildContext context) {
     HiveService service = Get.find<HiveService>();
     Box<ProductDetailsResponse> box = service.box;
+    // List<dynamic> keys = service.findKey(widget.item.id.toString());
+    // print(keys);
     return ValueListenableBuilder(
-      valueListenable: box.listenable(keys: [widget.item.id.toString()]),
+      valueListenable: box.listenable(),
       builder: (context, box, child) {
         return GestureDetector(
           key: widget.key,

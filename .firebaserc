@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "hwapp-78661"
-  }
+    "default": "hwapp-78661",
+    " ": "humble-warrior-c70b5",
+    "humble-warrior": "humble-warrior-c70b5"
+  },
+  "targets": {},
+  "etags": {}
 }

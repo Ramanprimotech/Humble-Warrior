@@ -22,13 +22,16 @@ class DonnaDailyDeals extends StatelessWidget {
           if (controller.donnaDealList.isEmpty &&
               controller.donnaDealsBool.value == true) {
             return Center(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CircularProgressIndicator(),
-                CommonWidgets.loading(),
-              ],
-            ));
+                child: ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (ctx, index){
+                  return const  CustomShimmer.rectangular(height: 290,borderRadius: 15,
+                  margin: EdgeInsets.symmetric(horizontal: 15),
+                  );
+                },
+                  itemCount: 10, separatorBuilder: (BuildContext context, int index) {
+                    return 18.shb;
+                  },));
           }
           if (controller.donnaDealList.isEmpty &&
               controller.donnaDealsBool.value == false) {
@@ -69,7 +72,8 @@ class DonnaDailyDeals extends StatelessWidget {
                           child: Container(
                               height: 80,
                               alignment: Alignment.center,
-                              child: const CircularProgressIndicator())),
+                              child: const CircularProgressIndicator()),
+                      ),
                     );
             },
             separatorBuilder: (BuildContext context, int index) {
@@ -129,7 +133,7 @@ Widget donnaDealsButton(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: 8.pl,
+                padding: 8.ph,
                 child: (details.shopUrl == "" ||
                         details.shopUrl == "null" ||
                         details.shopUrl == null)
@@ -163,7 +167,6 @@ Widget donnaDealsButton(
               : Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    shareButton(shareUrl: details.linkUrl, color: color),
                     IconButton(
                       onPressed: () {
                         // controller.select.value = !controller.select.value;
@@ -175,8 +178,9 @@ Widget donnaDealsButton(
                         key: Key(index.toString()),
                       ),
                     ),
+                    shareButton(shareUrl: details.linkUrl, color: color),
                   ],
-                ),
+                ).px8(),
         ],
       ),
     ],

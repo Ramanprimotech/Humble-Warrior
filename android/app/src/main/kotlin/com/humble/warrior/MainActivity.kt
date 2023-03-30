@@ -1,4 +1,4 @@
-package com.example.humble_warrior
+package com.humble.warrior
 
 import io.flutter.embedding.android.FlutterActivity
 

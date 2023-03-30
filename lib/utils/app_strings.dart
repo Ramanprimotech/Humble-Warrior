@@ -77,7 +77,7 @@ const String readMoreTxt = "read more";
 const String readLessTxt = "read less";
 const String seeCopyHumbleTxt = "See a copy of The Humble Warrior's";
 const String hereTxt = "here";
-const String aboutDonnaTxt = "ABOUT DONNA";
+const String aboutDonnaTxt = "About Donna";
 
 /*===================================================On Boarding Page strings========================================================*/
 
@@ -136,3 +136,5 @@ const String CS = "Coming Soon...";
 const String enterThreeTxt = "Enter at least three characters";
 const String noDealsTxt = "No Deals found";
 const String resetTxt = 'Reset';
+const String addToWishlistTxt = 'Add to Wishlist';
+const String shareTxt = 'Share';

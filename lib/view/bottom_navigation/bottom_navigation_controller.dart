@@ -70,8 +70,15 @@ class BottomNavigationController extends GetxController {
       const url =
           'com.amazon.mobile.shopping://www.amazon.com/shop/influencer-1604f2b0'; // or add your URL here
       final Uri uri = Uri.parse(url);
-      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-        throw Exception('Could not launch $uri');
+      if (!await launchUrl(uri,
+          mode: LaunchMode.externalNonBrowserApplication)) {
+        // throw Exception('Could not launch $uri');
+
+        if (!await launchUrl(
+            Uri.parse('https://www.amazon.com/shop/influencer-1604f2b0'),
+            mode: LaunchMode.externalApplication)) {
+          throw Exception('Could not launch $uri');
+        }
       }
     } catch (e) {
       launchUrl(Uri.parse('https://www.amazon.com/shop/influencer-1604f2b0'),
@@ -122,8 +129,14 @@ class BottomNavigationController extends GetxController {
         "fb://facewebmodal/f?href=https://www.facebook.com/groups/209617206226617";
     try {
       final Uri uri = Uri.parse(url);
-      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-        throw Exception('Could not launch $uri');
+      if (!await launchUrl(uri,
+          mode: LaunchMode.externalNonBrowserApplication)) {
+        // throw Exception('Could not launch $uri');
+        if (!await launchUrl(
+            Uri.parse('https://www.facebook.com/groups/209617206226617'),
+            mode: LaunchMode.externalApplication)) {
+          throw Exception('Could not launch $uri');
+        }
       }
     } catch (e) {
       launchUrl(Uri.parse('https://www.facebook.com/groups/209617206226617'),

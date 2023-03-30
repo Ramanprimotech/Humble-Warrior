@@ -74,16 +74,23 @@ class HomeScreenWidgets {
                           color: imageIconTheme.backGroundColor,
                         );
                       }
-                      return Badge(
-                          textColor: Colors.white,
-                          label: AppText("$notificationCount", fontSize: 8),
-                          alignment: const AlignmentDirectional(15.0, -3.0),
-                          child: Image.asset(
-                            ImagePathAssets.bellIcon,
-                            height: 28,
-                            fit: BoxFit.fitHeight,
-                            color: imageIconTheme.backGroundColor,
-                          ));
+                      return notificationCount == 0
+                          ? Image.asset(
+                              ImagePathAssets.bellIcon,
+                              height: 28,
+                              fit: BoxFit.fitHeight,
+                              color: imageIconTheme.backGroundColor,
+                            )
+                          : Badge(
+                              textColor: Colors.white,
+                              label: AppText("$notificationCount", fontSize: 8),
+                              alignment: const AlignmentDirectional(15.0, -3.0),
+                              child: Image.asset(
+                                ImagePathAssets.bellIcon,
+                                height: 28,
+                                fit: BoxFit.fitHeight,
+                                color: imageIconTheme.backGroundColor,
+                              ));
                     });
               },
             ),

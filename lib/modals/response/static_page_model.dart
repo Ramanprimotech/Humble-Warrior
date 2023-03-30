@@ -1,4 +1,3 @@
-
 class StaticPagesResponse {
   bool? status;
   List<StaticData>? data;
@@ -31,6 +30,8 @@ class StaticPagesResponse {
 class StaticData {
   String? pageTitle;
   String? pageContent;
+  String? page_bottom_image;
+  String? page_less_content;
   dynamic pageImage;
 
   StaticData({this.pageTitle, this.pageContent, this.pageImage});
@@ -38,6 +39,9 @@ class StaticData {
   StaticData.fromJson(Map<String, dynamic> json) {
     pageTitle = json['page_title'];
     pageContent = json['page_content'];
+    pageContent = json['page_content'];
+    page_bottom_image = json['page_bottom_image'];
+    page_less_content = json['page_less_content'];
     pageImage = json['page_image'];
   }
 
@@ -46,15 +50,11 @@ class StaticData {
     data['page_title'] = this.pageTitle;
     data['page_content'] = this.pageContent;
     data['page_image'] = this.pageImage;
+    data['page_bottom_image'] = this.page_bottom_image;
+    data['page_less_content'] = this.page_less_content;
     return data;
   }
 }
-
-
-
-
-
-
 
 /*class StaticPagesResponse {
   bool? status;

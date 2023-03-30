@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/utils/common/photo_viewer.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
-import 'package:humble_warrior/view/home_option/common_home_option.dart';
-import 'package:humble_warrior/view/home_option/tab_screens/donnas_deals.dart';
 import 'package:humble_warrior/view/wish_list/wish_list_widgets/wish_list_all_cards.dart';
+
+import '../../productDetail/category_details_list/card.dart';
 
 class WishListCardSelector extends StatelessWidget {
   final int index;
@@ -41,26 +41,68 @@ class WishListCardSelector extends StatelessWidget {
   }
 }
 
-ItemCard categoryListWishListCard(
+Widget categoryListWishListCard(
     ProductDetailsResponse details, int index, BuildContext context,
     {bool? categoryCard = false, bool isDetails = false}) {
-  return ItemCard(
-    onTap: () {
-      if (isDetails) {
-        if (details.url != "" || details.url != null) {
-          Get.to(CustomPhotoViewer(url: details.url!));
-        }
-      } else {
-        Get.toNamed(AppRoutes.categoryItemDetail, arguments: [details]);
-      }
-    },
-    imageHeight: 180,
-    radius: 10,
-    buttons:
-        donnaDealsButton(details, index, context, categoryCard: categoryCard),
-    imageUrl: details.url!,
-    title: "",
-    effect: false,
-    buttonbarHeight: categoryCard == true ? 85 : 50,
+  return Stack(
+    children: [
+      CardView(
+        cardText: details.ribbonName ?? details.itemName,
+        imageText: true,
+        imgUrl: details.url!,
+        title: details.ribbonName != null
+            ? details.ribbonName!
+            : details.itemName.toString(),
+        onTap: () {
+          if (isDetails) {
+            if (details.url != "" || details.url != null) {
+              Get.to(CustomPhotoViewer(url: details.url!));
+            }
+          } else {
+            Get.toNamed(AppRoutes.frontPageProductDetail, arguments: [details]);
+          }
+        },
+        details: details,
+      ),
+      // Positioned(
+      //   top: 0,
+      //   left: 0,
+      //   child: Container(
+      //     padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 4),
+      //     decoration: BoxDecoration(
+      //         color: AppColors.primary,
+      //         borderRadius: const BorderRadius.only(
+      //           // bottomLeft: Radius.circular(5),
+      //           bottomRight: Radius.circular(10),
+      //         )),
+      //     child: AppText(
+      //       deal.toUpperCase(),
+      //       fontWeight: FontWeight.bold,
+      //       color: Colors.white,
+      //       fontSize: 14,
+      //     ),
+      //   ),
+      // )
+    ],
   );
+
+  //   ItemCard(
+  //   onTap: () {
+  //     if (isDetails) {
+  //       if (details.url != "" || details.url != null) {
+  //         Get.to(CustomPhotoViewer(url: details.url!));
+  //       }
+  //     } else {
+  //       Get.toNamed(AppRoutes.frontPageProductDetail, arguments: [details]);
+  //     }
+  //   },
+  //   imageHeight: 180,
+  //   radius: 10,
+  //   buttons:
+  //       donnaDealsButton(details, index, context, categoryCard: categoryCard),
+  //   imageUrl: details.url!,
+  //   title: "",
+  //   effect: false,
+  //   buttonbarHeight: categoryCard == true ? 85 : 50,
+  // );
 }

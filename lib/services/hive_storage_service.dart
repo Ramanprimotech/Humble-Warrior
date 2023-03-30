@@ -16,7 +16,10 @@ class HiveService extends GetxController {
   }
 
   deleteItem(String id) {
-    box.delete(id);
+    List key = findKey(id);
+    for (var element in key) {
+      box.delete(element);
+    }
   }
 
   getWishList() {
@@ -25,11 +28,23 @@ class HiveService extends GetxController {
   }
 
   addToWishList(ProductDetailsResponse item) {
-    box.put(item.id.toString(), item);
+    // box.put(item.id.toString(), item);
+    box.add(item);
+  }
+
+  findKey(String id) {
+    List<dynamic> key = box.keys
+        .where((element) => box.get(element)!.id.toString() == id)
+        .toList();
+
+    return key;
   }
 
   hasItem(String id) {
-    bool isIt = box.containsKey(id);
+    int listLength = box.values.where((element) {
+      return element.id.toString() == id.toString();
+    }).length;
+    bool isIt = listLength != 0;
     return isIt;
   }
 

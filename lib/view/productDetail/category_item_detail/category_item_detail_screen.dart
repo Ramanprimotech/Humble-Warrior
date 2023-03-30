@@ -1,7 +1,8 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
+import 'package:humble_warrior/utils/common/html.dart';
 import 'package:humble_warrior/view/productDetail/product_detail_controller.dart';
-import 'package:simple_html_css/simple_html_css.dart';
+// import 'package:simple_html_css/simple_html_css.dart';
 
 class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
   CategoryItemDetail({Key? key}) : super(key: key);
@@ -74,7 +75,8 @@ class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
                                 categoryCard: false, isDetails: true),
                           ),
                           productTitleDetail(context, data.itemName),
-                          productDesc(data.productDescription,context: context),
+                          productDesc(data.productDescription,
+                              context: context),
                         ],
                       ),
                     ),
@@ -102,13 +104,12 @@ class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
   }
 
   /// Product Description
-  Widget productDesc(String? dis,{required BuildContext context}) {
+  Widget productDesc(String? dis, {required BuildContext context}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       width: MediaQuery.of(Get.context!).size.width * .9,
-      child:
-    HTML.toRichText(context, dis!),
-     /* AppText(
+      child: HtmlData().htmlString(context, dis!),
+      /* AppText(
         dis ?? "",
         fontSize: 16,
         maxLines: 150,

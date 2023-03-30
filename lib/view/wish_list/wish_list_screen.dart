@@ -11,6 +11,7 @@ class WishList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WishListController controller = Get.find();
+    AppBarTheme statusBarColor = AppBarTheme();
     return Scaffold(
       appBar: AppBar(
         title: const SearchBar(),
@@ -85,11 +86,13 @@ class WishList extends StatelessWidget {
                                       ),
                                     )
                                   : ListView.separated(
+                                      padding: 20.pb,
                                       itemCount: controller.data.value.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         ProductDetailsResponse details =
-                                            controller.data.value[index];
+                                            controller.data.value.reversed
+                                                .toList()[index];
                                         return Padding(
                                           padding: const EdgeInsets.only(
                                             left: 20,

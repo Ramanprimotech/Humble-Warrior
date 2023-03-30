@@ -17,7 +17,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
     return Expanded(
       child: CommonWidgets.errorAPI(
           buttonTitle: retryTxt,
-          errorText: error.toString(),
+          errorText: somethingWentWrongTxt.toString(),
           context: context,
           onPress: () => controller.update([Endpoints.homeCategories])),
     );

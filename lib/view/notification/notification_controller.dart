@@ -76,16 +76,18 @@ class NotificationController extends GetxController {
     String category = cat.toString().toUpperCase();
     ProductDetailsResponse productDetailsResponse =
         ProductDetailsResponse(id: id);
-    if (category == "Favourite Things") {
+    if (category == "Favourite Things".toUpperCase()) {
       Get.toNamed(AppRoutes.favouriteDeal, arguments: [productDetailsResponse]);
-    } else if (category == "Front Page Deals") {
+    } else if (category == "Front Page Deals".toUpperCase()) {
       Get.toNamed(AppRoutes.frontPageProductDetail,
+          arguments: [productDetailsResponse]);
+    } else if (category == "Donna Daily Deals".toUpperCase()) {
+      Get.toNamed(AppRoutes.dailyDealProductDetail,
           arguments: [productDetailsResponse]);
     } else {
       Get.toNamed(AppRoutes.dailyDealProductDetail,
           arguments: [productDetailsResponse]);
     }
-
     return await notificationStatus(id);
   }
 }

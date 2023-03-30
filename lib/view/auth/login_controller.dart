@@ -99,8 +99,8 @@ class LoginController extends GetxController {
         await SharePreferenceData.addBoolToSF(spIsEntered, true);
 
         /// Auth Data API
-        await authAPI();
-        Get.offAllNamed(AppRoutes.bottomNavigation);
+        await authAPI()
+            .whenComplete(() => Get.offAllNamed(AppRoutes.bottomNavigation));
       }
     };
     Function act = actions[action]!;

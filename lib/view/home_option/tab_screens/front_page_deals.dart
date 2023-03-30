@@ -23,13 +23,16 @@ class FrontPageDeals extends StatelessWidget {
           if (controller.frontPageDealList.isEmpty &&
               controller.frontPageDealsBool.value == true) {
             return Center(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CircularProgressIndicator(),
-                CommonWidgets.loading(),
-              ],
-            ));
+                child: ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (ctx, index){
+                    return const  CustomShimmer.rectangular(height: 290,borderRadius: 15,
+                      margin: EdgeInsets.symmetric(horizontal: 15),
+                    );
+                  },
+                  itemCount: 10, separatorBuilder: (BuildContext context, int index) {
+                  return 18.shb;
+                },));
           }
           if (controller.frontPageDealList.isEmpty &&
               controller.frontPageDealsBool.value == false) {
@@ -73,10 +76,12 @@ class FrontPageDeals extends StatelessWidget {
                       : Obx(
                           () => Visibility(
                               visible: controller.frontPageDealsBool.value,
-                              child: Container(
+                              child:
+                             Container(
                                   height: 80,
                                   alignment: Alignment.center,
-                                  child: const CircularProgressIndicator())),
+                                  child: const CircularProgressIndicator()),
+                          ),
                         ),
 
                   ///Do not remove code for future use Banner Ribbon
@@ -143,22 +148,11 @@ ItemCard frontPageCard(
 
 Widget frontPageButton(
     ProductDetailsResponse details, int index, BuildContext context) {
+  HiveService service = Get.find<HiveService>();
   Color color = Theme.of(context).textTheme.displayMedium!.color!;
   return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    mainAxisAlignment: MainAxisAlignment.end,
     children: [
-      shareButton(
-        shareUrl: details.linkUrl,
-        color: color,
-      ),
-      IconButton(
-        onPressed: () {},
-        icon: Image.asset(
-          color: color,
-          ImagePathAssets.commentIcon,
-          height: Dimens.mediumIcon,
-        ),
-      ),
       IconButton(
         onPressed: () {
           // controller.select.value = !controller.select.value;
@@ -170,8 +164,55 @@ Widget frontPageButton(
           color: color,
         ),
       ),
+      shareButton(
+        shareUrl: details.linkUrl,
+        color: color,
+      ),
+      // IconButton(
+      //   onPressed: () {},
+      //   icon: Image.asset(
+      //     color: color,
+      //     ImagePathAssets.commentIcon,
+      //     height: Dimens.mediumIcon,
+      //   ),
+      // ),
     ],
-  );
+  ).px8();
+    /*Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+            child: GestureDetector(
+              onTap: (){
+                service.favourite(item: details!);
+              },
+              child: iconWithText(
+                  title: 'Add to Wishlist',
+                  child: Heart(
+                    item: details!,
+                    id: details!.id.toString(),
+                    key: Key(index.toString()),
+                  )),
+            )),
+        Container(
+            width: 2,
+            height: 50,
+            color: Colors.black.withOpacity(.2)),
+        Expanded(
+          child:GestureDetector(
+            onTap: (){
+              CommonUtils().share(shareUrl: details!.linkUrl.toString());
+            },
+            child: iconWithText(
+              title: 'Share',
+              child: shareButton(
+                  shareUrl: details!.linkUrl, color: Colors.black),
+            ),
+          ),
+        ),
+      ],
+    ).px8();*/
 }
 
 Widget frontPageOptionsButton(

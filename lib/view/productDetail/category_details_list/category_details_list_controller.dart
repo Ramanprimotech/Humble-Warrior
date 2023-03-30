@@ -36,7 +36,7 @@ class CategoryDetailsListController extends GetxController {
             payload: paginationModel, url: Endpoints.productCategoriesItemList)
         .then((value) {
       if (value.data == null) {
-        DialogHelper.showToast(context, "No Deals Found");
+        DialogHelper.showToast(context, "No More Deals Found");
       } else {
         categoryListPage += 1;
         categoryList.addAll(value.data!);

@@ -18,25 +18,29 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
         centerTitle: false,
         title: const SearchBar(),
         leading: AppIcons.IosBackIcon(),
-        bottom: TabBar(
-            padding: 0.pt,
-            isScrollable: true,
-            controller: controller.tabController,
-            tabs: <Widget>[
-              AppText(
-                donnaDailyDealTxt.upperCamelCase,
-                fontSize: tabFontSize,
-              ),
-              AppText(donnaFrontPageDealTxt.upperCamelCase,
-                  fontSize: tabFontSize),
-              AppText(donnaFavouriteDealTxt.upperCamelCase,
-                  fontSize: tabFontSize),
-            ]),
+        bottom:
+        PreferredSize(
+          preferredSize: const Size.fromHeight(40),
+          child: TabBar(
+              padding: 0.pt,
+              isScrollable: true,
+              controller: controller.tabController,
+              tabs: <Widget>[
+                AppText(
+                  donnaDailyDealTxt.upperCamelCase,
+                  fontSize: tabFontSize,
+                ),
+                AppText(donnaFrontPageDealTxt.upperCamelCase,
+                    fontSize: tabFontSize),
+                AppText(donnaFavouriteDealTxt.upperCamelCase,
+                    fontSize: tabFontSize),
+              ]),
+        ),
         actions: [
           IconButton(
               padding: 16.pr,
               onPressed: () {
-                Get.toNamed(AppRoutes.sortPages);
+                // Get.toNamed(AppRoutes.sortPages);
               },
               icon: AppIcons.filter(size: 35))
         ],
