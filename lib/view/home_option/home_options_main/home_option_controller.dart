@@ -1,12 +1,8 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/filter_modal.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/network/endpoints.dart';
-import 'package:humble_warrior/services/hive_storage_service.dart';
-import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
 import 'package:humble_warrior/view/sorting/sort_controller.dart';
 
 import '../../../modals/requests/pagination_modal.dart';
@@ -209,5 +205,15 @@ class HomeOptionController extends GetxController
     donnaFavouriteDealScrollController.dispose();
     frontPageDealScrollController.dispose();
     super.onClose();
+  }
+
+  String postType(int position) {
+    Map<int, String> post = {
+      0: "deals",
+      1: "product",
+      2: "shopmycloset_product"
+    };
+
+    return post[position]!;
   }
 }
