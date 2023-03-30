@@ -28,6 +28,11 @@ class CardView extends StatelessWidget {
   final void Function()? onTap;
   final ProductDetailsResponse? details;
 
+  // void addFavourite() async{
+  //   HiveService service = Get.find<HiveService>();
+  //  await service.favourite(item: details!);
+  // }
+
   @override
   Widget build(BuildContext context) {
     HiveService service = Get.find<HiveService>();
@@ -193,6 +198,7 @@ class CardView extends StatelessWidget {
                     Padding(
                       padding: 8.pr,
                       child: shopButton(
+                        context: context,
                           url: "${details?.shopUrl}",
                           title: "${details?.itemName!}"),
                     ),
@@ -216,7 +222,7 @@ class CardView extends StatelessWidget {
                     ),
                   ),
                   8.swb,
-                  shareButton(shareUrl: details!.linkUrl, color: color),
+                  shareButton(shareUrl: details!.linkUrl, color: color,  context: context),
                 ],
               ),
             ),
@@ -231,21 +237,9 @@ class CardView extends StatelessWidget {
                 Expanded(
                   child: InkWell(
                     onTap: () async {
-                      bool value =
-                          await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
-                      if (value) {
-                        service.favourite(item: details!);
-                      } else {
-                        if (context.mounted) {
-                          DialogHelper.showConfirmationDialog(
-                              message: loginWishTxt,
-                              actionLabel: login,
-                              action: () {
-                                Get.toNamed(AppRoutes.loginPage);
-                              },
-                              context: context);
-                        }
-                      }
+                      await checkLoggedIn(() async {
+                        await service.favourite(item: details!);
+                      }, context);
                     },
                     child: iconWithText(
                         title: addToWishlistTxt,
@@ -262,13 +256,16 @@ class CardView extends StatelessWidget {
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                      CommonUtils()
-                          .share(shareUrl: details!.linkUrl.toString());
+                      checkLoggedIn( (){
+                        CommonUtils()
+                            .share(shareUrl: details!.linkUrl.toString());
+                      }, context);
+
                     },
                     child: iconWithText(
                       title: shareTxt,
                       child:
-                          shareButton(shareUrl: details!.linkUrl, color: color),
+                          shareButton(shareUrl: details!.linkUrl, color: color, context: context),
                     ),
                   ),
                 ),
@@ -277,6 +274,24 @@ class CardView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  static Future<void> checkLoggedIn(Function checkItem, BuildContext context) async {
+      bool value =
+        await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
+    if (value) {
+      checkItem();
+    } else {
+      if (context.mounted) {
+        DialogHelper.showConfirmationDialog(
+            message: loginWishTxt,
+            actionLabel: login,
+            action: () {
+              Get.toNamed(AppRoutes.loginPage);
+            },
+            context: context);
+      }
+    }
   }
 }
 

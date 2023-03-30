@@ -13,15 +13,18 @@ class BrandsScreen extends StatelessWidget {
         leadingWidth: 34,
         centerTitle: false,
         leading: AppIcons.IosBackIcon(),
-        title: const SearchBar(),
-        actions: [
-          IconButton(
-              padding: 16.pr,
-              onPressed: () {
-                // Get.toNamed(AppRoutes.sortPages);
-              },
-              icon: AppIcons.filter(size: 35))
-        ],
+        title: Padding(
+          padding: 15.pr,
+          child: const SearchBar(),
+        ),
+        // actions: [
+        //   IconButton(
+        //       padding: 16.pr,
+        //       onPressed: () {
+        //         // Get.toNamed(AppRoutes.sortPages);
+        //       },
+        //       icon: AppIcons.filter(size: 35))
+        // ],
       ),
       bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
