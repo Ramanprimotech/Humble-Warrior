@@ -90,7 +90,7 @@ class AppPages {
         name: AppRoutes.categoryDetailsList,
         page: () {
           _bottomNavigationController.isNavigated = true;
-          return CategoryListDetails();
+          return const CategoryListDetails();
         },
         binding: CategoryDetailsListBinding()),
     GetPage(

@@ -4,6 +4,7 @@ import '../../modals/response/product_category_response.dart';
 class FilterController extends GetxController {
   RxList record = <ProductCategoryItem>[].obs;
   RxBool selevtedVisibility = false.obs;
+  int? catID;
 
   ///----Scroll Controllers
   final ScrollController productScrollController =
@@ -43,6 +44,9 @@ class FilterController extends GetxController {
       record.value.add(item);
     }
 
+    if (record.value.length == 0) {
+      selevtedVisibility.value = false;
+    }
     update();
   }
 
@@ -53,6 +57,9 @@ class FilterController extends GetxController {
 
   void removeFromWish(ProductCategoryItem item) {
     record.value.remove(item);
+    if (record.value.length == 0) {
+      selevtedVisibility.value = false;
+    }
     update();
   }
 
@@ -62,13 +69,19 @@ class FilterController extends GetxController {
     super.onInit();
   }
 
-  void showCategories() {
-    selevtedVisibility.value = !selevtedVisibility.value;
-    update();
+  void showCategories(BuildContext context) {
+    FToast().init(context);
+    if (record.value.isEmpty) {
+      DialogHelper.showToast(context, "Please select at least one category");
+    } else {
+      selevtedVisibility.value = !selevtedVisibility.value;
+      update();
+    }
   }
 
   void resetList() {
     record.clear();
+    selevtedVisibility.value = false;
     update();
   }
 

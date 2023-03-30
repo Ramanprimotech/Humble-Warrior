@@ -2,6 +2,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/modals/hive_modal/recent_search_model.dart';
+import 'package:humble_warrior/modals/response/product_category_response.dart';
+import 'package:humble_warrior/view/filter/filter_controller.dart';
 import 'package:humble_warrior/view/search/api_services.dart';
 import 'package:humble_warrior/view/search/model.dart';
 
@@ -16,10 +18,25 @@ class _SearchViewState extends State<SearchView> {
   TextEditingController controller = TextEditingController();
   FocusNode focusNode = FocusNode();
   String postType = Get.arguments[0];
+  String catId = Get.arguments[1];
+  String name = Get.arguments[2];
+  String image = Get.arguments[3];
   List<int> selectedCategories = [];
 
   @override
   Widget build(BuildContext context) {
+    FilterController filterController = Get.find();
+    filterController.catID = catId == "" ? null : int.parse(catId);
+    if (filterController.catID != null) {
+      if (!filterController.record.contains(ProductCategoryItem(
+          id: int.parse(catId), categoryImage: image, categoryName: name))) {
+        selectedCategories.add(int.parse(catId));
+        filterController.record.add(ProductCategoryItem(
+            id: int.parse(catId), categoryImage: image, categoryName: name));
+        filterController.update();
+      }
+    }
+
     FToast().init(context);
     HiveService hiveService = Get.find();
     Box<RecentSearch> box = hiveService.recentBox;
@@ -101,28 +118,43 @@ class _SearchViewState extends State<SearchView> {
         ),
         leading: AppIcons.IosBackIcon(),
         actions: [
-          Badge(
-            alignment: const AlignmentDirectional(20.0, 3.0),
-            label: AppText(
-              "${selectedCategories.length}",
-              fontSize: 10,
-              color: Colors.white,
-            ),
-            child: IconButton(
-                padding: 16.pr,
-                onPressed: () async {
-                  var data = await Get.toNamed(AppRoutes.filterView);
-                  if (data != null) {
-                    List<int> values = [];
-                    data.forEach((e) => values.add(e.id!));
-                    selectedCategories.clear();
-                    selectedCategories.addAll(values);
+          selectedCategories.isEmpty
+              ? IconButton(
+                  padding: 16.pr,
+                  onPressed: () async {
+                    var data = await Get.toNamed(AppRoutes.filterView);
+                    if (data != null) {
+                      List<int> values = [];
+                      data.forEach((e) => values.add(e.id!));
+                      selectedCategories.clear();
+                      selectedCategories.addAll(values);
 
-                    setState(() {});
-                  }
-                },
-                icon: AppIcons.filter(size: 35)),
-          )
+                      setState(() {});
+                    }
+                  },
+                  icon: AppIcons.filter(size: 35))
+              : Badge(
+                  alignment: const AlignmentDirectional(20.0, 3.0),
+                  label: AppText(
+                    "${selectedCategories.length}",
+                    fontSize: 10,
+                    color: Colors.white,
+                  ),
+                  child: IconButton(
+                      padding: 16.pr,
+                      onPressed: () async {
+                        var data = await Get.toNamed(AppRoutes.filterView);
+                        if (data != null) {
+                          List<int> values = [];
+                          data.forEach((e) => values.add(e.id!));
+                          selectedCategories.clear();
+                          selectedCategories.addAll(values);
+
+                          setState(() {});
+                        }
+                      },
+                      icon: AppIcons.filter(size: 35)),
+                )
         ],
       ),
       body:

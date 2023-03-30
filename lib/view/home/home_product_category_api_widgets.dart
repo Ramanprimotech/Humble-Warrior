@@ -85,8 +85,7 @@ class HomePageProductCategoryAPIWidgets
                         onTap: () {
                           Get.toNamed(AppRoutes.categoryDetailsList,
                               arguments: [
-                                record[index].categoryName,
-                                record[index].id.toString(),
+                                record[index],
                               ]);
                         },
                         child: Container(

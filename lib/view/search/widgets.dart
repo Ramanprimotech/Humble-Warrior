@@ -1,14 +1,21 @@
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/modals/response/product_category_response.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar(
-      {Key? key, this.child, this.margin, this.padding, this.postType})
+      {Key? key,
+      this.child,
+      this.margin,
+      this.padding,
+      this.postType,
+      this.item})
       : super(key: key);
 
   final Widget? child;
   final EdgeInsets? margin;
   final EdgeInsets? padding;
   final String? postType;
+  final ProductCategoryItem? item;
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +53,14 @@ class SearchBar extends StatelessWidget {
             ),
       ),
       onTap: () {
-        Get.toNamed(AppRoutes.searchView,
-            arguments: postType.isEmptyOrNull ? [""] : [postType.toString()]);
+        ProductCategoryItem items =
+            item == null ? ProductCategoryItem() : item!;
+        Get.toNamed(AppRoutes.searchView, arguments: [
+          postType.isEmptyOrNull ? "" : postType.toString(),
+          items.id == null ? "" : items.id.toString(),
+          items.categoryName == null ? "" : items.categoryName.toString(),
+          items.categoryImage == null ? "" : items.categoryImage.toString()
+        ]);
       },
     );
   }

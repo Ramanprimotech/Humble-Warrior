@@ -1,5 +1,6 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
+import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/view/productDetail/category_details_list/category_details_list_controller.dart';
 
 class CategoryListDetails extends StatelessWidget {
@@ -9,9 +10,9 @@ class CategoryListDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     FToast().init(context);
     final CategoryDetailsListController controller = Get.find();
-    String title = Get.arguments[0];
+    ProductCategoryItem item = Get.arguments[0];
     controller.context = context;
-    controller.id = Get.arguments[1];
+    controller.id = item.id.toString();
     controller.categoryListApi();
     return Scaffold(
       bottomNavigationBar: bottomNavigationWidget(context),
@@ -28,7 +29,10 @@ class CategoryListDetails extends StatelessWidget {
         titleSpacing: 5,
         leadingWidth: 34,
         leading: AppIcons.IosBackIcon(),
-        title: const SearchBar(margin: EdgeInsets.only(right: 4)),
+        title: SearchBar(
+          margin: const EdgeInsets.only(right: 4),
+          item: item,
+        ),
         actions: [
           IconButton(
               padding: 16.pr,
@@ -59,15 +63,19 @@ class CategoryListDetails extends StatelessWidget {
                         controller.categoryListBool.value == true) {
                       return Center(
                           child: ListView.separated(
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (ctx, index){
-                              return const  CustomShimmer.rectangular(height: 290,borderRadius: 15,
-                                margin: EdgeInsets.symmetric(horizontal: 15),
-                              );
-                            },
-                            itemCount: 10, separatorBuilder: (BuildContext context, int index) {
-                            return 18.shb;
-                          },));
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (ctx, index) {
+                          return const CustomShimmer.rectangular(
+                            height: 290,
+                            borderRadius: 15,
+                            margin: EdgeInsets.symmetric(horizontal: 15),
+                          );
+                        },
+                        itemCount: 10,
+                        separatorBuilder: (BuildContext context, int index) {
+                          return 18.shb;
+                        },
+                      ));
                     }
                     if (controller.categoryList.isEmpty &&
                         controller.categoryListBool.value == false) {

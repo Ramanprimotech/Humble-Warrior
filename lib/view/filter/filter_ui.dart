@@ -65,7 +65,7 @@ class FilterScreen extends StatelessWidget {
                 const AppText(""),
                 GestureDetector(
                   onTap: () {
-                    _filterController.showCategories();
+                    _filterController.showCategories(context);
                   },
                   child: Obx(
                     () => Container(
@@ -74,7 +74,8 @@ class FilterScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(50)),
                       child: Center(
                         child: AppText(
-                          _filterController.selevtedVisibility.value
+                          _filterController.selevtedVisibility.value &&
+                                  _filterController.record.length != 0
                               ? "Hide"
                               : "Show",
                           color: AppColors.white,
@@ -90,11 +91,12 @@ class FilterScreen extends StatelessWidget {
             ///Visible Selected
             Obx(
               () => Visibility(
-                visible: _filterController.selevtedVisibility.value,
+                visible: _filterController.selevtedVisibility.value &&
+                    _filterController.record.length != 0,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const AppText("Categories").px(16),
+                    const AppText("Selected Categories").px(16),
                     10.shb,
 
                     /// Selected List
@@ -165,53 +167,68 @@ class FilterScreen extends StatelessWidget {
                                                       controller
                                                           .record.value[index]);
                                                 },
-                                                child: Container(
-                                                  padding: 30.pl,
-                                                  height: productHeight,
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      SizedBox(
-                                                        height:
-                                                            productHeight - 25,
-                                                        child: Image.network(
-                                                          item.categoryImage ??
-                                                              "",
-                                                          errorBuilder:
-                                                              (BuildContext ctx,
-                                                                  Object error,
-                                                                  stackTrace) {
-                                                            return Center(
-                                                                child:
-                                                                    Image.asset(
-                                                              ImagePathAssets
-                                                                  .noImageFound,
-                                                              alignment:
-                                                                  Alignment
-                                                                      .center,
-                                                              fit: BoxFit
-                                                                  .fitHeight,
-                                                              // height: height,
-                                                            ));
-                                                          },
-                                                        ),
+                                                child: Stack(
+                                                  alignment:
+                                                      Alignment.topCenter,
+                                                  children: [
+                                                    Container(
+                                                      padding: 30.pl,
+                                                      height: productHeight,
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          SizedBox(
+                                                            height:
+                                                                productHeight -
+                                                                    25,
+                                                            child:
+                                                                Image.network(
+                                                              item.categoryImage ??
+                                                                  "",
+                                                              errorBuilder:
+                                                                  (BuildContext
+                                                                          ctx,
+                                                                      Object
+                                                                          error,
+                                                                      stackTrace) {
+                                                                return Center(
+                                                                    child: Image
+                                                                        .asset(
+                                                                  ImagePathAssets
+                                                                      .noImageFound,
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .center,
+                                                                  fit: BoxFit
+                                                                      .fitHeight,
+                                                                  // height: height,
+                                                                ));
+                                                              },
+                                                            ),
+                                                          ),
+                                                          // 4.shb,
+                                                          AppText(
+                                                            controller
+                                                                    .record
+                                                                    .value[
+                                                                        index]
+                                                                    .categoryName ??
+                                                                "",
+                                                            fontSize: 14,
+                                                            maxLines: 1,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
+                                                        ],
                                                       ),
-                                                      // 4.shb,
-                                                      AppText(
-                                                        controller
-                                                                .record
-                                                                .value[index]
-                                                                .categoryName ??
-                                                            "",
-                                                        fontSize: 14,
-                                                        maxLines: 1,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                    const Icon(
+                                                      Icons.check_circle,
+                                                      color: AppColors.appGreen,
+                                                    ),
+                                                  ],
                                                 ),
                                               );
                                             }),
