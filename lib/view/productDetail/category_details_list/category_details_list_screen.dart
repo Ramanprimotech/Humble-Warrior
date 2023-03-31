@@ -34,12 +34,7 @@ class CategoryListDetails extends StatelessWidget {
           item: item,
         ),
         actions: [
-          IconButton(
-              padding: 16.pr,
-              onPressed: () {
-                // Get.toNamed(AppRoutes.sortPages);
-              },
-              icon: AppIcons.filter(size: 35))
+          FilterIcon(item: item),
         ],
       ),
       body: SafeArea(

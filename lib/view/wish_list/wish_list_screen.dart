@@ -15,14 +15,7 @@ class WishList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const SearchBar(),
-        actions: [
-          IconButton(
-              padding: 16.pr,
-              onPressed: () {
-                // Get.toNamed(AppRoutes.sortPages);
-              },
-              icon: AppIcons.filter(size: 35))
-        ],
+        actions: const [FilterIcon()],
       ),
       body: SafeArea(
         child: Column(
@@ -33,8 +26,7 @@ class WishList extends StatelessWidget {
             Expanded(
               child: Obx(
                 () => Center(
-                    child:
-                    controller.loggedIn.value == false
+                    child: controller.loggedIn.value == false
                         ? loginFirst(context)
                         : CustomRefreshIndicator(
                             onRefresh: () async {

@@ -22,6 +22,11 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
           ),
         ),
         leading: AppIcons.IosBackIcon(),
+        actions: [
+          FilterIcon(
+            postType: controller.postType(controller.selectedIndex.value),
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(40),
           child: TabBar(
@@ -39,14 +44,6 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
                     fontSize: tabFontSize),
               ]),
         ),
-        actions: [
-          IconButton(
-              padding: 16.pr,
-              onPressed: () {
-                // Get.toNamed(AppRoutes.sortPages);
-              },
-              icon: AppIcons.filter(size: 35))
-        ],
       ),
       body: Padding(
         padding: 10.pt,
