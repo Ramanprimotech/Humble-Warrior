@@ -1,8 +1,5 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/common/common_functionality.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:humble_warrior/hw.dart';
 
 class FavouriteDealController extends GetxController {
   final TextEditingController searchTextController = TextEditingController();
@@ -11,7 +8,8 @@ class FavouriteDealController extends GetxController {
 
   /// get image Path
   Future<void> getImagePath() async {
-    imagePath = await CommonUtils().getImagePath(imageSource: ImageSource.gallery);
+    imagePath =
+        await CommonUtils().getImagePath(imageSource: ImageSource.gallery);
     debugPrint("Image Path $imagePath");
     update();
   }

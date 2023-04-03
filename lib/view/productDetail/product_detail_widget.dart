@@ -1,8 +1,6 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/utils/common/html.dart';
 
-import '../../utils/sizes/sizes_config.dart';
-
 class ProductDetailWidget {
   final AccountOptionTheme accountOptionTheme =
       Theme.of(Get.context!).extension<AccountOptionTheme>()!;

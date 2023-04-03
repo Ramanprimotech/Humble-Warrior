@@ -1,16 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
-// import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
-import 'package:humble_warrior/utils/common/common_functionality.dart';
-import 'package:humble_warrior/utils/extensions.dart';
-import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
-import 'package:humble_warrior/utils/routes/app_routes.dart';
-import 'package:humble_warrior/view/my_account/my_account_controller.dart';
-import 'package:humble_warrior/view/my_account/my_account_widget.dart';
+import 'package:humble_warrior/hw.dart';
 
 class MyAccount extends StatelessWidget {
   const MyAccount({Key? key}) : super(key: key);
@@ -27,7 +15,7 @@ class MyAccount extends StatelessWidget {
     double optionSpacing = 15;
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value:  !isDark?SystemUiOverlayStyle.dark:SystemUiOverlayStyle.light,
+        value: !isDark ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
         child: SafeArea(
           child: SingleChildScrollView(
             child: Container(
@@ -37,17 +25,17 @@ class MyAccount extends StatelessWidget {
                   ///Image and account details
                   if (controller.userCheck.value == true) ...[
                     myAccWidget.profileImage(),
-                    optionSpacing.sh,
+                    optionSpacing.shb,
                     myAccWidget.divider(),
                   ],
-                  optionSpacing.sh,
+                  optionSpacing.shb,
 
                   ///===> My Account
                   myAccWidget.myAccountTextFun(heading: myAccountTxt),
 
                   ///Account Details
-                  myAccWidget.detailsOptions(controller, title: accountDetailsTxt,
-                      ontap: () {
+                  myAccWidget.detailsOptions(controller,
+                      title: accountDetailsTxt, ontap: () {
                     Get.toNamed(AppRoutes.accountDetails);
                   }),
 
@@ -56,9 +44,9 @@ class MyAccount extends StatelessWidget {
                       title: notificationsTxt,
                       isSwitchRequired: true,
                       click: controller.switchFunc),
-                  optionSpacing.sh,
+                  optionSpacing.shb,
                   // myAccWidget.divider(),
-                  // optionSpacing.sh,
+                  // optionSpacing.shb,
 
                   ///=====>The Humble Warrior
                   myAccWidget.myAccountTextFun(heading: theHumbleWarriorTxt),
@@ -74,12 +62,13 @@ class MyAccount extends StatelessWidget {
                     controller,
                     title: shareWithFriendsTxt,
                     ontap: () async {
-                      CommonUtils().share(shareUrl: "https://humblewarrior.com/");
+                      CommonUtils()
+                          .share(shareUrl: "https://humblewarrior.com/");
                     },
                   ),
-                  // // optionSpacing.sh,
+                  // // optionSpacing.shb,
                   // myAccWidget.divider(),
-                  optionSpacing.sh,
+                  optionSpacing.shb,
 
                   ///====>Settings
                   myAccWidget.myAccountTextFun(heading: settingsTxt),
@@ -112,7 +101,7 @@ class MyAccount extends StatelessWidget {
 
                   ///Login or Logout
                   _loginOrLogout(context),
-                  10.sh,
+                  10.shb,
                 ]),
               ),
             ),

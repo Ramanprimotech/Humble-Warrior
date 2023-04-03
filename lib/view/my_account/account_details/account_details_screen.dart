@@ -1,17 +1,6 @@
 import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_colors.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/extensions.dart';
-import 'package:humble_warrior/utils/image_path_assets.dart';
-import 'package:humble_warrior/utils/routes/app_routes.dart';
-import 'package:humble_warrior/view/bottom_navigation/bottom_navigation_widget.dart';
 import 'package:humble_warrior/view/my_account/account_details/account_details_controller.dart';
-import 'package:humble_warrior/view/my_account/my_account_widget.dart';
+import 'package:humble_warrior/hw.dart';
 
 class AccountDetails extends StatelessWidget {
   const AccountDetails({Key? key}) : super(key: key);
@@ -20,16 +9,16 @@ class AccountDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     AccountDetailsController accountController = Get.find();
     return Scaffold(
-      bottomNavigationBar: bottomNavigationWidget(context),
+        bottomNavigationBar: bottomNavigationWidget(context),
         body: Obx(
           () => accountController.userCheck.value == false
               ? SafeArea(
                   child: Column(
                     children: [
-                      // 50.sh,
+                      // 50.shb,
                       CommonWidgets.titleBar(context,
                           title: accountDetailsTxt, fontSize: 20),
-                      150.sh,
+                      150.shb,
                       loginFirst(context),
                     ],
                   ),
@@ -48,7 +37,7 @@ class AccountDetails extends StatelessWidget {
                       )),
                       child: Column(
                         children: [
-                          50.sh,
+                          50.shb,
                           CommonWidgets.titleBar(context,
                               title: accountDetailsTxt, fontSize: 20),
                           Spacer(),
@@ -62,20 +51,20 @@ class AccountDetails extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            50.sh,
+                            50.shb,
                             heading(headingTitle: "Name"),
-                            5.sh,
+                            5.shb,
                             subTitle(title: accountController.username),
-                            20.sh,
+                            20.shb,
                             heading(headingTitle: "Email"),
-                            5.sh,
+                            5.shb,
                             subTitle(title: accountController.user),
-                            20.sh,
+                            20.shb,
                             heading(headingTitle: 'Phone Number'),
-                            5.sh,
+                            5.shb,
                             subTitle(
                                 title: accountController.userPhone.toString()),
-                            20.sh,
+                            20.shb,
                           ],
                         ),
                       ),
@@ -159,7 +148,7 @@ class AccountDetails extends StatelessWidget {
                   ),
           ),
         ),
-        10.sh,
+        10.shb,
         AppText(
           accountController.username,
           fontSize: 24,

@@ -1,11 +1,9 @@
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/modals/hive_modal/recent_search_model.dart';
 import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/view/filter/filter_controller.dart';
 import 'package:humble_warrior/view/search/api_services.dart';
 import 'package:humble_warrior/view/search/model.dart';
+
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});

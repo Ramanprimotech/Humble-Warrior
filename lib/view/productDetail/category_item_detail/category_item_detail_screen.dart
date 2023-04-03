@@ -1,8 +1,6 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/utils/common/html.dart';
 import 'package:humble_warrior/view/productDetail/product_detail_controller.dart';
-// import 'package:simple_html_css/simple_html_css.dart';
 
 class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
   CategoryItemDetail({Key? key}) : super(key: key);

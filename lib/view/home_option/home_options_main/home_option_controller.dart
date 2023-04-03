@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/filter_modal.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/view/sorting/sort_controller.dart';
 
 import '../../../modals/requests/pagination_modal.dart';

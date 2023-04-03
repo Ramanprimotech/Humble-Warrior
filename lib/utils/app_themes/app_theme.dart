@@ -1,14 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
-import 'package:humble_warrior/utils/theme_extention/image_icon_theme_extention.dart';
-import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart';
-import 'package:humble_warrior/utils/theme_extention/shop_button_theme.dart';
-
-import '../app_colors.dart';
-import '../theme_extention/custom_notice_theme_extention.dart';
 
 class AppTheme {
   static ThemeData darkTheme = _darkTheme;

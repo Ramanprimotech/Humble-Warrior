@@ -1,12 +1,7 @@
 library passcode_screen;
 
-import 'dart:async';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:humble_warrior/utils/shake_curve.dart';
-import 'package:humble_warrior/view/my_account/circle.dart';
-import 'package:humble_warrior/view/my_account/keyboard.dart';
-
+import 'package:humble_warrior/hw.dart';
 
 typedef PasswordEnteredCallback = void Function(String text);
 typedef IsValidCallback = void Function();
@@ -16,6 +11,7 @@ class PasscodeScreen extends StatefulWidget {
   final Widget title;
   final int passwordDigits;
   final PasswordEnteredCallback passwordEnteredCallback;
+
   // Cancel button and delete button will be switched based on the screen state
   final Widget cancelButton;
   final Widget deleteButton;
@@ -69,7 +65,7 @@ class _PasscodeScreenState extends State<PasscodeScreen>
     controller = AnimationController(
         duration: const Duration(milliseconds: 500), vsync: this);
     final Animation curve =
-    CurvedAnimation(parent: controller, curve: ShakeCurve());
+        CurvedAnimation(parent: controller, curve: ShakeCurve());
     animation = Tween(begin: 0.0, end: 10.0).animate(curve as Animation<double>)
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
@@ -103,94 +99,94 @@ class _PasscodeScreenState extends State<PasscodeScreen>
   }
 
   _buildPortraitPasscodeScreen() => Stack(
-    children: [
-      Positioned(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              widget.title,
-              Container(
-                margin: const EdgeInsets.only(top: 20),
-                height: 40,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: _buildCircles(),
-                ),
-              ),
-              _buildKeyboard(),
-              widget.bottomWidget ?? Container()
-            ],
-          ),
-        ),
-      ),
-      Positioned(
-        child: Align(
-          alignment: Alignment.bottomRight,
-          child: _buildDeleteButton(),
-        ),
-      ),
-    ],
-  );
-
-  _buildLandscapePasscodeScreen() => Stack(
-    children: [
-      Positioned(
-        child: Center(
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Stack(
-                children: <Widget>[
-                  Positioned(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          widget.title,
-                          Container(
-                            margin: const EdgeInsets.only(top: 20),
-                            height: 40,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: _buildCircles(),
-                            ),
-                          ),
-                        ],
-                      ),
+        children: [
+          Positioned(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  widget.title,
+                  Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    height: 40,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: _buildCircles(),
                     ),
                   ),
-                  widget.bottomWidget != null
-                      ? Positioned(
-                    child: Align(
-                        alignment: Alignment.topCenter,
-                        child: widget.bottomWidget),
-                  )
-                      : Container()
+                  _buildKeyboard(),
+                  widget.bottomWidget ?? Container()
                 ],
               ),
-              _buildKeyboard(),
-            ],
+            ),
           ),
-        ),
-      ),
-      Positioned(
-        child: Align(
-          alignment: Alignment.bottomRight,
-          child: _buildDeleteButton(),
-        ),
-      )
-    ],
-  );
+          Positioned(
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: _buildDeleteButton(),
+            ),
+          ),
+        ],
+      );
+
+  _buildLandscapePasscodeScreen() => Stack(
+        children: [
+          Positioned(
+            child: Center(
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Stack(
+                    children: <Widget>[
+                      Positioned(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              widget.title,
+                              Container(
+                                margin: const EdgeInsets.only(top: 20),
+                                height: 40,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: _buildCircles(),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      widget.bottomWidget != null
+                          ? Positioned(
+                              child: Align(
+                                  alignment: Alignment.topCenter,
+                                  child: widget.bottomWidget),
+                            )
+                          : Container()
+                    ],
+                  ),
+                  _buildKeyboard(),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: _buildDeleteButton(),
+            ),
+          )
+        ],
+      );
 
   _buildKeyboard() => Keyboard(
-    onKeyboardTap: _onKeyboardButtonPressed,
-    keyboardUIConfig: widget.keyboardUIConfig,
-    digits: widget.digits,
-  );
+        onKeyboardTap: _onKeyboardButtonPressed,
+        keyboardUIConfig: widget.keyboardUIConfig,
+        digits: widget.digits,
+      );
 
   List<Widget> _buildCircles() {
     var list = <Widget>[];
@@ -275,15 +271,13 @@ class _PasscodeScreenState extends State<PasscodeScreen>
   }
 
   Widget _buildDeleteButton() {
-    return Container(
-      child: CupertinoButton(
-        onPressed: _onDeleteCancelButtonPressed,
-        child: Container(
-          margin: widget.keyboardUIConfig.digitInnerMargin,
-          child: enteredPasscode.length == 0
-              ? widget.cancelButton
-              : widget.deleteButton,
-        ),
+    return CupertinoButton(
+      onPressed: _onDeleteCancelButtonPressed,
+      child: Container(
+        margin: widget.keyboardUIConfig.digitInnerMargin,
+        child: enteredPasscode.length == 0
+            ? widget.cancelButton
+            : widget.deleteButton,
       ),
     );
   }

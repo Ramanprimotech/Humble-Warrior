@@ -1,24 +1,8 @@
-import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:humble_warrior/network/api_call.dart';
-import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
-import 'package:humble_warrior/utils/shared_prefrence/shared_pref.dart';
-import 'package:humble_warrior/utils/token_generator.dart';
-import 'package:humble_warrior/view/my_account/circle.dart';
-import 'package:humble_warrior/view/my_account/keyboard.dart';
-import 'package:humble_warrior/view/my_account/passcode_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../modals/requests/token_model_request.dart';
-import '../../network/endpoints.dart';
-import '../../utils/app_strings.dart';
-import '../../utils/app_themes/app_theme_controller.dart';
-import '../../utils/routes/app_routes.dart';
+import 'package:humble_warrior/hw.dart';
 
 class SplashController extends GetxController {
   final ThemeController themeController = ThemeController();

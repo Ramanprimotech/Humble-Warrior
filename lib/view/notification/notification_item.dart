@@ -1,6 +1,5 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/response/notification_response_model.dart';
-import 'package:humble_warrior/utils/common/html.dart';
 
 class NotificationItem extends StatefulWidget {
   final Posts data;
@@ -12,7 +11,6 @@ class NotificationItem extends StatefulWidget {
 }
 
 class _NotificationItemState extends State<NotificationItem> {
-  final NotificationController _notificationController = Get.find();
 
   @override
   Widget build(BuildContext context) {

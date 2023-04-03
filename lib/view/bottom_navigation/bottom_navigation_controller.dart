@@ -1,8 +1,4 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/services/notification_manager.dart';
-import 'package:humble_warrior/view/wish_list/wish_list_screen.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class BottomNavigationController extends GetxController {
   final HomeScreenController controller = Get.find();

@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/extensions.dart';
-
-import 'app_colors.dart';
-import 'app_text.dart';
-import 'sizes/enums.dart';
+import 'package:humble_warrior/hw.dart';
 
 class Button extends StatelessWidget {
   const Button({

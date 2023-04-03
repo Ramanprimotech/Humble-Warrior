@@ -1,7 +1,7 @@
-import 'package:get/get.dart';
 import 'package:humble_warrior/view/filter/filter_controller.dart';
-import 'package:humble_warrior/view/search/view.dart';
 import 'package:humble_warrior/view/sorting/sort_controller.dart';
+
+import 'package:humble_warrior/hw.dart';
 
 class SearchViewBindings implements Bindings {
   @override

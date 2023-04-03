@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../app_colors.dart';
-import '../shared_prefrence/shared_pref.dart';
+import 'package:humble_warrior/hw.dart';
 
 class ThemeController extends GetxController {
   static ThemeController get to => Get.find();

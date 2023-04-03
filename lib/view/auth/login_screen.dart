@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:humble_warrior/hw.dart';
 
 class LoginScreen extends GetView<LoginController> with AuthWidget {

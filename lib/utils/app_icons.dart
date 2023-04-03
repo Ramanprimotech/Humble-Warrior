@@ -1,8 +1,4 @@
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/main.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/utils/sizes/sizes_config.dart';
 
 class AppIcons {
   // IconData

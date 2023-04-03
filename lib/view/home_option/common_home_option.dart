@@ -1,20 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/utils/app_colors.dart';
-import 'package:humble_warrior/utils/app_icons.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/common/common_functionality.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
 import 'package:humble_warrior/utils/common/photo_viewer.dart';
-import 'package:humble_warrior/utils/decorations.dart';
-import 'package:humble_warrior/utils/helpers/extensions.dart';
-import 'package:humble_warrior/utils/routes/app_routes.dart';
-
-import '../../utils/app_text.dart';
-import 'tab_screens/donnas_deals.dart';
 
 class ItemCard extends StatelessWidget {
   final double? cardHeight;

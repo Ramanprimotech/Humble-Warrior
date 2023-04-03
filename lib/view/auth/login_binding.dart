@@ -1,5 +1,4 @@
-import 'package:get/get.dart';
-import 'package:humble_warrior/view/auth/login_controller.dart';
+import 'package:humble_warrior/hw.dart';
 
 class LoginBinding implements Bindings{
   @override

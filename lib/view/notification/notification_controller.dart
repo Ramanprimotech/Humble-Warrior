@@ -1,8 +1,6 @@
 import 'dart:io';
 
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/modals/response/notification_response_model.dart';
 import 'package:humble_warrior/network/api_call.dart';
 

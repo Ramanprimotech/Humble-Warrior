@@ -1,14 +1,10 @@
-import 'dart:async';
 import 'dart:developer';
-
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../modals/requests/token_model_request.dart';
 import '../network/api_call.dart';
-import '../network/endpoints.dart';
+
+import 'package:humble_warrior/hw.dart';
 
 class TokenManager {
   final Function() onTokenGenerate;

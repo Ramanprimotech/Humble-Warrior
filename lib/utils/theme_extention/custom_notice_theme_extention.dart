@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:humble_warrior/hw.dart';
 
 class DialogueThemeExtention extends ThemeExtension<DialogueThemeExtention> {
   final Color? textColor;

@@ -1,13 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:humble_warrior/hw.dart';
 
-class ImageIconTheme
-    extends ThemeExtension<ImageIconTheme> {
+class ImageIconTheme extends ThemeExtension<ImageIconTheme> {
   final Color? textColor;
   final Color? backGroundColor;
 
   const ImageIconTheme(
-      {required this.textColor,
-      required this.backGroundColor});
+      {required this.textColor, required this.backGroundColor});
 
   @override
   ThemeExtension<ImageIconTheme> copyWith(

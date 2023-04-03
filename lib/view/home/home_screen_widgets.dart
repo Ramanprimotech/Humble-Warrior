@@ -1,11 +1,12 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/modals/response/notification_response_model.dart';
 import 'package:humble_warrior/modals/response/product_category_response.dart';
-import 'package:humble_warrior/utils/sizes/sizes_config.dart';
 import 'package:humble_warrior/view/home/home_product_category_api_widgets.dart';
 
 import '../../modals/response/brands_response_mdel.dart';
 import '../../modals/response/home_categories_response_model.dart';
+
+import 'package:humble_warrior/hw.dart';
 
 class HomeScreenWidgets {
   final HomeScreenController controller;

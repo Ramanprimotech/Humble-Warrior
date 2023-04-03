@@ -1,13 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/extensions.dart';
-import 'package:humble_warrior/utils/media_query_widget.dart';
-import 'package:humble_warrior/utils/theme_extention/custom_notice_theme_extention.dart';
-
-import '../app_colors.dart';
-import '../app_text.dart';
-import '../button.dart';
+import 'package:humble_warrior/hw.dart';
 
 abstract class DialogHelper {
   static final FToast _fToast = FToast();
@@ -78,14 +69,14 @@ abstract class DialogHelper {
                   padding: 8.pb,
                   textAlign: TextAlign.center,
                 ),
-                16.sh,
+                16.shb,
                 AppText(
                   message,
                   fontSize: textFont??18,
                   maxLines: 6,
                   textAlign: TextAlign.center,
                 ),
-                32.sh,
+                32.shb,
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     elevation: 5,
@@ -192,20 +183,20 @@ abstract class DialogHelper {
                   size: 50,
                 ),
               ),
-              8.sh,
+              8.shb,
               AppText(
                 title,
                 fontSize: 18,
                 padding: 8.pl,
                 fontWeight: FontWeight.bold,
               ),
-              8.sh,
+              8.shb,
               AppText(
                 description,
                 maxLines: maxLines,
                 padding: 8.pl,
               ),
-              16.sh,
+              16.shb,
               const Button(
                 label: 'Close',
                 onTap: closeDialog,

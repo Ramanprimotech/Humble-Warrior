@@ -1,7 +1,5 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/utils/common/photo_viewer.dart';
-import 'package:humble_warrior/utils/sizes/sizes_config.dart';
 
 class FrontPageDeals extends StatelessWidget {
   const FrontPageDeals({Key? key}) : super(key: key);

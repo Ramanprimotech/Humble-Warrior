@@ -67,9 +67,49 @@ export 'splash/spalsh_controller.dart';
 
 export 'WebView/web_view.dart';
 
-
 export 'search/view.dart';
 export 'search/widgets.dart';
 
 export 'productDetail/category_details_list/card.dart';
+
+export 'filter/filter_ui.dart';
+export 'my_account/account_details/account_details_binding.dart';
+export 'my_account/account_details/account_details_screen.dart';
+export 'productDetail/category_details_list/category_details_list_binding.dart';
+export 'productDetail/category_details_list/category_details_list_screen.dart';
+export 'productDetail/category_item_detail/category_item_detail_binding.dart';
+export 'productDetail/category_item_detail/category_item_detail_screen.dart';
+export 'search/search_binding.dart';
+export 'sorting/sort_binding.dart';
+export 'sorting/sort_screen.dart';
+export 'static_pages/static_page_binding.dart';
+export 'static_pages/static_page_screen.dart';
+export 'wish_list/wish_list_screen.dart';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
+export '';
 

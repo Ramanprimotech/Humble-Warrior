@@ -1,10 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/modals/requests/pagination_modal.dart';
 import 'package:humble_warrior/network/api_call.dart';
-import 'package:humble_warrior/network/endpoints.dart';
-import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
+
+import 'package:humble_warrior/hw.dart';
 
 class CategoryDetailsListController extends GetxController {
   RxInt categoryListLength = 0.obs;

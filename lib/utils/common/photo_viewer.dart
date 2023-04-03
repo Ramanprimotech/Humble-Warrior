@@ -1,5 +1,4 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:photo_view/photo_view.dart';
 
 class CustomPhotoViewer extends StatelessWidget {
   final String url;
