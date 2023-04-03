@@ -1,5 +1,4 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/view/productDetail/category_details_list/category_details_list_controller.dart';
 
 class CategoryListDetails extends StatelessWidget {
@@ -162,7 +161,7 @@ class CategoryListDetails extends StatelessWidget {
       height: 150,
       margin: 20.pa,
       padding: 20.ps,
-      decoration: CustomBoxDecorations().shadow(context: context),
+      decoration: CustomBoxDecorations(context: context).shadow(),
       child: Column(children: [
         AppText(accessingMsgTxt,
             color: dialogueThemeExtention.textColor, fontSize: 20),

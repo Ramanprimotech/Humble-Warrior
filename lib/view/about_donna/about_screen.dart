@@ -1,5 +1,4 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/response/static_page_model.dart';
 import 'package:humble_warrior/utils/common/html.dart';
 import 'package:humble_warrior/utils/common/photo_viewer.dart';
 import 'package:humble_warrior/view/static_pages/static_page_controller.dart';
@@ -76,7 +75,7 @@ class AboutScreen extends StatelessWidget {
                           /// About Less
                           Obx(
                             () => Visibility(
-                              key: Key("less"),
+                              key: const Key("less"),
                               visible: aboutScreenController.readMore.value,
                               child: _detailsLess(context, staticResponse),
                             ),
@@ -85,13 +84,13 @@ class AboutScreen extends StatelessWidget {
                           /// About Details
                           Obx(
                             () => Visibility(
-                              key: Key("more"),
+                              key: const Key("more"),
                               visible: !aboutScreenController.readMore.value,
                               child: _details(context, staticResponse),
                             ),
                           ),
 
-                          ///Abbout Donna Bottom Image
+                          ///About Donna Bottom Image
                           _showImgBottom(staticResponse),
 
                           /// See copy of humble warrior button
@@ -134,7 +133,6 @@ class AboutScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           child: CommonWidgets.networkImage(
             imageUrl: staticResponse[0].pageImage.toString(),
-            // "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
             fit: BoxFit.fitWidth,
             height: Get.width - 40,
             alignment: Alignment.topCenter,
@@ -158,7 +156,6 @@ class AboutScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           child: CommonWidgets.networkImage(
             imageUrl: staticResponse[0].page_bottom_image.toString(),
-            // "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
             fit: BoxFit.fill,
             height: 170,
             alignment: Alignment.topCenter,
@@ -176,24 +173,11 @@ class AboutScreen extends StatelessWidget {
       padding: 10.pa,
       margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
       width: Get.width,
-      decoration: CustomBoxDecorations().shadow(context: context),
+      decoration: CustomBoxDecorations(context: context).shadow(),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const AppText(helloGorgeousTxt, fontWeight: FontWeight.bold),
         HtmlData()
             .htmlString(context, staticResponse[0].pageContent.toString()),
-        // HTML.toRichText(context, staticResponse[0].pageContent.toString(),),
-        // ReadMoreText(
-        //   style: Theme.of(context).textTheme.bodyMedium,
-        //   staticResponse[0].pageContent.toString(),
-        //   trimLines: 10,
-        //   trimMode: TrimMode.Line,
-        //   trimCollapsedText: readMoreTxt,
-        //   trimExpandedText: readLessTxt,
-        //   lessStyle: const TextStyle(
-        //       fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
-        //   moreStyle: const TextStyle(
-        //       fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
-        // ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -201,7 +185,7 @@ class AboutScreen extends StatelessWidget {
               onTap: () {
                 aboutScreenController.readStatus();
               },
-              child: AppText(
+              child: const AppText(
                 "Read Less",
                 color: AppColors.blue,
               ),
@@ -219,24 +203,11 @@ class AboutScreen extends StatelessWidget {
       padding: 10.pa,
       margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
       width: Get.width,
-      decoration: CustomBoxDecorations().shadow(context: context),
+      decoration: CustomBoxDecorations(context: context).shadow(),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const AppText(helloGorgeousTxt, fontWeight: FontWeight.bold),
         HtmlData().htmlString(
             context, staticResponse[0].page_less_content.toString()),
-        // HTML.toRichText(context, staticResponse[0].pageContent.toString(),),
-        // ReadMoreText(
-        //   style: Theme.of(context).textTheme.bodyMedium,
-        //   staticResponse[0].pageContent.toString(),
-        //   trimLines: 10,
-        //   trimMode: TrimMode.Line,
-        //   trimCollapsedText: readMoreTxt,
-        //   trimExpandedText: readLessTxt,
-        //   lessStyle: const TextStyle(
-        //       fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
-        //   moreStyle: const TextStyle(
-        //       fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
-        // ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -244,7 +215,7 @@ class AboutScreen extends StatelessWidget {
               onTap: () {
                 aboutScreenController.readStatus();
               },
-              child: AppText(
+              child: const AppText(
                 "Read More",
                 color: AppColors.blue,
               ),
@@ -269,7 +240,6 @@ class AboutScreen extends StatelessWidget {
               color: Colors.grey.shade400,
               spreadRadius: 1,
               blurRadius: 1,
-              // offset: const Offset(0, 3),
             )
           ]),
       child: RichText(
@@ -287,7 +257,7 @@ class AboutScreen extends StatelessWidget {
                   await CommonUtils().urlLauncher(
                       url:
                           "https://humblewarrior.com/wp-content/uploads/2020/09/humble-warrior-media.pdf",
-                      title: "The Humble Warrior");
+                      title: theHumbleWarriorLowerTxt);
                 },
               text: hereTxt,
               style: const TextStyle(

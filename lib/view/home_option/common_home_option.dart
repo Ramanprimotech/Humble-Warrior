@@ -35,7 +35,7 @@ class ItemCard extends StatelessWidget {
       child: Container(
         // height: imageHeight + buttonbarHeight,
         height: Get.width - 40,
-        decoration: CustomBoxDecorations().shadow(context: context),
+        decoration: CustomBoxDecorations(context: context).shadow(),
         child: Column(
           children: [
             Stack(
@@ -102,56 +102,55 @@ class ItemCard extends StatelessWidget {
   }
 }
 
-
 Widget codeButton({required String code, required BuildContext context}) {
   return GestureDetector(
     onTap: () async {
-      await CardView.checkLoggedIn((){
+      await CardView.checkLoggedIn(() {
         CommonUtils().copyToClipboard(copyText: code, context: context);
       }, context);
     },
     child: Container(
-          alignment: Alignment.center,
-          // width: 90,
-          // height: 35,
-          padding: 1.pa,
-          decoration: BoxDecoration(
-              color: AppColors.appGreen,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
-                BoxShadow(color: Colors.black12, blurRadius: 3)
-              ]),
-          child:  DottedBorder(
-            color: Colors.green,
-            borderType: BorderType.RRect,
-            strokeWidth: 2,
-            dashPattern: [3,3],
-            radius: const Radius.circular(20),
-            padding: const EdgeInsets.only(left: 10,right: 10,top: 5,bottom: 5),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.cut,
-                  size: 17,
-                  color: AppColors.black,
-                ),
-                2.swb,
-                AppText(
-                  code,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14,
-                ),
-              ],
-            ),
-          )),
+        alignment: Alignment.center,
+        // width: 90,
+        // height: 35,
+        padding: 1.pa,
+        decoration: BoxDecoration(
+            color: AppColors.appGreen,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 3)]),
+        child: DottedBorder(
+          color: Colors.green,
+          borderType: BorderType.RRect,
+          strokeWidth: 2,
+          dashPattern: [3, 3],
+          radius: const Radius.circular(20),
+          padding:
+              const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.cut,
+                size: 17,
+                color: AppColors.black,
+              ),
+              2.swb,
+              AppText(
+                code,
+                color: Colors.black,
+                fontWeight: FontWeight.w700,
+                fontSize: 14,
+              ),
+            ],
+          ),
+        )),
   );
 }
 
-Widget shopButton({required url, required String title, required BuildContext context}) {
+Widget shopButton(
+    {required url, required String title, required BuildContext context}) {
   return GestureDetector(
     onTap: () async {
-      await CardView.checkLoggedIn((){
+      await CardView.checkLoggedIn(() {
         CommonUtils().urlLauncher(url: url, title: title);
       }, context);
     },
@@ -173,12 +172,13 @@ Widget shopButton({required url, required String title, required BuildContext co
   );
 }
 
-
-
-Widget shareButton({required shareUrl, Color? color = Colors.black, required BuildContext context}) {
+Widget shareButton(
+    {required shareUrl,
+    Color? color = Colors.black,
+    required BuildContext context}) {
   return GestureDetector(
     onTap: () async {
-      await CardView.checkLoggedIn((){
+      await CardView.checkLoggedIn(() {
         CommonUtils().share(shareUrl: shareUrl);
       }, context);
     },

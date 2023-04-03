@@ -41,7 +41,7 @@ class CardView extends StatelessWidget {
           //   color: shadowColor.background,
           //     borderRadius: BorderRadius.circular(16),
           //     border: Border.all(width: 2, color: Colors.black.withOpacity(.2),),),
-          CustomBoxDecorations().shadow(context: context, radius: 16),
+          CustomBoxDecorations(context: context).shadow(radius: 16),
       child: Column(
         children: [
           GestureDetector(
@@ -122,7 +122,7 @@ class CardView extends StatelessWidget {
                   right: 0,
                   child: cardText != ""
                       ? Container(
-                    alignment: Alignment.bottomCenter,
+                          alignment: Alignment.bottomCenter,
                           height: 70,
                           width: Get.width,
                           decoration: const BoxDecoration(
@@ -195,7 +195,7 @@ class CardView extends StatelessWidget {
                     Padding(
                       padding: 8.pr,
                       child: shopButton(
-                        context: context,
+                          context: context,
                           url: "${details?.shopUrl}",
                           title: "${details?.itemName!}"),
                     ),
@@ -219,7 +219,10 @@ class CardView extends StatelessWidget {
                     ),
                   ),
                   8.swb,
-                  shareButton(shareUrl: details!.linkUrl, color: color,  context: context),
+                  shareButton(
+                      shareUrl: details!.linkUrl,
+                      color: color,
+                      context: context),
                 ],
               ),
             ),
@@ -253,16 +256,17 @@ class CardView extends StatelessWidget {
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                      checkLoggedIn( (){
+                      checkLoggedIn(() {
                         CommonUtils()
                             .share(shareUrl: details!.linkUrl.toString());
                       }, context);
-
                     },
                     child: iconWithText(
                       title: shareTxt,
-                      child:
-                          shareButton(shareUrl: details!.linkUrl, color: color, context: context),
+                      child: shareButton(
+                          shareUrl: details!.linkUrl,
+                          color: color,
+                          context: context),
                     ),
                   ),
                 ),
@@ -273,9 +277,9 @@ class CardView extends StatelessWidget {
     );
   }
 
-  static Future<void> checkLoggedIn(Function checkItem, BuildContext context) async {
-      bool value =
-        await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
+  static Future<void> checkLoggedIn(
+      Function checkItem, BuildContext context) async {
+    bool value = await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
     if (value) {
       checkItem();
     } else {

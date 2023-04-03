@@ -1,5 +1,4 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/response/notification_response_model.dart';
 
 class NotificationItem extends StatefulWidget {
   final Posts data;
@@ -11,15 +10,13 @@ class NotificationItem extends StatefulWidget {
 }
 
 class _NotificationItemState extends State<NotificationItem> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
       height: Get.width / 4.5,
-      decoration: CustomBoxDecorations().shadow(
-          context: context,
-          color: widget.data.read == false ? AppColors.readBox : null),
+      decoration: CustomBoxDecorations(context: context)
+          .shadow(color: widget.data.read == false ? AppColors.readBox : null),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         notificationImg(widget.data.thumbnail ?? "null"),
         notificationDetails(widget.data),
@@ -116,6 +113,3 @@ class _NotificationItemState extends State<NotificationItem> {
     );
   }
 }
-
-
-

@@ -11,7 +11,7 @@ class NotificationService {
 
     /// Android Notification Set Up
     AndroidInitializationSettings androidInitializationSettings =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        const AndroidInitializationSettings('@mipmap/ic_launcher');
 
     /// IOS Notification SetUP
 
@@ -77,13 +77,5 @@ class NotificationService {
         NotificationDetails(
           android: androidDetails,
         ));
-
-    // Get.snackbar(
-    //   "${notification.title}",
-    //   "${notification.body}",
-    //   colorText: AppColors.primary,
-    //   icon: Icon(Icons.flutter_dash),
-    //   backgroundColor: AppColors.white,
-    // );
   }
 }

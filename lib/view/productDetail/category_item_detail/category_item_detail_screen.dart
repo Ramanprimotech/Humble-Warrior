@@ -29,8 +29,8 @@ class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
                             Container(
                               width: Get.width,
                               height: Get.width - 40,
-                              decoration: CustomBoxDecorations()
-                                  .shadow(context: context),
+                              decoration: CustomBoxDecorations(context: context)
+                                  .shadow(),
                             ),
                             Container(
                               margin: 10.pv,
@@ -88,7 +88,7 @@ class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
 
   Widget productTitleDetail(context, title) {
     return Container(
-      decoration: CustomBoxDecorations().shadow(context: context),
+      decoration: CustomBoxDecorations(context: context).shadow(),
       width: MediaQuery.of(Get.context!).size.width * .9,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       margin: const EdgeInsets.symmetric(vertical: 12),

@@ -1,4 +1,3 @@
-import '../../modals/response/home_categories_response_model.dart';
 import 'package:humble_warrior/hw.dart';
 
 class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
@@ -56,8 +55,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
         itemBuilder: (ctx, index) {
           return const CustomShimmer.rectangular(
             height: 220,
-            margin:
-                EdgeInsets.only(left: 16, right: 16, bottom: 10, top: 6),
+            margin: EdgeInsets.only(left: 16, right: 16, bottom: 10, top: 6),
           );
         },
       ),
@@ -78,7 +76,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
           children: [
             Container(
               decoration:
-                  CustomBoxDecorations().shadow(context: context, radius: 10),
+                  CustomBoxDecorations(context: context).shadow(radius: 10),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: CommonWidgets.networkImage(

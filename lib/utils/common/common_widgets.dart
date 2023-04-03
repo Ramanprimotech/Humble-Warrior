@@ -32,36 +32,9 @@ class CommonWidgets {
         fit: fit,
         height: height,
       )),
-
-      // Container(
-      // color: Colors.grey,
-      // height: height,
-      // width: width ?? Get.width,
-      // child: const Icon(Icons.error)),
     );
   }
 
-  // static Widget noData({required Function update}) {
-  //   return RefreshIndicator(
-  //     onRefresh: () async {
-  //       update();
-  //       return Future.value(0);
-  //     },
-  //     child: ListView(
-  //       children: [
-  //         Container(
-  //           height: Get.height - 250,
-  //           alignment: Alignment.center,
-  //           child: AppText(
-  //             noDataFoundTxt,
-  //             fontSize: 24,
-  //             fontWeight: FontWeight.w700,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
   static Widget noData(
       {required Function update,
       required BuildContext context,
@@ -98,7 +71,7 @@ class CommonWidgets {
         height: height ?? 180,
         width: Get.width,
         padding: 20.pa,
-        decoration: CustomBoxDecorations().shadow(context: context),
+        decoration: CustomBoxDecorations(context: context).shadow(),
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           AppText(errorText,
@@ -137,7 +110,7 @@ class CommonWidgets {
 
       // padding: const EdgeInsets.only(right: 20),
       width: MediaQuery.of(Get.context!).size.width,
-      decoration: CustomBoxDecorations().shadow(context: context),
+      decoration: CustomBoxDecorations(context: context).shadow(),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_new
+
 import 'package:hive_flutter/hive_flutter.dart';
 
 part 'product_details_response.g.dart';
@@ -64,17 +66,17 @@ class ProductDetailsResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['item_name'] = this.itemName;
-    data['cat_name'] = this.catName;
-    data['url'] = this.url;
-    data['shop_url'] = this.shopUrl;
-    data['coupon_code'] = this.couponCode;
-    data['product_description'] = this.productDescription;
-    data['ribbon_name'] = this.ribbonName;
-    data['ribbon_color'] = this.ribbonColor;
-    data['link_url'] = this.linkUrl;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['item_name'] = itemName;
+    data['cat_name'] = catName;
+    data['url'] = url;
+    data['shop_url'] = shopUrl;
+    data['coupon_code'] = couponCode;
+    data['product_description'] = productDescription;
+    data['ribbon_name'] = ribbonName;
+    data['ribbon_color'] = ribbonColor;
+    data['link_url'] = linkUrl;
     return data;
   }
 }

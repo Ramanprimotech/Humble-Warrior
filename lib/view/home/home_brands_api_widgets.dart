@@ -1,7 +1,5 @@
 import 'package:humble_warrior/hw.dart';
 
-import '../../modals/response/brands_response_mdel.dart';
-
 class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   final BuildContext context;
 
@@ -61,8 +59,8 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
             height: height,
             padding: padding,
             margin: margin,
-            decoration: CustomBoxDecorations()
-                .shadow(context: context, color: Colors.grey.shade200),
+            decoration: CustomBoxDecorations(context: context)
+                .shadow(color: Colors.grey.shade200),
             child: CommonWidgets.networkImage(
               alignment: Alignment.center,
               imageUrl: record[index].brandImage!,
@@ -85,8 +83,8 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
       itemCount: 10,
       itemBuilder: (ctx, index) {
         return
-          // Container();
-          CustomShimmer.rectangular(width: width, height: height);
+            // Container();
+            CustomShimmer.rectangular(width: width, height: height);
       },
       separatorBuilder: (BuildContext context, int index) {
         return separatorHeight.swb;

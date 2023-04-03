@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/network/api_call.dart';
 
 class LoginController extends GetxController {
   User? user;
@@ -72,9 +71,6 @@ class LoginController extends GetxController {
           }
         } catch (e, st) {
           Loader.hide();
-          print(e);
-          printError(info: st.toString());
-          Get.snackbar("Error ", "$e ");
         }
       },
 
@@ -83,9 +79,6 @@ class LoginController extends GetxController {
         user = await AuthManager().appleLogin();
         if (user != null) {
           await saveUserToLocalStorage();
-          // if (userPhoneNumber.isEmpty || userProfilePic.isEmpty) {
-          //   Get.offAllNamed(AppRoutes.bottomNavigation);
-          // }
 
           /// Auth Data API
           await authAPI()
@@ -130,7 +123,6 @@ class LoginController extends GetxController {
       "user_id": user == null ? "" : user!.uid,
       "email": user == null ? "" : user!.email ?? ""
     };
-    print("Apple-------------$payload");
     await CallAPI.authDataAPI(payload: payload);
   }
 }

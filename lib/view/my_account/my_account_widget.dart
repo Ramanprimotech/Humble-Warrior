@@ -108,10 +108,8 @@ class MyAccWidget {
             bottom: isSwitchRequired ? 0 : 0),
         margin: 10.pv,
         width: MediaQuery.of(Get.context!).size.width,
-        decoration: CustomBoxDecorations().shadow(
-            context: context,
-            color: accountOptionTheme.backGroundColor,
-            radius: 50),
+        decoration: CustomBoxDecorations(context: context)
+            .shadow(color: accountOptionTheme.backGroundColor, radius: 50),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,9 +1,7 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/view/filter/filter_controller.dart';
 import 'package:humble_warrior/view/search/api_services.dart';
 import 'package:humble_warrior/view/search/model.dart';
-
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
@@ -317,8 +315,9 @@ class _SearchViewState extends State<SearchView> {
                                         height: 40,
                                         padding: 10.ph,
                                         margin: 20.ph,
-                                        decoration: CustomBoxDecorations()
-                                            .shadow(context: context),
+                                        decoration: CustomBoxDecorations(
+                                                context: context)
+                                            .shadow(),
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -397,7 +396,7 @@ class _SearchViewState extends State<SearchView> {
                             height: 80,
                             margin: 20.ph,
                             decoration:
-                                CustomBoxDecorations().shadow(context: context),
+                                CustomBoxDecorations(context: context).shadow(),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.end,
@@ -422,23 +421,33 @@ class _SearchViewState extends State<SearchView> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 12, vertical: 3),
-                                        decoration: BoxDecoration(
-                                            color: AppColors.primary,
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                              bottomRight: Radius.circular(10),
-                                            )),
-                                        child: AppText(
-                                          snapshot.data![index].categoryName!
-                                              .toUpperCase(),
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                          fontSize: 12,
-                                        ),
-                                      ),
+                                      (snapshot.data![index].categoryName ==
+                                                  null ||
+                                              snapshot.data![index]
+                                                      .categoryName ==
+                                                  "")
+                                          ? const SizedBox()
+                                          : Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 12,
+                                                      vertical: 3),
+                                              decoration: BoxDecoration(
+                                                  color: AppColors.primary,
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                    bottomRight:
+                                                        Radius.circular(10),
+                                                  )),
+                                              child: AppText(
+                                                snapshot
+                                                    .data![index].categoryName!
+                                                    .toUpperCase(),
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              ),
+                                            ),
                                       SizedBox(
                                         width: Get.width * .7 - 40,
                                         child: AppText(

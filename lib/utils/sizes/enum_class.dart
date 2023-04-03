@@ -1,8 +1,8 @@
-
-enum TextSizes{
-  small,
-  medium,
-  normal,
-  large,
-  extraLarge
-}
+//
+// enum TextSizes{
+//   small,
+//   medium,
+//   normal,
+//   large,
+//   extraLarge
+// }

@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:humble_warrior/hw.dart';
 
 class LoginScreen extends GetView<LoginController> with AuthWidget {
@@ -33,7 +34,7 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                     /// Facebook
                     optionWidget(
                         bckClr: AppColors.facebookClr,
-                        title: LocalString.signWithFacebook,
+                        title: signWithFacebook,
                         textClr: AppColors.white,
                         imagePath: ImagePathAssets.facebookImg,
                         onTap: controller.onClickFunction(
@@ -42,7 +43,7 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                     /// Google
                     optionWidget(
                         bckClr: AppColors.white,
-                        title: LocalString.signWithGoogle,
+                        title: signWithGoogle,
                         textClr: AppColors.black,
                         imagePath: ImagePathAssets.googleImg,
                         onTap: controller.onClickFunction(
@@ -52,7 +53,7 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                     if (Platform.isIOS)
                       optionWidget(
                           bckClr: AppColors.grey,
-                          title: LocalString.signWithApple,
+                          title: signWithApple,
                           textClr: AppColors.white,
                           imagePath: ImagePathAssets.appleImg,
                           onTap: controller.onClickFunction(
@@ -61,7 +62,7 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                     /// Without Login
                     optionWidget(
                         bckClr: AppColors.twitterClr,
-                        title: LocalString.signWithoutLogin,
+                        title: signWithoutLogin,
                         textClr: AppColors.white,
                         onTap: controller.onClickFunction(
                             action: OnClick.continueWithoutLogin,

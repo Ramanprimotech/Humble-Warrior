@@ -1,10 +1,10 @@
 import 'dart:developer';
+
+import 'package:humble_warrior/hw.dart';
 import 'package:intl/intl.dart';
 
 import '../modals/requests/token_model_request.dart';
 import '../network/api_call.dart';
-
-import 'package:humble_warrior/hw.dart';
 
 class TokenManager {
   final Function() onTokenGenerate;
@@ -25,10 +25,7 @@ class TokenManager {
     _token = _prefs!.getString(_TOKEN_KEY);
     _tokenExpirationDuration = _prefs!.getString(_TOKEN_EXPIRY_KEY);
 
-    log(_token.toString(), name: " Token");
     if (_token == null) {
-      log("Toke New", name: "New Token");
-      // token doesn't exist, so generate a new one
       await _generateToken().then((value) {
         if (value) {
           _startTimer();
@@ -41,13 +38,7 @@ class TokenManager {
       Endpoints.token = _token!;
       _startTimer();
     }
-
-    // set up timer to update token after 24 hours
   }
-
-  // String getToken() {
-  //   return _token;
-  // }
 
   void _startTimer() async {
     // cancel existing timer if it exists
@@ -77,9 +68,6 @@ class TokenManager {
     DateTime expiration = dateFormat.parse(_tokenExpirationDuration!);
     int refreshTime = expiration.difference(currentDateTime).inSeconds;
 
-    log(expiration.toString(), name: "Token Expiration Date");
-    log(refreshTime.toString(), name: "Token Expiration In Seconds");
-
     return refreshTime;
   }
 
@@ -97,14 +85,12 @@ class TokenManager {
       } else {
         String token = value.token!;
         String tokenExpire = value.tokenExpire!;
-        log("${value.token}", name: "Token API");
         _token = value.token;
         _tokenExpirationDuration = value.tokenExpire;
 
         Endpoints.token = value.token.toString();
         _prefs!.setString(_TOKEN_KEY, token);
         _prefs!.setString(_TOKEN_EXPIRY_KEY, tokenExpire);
-        log(value.token.toString());
       }
     });
     return true;

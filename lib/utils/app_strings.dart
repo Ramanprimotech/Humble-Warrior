@@ -23,29 +23,8 @@ const String photoViewerTxt = "Photo Viewer";
 
 /*===================================================Home page strings========================================================*/
 
-// const String menTxt = "Men";
-// const String giftTxt = "Gift";
-// const String giftForMomTxt = "Gift for Mom";
-// const String healthTxt = "Health";
-// const String kidsTxt = "Kids";
-// const String foodTxt = "Food";
-// const String kitchenTxt = "Kitchen";
-// const String womensFashionTxt = "Women's Fashion";
-// const String outdoorTxt = "Outdoor";
-// const String travelTxt = "Travel";
-// const String packingTxt = "Packing";
-// const String fitnessTxt = "Fitness";
-// const String jewelryTxt = "Jewelry";
-// const String babyTxt = "Baby";
-// const String booksTxt = "Books";
-// const String vehiclesTxt = "Vehicles";
-// const String petsTxt = "Pets";
 const String brandsTxt = "BRAND'S";
 const String viewAllTxt = "VIEW ALL";
-// const String nikeTxt = "Nike";
-// const String adidasTxt = "Adidas";
-// const String reebokTxt = "Reebok";
-// const String gucciTxt = "Gucci";
 const String donnaDailyDealTxt = "Donna's Daily Deals";
 const String donnaFavouriteDealTxt = "Donna's Favourite Things";
 const String donnaFrontPageDealTxt = "Front Page Deals";
@@ -53,12 +32,16 @@ const String donnaFrontPageDealTxt = "Front Page Deals";
 // const String brandLink = "https://humblewarrior.com/";
 
 /*===================================================My Account Page strings========================================================*/
-
+const String signWithFacebook = "Login with Facebook";
+const String signWithGoogle = "Login with Google";
+const String signWithApple = "Login with Apple";
+const String signWithoutLogin = "Continue Without Login";
 const String myAccountTxt = "MY ACCOUNT";
 const String accountDetailsTxt = "Account Details";
 const String notificationsTxt = "Notifications";
 const String filterTxt = "Filter";
 const String theHumbleWarriorTxt = "THE HUMBLE WARRIOR";
+const String theHumbleWarriorLowerTxt = "The Humble Warrior";
 const String aboutDonna = "About Donna";
 const String shareWithFriendsTxt = "Share with friends";
 const String settingsTxt = "SETTINGS";
@@ -68,8 +51,6 @@ const String helpSupportTxt = "Help & Support";
 const String termsConditionsTxt = "Terms & Conditions";
 const String login = "Login";
 const String logoutTxt = "Logout";
-// const String appVersionTxt = "APP VERSION";
-// const String addPhotoTxt = "Add Photo";
 
 /*===================================================About Donna Page strings========================================================*/
 
@@ -109,19 +90,13 @@ const String userEmail = "userEmail";
 const String userName = "userName";
 const String userPhoneNumber = "userPhoneNumber";
 const String userProfilePic = "userProfilePic";
-// const String userId = "userId";
-// const String showMoreTxt = 'Show more';
-// const String showLessTxt = 'Show less';
 const String readlessTxt = 'read less';
 const String readmoreTxt = 'read more';
 const String accessingMsgTxt = 'Please Login for accessing this feature.';
-// const String webSiteError = 'Unable to reach the website';
 const String gotoLoginTxt = 'Go to Login';
 const String retryTxt = 'Retry';
-// const String myFvrtTxt = 'My Favourite';
 const String buyNowTxt = 'Buy Now';
 const String sortTxt = "Sort";
-// const String notNowTxt = "Not Now";
 const String loginWishTxt = "Login to add items to wishlist";
 
 /*===================================================Shared Preference========================================================*/

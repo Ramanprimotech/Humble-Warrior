@@ -1,8 +1,5 @@
 import 'package:humble_warrior/hw.dart';
 
-import '../../modals/response/brands_response_mdel.dart';
-import '../../modals/response/home_categories_response_model.dart';
-
 class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   final BuildContext context;
   final String searchText;
