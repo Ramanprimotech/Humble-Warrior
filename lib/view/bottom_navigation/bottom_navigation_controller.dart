@@ -10,21 +10,8 @@ class BottomNavigationController extends GetxController {
   final List<Widget> _navigationItems = [
     const HomeScreen(),
     const WishList(),
-    Placeholder(),
-    Placeholder(),
-
-    // /// Amazon view
-    // const WebViewScreenWidget(
-    //     title: hwAmazonTxt,
-    //     key: Key(hwAmazonTxt),
-    //     url: "https://www.amazon.com/shop/influencer-1604f2b0"),
-    //
-    // /// Facebook View
-    // const WebViewScreenWidget(
-    //   title: joinUsTxt,
-    //   url: "https://www.facebook.com/groups/209617206226617",
-    //   key: Key(joinUsTxt),
-    // ),
+    const Placeholder(),
+    const Placeholder(),
     const MyAccount(),
   ];
 

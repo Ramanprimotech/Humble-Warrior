@@ -71,7 +71,7 @@ class CommonWidgets {
         height: height ?? 180,
         width: Get.width,
         padding: 20.pa,
-        decoration: CustomBoxDecorations().shadow(context: context),
+        decoration: CustomBoxDecorations(context: context).shadow(),
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           AppText(errorText,
@@ -110,7 +110,7 @@ class CommonWidgets {
 
       // padding: const EdgeInsets.only(right: 20),
       width: MediaQuery.of(Get.context!).size.width,
-      decoration: CustomBoxDecorations().shadow(context: context),
+      decoration: CustomBoxDecorations(context: context).shadow(),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

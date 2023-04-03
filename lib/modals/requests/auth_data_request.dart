@@ -15,11 +15,11 @@ class AuthDataRequest {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['token'] = this.token;
-    data['device'] = this.device;
-    data['user_id'] = this.userId;
-    data['email'] = this.email;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['token'] = token;
+    data['device'] = device;
+    data['user_id'] = userId;
+    data['email'] = email;
     return data;
   }
 

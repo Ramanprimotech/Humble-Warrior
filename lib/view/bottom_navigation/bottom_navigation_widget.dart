@@ -7,13 +7,7 @@ Widget bottomNavigationWidget(BuildContext context) {
   final ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
   final BottomNavigationController ctr = Get.find();
   return Container(
-    decoration: BoxDecoration(boxShadow: [
-      BoxShadow(
-        blurRadius: 2,
-        spreadRadius: 2,
-        color: shadowTheme.shadowColor!,
-      ),
-    ]),
+    decoration: CustomBoxDecorations(context: context).shadowAll(),
     child: BottomNavigationBar(
       elevation: 10,
       items: <BottomNavigationBarItem>[

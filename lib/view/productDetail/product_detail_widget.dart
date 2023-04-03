@@ -7,7 +7,7 @@ class ProductDetailWidget {
 
   Widget productText(context, title) {
     return Container(
-      decoration: CustomBoxDecorations().shadow(context: context),
+      decoration: CustomBoxDecorations(context: context).shadow(),
       width: MediaQuery.of(Get.context!).size.width * .9,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

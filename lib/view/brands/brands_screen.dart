@@ -1,5 +1,4 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 
 class BrandsScreen extends StatefulWidget {
   const BrandsScreen({Key? key}) : super(key: key);
@@ -63,14 +62,6 @@ class _BrandsScreenState extends State<BrandsScreen> {
             ),
           ),
         ),
-        // actions: [
-        //   IconButton(
-        //       padding: 16.pr,
-        //       onPressed: () {
-        //         // Get.toNamed(AppRoutes.sortPages);
-        //       },
-        //       icon: AppIcons.filter(size: 35))
-        // ],
       ),
       bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
@@ -78,8 +69,6 @@ class _BrandsScreenState extends State<BrandsScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // CommonWidgets.titleBar(context,
-              //     title: "$brandsTxt I", icon: true, fontSize: 20),
               Expanded(
                 child: Container(
                   padding: 20.ph,

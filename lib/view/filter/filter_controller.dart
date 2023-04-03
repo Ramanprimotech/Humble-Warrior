@@ -1,5 +1,4 @@
 import '../../hw.dart';
-import '../../modals/response/product_category_response.dart';
 
 class FilterController extends GetxController {
   RxList<ProductCategoryItem> record = <ProductCategoryItem>[].obs;
@@ -44,7 +43,7 @@ class FilterController extends GetxController {
       record.value.add(item);
     }
 
-    if (record.value.length == 0) {
+    if (record.value.isEmpty) {
       selevtedVisibility.value = false;
     }
     update();

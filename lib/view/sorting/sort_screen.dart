@@ -97,8 +97,8 @@ class _SortState extends State<Sort> {
                         margin: 20.pa,
                         width: MediaQuery.of(Get.context!).size.width,
                         alignment: Alignment.center,
-                        decoration: CustomBoxDecorations()
-                            .shadow(context: context, color: AppColors.primary),
+                        decoration: CustomBoxDecorations(context: context)
+                            .shadow(color: AppColors.primary),
                         /*BoxDecoration(
                       color: AppColors.primary,
                       borderRadius: BorderRadius.circular(10),

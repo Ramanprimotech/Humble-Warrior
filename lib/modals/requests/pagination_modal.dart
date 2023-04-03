@@ -27,14 +27,14 @@ class PaginationModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['category_id'] = this.categoryId;
-    data['page'] = this.page;
-    data['sortname'] = this.sortName;
-    data['sortorder'] = this.sortOrder;
-    data['search'] = this.search;
-    data['post_type'] = this.postType;
-    data['cat_ids'] = this.catIds;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['category_id'] = categoryId;
+    data['page'] = page;
+    data['sortname'] = sortName;
+    data['sortorder'] = sortOrder;
+    data['search'] = search;
+    data['post_type'] = postType;
+    data['cat_ids'] = catIds;
     return data;
   }
 

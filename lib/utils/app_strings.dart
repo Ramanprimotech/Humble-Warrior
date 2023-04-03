@@ -41,6 +41,7 @@ const String accountDetailsTxt = "Account Details";
 const String notificationsTxt = "Notifications";
 const String filterTxt = "Filter";
 const String theHumbleWarriorTxt = "THE HUMBLE WARRIOR";
+const String theHumbleWarriorLowerTxt = "The Humble Warrior";
 const String aboutDonna = "About Donna";
 const String shareWithFriendsTxt = "Share with friends";
 const String settingsTxt = "SETTINGS";
