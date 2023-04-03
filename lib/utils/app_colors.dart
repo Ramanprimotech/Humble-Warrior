@@ -1,7 +1,7 @@
 import 'package:humble_warrior/hw.dart';
 
 class AppColors {
-  static const Color purple = Color(0xFF443266);
+  // static const Color purple = Color(0xFF443266);
   static const Color blue = Color(0xff36A9C2);
   static const Color white = Colors.white;
   static const Color black = Colors.black;

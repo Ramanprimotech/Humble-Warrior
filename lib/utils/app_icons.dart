@@ -1,13 +1,6 @@
 import 'package:humble_warrior/hw.dart';
 
 class AppIcons {
-  // IconData
-
-  //Bottom Navigation ==============>
-  // static Icon home() => const Icon(Icons.home);
-
-  // static Icon favourite(BuildContext context) => Icon(Icons.favorite_outlined,color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,);
-
   static Image favourite(BuildContext context) => Image.asset(
         ImagePathAssets.heartIcon,
         height: 20,
@@ -149,19 +142,14 @@ class Heart extends StatefulWidget {
 }
 
 class _HeartState extends State<Heart> {
-
   @override
   void initState() {
-
-
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
-    setState(() {
-
-    });
+    setState(() {});
     super.didChangeDependencies();
   }
 
@@ -196,7 +184,7 @@ class _HeartState extends State<Heart> {
           },
           child: Icon(
             Icons.favorite_outlined,
-            color:isLoggedIn && service.hasItem(widget.item.id.toString())
+            color: isLoggedIn && service.hasItem(widget.item.id.toString())
                 ? Colors.red
                 : widget.color,
             size: widget.size ?? Dimens.largeIcon,

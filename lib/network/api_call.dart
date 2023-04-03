@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/modals/requests/id_model.dart';
 import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
@@ -54,13 +53,9 @@ class CallAPI {
   static Future<ProductListResponse> productListAPI(
       {required PaginationModel payload, required String url}) async {
     try {
-      // payload.toString().logRequest(apiName: Endpoints.donnaDeals);
-
       var response = await APIManager().postAPICall(url: url, param: payload);
-      debugPrint("Step 0");
       ProductListResponse productListResponse =
           ProductListResponse.fromJson(response);
-      debugPrint("Step 1");
       if (response == null) {
         return ProductListResponse(data: []);
       }
@@ -69,8 +64,6 @@ class CallAPI {
       }
       return ProductListResponse(data: []);
     } catch (e) {
-      log("API", name: "API Deals $url ${payload.page}", error: e);
-      // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
       return ProductListResponse(data: []);
     }
   }
@@ -78,36 +71,19 @@ class CallAPI {
   static Future<ProductListResponse> donnaDeals(
       {required PaginationModel payload}) async {
     try {
-      // payload.toString().logRequest(apiName: Endpoints.donnaDeals);
-
       var response = await APIManager()
           .postAPICall(url: Endpoints.donnaDeals, param: payload);
 
       ProductListResponse donnaDealsResponseModal =
           ProductListResponse.fromJson(response);
-
-      //
-      // log(response.toString(), name: "${Endpoints.donnaDeals}");
-      // response.toString().logResponse(apiName: Endpoints.donnaDeals);
       if (response == null) {
         return ProductListResponse(data: []);
       }
-
-      // DialogHelper.closeDialog();
-
       if (donnaDealsResponseModal.status == true) {
-        // _userController.userModel = UserModel.fromMap(response['data']);
-        // DialogHelper.showToast(Get.context!, response['msg']);
         return donnaDealsResponseModal;
       }
-      // Endpoints.donnaDeals.logError( apiName : Endpoints.donnaDeals ,error: response);
-      // DialogHelper.showErrorDialog(
-      //   title: 'Error Updating',
-      //   description: response['msg'],
-      // );
       return ProductListResponse(data: []);
     } catch (e) {
-      // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
       return ProductListResponse(data: []);
     }
   }
@@ -115,36 +91,19 @@ class CallAPI {
   static Future<FrontPageResponseModel> frontPage(
       {required PaginationModel payload}) async {
     try {
-      // payload.toString().logRequest(apiName: Endpoints.donnaDeals);
-
       var response = await APIManager()
           .postAPICall(url: Endpoints.frontPage, param: payload);
 
       FrontPageResponseModel frontPageResponseModel =
           FrontPageResponseModel.fromJson(response);
-
-      //
-      // log(response.toString(), name: "${Endpoints.donnaDeals}");
-      // response.toString().logResponse(apiName: Endpoints.donnaDeals);
       if (response == null) {
         return FrontPageResponseModel(data: []);
       }
-
-      // DialogHelper.closeDialog();
-
       if (frontPageResponseModel.status == true) {
-        // _userController.userModel = UserModel.fromMap(response['data']);
-        // DialogHelper.showToast(Get.context!, response['msg']);
         return frontPageResponseModel;
       }
-      // Endpoints.donnaDeals.logError( apiName : Endpoints.donnaDeals ,error: response);
-      // DialogHelper.showErrorDialog(
-      //   title: 'Error Updating',
-      //   description: response['msg'],
-      // );
       return FrontPageResponseModel(data: []);
     } catch (e) {
-      // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
       return FrontPageResponseModel(data: []);
     }
   }
@@ -152,36 +111,19 @@ class CallAPI {
   static Future<DonnaFavouriteResponseModel> donnaFavourite(
       {required PaginationModel payload}) async {
     try {
-      // payload.toString().logRequest(apiName: Endpoints.donnaDeals);
-
       var response = await APIManager()
           .postAPICall(url: Endpoints.donnaFavourite, param: payload);
 
       DonnaFavouriteResponseModel donnaFavouriteResponseModel =
           DonnaFavouriteResponseModel.fromJson(response);
-
-      //
-      // log(response.toString(), name: "${Endpoints.donnaDeals}");
-      // response.toString().logResponse(apiName: Endpoints.donnaDeals);
       if (response == null) {
         return DonnaFavouriteResponseModel(data: []);
       }
-
-      // DialogHelper.closeDialog();
-
       if (donnaFavouriteResponseModel.status == true) {
-        // _userController.userModel = UserModel.fromMap(response['data']);
-        // DialogHelper.showToast(Get.context!, response['msg']);
         return donnaFavouriteResponseModel;
       }
-      // Endpoints.donnaDeals.logError( apiName : Endpoints.donnaDeals ,error: response);
-      // DialogHelper.showErrorDialog(
-      //   title: 'Error Updating',
-      //   description: response['msg'],
-      // );
       return DonnaFavouriteResponseModel(data: []);
     } catch (e) {
-      // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
       return DonnaFavouriteResponseModel(data: []);
     }
   }
@@ -190,13 +132,11 @@ class CallAPI {
     try {
       var response =
           await APIManager().postAllCallNonParam(url: Endpoints.allBrands);
-
       BrandsResponseModel brandsResponseModel =
           BrandsResponseModel.fromJson(response);
       if (response == null) {
         return [];
       }
-
       if (brandsResponseModel.status == true) {
         return brandsResponseModel.data!;
       }
@@ -232,7 +172,6 @@ class CallAPI {
     try {
       var response =
           await APIManager().postAllCallNonParam(url: Endpoints.homeCategories);
-
       HomeCategoryResponseModel homeCategoryResponseModel =
           HomeCategoryResponseModel.fromJson(response);
       if (response == null) {
@@ -258,14 +197,9 @@ class CallAPI {
       log(staticPagesResponse.status.toString(), name: "static page");
       if (staticPagesResponse.status == true) {
         log(staticPagesResponse.data![0].pageContent.toString(), name: "Help");
-      } else {
-        log(staticPagesResponse.data![0].pageContent.toString(),
-            name: "Help", error: "sdfdfdfgdkfjdkfjdkfjdk");
-        print("${staticPagesResponse.status.toString()}==============");
       }
       return staticPagesResponse.data!;
     } catch (e) {
-      log("API", name: "Help", error: e.toString());
       return [];
     }
   }
@@ -302,9 +236,6 @@ class CallAPI {
         var data = jsonDecode(response.body);
         await SharePreferenceData.addStringToSF(
             spRegisterUserId, "${data['user_id']}");
-        // if (context.mounted) {
-        //   DialogHelper.showToast(context, "Error sending user login data");
-        // }
       }
 
       return;
@@ -318,29 +249,20 @@ class CallAPI {
   static Future<NotificationResponseModel> notificationListAPI(
       {required Map payload}) async {
     try {
-      // payload.toString().logRequest(apiName: Endpoints.donnaDeals);
-
-      log("${payload.toString()}", name: "Notification ");
       final response = await http.post(
           Uri.parse("${Endpoints.baseUrl}${Endpoints.notificationList}"),
           body: payload);
-      log("${response.body}", name: "Notification Data");
       NotificationResponseModel notificationResponseModel =
           NotificationResponseModel(posts: []);
       if (response.statusCode == 200) {
         notificationResponseModel =
             NotificationResponseModel.fromJson(jsonDecode(response.body));
       }
-
       if (response == null) {
         return notificationResponseModel;
       }
       return notificationResponseModel;
-
-      return NotificationResponseModel(posts: []);
     } catch (e) {
-      log("API", name: "API Deals 1 $payload", error: e);
-      // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
       return NotificationResponseModel(posts: []);
     }
   }
@@ -348,22 +270,17 @@ class CallAPI {
   ///  Notification Status API
   static Future<bool> notificationStatusAPI({required Map payload}) async {
     try {
-      // payload.toString().logRequest(apiName: Endpoints.donnaDeals);
-
       final response = await http.post(
           Uri.parse("${Endpoints.baseUrl}${Endpoints.notificationList}"),
           body: payload);
       if (response.statusCode == 200) {
         return true;
       }
-
       if (response == null) {
         return false;
       }
       return true;
     } catch (e) {
-      log("API", name: "API Deals 2 $payload", error: e);
-      // Endpoints.donnaDeals.logError(apiName: Endpoints.donnaDeals, error: e);
       return false;
     }
   }

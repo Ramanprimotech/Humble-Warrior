@@ -33,7 +33,6 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       height: 50,
       width: double.infinity,
       padding: 8.pa,
-      // margin: 8.pa,
       decoration: BoxDecoration(
           border: Border.all(
               width: 1,
@@ -102,7 +101,7 @@ class CustomAppBar extends StatelessWidget {
                 ),
               ),
             )
-          : SizedBox(),
+          : const SizedBox(),
       actions: actions,
     );
   }

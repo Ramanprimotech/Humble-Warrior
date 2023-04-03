@@ -7,20 +7,10 @@ class CommonUtils {
   /// Share Data
   Future<void> share({required String shareUrl}) async {
     Share.share(shareUrl);
-    // await FlutterShare.share(
-    //
-    //     linkUrl: 'https://flutter.dev/', title: '',
-    //
-    // );
   }
 
   /// URl Launcher
   Future<void> urlLauncher({required String url, String? title}) async {
-    // Get.to(WebViewScreenWidget(
-    //   url: url,
-    //   title: title,
-    //   home: false,
-    // ));
     final Uri uri = Uri.parse(url);
     if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
       throw Exception('Could not launch $uri');
@@ -78,7 +68,6 @@ class CommonUtils {
     return Container(
       decoration: BoxDecoration(
         borderRadius: 12.brc,
-        // color: Colors.white,
       ),
       child: CupertinoActionSheetAction(
         isDefaultAction: true,

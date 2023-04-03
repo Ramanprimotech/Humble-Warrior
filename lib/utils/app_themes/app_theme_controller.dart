@@ -28,8 +28,6 @@ class ThemeController extends GetxController {
       searchHintColor.value = AppColors.black;
       borderColor.value = AppColors.white;
       topicBorderColor.value = AppColors.white;
-
-      debugPrint(" iff part --- ${appBarColor.value}");
     } else {
       /// light mode
       appBarColor.value = AppColors.white;
@@ -40,7 +38,6 @@ class ThemeController extends GetxController {
       searchHintColor.value = AppColors.white;
       borderColor.value = AppColors.gray;
       topicBorderColor.value = AppColors.primary;
-      debugPrint(" else  part --- ${appBarColor.value}");
     }
   }
 
@@ -49,35 +46,19 @@ class ThemeController extends GetxController {
     _themeMode = themeMode;
     update();
     await SharePreferenceData.addBoolToSF("mode", themeMode == ThemeMode.dark);
-    // prefs = await SharedPreferences.getInstance();
-    // await prefs.setString('theme', themeMode.toString().split('.')[1]);
   }
 
-  // getThemeModeFromPreferences() async {
-  //   ThemeMode themeMode;
-  //   prefs = await SharedPreferences.getInstance();
-  //   String themeText = prefs.getString('theme') ?? 'system';
-  //   try {
-  //     themeMode =
-  //         ThemeMode.values.firstWhere((e) => describeEnum(e) == themeText);
-  //   } catch (e) {
-  //     themeMode = ThemeMode.system;
-  //   }
-  //   setThemeMode(themeMode);
-  // }
   getThemeModeFromPreferences() async {
     ThemeMode themeMode;
     bool? isDark = await SharePreferenceData.getBoolValuesSF("mode");
     try {
       if (isDark == null) {
-        // themeMode = ThemeMode.system;
         themeMode = ThemeMode.light;
       } else {
         themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
       }
     } catch (e) {
       themeMode = ThemeMode.light;
-      // themeMode = ThemeMode.system;
     }
     setThemeMode(themeMode);
     return themeMode;

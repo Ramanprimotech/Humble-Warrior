@@ -11,17 +11,16 @@ class CustomPhotoViewer extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            /*url==""?CustomShimmer(
-          height: 400,width: Get.width,
-        ):*/PhotoView(
-              loadingBuilder: (BuildContext context, ImageChunkEvent? loadingProgress) {
+            PhotoView(
+              loadingBuilder:
+                  (BuildContext context, ImageChunkEvent? loadingProgress) {
                 return Center(
                   child: CustomShimmer(
                     height: 450,
                     width: Get.width,
                   ),
                 );
-            },
+              },
               initialScale: PhotoViewComputedScale.contained,
               minScale: PhotoViewComputedScale.contained,
               maxScale: PhotoViewComputedScale.contained * 1.5,

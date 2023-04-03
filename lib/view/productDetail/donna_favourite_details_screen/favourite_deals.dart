@@ -3,7 +3,7 @@ import 'package:humble_warrior/utils/common/html.dart';
 import 'package:humble_warrior/utils/common/photo_viewer.dart';
 import 'package:humble_warrior/view/productDetail/product_detail_controller.dart';
 
-class FavouriteDeals extends StatelessWidget with CommonAppBar {
+class FavouriteDeals extends StatelessWidget {
   const FavouriteDeals({Key? key}) : super(key: key);
 
   @override

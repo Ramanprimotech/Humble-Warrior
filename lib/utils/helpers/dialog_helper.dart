@@ -41,15 +41,14 @@ abstract class DialogHelper {
     );
   }
 
-
   static Future<void> showAlertDialog(
-      String message, {
-        String? title,
-        double? textFont,
-        required VoidCallback onTap,
-      }) async {
+    String message, {
+    String? title,
+    double? textFont,
+    required VoidCallback onTap,
+  }) async {
     DialogueThemeExtention dialogueThemeExtention =
-    Theme.of(Get.context!).extension<DialogueThemeExtention>()!;
+        Theme.of(Get.context!).extension<DialogueThemeExtention>()!;
     await Get.dialog(
       Dialog(
         shape: 16.shape,
@@ -72,7 +71,7 @@ abstract class DialogHelper {
                 16.shb,
                 AppText(
                   message,
-                  fontSize: textFont??18,
+                  fontSize: textFont ?? 18,
                   maxLines: 6,
                   textAlign: TextAlign.center,
                 ),
@@ -86,8 +85,10 @@ abstract class DialogHelper {
                     backgroundColor: AppColors.primary,
                   ),
                   onPressed: onTap,
-                  child: AppText('OK',
-                    color: Colors.white, fontWeight: FontWeight.bold,
+                  child: const AppText(
+                    'OK',
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
                 ),
@@ -102,24 +103,27 @@ abstract class DialogHelper {
   }
 
   static Future<void> showConfirmationDialog({
-    required BuildContext context, required void Function() action,
+    required BuildContext context,
+    required void Function() action,
     void Function()? cancelAction,
-    String? actionLabel, String? cancelLabel, String? message,
+    String? actionLabel,
+    String? cancelLabel,
+    String? message,
   }) async {
     DialogueThemeExtention dialogueThemeExtention =
-    Theme.of(Get.context!).extension<DialogueThemeExtention>()!;
+        Theme.of(Get.context!).extension<DialogueThemeExtention>()!;
     showDialog(
       barrierDismissible: false,
       context: Get.context!,
       builder: (context) => AlertDialog(
         surfaceTintColor: Colors.transparent,
         contentPadding:
-        const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         alignment: Alignment.center,
         actionsAlignment: MainAxisAlignment.spaceAround,
         backgroundColor: dialogueThemeExtention.backGroundColor,
         elevation: 5,
-        title: AppText(message??"Are you Sure?",
+        title: AppText(message ?? "Are you Sure?",
             color: dialogueThemeExtention.textColor,
             textAlign: TextAlign.center,
             maxLines: 2,
@@ -134,9 +138,11 @@ abstract class DialogHelper {
               backgroundColor: AppColors.primary,
             ),
             onPressed: action,
-            child: AppText(actionLabel??'OK',
-                color: Colors.white, fontWeight: FontWeight.bold,
-            fontSize: 14,
+            child: AppText(
+              actionLabel ?? 'OK',
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
             ),
           ),
           OutlinedButton(
@@ -145,18 +151,19 @@ abstract class DialogHelper {
               shape: MaterialStateProperty.resolveWith((states) =>
                   RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10))),
-              // overlayColor: MaterialStateProperty.all(AppColors.primary),
               side: MaterialStateProperty.resolveWith(
-                    (states) => BorderSide(
+                (states) => BorderSide(
                   color: AppColors.primary,
                   width: 2,
                 ),
               ),
             ),
-            onPressed: cancelAction??() {
-              Get.back();
-            },
-            child: AppText(cancelLabel??'Cancel', fontWeight: FontWeight.bold),
+            onPressed: cancelAction ??
+                () {
+                  Get.back();
+                },
+            child:
+                AppText(cancelLabel ?? 'Cancel', fontWeight: FontWeight.bold),
           )
         ],
       ),
