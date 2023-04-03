@@ -1,5 +1,4 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/response/product_category_response.dart';
 
 class HomePageProductCategoryAPIWidgets
     extends FutureAPI<List<ProductCategoryItem>> {

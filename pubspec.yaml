@@ -35,11 +35,6 @@ dependencies:
     git:
       url: https://username@github.com/KiranPrimotech/authentication.git
       ref: master
-#  authentication:
-#    git:
-#      url: https://github.com/Ramanprimotech/SocialAuth.git
-#      ref: master
-
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -62,7 +57,7 @@ dependencies:
   firebase_core:
   firebase_auth: ^4.2.5
   flutter_overlay_loader: ^2.0.0
-  readmore: ^2.2.0
+#  readmore: ^2.2.0
 
 #  webview_flutter:
 #  webview_flutter: ^2.0.4
