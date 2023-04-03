@@ -5,7 +5,6 @@ class ImagePathAssets {
       "https://seeklogo.com/images/S/svgator-logo-B058419CD8-seeklogo.com.png";
   static const String bookingImg = "assets/images/img_booking.png";
 
-
   static const String loginImg = "assets/image/login.png";
   static const String callImg = "assets/image/call.png";
   static const String logoAnimation = "assets/image/logo-animation.gif";
