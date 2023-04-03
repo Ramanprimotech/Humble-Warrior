@@ -5,8 +5,9 @@ import '../../modals/response/home_categories_response_model.dart';
 
 class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   final BuildContext context;
+  final String searchText;
 
-  BrandAPIWidgets({required this.context});
+  BrandAPIWidgets({required this.context, required this.searchText});
 
   /// Grid Parameters
   final int crossAxisCount = 2;
@@ -28,7 +29,18 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
 
   @override
   Widget success({List<BrandDetails>? data}) {
-    List<BrandDetails> dataa = data ?? [];
+    List<BrandDetails> dataa = data != null
+        ? data.where((element) {
+            return element.brandName!
+                .toLowerCase()
+                .contains(searchText.toLowerCase().trim());
+          }).toList()
+        : [];
+    if (dataa.isEmpty) {
+      return const Center(
+        child: AppText("No Brand Found"),
+      );
+    }
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,

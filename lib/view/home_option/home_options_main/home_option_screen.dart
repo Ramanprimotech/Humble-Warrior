@@ -2,14 +2,16 @@ import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/view/home_option/tab_screens/front_page_deals.dart';
 
 class HomeOptionScreen extends GetView<HomeOptionController> {
-  const HomeOptionScreen({Key? key}) : super(key: key);
+  HomeOptionScreen({Key? key}) : super(key: key);
 
+  final int data = Get.arguments[0];
   @override
   Widget build(BuildContext context) {
     // FToast().init(context);
     const double tabFontSize = 18;
-    final HomeOptionController controller = Get.find();
 
+    final HomeOptionController controller = Get.find();
+    controller.selectedIndex.value = data;
     return Scaffold(
       bottomNavigationBar: bottomNavigationWidget(context),
       appBar: AppBar(

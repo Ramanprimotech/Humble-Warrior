@@ -33,7 +33,7 @@ class AppPages {
         name: AppRoutes.homeOptions,
         page: () {
           _bottomNavigationController.isNavigated = true;
-          return const HomeOptionScreen();
+          return  HomeOptionScreen();
         },
         binding: HomeOptionBindings()),
     GetPage(

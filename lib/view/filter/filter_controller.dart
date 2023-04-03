@@ -2,7 +2,7 @@ import '../../hw.dart';
 import '../../modals/response/product_category_response.dart';
 
 class FilterController extends GetxController {
-  RxList record = <ProductCategoryItem>[].obs;
+  RxList<ProductCategoryItem> record = <ProductCategoryItem>[].obs;
   RxBool selevtedVisibility = false.obs;
   int? catID;
 
@@ -56,9 +56,11 @@ class FilterController extends GetxController {
   }
 
   void removeFromWish(ProductCategoryItem item) {
-    record.value.remove(item);
-    if (record.value.length == 0) {
-      selevtedVisibility.value = false;
+    if (item.id != catID) {
+      record.value.remove(item);
+      if (record.value.length == 0) {
+        selevtedVisibility.value = false;
+      }
     }
     update();
   }
@@ -80,8 +82,16 @@ class FilterController extends GetxController {
   }
 
   void resetList() {
-    record.clear();
-    selevtedVisibility.value = false;
+    if (catID != null) {
+      for (var i = record.length - 1; i >= 0; i--) {
+        if (record[i].id != catID) {
+          record.value.remove(record[i]);
+        }
+      }
+    } else {
+      record.clear();
+      selevtedVisibility.value = false;
+    }
     update();
   }
 

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/network/api_call.dart';
 import 'package:humble_warrior/utils/app_text.dart';
@@ -48,19 +48,21 @@ class SplashController extends GetxController {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     print(
         "Logged value ---- ${await SharePreferenceData.getBoolValuesSF(spIsLogged)}");
-    if (await SharePreferenceData.getBoolValuesSF(spIsLogged) != null) {
-      Get.offNamed(AppRoutes.bottomNavigation);
+    // if (await SharePreferenceData.getBoolValuesSF(spIsLogged) == true) {
+    // Get.offNamed(AppRoutes.bottomNavigation);
+    final passCode = sharedPreferences.getString("PASSCODE");
+    if (passCode != null) {
+      _showLockScreen(
+        Get.context!,
+        opaque: false,
+        cancelButton: const AppText(
+          'Cancel',
+          fontSize: 16,
+        ),
+      );
     } else {
-      final passCode = sharedPreferences.getString("PASSCODE");
-      if (passCode != null) {
-        _showLockScreen(
-          Get.context!,
-          opaque: false,
-          cancelButton: const AppText(
-            'Cancel',
-            fontSize: 16,
-          ),
-        );
+      if (await SharePreferenceData.getBoolValuesSF(spIsLogged) == true) {
+        Get.offNamed(AppRoutes.bottomNavigation);
       } else {
         if (await SharePreferenceData.getBoolValuesSF(spIsEntered) == true) {
           Get.offNamed(AppRoutes.bottomNavigation);
@@ -69,6 +71,7 @@ class SplashController extends GetxController {
         }
       }
     }
+    // }
   }
 
   _passcodeEntered(String enteredPasscode) async {
@@ -81,7 +84,17 @@ class SplashController extends GetxController {
         if (storedPassCode == enteredPasscode) {
           // Navigator.pop(Get.context!);
           Get.back();
-          Get.offAllNamed(AppRoutes.bottomNavigation);
+          if (await SharePreferenceData.getBoolValuesSF(spIsLogged) == true) {
+            Get.offNamed(AppRoutes.bottomNavigation);
+          } else {
+            if (await SharePreferenceData.getBoolValuesSF(spIsEntered) ==
+                true) {
+              Get.offNamed(AppRoutes.bottomNavigation);
+            } else {
+              Get.offNamed(AppRoutes.loginPage);
+            }
+          }
+          // Get.offAllNamed(AppRoutes.bottomNavigation);
           // Navigator.of(Get.context!).pushNamedAndRemoveUntil(
           //     '/DashbordVC', (Route<dynamic> route) => false);
         } else {
@@ -99,8 +112,8 @@ class SplashController extends GetxController {
 
   _passcodeCancelled() {
     Get.back();
-    SystemNavigator.pop();
-    // exit(0);
+    // SystemNavigator.pop();
+    exit(0);
   }
 
   _showLockScreen(BuildContext context,

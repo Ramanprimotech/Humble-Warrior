@@ -34,7 +34,7 @@ class FilterScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const AppText("Categories"),
+                const AppText("All Categories"),
                 TextButton(
                     onPressed: () {
                       _filterController.resetList();
@@ -147,8 +147,10 @@ class FilterScreen extends StatelessWidget {
                                       ),
                                     ),
                                     Expanded(
-                                      child: SizedBox(
-                                        height: productHeight,
+                                      child: Container(
+                                        alignment: Alignment.bottomCenter,
+                                        margin: 8.pv,
+                                        height: productHeight + 10,
                                         width: Get.width,
                                         child: ListView.builder(
                                             padding: 30.pr,
@@ -167,17 +169,16 @@ class FilterScreen extends StatelessWidget {
                                                       controller
                                                           .record.value[index]);
                                                 },
-                                                child: Stack(
-                                                  alignment:
-                                                      Alignment.topCenter,
-                                                  children: [
-                                                    Container(
-                                                      padding: 30.pl,
-                                                      height: productHeight,
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
+                                                child: Container(
+                                                  padding: 30.pl,
+                                                  height: productHeight,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Stack(
+                                                        alignment:
+                                                            Alignment.topRight,
                                                         children: [
                                                           SizedBox(
                                                             height:
@@ -208,27 +209,32 @@ class FilterScreen extends StatelessWidget {
                                                               },
                                                             ),
                                                           ),
-                                                          // 4.shb,
-                                                          AppText(
-                                                            controller
-                                                                    .record
-                                                                    .value[
-                                                                        index]
-                                                                    .categoryName ??
-                                                                "",
-                                                            fontSize: 14,
-                                                            maxLines: 1,
-                                                            fontWeight:
-                                                                FontWeight.w600,
+                                                          Transform.translate(
+                                                            offset:
+                                                                Offset(18, -8),
+                                                            child: const Icon(
+                                                              Icons
+                                                                  .check_circle,
+                                                              color: AppColors
+                                                                  .appGreen,
+                                                            ),
                                                           ),
                                                         ],
                                                       ),
-                                                    ),
-                                                    const Icon(
-                                                      Icons.check_circle,
-                                                      color: AppColors.appGreen,
-                                                    ),
-                                                  ],
+                                                      // 4.shb,
+                                                      AppText(
+                                                        controller
+                                                                .record
+                                                                .value[index]
+                                                                .categoryName ??
+                                                            "",
+                                                        fontSize: 14,
+                                                        maxLines: 1,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               );
                                             }),

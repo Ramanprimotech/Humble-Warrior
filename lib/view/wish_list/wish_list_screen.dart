@@ -14,7 +14,7 @@ class WishList extends StatelessWidget {
     AppBarTheme statusBarColor = AppBarTheme();
     return Scaffold(
       appBar: AppBar(
-        title: const SearchBar(),
+          title: const SearchBar(),
         actions: const [FilterIcon()],
       ),
       body: SafeArea(

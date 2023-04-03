@@ -53,7 +53,7 @@ class WishListCard extends StatelessWidget {
             decoration: BoxDecoration(
                 color: AppColors.primary,
                 borderRadius: const BorderRadius.only(
-                  // bottomLeft: Radius.circular(5),
+                  topLeft: Radius.circular(15),
                   bottomRight: Radius.circular(10),
                 )),
             child: AppText(

@@ -76,7 +76,7 @@ class FilterPageProductCategoryAPIWidgets
               child: GetBuilder<FilterController>(
                 init: controller,
                 builder: (controller) => SizedBox(
-                  height: productHeight,
+                  height: productHeight + 10,
                   width: Get.width,
                   child: ListView.builder(
                       padding: 30.pr,
@@ -94,15 +94,14 @@ class FilterPageProductCategoryAPIWidgets
                             //       record[index].id.toString(),
                             //     ]);
                           },
-                          child: Stack(
-                            alignment: Alignment.topCenter,
-                            children: [
-                              Container(
-                                padding: 30.pl,
-                                height: productHeight,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                          child: Container(
+                            padding: 30.pl,
+                            height: productHeight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Stack(
+                                  alignment: Alignment.topRight,
                                   children: [
                                     SizedBox(
                                       height: productHeight - 25,
@@ -117,25 +116,28 @@ class FilterPageProductCategoryAPIWidgets
                                         ));
                                       }, record[index].categoryImage ?? ""),
                                     ),
-                                    // 4.shb,
-                                    AppText(
-                                      record[index].categoryName ?? "",
-                                      fontSize: 14,
-                                      maxLines: 1,
-                                      fontWeight: FontWeight.w600,
+                                    Transform.translate(
+                                      offset: const Offset(18, -8),
+                                      child: Visibility(
+                                        visible: controller
+                                            .containItem(record[index]),
+                                        child: const Icon(
+                                          Icons.check_circle,
+                                          color: AppColors.appGreen,
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
-                              ),
-                              Positioned(
-                                  child: Visibility(
-                                visible: controller.containItem(record[index]),
-                                child: const Icon(
-                                  Icons.check_circle,
-                                  color: AppColors.appGreen,
+                                // 4.shb,
+                                AppText(
+                                  record[index].categoryName ?? "",
+                                  fontSize: 14,
+                                  maxLines: 1,
+                                  fontWeight: FontWeight.w600,
                                 ),
-                              )),
-                            ],
+                              ],
+                            ),
                           ),
                         );
                       }),

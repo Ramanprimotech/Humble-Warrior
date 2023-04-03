@@ -362,7 +362,10 @@ class _SearchViewState extends State<SearchView> {
                   }
                   if (snapshot.hasError) {
                     return Center(
-                      child: AppText(snapshot.error.toString()),
+                      child: AppText(
+                        snapshot.error.toString(),
+                        maxLines: 4,
+                      ),
                     );
                   }
                   if (snapshot.data!.isEmpty) {

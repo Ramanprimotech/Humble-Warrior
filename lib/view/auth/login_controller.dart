@@ -66,16 +66,17 @@ class LoginController extends GetxController {
             /// Save User Info to Local Storage
             await saveUserToLocalStorage();
 
-            Get.offAllNamed(AppRoutes.bottomNavigation);
-
             /// Auth Data API
-            await authAPI();
+            await authAPI().whenComplete(
+                () => Get.offAllNamed(AppRoutes.bottomNavigation));
           } else {
             Loader.hide();
           }
-        } catch (e) {
+        } catch (e, st) {
           Loader.hide();
-          // Get.snackbar("Error ", "$e ");
+          print(e);
+          printError(info: st.toString());
+          Get.snackbar("Error ", "$e ");
         }
       },
 
@@ -84,13 +85,13 @@ class LoginController extends GetxController {
         user = await AuthManager().appleLogin();
         if (user != null) {
           await saveUserToLocalStorage();
-          if (userPhoneNumber.isEmpty || userProfilePic.isEmpty) {
-            Get.offAllNamed(AppRoutes.bottomNavigation);
-          }
-          Get.offAllNamed(AppRoutes.bottomNavigation);
+          // if (userPhoneNumber.isEmpty || userProfilePic.isEmpty) {
+          //   Get.offAllNamed(AppRoutes.bottomNavigation);
+          // }
 
           /// Auth Data API
-          await authAPI();
+          await authAPI()
+              .whenComplete(() => Get.offAllNamed(AppRoutes.bottomNavigation));
         }
       },
 
@@ -100,8 +101,7 @@ class LoginController extends GetxController {
         await SharePreferenceData.addBoolToSF(spIsEntered, true);
 
         /// Auth Data API
-        await authAPI()
-            .whenComplete(() => Get.offAllNamed(AppRoutes.bottomNavigation));
+        Get.offAllNamed(AppRoutes.bottomNavigation);
       }
     };
     Function act = actions[action]!;
@@ -110,7 +110,7 @@ class LoginController extends GetxController {
 
   ///-----------------------Save User Info to Local Storage--------------------------///
   Future<void> saveUserToLocalStorage() async {
-    isLoggedIn =
+    isLoggedIn = true;
     await SharePreferenceData.addBoolToSF(spIsLogged, true);
     await SharePreferenceData.addStringToSF(userEmail, "${user?.email}");
     await SharePreferenceData.addStringToSF(
