@@ -214,7 +214,7 @@ class FilterScreen extends StatelessWidget {
                                                               ),
                                                             ),
                                                             Transform.translate(
-                                                              offset: Offset(
+                                                              offset: const Offset(
                                                                   18, -8),
                                                               child: const Icon(
                                                                 Icons

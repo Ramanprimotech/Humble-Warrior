@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:humble_warrior/hw.dart';
 
-import '../../../network/api_call.dart';
 
 class DailyDealProductController extends GetxController {
   final TextEditingController searchTextController = TextEditingController();

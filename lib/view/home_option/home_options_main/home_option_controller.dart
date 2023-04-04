@@ -11,7 +11,7 @@ class HomeOptionController extends GetxController
   int initialIndex = Get.arguments[0];
   late BuildContext context;
   HiveService service = Get.find<HiveService>();
-  SortController _sortController = Get.find();
+  final SortController _sortController = Get.find();
 
   ///Storage has item
   bool hasItemInDatabase(String id) {

@@ -13,7 +13,7 @@ class SearchResponseModel {
     if (json['data'] != null) {
       data = <SearchPosts>[];
       json['data'].forEach((v) {
-        data!.add(new SearchPosts.fromJson(v));
+        data!.add(SearchPosts.fromJson(v));
       });
     }
     message = json['message'];

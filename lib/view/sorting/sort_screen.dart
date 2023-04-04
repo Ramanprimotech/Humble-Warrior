@@ -14,6 +14,7 @@ class _SortState extends State<Sort> {
 
   @override
   void initState() {
+    super.initState();
     controller.filterInitialData();
   }
 

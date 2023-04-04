@@ -41,7 +41,9 @@ class LoginController extends GetxController {
             /// Auth Data API
             await authAPI();
           }
-        } catch (e) {}
+        } catch (e) {
+          log();
+        }
       },
 
       ///------------ Click Google

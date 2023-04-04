@@ -146,7 +146,6 @@ ItemCard frontPageCard(
 
 Widget frontPageButton(
     ProductDetailsResponse details, int index, BuildContext context) {
-  HiveService service = Get.find<HiveService>();
   Color color = Theme.of(context).textTheme.displayMedium!.color!;
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,
