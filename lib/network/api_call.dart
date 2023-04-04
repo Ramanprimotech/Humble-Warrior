@@ -1,23 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:http/http.dart' as http;
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/requests/id_model.dart';
-import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
-import 'package:humble_warrior/modals/response/donna_favourite_response_model.dart';
-import 'package:humble_warrior/modals/response/front_page_response_model.dart';
-import 'package:humble_warrior/modals/response/home_categories_response_model.dart';
-import 'package:humble_warrior/modals/response/notification_response_model.dart';
-import 'package:humble_warrior/modals/response/product_category_response.dart';
-import 'package:humble_warrior/modals/response/product_details_api_response.dart';
-import 'package:humble_warrior/modals/response/product_list_response.dart';
-import 'package:humble_warrior/modals/response/static_page_model.dart';
-import 'package:humble_warrior/modals/response/token_response.dart';
-
-import '../modals/requests/pagination_modal.dart';
-import '../modals/requests/token_model_request.dart';
-import 'api_manager.dart';
 
 class CallAPI {
   static Future<TokenResponseModel> generateToken(

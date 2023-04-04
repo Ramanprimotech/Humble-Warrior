@@ -120,7 +120,7 @@ Widget donnaDealsButton(
         Padding(
           padding: const EdgeInsets.only(left: 15.0, top: 8.0),
           child: AppText(
-            "${details.itemName!}",
+            details.itemName!,
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),

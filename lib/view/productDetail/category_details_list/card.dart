@@ -29,7 +29,6 @@ class CardView extends StatelessWidget {
   Widget build(BuildContext context) {
     HiveService service = Get.find<HiveService>();
     Color color = Theme.of(context).textTheme.displayMedium!.color!;
-    ShadowTheme shadowColor = Theme.of(context).extension<ShadowTheme>()!;
     return Container(
       decoration: CustomBoxDecorations(context: context).shadow(radius: 16),
       child: Column(
@@ -76,7 +75,7 @@ class CardView extends StatelessWidget {
                             maxLines: 2,
                             textAlign: TextAlign.center,
                           ))
-                      : SizedBox(),
+                      : const SizedBox(),
                 )
               ],
             ),

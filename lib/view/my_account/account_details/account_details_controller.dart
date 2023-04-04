@@ -41,6 +41,7 @@ class AccountDetailsController extends GetxController {
     } else {
       username = name;
     }
+
     userPhone =
         await SharePreferenceData.getStringValuesSF(userPhoneNumber) ?? "";
     userImg = await SharePreferenceData.getStringValuesSF(userProfilePic) ?? "";

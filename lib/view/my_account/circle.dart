@@ -20,7 +20,7 @@ class Circle extends StatelessWidget {
   final CircleUIConfig circleUIConfig;
   final double extraSize;
 
-  Circle({
+  const Circle({
     Key? key,
     this.filled = false,
     required this.circleUIConfig,

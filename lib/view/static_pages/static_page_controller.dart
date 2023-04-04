@@ -31,7 +31,7 @@ class StaticPageID {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = this.id;
+    data['id'] = id;
     return data;
   }
 }

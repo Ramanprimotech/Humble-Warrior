@@ -42,6 +42,7 @@ class LoginController extends GetxController {
             await authAPI();
           }
         } catch (e) {}
+
       },
 
       ///------------ Click Google

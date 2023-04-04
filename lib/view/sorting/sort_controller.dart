@@ -59,6 +59,7 @@ class SortController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
     filterSelectionList.addAll(filterData);
     checkFilter();
   }

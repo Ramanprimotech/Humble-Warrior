@@ -17,8 +17,8 @@ class DialogueThemeExtention extends ThemeExtension<DialogueThemeExtention> {
       {Color? textColor, Color? backGroundColor}) {
     return DialogueThemeExtention(
         textColor: textColor ?? this.textColor,
-        shadow: shadow ?? this.shadow,
-        buttonColor: buttonColor ?? this.buttonColor,
+        shadow: shadow,
+        buttonColor: buttonColor,
         backGroundColor: backGroundColor ?? this.backGroundColor);
   }
 

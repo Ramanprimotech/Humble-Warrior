@@ -16,6 +16,8 @@ class MyAccount extends StatelessWidget {
     bool isDark = themeController.themeMode == ThemeMode.dark;
     controller.context = context;
 
+    MyAccWidget myAccWidget = MyAccWidget(context: context);
+
     double optionSpacing = 15;
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(

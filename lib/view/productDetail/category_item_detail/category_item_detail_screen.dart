@@ -9,7 +9,7 @@ class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
   Widget build(BuildContext context) {
     final ProductDetailsResponse details = Get.arguments[0];
     ProductDetailController controller = Get.find();
-    Future<List<ProductDetailsResponse>> _futureInstance =
+    Future<List<ProductDetailsResponse>> futureInstance =
         controller.productDetailsAPI(idData: details.id.toString());
 
     return Scaffold(
@@ -19,7 +19,7 @@ class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
             CommonWidgets.titleBar(context,
                 title: "Product Details", fontSize: 20, backIcon: true),
             FutureBuilder<List<ProductDetailsResponse>>(
-                future: _futureInstance,
+                future: futureInstance,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Expanded(
