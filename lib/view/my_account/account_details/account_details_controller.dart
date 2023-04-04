@@ -34,7 +34,13 @@ class AccountDetailsController extends GetxController {
     userCheck.value =
         await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
     user = await SharePreferenceData.getStringValuesSF(userEmail) ?? "";
-    username = await SharePreferenceData.getStringValuesSF(userName) ?? "";
+
+    String name = await SharePreferenceData.getStringValuesSF(userName) ?? "";
+    if (name == "" || name == "null" || name == "N/A") {
+      username = "N/A";
+    } else {
+      username = name;
+    }
     userPhone =
         await SharePreferenceData.getStringValuesSF(userPhoneNumber) ?? "";
     userImg = await SharePreferenceData.getStringValuesSF(userProfilePic) ?? "";

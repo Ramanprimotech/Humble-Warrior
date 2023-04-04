@@ -6,11 +6,16 @@ class MyAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FToast().init(context);
+
+    /// Controller
     MyAccountController controller = Get.find();
     final ThemeController themeController = Get.find();
+    MyAccWidget myAccWidget = MyAccWidget(context: context);
+
+    /// Variables
     bool isDark = themeController.themeMode == ThemeMode.dark;
     controller.context = context;
-    MyAccWidget myAccWidget = MyAccWidget(context: context);
+
     double optionSpacing = 15;
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(

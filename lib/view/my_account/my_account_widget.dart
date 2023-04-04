@@ -44,19 +44,31 @@ class MyAccWidget {
           ),
         ),
         10.shb,
-        AppText(controller.username),
+        (controller.username == "" ||
+                controller.username == "null" ||
+                controller.username == "N/A")
+            ? const AppText("N/A")
+            : AppText(controller.username),
         AppText(controller.user),
       ],
     );
   }
 
   profileText({String? firstName, String? secondName}) {
-    List<String> names = firstName!.split(" ");
     String text = "";
-    if (names.length == 1) {
-      text = names[0][0];
+    if (firstName == null ||
+        firstName == "" ||
+        firstName == "null" ||
+        firstName == "N/A") {
+      text = "NA";
     } else {
-      text = "${names[0][0]}${names[1][0]}";
+      List<String> names = firstName!.split(" ");
+
+      if (names.length == 1) {
+        text = names[0][0] + names[0][1];
+      } else {
+        text = "${names[0][0]}${names[1][0]}";
+      }
     }
     return AppText(
       text.toUpperCase(),

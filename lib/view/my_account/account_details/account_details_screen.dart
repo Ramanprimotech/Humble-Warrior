@@ -150,12 +150,17 @@ class AccountDetails extends StatelessWidget {
           ),
         ),
         10.shb,
-        AppText(
-          accountController.username,
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-        ),
+        (accountController.username == "" ||
+                accountController.username == "null" ||
+                accountController.username == "N/A")
+            ? const AppText("N/A",
+                fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)
+            : AppText(
+                accountController.username,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
       ],
     );
   }
