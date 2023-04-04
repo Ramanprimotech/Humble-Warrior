@@ -64,45 +64,6 @@ Widget categoryListWishListCard(
         },
         details: details,
       ),
-      // Positioned(
-      //   top: 0,
-      //   left: 0,
-      //   child: Container(
-      //     padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 4),
-      //     decoration: BoxDecoration(
-      //         color: AppColors.primary,
-      //         borderRadius: const BorderRadius.only(
-      //           // bottomLeft: Radius.circular(5),
-      //           bottomRight: Radius.circular(10),
-      //         )),
-      //     child: AppText(
-      //       deal.toUpperCase(),
-      //       fontWeight: FontWeight.bold,
-      //       color: Colors.white,
-      //       fontSize: 14,
-      //     ),
-      //   ),
-      // )
     ],
   );
-
-  //   ItemCard(
-  //   onTap: () {
-  //     if (isDetails) {
-  //       if (details.url != "" || details.url != null) {
-  //         Get.to(CustomPhotoViewer(url: details.url!));
-  //       }
-  //     } else {
-  //       Get.toNamed(AppRoutes.frontPageProductDetail, arguments: [details]);
-  //     }
-  //   },
-  //   imageHeight: 180,
-  //   radius: 10,
-  //   buttons:
-  //       donnaDealsButton(details, index, context, categoryCard: categoryCard),
-  //   imageUrl: details.url!,
-  //   title: "",
-  //   effect: false,
-  //   buttonbarHeight: categoryCard == true ? 85 : 50,
-  // );
 }

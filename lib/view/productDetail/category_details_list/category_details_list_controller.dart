@@ -1,6 +1,3 @@
-import 'package:humble_warrior/modals/requests/pagination_modal.dart';
-import 'package:humble_warrior/network/api_call.dart';
-
 import 'package:humble_warrior/hw.dart';
 
 class CategoryDetailsListController extends GetxController {
@@ -23,9 +20,7 @@ class CategoryDetailsListController extends GetxController {
   Future categoryListApi({bool? refresh = false}) async {
     if (refresh!) {
       categoryListPage = 1;
-      // donnaDealsBool.value = true;
       categoryList.clear();
-      // update();
     }
     PaginationModel paginationModel =
         PaginationModel(page: categoryListPage.toString(), categoryId: id);

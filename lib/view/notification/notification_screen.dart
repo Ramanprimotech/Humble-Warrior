@@ -1,5 +1,4 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/response/notification_response_model.dart';
 import 'package:humble_warrior/view/notification/notification_item.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -40,7 +39,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     left: 20, right: 20, bottom: 20, top: 5),
                                 scrollDirection: Axis.vertical,
                                 itemBuilder: (context, index) {
-                                  return CustomShimmer.rectangular(height: 100, width: double.infinity,);
+                                  return const CustomShimmer.rectangular(
+                                    height: 100,
+                                    width: double.infinity,
+                                  );
                                 },
                                 itemCount: 15,
                                 separatorBuilder:

@@ -107,11 +107,6 @@ class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
       padding: const EdgeInsets.symmetric(horizontal: 5),
       width: MediaQuery.of(Get.context!).size.width * .9,
       child: HtmlData().htmlString(context, dis!),
-      /* AppText(
-        dis ?? "",
-        fontSize: 16,
-        maxLines: 150,
-      ),*/
     );
   }
 }

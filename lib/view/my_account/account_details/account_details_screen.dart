@@ -1,6 +1,7 @@
 import 'dart:io';
-import 'package:humble_warrior/view/my_account/account_details/account_details_controller.dart';
+
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/view/my_account/account_details/account_details_controller.dart';
 
 class AccountDetails extends StatelessWidget {
   const AccountDetails({Key? key}) : super(key: key);
@@ -40,9 +41,9 @@ class AccountDetails extends StatelessWidget {
                           50.shb,
                           CommonWidgets.titleBar(context,
                               title: accountDetailsTxt, fontSize: 20),
-                          Spacer(),
+                          const Spacer(),
                           profileImg(),
-                          Spacer(),
+                          const Spacer(),
                         ],
                       ),
                     ),

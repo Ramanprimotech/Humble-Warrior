@@ -1,15 +1,13 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/abstract_enums/donna_options.dart';
 
 class WishListController extends GetxController {
   RxBool loggedIn = true.obs;
   RxList data = [].obs;
 
-  HiveService _hiveService = Get.find();
+  final HiveService _hiveService = Get.find();
   Future<void> getLoggedValue() async {
     loggedIn.value =
         await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
-    print("LoggedIN-------- $loggedIn.value");
   }
 
   getWishList() {

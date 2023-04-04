@@ -4,7 +4,6 @@ Widget bottomNavigationWidget(BuildContext context) {
   final ImageIconTheme imageIconTheme =
       Theme.of(context).extension<ImageIconTheme>()!;
   final Color iconColor = imageIconTheme.backGroundColor!;
-  final ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
   final BottomNavigationController ctr = Get.find();
   return Container(
     decoration: CustomBoxDecorations(context: context).shadowAll(),

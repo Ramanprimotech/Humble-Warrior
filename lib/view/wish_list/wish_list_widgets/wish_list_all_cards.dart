@@ -23,7 +23,6 @@ class WishListCards implements DonnaOptions {
   @override
   donnaDeals() {
     ProductDetailsResponse donnaDealsDetails = details;
-    // return donnaDealsCard(donnaDealsDetails, 0, context);
     return WishListCard(
       details: details,
       onTap: onTap.donnaDeals,
@@ -39,7 +38,6 @@ class WishListCards implements DonnaOptions {
   @override
   donnaFavourite() {
     ProductDetailsResponse donnaFavouriteDetails = details;
-    // return /favouritePageCard();
     return WishListCard(
       details: details,
       onTap: onTap.donnaFavourite,
@@ -55,7 +53,6 @@ class WishListCards implements DonnaOptions {
   @override
   frontPage() {
     ProductDetailsResponse frontPageDetails = details;
-    // return frontPageCard(details, index, context);
     return WishListCard(
       details: details,
       onTap: onTap.frontPage,

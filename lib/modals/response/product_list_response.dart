@@ -20,20 +20,20 @@ class ProductListResponse {
     if (json['data'] != null) {
       data = <ProductDetailsResponse>[];
       json['data'].forEach((v) {
-        data!.add(new ProductDetailsResponse.fromJson(v));
+        data!.add(ProductDetailsResponse.fromJson(v));
       });
     }
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['total_records'] = this.totalRecords;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['total_records'] = totalRecords;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data['message'] = this.message;
+    data['message'] = message;
     return data;
   }
 }

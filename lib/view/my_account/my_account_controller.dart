@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:humble_warrior/hw.dart';
 
 class MyAccountController extends GetxController {
@@ -24,7 +25,6 @@ class MyAccountController extends GetxController {
     imagePath =
         await CommonUtils().getImagePath(imageSource: ImageSource.gallery);
     imageUrl.value = imagePath!.path;
-    debugPrint("Image Pathhh $imagePath");
   }
 
   Future<void> getData() async {
@@ -35,7 +35,6 @@ class MyAccountController extends GetxController {
     userPhone =
         await SharePreferenceData.getStringValuesSF(userPhoneNumber) ?? "";
     userImg = await SharePreferenceData.getStringValuesSF(userProfilePic) ?? "";
-    debugPrint("user data ---- $username ---- $userPhone ---- $userImg");
   }
 
   void message(context) {
@@ -97,7 +96,6 @@ class MyAccountController extends GetxController {
           'Cancel',
           style: TextStyle(
             fontSize: 16,
-            // color: (AppMode.darkMode == true) ? Colors.white : Colors.black,
             color: Colors.white,
           ),
           semanticsLabel: 'Cancel',

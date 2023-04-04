@@ -1,5 +1,4 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 
 class WishListCard extends StatelessWidget {
   final double? cardHeight;

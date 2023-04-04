@@ -10,19 +10,19 @@ class ProductCategoriesListResponse {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data['message'] = this.message;
+    data['message'] = message;
     return data;
   }
 }
@@ -30,9 +30,9 @@ class ProductCategoriesListResponse {
 class Data {
   String? productName;
   String? url;
-  Null? ribbonName;
+  String? ribbonName;
   String? productDescription;
-  Null? ribbonColor;
+  String? ribbonColor;
 
   Data(
       {this.productName,
@@ -50,12 +50,12 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['product_name'] = this.productName;
-    data['url'] = this.url;
-    data['ribbon_name'] = this.ribbonName;
-    data['product_description'] = this.productDescription;
-    data['ribbon_color'] = this.ribbonColor;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['product_name'] = productName;
+    data['url'] = url;
+    data['ribbon_name'] = ribbonName;
+    data['product_description'] = productDescription;
+    data['ribbon_color'] = ribbonColor;
     return data;
   }
 }

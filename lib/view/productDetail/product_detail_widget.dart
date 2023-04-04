@@ -97,28 +97,7 @@ class ProductDetailWidget {
             maxLines: 2,
             fontWeight: FontWeight.bold,
           ),
-          // HTML.toRichText(context, discription.toString(),
-          //   linksCallback: (dynamic link) {
-          //     CommonUtils().urlLauncher(url: link.toString());
-          //   },)
           HtmlData().htmlString(context, discription.toString()),
-          // HTML.toRichText(context, discription.toString(),),
-          // AppText(
-          //   discription ?? "",
-          //   maxLines: 90,
-          // ),
-          // const ReadMoreText(
-          //   AppStrings.lorem,
-          //   trimLines: 20,
-          //   colorClickableText: Colors.pink,
-          //   trimMode: TrimMode.Length,
-          //   trimCollapsedText: readmoreTxt,
-          //   trimExpandedText: readlessTxt,
-          //   lessStyle: TextStyle(
-          //       fontSize: 15, fontWeight: FontWeight.bold, color: Colors.blue),
-          //   moreStyle: TextStyle(
-          //       fontSize: 15, fontWeight: FontWeight.bold, color: Colors.blue),
-          // ).p(6)
         ],
       ).p(6),
     ).py(6);

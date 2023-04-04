@@ -1,11 +1,5 @@
-import 'dart:developer';
-
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/filter_modal.dart';
 import 'package:humble_warrior/view/sorting/sort_controller.dart';
-
-import '../../../modals/requests/pagination_modal.dart';
-import '../../../network/api_call.dart';
 
 class HomeOptionController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -59,7 +53,6 @@ class HomeOptionController extends GetxController
   @override
   void onInit() {
     _sortController.additionalApplySort = functionSort;
-    debugPrint("$initialIndex");
     tabController =
         TabController(length: 3, initialIndex: initialIndex, vsync: this);
     tabController.addListener(() {
@@ -138,16 +131,13 @@ class HomeOptionController extends GetxController
   Future donnaFavouriteDealsAPI({bool? refresh = false}) async {
     if (refresh!) {
       donnaFavouriteDealsPage = 1;
-      // donnaFavouriteDealsBool.value = true;
       donnaFavouriteDealList.clear();
-      // update();
     }
     SortItem item = sort();
     PaginationModel paginationModel = PaginationModel(
         page: donnaFavouriteDealsPage.toString(),
         sortName: item.type,
         sortOrder: item.itemValue);
-    // log(paginationModel.toString(), name: "Sort");
     await CallAPI.productListAPI(
             payload: paginationModel, url: Endpoints.donnaFavourite)
         .then((value) {
@@ -171,9 +161,8 @@ class HomeOptionController extends GetxController
   }
 
   SortItem sort() {
-    log(_sortController.checkFilter().toString(), name: "Is Seleced");
     if (!_sortController.checkFilter()) {
-      return SortItem(itemnName: "", itemValue: "", type: "");
+      return const SortItem(itemnName: "", itemValue: "", type: "");
     } else {
       return _sortController
               .filterData[_sortController.headerIndex.value].subHeader[

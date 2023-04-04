@@ -8,11 +8,9 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DailyDealProductController controller = Get.find();
-
     ProductDetailController productDetailController = Get.find();
     final ProductDetailsResponse donnaDealsDetails = Get.arguments[0];
-    Future<List<ProductDetailsResponse>> _futureInstance =
+    Future<List<ProductDetailsResponse>> futureInstance =
         productDetailController.productDetailsAPI(
             idData: donnaDealsDetails.id.toString());
     return Scaffold(
@@ -23,7 +21,7 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
             CommonWidgets.titleBar(context,
                 title: "Product Details", fontSize: 20, backIcon: true),
             FutureBuilder<List<ProductDetailsResponse>>(
-                future: _futureInstance,
+                future: futureInstance,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Expanded(
@@ -83,8 +81,6 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
                               imgUrl: data.url!,
                               title: data.itemName!,
                             ),
-                            // donnaDealsCard(data, 0, context,
-                            //     isDetails: true),
                           ),
                           productText(context, data.itemName.toString()),
                           productDescription(

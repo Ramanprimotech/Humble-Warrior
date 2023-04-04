@@ -1,9 +1,9 @@
 import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:humble_warrior/hw.dart';
 
-class AccountDetailsController extends GetxController{
-
+class AccountDetailsController extends GetxController {
   RxBool userCheck = false.obs;
   String user = "";
   String username = "";
@@ -18,18 +18,16 @@ class AccountDetailsController extends GetxController{
     super.onInit();
   }
 
-
   Future<void> getImageCamera() async {
     imagePath =
-    await CommonUtils().getImagePath(imageSource: ImageSource.camera);
+        await CommonUtils().getImagePath(imageSource: ImageSource.camera);
     imageUrl.value = imagePath!.path;
   }
 
   Future<void> getImageGallery() async {
     imagePath =
-    await CommonUtils().getImagePath(imageSource: ImageSource.gallery);
+        await CommonUtils().getImagePath(imageSource: ImageSource.gallery);
     imageUrl.value = imagePath!.path;
-    debugPrint("Image Pathhh $imagePath");
   }
 
   Future<void> getData() async {
@@ -37,14 +35,13 @@ class AccountDetailsController extends GetxController{
         await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
     user = await SharePreferenceData.getStringValuesSF(userEmail) ?? "";
     username = await SharePreferenceData.getStringValuesSF(userName) ?? "";
-    userPhone = await SharePreferenceData.getStringValuesSF(userPhoneNumber) ?? "";
+    userPhone =
+        await SharePreferenceData.getStringValuesSF(userPhoneNumber) ?? "";
     userImg = await SharePreferenceData.getStringValuesSF(userProfilePic) ?? "";
 
-    if(userPhone == "null"){
+    if (userPhone == "null") {
       userPhone = "N/A";
     }
-    else{
-      print("user phone else  --- $userPhone"); }
   }
 
   Future<void> openBottomSheet() async {
@@ -58,7 +55,6 @@ class AccountDetailsController extends GetxController{
               cameraTxt,
               onTap: () {
                 getImageCamera();
-                //  CommonUtils().getImagePath(imageSource: ImageSource.camera);
                 Navigator.pop(context);
               },
             ),
@@ -66,7 +62,6 @@ class AccountDetailsController extends GetxController{
               galleryTxt,
               onTap: () {
                 getImageGallery();
-                //  CommonUtils().getImagePath(imageSource: ImageSource.gallery);
                 Navigator.pop(context);
               },
             ),
@@ -76,5 +71,4 @@ class AccountDetailsController extends GetxController{
       },
     );
   }
-
 }

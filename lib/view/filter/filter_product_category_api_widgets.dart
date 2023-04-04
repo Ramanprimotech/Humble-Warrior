@@ -29,7 +29,6 @@ class FilterPageProductCategoryAPIWidgets
         ),
         onPressed: () {
           controller.update([Endpoints.productCategories]);
-          // Get.toNamed(AppRoutes.categoryDetailsList, arguments: ["sd", "66"]);
         },
         child: const AppText('Retry',
             color: Colors.white, fontWeight: FontWeight.bold),
@@ -40,7 +39,6 @@ class FilterPageProductCategoryAPIWidgets
   @override
   Widget success({List<ProductCategoryItem>? data}) {
     List<ProductCategoryItem> record = data ?? [];
-    // record.sort((a, b) => a.id!.compareTo(b.id!));
     const double productArrowIconPadding = 8;
     const double arrowWidth = 40;
     return Stack(
