@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'custome_exception.dart';
@@ -29,7 +28,6 @@ class APIManager {
   }
 
   Future<dynamic> postAllCallNonParam({required String url}) async {
-    debugPrint("Calling API: $url");
     Uri urlForPost = Uri.parse("${Endpoints.baseUrl}$url");
     log("$urlForPost", name: "Executed POST API");
     var responseJson;
@@ -80,8 +78,6 @@ class APIManager {
             // 'Authorization': 'Bearer ${Endpoints.token}'
           },
           body: jsonEncode(param.toJson()));
-      log(response.body, name: "AAPI Body $url");
-      log(response.statusCode.toString(), name: "AAPI Status $url");
       responseJson = _response(response);
     } on SocketException {
       throw FetchDataException('No Internet connection');
@@ -93,7 +89,6 @@ class APIManager {
   }
 
   dynamic _response(http.Response response) {
-    debugPrint("${response.statusCode}");
     switch (response.statusCode) {
       case 200:
         var responseJson = jsonDecode(response.body);

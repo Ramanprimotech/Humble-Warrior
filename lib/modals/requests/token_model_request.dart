@@ -15,7 +15,7 @@ class TokenRequestModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     // data['username'] = this.username;
     // data['password'] = this.password;
-    data['user_id'] = this.userid;
+    data['user_id'] = userid;
     return data;
   }
 }

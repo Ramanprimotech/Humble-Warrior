@@ -45,10 +45,6 @@ class BottomNavigationController extends GetxController {
   }
 
   Future<void> amazon() async {
-    // await CommonUtils().urlLauncher(
-    //     url:
-    //         'com.amazon.mobile.shopping://www.amazon.in/shop/influencer-1604f2b0',
-    //     title: "The Humble Warrior");
     try {
       const url =
           'com.amazon.mobile.shopping://www.amazon.com/shop/influencer-1604f2b0'; // or add your URL here
@@ -66,46 +62,8 @@ class BottomNavigationController extends GetxController {
     } catch (e) {
       launchUrl(Uri.parse('https://www.amazon.com/shop/influencer-1604f2b0'),
           mode: LaunchMode.externalApplication);
-      print(e);
     }
-
-    // await launchUrl(Uri.parse(url),
-    //     mode: LaunchMode.externalNonBrowserApplication);
   }
-
-  /* Future<void> amazon() async {
-    if (Platform.isAndroid || Platform.isIOS) {
-      const url =
-          "com.amazon.mobile.shopping://www.amazon.com/shop/influencer-1604f2b0";
-      final Uri uri = Uri.parse(url);
-      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-        throw Exception('Could not launch $uri');
-      }
-    }
-    launchUrl(Uri.parse('https://www.amazon.com/shop/influencer-1604f2b0'),
-        mode: LaunchMode.externalNonBrowserApplication);
-
-    // await launchUrl(Uri.parse(url),
-    //     mode: LaunchMode.externalNonBrowserApplication);
-  }*/
-
-/*
-  Future<void> facebook() async {
-    if (Platform.isAndroid || Platform.isIOS) {
-      const url =
-          "fb://facewebmodal/f?href=https://www.facebook.com/groups/209617206226617";
-      final Uri uri = Uri.parse(url);
-      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-        throw Exception('Could not launch $uri');
-      }
-    }
-    launchUrl(Uri.parse('https://www.facebook.com/groups/209617206226617'),
-        mode: LaunchMode.externalNonBrowserApplication);
-
-    // await launchUrl(Uri.parse(url),
-    //     mode: LaunchMode.externalNonBrowserApplication);
-  }
-*/
 
   Future<void> facebook() async {
     const url =
@@ -114,7 +72,6 @@ class BottomNavigationController extends GetxController {
       final Uri uri = Uri.parse(url);
       if (!await launchUrl(uri,
           mode: LaunchMode.externalNonBrowserApplication)) {
-        // throw Exception('Could not launch $uri');
         if (!await launchUrl(
             Uri.parse('https://www.facebook.com/groups/209617206226617'),
             mode: LaunchMode.externalApplication)) {
@@ -126,17 +83,12 @@ class BottomNavigationController extends GetxController {
           mode: LaunchMode.externalApplication);
       print(e);
     }
-
-    // await launchUrl(Uri.parse(url),
-    //     mode: LaunchMode.externalNonBrowserApplication);
   }
 
   @override
   void onInit() {
     getLoggedValue();
-    FirebaseMessaging.instance.getToken().then((token) {
-      debugPrint("token ---- $token");
-    });
+    FirebaseMessaging.instance.getToken().then((token) {});
     NotificationManager.messageListener();
     if (value != null) {
       userCheck.value = true;

@@ -57,7 +57,7 @@ class FilterController extends GetxController {
   void removeFromWish(ProductCategoryItem item) {
     if (item.id != catID) {
       record.value.remove(item);
-      if (record.value.length == 0) {
+      if (record.value.isEmpty) {
         selevtedVisibility.value = false;
       }
     }

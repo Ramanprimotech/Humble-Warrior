@@ -1,6 +1,5 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/utils/common/html.dart';
-import 'package:humble_warrior/modals/response/static_page_model.dart';
 import 'package:humble_warrior/view/static_pages/static_page_controller.dart';
 
 class StaticPagesScreen extends StatelessWidget {
@@ -68,12 +67,6 @@ class StaticPagesScreen extends StatelessWidget {
                                 horizontal: 20, vertical: 20),
                             child: HtmlData().htmlString(context,
                                 staticResponse[0].pageContent.toString()),
-                            // HTML.toRichText(context, ,
-                            //   linksCallback: (dynamic link) {
-                            //     CommonUtils().urlLauncher(url: link.toString());
-                            //   },)
-
-                            // AppText(staticResponse[0].pageContent.toString(),maxLines: 100,),
                           ),
                         ),
                       )

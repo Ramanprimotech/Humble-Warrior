@@ -111,8 +111,6 @@ Widget codeButton({required String code, required BuildContext context}) {
     },
     child: Container(
         alignment: Alignment.center,
-        // width: 90,
-        // height: 35,
         padding: 1.pa,
         decoration: BoxDecoration(
             color: AppColors.appGreen,
@@ -122,7 +120,7 @@ Widget codeButton({required String code, required BuildContext context}) {
           color: Colors.green,
           borderType: BorderType.RRect,
           strokeWidth: 2,
-          dashPattern: [3, 3],
+          dashPattern: const [3, 3],
           radius: const Radius.circular(20),
           padding:
               const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),

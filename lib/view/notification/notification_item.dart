@@ -32,7 +32,6 @@ class _NotificationItemState extends State<NotificationItem> {
       ),
       child: CommonWidgets.networkImage(
         imageUrl: url,
-        // "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
         alignment: Alignment.topCenter,
         width: Get.width / 3.5,
         fit: BoxFit.cover,
@@ -71,20 +70,6 @@ class _NotificationItemState extends State<NotificationItem> {
                 fontSize: 16,
               ),
             ),
-          // Padding(
-          //     padding: const EdgeInsets.only(left: 15, right: 10, top: 5),
-          //     child: SizedBox(
-          //       height: 20,
-          //       child: HtmlData().htmlString(context, data.productDescription),
-          //     )
-          //     // AppText(
-          //     //   "These cuties were tough to photograph and honestly my picture doesn't to do justice." *
-          //     //       2,
-          //     //   fontSize: 14,
-          //     //   color: data.read == false ? Colors.black : null,
-          //     //   maxLines: 1,
-          //     // ),
-          //     ),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,

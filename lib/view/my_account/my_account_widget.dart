@@ -29,10 +29,6 @@ class MyAccWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         profileText(firstName: controller.username),
-                        // const Icon(Icons.camera_alt,
-                        //     color: Colors.black, size: 40),
-                        // 5.sh,
-                        // const AppText(addPhotoTxt),
                       ],
                     ),
                   )

@@ -1,7 +1,5 @@
-import 'dart:developer';
 import 'dart:io';
-import 'package:humble_warrior/network/api_call.dart';
-import '../../modals/requests/token_model_request.dart';
+
 import 'package:humble_warrior/hw.dart';
 
 class SplashController extends GetxController {
@@ -16,24 +14,16 @@ class SplashController extends GetxController {
   getTheme() async {
     var mode = await SharePreferenceData.getBoolValuesSF('mode');
     if (mode == null) {
-      // await SharePreferenceData.addBoolToSF(
-      //     'mode', ThemeMode.system == ThemeMode.dark);
       await SharePreferenceData.addBoolToSF('mode', false);
-      // isDark.value = ThemeMode.system == ThemeMode.dark;
       isDark.value = false;
     } else {
       isDark.value = mode;
     }
-
-    // isDark = themeController.themeMode == ThemeMode.dark;
   }
 
   Future<void> getData() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    print(
-        "Logged value ---- ${await SharePreferenceData.getBoolValuesSF(spIsLogged)}");
-    // if (await SharePreferenceData.getBoolValuesSF(spIsLogged) == true) {
-    // Get.offNamed(AppRoutes.bottomNavigation);
+
     final passCode = sharedPreferences.getString("PASSCODE");
     if (passCode != null) {
       _showLockScreen(
@@ -66,7 +56,6 @@ class SplashController extends GetxController {
         final storedPassCode = sharedPreferences.getString("PASSCODE");
 
         if (storedPassCode == enteredPasscode) {
-          // Navigator.pop(Get.context!);
           Get.back();
           if (await SharePreferenceData.getBoolValuesSF(spIsLogged) == true) {
             Get.offNamed(AppRoutes.bottomNavigation);
@@ -78,25 +67,19 @@ class SplashController extends GetxController {
               Get.offNamed(AppRoutes.loginPage);
             }
           }
-          // Get.offAllNamed(AppRoutes.bottomNavigation);
-          // Navigator.of(Get.context!).pushNamedAndRemoveUntil(
-          //     '/DashbordVC', (Route<dynamic> route) => false);
         } else {
           DialogHelper.showToast(context, 'Incorrect Passcode');
-          // Utility().errorToast('Incorrect Passcode', Colors.red);
         }
       }
       return;
     } catch (err) {
       DialogHelper.showErrorDialog();
-      // Utility().errorToast(AppMessages.defaultError, Colors.red);
       return;
     }
   }
 
   _passcodeCancelled() {
     Get.back();
-    // SystemNavigator.pop();
     exit(0);
   }
 
@@ -154,13 +137,10 @@ class SplashController extends GetxController {
         // password: "JtB@zCajal87@7MVXjzfyxOd"
         );
     await CallAPI.generateToken(payload: tokenRequestModel).then((value) {
-      log("${value.token}", name: "Token API");
       if (value.token == null) {
         return false;
       }
       Endpoints.token = value.token.toString();
-      log(value.token.toString());
-      log(Endpoints.token.toString());
     });
     return true;
   }

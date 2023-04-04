@@ -1,10 +1,5 @@
-import 'dart:developer';
-
 import 'package:humble_warrior/hw.dart';
 import 'package:intl/intl.dart';
-
-import '../modals/requests/token_model_request.dart';
-import '../network/api_call.dart';
 
 class TokenManager {
   final Function() onTokenGenerate;
@@ -34,7 +29,6 @@ class TokenManager {
         }
       });
     } else {
-      log("Toke Old", name: "Old Token");
       Endpoints.token = _token!;
       _startTimer();
     }

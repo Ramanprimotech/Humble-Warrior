@@ -10,7 +10,7 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
   Widget build(BuildContext context) {
     final ProductDetailsResponse details = Get.arguments[0];
     ProductDetailController controller = Get.find();
-    Future<List<ProductDetailsResponse>> _futureInstance =
+    Future<List<ProductDetailsResponse>> futureInstance =
         controller.productDetailsAPI(idData: details.id.toString());
 
     return Scaffold(
@@ -21,7 +21,7 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
             CommonWidgets.titleBar(context,
                 title: "Product Details", fontSize: 20, backIcon: true),
             FutureBuilder<List<ProductDetailsResponse>>(
-                future: _futureInstance,
+                future: futureInstance,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Expanded(
@@ -69,22 +69,20 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
                       child: Column(
                         children: [
                           Padding(
-                              padding: 8.ph,
-                              child: CardView(
-                                details: data,
-                                onTap: () {
-                                  if (data.url != "" || data.url != null) {
-                                    Get.to(CustomPhotoViewer(url: data.url!));
-                                  }
-                                },
-                                imgUrl: data.url!,
-                                title: data.ribbonName != null
-                                    ? data.ribbonName!
-                                    : data.itemName.toString(),
-                              )
-                              // frontPageCard(data, 0, context,
-                              //     isDetails: true),
-                              ),
+                            padding: 8.ph,
+                            child: CardView(
+                              details: data,
+                              onTap: () {
+                                if (data.url != "" || data.url != null) {
+                                  Get.to(CustomPhotoViewer(url: data.url!));
+                                }
+                              },
+                              imgUrl: data.url!,
+                              title: data.ribbonName != null
+                                  ? data.ribbonName!
+                                  : data.itemName.toString(),
+                            ),
+                          ),
                           productText(context, data.itemName),
                           productDescription(
                               context: context,

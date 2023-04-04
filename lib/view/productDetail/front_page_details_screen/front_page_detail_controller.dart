@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:humble_warrior/hw.dart';
 
 class FrontPageDetailController extends GetxController {
@@ -10,7 +11,6 @@ class FrontPageDetailController extends GetxController {
   Future<void> getImagePath() async {
     imagePath =
         await CommonUtils().getImagePath(imageSource: ImageSource.gallery);
-    debugPrint("Image Path $imagePath");
     update();
   }
 }

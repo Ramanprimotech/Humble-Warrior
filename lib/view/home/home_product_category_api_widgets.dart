@@ -21,14 +21,12 @@ class HomePageProductCategoryAPIWidgets
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 5,
-          // fixedSize: const Size(, 35),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           backgroundColor: dialogueThemeExtention.buttonColor,
         ),
         onPressed: () {
           controller.update([Endpoints.productCategories]);
-          // Get.toNamed(AppRoutes.categoryDetailsList, arguments: ["sd", "66"]);
         },
         child: const AppText('Retry',
             color: Colors.white, fontWeight: FontWeight.bold),

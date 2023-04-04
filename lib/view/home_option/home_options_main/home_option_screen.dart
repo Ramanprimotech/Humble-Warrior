@@ -7,7 +7,6 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
   final int data = Get.arguments[0];
   @override
   Widget build(BuildContext context) {
-    // FToast().init(context);
     const double tabFontSize = 18;
 
     final HomeOptionController controller = Get.find();

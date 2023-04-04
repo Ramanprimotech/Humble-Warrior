@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/response/notification_response_model.dart';
-import 'package:humble_warrior/network/api_call.dart';
 
 class NotificationController extends GetxController {
   RxBool loggedIn = true.obs;
@@ -66,7 +64,6 @@ class NotificationController extends GetxController {
   Future<void> getLoggedValue() async {
     loggedIn.value =
         await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
-    print("LoggedIN-------- $loggedIn.value");
   }
 
   Future<bool> notificationDetailsNavigator(String? cat, int? id) async {

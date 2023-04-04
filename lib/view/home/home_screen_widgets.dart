@@ -1,5 +1,6 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/view/home/home_product_category_api_widgets.dart';
+
 class HomeScreenWidgets {
   final HomeScreenController controller;
   final BuildContext context;
@@ -155,135 +156,13 @@ class HomeScreenWidgets {
         });
   }
 
-  /// Product List Future Builder
-  Widget productList() {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Row(
-          children: [
-            Expanded(
-              // flex: 8,
-              child: SizedBox(
-                height: productHeight,
-                width: Get.width,
-                child: ListView.builder(
-                    padding: 8.ph,
-                    scrollDirection: Axis.horizontal,
-                    controller: controller.productScrollController,
-                    itemCount: ProductImages.productImagesList.length,
-                    itemBuilder: (ctx, index) {
-                      return Padding(
-                        padding: 5.ph,
-                        child: GestureDetector(
-                          onTap: () {
-                            Get.toNamed(AppRoutes.categoryDetailsList,
-                                arguments: [
-                                  ProductImages.productImagesList[index].name
-                                ]);
-                          },
-                          child: Container(
-                            padding: 10.ph,
-                            height: productHeight,
-                            // width: 80,
-                            child: Column(
-                              children: [
-                                Image.asset(
-                                    ProductImages
-                                        .productImagesList[index].image,
-                                    fit: BoxFit.fitHeight,
-                                    height: productHeight - 25,
-                                    scale: 0.6),
-                                AppText(
-                                  ProductImages.productImagesList[index].name,
-                                  fontSize: 12,
-                                  maxLines: 1,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
-              ),
-            ),
-          ],
-        ),
-        Obx(
-          () => Visibility(
-            visible: controller.listBack.value,
-            child: Positioned(
-              left: 0,
-              child: Container(
-                alignment: Alignment.center,
-                color: Theme.of(context).scaffoldBackgroundColor,
-                height: brandHeight,
-                width: arrowWidth,
-                padding: EdgeInsets.only(left: productArrowIconPadding),
-                child: GestureDetector(
-                  onTap: () {
-                    controller.productScrollController.animateTo(
-                        controller.productScrollController.offset - (60 * 3),
-                        duration: const Duration(milliseconds: 150),
-                        curve: Curves.linear);
-                  },
-                  child: AppIcons.backArrrowIos(
-                      iconColor:
-                          Theme.of(context).textTheme.displaySmall!.color!),
-                ),
-              ),
-            ),
-          ),
-        ),
-        Obx(
-          () => Visibility(
-            visible: controller.listForward.value,
-            child: Positioned(
-              right: 0,
-              child: Container(
-                alignment: Alignment.center,
-                color: Theme.of(context).scaffoldBackgroundColor,
-                height: brandHeight,
-                width: arrowWidth,
-                child: GestureDetector(
-                  onTap: () {
-                    controller.productScrollController.animateTo(
-                        controller.productScrollController.offset + (60 * 3),
-                        duration: const Duration(milliseconds: 150),
-                        curve: Curves.linear);
-                  },
-                  child: AppIcons.next(
-                      iconColor:
-                          Theme.of(context).textTheme.displaySmall!.color!),
-                ),
-              ),
-            ),
-          ),
-        )
-      ],
-    );
-  }
-
   /// Brand List
   Widget brandsList() {
     final ImageIconTheme imageIconTheme =
         Theme.of(context).extension<ImageIconTheme>()!;
-    return
-        // ValueListenableBuilder(
-        // valueListenable: controller.keyboardIsOpened,
-        // builder: (BuildContext context, value, Widget? child) {
-        //   return Transform.translate(
-        //     offset: Offset(0, !value ? (brandHeight + brandLoveHeight + 10) : 0),
-        //     child: child,
-        //   );
-        // },
-        // child:
-        Container(
+    return Container(
       height: brandHeight + brandLoveHeight + 10,
       decoration: BoxDecoration(
-        // borderRadius: const BorderRadius.only(
-        //     topRight: Radius.circular(15), topLeft: Radius.circular(15)),
         color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
       ),
       child: Column(
