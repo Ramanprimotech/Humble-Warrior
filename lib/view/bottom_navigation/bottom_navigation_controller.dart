@@ -1,5 +1,7 @@
 import 'package:humble_warrior/hw.dart';
 
+List<ProductCategoryItem> productCategory = [];
+
 class BottomNavigationController extends GetxController {
   final HomeScreenController controller = Get.find();
 

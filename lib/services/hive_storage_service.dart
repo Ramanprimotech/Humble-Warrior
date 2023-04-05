@@ -71,7 +71,9 @@ class HiveService extends GetxController {
   }
 
   addToRecentList(RecentSearch item) {
-    recentBox.put(item.productSearched, item);
+    if (item.productSearched!.isNotEmpty) {
+      recentBox.put(item.productSearched, item);
+    }
   }
 
   @override

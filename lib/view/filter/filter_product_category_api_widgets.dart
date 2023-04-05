@@ -71,75 +71,70 @@ class FilterPageProductCategoryAPIWidgets
             ),
             Expanded(
               child: GetBuilder<FilterController>(
-                init: controller,
-                builder: (controller) => SizedBox(
-                  height: productHeight + 10,
-                  width: Get.width,
-                  child: ListView.builder(
-                      padding: 30.pr,
-                      scrollDirection: Axis.horizontal,
-                      controller: controller.productScrollController,
-                      itemCount: record.length,
-                      itemBuilder: (ctx, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            // controller.record.add(record[index]);
-                            controller.addToWish(record[index]);
-                            // Get.toNamed(AppRoutes.categoryDetailsList,
-                            //     arguments: [
-                            //       record[index].categoryName,
-                            //       record[index].id.toString(),
-                            //     ]);
-                          },
-                          child: Container(
-                            padding: 30.pl,
-                            height: productHeight,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Stack(
-                                  alignment: Alignment.topRight,
+                  init: controller,
+                  builder: (controller) {
+                    return SizedBox(
+                      height: productHeight + 10,
+                      width: Get.width,
+                      child: ListView.builder(
+                          padding: 30.pr,
+                          scrollDirection: Axis.horizontal,
+                          controller: controller.productScrollController,
+                          itemCount: record.length,
+                          itemBuilder: (ctx, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                controller.addToWish(record[index]);
+                              },
+                              child: Container(
+                                padding: 30.pl,
+                                height: productHeight,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    SizedBox(
-                                      height: productHeight - 25,
-                                      child: Image.network(errorBuilder:
-                                          (context, error, stackTrace) {
-                                        return Center(
-                                            child: Image.asset(
-                                          ImagePathAssets.noImageFound,
-                                          alignment: Alignment.center,
-                                          fit: BoxFit.fitHeight,
-                                          // height: height,
-                                        ));
-                                      }, record[index].categoryImage ?? ""),
-                                    ),
-                                    Transform.translate(
-                                      offset: const Offset(18, -8),
-                                      child: Visibility(
-                                        visible: controller
-                                            .containItem(record[index]),
-                                        child: const Icon(
-                                          Icons.check_circle,
-                                          color: AppColors.appGreen,
+                                    Stack(
+                                      alignment: Alignment.topRight,
+                                      children: [
+                                        SizedBox(
+                                          height: productHeight - 25,
+                                          child: Image.network(errorBuilder:
+                                              (context, error, stackTrace) {
+                                            return Center(
+                                                child: Image.asset(
+                                              ImagePathAssets.noImageFound,
+                                              alignment: Alignment.center,
+                                              fit: BoxFit.fitHeight,
+                                              // height: height,
+                                            ));
+                                          }, record[index].categoryImage ?? ""),
                                         ),
-                                      ),
+                                        Transform.translate(
+                                          offset: const Offset(18, -8),
+                                          child: Visibility(
+                                            visible: controller
+                                                .containItem(record[index]),
+                                            child: const Icon(
+                                              Icons.check_circle,
+                                              color: AppColors.appGreen,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    // 4.shb,
+                                    AppText(
+                                      record[index].categoryName ?? "",
+                                      fontSize: 14,
+                                      maxLines: 1,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ],
                                 ),
-                                // 4.shb,
-                                AppText(
-                                  record[index].categoryName ?? "",
-                                  fontSize: 14,
-                                  maxLines: 1,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      }),
-                ),
-              ),
+                              ),
+                            );
+                          }),
+                    );
+                  }),
             ),
             Obx(
               () => Visibility(

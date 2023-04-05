@@ -11,17 +11,19 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
-  TextEditingController controller = TextEditingController();
   FocusNode focusNode = FocusNode();
   String postType = Get.arguments[0];
   String catId = Get.arguments[1];
   String name = Get.arguments[2];
   String image = Get.arguments[3];
   List<int> selectedCategories = [];
+  RxBool showCross = false.obs;
+  Timer? timer;
 
   @override
   Widget build(BuildContext context) {
     FilterController filterController = Get.find();
+    filterController.postType = postType;
     filterController.catID = catId == "" ? null : int.parse(catId);
     if (filterController.catID != null) {
       if (!filterController.record.contains(ProductCategoryItem(
@@ -45,11 +47,37 @@ class _SearchViewState extends State<SearchView> {
           padding: 8.pv,
           child: TextFormField(
             focusNode: focusNode,
-            controller: controller,
+            controller: filterController.controller,
+            onChanged: (value) {
+              if (value.isEmpty) {
+                showCross.value = false;
+              } else {
+                showCross.value = true;
+              }
+              // if (value.length >= 3) {
+              //   hiveService.addToRecentList(
+              //       RecentSearch(productSearched: controller.text));
+              //   setState(() {});
+              // }
+              if (timer != null) {
+                timer!.cancel();
+              }
+
+              timer = Timer(const Duration(seconds: 1), () {
+                if (value.length >= 3) {
+                  // hiveService.addToRecentList(
+                  //     RecentSearch(productSearched: controller.text));
+                  setState(() {});
+                }
+              });
+            },
             onFieldSubmitted: (value) {
+              if (timer != null) {
+                timer!.cancel();
+              }
               if (value.length >= 3) {
-                hiveService.addToRecentList(
-                    RecentSearch(productSearched: controller.text));
+                // hiveService.addToRecentList(
+                //     RecentSearch(productSearched: controller.text));
                 setState(() {});
               } else {
                 DialogHelper.showToast(context, enterThreeTxt);
@@ -80,9 +108,9 @@ class _SearchViewState extends State<SearchView> {
                 // padding: 4.pl,
                 onTap: () {
                   if (selectedCategories.isEmpty) {
-                    if (controller.text.length >= 3) {
-                      hiveService.addToRecentList(
-                          RecentSearch(productSearched: controller.text));
+                    if (filterController.controller.text.length >= 3) {
+                      hiveService.addToRecentList(RecentSearch(
+                          productSearched: filterController.controller.text));
                       setState(() {});
                     } else {
                       focusNode.unfocus();
@@ -98,16 +126,21 @@ class _SearchViewState extends State<SearchView> {
               ),
 
               // suffixIcon:
-              suffixIcon: GestureDetector(
-                child: Icon(
-                  Icons.close,
-                  color: Theme.of(context).textTheme.displayMedium!.color,
-                  size: 20.sp,
+              suffixIcon: Obx(
+                () => Visibility(
+                  visible: showCross.value,
+                  child: GestureDetector(
+                    child: Icon(
+                      Icons.close,
+                      color: Theme.of(context).textTheme.displayMedium!.color,
+                      size: 20.sp,
+                    ),
+                    onTap: () {
+                      filterController.controller.clear();
+                      setState(() {});
+                    },
+                  ),
                 ),
-                onTap: () {
-                  controller.clear();
-                  setState(() {});
-                },
               ),
             ),
           ),
@@ -118,7 +151,9 @@ class _SearchViewState extends State<SearchView> {
               ? IconButton(
                   padding: 16.pr,
                   onPressed: () async {
-                    var data = await Get.toNamed(AppRoutes.filterView);
+                    var data = await Get.toNamed(
+                      AppRoutes.filterView,
+                    );
                     if (data != null) {
                       List<int> values = [];
                       data.forEach((e) => values.add(e.id!));
@@ -159,9 +194,12 @@ class _SearchViewState extends State<SearchView> {
             Expanded(
               child: FutureBuilder<List<SearchPosts>>(
                 future: FetchSearchList().productDetails(
-                    controller.text, postType, selectedCategories),
+                    filterController.controller.text,
+                    postType,
+                    selectedCategories),
                 builder: (ctx, snapshot) {
-                  if (controller.text.isEmpty && selectedCategories.isEmpty) {
+                  if (filterController.controller.text.isEmpty &&
+                      selectedCategories.isEmpty) {
                     return ValueListenableBuilder(
                         valueListenable: box.listenable(),
                         builder: (context, value, child) {
@@ -185,11 +223,11 @@ class _SearchViewState extends State<SearchView> {
                               ).paddingSymmetric(horizontal: 20, vertical: 20),
                               Expanded(
                                 child: ListView.separated(
-                                  itemCount: box.length,
+                                  itemCount: box.length > 8 ? 8 : box.length,
                                   itemBuilder: (context, index) {
                                     return GestureDetector(
                                       onTap: () {
-                                        controller.text =
+                                        filterController.controller.text =
                                             data[index].productSearched!;
                                         setState(() {});
                                       },
@@ -240,9 +278,9 @@ class _SearchViewState extends State<SearchView> {
                     return const Center(child: CircularProgressIndicator());
                   }
                   if (snapshot.hasError) {
-                    return Center(
+                    return const Center(
                       child: AppText(
-                        snapshot.error.toString(),
+                        somethingWentWrongTxt,
                         maxLines: 4,
                       ),
                     );
@@ -262,6 +300,9 @@ class _SearchViewState extends State<SearchView> {
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           onTap: () {
+                            hiveService.addToRecentList(RecentSearch(
+                                productSearched:
+                                    filterController.controller.text));
                             Get.toNamed(AppRoutes.dailyDealProductDetail,
                                 arguments: [
                                   ProductDetailsResponse(

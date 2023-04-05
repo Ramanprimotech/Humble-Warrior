@@ -36,6 +36,8 @@ class HomePageProductCategoryAPIWidgets
 
   @override
   Widget success({List<ProductCategoryItem>? data}) {
+    productCategory = data ?? [];
+    debugPrint("=============${productCategory.length.toString()}");
     List<ProductCategoryItem> record = data ?? [];
     // record.sort((a, b) => a.id!.compareTo(b.id!));
     const double productArrowIconPadding = 8;

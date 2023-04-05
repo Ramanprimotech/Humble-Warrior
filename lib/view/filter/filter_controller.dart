@@ -2,6 +2,8 @@ import '../../hw.dart';
 
 class FilterController extends GetxController {
   RxList<ProductCategoryItem> record = <ProductCategoryItem>[].obs;
+  TextEditingController controller = TextEditingController();
+  String postType = "";
   RxBool selevtedVisibility = false.obs;
   int? catID;
 
@@ -36,6 +38,10 @@ class FilterController extends GetxController {
     });
   }
 
+  Future<List<ProductCategoryItem>> api() async {
+    return productCategory;
+  }
+
   void addToWish(ProductCategoryItem item) {
     if (record.value.contains(item)) {
       removeFromWish(item);
@@ -46,6 +52,7 @@ class FilterController extends GetxController {
     if (record.value.isEmpty) {
       selevtedVisibility.value = false;
     }
+    print("Recordes Length ${record.length}");
     update();
   }
 
@@ -62,6 +69,18 @@ class FilterController extends GetxController {
       }
     }
     update();
+  }
+
+  List<ProductCategoryItem> unSelectedList() {
+    List<ProductCategoryItem> data = [];
+    data.addAll(record.value.reversed);
+    Iterable<ProductCategoryItem> unselectedData =
+        productCategory.where((element) {
+      bool isIt = !containItem(element);
+      return isIt;
+    });
+    data.addAll(unselectedData);
+    return data;
   }
 
   @override
@@ -96,5 +115,11 @@ class FilterController extends GetxController {
 
   void showResult() {
     Get.back(result: record.value);
+  }
+
+  List<int> getIntList() {
+    List<int> values = [];
+    record.value.forEach((e) => values.add(e.id!));
+    return values;
   }
 }
