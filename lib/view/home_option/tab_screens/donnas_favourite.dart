@@ -93,7 +93,7 @@ class DonnaFavourite extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           child: CommonWidgets.networkImage(
             imageUrl: imageUrl ?? "",
-            alignment: Alignment.center,
+            alignment: Alignment.topCenter,
             width: Get.width,
             fit: BoxFit.cover,
           ),

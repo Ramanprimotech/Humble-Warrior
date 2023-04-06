@@ -23,7 +23,8 @@ class WishList extends StatelessWidget {
                         ? loginFirst(context)
                         : CustomRefreshIndicator(
                             onRefresh: () async {
-                              return Future.delayed(const Duration(seconds: 1), () {
+                              return Future.delayed(const Duration(seconds: 1),
+                                  () {
                                 controller.getWishList();
                                 return Future.value(0);
                               });

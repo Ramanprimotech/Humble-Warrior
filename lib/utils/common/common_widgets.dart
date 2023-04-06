@@ -12,12 +12,13 @@ class CommonWidgets {
     return CachedNetworkImage(
       height: height,
       width: width,
+      alignment: Alignment.topCenter,
       imageUrl: imageUrl,
       imageBuilder: (context, imageProvider) => Container(
         margin: margin ?? 0.pa,
         decoration: BoxDecoration(
           image: DecorationImage(
-            alignment: alignment ?? Alignment.center,
+            alignment: alignment ?? Alignment.topCenter,
             image: imageProvider,
             fit: fit,
           ),

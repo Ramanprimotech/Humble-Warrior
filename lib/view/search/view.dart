@@ -109,8 +109,8 @@ class _SearchViewState extends State<SearchView> {
                 onTap: () {
                   if (selectedCategories.isEmpty) {
                     if (filterController.controller.text.length >= 3) {
-                      hiveService.addToRecentList(RecentSearch(
-                          productSearched: filterController.controller.text));
+                      // hiveService.addToRecentList(RecentSearch(
+                      //     productSearched: filterController.controller.text));
                       setState(() {});
                     } else {
                       focusNode.unfocus();
@@ -203,8 +203,11 @@ class _SearchViewState extends State<SearchView> {
                     return ValueListenableBuilder(
                         valueListenable: box.listenable(),
                         builder: (context, value, child) {
-                          var data = value.values.toList();
-                          var dataKeys = value.keys.toList();
+                          Map<dynamic, RecentSearch> dataMap = box.toMap();
+                          List<RecentSearch> data =
+                              dataMap.values.toList().reversed.toList();
+                          var dataKeys =
+                              dataMap.keys.toList().reversed.toList();
                           if (box.isEmpty) {
                             return const Center(
                               child: AppText(
@@ -252,9 +255,8 @@ class _SearchViewState extends State<SearchView> {
                                               ),
                                               onTap: () {
                                                 hiveService
-                                                    .deleteRecentSearchItem(
-                                                        dataKeys[index]
-                                                            .toString());
+                                                    .deleteRecentItemByKey(
+                                                        dataKeys[index]);
                                               },
                                             ),
                                           ],
@@ -300,9 +302,10 @@ class _SearchViewState extends State<SearchView> {
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           onTap: () {
-                            hiveService.addToRecentList(RecentSearch(
-                                productSearched:
-                                    filterController.controller.text));
+                            hiveService.recentFavourite(
+                                item: RecentSearch(
+                                    productSearched:
+                                        filterController.controller.text));
                             Get.toNamed(AppRoutes.dailyDealProductDetail,
                                 arguments: [
                                   ProductDetailsResponse(

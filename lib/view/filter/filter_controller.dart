@@ -94,9 +94,10 @@ class FilterController extends GetxController {
     if (record.value.isEmpty) {
       DialogHelper.showToast(context, "Please select at least one category");
     } else {
-      selevtedVisibility.value = !selevtedVisibility.value;
-      update();
+      selevtedVisibility.value = true;
     }
+    update();
+    update(["search"]);
   }
 
   void resetList() {

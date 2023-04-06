@@ -119,10 +119,11 @@ class SplashController extends GetxController {
   @override
   void onInit() async {
     await getTheme();
+    await TokenManager(onTokenGenerate: () {}, onTokenEror: showError).init();
     Future.delayed(const Duration(seconds: 3), () {
       getData();
     });
-    TokenManager(onTokenGenerate: () {}, onTokenEror: showError).init();
+
     super.onInit();
   }
 
