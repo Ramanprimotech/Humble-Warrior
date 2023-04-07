@@ -56,12 +56,28 @@ class DonnaFavourite extends StatelessWidget {
                 details = controller.donnaFavouriteDealList[index];
               }
               return index != controller.donnaFavouriteDealList.length
-                  ? favouritePageCard(
+                  ?
+              /*CardView(
+                index: index,
+                details: details,
+                onTap: () {
+                  Get.toNamed(AppRoutes.frontPageProductDetail,
+                      arguments: [details]);
+                },
+                cardText: details.ribbonName,
+                imageText: true,
+                imgUrl: details.url!,
+                title: details.ribbonName != null
+                    ? details.ribbonName!
+                    : details.itemName.toString(),
+              )*/
+              favouritePageCard(
                       onTap: () {
                         Get.toNamed(AppRoutes.favouriteDeal,
                             arguments: [details]);
                       },
                       imageUrl: details.url!,
+                cardText: details.itemName,
                     )
                   : Obx(
                       () => Visibility(
@@ -83,20 +99,54 @@ class DonnaFavourite extends StatelessWidget {
     );
   }
 
-  favouritePageCard({double? height, onTap, imageUrl}) {
+  favouritePageCard({double? height, onTap, imageUrl, String? cardText}) {
     return InkWell(
       onTap: onTap ?? () {},
       child: SizedBox(
         // height: height ?? 160 + 50,
         height: Get.width - 40,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: CommonWidgets.networkImage(
-            imageUrl: imageUrl ?? "",
-            alignment: Alignment.topCenter,
-            width: Get.width,
-            fit: BoxFit.cover,
-          ),
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: CommonWidgets.networkImage(
+                imageUrl: imageUrl ?? "",
+                alignment: Alignment.topCenter,
+                width: Get.width,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: cardText != ""
+                  ? Container(
+                  alignment: Alignment.bottomCenter,
+                  height: 70,
+                  width: Get.width,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15),bottomRight: Radius.circular(15)),
+                      gradient: LinearGradient(
+                          colors: [
+                            Colors.transparent,
+                            Colors.black54,
+                            Colors.black
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter)),
+                  child: AppText(
+                    cardText??"",
+                    padding: 8.pa,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                  ))
+                  : const SizedBox(),
+            )
+          ],
         ),
       ),
     );

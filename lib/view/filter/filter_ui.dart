@@ -554,12 +554,13 @@ class FilterScreen extends StatelessWidget {
                 //     ),
                 //   ),
                 // ),
-                Visibility(
+               /* Visibility(
                     visible: _filterController.record.isNotEmpty,
                     child: Divider(
                       height: 0.5,
                       color: AppColors.grey,
-                    ).px16()),
+                    ).px16(),
+                ),*/
                 _filterController.record.isEmpty
                     ? const Expanded(
                         child: Center(

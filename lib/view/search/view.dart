@@ -65,8 +65,8 @@ class _SearchViewState extends State<SearchView> {
 
               timer = Timer(const Duration(seconds: 1), () {
                 if (value.length >= 3) {
-                  // hiveService.addToRecentList(
-                  //     RecentSearch(productSearched: controller.text));
+                  hiveService.addToRecentList(
+                      RecentSearch(productSearched: filterController.controller.text));
                   setState(() {});
                 }
               });
@@ -93,7 +93,9 @@ class _SearchViewState extends State<SearchView> {
                       .displayMedium!
                       .color
                       ?.withOpacity(0.6),
-                  fontSize: 14),
+                  fontSize: 16),
+              // AppText(searchTxt,
+              //     fontWeight: FontWeight.w400, fontSize: 14, padding: 4.pl),
               // hintStyle:
               isDense: true,
               focusedBorder: const UnderlineInputBorder(
@@ -302,10 +304,10 @@ class _SearchViewState extends State<SearchView> {
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           onTap: () {
-                            hiveService.recentFavourite(
-                                item: RecentSearch(
-                                    productSearched:
-                                        filterController.controller.text));
+                            // hiveService.recentFavourite(
+                            //     item: RecentSearch(
+                            //         productSearched:
+                            //             filterController.controller.text));
                             Get.toNamed(AppRoutes.dailyDealProductDetail,
                                 arguments: [
                                   ProductDetailsResponse(
