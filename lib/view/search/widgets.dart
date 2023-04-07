@@ -20,47 +20,52 @@ class SearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeController themeController = Get.find();
     bool isDark = themeController.themeMode == ThemeMode.dark;
-    return GestureDetector(
-      child: Container(
-        height: 45,
-        width: double.infinity,
-        padding: padding ?? 8.pa,
-        margin: margin ?? 0.pa,
-        decoration: BoxDecoration(
-          border: Border.all(
-              width: 1,
-              color: Theme.of(context).textTheme.displaySmall!.color!),
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: child ??
-            Row(
-              children: [
-                Image.asset(
-                  !isDark
-                      ? ImagePathAssets.hwLogoUnnamed
-                      : ImagePathAssets.hwLogoUnnamedDark,
-                  height: 40,
-                  width: 40,
-                ),
-                const Spacer(),
-                const Icon(Icons.search, size: 20),
-                AppText(searchTxt,
-                    fontWeight: FontWeight.w400, fontSize: 14, padding: 4.pl),
-                const Spacer(),
-                20.swb,
-              ],
-            ),
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
       ),
-      onTap: () {
-        ProductCategoryItem items =
-            item == null ? ProductCategoryItem() : item!;
-        Get.toNamed(AppRoutes.searchView, arguments: [
-          postType.isEmptyOrNull ? "" : postType.toString(),
-          items.id == null ? "" : items.id.toString(),
-          items.categoryName == null ? "" : items.categoryName.toString(),
-          items.categoryImage == null ? "" : items.categoryImage.toString()
-        ]);
-      },
+      child: GestureDetector(
+        child: Container(
+          height: 45,
+          width: double.infinity,
+          padding: padding ?? 8.pa,
+          margin: margin ?? 0.pa,
+          decoration: BoxDecoration(
+            border: Border.all(
+                width: 1,
+                color: Theme.of(context).textTheme.displaySmall!.color!.withOpacity(.5)),
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: child ??
+              Row(
+                children: [
+                  Image.asset(
+                    !isDark
+                        ? ImagePathAssets.hwLogoUnnamed
+                        : ImagePathAssets.hwLogoUnnamedDark,
+                    height: 40,
+                    width: 40,
+                  ),
+                  const Spacer(),
+                  const Icon(Icons.search, size: 20),
+                  AppText(searchTxt,
+                      fontWeight: FontWeight.w400, fontSize: 14, padding: 4.pl),
+                  const Spacer(),
+                  20.swb,
+                ],
+              ),
+        ),
+        onTap: () {
+          ProductCategoryItem items =
+              item == null ? ProductCategoryItem() : item!;
+          Get.toNamed(AppRoutes.searchView, arguments: [
+            postType.isEmptyOrNull ? "" : postType.toString(),
+            items.id == null ? "" : items.id.toString(),
+            items.categoryName == null ? "" : items.categoryName.toString(),
+            items.categoryImage == null ? "" : items.categoryImage.toString()
+          ]);
+        },
+      ),
     );
   }
 }
