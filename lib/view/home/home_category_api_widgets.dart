@@ -54,7 +54,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (ctx, index) {
           return const CustomShimmer.rectangular(
-            height: 220,
+            height: 260,
             margin: EdgeInsets.only(left: 16, right: 16, bottom: 10, top: 6),
           );
         },
@@ -82,7 +82,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
                 child: CommonWidgets.networkImage(
                   imageUrl: homeOptions.categoryImage!,
                   fit: BoxFit.fitWidth,
-                  height: 220,
+                  height: 260,
                   alignment: Alignment.topCenter,
                   // width: Get.width,
                 ),
