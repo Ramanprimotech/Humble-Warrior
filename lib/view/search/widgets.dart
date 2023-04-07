@@ -29,11 +29,17 @@ class SearchBar extends StatelessWidget {
           height: 45,
           width: double.infinity,
           padding: padding ?? 8.pa,
-          margin: margin ?? 0.pa,
+          margin:
+              //margin ??
+              0.pa,
           decoration: BoxDecoration(
             border: Border.all(
                 width: 1,
-                color: Theme.of(context).textTheme.displaySmall!.color!.withOpacity(.5)),
+                color: Theme.of(context)
+                    .textTheme
+                    .displaySmall!
+                    .color!
+                    .withOpacity(.5)),
             borderRadius: BorderRadius.circular(24),
           ),
           child: child ??
