@@ -65,8 +65,12 @@ class _SearchViewState extends State<SearchView> {
 
               timer = Timer(const Duration(seconds: 1), () {
                 if (value.length >= 3) {
-                  hiveService.addToRecentList(
-                      RecentSearch(productSearched: filterController.controller.text));
+                  hiveService.recentFavourite(
+                      item: RecentSearch(
+                          productSearched:
+                              filterController.controller.text));
+                  // hiveService.addToRecentList(
+                  //     RecentSearch(productSearched: filterController.controller.text));
                   setState(() {});
                 }
               });

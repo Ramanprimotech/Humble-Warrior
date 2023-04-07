@@ -23,37 +23,42 @@ class _BrandsScreenState extends State<BrandsScreen> {
         leading: AppIcons.IosBackIcon(),
         title: Padding(
           padding: 15.pr,
-          child: Container(
-            height: 45,
-            width: double.infinity,
-            padding: 8.pa,
-            margin: 0.pa,
-            decoration: BoxDecoration(
-              border: Border.all(
-                  width: 1,
-                  color: Theme.of(context).textTheme.displaySmall!.color!),
-              borderRadius: BorderRadius.circular(24),
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25),
             ),
-            child: Row(
-              children: [
-                4.swb,
-                const Icon(Icons.search, size: 20),
-                4.swb,
-                SizedBox(
-                  width: Get.width * .6,
-                  child: TextFormField(
-                    onChanged: (value) {
-                      setState(() {});
-                    },
-                    controller: searchTextController,
-                    decoration: const InputDecoration.collapsed(
-                      hintText: searchTxt,
-                      hintStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)
+            child: Container(
+              height: 45,
+              width: double.infinity,
+              padding: 8.pa,
+              margin: 0.pa,
+              decoration: BoxDecoration(
+                border: Border.all(
+                    width: 1,
+                    color: Theme.of(context).textTheme.displaySmall!.color!),
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: Row(
+                children: [
+                  4.swb,
+                  const Icon(Icons.search, size: 20),
+                  4.swb,
+                  SizedBox(
+                    width: Get.width * .6,
+                    child: TextFormField(
+                      onChanged: (value) {
+                        setState(() {});
+                      },
+                      controller: searchTextController,
+                      decoration: const InputDecoration.collapsed(
+                        hintText: searchTxt,
+                        hintStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)
+                      ),
                     ),
                   ),
-                ),
-                20.swb,
-              ],
+                  20.swb,
+                ],
+              ),
             ),
           ),
         ),
