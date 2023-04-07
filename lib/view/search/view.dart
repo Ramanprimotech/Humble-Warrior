@@ -43,111 +43,107 @@ class _SearchViewState extends State<SearchView> {
         titleSpacing: 5,
         leadingWidth: 35,
         centerTitle: false,
-        title: SearchBar(
-          padding: 8.pv,
-          child: TextFormField(
-            focusNode: focusNode,
-            controller: filterController.controller,
-            onChanged: (value) {
-              if (value.isEmpty) {
-                showCross.value = false;
-              } else {
-                showCross.value = true;
-              }
-              // if (value.length >= 3) {
-              //   hiveService.addToRecentList(
-              //       RecentSearch(productSearched: controller.text));
-              //   setState(() {});
-              // }
-              if (timer != null) {
-                timer!.cancel();
-              }
+        title: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: Container(
+            height: 45,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              border: Border.all(
+                  width: 1,
+                  color: Theme.of(context).textTheme.displaySmall!.color!.withOpacity(0.5)),
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                8.swb,
+                Padding(
+                  padding: 3.pt,
+                  child: Icon(Icons.search, size: 20),
+                ),
+                4.swb,
+                Expanded(
+                  child: TextFormField(
+                    focusNode: focusNode,
+                    controller: filterController.controller,
+                    onChanged: (value) {
+                      if (value.isEmpty) {
+                        showCross.value = false;
+                      } else {
+                        showCross.value = true;
+                      }
+                      // if (value.length >= 3) {
+                      //   hiveService.addToRecentList(
+                      //       RecentSearch(productSearched: controller.text));
+                      //   setState(() {});
+                      // }
+                      if (timer != null) {
+                        timer!.cancel();
+                      }
 
-              timer = Timer(const Duration(seconds: 1), () {
-                if (value.length >= 3) {
-                  hiveService.recentFavourite(
-                      item: RecentSearch(
-                          productSearched:
-                              filterController.controller.text));
-                  // hiveService.addToRecentList(
-                  //     RecentSearch(productSearched: filterController.controller.text));
-                  setState(() {});
-                }
-              });
-            },
-            onFieldSubmitted: (value) {
-              if (timer != null) {
-                timer!.cancel();
-              }
-              if (value.length >= 3) {
-                // hiveService.addToRecentList(
-                //     RecentSearch(productSearched: controller.text));
-                setState(() {});
-              } else {
-                DialogHelper.showToast(context, enterThreeTxt);
-              }
-            },
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 10.0).r,
-              counterText: "",
-              hintText: searchTxt,
-              hintStyle: TextStyle(
-                  color: Theme.of(context)
-                      .textTheme
-                      .displayMedium!
-                      .color
-                      ?.withOpacity(0.6),
-                  fontSize: 16),
-              // AppText(searchTxt,
-              //     fontWeight: FontWeight.w400, fontSize: 14, padding: 4.pl),
-              // hintStyle:
-              isDense: true,
-              focusedBorder: const UnderlineInputBorder(
-                borderSide: BorderSide.none,
-              ),
-              enabledBorder: const UnderlineInputBorder(
-                borderSide: BorderSide.none,
-              ),
-
-              /// prefixIcon
-              prefixIcon: GestureDetector(
-                // padding: 4.pl,
-                onTap: () {
-                  if (selectedCategories.isEmpty) {
-                    if (filterController.controller.text.length >= 3) {
-                      // hiveService.addToRecentList(RecentSearch(
-                      //     productSearched: filterController.controller.text));
-                      setState(() {});
-                    } else {
-                      focusNode.unfocus();
-                      DialogHelper.showToast(context, enterThreeTxt);
-                    }
-                  } else {
-                    setState(() {});
-                  }
-                },
-                child: Icon(Icons.search,
-                    color: Theme.of(context).textTheme.displayMedium!.color,
-                    size: 24.sp),
-              ),
-
-              // suffixIcon:
-              suffixIcon: Obx(
-                () => Visibility(
-                  visible: showCross.value,
-                  child: GestureDetector(
-                    child: Icon(
-                      Icons.close,
-                      color: Theme.of(context).textTheme.displayMedium!.color,
-                      size: 20.sp,
-                    ),
-                    onTap: () {
-                      filterController.controller.clear();
-                      setState(() {});
+                      timer = Timer(const Duration(seconds: 1), () {
+                        if (value.length >= 3) {
+                          hiveService.addToRecentList(
+                              RecentSearch(productSearched: filterController.controller.text));
+                          setState(() {});
+                        }
+                      });
                     },
+                    onFieldSubmitted: (value) {
+                      if (timer != null) {
+                        timer!.cancel();
+                      }
+                      if (value.length >= 3) {
+                        // hiveService.addToRecentList(
+                        //     RecentSearch(productSearched: controller.text));
+                        setState(() {});
+                      } else {
+                        DialogHelper.showToast(context, enterThreeTxt);
+                      }
+                    },
+                    decoration: InputDecoration(
+                      // contentPadding: const EdgeInsets.symmetric(horizontal: 10.0).r,
+                      // counterText: "",
+                      hintText: searchTxt,
+                      hintStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 16 ),
+                      // AppText(searchTxt,
+                      //     fontWeight: FontWeight.w400, fontSize: 14, padding: 4.pl),
+                      // hintStyle:
+                      // isDense: true,
+                      focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide.none,
+                      ),
+                      enabledBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide.none,
+                      ),
+
+                      /// prefixIcon
+
+                      // suffixIcon:
+                      suffixIcon: Obx(
+                            () => Visibility(
+                          visible: showCross.value,
+                          child: GestureDetector(
+                            child: Icon(
+                              Icons.close,
+                              color: Theme.of(context).textTheme.displayMedium!.color,
+                              size: 20.sp,
+                            ),
+                            onTap: () {
+                              filterController.controller.clear();
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                20.swb,
+              ],
             ),
           ),
         ),
@@ -155,43 +151,43 @@ class _SearchViewState extends State<SearchView> {
         actions: [
           selectedCategories.isEmpty
               ? IconButton(
-                  padding: 16.pr,
-                  onPressed: () async {
-                    var data = await Get.toNamed(
-                      AppRoutes.filterView,
-                    );
-                    if (data != null) {
-                      List<int> values = [];
-                      data.forEach((e) => values.add(e.id!));
-                      selectedCategories.clear();
-                      selectedCategories.addAll(values);
+              padding: 16.pr,
+              onPressed: () async {
+                var data = await Get.toNamed(
+                  AppRoutes.filterView,
+                );
+                if (data != null) {
+                  List<int> values = [];
+                  data.forEach((e) => values.add(e.id!));
+                  selectedCategories.clear();
+                  selectedCategories.addAll(values);
 
-                      setState(() {});
-                    }
-                  },
-                  icon: AppIcons.filter(size: 35))
+                  setState(() {});
+                }
+              },
+              icon: AppIcons.filter(size: 35))
               : Badge(
-                  alignment: const AlignmentDirectional(20.0, 3.0),
-                  label: AppText(
-                    "${selectedCategories.length}",
-                    fontSize: 10,
-                    color: Colors.white,
-                  ),
-                  child: IconButton(
-                      padding: 16.pr,
-                      onPressed: () async {
-                        var data = await Get.toNamed(AppRoutes.filterView);
-                        if (data != null) {
-                          List<int> values = [];
-                          data.forEach((e) => values.add(e.id!));
-                          selectedCategories.clear();
-                          selectedCategories.addAll(values);
+            alignment: const AlignmentDirectional(20.0, 3.0),
+            label: AppText(
+              "${selectedCategories.length}",
+              fontSize: 10,
+              color: Colors.white,
+            ),
+            child: IconButton(
+                padding: 16.pr,
+                onPressed: () async {
+                  var data = await Get.toNamed(AppRoutes.filterView);
+                  if (data != null) {
+                    List<int> values = [];
+                    data.forEach((e) => values.add(e.id!));
+                    selectedCategories.clear();
+                    selectedCategories.addAll(values);
 
-                          setState(() {});
-                        }
-                      },
-                      icon: AppIcons.filter(size: 35)),
-                )
+                    setState(() {});
+                  }
+                },
+                icon: AppIcons.filter(size: 35)),
+          )
         ],
       ),
       body: SafeArea(
