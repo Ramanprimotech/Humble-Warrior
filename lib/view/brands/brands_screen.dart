@@ -36,15 +36,9 @@ class _BrandsScreenState extends State<BrandsScreen> {
             ),
             child: Row(
               children: [
-                Image.asset(
-                  !isDark
-                      ? ImagePathAssets.hwLogoUnnamed
-                      : ImagePathAssets.hwLogoUnnamedDark,
-                  height: 40,
-                  width: 40,
-                ),
-                const Spacer(),
-                // const Icon(Icons.search, size: 20),
+                4.swb,
+                const Icon(Icons.search, size: 20),
+                4.swb,
                 SizedBox(
                   width: Get.width * .6,
                   child: TextFormField(
@@ -53,7 +47,8 @@ class _BrandsScreenState extends State<BrandsScreen> {
                     },
                     controller: searchTextController,
                     decoration: const InputDecoration.collapsed(
-                      hintText: "Search Brand",
+                      hintText: searchTxt,
+                      hintStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)
                     ),
                   ),
                 ),
