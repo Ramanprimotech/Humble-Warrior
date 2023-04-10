@@ -92,8 +92,9 @@ class MyAccount extends StatelessWidget {
                   ///Help & Support
                   myAccWidget.detailsOptions(controller, title: helpSupportTxt,
                       ontap: () {
-                    Get.toNamed(AppRoutes.staticPages,
-                        arguments: ["40429", helpSupportTxt]);
+                    // Get.toNamed(AppRoutes.staticPages,
+                    //     arguments: ["40429", helpSupportTxt]);
+                        DialogHelper.showToast(context, "Coming Soon");
                   }),
 
                   ///Term & Conditions

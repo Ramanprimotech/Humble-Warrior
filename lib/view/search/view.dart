@@ -101,7 +101,7 @@ class _SearchViewState extends State<SearchView> {
                         //     RecentSearch(productSearched: controller.text));
                         setState(() {});
                       } else {
-                        DialogHelper.showToast(context, enterThreeTxt);
+                        // DialogHelper.showToast(context, enterThreeTxt);
                       }
                     },
                     decoration: InputDecoration(
