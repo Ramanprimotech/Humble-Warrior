@@ -16,44 +16,58 @@ class _NotificationScreenState extends State<NotificationScreen> {
     return Scaffold(
       bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
-        child: Obx(
-              () =>
-              Column(
-                children: [
-                  CommonWidgets.titleBar(context,
-                      title: notificationsTxt,
-                      fontSize: 20,
-                      widget: Container(
-                        padding: 20.pr,
-                        alignment: Alignment.centerRight,
-                        width: 110,
-                        child: GestureDetector(
-                            onTap: () {
-                              DialogHelper.showConfirmationDialog(
-                                  context: context,
-                                  message: confirmDeleteNotification,
-                                  actionLabel: deleteTxt, action: () async {
-                                Get.back();
-                                DialogHelper.showLoadingDialog(
-                                    label: loadingTxt);
-                                await _notificationController.deleteNotification()
-                                    .then((value) {
-                                  DialogHelper.closeDialog();
-                                  if (!value) {
-                                    debugPrint("Error Deleting the notifications");
-                                  }else{
-                                    setState(() {});
-                                    setState(() {});
-                                  }});
-                              });
-                            },
-                            child:  AppText(clearAllTxt, color: AppColors.primary,)
-                        ),
-                      )),
-                  Expanded(
-                    child: _notificationController.loggedIn.value == false
-                        ? loginFirst(context)
-                        : CustomRefreshIndicator(
+        child: Column(
+          children: [
+            CommonWidgets.titleBar(context,
+                title: notificationsTxt,
+                fontSize: 20,
+                widget: FutureBuilder<NotificationResponseModel>(
+                    future: _notificationController.notificationList(),
+                    builder: (context, snapshot) {
+
+                      if(snapshot.connectionState == ConnectionState.waiting || snapshot.hasError){
+                        return const SizedBox(width: 95,);
+                      }
+                      if (snapshot.data!.posts!.isNotEmpty && isLoggedIn) {
+                        return Container(
+                          padding: 20.pr,
+                          alignment: Alignment.centerRight,
+                          width: 95,
+                          child: GestureDetector(
+                              onTap: () {
+                                DialogHelper.showConfirmationDialog(
+                                    context: context,
+                                    message: confirmDeleteNotification,
+                                    actionLabel: deleteTxt,
+                                    action: () async {
+                                      Get.back();
+                                      DialogHelper.showLoadingDialog(
+                                          label: loadingTxt);
+                                      await _notificationController
+                                          .deleteNotification()
+                                          .then((value) {
+                                        DialogHelper.closeDialog();
+                                        if (!value) {
+                                          debugPrint(
+                                              "Error Deleting the notifications");
+                                        } else {
+                                          setState(() {});
+                                        }
+                                      });
+                                    });
+                              },
+                              child: AppText(
+                                clearAllTxt,
+                                color: AppColors.primary,
+                              )),
+                        );
+                      }
+                      return const SizedBox(width: 95,);
+                    })),
+            Expanded(
+              child: isLoggedIn == false
+                  ? loginFirst(context)
+                  : CustomRefreshIndicator(
                       onRefresh: () {
                         setState(() {});
                         return Future.value(0);
@@ -108,12 +122,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   onTap: () async {
                                     await _notificationController
                                         .notificationDetailsNavigator(
-                                        posts.categoryName, posts.id)
-                                        .then((value) =>
-                                        setState(() {
-                                          _notificationController
-                                              .update();
-                                        }));
+                                            posts.categoryName, posts.id)
+                                        .then((value) => setState(() {
+                                              _notificationController.update();
+                                            }));
                                   },
                                   child: NotificationItem(data: posts));
                             },
@@ -126,9 +138,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         },
                       ),
                     ),
-                  ),
-                ],
-              ),
+            ),
+          ],
         ),
       ),
     );
