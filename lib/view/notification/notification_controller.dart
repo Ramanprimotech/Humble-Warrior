@@ -85,4 +85,15 @@ class NotificationController extends GetxController {
     }
     return await notificationStatus(id);
   }
+
+  Future<bool> deleteNotification() async{
+    String? userId =
+        await SharePreferenceData.getStringValuesSF(spRegisterUserId);
+    var payload = {
+      'user_id' : userId??""
+    };
+
+ bool result  =   await CallAPI.deleteNotification(payload: payload);
+  return result;
+  }
 }

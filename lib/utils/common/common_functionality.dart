@@ -22,7 +22,7 @@ class CommonUtils {
       {required String copyText, required BuildContext context}) {
     FToast().init(context);
     Clipboard.setData(ClipboardData(text: copyText)).then((value) {
-      DialogHelper.showToast(context, "Copied to Clipboard");
+      DialogHelper.showToast(context, clipboardTxt);
     });
   }
 

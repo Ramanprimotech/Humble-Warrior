@@ -14,6 +14,7 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
     return Scaffold(
       bottomNavigationBar: bottomNavigationWidget(context),
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
         titleSpacing: 5,
         leadingWidth: 35,
         centerTitle: false,

@@ -38,7 +38,7 @@ class MyAccountController extends GetxController {
   }
 
   void message(context) {
-    DialogHelper.showToast(context, "Stay tuned");
+    DialogHelper.showToast(context, stayTunedtxt);
   }
 
   Future<void> getImageCamera() async {
@@ -103,7 +103,7 @@ class MyAccountController extends GetxController {
       );
     } else {
       DialogHelper.showConfirmationDialog(
-          message: "Do you want to Change Or Remove the Passcode",
+          message: confirmPasscodeTxt,
           cancelLabel: "Change",
           actionLabel: "Remove",
           cancelAction: () async {
@@ -126,12 +126,12 @@ class MyAccountController extends GetxController {
             SharedPreferences sharedPreferences =
                 await SharedPreferences.getInstance();
 
-            var pass = sharedPreferences.getString('PASSCODE');
+            var pass = sharedPreferences.getString(passcodeTxt);
             if (pass == null || pass == "") {
-              DialogHelper.showToast(context, 'Passcode not set yet');
+              DialogHelper.showToast(context, passcodeNotSetTxt);
             } else {
-              sharedPreferences.remove('PASSCODE');
-              DialogHelper.showToast(context, 'Successfully removed passcode');
+              sharedPreferences.remove(passcodeTxt);
+              DialogHelper.showToast(context, removedPasscodeTxt);
             }
           },
           context: Get.context!);
@@ -181,10 +181,10 @@ class MyAccountController extends GetxController {
       if (enteredPasscode != null) {
         SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
-        sharedPreferences.setString('PASSCODE', enteredPasscode);
-        if (sharedPreferences.getString('PASSCODE') != null) {
+        sharedPreferences.setString(spPasscode, enteredPasscode);
+        if (sharedPreferences.getString(spPasscode) != null) {
           DialogHelper.showAlertDialog(
-            'Successfully set app passcode',
+            setPasscodeTxt,
             onTap: () {
               Get.back(result: true);
               Get.back(result: true);
@@ -192,7 +192,7 @@ class MyAccountController extends GetxController {
           );
         } else {
           DialogHelper.showAlertDialog(
-            'Successfully reset app passcode',
+            resetPasscodeTxt,
             onTap: () {
               Get.back(result: true);
               Get.back(result: true);

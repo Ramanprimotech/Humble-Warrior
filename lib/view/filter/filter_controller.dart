@@ -92,7 +92,7 @@ class FilterController extends GetxController {
   void showCategories(BuildContext context) {
     FToast().init(context);
     if (record.value.isEmpty) {
-      DialogHelper.showToast(context, "Please select at least one category");
+      DialogHelper.showToast(context, selectCategoryTxt);
     } else {
       selevtedVisibility.value = true;
     }

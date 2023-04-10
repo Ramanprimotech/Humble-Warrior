@@ -21,6 +21,7 @@ class SearchBar extends StatelessWidget {
     final ThemeController themeController = Get.find();
     bool isDark = themeController.themeMode == ThemeMode.dark;
     return Card(
+      surfaceTintColor: Colors.transparent,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
       ),
