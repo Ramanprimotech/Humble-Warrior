@@ -28,13 +28,13 @@ class CategoryDetailsListController extends GetxController {
             payload: paginationModel, url: Endpoints.productCategoriesItemList)
         .then((value) {
       if (value.data == null) {
-        DialogHelper.showToast(context, "No More Deals Found");
+        DialogHelper.showToast(context, noMoreDealsTxt);
       } else {
         categoryListPage += 1;
         categoryList.addAll(value.data!);
         categoryListLength.value = categoryList.length;
         if (refresh) {
-          DialogHelper.showToast(context, "Deals Refreshed");
+          DialogHelper.showToast(context, dealsRefreshTxt);
         }
       }
       if (value.totalRecords != null) {

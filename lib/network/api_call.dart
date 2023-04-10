@@ -232,6 +232,7 @@ class CallAPI {
   ///  Notification List API
   static Future<NotificationResponseModel> notificationListAPI(
       {required Map payload}) async {
+    log(payload.toString(), name: "Notification Delete");
     try {
       final response = await http.post(
           Uri.parse("${Endpoints.baseUrl}${Endpoints.notificationList}"),
@@ -264,6 +265,24 @@ class CallAPI {
         return false;
       }
       return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// Delete Notification Status API
+  static Future<bool> deleteNotification({required Map payload}) async {
+    log(payload.toString(), name: "Notification Delete");
+    try {
+      final response = await http.post(
+          Uri.parse("${Endpoints.baseUrl}${Endpoints.deleteNotificationList}"),
+          body: payload,
+      headers: {'Authorization': 'Bearer ${Endpoints.token}'});
+
+      if (jsonDecode(response.body)['status'] ==  true) {
+        return true;
+      }
+      return false;
     } catch (e) {
       return false;
     }

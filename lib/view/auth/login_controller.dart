@@ -7,6 +7,7 @@ class LoginController extends GetxController {
   RxBool isPlatformIOS = false.obs;
   String? platform;
 
+
   ///----------Check Current Platform----------///
   checkCurrentPlatform() {
     if (Platform.isAndroid) {
@@ -36,10 +37,10 @@ class LoginController extends GetxController {
             /// Save User Info to Local Storage
             await saveUserToLocalStorage();
 
-            Get.offAllNamed(AppRoutes.bottomNavigation);
-
-            /// Auth Data API
-            await authAPI();
+            await authAPI().whenComplete(
+                    () {
+                  Get.offAllNamed(AppRoutes.bottomNavigation);
+                });
           }
         } catch (e) {}
 
@@ -64,7 +65,9 @@ class LoginController extends GetxController {
 
             /// Auth Data API
             await authAPI().whenComplete(
-                () => Get.offAllNamed(AppRoutes.bottomNavigation));
+                () {
+                  Get.offAllNamed(AppRoutes.bottomNavigation);
+                });
           } else {
             Loader.hide();
           }
@@ -80,8 +83,10 @@ class LoginController extends GetxController {
           await saveUserToLocalStorage();
 
           /// Auth Data API
-          await authAPI()
-              .whenComplete(() => Get.offAllNamed(AppRoutes.bottomNavigation));
+          await authAPI().whenComplete(
+                  () {
+                Get.offAllNamed(AppRoutes.bottomNavigation);
+              });
         }
       },
 

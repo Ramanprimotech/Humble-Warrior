@@ -142,7 +142,6 @@ class _SearchViewState extends State<SearchView> {
                     ),
                   ),
                 ),
-                20.swb,
               ],
             ),
           ),

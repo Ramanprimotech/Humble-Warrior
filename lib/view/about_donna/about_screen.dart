@@ -256,7 +256,7 @@ class AboutScreen extends StatelessWidget {
                 ..onTap = () async {
                   await CommonUtils().urlLauncher(
                       url:
-                          "https://humblewarrior.com/wp-content/uploads/2020/09/humble-warrior-media.pdf",
+                          Endpoints.pdf,
                       title: theHumbleWarriorLowerTxt);
                 },
               text: hereTxt,

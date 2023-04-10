@@ -97,14 +97,19 @@ const String gotoLoginTxt = 'Go to Login';
 const String retryTxt = 'Retry';
 const String buyNowTxt = 'Buy Now';
 const String sortTxt = "Sort";
-const String loginWishTxt = "Login to add items to wishlist";
+const String clearAllTxt = "Clear all";
+const String noNotificationTxt = "No notifications found";
+
 
 /*===================================================Shared Preference========================================================*/
 const String spIsEntered = 'isEntered';
 const String spIsLogged = "isLogged";
 const String spRegisterUserId = "registerUserId";
+const String spPasscode = "PASSCODE";
 
 const String okTxt = "OK";
+const String deleteTxt = "Delete";
+const String loadingTxt = "Loading...";
 const String somethingWentWrongTxt = "Something Went Wrong";
 const String recentTxt = "Recent";
 const String searchDealsTxt = "Enter text to search deals...";
@@ -114,3 +119,20 @@ const String noDealsTxt = "No Deals found";
 const String resetTxt = 'Reset';
 const String addToWishlistTxt = 'Add to Wishlist';
 const String shareTxt = 'Share';
+
+/*===================================================Toast========================================================*/
+const String loginWishTxt = "Login to add items to wishlist";
+const String confirmDeleteNotification = "Do you want to delete all the notifications?";
+const String clipboardTxt = "Copied to Clipboard";
+const String exitApplicationTxt = "Press again to exit application";
+const String selectCategoryTxt = "Please select at least one category";
+const String noMoreDealsTxt = "No More Deals";
+const String dealsRefreshTxt = "Deals Refreshed";
+const String incorrectPasswordTxt = 'Incorrect Passcode';
+
+const String confirmPasscodeTxt ="Do you want to Change Or Remove the Passcode";
+const String removedPasscodeTxt = 'Successfully removed passcode';
+const String setPasscodeTxt = 'Successfully set app passcode';
+const String resetPasscodeTxt = 'Successfully reset app passcode';
+const String passcodeNotSetTxt = 'Passcode not set yet';
+const String stayTunedtxt = "Stay tuned";

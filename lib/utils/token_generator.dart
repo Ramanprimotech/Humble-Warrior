@@ -73,8 +73,7 @@ class TokenManager {
         );
     await CallAPI.generateToken(payload: tokenRequestModel).then((value) {
       if (value.token == null) {
-        DialogHelper.showToast(
-            Get.context!, "Unable to generate authentication token");
+       debugPrint("Unable to generate token");
         return false;
       } else {
         String token = value.token!;

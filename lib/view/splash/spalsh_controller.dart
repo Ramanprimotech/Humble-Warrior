@@ -68,7 +68,7 @@ class SplashController extends GetxController {
             }
           }
         } else {
-          DialogHelper.showToast(context, 'Incorrect Passcode');
+          DialogHelper.showToast(context, incorrectPasswordTxt);
         }
       }
       return;
