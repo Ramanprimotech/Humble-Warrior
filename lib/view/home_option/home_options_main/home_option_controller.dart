@@ -79,13 +79,13 @@ class HomeOptionController extends GetxController
             payload: paginationModel, url: Endpoints.donnaDeals)
         .then((value) {
       if (value.data == null) {
-        DialogHelper.showToast(context, "No More Deals");
+        DialogHelper.showToast(context, noMoreDealsTxt);
       } else {
         donnaDealsPage += 1;
         donnaDealList.addAll(value.data!);
         donnaDealListLength.value = donnaDealList.length;
         if (refresh) {
-          DialogHelper.showToast(context, "Deals Refreshed");
+          DialogHelper.showToast(context, dealsRefreshTxt);
         }
       }
       if (value.totalRecords != null) {
@@ -110,13 +110,13 @@ class HomeOptionController extends GetxController
             payload: paginationModel, url: Endpoints.frontPage)
         .then((value) {
       if (value.data == null) {
-        DialogHelper.showToast(context, "No More Deals");
+        DialogHelper.showToast(context, noMoreDealsTxt);
       } else {
         frontPageDealsPage += 1;
         frontPageDealList.addAll(value.data!);
         frontPageDealListLength.value = frontPageDealList.length;
         if (refresh) {
-          DialogHelper.showToast(context, "Deals Refreshed");
+          DialogHelper.showToast(context, dealsRefreshTxt);
         }
       }
 
@@ -142,13 +142,13 @@ class HomeOptionController extends GetxController
             payload: paginationModel, url: Endpoints.donnaFavourite)
         .then((value) {
       if (value.data == null) {
-        DialogHelper.showToast(context, "No More Deals");
+        DialogHelper.showToast(context, noMoreDealsTxt);
       } else {
         donnaFavouriteDealsPage += 1;
         donnaFavouriteDealList.addAll(value.data!);
         donnaFavouriteDealListLength.value = donnaFavouriteDealList.length;
         if (refresh) {
-          DialogHelper.showToast(context, "Deals Refreshed");
+          DialogHelper.showToast(context, dealsRefreshTxt);
         }
       }
       if (value.totalRecords != null) {

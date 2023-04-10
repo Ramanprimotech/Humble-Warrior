@@ -4,7 +4,7 @@ import 'package:humble_warrior/hw.dart';
 
 class NotificationController extends GetxController {
   RxBool loggedIn = true.obs;
-
+RxBool list = false.obs;
   @override
   void onInit() async {
     await getLoggedValue();
@@ -84,5 +84,17 @@ class NotificationController extends GetxController {
           arguments: [productDetailsResponse]);
     }
     return await notificationStatus(id);
+  }
+
+  Future<bool> deleteNotification() async{
+    String? userId =
+        await SharePreferenceData.getStringValuesSF(spRegisterUserId);
+    var payload = {
+      'user_id' : userId??""
+    };
+
+ bool result  =   await CallAPI.deleteNotification(payload: payload);
+ update(['badge']);
+  return result;
   }
 }

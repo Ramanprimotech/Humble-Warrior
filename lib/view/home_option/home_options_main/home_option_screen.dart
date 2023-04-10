@@ -14,14 +14,19 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
     return Scaffold(
       bottomNavigationBar: bottomNavigationWidget(context),
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
         titleSpacing: 5,
         leadingWidth: 35,
         centerTitle: false,
-        title: Obx(
-          () => SearchBar(
-            postType: controller.postType(controller.selectedIndex.value),
+        title:
+    // Obx(
+    //       () =>
+          const SearchBar(
+            /// Uncomment this line to filter by category
+            // postType: controller.postType(controller.selectedIndex.value),
           ),
-        ),
+
+        // ),
         leading: AppIcons.IosBackIcon(),
         actions: [
           FilterIcon(

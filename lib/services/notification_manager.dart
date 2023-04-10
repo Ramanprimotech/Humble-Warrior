@@ -34,6 +34,7 @@ class NotificationManager {
 
   ///  Notification Listener
   static void messageListener() {
+
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       debugPrint('Got a message whilst in the foreground!');
 

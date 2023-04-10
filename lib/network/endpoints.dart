@@ -17,7 +17,9 @@ class Endpoints {
   static const String registerUser = "/pnfw/register";
   static const String notificationStatus = "/pnfw/posts";
   static const String notificationList = "/pnfw/posts";
+  static const String deleteNotificationList = "/wp-json/hwapi/clear_all_notifications";
   static const String search = "/wp-json/wp/v2/search";
 
   static String token = "";
+  static String pdf = "https://humblewarrior.com/wp-content/uploads/2020/09/humble-warrior-media.pdf";
 }

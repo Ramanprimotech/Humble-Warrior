@@ -103,7 +103,7 @@ class BottomNavigationController extends GetxController {
     if (currentBackPressTime == null ||
         now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
       currentBackPressTime = now;
-      Fluttertoast.showToast(msg: "Press again to exit application");
+      Fluttertoast.showToast(msg: exitApplicationTxt);
       return Future.value(false);
     }
     return Future.value(true);

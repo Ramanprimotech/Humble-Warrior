@@ -35,6 +35,7 @@ class HomeScreenWidgets {
             },
             child: GetBuilder<NotificationController>(
               init: _notificationController,
+              id: "badge",
               builder: (ctx) {
                 return FutureBuilder<NotificationResponseModel>(
                     future: ctx.notificationList(),
