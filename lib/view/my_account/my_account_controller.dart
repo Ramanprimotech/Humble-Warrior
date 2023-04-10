@@ -103,38 +103,38 @@ class MyAccountController extends GetxController {
       );
     } else {
       DialogHelper.showConfirmationDialog(
-          message: confirmPasscodeTxt,
-          cancelLabel: "Change",
-          actionLabel: "Remove",
-          cancelAction: () async {
-            Get.back();
-            await _showLockScreen(
-              Get.context!,
-              opaque: false,
-              cancelButton: Text(
-                'Cancel',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: AppColors.red,
-                ),
-                semanticsLabel: 'Cancel',
+        context: context,
+        message: "Do you want to Change Or Remove the Passcode",
+        cancelLabel: "Change",
+        actionLabel: "Remove",
+        cancelAction: () {
+          Navigator.of(context, rootNavigator: true).pop();
+          _showLockScreen(
+            context,
+            opaque: false,
+            cancelButton: Text(
+              'Cancel',
+              style: TextStyle(
+                fontSize: 16,
               ),
-            );
-          },
-          action: () async {
-            Get.back(result: true);
-            SharedPreferences sharedPreferences =
-                await SharedPreferences.getInstance();
+              semanticsLabel: 'Cancel',
+            ),
+          );
+        },
+        action: () async {
+          Navigator.of(context, rootNavigator: true).pop();
+          SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
 
-            var pass = sharedPreferences.getString(passcodeTxt);
-            if (pass == null || pass == "") {
-              DialogHelper.showToast(context, passcodeNotSetTxt);
-            } else {
-              sharedPreferences.remove(passcodeTxt);
-              DialogHelper.showToast(context, removedPasscodeTxt);
-            }
-          },
-          context: Get.context!);
+          var pass = sharedPreferences.getString('PASSCODE');
+          if (pass == null || pass == "") {
+            DialogHelper.showToast(context, passcodeNotSetTxt);
+          } else {
+            sharedPreferences.remove('PASSCODE');
+            DialogHelper.showToast(context, removedPasscodeTxt);
+          }
+        },
+      );
     }
   }
 

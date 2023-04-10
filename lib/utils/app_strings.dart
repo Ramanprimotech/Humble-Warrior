@@ -131,8 +131,8 @@ const String dealsRefreshTxt = "Deals Refreshed";
 const String incorrectPasswordTxt = 'Incorrect Passcode';
 
 const String confirmPasscodeTxt ="Do you want to Change Or Remove the Passcode";
-const String removedPasscodeTxt = 'Successfully removed passcode';
-const String setPasscodeTxt = 'Successfully set app passcode';
+const String removedPasscodeTxt = 'Passcode removed successfully';
+const String setPasscodeTxt = 'Passcode set successfully';
 const String resetPasscodeTxt = 'Successfully reset app passcode';
 const String passcodeNotSetTxt = 'Passcode not set yet';
 const String stayTunedtxt = "Stay tuned";

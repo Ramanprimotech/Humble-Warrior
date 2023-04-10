@@ -152,9 +152,7 @@ class _SearchViewState extends State<SearchView> {
               ? IconButton(
               padding: 16.pr,
               onPressed: () async {
-                var data = await Get.toNamed(
-                  AppRoutes.filterView,
-                );
+                var data = await Get.toNamed(AppRoutes.filterView);
                 if (data != null) {
                   List<int> values = [];
                   data.forEach((e) => values.add(e.id!));
