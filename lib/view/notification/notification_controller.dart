@@ -4,7 +4,7 @@ import 'package:humble_warrior/hw.dart';
 
 class NotificationController extends GetxController {
   RxBool loggedIn = true.obs;
-
+RxBool list = false.obs;
   @override
   void onInit() async {
     await getLoggedValue();
@@ -94,6 +94,7 @@ class NotificationController extends GetxController {
     };
 
  bool result  =   await CallAPI.deleteNotification(payload: payload);
+ update(['badge']);
   return result;
   }
 }
