@@ -64,40 +64,44 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       }*/
                       return const SizedBox(width: 95,);
                     })),
-            if ( _notificationController.notificationList().toString().isNotEmpty && isLoggedIn)
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Container(
-              padding: const EdgeInsets.only(right: 20, bottom: 10),
-              width: 95,
-              child: GestureDetector(
-                  onTap: () {
-                    DialogHelper.showConfirmationDialog(
-                        context: context,
-                        message: confirmDeleteNotification,
-                        actionLabel: deleteTxt,
-                        action: () async {
-                          Get.back();
-                          DialogHelper.showLoadingDialog(
-                              label: loadingTxt);
-                          await _notificationController
-                              .deleteNotification()
-                              .then((value) {
-                            DialogHelper.closeDialog();
-                            if (!value) {
-                              debugPrint(
-                                  "Error Deleting the notifications");
-                            } else {
-                              setState(() {});
-                            }
+            // if (_notificationController.notificationList().toString().isNotEmpty && isLoggedIn)
+          Visibility(
+            visible: !_notificationController.notificationList().toString().isNotEmpty && isLoggedIn,
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: Container(
+                padding: const EdgeInsets.only(right: 20, bottom: 10),
+                width: 95,
+                child: GestureDetector(
+                    onTap: () {
+                      DialogHelper.showConfirmationDialog(
+                          context: context,
+                          message: confirmDeleteNotification,
+                          actionLabel: deleteTxt,
+                          action: () async {
+                            Get.back();
+                            DialogHelper.showLoadingDialog(
+                                label: loadingTxt);
+                            await _notificationController
+                                .deleteNotification()
+                                .then((value) {
+                              DialogHelper.closeDialog();
+                              if (!value) {
+                                debugPrint(
+                                    "Error Deleting the notifications");
+                              } else {
+                                setState(() {});
+                              }
+                            });
+                            setState(() {});
                           });
-                        });
-                  },
-                  child: AppText(
-                    clearAllTxt,
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.bold,
-                  )),
+                    },
+                    child: AppText(
+                      clearAllTxt,
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
             ),
           ),
             Expanded(
