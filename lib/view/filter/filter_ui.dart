@@ -306,7 +306,7 @@ class FilterScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(50)),
                         child: const Center(
                           child: AppText(
-                            "Search Result",
+                            "Search Results",
                             color: AppColors.white,
                           ),
                         ).px(14).py(2),
