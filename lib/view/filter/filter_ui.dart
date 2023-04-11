@@ -44,7 +44,7 @@ class FilterScreen extends StatelessWidget {
                   children: [
                     AppText((!_filterController.selevtedVisibility.value)
                         ? "Categories"
-                        : "Selected Categories"),
+                        : "Selected Categories",fontWeight: FontWeight.bold),
                     TextButton(
                         onPressed: () {
                           if (_filterController.record.isNotEmpty) {
