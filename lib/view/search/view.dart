@@ -84,7 +84,7 @@ class _SearchViewState extends State<SearchView> {
                         timer!.cancel();
                       }
 
-                      timer = Timer(const Duration(seconds: 1), () {
+                      timer = Timer(const Duration(milliseconds: 660), () {
                         if (value.length >= 3) {
                           hiveService.recentFavourite(
                               item: RecentSearch(
@@ -95,17 +95,15 @@ class _SearchViewState extends State<SearchView> {
                       });
                     },
                     onFieldSubmitted: (value) {
-                      if (timer != null) {
-                        timer!.cancel();
-                      }
+                      // if (timer != null) {
+                      //   timer!.cancel();
+                      // }
                       if (value.isNotEmpty) {
                         hiveService.recentFavourite(
                             item: RecentSearch(
                                 productSearched:
                                     filterController.controller.text));
                         setState(() {});
-                      } else {
-                        // DialogHelper.showToast(context, enterThreeTxt);
                       }
                     },
                     decoration: InputDecoration(
