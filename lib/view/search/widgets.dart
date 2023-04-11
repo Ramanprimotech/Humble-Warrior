@@ -103,7 +103,7 @@ class FilterIcon extends StatelessWidget {
               item == null ? ProductCategoryItem() : item!;
           Get.put(FilterController());
      var data = await Get.toNamed(AppRoutes.filterView);
-     Get.find<FilterController>().record.clear();
+     Get.find<FilterController>().resetList();
           /*Get.toNamed(AppRoutes.searchView, arguments: [
             postType.isEmptyOrNull ? "" : postType.toString(),
             items.id == null ? "" : items.id.toString(),
