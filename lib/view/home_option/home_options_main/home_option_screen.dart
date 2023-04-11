@@ -28,9 +28,10 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
 
         // ),
         leading: AppIcons.IosBackIcon(),
-        actions: [
+        actions: const [
           FilterIcon(
-            postType: controller.postType(controller.selectedIndex.value),
+            // postType: controller.postType(controller.selectedIndex.value),
+            postType: "",
           ),
         ],
         bottom: PreferredSize(

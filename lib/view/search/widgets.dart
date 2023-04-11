@@ -1,4 +1,5 @@
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/view/filter/filter_controller.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar(
@@ -97,15 +98,18 @@ class FilterIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
         padding: 16.pr,
-        onPressed: () {
+        onPressed: () async {
           ProductCategoryItem items =
               item == null ? ProductCategoryItem() : item!;
-          Get.toNamed(AppRoutes.searchView, arguments: [
+          Get.put(FilterController());
+     var data = await Get.toNamed(AppRoutes.filterView);
+     Get.find<FilterController>().record.clear();
+          /*Get.toNamed(AppRoutes.searchView, arguments: [
             postType.isEmptyOrNull ? "" : postType.toString(),
             items.id == null ? "" : items.id.toString(),
             items.categoryName == null ? "" : items.categoryName.toString(),
             items.categoryImage == null ? "" : items.categoryImage.toString()
-          ]);
+          ]);*/
         },
         icon: AppIcons.filter(size: 35));
   }
