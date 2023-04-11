@@ -155,14 +155,15 @@ class _SearchViewState extends State<SearchView> {
               padding: 16.pr,
               onPressed: () async {
                 var data = await Get.toNamed(AppRoutes.filterView);
-                if (data != null) {
-                  List<int> values = [];
-                  data.forEach((e) => values.add(e.id!));
+                /// Uncomment to link with the filter screen
+                // if (data != null) {
+                //   List<int> values = [];
+                //   data.forEach((e) => values.add(e.id!));
                   selectedCategories.clear();
-                  selectedCategories.addAll(values);
-
-                  setState(() {});
-                }
+                //   selectedCategories.addAll(values);
+                //
+                //   setState(() {});
+                // }
               },
               icon: AppIcons.filter(size: 35))
               : Badge(
@@ -176,14 +177,16 @@ class _SearchViewState extends State<SearchView> {
                 padding: 16.pr,
                 onPressed: () async {
                   var data = await Get.toNamed(AppRoutes.filterView);
-                  if (data != null) {
-                    List<int> values = [];
-                    data.forEach((e) => values.add(e.id!));
+                  ///uncomment to link with filter screen
+                  // if (data != null) {
+                  //   List<int> values = [];
+                  //   data.forEach((e) => values.add(e.id!));
                     selectedCategories.clear();
-                    selectedCategories.addAll(values);
-
-                    setState(() {});
-                  }
+                    filterController.controller.text = "";
+                  //   selectedCategories.addAll(values);
+                  //
+                  //   setState(() {});
+                  // }
                 },
                 icon: AppIcons.filter(size: 35)),
           )

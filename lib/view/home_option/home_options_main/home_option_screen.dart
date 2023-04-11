@@ -19,14 +19,14 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
         leadingWidth: 35,
         centerTitle: false,
         title:
-    // Obx(
-    //       () =>
-          const SearchBar(
+    Obx(
+          () =>
+           SearchBar(
             /// Uncomment this line to filter by category
-            // postType: controller.postType(controller.selectedIndex.value),
+            postType: controller.postType(controller.selectedIndex.value),
           ),
 
-        // ),
+        ),
         leading: AppIcons.IosBackIcon(),
         actions: const [
           FilterIcon(

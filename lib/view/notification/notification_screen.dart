@@ -28,7 +28,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       if(snapshot.connectionState == ConnectionState.waiting || snapshot.hasError){
                         return const SizedBox(width: 95,);
                       }
-                      if (snapshot.data!.posts!.isNotEmpty && isLoggedIn) {
+                      /*if (snapshot.data!.posts!.isNotEmpty && isLoggedIn) {
                         return Container(
                           padding: 20.pr,
                           alignment: Alignment.centerRight,
@@ -61,9 +61,45 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 color: AppColors.primary,
                               )),
                         );
-                      }
+                      }*/
                       return const SizedBox(width: 95,);
                     })),
+            if ( _notificationController.notificationList().toString().isNotEmpty && isLoggedIn)
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              padding: const EdgeInsets.only(right: 20, bottom: 10),
+              width: 95,
+              child: GestureDetector(
+                  onTap: () {
+                    DialogHelper.showConfirmationDialog(
+                        context: context,
+                        message: confirmDeleteNotification,
+                        actionLabel: deleteTxt,
+                        action: () async {
+                          Get.back();
+                          DialogHelper.showLoadingDialog(
+                              label: loadingTxt);
+                          await _notificationController
+                              .deleteNotification()
+                              .then((value) {
+                            DialogHelper.closeDialog();
+                            if (!value) {
+                              debugPrint(
+                                  "Error Deleting the notifications");
+                            } else {
+                              setState(() {});
+                            }
+                          });
+                        });
+                  },
+                  child: AppText(
+                    clearAllTxt,
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.bold,
+                  )),
+            ),
+          ),
             Expanded(
               child: isLoggedIn == false
                   ? loginFirst(context)

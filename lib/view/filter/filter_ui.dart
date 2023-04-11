@@ -576,9 +576,9 @@ class FilterScreen extends StatelessWidget {
                         builder: (ctr) => Expanded(
                           child: FutureBuilder<List<SearchPosts>>(
                             future: FetchSearchList().productDetails(
-                                "",
+                                "","",
                                 // _filterController.controller.text,
-                                _filterController.postType,
+                                // _filterController.postType,
                                 _filterController.getIntList()),
                             builder: (ctx, snapshot) {
                               if (snapshot.connectionState ==
