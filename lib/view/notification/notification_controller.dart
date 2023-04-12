@@ -68,6 +68,7 @@ RxBool list = false.obs;
 
   Future<bool> notificationDetailsNavigator(String? cat, int? id) async {
     "$cat    $id".log();
+    update(['badge']);
     String category = cat.toString().toUpperCase();
     ProductDetailsResponse productDetailsResponse =
         ProductDetailsResponse(id: id);

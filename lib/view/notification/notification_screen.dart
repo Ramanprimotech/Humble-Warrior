@@ -20,90 +20,99 @@ class _NotificationScreenState extends State<NotificationScreen> {
           children: [
             CommonWidgets.titleBar(context,
                 title: notificationsTxt,
-                fontSize: 20,
-                widget: FutureBuilder<NotificationResponseModel>(
-                    future: _notificationController.notificationList(),
-                    builder: (context, snapshot) {
 
-                      if(snapshot.connectionState == ConnectionState.waiting || snapshot.hasError){
-                        return const SizedBox(width: 95,);
-                      }
-                      /*if (snapshot.data!.posts!.isNotEmpty && isLoggedIn) {
-                        return Container(
-                          padding: 20.pr,
-                          alignment: Alignment.centerRight,
-                          width: 95,
-                          child: GestureDetector(
-                              onTap: () {
-                                DialogHelper.showConfirmationDialog(
-                                    context: context,
-                                    message: confirmDeleteNotification,
-                                    actionLabel: deleteTxt,
-                                    action: () async {
-                                      Get.back();
-                                      DialogHelper.showLoadingDialog(
-                                          label: loadingTxt);
-                                      await _notificationController
-                                          .deleteNotification()
-                                          .then((value) {
-                                        DialogHelper.closeDialog();
-                                        if (!value) {
-                                          debugPrint(
-                                              "Error Deleting the notifications");
-                                        } else {
-                                          setState(() {});
-                                        }
-                                      });
-                                    });
-                              },
-                              child: AppText(
-                                clearAllTxt,
-                                color: AppColors.primary,
-                              )),
-                        );
-                      }*/
-                      return const SizedBox(width: 95,);
-                    })),
+                fontSize: 20,),
+                // widget: FutureBuilder<NotificationResponseModel>(
+                //     future: _notificationController.notificationList(),
+                //     builder: (context, snapshot) {
+                //
+                //       if(snapshot.connectionState == ConnectionState.waiting || snapshot.hasError){
+                //         return const SizedBox(width: 95,);
+                //       }
+                //       if (snapshot.data!.posts!.isNotEmpty && isLoggedIn) {
+                //         return Container(
+                //           padding: 20.pr,
+                //           alignment: Alignment.centerRight,
+                //           width: 95,
+                //           child: GestureDetector(
+                //               onTap: () {
+                //                 DialogHelper.showConfirmationDialog(
+                //                     context: context,
+                //                     message: confirmDeleteNotification,
+                //                     actionLabel: deleteTxt,
+                //                     action: () async {
+                //                       Get.back();
+                //                       DialogHelper.showLoadingDialog(
+                //                           label: loadingTxt);
+                //                       await _notificationController
+                //                           .deleteNotification()
+                //                           .then((value) {
+                //                         DialogHelper.closeDialog();
+                //                         if (!value) {
+                //                           debugPrint(
+                //                               "Error Deleting the notifications");
+                //                         } else {
+                //                           setState(() {});
+                //                         }
+                //                       });
+                //                     });
+                //               },
+                //               child: AppText(
+                //                 clearAllTxt,
+                //                 color: AppColors.primary,
+                //               )),
+                //         );
+                //       }
+                //       return const SizedBox(width: 95,);
+                //     })),
             // if (_notificationController.notificationList().toString().isNotEmpty && isLoggedIn)
-          Visibility(
-            visible: !_notificationController.notificationList().toString().isNotEmpty && isLoggedIn,
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: Container(
-                padding: const EdgeInsets.only(right: 20, bottom: 10),
-                width: 95,
-                child: GestureDetector(
-                    onTap: () {
-                      DialogHelper.showConfirmationDialog(
-                          context: context,
-                          message: confirmDeleteNotification,
-                          actionLabel: deleteTxt,
-                          action: () async {
-                            Get.back();
-                            DialogHelper.showLoadingDialog(
-                                label: loadingTxt);
-                            await _notificationController
-                                .deleteNotification()
-                                .then((value) {
-                              DialogHelper.closeDialog();
-                              if (!value) {
-                                debugPrint(
-                                    "Error Deleting the notifications");
-                              } else {
-                                setState(() {});
-                              }
-                            });
-                            setState(() {});
-                          });
-                    },
-                    child: AppText(
-                      clearAllTxt,
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.bold,
-                    )),
-              ),
-            ),
-          ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: FutureBuilder<NotificationResponseModel>(
+                      future: _notificationController.notificationList(),
+                      builder: (context, snapshot) {
+                        if(snapshot.connectionState == ConnectionState.waiting || snapshot.hasError){
+                          return const SizedBox(width: 95,height: 20,);
+                        }
+                        if (snapshot.data!.posts!.isNotEmpty && isLoggedIn) {
+                          return Container(
+                            padding: const EdgeInsets.only(right: 20,bottom: 10),
+                            alignment: Alignment.centerRight,
+                            width: 95,
+                            child: GestureDetector(
+                                onTap: () {
+                                  DialogHelper.showConfirmationDialog(
+                                      context: context,
+                                      message: confirmDeleteNotification,
+                                      actionLabel: deleteTxt,
+                                      action: () async {
+                                        Get.back();
+                                        DialogHelper.showLoadingDialog(
+                                            label: loadingTxt);
+                                        await _notificationController
+                                            .deleteNotification()
+                                            .then((value) {
+                                          DialogHelper.closeDialog();
+                                          if (!value) {
+                                            debugPrint(
+                                                "Error Deleting the notifications");
+                                          } else {
+                                            setState(() {});
+                                          }
+                                          _notificationController.update(['badge']);
+                                        });
+                                      });
+                                },
+                                child: AppText(
+                                  clearAllTxt,
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          );
+                        }
+                        return const SizedBox(width: 95,height: 20,);
+                      }),
+                ),
             Expanded(
               child: isLoggedIn == false
                   ? loginFirst(context)
@@ -165,6 +174,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                             posts.categoryName, posts.id)
                                         .then((value) => setState(() {
                                               _notificationController.update();
+                                              _notificationController.update(['badge']);
                                             }));
                                   },
                                   child: NotificationItem(data: posts));

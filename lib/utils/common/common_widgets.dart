@@ -115,12 +115,7 @@ class CommonWidgets {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          title == "Notifications"
-              ?backIcon
-              ?  Container(
-            alignment: Alignment.centerLeft,
-                  width: 110, child: AppIcons.IosBackIcon(onPress: onPress)): 40.swb
-              : backIcon
+            backIcon
                   ? SizedBox(child: AppIcons.IosBackIcon(onPress: onPress))
                   : 40.swb,
           Row(
