@@ -74,7 +74,8 @@ class HomeOptionController extends GetxController
     PaginationModel paginationModel = PaginationModel(
         page: donnaDealsPage.toString(),
         sortName: item.type,
-        sortOrder: item.itemValue);
+        sortOrder: item.itemValue
+    );
     await CallAPI.productListAPI(
             payload: paginationModel, url: Endpoints.donnaDeals)
         .then((value) {

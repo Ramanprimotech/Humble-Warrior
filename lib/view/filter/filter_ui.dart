@@ -22,6 +22,8 @@ class FilterScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         Get.back(result: _filterController.record.value);
+        _filterController.record.clear();
+        _filterController.selevtedVisibility.value = false;
         return false;
       },
       child: Scaffold(
@@ -31,11 +33,14 @@ class FilterScreen extends StatelessWidget {
               children: [
                 CommonWidgets.titleBar(context,
                     title: "All Categories", fontSize: 20, onPress: () {
+                      _filterController.selevtedVisibility.value = false;
                   if (_filterController.record.isEmpty) {
                     Get.back(result: _filterController.record.value);
                   } else {
                     Get.back(result: _filterController.record.value);
                   }
+
+                  _filterController.record.clear();
                 }),
 
                 /// Category Reset Bar
