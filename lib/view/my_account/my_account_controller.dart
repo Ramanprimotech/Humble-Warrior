@@ -85,6 +85,7 @@ class MyAccountController extends GetxController {
   }
 
   void tapPasscode() async {
+    FToast().init(context);
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     var pass = sharedPreferences.getString('PASSCODE');
@@ -102,6 +103,7 @@ class MyAccountController extends GetxController {
         ),
       );
     } else {
+
       DialogHelper.showConfirmationDialog(
         context: context,
         message: "Do you want to Change Or Remove the Passcode",
