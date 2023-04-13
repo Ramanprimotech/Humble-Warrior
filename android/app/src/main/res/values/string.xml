@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
+    <!--<string name="app_name">check</string>
+    <string name="facebook_app_id">621237636199367</string>
+    <string name="fb_login_protocol_scheme">fb621237636199367</string>
+    <string name="facebook_client_token">a3cb5efb8283b860c108de77292fd6e5</string>-->
+    <string name="app_name">Humble Warrior</string>
     <string name="facebook_app_id">1855778784755753</string>
     <string name="fb_login_protocol_scheme">fb1855778784755753</string>
     <string name="facebook_client_token">65aea227b0bb45966afa0e131a5739f7</string>
-
 </resources>
