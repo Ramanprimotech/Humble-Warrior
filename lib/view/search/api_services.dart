@@ -9,27 +9,53 @@ class FetchSearchList {
 
   /// Product Details
 
-  Future<List<SearchPosts>> productDetails(
-      String id, String postType, List<int> searchCat) async {
+  // Future<List<SearchPosts>> productDetails(
+  //     String id, String postType, List<int> searchCat) async {
+  //   try {
+  //     PaginationModel payload = PaginationModel(
+  //         search: id, page: "1", postType: postType, catIds: searchCat);
+  //     payload.toString();
+  //     var response =
+  //         await APIManager().postAPICall(url: Endpoints.search, param: payload);
+  //
+  //     SearchResponseModel searchResponseModel =
+  //         SearchResponseModel.fromJson(response);
+  //
+  //     if (response == null) {
+  //       return [];
+  //     }
+  //     if (searchResponseModel.status == true) {
+  //       return searchResponseModel.data!;
+  //     }
+  //     return [];
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
+
+
+  Future<ProductListResponse> productDetails(
+      String id,String page,String postType, List<int> searchCat) async {
     try {
       PaginationModel payload = PaginationModel(
-          search: id, page: "1", postType: postType, catIds: searchCat);
+          search: id, page: page, postType: postType, catIds: searchCat);
       payload.toString();
       var response =
-          await APIManager().postAPICall(url: Endpoints.search, param: payload);
+      await APIManager().postAPICall(url: Endpoints.search, param: payload);
 
-      SearchResponseModel searchResponseModel =
-          SearchResponseModel.fromJson(response);
-
+      ProductListResponse productListResponse =
+      ProductListResponse.fromJson(response);
+      print(productListResponse.data!.length);
       if (response == null) {
-        return [];
+        return ProductListResponse(data: []);
       }
-      if (searchResponseModel.status == true) {
-        return searchResponseModel.data!;
+      if (productListResponse.status == true) {
+        return  productListResponse;
       }
-      return [];
+      return  ProductListResponse(data: []);
     } catch (e) {
-      rethrow;
+      throw(e);
+      return  ProductListResponse(data: []);
     }
   }
 }

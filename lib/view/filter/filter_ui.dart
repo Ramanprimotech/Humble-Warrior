@@ -14,11 +14,11 @@ class FilterScreen extends StatelessWidget {
   final double arrowWidth = 40;
   final int badge = 99;
   final FilterController _filterController = Get.find();
-  final HomeScreenController _homeScreenController = Get.find();
   HiveService hiveService = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    _filterController.context = context;
     return WillPopScope(
       onWillPop: () async {
         Get.back(result: _filterController.record.value);
@@ -33,7 +33,7 @@ class FilterScreen extends StatelessWidget {
               children: [
                 CommonWidgets.titleBar(context,
                     title: "All Categories", fontSize: 20, onPress: () {
-                      _filterController.selevtedVisibility.value = false;
+                  _filterController.selevtedVisibility.value = false;
                   if (_filterController.record.isEmpty) {
                     Get.back(result: _filterController.record.value);
                   } else {
@@ -47,9 +47,11 @@ class FilterScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    AppText((!_filterController.selevtedVisibility.value)
-                        ? "Categories"
-                        : "Selected Categories",fontWeight: FontWeight.bold),
+                    AppText(
+                        (!_filterController.selevtedVisibility.value)
+                            ? "Categories"
+                            : "Selected Categories",
+                        fontWeight: FontWeight.bold),
                     TextButton(
                         onPressed: () {
                           if (_filterController.record.isNotEmpty) {
@@ -156,13 +158,14 @@ class FilterScreen extends StatelessWidget {
                                                 controller: controller
                                                     .selectedProductScrollController,
                                                 itemCount: controller
-                                                    .unSelectedList()
+                                                    .unSelectedRecords
+                                                    .value
                                                     .length,
                                                 itemBuilder: (ctx, index) {
                                                   ProductCategoryItem item =
                                                       controller
-                                                              .unSelectedList()[
-                                                          index];
+                                                          .unSelectedRecords
+                                                          .value[index];
                                                   return GestureDetector(
                                                     onTap: () {
                                                       _filterController
@@ -302,16 +305,18 @@ class FilterScreen extends StatelessWidget {
                     visible: _filterController.record.isNotEmpty,
                     child: GestureDetector(
                       onTap: () {
+                        _filterController.unSelectedList();
                         _filterController.showCategories(context);
+                        _filterController.searchFromStart();
                       },
                       child: Container(
-                        width: 150,
+                        width: 120,
                         decoration: BoxDecoration(
                             color: AppColors.primary,
                             borderRadius: BorderRadius.circular(50)),
                         child: const Center(
                           child: AppText(
-                            "Search Results",
+                            "Search",
                             color: AppColors.white,
                           ),
                         ).px(14).py(2),
@@ -559,7 +564,7 @@ class FilterScreen extends StatelessWidget {
                 //     ),
                 //   ),
                 // ),
-               /* Visibility(
+                /* Visibility(
                     visible: _filterController.record.isNotEmpty,
                     child: Divider(
                       height: 0.5,
@@ -575,178 +580,367 @@ class FilterScreen extends StatelessWidget {
                           ),
                         ),
                       )
-                    : GetBuilder(
-                        id: "search",
-                        init: _filterController,
-                        builder: (ctr) => Expanded(
-                          child: FutureBuilder<List<SearchPosts>>(
-                            future: FetchSearchList().productDetails(
-                                "","",
-                                // _filterController.controller.text,
-                                // _filterController.postType,
-                                _filterController.getIntList()),
-                            builder: (ctx, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
+                    : Expanded(
+                        child: PaginationWidget(
+                          length: _filterController.searchListLength,
+                          apiBool: _filterController.searchsBool,
+                          api: _filterController.searchsAPI,
+                          update: _filterController.update,
+                          scrollController:
+                              _filterController.searchScrollController,
+                          totalRecords: _filterController.searchsTotalDeals,
+                          child: GetBuilder<FilterController>(
+                            init: _filterController,
+                            builder: (ctx) {
+                              if (_filterController.searchList.isEmpty &&
+                                  _filterController.searchsBool.value == true) {
                                 return const Center(
                                     child: CircularProgressIndicator());
                               }
-                              if (snapshot.hasError) {
-                                if (_filterController.controller.text.isEmpty) {
-                                  return const Center(
-                                    child: AppText(
-                                      "Select a category to continue...",
-                                      maxLines: 4,
-                                    ),
-                                  );
-                                }
-                                return const Center(
-                                  child: AppText(
-                                    somethingWentWrongTxt,
-                                    maxLines: 4,
-                                  ),
-                                );
+                              if (_filterController.searchList.isEmpty &&
+                                  _filterController.searchsBool.value ==
+                                      false) {
+                                return CommonWidgets.noData(
+                                    update: _filterController.update,
+                                    context: context,
+                                    onTap: () {
+                                      _filterController.searchsBool.value =
+                                          true;
+                                      _filterController.update();
+                                      _filterController.searchsAPI();
+                                    });
                               }
-                              if (snapshot.data!.isEmpty) {
-                                return const Center(
-                                  child: AppText(noDealsTxt),
-                                );
-                              }
-
                               return ListView.separated(
-                                  padding: 10.pv,
-                                  itemCount: snapshot.data!.length,
-                                  separatorBuilder:
-                                      (BuildContext context, int index) {
-                                    return 10.shb;
-                                  },
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        hiveService.addToRecentList(
-                                            RecentSearch(
-                                                productSearched:
-                                                    _filterController
-                                                        .controller.text));
-                                        Get.toNamed(
-                                            AppRoutes.dailyDealProductDetail,
-                                            arguments: [
-                                              ProductDetailsResponse(
-                                                  id: snapshot.data![index].id)
-                                            ]);
-                                      },
-                                      child: Container(
-                                        height: 80,
-                                        margin: 20.ph,
-                                        decoration: CustomBoxDecorations(
-                                                context: context)
-                                            .shadow(),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(10),
-                                                      bottomLeft:
-                                                          Radius.circular(10)),
-                                              child: CommonWidgets.networkImage(
+                                padding:
+                                    const EdgeInsets.only(bottom: 10, top: 6),
+                                controller:
+                                    _filterController.searchScrollController,
+                                itemCount:
+                                    _filterController.searchList.length + 1,
+                                itemBuilder: (ctx, index) {
+                                  ProductDetailsResponse details =
+                                      ProductDetailsResponse();
+                                  if (index !=
+                                      _filterController.searchList.length) {
+                                    details =
+                                        _filterController.searchList[index];
+                                  }
+                                  return index !=
+                                          _filterController.searchList.length
+                                      ? GestureDetector(
+                                          onTap: () {
+                                            // hiveService.recentFavourite(
+                                            //     item: RecentSearch(
+                                            //         productSearched:
+                                            //             filterController.controller.text));
+                                            Get.toNamed(
+                                                AppRoutes
+                                                    .dailyDealProductDetail,
+                                                arguments: [
+                                                  ProductDetailsResponse(
+                                                      id: details.id)
+                                                ]);
+                                          },
+                                          child: Container(
+                                            height: 80,
+                                            margin: 20.ph,
+                                            decoration: CustomBoxDecorations(
+                                                    context: context)
+                                                .shadow(),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  10),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  10)),
+                                                  child: CommonWidgets
+                                                      .networkImage(
+                                                          height: 80,
+                                                          width: Get.width * .3,
+                                                          imageUrl: details.url
+                                                              .toString(),
+                                                          fit: BoxFit.cover),
+                                                ),
+                                                SizedBox(
                                                   height: 80,
-                                                  width: Get.width * .3,
-                                                  imageUrl: snapshot
-                                                      .data![index].url
-                                                      .toString(),
-                                                  fit: BoxFit.cover),
-                                            ),
-                                            SizedBox(
-                                              height: 80,
-                                              width: Get.width * .7 - 40,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  (snapshot.data![index]
-                                                                  .categoryName ==
-                                                              null ||
-                                                          snapshot.data![index]
-                                                                  .categoryName ==
-                                                              "")
-                                                      ? const SizedBox()
-                                                      : Container(
-                                                          padding:
-                                                              const EdgeInsets
+                                                  width: Get.width * .7 - 40,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      (details.catName ==
+                                                                  null ||
+                                                              details.catName ==
+                                                                  "")
+                                                          ? const SizedBox()
+                                                          : Container(
+                                                              padding: const EdgeInsets
                                                                       .symmetric(
                                                                   horizontal:
                                                                       12,
                                                                   vertical: 3),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                                  color: AppColors
-                                                                      .primary,
-                                                                  borderRadius:
-                                                                      const BorderRadius
-                                                                          .only(
-                                                                    bottomRight:
-                                                                        Radius.circular(
-                                                                            10),
-                                                                  )),
-                                                          child: AppText(
-                                                            snapshot
-                                                                .data![index]
-                                                                .categoryName!
-                                                                .toUpperCase(),
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Colors.white,
-                                                            fontSize: 12,
-                                                          ),
-                                                        ),
-                                                  SizedBox(
-                                                    width: Get.width * .7 - 40,
-                                                    child: AppText(
-                                                      snapshot
-                                                          .data![index].itemName
-                                                          .toString(),
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: 14,
-                                                      maxLines: 2,
-                                                    ).paddingSymmetric(
-                                                        horizontal: 8,
-                                                        vertical: 4),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                      color: AppColors
+                                                                          .primary,
+                                                                      borderRadius:
+                                                                          const BorderRadius
+                                                                              .only(
+                                                                        bottomRight:
+                                                                            Radius.circular(10),
+                                                                      )),
+                                                              child: AppText(
+                                                                details.catName!
+                                                                    .toUpperCase(),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+                                                      SizedBox(
+                                                        width:
+                                                            Get.width * .7 - 40,
+                                                        child: AppText(
+                                                          details.itemName
+                                                              .toString(),
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 14,
+                                                          maxLines: 2,
+                                                        ).paddingSymmetric(
+                                                            horizontal: 8,
+                                                            vertical: 4),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-
-                                    //   ListTile(
-                                    //   onTap: () {},
-                                    //   contentPadding: 16.ph,
-                                    //   leading: Image.asset(
-                                    //     ImagePathAssets.hwLogoUnnamed,
-                                    //     height: 40,
-                                    //     width: 40,
-                                    //   ),
-                                    //   title:
-                                    //       AppText("${snapshot.data![index].productName}"),
-                                    // );
-                                  });
+                                          ),
+                                        )
+                                      // CardView(
+                                      //   index: index,
+                                      //   details: details,
+                                      //   onTap: () {
+                                      //     Get.toNamed(AppRoutes.dailyDealProductDetail,
+                                      //         arguments: [details]);
+                                      //   },
+                                      //   imgUrl: details.url!,
+                                      //   cardText: details.itemName!,
+                                      // )
+                                      // searchsCard(details, index, context, dailyDeals: true)
+                                      : Obx(
+                                          () => Visibility(
+                                            visible: _filterController
+                                                .searchsBool.value,
+                                            child: Container(
+                                                height: 80,
+                                                alignment: Alignment.center,
+                                                child:
+                                                    const CircularProgressIndicator()),
+                                          ),
+                                        );
+                                },
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return const SizedBox(
+                                    height: 18,
+                                  );
+                                },
+                              );
                             },
                           ),
                         ),
                       )
+                // GetBuilder(
+                //         id: "search",
+                //         init: _filterController,
+                //         builder: (ctr) => Expanded(
+                //           child: FutureBuilder<List<SearchPosts>>(
+                //             future: FetchSearchList().productDetails(
+                //                 "","",
+                //                 // _filterController.controller.text,
+                //                 // _filterController.postType,
+                //                 _filterController.getIntList()),
+                //             builder: (ctx, snapshot) {
+                //               if (snapshot.connectionState ==
+                //                   ConnectionState.waiting) {
+                //                 return const Center(
+                //                     child: CircularProgressIndicator());
+                //               }
+                //               if (snapshot.hasError) {
+                //                 if (_filterController.controller.text.isEmpty) {
+                //                   return const Center(
+                //                     child: AppText(
+                //                       "Select a category to continue...",
+                //                       maxLines: 4,
+                //                     ),
+                //                   );
+                //                 }
+                //                 return const Center(
+                //                   child: AppText(
+                //                     somethingWentWrongTxt,
+                //                     maxLines: 4,
+                //                   ),
+                //                 );
+                //               }
+                //               if (snapshot.data!.isEmpty) {
+                //                 return const Center(
+                //                   child: AppText(noDealsTxt),
+                //                 );
+                //               }
+                //
+                //               return ListView.separated(
+                //                   padding: 10.pv,
+                //                   itemCount: snapshot.data!.length,
+                //                   separatorBuilder:
+                //                       (BuildContext context, int index) {
+                //                     return 10.shb;
+                //                   },
+                //                   itemBuilder:
+                //                       (BuildContext context, int index) {
+                //                     return GestureDetector(
+                //                       onTap: () {
+                //                         hiveService.addToRecentList(
+                //                             RecentSearch(
+                //                                 productSearched:
+                //                                     _filterController
+                //                                         .controller.text));
+                //                         Get.toNamed(
+                //                             AppRoutes.dailyDealProductDetail,
+                //                             arguments: [
+                //                               ProductDetailsResponse(
+                //                                   id: snapshot.data![index].id)
+                //                             ]);
+                //                       },
+                //                       child: Container(
+                //                         height: 80,
+                //                         margin: 20.ph,
+                //                         decoration: CustomBoxDecorations(
+                //                                 context: context)
+                //                             .shadow(),
+                //                         child: Row(
+                //                           mainAxisAlignment:
+                //                               MainAxisAlignment.spaceBetween,
+                //                           crossAxisAlignment:
+                //                               CrossAxisAlignment.end,
+                //                           children: [
+                //                             ClipRRect(
+                //                               borderRadius:
+                //                                   const BorderRadius.only(
+                //                                       topLeft:
+                //                                           Radius.circular(10),
+                //                                       bottomLeft:
+                //                                           Radius.circular(10)),
+                //                               child: CommonWidgets.networkImage(
+                //                                   height: 80,
+                //                                   width: Get.width * .3,
+                //                                   imageUrl: snapshot
+                //                                       .data![index].url
+                //                                       .toString(),
+                //                                   fit: BoxFit.cover),
+                //                             ),
+                //                             SizedBox(
+                //                               height: 80,
+                //                               width: Get.width * .7 - 40,
+                //                               child: Column(
+                //                                 crossAxisAlignment:
+                //                                     CrossAxisAlignment.start,
+                //                                 mainAxisAlignment:
+                //                                     MainAxisAlignment
+                //                                         .spaceBetween,
+                //                                 children: [
+                //                                   (snapshot.data![index]
+                //                                                   .categoryName ==
+                //                                               null ||
+                //                                           snapshot.data![index]
+                //                                                   .categoryName ==
+                //                                               "")
+                //                                       ? const SizedBox()
+                //                                       : Container(
+                //                                           padding:
+                //                                               const EdgeInsets
+                //                                                       .symmetric(
+                //                                                   horizontal:
+                //                                                       12,
+                //                                                   vertical: 3),
+                //                                           decoration:
+                //                                               BoxDecoration(
+                //                                                   color: AppColors
+                //                                                       .primary,
+                //                                                   borderRadius:
+                //                                                       const BorderRadius
+                //                                                           .only(
+                //                                                     bottomRight:
+                //                                                         Radius.circular(
+                //                                                             10),
+                //                                                   )),
+                //                                           child: AppText(
+                //                                             snapshot
+                //                                                 .data![index]
+                //                                                 .categoryName!
+                //                                                 .toUpperCase(),
+                //                                             fontWeight:
+                //                                                 FontWeight.bold,
+                //                                             color: Colors.white,
+                //                                             fontSize: 12,
+                //                                           ),
+                //                                         ),
+                //                                   SizedBox(
+                //                                     width: Get.width * .7 - 40,
+                //                                     child: AppText(
+                //                                       snapshot
+                //                                           .data![index].itemName
+                //                                           .toString(),
+                //                                       fontWeight:
+                //                                           FontWeight.w600,
+                //                                       fontSize: 14,
+                //                                       maxLines: 2,
+                //                                     ).paddingSymmetric(
+                //                                         horizontal: 8,
+                //                                         vertical: 4),
+                //                                   ),
+                //                                 ],
+                //                               ),
+                //                             ),
+                //                           ],
+                //                         ),
+                //                       ),
+                //                     );
+                //
+                //                     //   ListTile(
+                //                     //   onTap: () {},
+                //                     //   contentPadding: 16.ph,
+                //                     //   leading: Image.asset(
+                //                     //     ImagePathAssets.hwLogoUnnamed,
+                //                     //     height: 40,
+                //                     //     width: 40,
+                //                     //   ),
+                //                     //   title:
+                //                     //       AppText("${snapshot.data![index].productName}"),
+                //                     // );
+                //                   });
+                //             },
+                //           ),
+                //         ),
+                //       )
               ],
             ),
           ),

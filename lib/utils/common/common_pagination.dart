@@ -25,7 +25,7 @@ class PaginationWidget extends StatelessWidget {
     return NotificationListener<ScrollNotification>(
       onNotification: (ScrollNotification scrollInfo) {
         if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
-          if (length.value <= totalRecords.value) {
+          if (length.value < totalRecords.value) {
             if (apiBool.value == false) {
               apiBool.value = true;
               update();

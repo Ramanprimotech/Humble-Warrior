@@ -56,6 +56,7 @@ class ProductDetailsResponse {
     id = json['id'];
     itemName = json['item_name'];
     catName = json['cat_name'];
+    catName = json['category_name'];
     url = json['url'];
     shopUrl = json['shop_url'];
     couponCode = json['coupon_code'];
@@ -70,6 +71,7 @@ class ProductDetailsResponse {
     data['id'] = id;
     data['item_name'] = itemName;
     data['cat_name'] = catName;
+    data['category_name'] = catName;
     data['url'] = url;
     data['shop_url'] = shopUrl;
     data['coupon_code'] = couponCode;

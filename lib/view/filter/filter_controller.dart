@@ -1,9 +1,16 @@
+import 'dart:convert';
+
+import 'package:humble_warrior/view/search/api_services.dart';
+import 'package:humble_warrior/view/search/model.dart';
+
 import '../../hw.dart';
 
 class FilterController extends GetxController {
   RxList<ProductCategoryItem> record = <ProductCategoryItem>[].obs;
+  RxList<ProductCategoryItem> unSelectedRecords = <ProductCategoryItem>[].obs;
   TextEditingController controller = TextEditingController();
   String postType = "";
+  late BuildContext context;
   RxBool selevtedVisibility = false.obs;
   int? catID;
 
@@ -19,6 +26,16 @@ class FilterController extends GetxController {
   RxBool listForward = true.obs;
   RxBool listSelectedBack = false.obs;
   RxBool listSelectedForward = true.obs;
+
+  /// Donna's Deals
+  final RxInt searchsLength = 0.obs;
+  final RxBool searchsBool = true.obs;
+  List<ProductDetailsResponse> searchList = [];
+  RxInt searchListLength = 0.obs;
+  int searchsPage = 1;
+  RxInt searchsTotalDeals = 20.obs;
+  final ScrollController searchScrollController =
+      ScrollController(initialScrollOffset: 0.0);
 
   /// Scroll Listener
   void scrollControllerListener() {
@@ -42,6 +59,73 @@ class FilterController extends GetxController {
     return productCategory;
   }
 
+  void searchFromStart() {
+    searchsBool.value = true;
+    searchsPage = 1;
+    searchsTotalDeals.value = 20;
+    searchList.clear();
+    update();
+    searchsAPI();
+  }
+
+  Future searchsAPI({bool? refresh = false}) async {
+    if (refresh!) {
+      searchsPage = 1;
+      searchList.clear();
+    }
+    List<int> catIds = getIntList();
+    await FetchSearchList()
+        .productDetails(catIds.isEmpty ? controller.text : "",
+            searchsPage.toString(), postType, catIds)
+        .then((value) {
+      if (value.data == null) {
+        DialogHelper.showToast(context, noMoreDealsTxt);
+      } else {
+        searchsPage += 1;
+        searchList.addAll(value.data!);
+        searchListLength.value = searchList.length;
+        if (refresh) {
+          DialogHelper.showToast(context, dealsRefreshTxt);
+        }
+      }
+      if (value.totalRecords != null) {
+        searchsTotalDeals.value = int.parse(value.totalRecords!);
+      }
+      searchsTotalDeals.log();
+      searchsBool.value = false;
+      update();
+    });
+  }
+
+  Future filterAPI(List<int> catIds, {bool? refresh = false}) async {
+    if (refresh!) {
+      searchsPage = 1;
+      searchList.clear();
+    }
+
+    await FetchSearchList()
+        .productDetails(
+            controller.text, searchsPage.toString(), postType, catIds)
+        .then((value) {
+      if (value.data == null) {
+        DialogHelper.showToast(context, noMoreDealsTxt);
+      } else {
+        searchsPage += 1;
+        searchList.addAll(value.data!);
+        searchListLength.value = searchList.length;
+        if (refresh) {
+          DialogHelper.showToast(context, dealsRefreshTxt);
+        }
+      }
+      if (value.totalRecords != null) {
+        searchsTotalDeals.value = int.parse(value.totalRecords!);
+      }
+      searchsTotalDeals.log();
+      searchsBool.value = false;
+      update();
+    });
+  }
+
   void addToWish(ProductCategoryItem item) {
     if (record.value.contains(item)) {
       removeFromWish(item);
@@ -52,7 +136,6 @@ class FilterController extends GetxController {
     if (record.value.isEmpty) {
       selevtedVisibility.value = false;
     }
-    print("Recordes Length ${record.length}");
     update();
   }
 
@@ -80,12 +163,17 @@ class FilterController extends GetxController {
       return isIt;
     });
     data.addAll(unselectedData);
+    unSelectedRecords.value = data;
+    selectedProductScrollController.animateTo(1,
+        duration: const Duration(microseconds: 1600), curve: Curves.ease);
+
     return data;
   }
 
   @override
   void onInit() {
     scrollControllerListener();
+    searchsAPI();
     super.onInit();
   }
 
@@ -123,4 +211,24 @@ class FilterController extends GetxController {
     record.value.forEach((e) => values.add(e.id!));
     return values;
   }
+
+  @override
+  void onClose() {
+    controller.dispose();
+    productScrollController.dispose();
+    selectedProductScrollController.dispose();
+    searchScrollController.dispose();
+    super.onClose();
+  }
+
+// SortItem sort() {
+//   if (!_sortController.checkFilter()) {
+//     return const SortItem(itemnName: "", itemValue: "", type: "");
+//   } else {
+//     return _sortController
+//         .filterData[_sortController.headerIndex.value].subHeader[
+//     _sortController
+//         .filterData[_sortController.headerIndex.value].selected!];
+//   }
+// }
 }
