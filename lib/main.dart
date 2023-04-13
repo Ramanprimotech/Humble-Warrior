@@ -21,7 +21,7 @@ Future main() async {
    isLoggedIn =
       await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
   await Firebase.initializeApp(
-    // name: "humble-warrior",
+    name: "humble-warrior",
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseMessaging.onBackgroundMessage(_messageHandler);
@@ -69,6 +69,7 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
+                initialBinding: IntroBinding(),
                 themeMode: value ? ThemeMode.dark : ThemeMode.light,
                 initialRoute: AppPages.initialRoute,
                 getPages: AppPages.routes,

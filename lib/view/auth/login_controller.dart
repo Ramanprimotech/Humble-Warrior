@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:humble_warrior/hw.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class LoginController extends GetxController {
   User? user;
@@ -25,12 +26,30 @@ class LoginController extends GetxController {
     super.onInit();
   }
 
+  Future<UserCredential> signInWithFacebook() async {
+    // Trigger the sign-in flow
+    final LoginResult loginResult = await FacebookAuth.instance.login();
+
+    // Create a credential from the access token
+    final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+    // Once signed in, return the UserCredential
+    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential).then((value){
+      Get.offAllNamed(AppRoutes.bottomNavigation);
+      print('testing------${value.user!.displayName}');
+      return value;
+    }
+    );
+  }
+
   ///---------------------Click Login Button Functionality-----------------------///
   Function onClickFunction(
       {required OnClick action, required BuildContext context}) {
     Map<OnClick, void Function()> actions = {
       ///--------Click  facebook
       OnClick.facebook: () async {
+          // Trigger the sign-in flow
+          // signInWithFacebook();
         try {
           user = await AuthManager().facebookLogin();
           if (user != null) {
