@@ -15,7 +15,6 @@ class CatCard extends StatelessWidget {
       onTap: onTap ?? () {},
       child: Container(
         padding: 30.pl,
-        height: 75,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -25,7 +24,7 @@ class CatCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
                   child: SizedBox(
-                    height: 45,
+                    height: 40,
                     child: Image.network(errorBuilder: (context, error, stackTrace) {
                       return Center(
                           child: Image.asset(

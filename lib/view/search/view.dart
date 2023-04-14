@@ -1,5 +1,7 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/view/filter/filter_controller.dart';
+import 'package:humble_warrior/view/search/api_services.dart';
+import 'package:humble_warrior/view/search/model.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
@@ -18,6 +20,12 @@ class _SearchViewState extends State<SearchView> {
   RxBool showCross = false.obs;
 
   Timer? timer;
+
+  @override
+  void initState() {
+    focusNode.requestFocus();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +104,7 @@ class _SearchViewState extends State<SearchView> {
                                   productSearched:
                                       filterController.controller.text));
                           filterController.searchFromStart();
-                          // setState(() {});
+                          setState(() {});
                         }
                       });
                     },
@@ -104,13 +112,14 @@ class _SearchViewState extends State<SearchView> {
                       // if (timer != null) {
                       //   timer!.cancel();
                       // }
+                      focusNode.unfocus();
                       if (value.isNotEmpty) {
                         hiveService.recentFavourite(
                             item: RecentSearch(
                                 productSearched:
                                     filterController.controller.text));
                         filterController.searchFromStart();
-                        // setState(() {});
+                        setState(() {});
                       }
                     },
                     decoration: InputDecoration(
@@ -198,7 +207,82 @@ class _SearchViewState extends State<SearchView> {
         ],
       ),
       body: SafeArea(
-          child: PaginationWidget(
+          child: (filterController.controller.text.isEmpty &&
+              selectedCategories.isEmpty) ? ValueListenableBuilder(
+              valueListenable: box.listenable(),
+              builder: (context, value, child) {
+                Map<dynamic, RecentSearch> dataMap = box.toMap();
+                List<RecentSearch> data =
+                dataMap.values.toList().reversed.toList();
+                var dataKeys =
+                dataMap.keys.toList().reversed.toList();
+                if (box.isEmpty) {
+                  return const Center(
+                    child: AppText(
+                      searchDealsTxt,
+                      fontSize: 18,
+                    ),
+                  );
+                }
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const AppText(
+                      recentTxt,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
+                    ).paddingSymmetric(horizontal: 20, vertical: 20),
+                    Expanded(
+                      child: ListView.separated(
+                        itemCount: box.length > 8 ? 8 : box.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              filterController.controller.text =
+                              data[index].productSearched!;
+                              setState(() {});
+                            },
+                            child: Container(
+                              height: 40,
+                              padding: 10.ph,
+                              margin: 20.ph,
+                              decoration: CustomBoxDecorations(
+                                  context: context)
+                                  .shadow(),
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Icon(Icons.history),
+                                  AppText("${data[index].productSearched}")
+                                      .paddingOnly(left: 10),
+                                  const Spacer(),
+                                  InkWell(
+                                    child: const Icon(
+                                      Icons.cancel_outlined,
+                                    ),
+                                    onTap: () {
+                                      hiveService
+                                          .deleteRecentItemByKey(
+                                          dataKeys[index]);
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(
+                            height: 20,
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              }):
+          PaginationWidget(
         length: filterController.searchListLength,
         apiBool: filterController.searchsBool,
         api: filterController.searchsAPI,
@@ -337,222 +421,225 @@ class _SearchViewState extends State<SearchView> {
             );
           },
         ),
-      )
-          // Column(
-          //   children: [
-          //     Expanded(
-          //       child: FutureBuilder<List<SearchPosts>>(
-          //         future: FetchSearchList().productDetails(
-          //             filterController.controller.text,
-          //             postType,
-          //             selectedCategories),
-          //         builder: (ctx, snapshot) {
-          //           if (filterController.controller.text.isEmpty &&
-          //               selectedCategories.isEmpty) {
-          //             return ValueListenableBuilder(
-          //                 valueListenable: box.listenable(),
-          //                 builder: (context, value, child) {
-          //                   Map<dynamic, RecentSearch> dataMap = box.toMap();
-          //                   List<RecentSearch> data =
-          //                       dataMap.values.toList().reversed.toList();
-          //                   var dataKeys =
-          //                       dataMap.keys.toList().reversed.toList();
-          //                   if (box.isEmpty) {
-          //                     return const Center(
-          //                       child: AppText(
-          //                         searchDealsTxt,
-          //                         fontSize: 18,
-          //                       ),
-          //                     );
-          //                   }
-          //                   return Column(
-          //                     crossAxisAlignment: CrossAxisAlignment.start,
-          //                     children: [
-          //                       const AppText(
-          //                         recentTxt,
-          //                         fontWeight: FontWeight.w600,
-          //                         fontSize: 18,
-          //                       ).paddingSymmetric(horizontal: 20, vertical: 20),
-          //                       Expanded(
-          //                         child: ListView.separated(
-          //                           itemCount: box.length > 8 ? 8 : box.length,
-          //                           itemBuilder: (context, index) {
-          //                             return GestureDetector(
-          //                               onTap: () {
-          //                                 filterController.controller.text =
-          //                                     data[index].productSearched!;
-          //                                 setState(() {});
-          //                               },
-          //                               child: Container(
-          //                                 height: 40,
-          //                                 padding: 10.ph,
-          //                                 margin: 20.ph,
-          //                                 decoration: CustomBoxDecorations(
-          //                                         context: context)
-          //                                     .shadow(),
-          //                                 child: Row(
-          //                                   mainAxisAlignment:
-          //                                       MainAxisAlignment.spaceBetween,
-          //                                   children: [
-          //                                     const Icon(Icons.history),
-          //                                     AppText("${data[index].productSearched}")
-          //                                         .paddingOnly(left: 10),
-          //                                     const Spacer(),
-          //                                     InkWell(
-          //                                       child: const Icon(
-          //                                         Icons.cancel_outlined,
-          //                                       ),
-          //                                       onTap: () {
-          //                                         hiveService
-          //                                             .deleteRecentItemByKey(
-          //                                                 dataKeys[index]);
-          //                                       },
-          //                                     ),
-          //                                   ],
-          //                                 ),
-          //                               ),
-          //                             );
-          //                           },
-          //                           separatorBuilder: (context, index) {
-          //                             return const SizedBox(
-          //                               height: 20,
-          //                             );
-          //                           },
-          //                         ),
-          //                       ),
-          //                     ],
-          //                   );
-          //                 });
-          //           }
-          //
-          //           if (snapshot.connectionState == ConnectionState.waiting) {
-          //             return const Center(child: CircularProgressIndicator());
-          //           }
-          //           if (snapshot.hasError) {
-          //             return const Center(
-          //               child: AppText(
-          //                 somethingWentWrongTxt,
-          //                 maxLines: 4,
-          //               ),
-          //             );
-          //           }
-          //           if (snapshot.data!.isEmpty) {
-          //             return const Center(
-          //               child: AppText(noDealsTxt),
-          //             );
-          //           }
-          //
-          //           return ListView.separated(
-          //               padding: 15.pv,
-          //               itemCount: snapshot.data!.length,
-          //               separatorBuilder: (BuildContext context, int index) {
-          //                 return 10.shb;
-          //               },
-          //               itemBuilder: (BuildContext context, int index) {
-          //                 return GestureDetector(
-          //                   onTap: () {
-          //                     // hiveService.recentFavourite(
-          //                     //     item: RecentSearch(
-          //                     //         productSearched:
-          //                     //             filterController.controller.text));
-          //                     Get.toNamed(AppRoutes.dailyDealProductDetail,
-          //                         arguments: [
-          //                           ProductDetailsResponse(
-          //                               id: snapshot.data![index].id)
-          //                         ]);
-          //                   },
-          //                   child: Container(
-          //                     height: 80,
-          //                     margin: 20.ph,
-          //                     decoration:
-          //                         CustomBoxDecorations(context: context).shadow(),
-          //                     child: Row(
-          //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //                       crossAxisAlignment: CrossAxisAlignment.end,
-          //                       children: [
-          //                         ClipRRect(
-          //                           borderRadius: const BorderRadius.only(
-          //                               topLeft: Radius.circular(10),
-          //                               bottomLeft: Radius.circular(10)),
-          //                           child: CommonWidgets.networkImage(
-          //                               height: 80,
-          //                               width: Get.width * .3,
-          //                               imageUrl:
-          //                                   snapshot.data![index].url.toString(),
-          //                               fit: BoxFit.cover),
-          //                         ),
-          //                         SizedBox(
-          //                           height: 80,
-          //                           width: Get.width * .7 - 40,
-          //                           child: Column(
-          //                             crossAxisAlignment:
-          //                                 CrossAxisAlignment.start,
-          //                             mainAxisAlignment:
-          //                                 MainAxisAlignment.spaceBetween,
-          //                             children: [
-          //                               (snapshot.data![index].categoryName ==
-          //                                           null ||
-          //                                       snapshot.data![index]
-          //                                               .categoryName ==
-          //                                           "")
-          //                                   ? const SizedBox()
-          //                                   : Container(
-          //                                       padding:
-          //                                           const EdgeInsets.symmetric(
-          //                                               horizontal: 12,
-          //                                               vertical: 3),
-          //                                       decoration: BoxDecoration(
-          //                                           color: AppColors.primary,
-          //                                           borderRadius:
-          //                                               const BorderRadius.only(
-          //                                             bottomRight:
-          //                                                 Radius.circular(10),
-          //                                           )),
-          //                                       child: AppText(
-          //                                         snapshot
-          //                                             .data![index].categoryName!
-          //                                             .toUpperCase(),
-          //                                         fontWeight: FontWeight.bold,
-          //                                         color: Colors.white,
-          //                                         fontSize: 12,
-          //                                       ),
-          //                                     ),
-          //                               SizedBox(
-          //                                 width: Get.width * .7 - 40,
-          //                                 child: AppText(
-          //                                   snapshot.data![index].itemName
-          //                                       .toString(),
-          //                                   fontWeight: FontWeight.w600,
-          //                                   fontSize: 14,
-          //                                   maxLines: 2,
-          //                                 ).paddingSymmetric(
-          //                                     horizontal: 8, vertical: 4),
-          //                               ),
-          //                             ],
-          //                           ),
-          //                         ),
-          //                       ],
-          //                     ),
-          //                   ),
-          //                 );
-          //
-          //                 //   ListTile(
-          //                 //   onTap: () {},
-          //                 //   contentPadding: 16.ph,
-          //                 //   leading: Image.asset(
-          //                 //     ImagePathAssets.hwLogoUnnamed,
-          //                 //     height: 40,
-          //                 //     width: 40,
-          //                 //   ),
-          //                 //   title:
-          //                 //       AppText("${snapshot.data![index].productName}"),
-          //                 // );
-          //               });
-          //         },
-          //       ),
-          //     )
-          //   ],
-          // ),
+      ),
+
+      /*    Column(
+            children: [
+              Expanded(
+                child: FutureBuilder<List<SearchPosts>>(
+                  future:
+              FetchSearchList().productDetails(
+                      filterController.controller.text,
+                      postType,
+                      selectedCategories),
+                  builder: (ctx, snapshot) {
+                    if (filterController.controller.text.isEmpty &&
+                        selectedCategories.isEmpty) {
+                      return
+                        ValueListenableBuilder(
+                          valueListenable: box.listenable(),
+                          builder: (context, value, child) {
+                            Map<dynamic, RecentSearch> dataMap = box.toMap();
+                            List<RecentSearch> data =
+                                dataMap.values.toList().reversed.toList();
+                            var dataKeys =
+                                dataMap.keys.toList().reversed.toList();
+                            if (box.isEmpty) {
+                              return const Center(
+                                child: AppText(
+                                  searchDealsTxt,
+                                  fontSize: 18,
+                                ),
+                              );
+                            }
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const AppText(
+                                  recentTxt,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                ).paddingSymmetric(horizontal: 20, vertical: 20),
+                                Expanded(
+                                  child: ListView.separated(
+                                    itemCount: box.length > 8 ? 8 : box.length,
+                                    itemBuilder: (context, index) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          filterController.controller.text =
+                                              data[index].productSearched!;
+                                          setState(() {});
+                                        },
+                                        child: Container(
+                                          height: 40,
+                                          padding: 10.ph,
+                                          margin: 20.ph,
+                                          decoration: CustomBoxDecorations(
+                                                  context: context)
+                                              .shadow(),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              const Icon(Icons.history),
+                                              AppText("${data[index].productSearched}")
+                                                  .paddingOnly(left: 10),
+                                              const Spacer(),
+                                              InkWell(
+                                                child: const Icon(
+                                                  Icons.cancel_outlined,
+                                                ),
+                                                onTap: () {
+                                                  hiveService
+                                                      .deleteRecentItemByKey(
+                                                          dataKeys[index]);
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    separatorBuilder: (context, index) {
+                                      return const SizedBox(
+                                        height: 20,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            );
+                          });
+                    }
+
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    if (snapshot.hasError) {
+                      return const Center(
+                        child: AppText(
+                          somethingWentWrongTxt,
+                          maxLines: 4,
+                        ),
+                      );
+                    }
+                    if (snapshot.data!.isEmpty) {
+                      return const Center(
+                        child: AppText(noDealsTxt),
+                      );
+                    }
+
+                    return ListView.separated(
+                        padding: 15.pv,
+                        itemCount: snapshot.data!.length,
+                        separatorBuilder: (BuildContext context, int index) {
+                          return 10.shb;
+                        },
+                        itemBuilder: (BuildContext context, int index) {
+                          return GestureDetector(
+                            onTap: () {
+                              // hiveService.recentFavourite(
+                              //     item: RecentSearch(
+                              //         productSearched:
+                              //             filterController.controller.text));
+                              Get.toNamed(AppRoutes.dailyDealProductDetail,
+                                  arguments: [
+                                    ProductDetailsResponse(
+                                        id: snapshot.data![index].id)
+                                  ]);
+                            },
+                            child: Container(
+                              height: 80,
+                              margin: 20.ph,
+                              decoration:
+                                  CustomBoxDecorations(context: context).shadow(),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        bottomLeft: Radius.circular(10)),
+                                    child: CommonWidgets.networkImage(
+                                        height: 80,
+                                        width: Get.width * .3,
+                                        imageUrl:
+                                            snapshot.data![index].url.toString(),
+                                        fit: BoxFit.cover),
+                                  ),
+                                  SizedBox(
+                                    height: 80,
+                                    width: Get.width * .7 - 40,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        (snapshot.data![index].categoryName ==
+                                                    null ||
+                                                snapshot.data![index]
+                                                        .categoryName ==
+                                                    "")
+                                            ? const SizedBox()
+                                            : Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 12,
+                                                        vertical: 3),
+                                                decoration: BoxDecoration(
+                                                    color: AppColors.primary,
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      bottomRight:
+                                                          Radius.circular(10),
+                                                    )),
+                                                child: AppText(
+                                                  snapshot
+                                                      .data![index].categoryName!
+                                                      .toUpperCase(),
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                        SizedBox(
+                                          width: Get.width * .7 - 40,
+                                          child: AppText(
+                                            snapshot.data![index].itemName
+                                                .toString(),
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
+                                            maxLines: 2,
+                                          ).paddingSymmetric(
+                                              horizontal: 8, vertical: 4),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+
+                          //   ListTile(
+                          //   onTap: () {},
+                          //   contentPadding: 16.ph,
+                          //   leading: Image.asset(
+                          //     ImagePathAssets.hwLogoUnnamed,
+                          //     height: 40,
+                          //     width: 40,
+                          //   ),
+                          //   title:
+                          //       AppText("${snapshot.data![index].productName}"),
+                          // );
+                        });
+                  },
+                ),
+              )
+            ],
+          ),*/
           ),
     );
   }

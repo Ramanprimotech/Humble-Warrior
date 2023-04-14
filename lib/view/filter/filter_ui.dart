@@ -79,7 +79,7 @@ class FilterScreen extends StatelessWidget {
                                 futureWidgets:
                                     FilterPageProductCategoryAPIWidgets(
                                         context: context,
-                                        productHeight: productHeight,
+                                        productHeight: productHeight + 10,
                                         brandHeight: brandHeight),
                                 // future: _homeScreenController.productCategoryAPI(),
                                 future: _filterController.api(),
@@ -100,7 +100,7 @@ class FilterScreen extends StatelessWidget {
                           init: _filterController,
                           builder: (controller) => controller.record.isEmpty
                               ? Container(
-                                  height: productHeight,
+                                  height: productHeight + 10,
                                   alignment: Alignment.center,
                                   width: Get.width,
                                   child: const AppText("No Category Selected"),
@@ -147,7 +147,7 @@ class FilterScreen extends StatelessWidget {
                                         Expanded(
                                           child: Container(
                                             alignment: Alignment.bottomCenter,
-                                            height: 80,
+                                            height: productHeight + 20,
                                             width: Get.width,
                                             child: ListView.builder(
                                                 padding: 30.pr,
