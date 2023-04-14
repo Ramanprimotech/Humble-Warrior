@@ -18,7 +18,11 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
           buttonTitle: retryTxt,
           errorText: somethingWentWrongTxt.toString(),
           context: context,
-          onPress: () => controller.update([Endpoints.homeCategories])),
+          onPress: () {
+            controller.update([Endpoints.productCategories]);
+            controller.update([Endpoints.allBrands]);
+            controller.update([Endpoints.homeCategories]);
+          }),
     );
   }
 

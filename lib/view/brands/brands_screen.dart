@@ -86,6 +86,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
                                 context: context,
                                 searchText: searchTextController.text),
                             future: controller.allBrands(),
+                            checkInternet: true,
                             context: context);
                       }),
                 ),

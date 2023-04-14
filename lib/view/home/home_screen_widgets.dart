@@ -153,102 +153,25 @@ class HomeScreenWidgets {
           return FutureWidget<List<HomeCategoryList>>().builder(
               futureWidgets: HomePageCategoryAPIWidgets(context: context),
               future: controller.homeCategories(),
+              checkInternet: true,
               context: context);
         });
   }
 
-  /// Brand List
-  Widget brandsList() {
-    final ImageIconTheme imageIconTheme =
-        Theme.of(context).extension<ImageIconTheme>()!;
-    return Container(
-      height: brandHeight + brandLoveHeight + 10,
-      decoration: BoxDecoration(
-        color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-      ),
-      child: Column(
-        children: [
-          /// Brand Title Row
-          _brandRow(height: brandLoveHeight, context: context),
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    flex: 10,
-                    child: Container(
-                      color: Theme.of(context)
-                          .floatingActionButtonTheme
-                          .backgroundColor,
-                      height: brandHeight,
-                      width: Get.height,
-
-                      /// Brand List Future Builder
-                      child: brandListAPIBuilder(),
-                    ),
-                  ),
-                ],
-              ),
-              Obx(
-                () => Visibility(
-                  visible: controller.brandListBack.value,
-                  child: Positioned(
-                    left: 0,
-                    child: GestureDetector(
-                        onTap: () {
-                          controller.brandScrollController.animateTo(
-                              controller.brandScrollController.offset -
-                                  (80 * 2),
-                              duration: const Duration(milliseconds: 150),
-                              curve: Curves.linear);
-                        },
-                        child: Container(
-                            alignment: Alignment.center,
-                            padding: productArrowIconPadding.pl,
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            height: brandHeight,
-                            width: arrowWidth,
-                            child: AppIcons.backArrrowIos(
-                                iconColor: imageIconTheme.textColor))),
-                  ),
-                ),
-              ),
-              Obx(
-                () => Visibility(
-                  visible: controller.brandListForward.value,
-                  child: Positioned(
-                    right: 0,
-                    child: GestureDetector(
-                        onTap: () {
-                          controller.brandScrollController.animateTo(
-                              controller.brandScrollController.offset +
-                                  (80 * 2),
-                              duration: const Duration(milliseconds: 150),
-                              curve: Curves.linear);
-                        },
-                        child: Container(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            height: brandHeight,
-                            width: arrowWidth,
-                            child: AppIcons.next(
-                                iconColor: imageIconTheme.textColor))),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          /* Container(
-            margin: const EdgeInsets.only(left: 25, right: 25, top: 10),
-            height: 1,
-            width: Get.width,
-            color: Colors.grey.shade400,
-          ),*/
-        ],
-      ),
+/*  /// Brand List
+  GetBuilder<HomeScreenController> brandsList() {
+    return GetBuilder<HomeScreenController>(
+      id: Endpoints.allBrands,
+      init: controller,
+      builder: (controller){
+        return FutureWidget<List<BrandDetails>>().builder(
+          futureWidgets: HomePageBrandAPIWidgets(context: context),
+          future: controller.allBrands(),
+          checkInternet: false,
+          context: context);
+      },
     );
-    // );
-  }
+  }*/
 
   /// Product Categories API Builder
   GetBuilder<HomeScreenController> productCategoryListAPIBuilder() {
@@ -261,13 +184,14 @@ class HomeScreenWidgets {
                   context: context,
                   brandHeight: brandHeight,
                   productHeight: productHeight),
+              checkInternet: false,
               future: controller.productCategoryAPI(),
               context: context);
         });
   }
 
   /// Brand List API Builder
-  GetBuilder<HomeScreenController> brandListAPIBuilder() {
+  GetBuilder<HomeScreenController> brandListAPIBuilder({waitingState}) {
     return GetBuilder<HomeScreenController>(
         id: Endpoints.allBrands,
         init: controller,
@@ -275,11 +199,13 @@ class HomeScreenWidgets {
           return FutureWidget<List<BrandDetails>>().builder(
               futureWidgets: HomePageBrandAPIWidgets(context: context),
               future: controller.allBrands(),
+              waiting: waitingState,
+              checkInternet: false,
               context: context);
         });
   }
 
-  /// Brand Title Row
+  /*/// Brand Title Row
   Widget _brandRow({required double height, required BuildContext context}) {
     final ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
     return Container(
@@ -331,5 +257,5 @@ class HomeScreenWidgets {
         ],
       ),
     );
-  }
+  }*/
 }

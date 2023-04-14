@@ -83,6 +83,7 @@ class FilterScreen extends StatelessWidget {
                                         brandHeight: brandHeight),
                                 // future: _homeScreenController.productCategoryAPI(),
                                 future: _filterController.api(),
+                                checkInternet: true,
                                 context: context);
                       }),
                 ),

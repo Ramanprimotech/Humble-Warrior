@@ -19,6 +19,7 @@ class HomeScreenController extends GetxController {
   RxBool listForward = true.obs;
   RxBool brandListBack = false.obs;
   RxBool brandListForward = true.obs;
+  bool check = false;
 
   final FocusNode focusNode = FocusNode();
   ValueNotifier<bool> keyboardIsOpened = ValueNotifier(true);
@@ -59,6 +60,7 @@ class HomeScreenController extends GetxController {
   }
 
   Future<List<ProductCategoryItem>> productCategoryAPI() async {
+    check = true;
     return CallAPI.productCategoryAPI();
   }
 
