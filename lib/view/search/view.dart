@@ -190,19 +190,22 @@ class _SearchViewState extends State<SearchView> {
                   child: IconButton(
                       padding: 16.pr,
                       onPressed: () async {
-                        var data = await Get.toNamed(AppRoutes.filterView);
+                        CommonUtils.toCheckInternet(action: () async {
+                          var data = await Get.toNamed(AppRoutes.filterView);
 
-                        ///uncomment to link with filter screen
-                        // if (data != null) {
-                        //   List<int> values = [];
-                        //   data.forEach((e) => values.add(e.id!));
-                        selectedCategories.clear();
-                        filterController.searchFromStart();
-                        filterController.controller.text = "";
-                        //   selectedCategories.addAll(values);
-                        //
-                        //   setState(() {});
-                        // }
+                          ///uncomment to link with filter screen
+                          // if (data != null) {
+                          //   List<int> values = [];
+                          //   data.forEach((e) => values.add(e.id!));
+                          selectedCategories.clear();
+                          filterController.searchFromStart();
+                          filterController.controller.text = "";
+                          //   selectedCategories.addAll(values);
+                          //
+                          //   setState(() {});
+                          // }
+                        });
+
                       },
                       icon: AppIcons.filter(size: 35)),
                 )
