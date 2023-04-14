@@ -146,7 +146,7 @@ class AboutScreen extends StatelessWidget {
                   )
                 : Center(
                     child: CommonWidgets.errorAPI(
-                        errorText: "${snapshot.error}",
+                        errorText: "Something went wrong",
                         context: context,
                         onPress: () {
                           Get.back();
