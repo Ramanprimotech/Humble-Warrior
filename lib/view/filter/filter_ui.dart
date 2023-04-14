@@ -147,7 +147,7 @@ class FilterScreen extends StatelessWidget {
                                         Expanded(
                                           child: Container(
                                             alignment: Alignment.bottomCenter,
-                                            height: productHeight + 10,
+                                            height: 80,
                                             width: Get.width,
                                             child: ListView.builder(
                                                 padding: 30.pr,
@@ -164,88 +164,100 @@ class FilterScreen extends StatelessWidget {
                                                       controller
                                                           .unSelectedRecords
                                                           .value[index];
-                                                  return GestureDetector(
-                                                    onTap: () {
-                                                      _filterController
+                                                  return CatCard(
+                                                    title: item.categoryName,
+                                                    imageUrl: item.categoryImage,
+                                                    visible: _filterController
+                                                        .containItem(
+                                                        item),
+                                                    isCheck: true,
+                                                    onTap: ()
+                                                    {_filterController
                                                           .addToWish(item);
-                                                    },
-                                                    child: Container(
-                                                      padding: 30.pl,
-                                                      height: productHeight,
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Stack(
-                                                            alignment: Alignment
-                                                                .topRight,
-                                                            children: [
-                                                              SizedBox(
-                                                                height:
-                                                                    productHeight -
-                                                                        25,
-                                                                child: Image
-                                                                    .network(
-                                                                  item.categoryImage ??
-                                                                      "",
-                                                                  errorBuilder: (BuildContext
-                                                                          ctx,
-                                                                      Object
-                                                                          error,
-                                                                      stackTrace) {
-                                                                    return Center(
-                                                                        child: Image
-                                                                            .asset(
-                                                                      ImagePathAssets
-                                                                          .noImageFound,
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .center,
-                                                                      fit: BoxFit
-                                                                          .fitHeight,
-                                                                      // height: height,
-                                                                    ));
-                                                                  },
-                                                                ),
-                                                              ),
-                                                              Visibility(
-                                                                visible: _filterController
-                                                                    .containItem(
-                                                                        item),
-                                                                child: Transform
-                                                                    .translate(
-                                                                  offset:
-                                                                      const Offset(
-                                                                          18,
-                                                                          -8),
-                                                                  child:
-                                                                      const Icon(
-                                                                    Icons
-                                                                        .check_circle,
-                                                                    color: AppColors
-                                                                        .appGreen,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          // 4.shb,
-                                                          AppText(
-                                                            // controller
-                                                            //         .record
-                                                            //         .value[index]
-                                                            item.categoryName ??
-                                                                "",
-                                                            fontSize: 14,
-                                                            maxLines: 1,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  );
+                                                    },);
+
+                                                  //   GestureDetector(
+                                                  //   onTap: () {
+                                                  //     _filterController
+                                                  //         .addToWish(item);
+                                                  //   },
+                                                  //   child: Container(
+                                                  //     padding: 30.pl,
+                                                  //     height: productHeight,
+                                                  //     child: Column(
+                                                  //       mainAxisAlignment:
+                                                  //           MainAxisAlignment
+                                                  //               .end,
+                                                  //       children: [
+                                                  //         Stack(
+                                                  //           alignment: Alignment
+                                                  //               .topRight,
+                                                  //           children: [
+                                                  //             SizedBox(
+                                                  //               height:
+                                                  //                   productHeight -
+                                                  //                       25,
+                                                  //               child: Image
+                                                  //                   .network(
+                                                  //                 item.categoryImage ??
+                                                  //                     "",
+                                                  //                 errorBuilder: (BuildContext
+                                                  //                         ctx,
+                                                  //                     Object
+                                                  //                         error,
+                                                  //                     stackTrace) {
+                                                  //                   return Center(
+                                                  //                       child: Image
+                                                  //                           .asset(
+                                                  //                     ImagePathAssets
+                                                  //                         .noImageFound,
+                                                  //                     alignment:
+                                                  //                         Alignment
+                                                  //                             .center,
+                                                  //                     fit: BoxFit
+                                                  //                         .fitHeight,
+                                                  //                     // height: height,
+                                                  //                   ));
+                                                  //                 },
+                                                  //               ),
+                                                  //             ),
+                                                  //             Visibility(
+                                                  //               visible: _filterController
+                                                  //                   .containItem(
+                                                  //                       item),
+                                                  //               child: Transform
+                                                  //                   .translate(
+                                                  //                 offset:
+                                                  //                     const Offset(
+                                                  //                         18,
+                                                  //                         -8),
+                                                  //                 child:
+                                                  //                     const Icon(
+                                                  //                   Icons
+                                                  //                       .check_circle,
+                                                  //                   color: AppColors
+                                                  //                       .appGreen,
+                                                  //                 ),
+                                                  //               ),
+                                                  //             ),
+                                                  //           ],
+                                                  //         ),
+                                                  //         // 4.shb,
+                                                  //         AppText(
+                                                  //           // controller
+                                                  //           //         .record
+                                                  //           //         .value[index]
+                                                  //           item.categoryName ??
+                                                  //               "",
+                                                  //           fontSize: 14,
+                                                  //           maxLines: 1,
+                                                  //           fontWeight:
+                                                  //               FontWeight.w600,
+                                                  //         ),
+                                                  //       ],
+                                                  //     ),
+                                                  //   ),
+                                                  // );
                                                 }),
                                           ),
                                         ),
