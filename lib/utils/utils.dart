@@ -36,3 +36,4 @@ export 'theme_extension/image_icon_theme_extension.dart';
 export 'theme_extension/shadow_theme_extension.dart';
 export 'theme_extension/shop_button_theme.dart';
 export 'token_generator.dart';
+export 'widgets.dart';
