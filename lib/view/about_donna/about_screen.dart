@@ -22,27 +22,34 @@ class AboutScreen extends StatelessWidget {
               return Column(
                 children: [
                   /// About Donna title
-                  CommonWidgets.titleBar(
-                    context,
-                    backIcon: true,
-                    title: aboutDonnaTxt,
-                    fontSize: 18,
-                  ),
+                  CommonWidgets.titleBar(context,
+                      backIcon: true, title: aboutDonnaTxt, fontSize: 18),
                   Expanded(
                     child: ListView(
                       // physics: const NeverScrollableScrollPhysics(),
                       children: [
                         CustomShimmer.rectangular(
-                          height: 380,
-                          borderRadius: 15,
-                          margin: 16.pa,
-                        ),
+                            height: 380, borderRadius: 15, margin: 16.pa),
                         const CustomShimmer.rectangular(
-                          height: 20,
-                          borderRadius: 15,
-                          margin:
-                              EdgeInsets.only(right: 150, left: 16, bottom: 12),
-                        ),
+                            height: 20,
+                            borderRadius: 15,
+                            margin: EdgeInsets.only(
+                                right: 150, left: 16, bottom: 12)),
+                        const CustomShimmer.rectangular(
+                            height: 16,
+                            borderRadius: 15,
+                            margin: EdgeInsets.only(
+                                right: 16, left: 16, bottom: 8)),
+                        const CustomShimmer.rectangular(
+                            height: 16,
+                            borderRadius: 15,
+                            margin: EdgeInsets.only(
+                                right: 16, left: 16, bottom: 8)),
+                        const CustomShimmer.rectangular(
+                            height: 16,
+                            borderRadius: 15,
+                            margin: EdgeInsets.only(
+                                right: 16, left: 16, bottom: 8)),
                         const CustomShimmer.rectangular(
                           height: 16,
                           borderRadius: 15,
@@ -58,27 +65,14 @@ class AboutScreen extends StatelessWidget {
                         const CustomShimmer.rectangular(
                           height: 16,
                           borderRadius: 15,
-                          margin: EdgeInsets.only(right: 16, left: 16,bottom: 8),
+                          margin:
+                              EdgeInsets.only(right: 16, left: 16, bottom: 8),
                         ),
                         const CustomShimmer.rectangular(
                           height: 16,
                           borderRadius: 15,
-                          margin: EdgeInsets.only(right: 16, left: 16,bottom: 8),
-                        ),
-                        const CustomShimmer.rectangular(
-                          height: 16,
-                          borderRadius: 15,
-                          margin: EdgeInsets.only(right: 16, left: 16,bottom: 8),
-                        ),
-                        const CustomShimmer.rectangular(
-                          height: 16,
-                          borderRadius: 15,
-                          margin: EdgeInsets.only(right: 16, left: 16,bottom: 8),
-                        ),
-                        const CustomShimmer.rectangular(
-                          height: 16,
-                          borderRadius: 15,
-                          margin: EdgeInsets.only(right: 16, left: 16,bottom: 8),
+                          margin:
+                              EdgeInsets.only(right: 16, left: 16, bottom: 8),
                         ),
                         CustomShimmer.rectangular(
                           height: 180,
