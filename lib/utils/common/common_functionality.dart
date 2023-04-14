@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:humble_warrior/hw.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class CommonUtils {
   /// Share Data
@@ -15,6 +16,31 @@ class CommonUtils {
     if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
       throw Exception('Could not launch $uri');
     }
+  }
+
+  static Future<bool> toCheckInternet( {Function? action}) async {
+    bool connect = false ;
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if(connectivityResult == ConnectivityResult.none){
+      connect = false;
+      DialogHelper.showAlertDialog(
+        "Please Check your Internet  connection",
+        title:
+        "No Internet Connection.",
+        onTap: () {
+          Navigator.of(Get.context!, rootNavigator: true).pop();
+        },
+      );
+
+      print("No internet connection");
+    }
+    else {
+      connect = true;
+      if(action!= null){
+        action();
+      }
+    }
+    return connect;
   }
 
   /// Copy To Clipboard
