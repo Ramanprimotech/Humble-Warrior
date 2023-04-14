@@ -19,6 +19,7 @@ class FilterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _filterController.context = context;
+    final catController = !_filterController.selevtedVisibility.value;
     return WillPopScope(
       onWillPop: () async {
         Get.back(result: _filterController.record.value);
@@ -44,31 +45,27 @@ class FilterScreen extends StatelessWidget {
                 }),
 
                 /// Category Reset Bar
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    AppText(
-                        (!_filterController.selevtedVisibility.value)
-                            ? "Categories"
-                            : "Selected Categories",
-                        fontWeight: FontWeight.bold),
-                    TextButton(
-                        onPressed: () {
-                          if (_filterController.record.isNotEmpty) {
-                            _filterController.resetList();
-                            _filterController.selevtedVisibility.value = false;
-                            _filterController.update();
-                          }
-                        },
-                        child: GetBuilder<FilterController>(
-                            init: _filterController,
-                            builder: (controller) {
-                              return AppText(_filterController.record.isNotEmpty
-                                  ? "Reset"
-                                  : "");
-                            })),
-                  ],
-                ).px(16),
+
+                HeaderText(
+                  leadingText: (!_filterController.selevtedVisibility.value)
+                      ? "Categories"
+                      : "Selected Categories",
+                  trailing: TextButton(
+                      onPressed: () {
+                        if (_filterController.record.isNotEmpty) {
+                          _filterController.resetList();
+                          _filterController.selevtedVisibility.value = false;
+                          _filterController.update();
+                        }
+                      },
+                      child: GetBuilder<FilterController>(
+                          init: _filterController,
+                          builder: (controller) {
+                            return AppText(_filterController.record.isNotEmpty
+                                ? "Reset"
+                                : "");
+                          })),
+                ),
 
                 /// List To Select From
                 Visibility(
@@ -945,6 +942,30 @@ class FilterScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class HeaderText extends StatelessWidget {
+  const HeaderText({Key? key, this.leadingText, this.trailing})
+      : super(key: key);
+  final String? leadingText;
+  final Widget? trailing;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: 16.ph,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          AppText(
+            leadingText ?? "",
+            fontWeight: FontWeight.w600,
+          ),
+          trailing ?? 0.shb,
+        ],
       ),
     );
   }

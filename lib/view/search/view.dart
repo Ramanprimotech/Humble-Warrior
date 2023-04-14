@@ -114,25 +114,15 @@ class _SearchViewState extends State<SearchView> {
                       }
                     },
                     decoration: InputDecoration(
-                      // contentPadding: const EdgeInsets.symmetric(horizontal: 10.0).r,
-                      // counterText: "",
                       hintText: searchTxt,
-                      hintStyle:
-                          const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-                      // AppText(searchTxt,
-                      //     fontWeight: FontWeight.w400, fontSize: 14, padding: 4.pl),
-                      // hintStyle:
-                      // isDense: true,
+                      hintStyle: const TextStyle(
+                          fontWeight: FontWeight.w400, fontSize: 16),
                       focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide.none,
                       ),
                       enabledBorder: const UnderlineInputBorder(
                         borderSide: BorderSide.none,
                       ),
-
-                      /// prefixIcon
-
-                      // suffixIcon:
                       suffixIcon: Obx(
                         () => Visibility(
                           visible: showCross.value,
@@ -220,8 +210,7 @@ class _SearchViewState extends State<SearchView> {
           builder: (ctx) {
             if (filterController.searchList.isEmpty &&
                 filterController.searchsBool.value == true) {
-              return const Center(
-                  child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
             if (filterController.searchList.isEmpty &&
                 filterController.searchsBool.value == false) {
@@ -235,8 +224,7 @@ class _SearchViewState extends State<SearchView> {
                   });
             }
             return ListView.separated(
-              padding: const EdgeInsets.only(
-                   bottom: 10, top: 6),
+              padding: const EdgeInsets.only(bottom: 10, top: 6),
               controller: filterController.searchScrollController,
               itemCount: filterController.searchList.length + 1,
               itemBuilder: (ctx, index) {
@@ -245,102 +233,91 @@ class _SearchViewState extends State<SearchView> {
                   details = filterController.searchList[index];
                 }
                 return index != filterController.searchList.length
-                    ?
-                GestureDetector(
-                  onTap: () {
-                    // hiveService.recentFavourite(
-                    //     item: RecentSearch(
-                    //         productSearched:
-                    //             filterController.controller.text));
-                    Get.toNamed(AppRoutes.dailyDealProductDetail,
-                        arguments: [
-                          ProductDetailsResponse(
-                              id: details.id)
-                        ]);
-                  },
-                  child: Container(
-                    height: 80,
-                    margin: 20.ph,
-                    decoration:
-                    CustomBoxDecorations(context: context).shadow(),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        ClipRRect(
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              bottomLeft: Radius.circular(10)),
-                          child: CommonWidgets.networkImage(
-                              height: 80,
-                              width: Get.width * .3,
-                              imageUrl:
-                              details.url.toString(),
-                              fit: BoxFit.cover),
-                        ),
-                        SizedBox(
+                    ? GestureDetector(
+                        onTap: () {
+                          // hiveService.recentFavourite(
+                          //     item: RecentSearch(
+                          //         productSearched:
+                          //             filterController.controller.text));
+                          Get.toNamed(AppRoutes.dailyDealProductDetail,
+                              arguments: [
+                                ProductDetailsResponse(id: details.id)
+                              ]);
+                        },
+                        child: Container(
                           height: 80,
-                          width: Get.width * .7 - 40,
-                          child: Column(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                          margin: 20.ph,
+                          decoration:
+                              CustomBoxDecorations(context: context).shadow(),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              (details.catName ==
-                                  null ||
-                                  details
-                                      .catName ==
-                                      "")
-                                  ? const SizedBox()
-                                  : Container(
-                                padding:
-                                const EdgeInsets.symmetric(
-                                    horizontal: 12,
-                                    vertical: 3),
-                                decoration: BoxDecoration(
-                                    color: AppColors.primary,
-                                    borderRadius:
-                                    const BorderRadius.only(
-                                      bottomRight:
-                                      Radius.circular(10),
-                                    )),
-                                child: AppText(
-                                  details.catName!
-                                      .toUpperCase(),
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                ),
+                              ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10)),
+                                child: CommonWidgets.networkImage(
+                                    height: 80,
+                                    width: Get.width * .3,
+                                    imageUrl: details.url.toString(),
+                                    fit: BoxFit.cover),
                               ),
                               SizedBox(
+                                height: 80,
                                 width: Get.width * .7 - 40,
-                                child: AppText(
-                                  details.itemName
-                                      .toString(),
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14,
-                                  maxLines: 2,
-                                ).paddingSymmetric(
-                                    horizontal: 8, vertical: 4),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    (details.catName == null ||
+                                            details.catName == "")
+                                        ? const SizedBox()
+                                        : Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 12, vertical: 3),
+                                            decoration: BoxDecoration(
+                                                color: AppColors.primary,
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  bottomRight:
+                                                      Radius.circular(10),
+                                                )),
+                                            child: AppText(
+                                              details.catName!.toUpperCase(),
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                    SizedBox(
+                                      width: Get.width * .7 - 40,
+                                      child: AppText(
+                                        details.itemName.toString(),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14,
+                                        maxLines: 2,
+                                      ).paddingSymmetric(
+                                          horizontal: 8, vertical: 4),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                )
-                // CardView(
-                //         index: index,
-                //         details: details,
-                //         onTap: () {
-                //           Get.toNamed(AppRoutes.dailyDealProductDetail,
-                //               arguments: [details]);
-                //         },
-                //         imgUrl: details.url!,
-                //         cardText: details.itemName!,
-                //       )
+                      )
+                    // CardView(
+                    //         index: index,
+                    //         details: details,
+                    //         onTap: () {
+                    //           Get.toNamed(AppRoutes.dailyDealProductDetail,
+                    //               arguments: [details]);
+                    //         },
+                    //         imgUrl: details.url!,
+                    //         cardText: details.itemName!,
+                    //       )
                     // searchsCard(details, index, context, dailyDeals: true)
                     : Obx(
                         () => Visibility(
@@ -579,6 +556,4 @@ class _SearchViewState extends State<SearchView> {
           ),
     );
   }
-
-
 }

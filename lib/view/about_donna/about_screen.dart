@@ -29,19 +29,63 @@ class AboutScreen extends StatelessWidget {
                     fontSize: 18,
                   ),
                   Expanded(
-                    child: ListView.separated(
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (ctx, index) {
-                        return const CustomShimmer.rectangular(
-                          height: 290,
+                    child: ListView(
+                      // physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        CustomShimmer.rectangular(
+                          height: 380,
                           borderRadius: 15,
-                          margin: EdgeInsets.symmetric(horizontal: 15),
-                        );
-                      },
-                      itemCount: 10,
-                      separatorBuilder: (BuildContext context, int index) {
-                        return 16.shb;
-                      },
+                          margin: 16.pa,
+                        ),
+                        const CustomShimmer.rectangular(
+                          height: 20,
+                          borderRadius: 15,
+                          margin:
+                              EdgeInsets.only(right: 150, left: 16, bottom: 12),
+                        ),
+                        const CustomShimmer.rectangular(
+                          height: 16,
+                          borderRadius: 15,
+                          margin:
+                              EdgeInsets.only(right: 16, left: 16, bottom: 8),
+                        ),
+                        const CustomShimmer.rectangular(
+                          height: 16,
+                          borderRadius: 15,
+                          margin:
+                              EdgeInsets.only(right: 16, left: 16, bottom: 8),
+                        ),
+                        const CustomShimmer.rectangular(
+                          height: 16,
+                          borderRadius: 15,
+                          margin: EdgeInsets.only(right: 16, left: 16,bottom: 8),
+                        ),
+                        const CustomShimmer.rectangular(
+                          height: 16,
+                          borderRadius: 15,
+                          margin: EdgeInsets.only(right: 16, left: 16,bottom: 8),
+                        ),
+                        const CustomShimmer.rectangular(
+                          height: 16,
+                          borderRadius: 15,
+                          margin: EdgeInsets.only(right: 16, left: 16,bottom: 8),
+                        ),
+                        const CustomShimmer.rectangular(
+                          height: 16,
+                          borderRadius: 15,
+                          margin: EdgeInsets.only(right: 16, left: 16,bottom: 8),
+                        ),
+                        const CustomShimmer.rectangular(
+                          height: 16,
+                          borderRadius: 15,
+                          margin: EdgeInsets.only(right: 16, left: 16,bottom: 8),
+                        ),
+                        CustomShimmer.rectangular(
+                          height: 180,
+                          borderRadius: 15,
+                          margin: 16.pa,
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -54,7 +98,7 @@ class AboutScreen extends StatelessWidget {
                   onPress: () {
                     Get.back();
                   },
-                  buttonTitle: okTxt);
+                  buttonTitle: "hjwerf");
             }
             List<StaticData> staticResponse = snapshot.data!;
             return staticResponse.isNotEmpty
@@ -133,8 +177,8 @@ class AboutScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           child: CommonWidgets.networkImage(
             imageUrl: staticResponse[0].pageImage.toString(),
-            fit: BoxFit.fitWidth,
-            height: Get.width - 40,
+            fit: BoxFit.cover,
+            height: 380,
             alignment: Alignment.topCenter,
             width: Get.width,
           ),
@@ -255,9 +299,7 @@ class AboutScreen extends StatelessWidget {
               recognizer: TapGestureRecognizer()
                 ..onTap = () async {
                   await CommonUtils().urlLauncher(
-                      url:
-                          Endpoints.pdf,
-                      title: theHumbleWarriorLowerTxt);
+                      url: Endpoints.pdf, title: theHumbleWarriorLowerTxt);
                 },
               text: hereTxt,
               style: const TextStyle(

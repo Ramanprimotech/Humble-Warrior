@@ -24,53 +24,40 @@ class AccountDetails extends StatelessWidget {
                     ],
                   ),
                 )
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: Get.width,
-                      height: Get.height / 2.5,
-                      decoration: const BoxDecoration(
-                          image: DecorationImage(
-                        fit: BoxFit.fill,
-                        opacity: 0.7,
-                        image: AssetImage(ImagePathAssets.backgroundImg),
-                      )),
-                      child: Column(
-                        children: [
-                          50.shb,
-                          CommonWidgets.titleBar(context,
-                              title: accountDetailsTxt, fontSize: 20),
-                          const Spacer(),
-                          profileImg(),
-                          const Spacer(),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            50.shb,
-                            heading(headingTitle: "Name"),
-                            5.shb,
-                            subTitle(title: accountController.username),
-                            20.shb,
-                            heading(headingTitle: "Email"),
-                            5.shb,
-                            subTitle(title: accountController.user),
-                            20.shb,
-                            heading(headingTitle: 'Phone Number'),
-                            5.shb,
-                            subTitle(
-                                title: accountController.userPhone.toString()),
-                            20.shb,
-                          ],
+              : SafeArea(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // 50.shb,
+                      CommonWidgets.titleBar(context,
+                          title: accountDetailsTxt, fontSize: 20),
+                      70.shb,
+                      profileImg(),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              heading(headingTitle: "Name"),
+                              5.shb,
+                              subTitle(title: accountController.username),
+                              20.shb,
+                              heading(headingTitle: "Email"),
+                              5.shb,
+                              subTitle(title: accountController.user),
+                              20.shb,
+                              heading(headingTitle: 'Phone Number'),
+                              5.shb,
+                              subTitle(
+                                  title:
+                                      accountController.userPhone.toString()),
+                              20.shb,
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
         ));
   }
@@ -87,18 +74,12 @@ class AccountDetails extends StatelessWidget {
 
   subTitle({title}) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 80),
+      padding: 20.ph,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppText(
-            '$title',
-            fontSize: 18,
-          ),
-          Divider(
-            color: Theme.of(Get.context!).iconTheme.color!,
-            thickness: 2,
-          ),
+          AppText('$title', fontSize: 18),
+          Divider(color: Theme.of(Get.context!).iconTheme.color!, thickness: 1),
         ],
       ),
     );
