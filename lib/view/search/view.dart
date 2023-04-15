@@ -125,7 +125,7 @@ class _SearchViewState extends State<SearchView> {
                     decoration: InputDecoration(
                       hintText: searchTxt,
                       hintStyle: const TextStyle(
-                          fontWeight: FontWeight.w400, fontSize: 16),
+                          fontWeight: FontWeight.w400, fontSize: 16, color: Colors.black),
                       focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide.none,
                       ),
@@ -240,6 +240,12 @@ class _SearchViewState extends State<SearchView> {
                             onTap: () {
                               filterController.controller.text =
                               data[index].productSearched!;
+
+                              hiveService.recentFavourite(
+                                  item: RecentSearch(
+                                      productSearched:
+                                      filterController.controller.text));
+                              filterController.searchFromStart();
                               setState(() {});
                             },
                             child: Container(
