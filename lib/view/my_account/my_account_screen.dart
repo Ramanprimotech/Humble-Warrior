@@ -78,10 +78,10 @@ class MyAccount extends StatelessWidget {
                   myAccWidget.myAccountTextFun(heading: settingsTxt),
 
                   ///Passcode
-                  // myAccWidget.detailsOptions(controller, title: passcodeTxt,
-                  //     ontap: () {
-                  //   controller.tapPasscode();
-                  // }),
+                  myAccWidget.detailsOptions(controller, title: passcodeTxt,
+                      ontap: () {
+                    controller.tapPasscode();
+                  }),
 
                   ///Dark Mode
                   myAccWidget.detailsOptions(controller,

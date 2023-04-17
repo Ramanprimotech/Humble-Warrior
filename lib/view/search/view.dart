@@ -21,6 +21,8 @@ class _SearchViewState extends State<SearchView> {
 
   Timer? timer;
 
+  ThemeController themeController = ThemeController();
+
   @override
   void initState() {
     focusNode.requestFocus();
@@ -53,6 +55,7 @@ class _SearchViewState extends State<SearchView> {
         leadingWidth: 35,
         centerTitle: false,
         title: Card(
+          surfaceTintColor: Colors.transparent,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
           ),
@@ -73,10 +76,7 @@ class _SearchViewState extends State<SearchView> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 8.swb,
-                Padding(
-                  padding: 3.pt,
-                  child: const Icon(Icons.search, size: 20),
-                ),
+                const Icon(Icons.search, size: 20),
                 4.swb,
                 Expanded(
                   child: TextFormField(
@@ -123,9 +123,10 @@ class _SearchViewState extends State<SearchView> {
                       }
                     },
                     decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(vertical: 5),
                       hintText: searchTxt,
-                      hintStyle: const TextStyle(
-                          fontWeight: FontWeight.w400, fontSize: 16, color: Colors.black),
+                      hintStyle:  TextStyle(
+                          fontWeight: FontWeight.w400, fontSize: 15, color: Theme.of(context).textTheme.displayLarge!.color!),
                       focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide.none,
                       ),
@@ -251,6 +252,7 @@ class _SearchViewState extends State<SearchView> {
                                       productSearched:
                                       filterController.controller.text));
                               filterController.searchFromStart();
+                              focusNode.unfocus();
                               setState(() {});
                             },
                             child: Container(
