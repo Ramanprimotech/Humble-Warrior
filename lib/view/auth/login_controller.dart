@@ -61,7 +61,9 @@ class LoginController extends GetxController {
                   Get.offAllNamed(AppRoutes.bottomNavigation);
                 });
           }
-        } catch (e) {}
+        } catch (e) {
+          print(e);
+        }
 
       },
 
@@ -69,7 +71,6 @@ class LoginController extends GetxController {
       OnClick.google: () async {
         try {
           Loader.show(context);
-
           user = await AuthManager().googleLogin(
               androidClientId:
                   DefaultFirebaseOptions.currentPlatform.androidClientId ?? "",
@@ -77,8 +78,6 @@ class LoginController extends GetxController {
                   DefaultFirebaseOptions.currentPlatform.iosClientId ?? "");
 
           if (user != null) {
-            Loader.hide();
-
             /// Save User Info to Local Storage
             await saveUserToLocalStorage();
 
@@ -87,16 +86,18 @@ class LoginController extends GetxController {
                 () {
                   Get.offAllNamed(AppRoutes.bottomNavigation);
                 });
-          } else {
-            Loader.hide();
           }
         } catch (e, st) {
+          print(e);
+        }finally{
           Loader.hide();
         }
       },
 
       /// ----------- Click apple
       OnClick.apple: () async {
+        try{
+          Loader.show(context);
         user = await AuthManager().appleLogin();
         if (user != null) {
           await saveUserToLocalStorage();
@@ -107,7 +108,10 @@ class LoginController extends GetxController {
                 Get.offAllNamed(AppRoutes.bottomNavigation);
               });
         }
-      },
+      }finally{
+          Loader.hide();
+        }
+    },
 
       /// Click Continue without login
       OnClick.continueWithoutLogin: () async {

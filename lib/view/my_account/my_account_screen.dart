@@ -127,7 +127,7 @@ class MyAccount extends StatelessWidget {
           })
         : myAccWidget.detailsOptions(controller, title: login, ontap: () {
             DialogHelper.logoutDialog(
-                context: context, onTap: controller.loginPage());
+                context: context, onTap: controller.loginPage);
           });
   }
 }
