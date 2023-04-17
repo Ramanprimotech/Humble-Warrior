@@ -45,9 +45,9 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: master
-      resolved-ref: "91f7d3ebd48e0152413a8879b27c80aab7d34850"
-      url: "https://username@github.com/KiranPrimotech/authentication.git"
+      ref: main
+      resolved-ref: "75ed3a3f46201471720fb6b6d6029a941a19fe5f"
+      url: "https://github.com/bijayprimo/Social_auth.git"
     source: git
     version: "0.0.1"
   auto_size_text_pk:
@@ -677,10 +677,10 @@ packages:
     dependency: transitive
     description:
       name: google_sign_in_android
-      sha256: "6a740e8498920ecf5fc2849ae0e4412536d700230bc3169493a1d031fdfe1cca"
+      sha256: "2efe7a35f8542b94f240661ef888ae74fcbdb1886908a6aac54404e2268be73c"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.8"
+    version: "6.1.9"
   google_sign_in_ios:
     dependency: transitive
     description:
@@ -693,10 +693,10 @@ packages:
     dependency: transitive
     description:
       name: google_sign_in_platform_interface
-      sha256: fece762f0d2dd762ebde43ad70662a209ff6ee034111976549c392f7763d9264
+      sha256: "95a9e0a8701b5485f2ca330fd1fc6f918f5ce088042ce1019c5e389d8574ae4c"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.1"
+    version: "2.4.0"
   google_sign_in_web:
     dependency: transitive
     description:
