@@ -57,7 +57,7 @@ class SearchBar extends StatelessWidget {
                   const Spacer(),
                   const Icon(Icons.search, size: 20),
                   AppText(searchTxt,
-                      fontWeight: FontWeight.w400, fontSize: 14, padding: 4.pl),
+                      fontWeight: FontWeight.w400, fontSize: 15, padding: 4.pl),
                   const Spacer(),
                   20.swb,
                 ],

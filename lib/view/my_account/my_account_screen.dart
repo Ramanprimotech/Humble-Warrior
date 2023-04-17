@@ -78,10 +78,10 @@ class MyAccount extends StatelessWidget {
                   myAccWidget.myAccountTextFun(heading: settingsTxt),
 
                   ///Passcode
-                  myAccWidget.detailsOptions(controller, title: passcodeTxt,
-                      ontap: () {
-                    controller.tapPasscode();
-                  }),
+                  // myAccWidget.detailsOptions(controller, title: passcodeTxt,
+                  //     ontap: () {
+                  //   controller.tapPasscode();
+                  // }),
 
                   ///Dark Mode
                   myAccWidget.detailsOptions(controller,
@@ -90,12 +90,12 @@ class MyAccount extends StatelessWidget {
                       click: controller.darkMode),
 
                   ///Help & Support
-                  myAccWidget.detailsOptions(controller, title: helpSupportTxt,
-                      ontap: () {
-                    // Get.toNamed(AppRoutes.staticPages,
-                    //     arguments: ["40429", helpSupportTxt]);
-                        DialogHelper.showToast(context, "Coming Soon");
-                  }),
+                  // myAccWidget.detailsOptions(controller, title: helpSupportTxt,
+                  //     ontap: () {
+                  //   // Get.toNamed(AppRoutes.staticPages,
+                  //   //     arguments: ["40429", helpSupportTxt]);
+                  //       DialogHelper.showToast(context, "Coming Soon");
+                  // }),
 
                   ///Term & Conditions
                   myAccWidget.detailsOptions(controller,
@@ -127,7 +127,7 @@ class MyAccount extends StatelessWidget {
           })
         : myAccWidget.detailsOptions(controller, title: login, ontap: () {
             DialogHelper.logoutDialog(
-                context: context, onTap: controller.loginPage());
+                context: context, onTap: controller.loginPage);
           });
   }
 }

@@ -144,22 +144,25 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             );
                           }
                           if (snapshot.hasError) {
-                            return const Center(
-                              child: AppText(
-                                noNotificationTxt,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            );
+                            return CommonWidgets.errorAPI(
+                                buttonTitle: retryTxt,
+                                errorText: somethingWentWrongTxt.toString(),
+                                context: context,
+                                onPress: () {
+                                  setState(() {
+                                    _notificationController.update();
+                                    _notificationController.update(['badge']);
+                                  });
+                                });
                           }
                           if (snapshot.data!.posts!.isEmpty) {
-                            return const Center(
-                              child: AppText(
-                                noNotificationTxt,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            );
+                              return const Center(
+                                child: AppText(
+                                  noNotificationTxt,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              );
                           }
                           return ListView.separated(
                             padding: const EdgeInsets.only(

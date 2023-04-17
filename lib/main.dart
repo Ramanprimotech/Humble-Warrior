@@ -7,7 +7,7 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
     importance: Importance.max,
     playSound: true);
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+FlutterLocalNotificationsPlugin();
 
 bool isLoggedIn = false;
 Future<void> _messageHandler(RemoteMessage message) async {
@@ -18,17 +18,17 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-   isLoggedIn =
+  isLoggedIn =
       await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
   await Firebase.initializeApp(
-    name: "humble-warrior",
+    // name: "humble-warrior",
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseMessaging.onBackgroundMessage(_messageHandler);
 
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
+      AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
   NotificationManager.initialize(flutterLocalNotificationsPlugin);

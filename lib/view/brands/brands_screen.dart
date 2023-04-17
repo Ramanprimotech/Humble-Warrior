@@ -52,7 +52,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
                       controller: searchTextController,
                       decoration: const InputDecoration.collapsed(
                         hintText: searchTxt,
-                        hintStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)
+                        hintStyle: TextStyle(fontWeight: FontWeight.w400,color: Colors.black, fontSize: 16)
                       ),
                     ),
                   ),

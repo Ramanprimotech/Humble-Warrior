@@ -313,24 +313,31 @@ class FilterScreen extends StatelessWidget {
                   init: _filterController,
                   builder: (ctx) => Visibility(
                     visible: _filterController.record.isNotEmpty,
-                    child: GestureDetector(
-                      onTap: () {
-                        _filterController.unSelectedList();
-                        _filterController.showCategories(context);
-                        _filterController.searchFromStart();
-                      },
-                      child: Container(
-                        width: 120,
-                        decoration: BoxDecoration(
-                            color: AppColors.primary,
-                            borderRadius: BorderRadius.circular(50)),
-                        child: const Center(
-                          child: AppText(
-                            "Search",
-                            color: AppColors.white,
-                          ),
-                        ).px(14).py(2),
-                      ).p(10),
+                    child: Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            _filterController.unSelectedList();
+                            _filterController.showCategories(context);
+                            _filterController.searchFromStart();
+                          },
+                          child: Container(
+                            width: 150,
+                            height: 35,
+                            decoration: BoxDecoration(
+                                color: AppColors.primary,
+                                borderRadius: BorderRadius.circular(16)),
+                            child: const Center(
+                              child: AppText(
+                                "Search",
+                                color: AppColors.white,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          )
+                        ),
+                        Container(height: 1, color: Colors.black12,margin: 8.pv,),
+                      ],
                     ),
                   ),
                 ),
