@@ -83,7 +83,8 @@ class _SearchViewState extends State<SearchView> {
                     focusNode: focusNode,
                     controller: filterController.controller,
                     onChanged: (value) {
-                      if (value.isEmpty && filterController.controller.text == "") {
+                      if (value.isEmpty &&
+                          filterController.controller.text == "") {
                         showCross.value = false;
                       } else {
                         showCross.value = true;
@@ -97,12 +98,15 @@ class _SearchViewState extends State<SearchView> {
                         timer!.cancel();
                       }
 
-                      timer = Timer(const Duration(milliseconds: 660), () {
+                      timer = Timer(const Duration(seconds: 2), () {
                         if (value.length >= 3) {
-                          hiveService.recentFavourite(
-                              item: RecentSearch(
-                                  productSearched:
-                                      filterController.controller.text));
+                          // hiveService.recentFavourite(
+                          //     item: RecentSearch(
+                          //         productSearched:
+                          //             filterController.controller.text));
+                          RecentSearch(
+                              productSearched:
+                                  filterController.controller.text);
                           filterController.searchFromStart();
                           setState(() {});
                         }
@@ -125,8 +129,11 @@ class _SearchViewState extends State<SearchView> {
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(vertical: 5),
                       hintText: searchTxt,
-                      hintStyle:  TextStyle(
-                          fontWeight: FontWeight.w400, fontSize: 15, color: Theme.of(context).textTheme.displayLarge!.color!),
+                      hintStyle: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          color:
+                              Theme.of(context).textTheme.displayLarge!.color!),
                       focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide.none,
                       ),
@@ -207,237 +214,246 @@ class _SearchViewState extends State<SearchView> {
                           //   setState(() {});
                           // }
                         });
-
                       },
                       icon: AppIcons.filter(size: 35)),
                 )
         ],
       ),
       body: SafeArea(
-          child: (filterController.controller.text.isEmpty &&
-              selectedCategories.isEmpty) ? ValueListenableBuilder(
-              valueListenable: box.listenable(),
-              builder: (context, value, child) {
-                Map<dynamic, RecentSearch> dataMap = box.toMap();
-                List<RecentSearch> data =
-                dataMap.values.toList().reversed.toList();
-                var dataKeys =
-                dataMap.keys.toList().reversed.toList();
-                if (box.isEmpty) {
-                  return const Center(
-                    child: AppText(
-                      searchDealsTxt,
-                      fontSize: 18,
-                    ),
-                  );
-                }
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const AppText(
-                      recentTxt,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                    ).paddingSymmetric(horizontal: 20, vertical: 20),
-                    Expanded(
-                      child: ListView.separated(
-                        itemCount: box.length > 8 ? 8 : box.length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              filterController.controller.text =
-                              data[index].productSearched!;
-                              showCross.value = true;
-                              RecentSearch(
-                                      productSearched:
-                                      filterController.controller.text);
-                              filterController.searchFromStart();
-                              focusNode.unfocus();
-                              setState(() {});
-                            },
-                            child: Container(
-                              height: 40,
-                              padding: 10.ph,
-                              margin: 20.ph,
-                              decoration: CustomBoxDecorations(
-                                  context: context)
-                                  .shadow(),
-                              child: Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Icon(Icons.history),
-                                  AppText("${data[index].productSearched}")
-                                      .paddingOnly(left: 10),
-                                  const Spacer(),
-                                  InkWell(
-                                    child: const Icon(
-                                      Icons.cancel_outlined,
-                                    ),
-                                    onTap: () {
-                                      hiveService
-                                          .deleteRecentItemByKey(
-                                          dataKeys[index]);
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return const SizedBox(
-                            height: 20,
-                          );
-                        },
+        child: (filterController.controller.text.isEmpty &&
+                selectedCategories.isEmpty)
+            ? ValueListenableBuilder(
+                valueListenable: box.listenable(),
+                builder: (context, value, child) {
+                  Map<dynamic, RecentSearch> dataMap = box.toMap();
+                  List<RecentSearch> data =
+                      dataMap.values.toList().reversed.toList();
+                  var dataKeys = dataMap.keys.toList().reversed.toList();
+                  if (box.isEmpty) {
+                    return const Center(
+                      child: AppText(
+                        searchDealsTxt,
+                        fontSize: 18,
                       ),
-                    ),
-                  ],
-                );
-              }):
-          PaginationWidget(
-        length: filterController.searchListLength,
-        apiBool: filterController.searchsBool,
-        api: filterController.searchsAPI,
-        update: filterController.update,
-        scrollController: filterController.searchScrollController,
-        totalRecords: filterController.searchsTotalDeals,
-        child: GetBuilder<FilterController>(
-          init: filterController,
-          builder: (ctx) {
-            if (filterController.searchList.isEmpty &&
-                filterController.searchsBool.value == true) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (filterController.searchList.isEmpty &&
-                filterController.searchsBool.value == false) {
-              return CommonWidgets.noData(
-                  update: filterController.update,
-                  context: context,
-                  onTap: () {
-                    filterController.searchsBool.value = true;
-                    filterController.update();
-                    filterController.searchsAPI();
-                  });
-            }
-            return ListView.separated(
-              padding: const EdgeInsets.only(bottom: 10, top: 6),
-              controller: filterController.searchScrollController,
-              itemCount: filterController.searchList.length + 1,
-              itemBuilder: (ctx, index) {
-                ProductDetailsResponse details = ProductDetailsResponse();
-                if (index != filterController.searchList.length) {
-                  details = filterController.searchList[index];
-                }
-                return index != filterController.searchList.length
-                    ? GestureDetector(
-                        onTap: () {
-                          // hiveService.recentFavourite(
-                          //     item: RecentSearch(
-                          //         productSearched:
-                          //             filterController.controller.text));
-
-                          Get.toNamed(AppRoutes.dailyDealProductDetail,
-                              arguments: [
-                                ProductDetailsResponse(id: details.id)
-                              ]);
-                        },
-                        child: Container(
-                          height: 80,
-                          margin: 20.ph,
-                          decoration:
-                              CustomBoxDecorations(context: context).shadow(),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              ClipRRect(
-                                borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    bottomLeft: Radius.circular(10)),
-                                child: CommonWidgets.networkImage(
-                                    height: 80,
-                                    width: Get.width * .3,
-                                    imageUrl: details.url.toString(),
-                                    fit: BoxFit.cover),
-                              ),
-                              SizedBox(
-                                height: 80,
-                                width: Get.width * .7 - 40,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                    );
+                  }
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const AppText(
+                        recentTxt,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                      ).paddingSymmetric(horizontal: 20, vertical: 20),
+                      Expanded(
+                        child: ListView.separated(
+                          itemCount: box.length > 8 ? 8 : box.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                filterController.controller.text =
+                                    data[index].productSearched!;
+                                showCross.value = true;
+                                RecentSearch(
+                                    productSearched:
+                                        filterController.controller.text);
+                                filterController.searchFromStart();
+                                focusNode.unfocus();
+                                setState(() {});
+                              },
+                              child: Container(
+                                height: 40,
+                                padding: 10.ph,
+                                margin: 20.ph,
+                                decoration:
+                                    CustomBoxDecorations(context: context)
+                                        .shadow(),
+                                child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    (details.catName == null ||
-                                            details.catName == "")
-                                        ? const SizedBox()
-                                        : Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 12, vertical: 3),
-                                            decoration: BoxDecoration(
-                                                color: AppColors.primary,
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  bottomRight:
-                                                      Radius.circular(10),
-                                                )),
-                                            child: AppText(
-                                              details.catName!.toUpperCase(),
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                    SizedBox(
-                                      width: Get.width * .7 - 40,
-                                      child: AppText(
-                                        details.itemName.toString(),
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14,
-                                        maxLines: 2,
-                                      ).paddingSymmetric(
-                                          horizontal: 8, vertical: 4),
+                                    const Icon(Icons.history),
+                                    AppText("${data[index].productSearched}")
+                                        .paddingOnly(left: 10),
+                                    const Spacer(),
+                                    InkWell(
+                                      child: const Icon(
+                                        Icons.cancel_outlined,
+                                      ),
+                                      onTap: () {
+                                        hiveService.deleteRecentItemByKey(
+                                            dataKeys[index]);
+                                      },
                                     ),
                                   ],
                                 ),
                               ),
-                            ],
-                          ),
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              height: 20,
+                            );
+                          },
                         ),
-                      )
-                    // CardView(
-                    //         index: index,
-                    //         details: details,
-                    //         onTap: () {
-                    //           Get.toNamed(AppRoutes.dailyDealProductDetail,
-                    //               arguments: [details]);
-                    //         },
-                    //         imgUrl: details.url!,
-                    //         cardText: details.itemName!,
-                    //       )
-                    // searchsCard(details, index, context, dailyDeals: true)
-                    : Obx(
-                        () => Visibility(
-                          visible: filterController.searchsBool.value,
-                          child: Container(
-                              height: 80,
-                              alignment: Alignment.center,
-                              child: const CircularProgressIndicator()),
-                        ),
-                      );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(
-                  height: 18,
-                );
-              },
-            );
-          },
-        ),
-      ),
+                      ),
+                    ],
+                  );
+                })
+            : PaginationWidget(
+                length: filterController.searchListLength,
+                apiBool: filterController.searchsBool,
+                api: filterController.searchsAPI,
+                update: filterController.update,
+                scrollController: filterController.searchScrollController,
+                totalRecords: filterController.searchsTotalDeals,
+                child: GetBuilder<FilterController>(
+                  init: filterController,
+                  builder: (ctx) {
+                    if (filterController.searchList.isEmpty &&
+                        filterController.searchsBool.value == true) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    if (filterController.searchList.isEmpty &&
+                        filterController.searchsBool.value == false) {
+                      return CommonWidgets.noData(
+                          update: filterController.update,
+                          context: context,
+                          onTap: () {
+                            filterController.searchsBool.value = true;
+                            filterController.update();
+                            filterController.searchsAPI();
+                          });
+                    }
+                    return ListView.separated(
+                      padding: const EdgeInsets.only(bottom: 10, top: 6),
+                      controller: filterController.searchScrollController,
+                      itemCount: filterController.searchList.length + 1,
+                      itemBuilder: (ctx, index) {
+                        ProductDetailsResponse details =
+                            ProductDetailsResponse();
+                        if (index != filterController.searchList.length) {
+                          details = filterController.searchList[index];
+                        }
+                        return index != filterController.searchList.length
+                            ? GestureDetector(
+                                onTap: () {
+                                  // hiveService.recentFavourite(
+                                  //     item: RecentSearch(
+                                  //         productSearched:
+                                  //             filterController.controller.text));
 
-      /*    Column(
+                                  Get.toNamed(AppRoutes.dailyDealProductDetail,
+                                      arguments: [
+                                        ProductDetailsResponse(id: details.id)
+                                      ]);
+                                },
+                                child: Container(
+                                  height: 80,
+                                  margin: 20.ph,
+                                  decoration:
+                                      CustomBoxDecorations(context: context)
+                                          .shadow(),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(10),
+                                            bottomLeft: Radius.circular(10)),
+                                        child: CommonWidgets.networkImage(
+                                            height: 80,
+                                            width: Get.width * .3,
+                                            imageUrl: details.url.toString(),
+                                            fit: BoxFit.cover),
+                                      ),
+                                      SizedBox(
+                                        height: 80,
+                                        width: Get.width * .7 - 40,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            (details.catName == null ||
+                                                    details.catName == "")
+                                                ? const SizedBox()
+                                                : Container(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 12,
+                                                        vertical: 3),
+                                                    decoration: BoxDecoration(
+                                                        color:
+                                                            AppColors.primary,
+                                                        borderRadius:
+                                                            const BorderRadius
+                                                                .only(
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  10),
+                                                        )),
+                                                    child: AppText(
+                                                      details.catName!
+                                                          .toUpperCase(),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.white,
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                            SizedBox(
+                                              width: Get.width * .7 - 40,
+                                              child: AppText(
+                                                details.itemName.toString(),
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 14,
+                                                maxLines: 2,
+                                              ).paddingSymmetric(
+                                                  horizontal: 8, vertical: 4),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            // CardView(
+                            //         index: index,
+                            //         details: details,
+                            //         onTap: () {
+                            //           Get.toNamed(AppRoutes.dailyDealProductDetail,
+                            //               arguments: [details]);
+                            //         },
+                            //         imgUrl: details.url!,
+                            //         cardText: details.itemName!,
+                            //       )
+                            // searchsCard(details, index, context, dailyDeals: true)
+                            : Obx(
+                                () => Visibility(
+                                  visible: filterController.searchsBool.value,
+                                  child: Container(
+                                      height: 80,
+                                      alignment: Alignment.center,
+                                      child: const CircularProgressIndicator()),
+                                ),
+                              );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(
+                          height: 18,
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+
+        /*    Column(
             children: [
               Expanded(
                 child: FutureBuilder<List<SearchPosts>>(
@@ -654,7 +670,7 @@ class _SearchViewState extends State<SearchView> {
               )
             ],
           ),*/
-          ),
+      ),
     );
   }
 }
