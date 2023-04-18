@@ -33,6 +33,8 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
     return Expanded(
       child: CustomRefreshIndicator(
         onRefresh: () {
+          controller.update([Endpoints.productCategories]);
+          controller.update([Endpoints.allBrands]);
           controller.update([Endpoints.homeCategories]);
 
           return Future.value(0);
