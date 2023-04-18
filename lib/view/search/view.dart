@@ -22,6 +22,7 @@ class _SearchViewState extends State<SearchView> {
   Timer? timer;
 
   ThemeController themeController = ThemeController();
+  FilterController filterController = Get.find();
 
   @override
   void initState() {
@@ -31,7 +32,6 @@ class _SearchViewState extends State<SearchView> {
 
   @override
   Widget build(BuildContext context) {
-    FilterController filterController = Get.find();
     filterController.context = context;
     filterController.postType = postType;
     filterController.catID = catId == "" ? null : int.parse(catId);
