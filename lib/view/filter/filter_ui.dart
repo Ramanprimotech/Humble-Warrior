@@ -286,7 +286,6 @@ class FilterScreen extends StatelessWidget {
                                                           milliseconds:
                                                           150),
                                                       curve: Curves.linear);
-                                                  controller.update();
                                                 },
                                                 child: AppIcons.next(
                                                     iconColor: Theme.of(context)

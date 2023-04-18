@@ -83,7 +83,7 @@ class _SearchViewState extends State<SearchView> {
                     focusNode: focusNode,
                     controller: filterController.controller,
                     onChanged: (value) {
-                      if (value.isEmpty) {
+                      if (value.isEmpty && filterController.controller.text == "") {
                         showCross.value = false;
                       } else {
                         showCross.value = true;
@@ -147,6 +147,7 @@ class _SearchViewState extends State<SearchView> {
                             ),
                             onTap: () {
                               filterController.controller.clear();
+                              showCross.value = false;
                               setState(() {});
                             },
                           ),
@@ -246,7 +247,7 @@ class _SearchViewState extends State<SearchView> {
                             onTap: () {
                               filterController.controller.text =
                               data[index].productSearched!;
-
+                              showCross.value = true;
                               RecentSearch(
                                       productSearched:
                                       filterController.controller.text);
