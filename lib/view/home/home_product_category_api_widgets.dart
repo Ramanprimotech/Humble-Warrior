@@ -71,7 +71,7 @@ class HomePageProductCategoryAPIWidgets
             ),
             Expanded(
               child: SizedBox(
-                height: productHeight + 10,
+                height: productHeight + 35,
                 width: Get.width,
                 child: ListView.builder(
                   padding: 30.pr,

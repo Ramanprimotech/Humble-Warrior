@@ -19,7 +19,8 @@ class AppColors {
   static const Color shadowDark = Colors.black54;
   static const Color shadowLight = Color(0xFFD8D4CF);
   static const Color readBox = Color(0xFFDAEBFD);
-  static const Color switchActiveColor = Color(0xFF2af500);
+  // static const Color switchActiveColor = Color(0xFF2af500);
+  static const Color switchActiveColor = Colors.green;
   static const Color switchInactiveColor = Color(0xFF494E4A);
   static const Color appGreen = Color(0xFF63F3B8);
 }

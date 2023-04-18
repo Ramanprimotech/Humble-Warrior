@@ -14,9 +14,10 @@ class CatCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap ?? () {},
       child: Container(
+        width: 90,
         padding: 30.pl,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Stack(
               alignment: Alignment.topRight,
@@ -48,9 +49,9 @@ class CatCard extends StatelessWidget {
                 ),
               ],
             ),
-            // 4.shb,
+            8.shb,
             AppText(title ?? "",
-                fontSize: 14, maxLines: 1, fontWeight: FontWeight.w600),
+                fontSize: 14, maxLines: 2, fontWeight: FontWeight.w600,textAlign: TextAlign.center),
           ],
         ),
       ),

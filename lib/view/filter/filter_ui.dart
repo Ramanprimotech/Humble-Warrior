@@ -79,7 +79,7 @@ class FilterScreen extends StatelessWidget {
                                 futureWidgets:
                                     FilterPageProductCategoryAPIWidgets(
                                         context: context,
-                                        productHeight: productHeight + 10,
+                                        productHeight: productHeight + 35,
                                         brandHeight: brandHeight),
                                 // future: _homeScreenController.productCategoryAPI(),
                                 future: _filterController.api(),

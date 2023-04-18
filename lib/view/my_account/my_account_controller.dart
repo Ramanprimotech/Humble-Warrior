@@ -49,6 +49,8 @@ class MyAccountController extends GetxController {
 
   void switchFunc() {
     checkNotification.value = !checkNotification.value;
+    SharePreferenceData.addBoolToSF("check", checkNotification.value);
+    update();
   }
 
   void darkMode() {
@@ -78,8 +80,9 @@ class MyAccountController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     checkDark.value = themeController.themeMode == ThemeMode.dark;
+    checkNotification.value = await SharePreferenceData.getBoolValuesSF("check");
     getData();
     super.onInit();
   }

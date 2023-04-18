@@ -139,7 +139,7 @@ class MyAccWidget {
                             value: title == darkModeTxt
                                 ? controller.checkDark.value
                                 : controller.checkNotification.value,
-                            activeColor: AppColors.switchActiveColor,
+                            activeColor: Colors.greenAccent.shade700,
                             inactiveTrackColor: AppColors.switchInactiveColor,
                             thumbColor: MaterialStateProperty.all(Colors.white),
                             onChanged: (value) {
