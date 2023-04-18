@@ -53,6 +53,7 @@ class FilterScreen extends StatelessWidget {
                           _filterController.selevtedVisibility.value = false;
                           _filterController.update();
                         }
+                        _filterController.listBack.value = false;
                       },
                       child: GetBuilder<FilterController>(
                           init: _filterController,
