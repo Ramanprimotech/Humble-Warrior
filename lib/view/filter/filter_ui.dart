@@ -79,7 +79,7 @@ class FilterScreen extends StatelessWidget {
                                 futureWidgets:
                                     FilterPageProductCategoryAPIWidgets(
                                         context: context,
-                                        productHeight: productHeight + 35,
+                                        productHeight: productHeight + 45,
                                         brandHeight: brandHeight),
                                 // future: _homeScreenController.productCategoryAPI(),
                                 future: _filterController.api(),
@@ -110,44 +110,46 @@ class FilterScreen extends StatelessWidget {
                                   children: [
                                     Row(
                                       children: [
-                                        Visibility(
-                                          visible:
-                                              controller.listSelectedBack.value,
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            color: Theme.of(context)
-                                                .scaffoldBackgroundColor,
-                                            height: brandHeight,
-                                            width: arrowWidth,
-                                            padding: EdgeInsets.only(
-                                                left: productArrowIconPadding),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                controller
-                                                    .selectedProductScrollController
-                                                    .animateTo(
-                                                        controller
-                                                                .selectedProductScrollController
-                                                                .offset -
-                                                            (60 * 3),
-                                                        duration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    150),
-                                                        curve: Curves.linear);
-                                              },
-                                              child: AppIcons.backArrrowIos(
-                                                  iconColor: Theme.of(context)
-                                                      .textTheme
-                                                      .displaySmall!
-                                                      .color!),
+                                        Obx(
+                              ()=> Visibility(
+                                            visible:
+                                                controller.listSelectedBack.value,
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              color: Theme.of(context)
+                                                  .scaffoldBackgroundColor,
+                                              height: brandHeight,
+                                              width: arrowWidth,
+                                              padding: EdgeInsets.only(
+                                                  left: productArrowIconPadding),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  controller
+                                                      .selectedProductScrollController
+                                                      .animateTo(
+                                                          controller
+                                                                  .selectedProductScrollController
+                                                                  .offset -
+                                                              (60 * 3),
+                                                          duration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      150),
+                                                          curve: Curves.linear);
+                                                },
+                                                child: AppIcons.backArrrowIos(
+                                                    iconColor: Theme.of(context)
+                                                        .textTheme
+                                                        .displaySmall!
+                                                        .color!),
+                                              ),
                                             ),
                                           ),
                                         ),
                                         Expanded(
                                           child: Container(
                                             alignment: Alignment.bottomCenter,
-                                            height: productHeight + 20,
+                                            height: productHeight + 45,
                                             width: Get.width,
                                             child: ListView.builder(
                                                 padding: 30.pr,
@@ -262,37 +264,38 @@ class FilterScreen extends StatelessWidget {
                                           ),
                                         ),
                                         Visibility(
-                                          visible: controller
-                                              .listSelectedForward.value,
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            color: Theme.of(context)
-                                                .scaffoldBackgroundColor,
-                                            height: brandHeight,
-                                            width: arrowWidth,
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                controller
-                                                    .selectedProductScrollController
-                                                    .animateTo(
-                                                        controller
-                                                                .selectedProductScrollController
-                                                                .offset +
-                                                            (60 * 3),
-                                                        duration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    150),
-                                                        curve: Curves.linear);
-                                              },
-                                              child: AppIcons.next(
-                                                  iconColor: Theme.of(context)
-                                                      .textTheme
-                                                      .displaySmall!
-                                                      .color!),
+                                            visible: controller
+                                                .listSelectedForward.value,
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              color: Theme.of(context)
+                                                  .scaffoldBackgroundColor,
+                                              height: brandHeight,
+                                              width: arrowWidth,
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  controller
+                                                      .selectedProductScrollController
+                                                      .animateTo(
+                                                      controller
+                                                          .selectedProductScrollController
+                                                          .offset +
+                                                          (60 * 3),
+                                                      duration:
+                                                      const Duration(
+                                                          milliseconds:
+                                                          150),
+                                                      curve: Curves.linear);
+                                                  controller.update();
+                                                },
+                                                child: AppIcons.next(
+                                                    iconColor: Theme.of(context)
+                                                        .textTheme
+                                                        .displaySmall!
+                                                        .color!),
+                                              ),
                                             ),
                                           ),
-                                        ),
                                       ],
                                     ),
                                   ],
@@ -317,9 +320,12 @@ class FilterScreen extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            _filterController.unSelectedList();
-                            _filterController.showCategories(context);
-                            _filterController.searchFromStart();
+                            CommonUtils.toCheckInternet(action: () async {
+                              _filterController.unSelectedList();
+                              _filterController.showCategories(context);
+                              _filterController.searchFromStart();
+                            });
+
                           },
                           child: Container(
                             width: 150,

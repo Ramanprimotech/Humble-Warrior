@@ -247,10 +247,9 @@ class _SearchViewState extends State<SearchView> {
                               filterController.controller.text =
                               data[index].productSearched!;
 
-                              hiveService.recentFavourite(
-                                  item: RecentSearch(
+                              RecentSearch(
                                       productSearched:
-                                      filterController.controller.text));
+                                      filterController.controller.text);
                               filterController.searchFromStart();
                               focusNode.unfocus();
                               setState(() {});
@@ -336,6 +335,7 @@ class _SearchViewState extends State<SearchView> {
                           //     item: RecentSearch(
                           //         productSearched:
                           //             filterController.controller.text));
+
                           Get.toNamed(AppRoutes.dailyDealProductDetail,
                               arguments: [
                                 ProductDetailsResponse(id: details.id)
