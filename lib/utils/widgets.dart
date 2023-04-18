@@ -41,9 +41,15 @@ class CatCard extends StatelessWidget {
                 Positioned(
                   child: Visibility(
                     visible: visible ?? true,
-                    child: const Icon(
-                      Icons.check_circle,
-                      color: AppColors.appGreen,
+                    child:  Container(
+                      decoration: BoxDecoration(
+                          color:  AppColors.appGreen,
+                          border: Border.all(width: 1, color:Colors.green.shade900), shape: BoxShape.circle),
+                      child: Icon(
+                        Icons.check,
+                        color: Colors.green.shade900, size: 20,
+                        // AppColors.appGreen,
+                      ),
                     ),
                   ),
                 ),

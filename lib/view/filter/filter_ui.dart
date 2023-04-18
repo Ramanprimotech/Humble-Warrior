@@ -1,8 +1,5 @@
 import 'package:humble_warrior/view/filter/filter_controller.dart';
 import 'package:humble_warrior/view/filter/filter_product_category_api_widgets.dart';
-import 'package:humble_warrior/view/search/api_services.dart';
-import 'package:humble_warrior/view/search/model.dart';
-
 import '../../hw.dart';
 
 class FilterScreen extends StatelessWidget {
@@ -19,7 +16,6 @@ class FilterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _filterController.context = context;
-    final catController = !_filterController.selevtedVisibility.value;
     return WillPopScope(
       onWillPop: () async {
         Get.back(result: _filterController.record.value);
@@ -111,9 +107,9 @@ class FilterScreen extends StatelessWidget {
                                     Row(
                                       children: [
                                         Obx(
-                              ()=> Visibility(
-                                            visible:
-                                                controller.listSelectedBack.value,
+                                          () => Visibility(
+                                            visible: controller
+                                                .listSelectedBack.value,
                                             child: Container(
                                               alignment: Alignment.center,
                                               color: Theme.of(context)
@@ -121,7 +117,8 @@ class FilterScreen extends StatelessWidget {
                                               height: brandHeight,
                                               width: arrowWidth,
                                               padding: EdgeInsets.only(
-                                                  left: productArrowIconPadding),
+                                                  left:
+                                                      productArrowIconPadding),
                                               child: GestureDetector(
                                                 onTap: () {
                                                   controller
@@ -168,15 +165,16 @@ class FilterScreen extends StatelessWidget {
                                                           .value[index];
                                                   return CatCard(
                                                     title: item.categoryName,
-                                                    imageUrl: item.categoryImage,
+                                                    imageUrl:
+                                                        item.categoryImage,
                                                     visible: _filterController
-                                                        .containItem(
-                                                        item),
+                                                        .containItem(item),
                                                     isCheck: true,
-                                                    onTap: ()
-                                                    {_filterController
+                                                    onTap: () {
+                                                      _filterController
                                                           .addToWish(item);
-                                                    },);
+                                                    },
+                                                  );
 
                                                   //   GestureDetector(
                                                   //   onTap: () {
@@ -263,41 +261,43 @@ class FilterScreen extends StatelessWidget {
                                                 }),
                                           ),
                                         ),
-                                        Obx(() {
-                                         return Visibility(
-                                            visible: controller
-                                                .listSelectedForward.value,
-                                            child: Container(
-                                              alignment: Alignment.center,
-                                              color: Theme.of(context)
-                                                  .scaffoldBackgroundColor,
-                                              height: brandHeight,
-                                              width: arrowWidth,
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  controller
-                                                      .selectedProductScrollController
-                                                      .animateTo(
-                                                      controller
-                                                          .selectedProductScrollController
-                                                          .offset +
-                                                          (60 * 3),
-                                                      duration:
-                                                      const Duration(
-                                                          milliseconds:
-                                                          150),
-                                                      curve: Curves.decelerate);
-                                                },
-                                                child: AppIcons.next(
-                                                    iconColor: Theme.of(context)
-                                                        .textTheme
-                                                        .displaySmall!
-                                                        .color!),
+                                        Obx(
+                                          () {
+                                            return Visibility(
+                                              visible: controller
+                                                  .listSelectedForward.value,
+                                              child: Container(
+                                                alignment: Alignment.center,
+                                                color: Theme.of(context)
+                                                    .scaffoldBackgroundColor,
+                                                height: brandHeight,
+                                                width: arrowWidth,
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    controller
+                                                        .selectedProductScrollController
+                                                        .animateTo(
+                                                            controller
+                                                                    .selectedProductScrollController
+                                                                    .offset +
+                                                                (60 * 3),
+                                                            duration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        150),
+                                                            curve: Curves
+                                                                .decelerate);
+                                                  },
+                                                  child: AppIcons.next(
+                                                      iconColor:
+                                                          Theme.of(context)
+                                                              .textTheme
+                                                              .displaySmall!
+                                                              .color!),
+                                                ),
                                               ),
-                                            ),
-                                          );
-                                        },
-
+                                            );
+                                          },
                                         ),
                                       ],
                                     ),
@@ -322,30 +322,31 @@ class FilterScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         GestureDetector(
-                          onTap: () {
-                            CommonUtils.toCheckInternet(action: () async {
-                              _filterController.unSelectedList();
-                              _filterController.showCategories(context);
-                              _filterController.searchFromStart();
-                            });
-
-                          },
-                          child: Container(
-                            width: 150,
-                            height: 35,
-                            decoration: BoxDecoration(
-                                color: AppColors.primary,
-                                borderRadius: BorderRadius.circular(16)),
-                            child: const Center(
-                              child: AppText(
-                                "Search",
-                                color: AppColors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            )
-                          )
+                            onTap: () {
+                              CommonUtils.toCheckInternet(action: () async {
+                                _filterController.unSelectedList();
+                                _filterController.showCategories(context);
+                                _filterController.searchFromStart();
+                              });
+                            },
+                            child: Container(
+                                width: 150,
+                                height: 35,
+                                decoration: BoxDecoration(
+                                    color: AppColors.primary,
+                                    borderRadius: BorderRadius.circular(16)),
+                                child: const Center(
+                                  child: AppText(
+                                    "Search",
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ))),
+                        Container(
+                          height: 1,
+                          color: Colors.black12,
+                          margin: 8.pv,
                         ),
-                        Container(height: 1, color: Colors.black12,margin: 8.pv,),
                       ],
                     ),
                   ),
@@ -600,11 +601,19 @@ class FilterScreen extends StatelessWidget {
                 _filterController.record.isEmpty
                     ? Expanded(
                         child: Center(
-                          child: AppText(
-                            !_filterController.selevtedVisibility.value?
-                            "Select a category to continue...":"",
-                            maxLines: 4,
-                          ),
+                          child: GetBuilder<FilterController>(
+                              init: _filterController,
+                              builder: (controller) {
+                                return AppText(!_filterController.record.isNotEmpty
+                                    ? "Select a category to continue..."
+                                    : "Tap to search to continue");
+                              })
+                          // AppText(
+                          //   !_filterController.selevtedVisibility.value
+                          //       ? "Select a category to continue..."
+                          //       : "",
+                          //   maxLines: 4,
+                          // ),
                         ),
                       )
                     : Expanded(
