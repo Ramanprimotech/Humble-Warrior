@@ -263,7 +263,8 @@ class FilterScreen extends StatelessWidget {
                                                 }),
                                           ),
                                         ),
-                                        Visibility(
+                                        Obx(() {
+                                         return Visibility(
                                             visible: controller
                                                 .listSelectedForward.value,
                                             child: Container(
@@ -285,7 +286,7 @@ class FilterScreen extends StatelessWidget {
                                                       const Duration(
                                                           milliseconds:
                                                           150),
-                                                      curve: Curves.linear);
+                                                      curve: Curves.decelerate);
                                                 },
                                                 child: AppIcons.next(
                                                     iconColor: Theme.of(context)
@@ -294,7 +295,10 @@ class FilterScreen extends StatelessWidget {
                                                         .color!),
                                               ),
                                             ),
-                                          ),
+                                          );
+                                        },
+
+                                        ),
                                       ],
                                     ),
                                   ],
@@ -594,10 +598,11 @@ class FilterScreen extends StatelessWidget {
                     ).px16(),
                 ),*/
                 _filterController.record.isEmpty
-                    ? const Expanded(
+                    ? Expanded(
                         child: Center(
                           child: AppText(
-                            "Select a category to continue...",
+                            !_filterController.selevtedVisibility.value?
+                            "Select a category to continue...":"",
                             maxLines: 4,
                           ),
                         ),

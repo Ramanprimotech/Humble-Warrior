@@ -48,8 +48,8 @@ class FilterController extends GetxController {
     });
 
     selectedProductScrollController.addListener(() {
-      listSelectedForward.value = selectedProductScrollController.offset !=
-          selectedProductScrollController.position.maxScrollExtent;
+      listSelectedForward.value = selectedProductScrollController.position.maxScrollExtent - 40 >
+          selectedProductScrollController.offset;
       listSelectedBack.value = selectedProductScrollController.offset !=
           selectedProductScrollController.initialScrollOffset;
     });
@@ -164,9 +164,9 @@ class FilterController extends GetxController {
     });
     data.addAll(unselectedData);
     unSelectedRecords.value = data;
-    selectedProductScrollController.animateTo(1,
-        duration: const Duration(microseconds: 1600), curve: Curves.ease);
-
+    // selectedProductScrollController.animateTo(1.0,
+    //     duration: const Duration(microseconds: 1600), curve: Curves.ease);
+        update();
     return data;
   }
 
