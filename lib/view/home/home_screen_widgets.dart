@@ -31,7 +31,7 @@ class HomeScreenWidgets {
           padding: 25.pr,
           child: InkWell(
             onTap: () {
-              CommonUtils.toCheckInternet(context: context, action: (){
+              CommonUtils.toCheckInternet(action: (){
                 Get.toNamed(AppRoutes.notification);
               });
             },

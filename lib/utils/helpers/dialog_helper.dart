@@ -68,30 +68,31 @@ abstract class DialogHelper {
                   padding: 8.pb,
                   textAlign: TextAlign.center,
                 ),
-                16.shb,
                 AppText(
                   message,
                   fontSize: textFont ?? 18,
                   maxLines: 6,
                   textAlign: TextAlign.center,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
-                32.shb,
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 5,
-                    fixedSize: const Size(180, 35),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    backgroundColor: AppColors.primary,
-                  ),
-                  onPressed: onTap,
-                  child: const AppText(
-                    'OK',
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 5,
+                        // fixedSize: const Size(, 35),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        backgroundColor: dialogueThemeExtention.buttonColor,
+                      ),
+                      onPressed: onTap,
+                      child: const AppText(
+                        "Ok",
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
+                      )),
+                )
               ],
             ),
           ),

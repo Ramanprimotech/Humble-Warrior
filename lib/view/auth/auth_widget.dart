@@ -10,7 +10,7 @@ class AuthWidget {
     final AccountOptionTheme accountOptionTheme =
         Theme.of(Get.context!).extension<AccountOptionTheme>()!;
     return InkWell(
-      onTap: () => CommonUtils.toCheckInternet(context: context,action: () async {
+      onTap: () => CommonUtils.toCheckInternet(action: () async {
         onTap();
       }),
       child: Container(
