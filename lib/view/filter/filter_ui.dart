@@ -606,7 +606,7 @@ class FilterScreen extends StatelessWidget {
                               builder: (controller) {
                                 return AppText(!_filterController.record.isNotEmpty
                                     ? "Select a category to continue..."
-                                    : "Tap to search to continue");
+                                    : "Tap to search to continue...");
                               })
                           // AppText(
                           //   !_filterController.selevtedVisibility.value
