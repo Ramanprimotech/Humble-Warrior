@@ -328,7 +328,9 @@ class FilterScreen extends StatelessWidget {
                                 _filterController.unSelectedList();
                                 _filterController.showCategories(context);
                                 _filterController.searchFromStart();
+                                _filterController.update();
                               });
+                              _filterController.update();
                             },
                             child: Container(
                                 width: 150,

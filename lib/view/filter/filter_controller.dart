@@ -160,6 +160,7 @@ class FilterController extends GetxController {
     Iterable<ProductCategoryItem> unselectedData =
         productCategory.where((element) {
       bool isIt = !containItem(element);
+      update();
       return isIt;
     });
     data.addAll(unselectedData);
