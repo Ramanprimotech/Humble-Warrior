@@ -50,7 +50,7 @@ class StaticPagesScreen extends StatelessWidget {
                 }
                 if (snapshot.hasError) {
                   return CommonWidgets.errorAPI(
-                      errorText: "${snapshot.error}",
+                      errorText: somethingWentWrongTxt.toString(),
                       context: context,
                       onPress: () {
                         Get.back();
@@ -73,7 +73,7 @@ class StaticPagesScreen extends StatelessWidget {
                     : Expanded(
                         child: Center(
                             child: CommonWidgets.errorAPI(
-                                errorText: "${snapshot.error}",
+                                errorText: somethingWentWrongTxt.toString(),
                                 context: context,
                                 onPress: () {
                                   Get.back();
