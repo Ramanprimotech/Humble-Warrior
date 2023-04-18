@@ -165,8 +165,8 @@ class FilterController extends GetxController {
     });
     data.addAll(unselectedData);
     unSelectedRecords.value = data;
-    // selectedProductScrollController.animateTo(1.0,
-    //     duration: const Duration(microseconds: 1600), curve: Curves.ease);
+    selectedProductScrollController.animateTo(0,
+        duration: const Duration(microseconds: 1600), curve: Curves.ease);
         update();
     return data;
   }
