@@ -24,7 +24,7 @@ class BottomNavigationController extends GetxController {
   String? user;
 
   void onItemTap(int? index) async {
-    CommonUtils.toCheckInternet(action: () async {
+    CommonUtils.toCheckInternet(context: context,action: () async {
       if (index != 2 && index != 3) {
         selectedIndex = index!;
         if (index == 1) {
