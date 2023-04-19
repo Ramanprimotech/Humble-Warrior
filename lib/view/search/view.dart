@@ -98,15 +98,15 @@ class _SearchViewState extends State<SearchView> {
                         timer!.cancel();
                       }
 
-                      timer = Timer(const Duration(seconds: 2), () {
+                      timer = Timer(const Duration(seconds: 1), () {
                         if (value.length >= 3) {
                           // hiveService.recentFavourite(
                           //     item: RecentSearch(
                           //         productSearched:
                           //             filterController.controller.text));
-                          RecentSearch(
-                              productSearched:
-                                  filterController.controller.text);
+                          // RecentSearch(
+                          //     productSearched:
+                          //         filterController.controller.text);
                           filterController.searchFromStart();
                           setState(() {});
                         }
@@ -116,6 +116,9 @@ class _SearchViewState extends State<SearchView> {
                       // if (timer != null) {
                       //   timer!.cancel();
                       // }
+                      if(timer!=null) {
+                        timer!.cancel();
+                      }
                       focusNode.unfocus();
                       if (value.isNotEmpty) {
                         hiveService.recentFavourite(
@@ -338,6 +341,10 @@ class _SearchViewState extends State<SearchView> {
                         return index != filterController.searchList.length
                             ? GestureDetector(
                                 onTap: () {
+                                  hiveService.recentFavourite(
+                                      item: RecentSearch(
+                                          productSearched:
+                                          filterController.controller.text));
                                   // hiveService.recentFavourite(
                                   //     item: RecentSearch(
                                   //         productSearched:

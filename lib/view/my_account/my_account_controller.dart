@@ -14,6 +14,7 @@ class MyAccountController extends GetxController {
   String userImg = "";
   late BuildContext context;
   ThemeController themeController = Get.find();
+  BottomNavigationController controller = Get.find();
   final StreamController<bool> _verificationNotifier =
       StreamController<bool>.broadcast();
 
@@ -65,7 +66,6 @@ class MyAccountController extends GetxController {
   }
 
   Future<void> logout() async {
-    BottomNavigationController controller = Get.find();
     await FirebaseAuth.instance.signOut().then((value) async {
       await SharePreferenceData.clear();
       isLoggedIn = false;
@@ -76,6 +76,9 @@ class MyAccountController extends GetxController {
   }
 
   loginPage() {
+    isLoggedIn = false;
+    controller.selectedIndex = 0;
+    controller.update();
     Get.offAllNamed(AppRoutes.loginPage);
   }
 
