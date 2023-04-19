@@ -91,7 +91,6 @@ class FilterController extends GetxController {
       if (value.totalRecords != null) {
         searchsTotalDeals.value = int.parse(value.totalRecords!);
       }
-      searchsTotalDeals.log();
       searchsBool.value = false;
       update();
     });
@@ -174,7 +173,7 @@ class FilterController extends GetxController {
   @override
   void onInit() {
     scrollControllerListener();
-    searchsAPI();
+    // searchsAPI();
     super.onInit();
   }
 

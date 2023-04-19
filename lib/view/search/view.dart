@@ -1,7 +1,5 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/view/filter/filter_controller.dart';
-import 'package:humble_warrior/view/search/api_services.dart';
-import 'package:humble_warrior/view/search/model.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
@@ -85,7 +83,7 @@ class _SearchViewState extends State<SearchView> {
                     onChanged: (value) {
                       if (value.isEmpty &&
                           filterController.controller.text == "") {
-                        showCross.value = false;
+                        showCross.value = true;
                       } else {
                         showCross.value = true;
                       }
@@ -116,16 +114,15 @@ class _SearchViewState extends State<SearchView> {
                       // if (timer != null) {
                       //   timer!.cancel();
                       // }
-                      if(timer!=null) {
-                        timer!.cancel();
-                      }
+
                       focusNode.unfocus();
                       if (value.isNotEmpty) {
                         hiveService.recentFavourite(
                             item: RecentSearch(
                                 productSearched:
                                     filterController.controller.text));
-                        filterController.searchFromStart();
+                        // filterController.searchFromStart();
+                        focusNode.unfocus();
                         setState(() {});
                       }
                     },

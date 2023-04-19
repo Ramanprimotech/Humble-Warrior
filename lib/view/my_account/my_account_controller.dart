@@ -79,6 +79,7 @@ class MyAccountController extends GetxController {
     isLoggedIn = false;
     controller.selectedIndex = 0;
     controller.update();
+    controller.selectedIndex.toString().log();
     Get.offAllNamed(AppRoutes.loginPage);
   }
 
@@ -86,7 +87,7 @@ class MyAccountController extends GetxController {
   void onInit() async {
     checkDark.value = themeController.themeMode == ThemeMode.dark;
     await getData();
-    checkNotification.value = await SharePreferenceData.getBoolValuesSF("notificationCheck");
+    checkNotification.value = await SharePreferenceData.getBoolValuesSF("notificationCheck")??true;
     super.onInit();
   }
 
