@@ -275,9 +275,13 @@ abstract class DialogHelper {
             color: dialogueThemeExtention.textColor,
             textAlign: TextAlign.center,
             fontSize: 20),
-        content: const AppText(
-          AppStrings.logoutSubText,
+        content:  RichText(
           textAlign: TextAlign.center,
+          text: TextSpan(
+              children: [
+          TextSpan(text: "${AppStrings.logoutSubText} ",style: TextStyle(fontSize: 16, color: Theme.of(context).textTheme.displaySmall!.color!)),
+          TextSpan(text: AppStrings.logoutText,style: TextStyle(fontSize: 16, color: Theme.of(context).textTheme.displaySmall!.color!, fontWeight: FontWeight.bold)),
+        ]),
         ),
         actions: [
           SizedBox(
