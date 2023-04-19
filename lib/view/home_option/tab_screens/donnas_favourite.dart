@@ -6,6 +6,8 @@ class DonnaFavourite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeOptionController controller = Get.find();
+    controller.context = context;
+    FToast().init(context);
     return PaginationWidget(
       api: controller.donnaFavouriteDealsAPI,
       apiBool: controller.donnaFavouriteDealsBool,

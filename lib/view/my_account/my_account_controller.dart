@@ -113,7 +113,7 @@ class MyAccountController extends GetxController {
 
       DialogHelper.showConfirmationDialog(
         context: context,
-        message: "Do you want to Change Or Remove the Passcode",
+        message: confirmPasscodeTxt,
         cancelLabel: "Change",
         actionLabel: "Remove",
         cancelAction: () {

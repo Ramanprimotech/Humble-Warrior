@@ -81,13 +81,19 @@ class _BrandsScreenState extends State<BrandsScreen> {
                       id: Endpoints.allBrands,
                       init: homeScreenController,
                       builder: (controller) {
-                        return FutureWidget<List<BrandDetails>>().builder(
-                            futureWidgets: BrandAPIWidgets(
-                                context: context,
-                                searchText: searchTextController.text),
-                            future: controller.allBrands(),
-                            checkInternet: true,
-                            context: context);
+                        return RefreshIndicator(
+                          onRefresh: (){
+                              controller.update([Endpoints.allBrands]);
+                           return Future.value(true);
+                          },
+                          child: FutureWidget<List<BrandDetails>>().builder(
+                              futureWidgets:  BrandAPIWidgets(
+                                  context: context,
+                                  searchText: searchTextController.text),
+                              future: controller.allBrands(),
+                              checkInternet: true,
+                              context: context),
+                        );
                       }),
                 ),
               ),

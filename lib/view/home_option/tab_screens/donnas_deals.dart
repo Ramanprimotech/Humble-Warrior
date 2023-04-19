@@ -7,7 +7,8 @@ class DonnaDailyDeals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeOptionController controller = Get.find();
-
+    controller.context = context;
+FToast().init(context);
     return PaginationWidget(
       length: controller.donnaDealListLength,
       apiBool: controller.donnaDealsBool,
