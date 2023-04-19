@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:humble_warrior/hw.dart';
 
 
@@ -27,7 +29,37 @@ class NotificationManager {
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse response) {
-        Get.toNamed(AppRoutes.notification);
+      try {
+        "Noti ${response.input}".log();
+        "Noti ${response.payload is Map}".log();
+        Map data = jsonDecode(response.payload!);
+        "adsaddasdadsdsa".log();
+        if (data["url_to_redirect"] != "") {
+          "NOti kl${data["url_to_redirect"]}".log();
+
+          Future.delayed(Duration(seconds: 0),()async{
+
+         if (data["post_id"] != "0") {
+          "Noti Id ${data["post_id"]}".log();
+          ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
+              id: int.parse(data["post_id"]!));
+          Get.toNamed(AppRoutes.frontPageProductDetail,
+              arguments: [productDetailsResponse]);
+        }  else  if (!await launchUrl(
+             Uri.parse(data["url_to_redirect"]),
+             mode: LaunchMode.externalApplication)) {
+           Get.toNamed(AppRoutes.notification);
+         }
+          });
+        }
+         else {
+          Get.toNamed(AppRoutes.notification);
+        }
+      }catch(e, st){
+        print(st);
+      }
+
+
       },
     );
   }
@@ -40,13 +72,14 @@ class NotificationManager {
 
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
-      debugPrint("Message Received ${notification!.title}");
+
+message.data.toString().log();
 
       if (android != null) {
         flutterLocalNotificationsPlugin.show(
             notification.hashCode,
-            notification.title,
-            notification.body,
+            notification!.title??"",
+            notification!.body??"",
             NotificationDetails(
               android: AndroidNotificationDetails(
                 channel.id,
@@ -55,13 +88,20 @@ class NotificationManager {
 
                 // other properties...
               ),
-            ));
+            ),
+           payload : jsonEncode( message.data),
+        );
       }
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
+
       debugPrint("notification event ---- $event");
+      "Message Received ${event.data}".log();
+
+
       Get.toNamed(AppRoutes.notification);
+
     });
   }
 }
