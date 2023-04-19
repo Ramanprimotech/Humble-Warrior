@@ -46,10 +46,9 @@ class CatCard extends StatelessWidget {
                           color:  AppColors.primary,
                           border: Border.all(width: 1, color:Colors.white),
                           shape: BoxShape.circle),
-                      child: Icon(
+                      child: const Icon(
                         Icons.check,
                         color: Colors.white, size: 20,
-                        // AppColors.appGreen,
                       ),
                     ),
                   ),
