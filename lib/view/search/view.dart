@@ -257,9 +257,13 @@ class _SearchViewState extends State<SearchView> {
                                 filterController.controller.text =
                                     data[index].productSearched!;
                                 showCross.value = true;
-                                RecentSearch(
-                                    productSearched:
-                                        filterController.controller.text);
+                                hiveService.recentFavourite(
+                                    item: RecentSearch(
+                                        productSearched:
+                                        filterController.controller.text));
+                                // RecentSearch(
+                                //     productSearched:
+                                //         filterController.controller.text);
                                 filterController.searchFromStart();
                                 focusNode.unfocus();
                                 setState(() {});
