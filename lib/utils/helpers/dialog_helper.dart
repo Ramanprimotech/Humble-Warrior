@@ -261,53 +261,70 @@ abstract class DialogHelper {
     DialogueThemeExtention dialogueThemeExtention =
         Theme.of(context).extension<DialogueThemeExtention>()!;
     showDialog(
-      barrierDismissible: false,
+      barrierDismissible: true,
       context: Get.context!,
       builder: (context) => AlertDialog(
         surfaceTintColor: Colors.transparent,
         contentPadding:
-            const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            const EdgeInsets.symmetric(vertical: 20, horizontal: 0),
         alignment: Alignment.center,
         actionsAlignment: MainAxisAlignment.spaceAround,
         backgroundColor: dialogueThemeExtention.backGroundColor,
         elevation: 5,
-        title: AppText("Are you Sure?",
+        title: AppText(AppStrings.logoutTitleText,
             color: dialogueThemeExtention.textColor,
             textAlign: TextAlign.center,
             fontSize: 20),
+        content: const AppText(
+          AppStrings.logoutSubText,
+          textAlign: TextAlign.center,
+        ),
         actions: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              elevation: 5,
-              fixedSize: const Size(90, 35),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              backgroundColor: AppColors.primary,
-            ),
-            onPressed: () {
-              onTap();
-            },
-            child: const AppText('OK',
-                color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          OutlinedButton(
-            style: ButtonStyle(
-              elevation: MaterialStateProperty.resolveWith((states) => 5),
-              shape: MaterialStateProperty.resolveWith((states) =>
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10))),
-              // overlayColor: MaterialStateProperty.all(AppColors.primary),
-              side: MaterialStateProperty.resolveWith(
-                (states) => BorderSide(
-                  color: AppColors.primary,
-                  width: 2,
+          SizedBox(
+            height: 50,
+            child: Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                      elevation:
+                      MaterialStateProperty.resolveWith((states) => 5),
+                      shape: MaterialStateProperty.resolveWith((states) =>
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                      // overlayColor: MaterialStateProperty.all(AppColors.primary),
+                      side: MaterialStateProperty.resolveWith(
+                            (states) => BorderSide(
+                          color: AppColors.primary,
+                          width: 2,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      onTap();
+                    },
+                    child: const AppText('Log out', fontWeight: FontWeight.w600),
+                  ),
                 ),
-              ),
+                16.swb,
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 5,
+                      // fixedSize: const Size(90, 35),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      backgroundColor: AppColors.primary,
+                    ),
+                    onPressed: () {
+                      Get.back();
+                    },
+                    child: const AppText('Cancel',
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
             ),
-            onPressed: () {
-              Get.back();
-            },
-            child: const AppText('Cancel', fontWeight: FontWeight.bold),
           )
         ],
       ),
