@@ -54,9 +54,8 @@ class _SearchViewState extends State<SearchView> {
         centerTitle: false,
         title: Card(
           surfaceTintColor: Colors.transparent,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
           child: Container(
             height: 45,
             width: double.infinity,
@@ -87,34 +86,22 @@ class _SearchViewState extends State<SearchView> {
                       } else {
                         showCross.value = true;
                       }
-                      // if (value.length >= 3) {
-                      //   hiveService.addToRecentList(
-                      //       RecentSearch(productSearched: controller.text));
-                      //   setState(() {});
-                      // }
                       if (timer != null) {
                         timer!.cancel();
                       }
 
                       timer = Timer(const Duration(seconds: 1), () {
                         if (value.length >= 3) {
-                          // hiveService.recentFavourite(
-                          //     item: RecentSearch(
-                          //         productSearched:
-                          //             filterController.controller.text));
-                          // RecentSearch(
-                          //     productSearched:
-                          //         filterController.controller.text);
+                          /*hiveService.recentFavourite(
+                              item: RecentSearch(
+                                  productSearched:
+                                      filterController.controller.text));*/
                           filterController.searchFromStart();
                           setState(() {});
                         }
                       });
                     },
                     onFieldSubmitted: (value) {
-                      // if (timer != null) {
-                      //   timer!.cancel();
-                      // }
-
                       focusNode.unfocus();
                       if (value.isNotEmpty) {
                         hiveService.recentFavourite(
@@ -127,19 +114,17 @@ class _SearchViewState extends State<SearchView> {
                       }
                     },
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(vertical: 5),
+                      contentPadding: 5.pv,
                       hintText: searchTxt,
                       hintStyle: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15,
-                          color:
-                              Theme.of(context).textTheme.displayLarge!.color!),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                        color: Theme.of(context).textTheme.displayLarge!.color!,
+                      ),
                       focusedBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide.none,
-                      ),
+                          borderSide: BorderSide.none),
                       enabledBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide.none,
-                      ),
+                          borderSide: BorderSide.none),
                       suffixIcon: Obx(
                         () => Visibility(
                           visible: showCross.value,
@@ -229,74 +214,64 @@ class _SearchViewState extends State<SearchView> {
                   List<RecentSearch> data =
                       dataMap.values.toList().reversed.toList();
                   var dataKeys = dataMap.keys.toList().reversed.toList();
+
+                  /// No Recent text
                   if (box.isEmpty) {
                     return const Center(
-                      child: AppText(
-                        searchDealsTxt,
-                        fontSize: 18,
-                      ),
+                      child: AppText(searchDealsTxt, fontSize: 18),
                     );
                   }
+
+                  /// RecentSearch List View
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const AppText(
+                      AppText(
                         recentTxt,
                         fontWeight: FontWeight.w600,
                         fontSize: 18,
-                      ).paddingSymmetric(horizontal: 20, vertical: 20),
+                        padding: 20.pa,
+                      ),
                       Expanded(
-                        child: ListView.separated(
+                        child: ListView.builder(
                           itemCount: box.length > 8 ? 8 : box.length,
                           itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                filterController.controller.text =
-                                    data[index].productSearched!;
-                                showCross.value = true;
-                                hiveService.recentFavourite(
-                                    item: RecentSearch(
-                                        productSearched:
-                                        filterController.controller.text));
-                                // RecentSearch(
-                                //     productSearched:
-                                //         filterController.controller.text);
-                                filterController.searchFromStart();
-                                focusNode.unfocus();
-                                setState(() {});
-                              },
-                              child: Container(
-                                height: 40,
-                                padding: 10.ph,
-                                margin: 20.ph,
-                                decoration:
-                                    CustomBoxDecorations(context: context)
-                                        .shadow(),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Icon(Icons.history),
-                                    AppText("${data[index].productSearched}")
-                                        .paddingOnly(left: 10),
-                                    const Spacer(),
-                                    InkWell(
-                                      child: const Icon(
-                                        Icons.cancel_outlined,
-                                      ),
-                                      onTap: () {
-                                        hiveService.deleteRecentItemByKey(
-                                            dataKeys[index]);
-                                      },
-                                    ),
-                                  ],
+                            return Card(
+                              elevation: 4,
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
+                              child: ListTile(
+                                contentPadding: 16.pl,
+                                minLeadingWidth: 10,
+                                leading: Icon(
+                                  Icons.history,
+                                  color: AppColors.primary,
                                 ),
+                                title:
+                                    AppText("${data[index].productSearched}"),
+                                trailing: IconButton(
+                                  onPressed: () {
+                                    hiveService
+                                        .deleteRecentItemByKey(dataKeys[index]);
+                                  },
+                                  icon: Icon(
+                                    Icons.cancel_outlined,
+                                    color: AppColors.primary,
+                                  ),
+                                ),
+                                onTap: () {
+                                  filterController.controller.text =
+                                      data[index].productSearched!;
+                                  showCross.value = true;
+                                  hiveService.recentFavourite(
+                                      item: RecentSearch(
+                                          productSearched: filterController
+                                              .controller.text));
+                                  filterController.searchFromStart();
+                                  focusNode.unfocus();
+                                  setState(() {});
+                                },
                               ),
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return const SizedBox(
-                              height: 20,
                             );
                           },
                         ),
@@ -304,6 +279,8 @@ class _SearchViewState extends State<SearchView> {
                     ],
                   );
                 })
+
+            /// Search Result View
             : PaginationWidget(
                 length: filterController.searchListLength,
                 apiBool: filterController.searchsBool,
@@ -320,14 +297,12 @@ class _SearchViewState extends State<SearchView> {
                     }
                     if (filterController.searchList.isEmpty &&
                         filterController.searchsBool.value == false) {
-                      return CommonWidgets.noData(
-                          update: filterController.update,
-                          context: context,
-                          onTap: () {
-                            filterController.searchsBool.value = true;
-                            filterController.update();
-                            filterController.searchsAPI();
-                          });
+                      return const Center(
+                          child: AppText(
+                        "Sorry, we could not find any results matching.",
+                        textAlign: TextAlign.center,
+                        color: AppColors.black,
+                      ));
                     }
                     return ListView.separated(
                       padding: const EdgeInsets.only(bottom: 10, top: 6),
@@ -344,13 +319,8 @@ class _SearchViewState extends State<SearchView> {
                                 onTap: () {
                                   hiveService.recentFavourite(
                                       item: RecentSearch(
-                                          productSearched:
-                                          filterController.controller.text));
-                                  // hiveService.recentFavourite(
-                                  //     item: RecentSearch(
-                                  //         productSearched:
-                                  //             filterController.controller.text));
-
+                                          productSearched: filterController
+                                              .controller.text));
                                   Get.toNamed(AppRoutes.dailyDealProductDetail,
                                       arguments: [
                                         ProductDetailsResponse(id: details.id)
@@ -430,17 +400,6 @@ class _SearchViewState extends State<SearchView> {
                                   ),
                                 ),
                               )
-                            // CardView(
-                            //         index: index,
-                            //         details: details,
-                            //         onTap: () {
-                            //           Get.toNamed(AppRoutes.dailyDealProductDetail,
-                            //               arguments: [details]);
-                            //         },
-                            //         imgUrl: details.url!,
-                            //         cardText: details.itemName!,
-                            //       )
-                            // searchsCard(details, index, context, dailyDeals: true)
                             : Obx(
                                 () => Visibility(
                                   visible: filterController.searchsBool.value,
@@ -452,9 +411,7 @@ class _SearchViewState extends State<SearchView> {
                               );
                       },
                       separatorBuilder: (BuildContext context, int index) {
-                        return const SizedBox(
-                          height: 18,
-                        );
+                        return const SizedBox(height: 18);
                       },
                     );
                   },
