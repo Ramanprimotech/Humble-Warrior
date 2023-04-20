@@ -10,8 +10,31 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 FlutterLocalNotificationsPlugin();
 
 bool isLoggedIn = false;
-Future<void> _messageHandler(RemoteMessage message) async {
-  debugPrint('background message ${message.notification!.body}');
+Future<void> _messageHandler(RemoteMessage event) async {
+  debugPrint("notification event ---- $event");
+  "Message Received ${event.data}".log();
+  Map data = event.data;
+  try {
+    if (data["url_to_redirect"] != "") {
+      Future.delayed(Duration(seconds: 0),()async{
+        if (data["post_id"] != "0") {
+          ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
+              id: int.parse(data["post_id"]!));
+          Get.toNamed(AppRoutes.frontPageProductDetail,
+              arguments: [productDetailsResponse]);
+        }  else  if (!await launchUrl(
+            Uri.parse(data["url_to_redirect"]),
+            mode: LaunchMode.externalApplication)) {
+          throw Exception('Could not launch');
+        }
+      });
+    }
+    else {
+      Get.toNamed(AppRoutes.notification);
+    }
+  }catch(e, st){
+    print(st);
+  }
 }
 
 Future main() async {

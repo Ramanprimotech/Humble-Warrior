@@ -69,6 +69,7 @@ dependencies:
   share_plus: ^6.3.0
   image_picker: ^0.8.6+1
   flutter_keyboard_visibility: ^5.4.0
+  path_provider: ^2.0.14
   intl:
   hive: ^2.2.3
   hive_flutter: 1.1.0
