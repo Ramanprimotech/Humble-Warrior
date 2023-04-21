@@ -55,7 +55,7 @@ class SearchBar extends StatelessWidget {
                   AppText(searchTxt,
                       fontWeight: FontWeight.w400, fontSize: 15, padding: 4.pl),
                   const Spacer(),
-                  20.swb,
+                  16.swb,
                 ],
               ),
         ),
