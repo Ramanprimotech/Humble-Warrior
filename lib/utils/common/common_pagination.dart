@@ -22,30 +22,42 @@ class PaginationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Timer? _timer;
     return NotificationListener<ScrollNotification>(
       onNotification: (ScrollNotification scrollInfo) {
         if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
-          if (length.value < totalRecords.value) {
-            if (apiBool.value == false) {
-              apiBool.value = true;
-              update();
-              Future.delayed(Duration(milliseconds: 10), () {
-                scrollController.animateTo(
-                  scrollController.position.maxScrollExtent,
-                  duration: Duration(milliseconds: 500),
-                  curve: Curves.fastOutSlowIn,
-                );
-              });
-
-              api();
-            }
+          if (_timer != null) {
+            _timer!.cancel();
           }
+          _timer = Timer(const Duration(milliseconds: 1000), () {
+            CommonUtils.toCheckInternet(action: () {
+              if (length.value < totalRecords.value) {
+                if (apiBool.value == false) {
+                  apiBool.value = true;
+                  update();
+                  // Future.delayed(const Duration(milliseconds: 10), () {
+                  //   scrollController.animateTo(
+                  //     scrollController.position.maxScrollExtent,
+                  //     duration: const Duration(milliseconds: 100),
+                  //     curve: Curves.fastOutSlowIn,
+                  //   );
+                  // });
+
+                  api();
+                }
+              }
+            });
+          });
         }
         return true;
       },
       child: RefreshIndicator(
           onRefresh: () async {
-            await api(refresh: true).then((value) => Future.value(0));
+            Future.delayed(Duration(seconds: 1), () async {
+              CommonUtils.toCheckInternet(action: () async {
+                await api(refresh: true).then((value) => Future.value(0));
+              });
+            });
           },
           child: child),
     );

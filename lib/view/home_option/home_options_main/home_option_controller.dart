@@ -67,7 +67,7 @@ class HomeOptionController extends GetxController
     if (refresh!) {
       donnaDealsPage = 1;
       // donnaDealsBool.value = true;
-      donnaDealList.clear();
+
       // update();
     }
     SortItem item = sort();
@@ -82,11 +82,14 @@ class HomeOptionController extends GetxController
       if (value.data == null) {
         DialogHelper.showToast(context, noMoreDealsTxt);
       } else {
+        if(refresh!) {
+          donnaDealList.clear();
+        }
         donnaDealsPage += 1;
         donnaDealList.addAll(value.data!);
         donnaDealListLength.value = donnaDealList.length;
         if (refresh) {
-          DialogHelper.showToast(context, dealsRefreshTxt);
+          // DialogHelper.showToast(context, dealsRefreshTxt);
         }
       }
       if (value.totalRecords != null) {
@@ -100,7 +103,8 @@ class HomeOptionController extends GetxController
   Future frontPageDealsAPI({bool? refresh = false}) async {
     if (refresh!) {
       frontPageDealsPage = 1;
-      frontPageDealList.clear();
+
+      update();
     }
     SortItem item = sort();
     PaginationModel paginationModel = PaginationModel(
@@ -113,11 +117,13 @@ class HomeOptionController extends GetxController
       if (value.data == null) {
         DialogHelper.showToast(context, noMoreDealsTxt);
       } else {
-        frontPageDealsPage += 1;
+        if(refresh!) {
+          frontPageDealList.clear();
+        }frontPageDealsPage += 1;
         frontPageDealList.addAll(value.data!);
         frontPageDealListLength.value = frontPageDealList.length;
         if (refresh) {
-          DialogHelper.showToast(context, dealsRefreshTxt);
+          // DialogHelper.showToast(context, dealsRefreshTxt);
         }
       }
 
@@ -132,7 +138,7 @@ class HomeOptionController extends GetxController
   Future donnaFavouriteDealsAPI({bool? refresh = false}) async {
     if (refresh!) {
       donnaFavouriteDealsPage = 1;
-      donnaFavouriteDealList.clear();
+
     }
     SortItem item = sort();
     PaginationModel paginationModel = PaginationModel(
@@ -145,11 +151,14 @@ class HomeOptionController extends GetxController
       if (value.data == null) {
         DialogHelper.showToast(context, noMoreDealsTxt);
       } else {
+        if(refresh!) {
+          donnaFavouriteDealList.clear();
+        }
         donnaFavouriteDealsPage += 1;
         donnaFavouriteDealList.addAll(value.data!);
         donnaFavouriteDealListLength.value = donnaFavouriteDealList.length;
         if (refresh) {
-          DialogHelper.showToast(context, dealsRefreshTxt);
+          // DialogHelper.showToast(context, dealsRefreshTxt);
         }
       }
       if (value.totalRecords != null) {
