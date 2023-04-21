@@ -9,7 +9,6 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
-  FocusNode focusNode = FocusNode();
   String postType = Get.arguments[0];
   String catId = Get.arguments[1];
   String name = Get.arguments[2];
@@ -24,7 +23,6 @@ class _SearchViewState extends State<SearchView> {
 
   @override
   void initState() {
-    focusNode.requestFocus();
     super.initState();
   }
 
@@ -73,11 +71,18 @@ class _SearchViewState extends State<SearchView> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 8.swb,
-                const Icon(Icons.search, size: 20),
+                Obx(() =>
+                // filterController.searchIconVisibility.value
+                //     ?
+                Icon(Icons.search, size: filterController.searchIconVisibility.value?20:15,color: filterController.searchIconVisibility.value?null:Colors.transparent,)
+                    // : SizedBox(
+                    //     width: 20,
+                    //   )
+                ),
                 4.swb,
                 Expanded(
                   child: TextFormField(
-                    focusNode: focusNode,
+                    focusNode: filterController.focusNode,
                     controller: filterController.controller,
                     onChanged: (value) {
                       if (value.isEmpty &&
@@ -102,14 +107,14 @@ class _SearchViewState extends State<SearchView> {
                       });
                     },
                     onFieldSubmitted: (value) {
-                      focusNode.unfocus();
+                      filterController.focusNode.unfocus();
                       if (value.isNotEmpty) {
                         hiveService.recentFavourite(
                             item: RecentSearch(
                                 productSearched:
                                     filterController.controller.text));
                         // filterController.searchFromStart();
-                        focusNode.unfocus();
+                        filterController.focusNode.unfocus();
                         setState(() {});
                       }
                     },
@@ -268,7 +273,7 @@ class _SearchViewState extends State<SearchView> {
                                           productSearched: filterController
                                               .controller.text));
                                   filterController.searchFromStart();
-                                  focusNode.unfocus();
+                                  filterController.focusNode.unfocus();
                                   setState(() {});
                                 },
                               ),

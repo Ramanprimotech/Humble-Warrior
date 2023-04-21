@@ -1,14 +1,12 @@
-import 'dart:convert';
-
 import 'package:humble_warrior/view/search/api_services.dart';
-import 'package:humble_warrior/view/search/model.dart';
-
 import '../../hw.dart';
 
 class FilterController extends GetxController {
   RxList<ProductCategoryItem> record = <ProductCategoryItem>[].obs;
   RxList<ProductCategoryItem> unSelectedRecords = <ProductCategoryItem>[].obs;
   TextEditingController controller = TextEditingController();
+  RxBool searchIconVisibility = true.obs;
+  FocusNode focusNode = FocusNode();
   String postType = "";
   late BuildContext context;
   RxBool selevtedVisibility = false.obs;
@@ -48,8 +46,9 @@ class FilterController extends GetxController {
     });
 
     selectedProductScrollController.addListener(() {
-      listSelectedForward.value = selectedProductScrollController.position.maxScrollExtent - 40 >
-          selectedProductScrollController.offset;
+      listSelectedForward.value =
+          selectedProductScrollController.position.maxScrollExtent - 40 >
+              selectedProductScrollController.offset;
       listSelectedBack.value = selectedProductScrollController.offset !=
           selectedProductScrollController.initialScrollOffset;
     });
@@ -166,13 +165,21 @@ class FilterController extends GetxController {
     unSelectedRecords.value = data;
     selectedProductScrollController.animateTo(0,
         duration: const Duration(microseconds: 1600), curve: Curves.ease);
-        update();
+    update();
     return data;
   }
 
   @override
   void onInit() {
     scrollControllerListener();
+    focusNode.requestFocus();
+    focusNode.addListener(() {
+      if (focusNode.hasFocus) {
+        searchIconVisibility.value = false;
+      } else {
+        searchIconVisibility.value = true;
+      }
+    });
     // searchsAPI();
     super.onInit();
   }
@@ -214,6 +221,7 @@ class FilterController extends GetxController {
 
   @override
   void onClose() {
+    focusNode.dispose();
     controller.dispose();
     productScrollController.dispose();
     selectedProductScrollController.dispose();
