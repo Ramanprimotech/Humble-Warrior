@@ -10,7 +10,7 @@ class HomeScreenWidgets {
     required this.context,
   });
 
-  final double productHeight = 65;
+  final double productHeight = 60;
   final double brandLoveHeight = 39;
   final double brandHeight = 63;
   final double productArrowIconPadding = 8;
@@ -93,55 +93,6 @@ class HomeScreenWidgets {
             ),
           ),
         )
-
-        /// Do not remove this code, saved for future use
-        /*Padding(
-          padding: 15.pb,
-          child: Stack(
-            alignment: Alignment.topRight,
-            children: [
-              Container(
-                  height: 45,
-                  alignment: Alignment.bottomLeft,
-                  width: 50,
-                  child: Image.asset(
-                    ImagePathAssets.bellIcon,
-                    height: 28,
-                    fit: BoxFit.fitHeight,
-                    color: imageIconTheme.backGroundColor,
-                  )),
-              Visibility(
-                visible: badge>0,
-                child: Positioned(
-                  left: 15,
-                  bottom: 15,
-                  child: Container(
-                    padding: 2.pa,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Container(
-                      height: 20,
-                      width: 20,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: imageIconTheme.backGroundColor,
-                        shape: BoxShape.circle,
-                      ),
-                      child: AppText(badge>99?"99+":"$badge",
-                          fontWeight: FontWeight.w600,
-                          fontSize: badge>99?9:10,
-                          color: imageIconTheme.backGroundColor == Colors.black
-                              ? Colors.white
-                              : Colors.black),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        )*/
       ],
     );
   }

@@ -40,20 +40,31 @@ class _BrandsScreenState extends State<BrandsScreen> {
               ),
               child: Row(
                 children: [
+                  Image.asset(
+                    !isDark
+                        ? ImagePathAssets.hwLogoUnnamed
+                        : ImagePathAssets.hwLogoUnnamedDark,
+                    height: 40,
+                    width: 40,
+                  ),
                   4.swb,
                   const Icon(Icons.search, size: 20),
                   4.swb,
-                  SizedBox(
-                    width: Get.width * .6,
+                  Expanded(
                     child: TextFormField(
                       onChanged: (value) {
                         setState(() {});
                       },
                       controller: searchTextController,
-                      decoration: const InputDecoration.collapsed(
+                      decoration:  InputDecoration.collapsed(
                         hintText: searchTxt,
-                        hintStyle: TextStyle(fontWeight: FontWeight.w400,color: Colors.black, fontSize: 16)
+                        hintStyle: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          color: Theme.of(context).textTheme.displayLarge!.color!,
+                        )
                       ),
+
                     ),
                   ),
                   20.swb,

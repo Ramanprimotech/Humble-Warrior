@@ -21,7 +21,8 @@ class CatCard extends StatelessWidget {
       onTap: onTap ?? () {},
       child: Container(
         width: 90,
-        padding: 30.pl,
+        // color: Colors.pink,
+        padding: 4.pl,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -29,7 +30,7 @@ class CatCard extends StatelessWidget {
               alignment: Alignment.topRight,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 8),
+                  padding: const EdgeInsets.only(top: 4),
                   child: SizedBox(
                     height: 40,
                     child: Image.network(
@@ -62,7 +63,7 @@ class CatCard extends StatelessWidget {
             ),
             8.shb,
             AppText(title ?? "",
-                fontSize: 14,
+                fontSize: 12,
                 maxLines: 2,
                 fontWeight: FontWeight.w600,
                 textAlign: TextAlign.center),

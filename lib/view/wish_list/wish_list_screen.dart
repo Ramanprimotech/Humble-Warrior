@@ -33,7 +33,7 @@ class WishList extends StatelessWidget {
                               () => controller.data.value.isEmpty
                                   ? const Center(
                                       child: AppText(
-                                        "Your wishlist is empty",
+                                        "Your wishlist is empty!",
                                         fontSize: 20,
                                       ),
                                     )

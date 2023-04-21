@@ -54,7 +54,7 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
     Theme.of(context).extension<ImageIconTheme>()!;
     return Column(
       children: [
-        SizedBox(),
+        const SizedBox(),
         Container(
           height: brandHeight + brandLoveHeight + 10,
           decoration: BoxDecoration(

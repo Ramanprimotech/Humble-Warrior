@@ -23,17 +23,13 @@ class SearchBar extends StatelessWidget {
     bool isDark = themeController.themeMode == ThemeMode.dark;
     return Card(
       surfaceTintColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       child: GestureDetector(
         child: Container(
           height: 45,
           width: double.infinity,
           padding: padding ?? 8.pa,
-          margin:
-              //margin ??
-              0.pa,
+          margin: 0.pa,
           decoration: BoxDecoration(
             border: Border.all(
                 width: 1,
@@ -102,8 +98,8 @@ class FilterIcon extends StatelessWidget {
           ProductCategoryItem items =
               item == null ? ProductCategoryItem() : item!;
           Get.put(FilterController());
-     var data = await Get.toNamed(AppRoutes.filterView);
-     Get.find<FilterController>().resetList();
+          var data = await Get.toNamed(AppRoutes.filterView);
+          Get.find<FilterController>().resetList();
           /*Get.toNamed(AppRoutes.searchView, arguments: [
             postType.isEmptyOrNull ? "" : postType.toString(),
             items.id == null ? "" : items.id.toString(),

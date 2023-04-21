@@ -309,7 +309,7 @@ class FilterScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                10.shb,
+                // 10.shb,
 
                 /// Category Reset Bar
                 // GetBuilder<FilterController>(

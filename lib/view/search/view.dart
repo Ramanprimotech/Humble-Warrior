@@ -72,13 +72,21 @@ class _SearchViewState extends State<SearchView> {
               children: [
                 8.swb,
                 Obx(() =>
-                // filterController.searchIconVisibility.value
-                //     ?
-                Icon(Icons.search, size: filterController.searchIconVisibility.value?20:15,color: filterController.searchIconVisibility.value?null:Colors.transparent,)
+                        // filterController.searchIconVisibility.value
+                        //     ?
+                        Icon(
+                          Icons.search,
+                          size: filterController.searchIconVisibility.value
+                              ? 20
+                              : 15,
+                          color: filterController.searchIconVisibility.value
+                              ? null
+                              : Colors.transparent,
+                        )
                     // : SizedBox(
                     //     width: 20,
                     //   )
-                ),
+                    ),
                 4.swb,
                 Expanded(
                   child: TextFormField(

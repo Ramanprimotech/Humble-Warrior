@@ -41,81 +41,76 @@ class HomePageProductCategoryAPIWidgets
     // record.sort((a, b) => a.id!.compareTo(b.id!));
     const double productArrowIconPadding = 8;
     const double arrowWidth = 40;
-    return Stack(
-      alignment: Alignment.center,
+    return Row(
       children: [
-        Row(
-          children: [
-            Obx(
-              () => Visibility(
-                visible: controller.listBack.value,
-                child: Container(
-                  alignment: Alignment.center,
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  height: brandHeight,
-                  width: arrowWidth,
-                  padding: const EdgeInsets.only(left: productArrowIconPadding),
-                  child: GestureDetector(
-                    onTap: () {
-                      controller.productScrollController.animateTo(
-                          controller.productScrollController.offset - (60 * 3),
-                          duration: const Duration(milliseconds: 150),
-                          curve: Curves.linear);
-                    },
-                    child: AppIcons.backArrrowIos(
-                        iconColor:
-                            Theme.of(context).textTheme.displaySmall!.color!),
-                  ),
-                ),
+        Obx(
+          () => Visibility(
+            visible: controller.listBack.value,
+            child: Container(
+              alignment: Alignment.center,
+              color: Theme.of(context).scaffoldBackgroundColor,
+              height: brandHeight,
+              width: arrowWidth,
+              padding: const EdgeInsets.only(left: productArrowIconPadding),
+              child: GestureDetector(
+                onTap: () {
+                  controller.productScrollController.animateTo(
+                      controller.productScrollController.offset - (60 * 3),
+                      duration: const Duration(milliseconds: 150),
+                      curve: Curves.linear);
+                },
+                child: AppIcons.backArrrowIos(
+                    iconColor:
+                        Theme.of(context).textTheme.displaySmall!.color!),
               ),
             ),
-            Expanded(
-              child: SizedBox(
-                height: productHeight + 35,
-                width: Get.width,
-                child: ListView.builder(
-                  padding: 30.pr,
-                  scrollDirection: Axis.horizontal,
-                  controller: controller.productScrollController,
-                  itemCount: record.length,
-                  itemBuilder: (ctx, index) {
-                    return CatCard(
-                      imageUrl: record[index].categoryImage,
-                      title: record[index].categoryName,
-                      onTap: () {
-                        Get.toNamed(AppRoutes.categoryDetailsList, arguments: [
-                          record[index],
-                        ]);
-                      },
-                    );
-                  },
-                ),
-              ),
-            ),
-            Obx(
-              () => Visibility(
-                visible: controller.listForward.value,
-                child: Container(
-                  alignment: Alignment.center,
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  height: brandHeight,
-                  width: arrowWidth,
-                  child: GestureDetector(
-                    onTap: () {
-                      controller.productScrollController.animateTo(
-                          controller.productScrollController.offset + (60 * 3),
-                          duration: const Duration(milliseconds: 150),
-                          curve: Curves.linear);
-                    },
-                    child: AppIcons.next(
-                        iconColor:
-                            Theme.of(context).textTheme.displaySmall!.color!),
-                  ),
-                ),
-              ),
-            )
-          ],
+          ),
         ),
+        Expanded(
+          child: SizedBox(
+            height: productHeight + 30,
+            width: Get.width,
+            child: ListView.builder(
+              padding: 40.pr,
+              scrollDirection: Axis.horizontal,
+              controller: controller.productScrollController,
+              itemCount: record.length,
+              itemBuilder: (ctx, index) {
+                return CatCard(
+                  imageUrl: record[index].categoryImage,
+                  title: record[index].categoryName,
+                  onTap: () {
+                    Get.toNamed(AppRoutes.categoryDetailsList, arguments: [
+                      record[index],
+                    ]);
+                  },
+                );
+              },
+            ),
+          ),
+        ),
+        Obx(
+          () => Visibility(
+            visible: controller.listForward.value,
+            child: Container(
+              alignment: Alignment.center,
+              color: Theme.of(context).scaffoldBackgroundColor,
+              height: brandHeight,
+              width: arrowWidth,
+              child: GestureDetector(
+                onTap: () {
+                  controller.productScrollController.animateTo(
+                      controller.productScrollController.offset + (60 * 3),
+                      duration: const Duration(milliseconds: 150),
+                      curve: Curves.linear);
+                },
+                child: AppIcons.next(
+                    iconColor:
+                        Theme.of(context).textTheme.displaySmall!.color!),
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
