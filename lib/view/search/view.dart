@@ -83,9 +83,6 @@ class _SearchViewState extends State<SearchView> {
                               ? null
                               : Colors.transparent,
                         )
-                    // : SizedBox(
-                    //     width: 20,
-                    //   )
                     ),
                 4.swb,
                 Expanded(
