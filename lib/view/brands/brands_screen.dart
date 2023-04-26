@@ -9,10 +9,28 @@ class BrandsScreen extends StatefulWidget {
 
 class _BrandsScreenState extends State<BrandsScreen> {
   TextEditingController searchTextController = TextEditingController();
+  FocusNode focusNode = FocusNode();
+  bool showCross = false;
+  bool searchIconVisibility = true;
+
+  @override
+  void initState() {
+    // focusNode.requestFocus();
+    // focusNode.addListener(() {
+    //   if (focusNode.hasFocus) {
+    //     searchIconVisibility = true;
+    //   } else {
+    //     searchIconVisibility = false;
+    //   }
+    // });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     HomeScreenController homeScreenController = Get.find();
     final ThemeController themeController = Get.find();
+
 
     bool isDark = themeController.themeMode == ThemeMode.dark;
     return Scaffold(
@@ -30,8 +48,8 @@ class _BrandsScreenState extends State<BrandsScreen> {
             child: Container(
               height: 45,
               width: double.infinity,
-              padding: 8.pa,
-              margin: 0.pa,
+              // padding: 8.pa,
+              // margin: 0.pa,
               decoration: BoxDecoration(
                 border: Border.all(
                     width: 1,
@@ -40,31 +58,79 @@ class _BrandsScreenState extends State<BrandsScreen> {
               ),
               child: Row(
                 children: [
-                  Image.asset(
+                  /*Image.asset(
                     !isDark
                         ? ImagePathAssets.hwLogoUnnamed
                         : ImagePathAssets.hwLogoUnnamedDark,
                     height: 40,
                     width: 40,
+                  ),*/
+                  8.swb,
+                   Visibility(
+                     visible: searchIconVisibility,
+                     child: const Icon(
+                      Icons.search,
                   ),
-                  4.swb,
-                  const Icon(Icons.search, size: 20),
+                   ),
                   4.swb,
                   Expanded(
                     child: TextFormField(
                       onChanged: (value) {
+                        if (value.isEmpty &&
+                            searchTextController.text == "") {
+                          showCross = false;
+                          searchIconVisibility = true;
+                          focusNode.hasFocus;
+                          setState(() {});
+                        } else {
+                          showCross = true;
+                          searchIconVisibility = false;
+                          focusNode.unfocus();
+                          setState(() {});
+                        }
                         setState(() {});
                       },
                       controller: searchTextController,
-                      decoration:  InputDecoration.collapsed(
+                      decoration:  InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(vertical: 12),
                         hintText: searchTxt,
                         hintStyle: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 15,
                           color: Theme.of(context).textTheme.displayLarge!.color!,
-                        )
+                        ),
+                        focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide.none),
+                        enabledBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide.none),
+                        suffix: Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Visibility(
+                            visible: showCross,
+                            child: InkWell(
+                              child: Icon(
+                                Icons.close,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .displayMedium!
+                                    .color,
+                                size: 20.sp,
+                              ),
+                              onTap: () {
+                                searchTextController.clear();
+                                showCross = false;
+                                setState(() {});
+                              },
+                            ),
+                          ),
+                        ),
+                        // hintText: searchTxt,
+                        // hintStyle: TextStyle(
+                        //   fontWeight: FontWeight.w400,
+                        //   fontSize: 15,
+                        //   color: Theme.of(context).textTheme.displayLarge!.color!,
+                        // ),
                       ),
-
                     ),
                   ),
                   20.swb,

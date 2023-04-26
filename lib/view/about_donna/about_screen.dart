@@ -141,7 +141,7 @@ class AboutScreen extends StatelessWidget {
                       /// Brands List
                       HomeScreenWidgets(
                               context: context, controller: controller)
-                          .brandListAPIBuilder(),
+                          .brandListAPIBuilder(waitingState: false),
                     ],
                   )
                 : Center(
