@@ -18,7 +18,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
     // focusNode.requestFocus();
     // focusNode.addListener(() {
     //   if (focusNode.hasFocus) {
-    //     searchIconVisibility = true;
+        searchIconVisibility = true;
     //   } else {
     //     searchIconVisibility = false;
     //   }
@@ -66,12 +66,16 @@ class _BrandsScreenState extends State<BrandsScreen> {
                     width: 40,
                   ),*/
                   8.swb,
-                   Visibility(
+                   if(searchIconVisibility==true)
+                     const Icon(
+                       Icons.search,
+                     ),
+                   /*Visibility(
                      visible: searchIconVisibility,
                      child: const Icon(
                       Icons.search,
                   ),
-                   ),
+                   ),*/
                   4.swb,
                   Expanded(
                     child: TextFormField(
@@ -90,9 +94,16 @@ class _BrandsScreenState extends State<BrandsScreen> {
                         }
                         setState(() {});
                       },
+                      onFieldSubmitted: (value){
+                        setState(() {
+                          searchIconVisibility = false;
+                        showCross = true;
+                        focusNode.unfocus();
+                        });
+                      },
                       controller: searchTextController,
                       decoration:  InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: 12),
+                        contentPadding: EdgeInsets.symmetric(vertical: 13),
                         hintText: searchTxt,
                         hintStyle: TextStyle(
                           fontWeight: FontWeight.w400,
@@ -103,25 +114,23 @@ class _BrandsScreenState extends State<BrandsScreen> {
                             borderSide: BorderSide.none),
                         enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide.none),
-                        suffix: Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: Visibility(
-                            visible: showCross,
-                            child: InkWell(
-                              child: Icon(
-                                Icons.close,
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .displayMedium!
-                                    .color,
-                                size: 20.sp,
-                              ),
-                              onTap: () {
-                                searchTextController.clear();
-                                showCross = false;
-                                setState(() {});
-                              },
+                        suffixIcon: Visibility(
+                          visible: showCross,
+                          child: GestureDetector(
+                            child: Icon(
+                              Icons.close,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .displayMedium!
+                                  .color,
+                              size: 20.sp,
                             ),
+                            onTap: () {
+                              searchTextController.clear();
+                              showCross = false;
+                              searchIconVisibility = false;
+                              setState(() {});
+                            },
                           ),
                         ),
                         // hintText: searchTxt,
