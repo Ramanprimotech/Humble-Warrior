@@ -142,7 +142,6 @@ class _BrandsScreenState extends State<BrandsScreen> {
                       ),
                     ),
                   ),
-                  20.swb,
                 ],
               ),
             ),

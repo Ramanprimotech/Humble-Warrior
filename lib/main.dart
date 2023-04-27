@@ -11,6 +11,8 @@ FlutterLocalNotificationsPlugin();
 
 bool isLoggedIn = false;
 Future<void> _messageHandler(RemoteMessage event) async {
+  // NotificationController controller = Get.find();
+  // controller.update(["badge"]);
   debugPrint("notification event ---- $event");
   "Message Received ${event.data}".log();
   Map data = event.data;
@@ -103,7 +105,7 @@ class MyApp extends StatelessWidget {
 }
 
 dependencies() {
-  Get.put(NotificationController());
+  Get.put(NotificationController(),permanent: true);
   Get.put(ThemeController());
   Get.put(HomeScreenController());
   Get.put(BottomNavigationController());

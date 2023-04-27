@@ -98,7 +98,7 @@ class LoginController extends GetxController {
       OnClick.apple: () async {
         try{
           Loader.show(context);
-        user = await AuthManager().appleLogin();
+        user = await AuthManager().appleLogin(context);
         if (user != null) {
           await saveUserToLocalStorage();
 

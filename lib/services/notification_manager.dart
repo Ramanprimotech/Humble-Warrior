@@ -31,6 +31,8 @@ class NotificationManager {
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse response) {
+        NotificationController controller = Get.find();
+        controller.update(["badge"]);
       try {
         Map data = jsonDecode(response.payload!);
         if (data["url_to_redirect"] != "") {
@@ -65,7 +67,8 @@ class NotificationManager {
   static void messageListener() {
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async{
-
+      // NotificationController controller = Get.find();
+      // controller.update(["badge"]);
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       AppleNotification? apple = message.notification?.apple;
@@ -115,6 +118,8 @@ class NotificationManager {
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      // NotificationController controller = Get.find();
+      // controller.update(["badge"]);
 
       debugPrint("notification event ---- $event");
       "Message Received ${event.data}".log();
