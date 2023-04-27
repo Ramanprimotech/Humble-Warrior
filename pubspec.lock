@@ -46,7 +46,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "75ed3a3f46201471720fb6b6d6029a941a19fe5f"
+      resolved-ref: "93820d18a6e0b031e3590635b3a2162ef1a913b7"
       url: "https://github.com/bijayprimo/Social_auth.git"
     source: git
     version: "0.0.1"
@@ -693,10 +693,10 @@ packages:
     dependency: transitive
     description:
       name: google_sign_in_android
-      sha256: "2efe7a35f8542b94f240661ef888ae74fcbdb1886908a6aac54404e2268be73c"
+      sha256: "1c9b7953700cf2c6d164f1a55bd633a8e84495bc465827169cd8ad5dfec57c7d"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.9"
+    version: "6.1.13"
   google_sign_in_ios:
     dependency: transitive
     description:
