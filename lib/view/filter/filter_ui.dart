@@ -621,6 +621,7 @@ class FilterScreen extends StatelessWidget {
                       )
                     : Expanded(
                         child: PaginationWidget(
+                          showRefresh: false,
                           length: _filterController.searchListLength,
                           apiBool: _filterController.searchsBool,
                           api: _filterController.searchsAPI,
