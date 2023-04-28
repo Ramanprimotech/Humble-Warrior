@@ -95,11 +95,14 @@ class FilterIcon extends StatelessWidget {
     return IconButton(
         padding: 16.pr,
         onPressed: () async {
-          ProductCategoryItem items =
-              item == null ? ProductCategoryItem() : item!;
-          Get.put(FilterController());
-          var data = await Get.toNamed(AppRoutes.filterView);
-          Get.find<FilterController>().resetList();
+          CommonUtils.toCheckInternet(action: () async{
+            ProductCategoryItem items =
+            item == null ? ProductCategoryItem() : item!;
+            Get.put(FilterController());
+            var data = await Get.toNamed(AppRoutes.filterView);
+            Get.find<FilterController>().resetList();
+          });
+
           /*Get.toNamed(AppRoutes.searchView, arguments: [
             postType.isEmptyOrNull ? "" : postType.toString(),
             items.id == null ? "" : items.id.toString(),

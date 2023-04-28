@@ -68,8 +68,11 @@ class MyAccount extends StatelessWidget {
                     controller,
                     title: shareWithFriendsTxt,
                     ontap: () async {
-                      CommonUtils()
-                          .share(shareUrl: "https://humblewarrior.com/");
+                      CommonUtils.toCheckInternet(action: () async{
+                        CommonUtils()
+                            .share(shareUrl: "https://humblewarrior.com/");
+                      });
+
                     },
                   ),
                   // // optionSpacing.shb,
