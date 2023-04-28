@@ -20,7 +20,7 @@ class CategoryDetailsListController extends GetxController {
   Future categoryListApi({bool? refresh = false}) async {
     if (refresh!) {
       categoryListPage = 1;
-      categoryList.clear();
+      // categoryList.clear();
     }
     PaginationModel paginationModel =
         PaginationModel(page: categoryListPage.toString(), categoryId: id);
@@ -30,11 +30,14 @@ class CategoryDetailsListController extends GetxController {
       if (value.data == null) {
         DialogHelper.showToast(context, noMoreDealsTxt);
       } else {
+        if(refresh!) {
+          categoryList.clear();
+        }
         categoryListPage += 1;
         categoryList.addAll(value.data!);
         categoryListLength.value = categoryList.length;
         if (refresh) {
-          DialogHelper.showToast(context, dealsRefreshTxt);
+          // DialogHelper.showToast(context, dealsRefreshTxt);
         }
       }
       if (value.totalRecords != null) {

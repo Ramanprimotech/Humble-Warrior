@@ -8,7 +8,7 @@ class DonnaDailyDeals extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeOptionController controller = Get.find();
     controller.context = context;
-FToast().init(context);
+    FToast().init(context);
     return PaginationWidget(
       length: controller.donnaDealListLength,
       apiBool: controller.donnaDealsBool,
@@ -23,15 +23,19 @@ FToast().init(context);
               controller.donnaDealsBool.value == true) {
             return Center(
                 child: ListView.separated(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (ctx, index){
-                  return const  CustomShimmer.rectangular(height: 290,borderRadius: 15,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (ctx, index) {
+                return const CustomShimmer.rectangular(
+                  height: 290,
+                  borderRadius: 15,
                   margin: EdgeInsets.symmetric(horizontal: 15),
-                  );
-                },
-                  itemCount: 10, separatorBuilder: (BuildContext context, int index) {
-                    return 18.shb;
-                  },));
+                );
+              },
+              itemCount: 10,
+              separatorBuilder: (BuildContext context, int index) {
+                return 18.shb;
+              },
+            ));
           }
           if (controller.donnaDealList.isEmpty &&
               controller.donnaDealsBool.value == false) {
@@ -68,11 +72,11 @@ FToast().init(context);
                   // donnaDealsCard(details, index, context, dailyDeals: true)
                   : Obx(
                       () => Visibility(
-                          visible: controller.donnaDealsBool.value,
-                          child: Container(
-                              height: 80,
-                              alignment: Alignment.center,
-                              child: const CircularProgressIndicator()),
+                        visible: controller.donnaDealsBool.value,
+                        child: Container(
+                            height: 80,
+                            alignment: Alignment.center,
+                            child: const CircularProgressIndicator()),
                       ),
                     );
             },
@@ -139,8 +143,9 @@ Widget donnaDealsButton(
                         details.shopUrl == null)
                     ? 0.shb
                     : shopButton(
-                  context: context,
-                        url: "${details.shopUrl}", title: details.itemName!),
+                        context: context,
+                        url: "${details.shopUrl}",
+                        title: details.itemName!),
               ),
               !(details.couponCode == null || details.couponCode == "")
                   ? codeButton(code: "${details.couponCode}", context: context)
@@ -162,7 +167,10 @@ Widget donnaDealsButton(
                         key: Key(index.toString()),
                       ),
                     ),
-                    shareButton(shareUrl: details.linkUrl, color: color, context: context),
+                    shareButton(
+                        shareUrl: details.linkUrl,
+                        color: color,
+                        context: context),
                   ],
                 )
               : Row(
@@ -179,7 +187,10 @@ Widget donnaDealsButton(
                         key: Key(index.toString()),
                       ),
                     ),
-                    shareButton(shareUrl: details.linkUrl, color: color, context: context),
+                    shareButton(
+                        shareUrl: details.linkUrl,
+                        color: color,
+                        context: context),
                   ],
                 ).px8(),
         ],

@@ -292,6 +292,7 @@ class _SearchViewState extends State<SearchView> {
 
             /// Search Result View
             : PaginationWidget(
+          showRefresh : false,
                 length: filterController.searchListLength,
                 apiBool: filterController.searchsBool,
                 api: filterController.searchsAPI,

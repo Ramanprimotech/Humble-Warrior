@@ -1,9 +1,11 @@
 import 'package:humble_warrior/hw.dart';
 
 class PaginationWidget extends StatelessWidget {
+
   final RxBool apiBool;
   final Future Function({bool? refresh}) api;
   final Function update;
+  final bool showRefresh;
   final RxInt length;
   final RxInt totalRecords;
   final ScrollController scrollController;
@@ -12,6 +14,7 @@ class PaginationWidget extends StatelessWidget {
   const PaginationWidget({
     super.key,
     required this.apiBool,
+    this.showRefresh  = true,
     required this.api,
     required this.update,
     required this.scrollController,
@@ -51,15 +54,15 @@ class PaginationWidget extends StatelessWidget {
         }
         return true;
       },
-      child: RefreshIndicator(
+      child: showRefresh ? RefreshIndicator(
           onRefresh: () async {
-            Future.delayed(Duration(seconds: 1), () async {
+            Future.delayed(const Duration(seconds: 1), () async {
               CommonUtils.toCheckInternet(action: () async {
                 await api(refresh: true).then((value) => Future.value(0));
               });
             });
           },
-          child: child),
+          child: child): child,
     );
   }
 }
