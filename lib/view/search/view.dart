@@ -120,6 +120,7 @@ class _SearchViewState extends State<SearchView> {
                                     filterController.controller.text));
                         // filterController.searchFromStart();
                         filterController.focusNode.unfocus();
+                        filterController.searchFromStart();
                         setState(() {});
                       }
                     },
