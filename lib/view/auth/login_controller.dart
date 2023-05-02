@@ -51,6 +51,8 @@ class LoginController extends GetxController {
           // Trigger the sign-in flow
           // signInWithFacebook();
         try {
+          Loader.show(context);
+
           user = await AuthManager().facebookLogin();
           if (user != null) {
             /// Save User Info to Local Storage
@@ -63,6 +65,8 @@ class LoginController extends GetxController {
           }
         } catch (e) {
           print(e);
+        }finally{
+          Loader.hide();
         }
 
       },
