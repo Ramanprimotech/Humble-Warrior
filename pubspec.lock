@@ -46,7 +46,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "6852376e675a67ed8efd76f1dc834c9233cc1f00"
+      resolved-ref: c62f38127d2c64f9722ba453a5d03b45b4916986
       url: "https://github.com/bijayprimo/Social_auth.git"
     source: git
     version: "0.0.1"

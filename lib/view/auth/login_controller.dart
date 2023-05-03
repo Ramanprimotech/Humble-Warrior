@@ -56,7 +56,7 @@ class LoginController extends GetxController {
           user = await AuthManager().facebookLogin();
           if (user != null) {
             /// Save User Info to Local Storage
-            await saveUserToLocalStorage();
+            await saveUserToLocalStorage(fb:true);
 
             await authAPI().whenComplete(
                     () {
@@ -131,12 +131,12 @@ class LoginController extends GetxController {
   }
 
   ///-----------------------Save User Info to Local Storage--------------------------///
-  Future<void> saveUserToLocalStorage() async {
+  Future<void> saveUserToLocalStorage({ bool fb = false}) async {
     isLoggedIn = true;
     await SharePreferenceData.addBoolToSF(spIsLogged, true);
-    await SharePreferenceData.addStringToSF(userEmail, "${user?.email}");
+    await SharePreferenceData.addStringToSF(userEmail, "${user?.providerData[0].email}");
     await SharePreferenceData.addStringToSF(
-        userPhoneNumber, "${user?.phoneNumber}");
+        userPhoneNumber, "${user?.providerData[0].phoneNumber}");
     await SharePreferenceData.addStringToSF(userName, "${user?.displayName}");
     await SharePreferenceData.addStringToSF(
         userProfilePic, "${user?.photoURL}");
