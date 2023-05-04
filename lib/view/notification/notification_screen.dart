@@ -14,12 +14,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: bottomNavigationWidget(context),
+      // bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
         child: Column(
           children: [
             CommonWidgets.titleBar(context,
-                title: notificationsTxt,
+                title: notificationsTxt,onPress: (){
+              Get.back(id: 3);
+              },
 
                 fontSize: 20,),
                 // widget: FutureBuilder<NotificationResponseModel>(

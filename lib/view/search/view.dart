@@ -2,17 +2,18 @@ import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/view/filter/filter_controller.dart';
 
 class SearchView extends StatefulWidget {
-  const SearchView({super.key});
+  final  String postType;
+  final String catId;
+  final  String name;
+  final  String image;
+  final int route;
+  const SearchView({super.key, required this.postType, required this.catId, required this.name, required this.image,required this.route});
 
   @override
   State<SearchView> createState() => _SearchViewState();
 }
 
 class _SearchViewState extends State<SearchView> {
-  String postType = Get.arguments[0];
-  String catId = Get.arguments[1];
-  String name = Get.arguments[2];
-  String image = Get.arguments[3];
   List<int> selectedCategories = [];
   RxBool showCross = false.obs;
 
@@ -29,14 +30,14 @@ class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
     filterController.context = context;
-    filterController.postType = postType;
-    filterController.catID = catId == "" ? null : int.parse(catId);
+    filterController.postType = widget.postType;
+    filterController.catID = widget.catId == "" ? null : int.parse(widget.catId);
     if (filterController.catID != null) {
       if (!filterController.record.contains(ProductCategoryItem(
-          id: int.parse(catId), categoryImage: image, categoryName: name))) {
-        selectedCategories.add(int.parse(catId));
+          id: int.parse(widget.catId), categoryImage: widget.image, categoryName: widget.name))) {
+        selectedCategories.add(int.parse(widget.catId));
         filterController.record.add(ProductCategoryItem(
-            id: int.parse(catId), categoryImage: image, categoryName: name));
+            id: int.parse(widget.catId), categoryImage: widget.image, categoryName: widget.name));
         filterController.update();
       }
     }
@@ -163,14 +164,14 @@ class _SearchViewState extends State<SearchView> {
             ),
           ),
         ),
-        leading: AppIcons.IosBackIcon(),
+        leading: AppIcons.IosBackIcon(onPress: (){Get.back(id : widget.route);}),
         actions: [
           selectedCategories.isEmpty
               ? IconButton(
                   padding: 16.pr,
                   onPressed: () async {
                     CommonUtils.toCheckInternet(action: () async {
-                      var data = await Get.toNamed(AppRoutes.filterView);
+                      var data = await Get.toNamed(AppRoutes.filterView, id: widget.route,arguments: {"route": widget.route});
 
                       /// Uncomment to link with the filter screen
                       // if (data != null) {
@@ -196,7 +197,7 @@ class _SearchViewState extends State<SearchView> {
                       padding: 16.pr,
                       onPressed: () async {
                         CommonUtils.toCheckInternet(action: () async {
-                          var data = await Get.toNamed(AppRoutes.filterView);
+                          var data = await Get.toNamed(AppRoutes.filterView, id: widget.route, arguments: {"route": widget.route});
 
                           ///uncomment to link with filter screen
                           // if (data != null) {
@@ -333,10 +334,12 @@ class _SearchViewState extends State<SearchView> {
                                       item: RecentSearch(
                                           productSearched: filterController
                                               .controller.text));
-                                  Get.toNamed(AppRoutes.dailyDealProductDetail,
-                                      arguments: [
-                                        ProductDetailsResponse(id: details.id)
-                                      ]);
+
+                                  // Get.toNamed(AppRoutes.dailyDealProductDetail,
+                                  //
+                                  //     arguments: {,"details" :    ProductDetailsResponse(id: details.id)});
+                                  Get.toNamed(AppRoutes.categoryItemDetail,id: widget.route
+                                    ,  arguments: {"route": widget.route, "details" :    ProductDetailsResponse(id: details.id)});
                                 },
                                 child: Container(
                                   height: 80,

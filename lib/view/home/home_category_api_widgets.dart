@@ -75,7 +75,7 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
       padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10, top: 6),
       child: GestureDetector(
         onTap: () {
-          Get.toNamed(AppRoutes.homeOptions, arguments: <int>[homeOptions.id!]);
+          Get.toNamed(AppRoutes.homeOptions, id: 3 ,arguments: {"id": homeOptions.id!});
         },
         child: Stack(
           alignment: Alignment.bottomLeft,

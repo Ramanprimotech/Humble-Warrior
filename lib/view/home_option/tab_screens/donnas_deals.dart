@@ -63,8 +63,8 @@ class DonnaDailyDeals extends StatelessWidget {
                       index: index,
                       details: details,
                       onTap: () {
-                        Get.toNamed(AppRoutes.dailyDealProductDetail,
-                            arguments: [details]);
+                        Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
+                            arguments: { "details" : details});
                       },
                       imgUrl: details.url!,
                       cardText: details.itemName!,
@@ -102,7 +102,8 @@ ItemCard donnaDealsCard(
           Get.to(CustomPhotoViewer(url: details.url!));
         }
       } else {
-        Get.toNamed(AppRoutes.dailyDealProductDetail, arguments: [details]);
+        Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
+            arguments: { "details" : details});
       }
     },
     radius: 10,

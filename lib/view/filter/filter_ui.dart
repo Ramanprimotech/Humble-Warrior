@@ -3,7 +3,8 @@ import 'package:humble_warrior/view/filter/filter_product_category_api_widgets.d
 import '../../hw.dart';
 
 class FilterScreen extends StatelessWidget {
-  FilterScreen({Key? key}) : super(key: key);
+  final int? route;
+  FilterScreen({required this.route,Key? key}) : super(key: key);
   final double productHeight = 55;
   final double brandLoveHeight = 39;
   final double brandHeight = 63;
@@ -18,7 +19,7 @@ class FilterScreen extends StatelessWidget {
     _filterController.context = context;
     return WillPopScope(
       onWillPop: () async {
-        Get.back(result: _filterController.record.value);
+        Get.back(id:  route,result: _filterController.record.value);
         _filterController.record.clear();
         _filterController.selevtedVisibility.value = false;
         return false;
@@ -32,9 +33,9 @@ class FilterScreen extends StatelessWidget {
                     title: "All Categories", fontSize: 20, onPress: () {
                   _filterController.selevtedVisibility.value = false;
                   if (_filterController.record.isEmpty) {
-                    Get.back(result: _filterController.record.value);
+                    Get.back(id: route,result: _filterController.record.value);
                   } else {
-                    Get.back(result: _filterController.record.value);
+                    Get.back(id: route,result: _filterController.record.value);
                   }
 
                   _filterController.record.clear();
@@ -673,13 +674,16 @@ class FilterScreen extends StatelessWidget {
                                             //     item: RecentSearch(
                                             //         productSearched:
                                             //             filterController.controller.text));
-                                            Get.toNamed(
-                                                AppRoutes
-                                                    .dailyDealProductDetail,
-                                                arguments: [
-                                                  ProductDetailsResponse(
-                                                      id: details.id)
-                                                ]);
+                                            Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
+                                                arguments: { "details" :   ProductDetailsResponse(
+                                                    id: details.id)});
+                                            // Get.toNamed(
+                                            //     AppRoutes
+                                            //         .dailyDealProductDetail,
+                                            //     arguments: [
+                                            //       ProductDetailsResponse(
+                                            //           id: details.id)
+                                            //     ]);
                                           },
                                           child: Container(
                                             height: 80,

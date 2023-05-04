@@ -28,16 +28,22 @@ class WishListRouting extends DonnaOptions {
   WishListRouting({this.details});
   @override
   donnaDeals() {
-    Get.toNamed(AppRoutes.dailyDealProductDetail, arguments: [details]);
+    Get.toNamed(AppRoutes.categoryItemDetail,id: 2,
+        arguments: {"route" : 2, "details" :   ProductDetailsResponse(
+            id: details.id)});
   }
 
   @override
   donnaFavourite() {
-    Get.toNamed(AppRoutes.favouriteDeal, arguments: [details]);
+    Get.toNamed(AppRoutes.categoryItemDetail,id: 2,
+        arguments: {"route" : 2,"details" :   ProductDetailsResponse(
+            id: details.id)});
   }
 
   @override
   frontPage() {
-    Get.toNamed(AppRoutes.frontPageProductDetail, arguments: [details]);
+    Get.toNamed(AppRoutes.categoryItemDetail,id: 2,
+        arguments: { "details" :   ProductDetailsResponse(
+            id: details.id)});
   }
 }

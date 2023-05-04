@@ -10,15 +10,16 @@ class AccountDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     AccountDetailsController accountController = Get.find();
     return Scaffold(
-        bottomNavigationBar: bottomNavigationWidget(context),
-        body: Obx(
+       body: Obx(
           () => accountController.userCheck.value == false
               ? SafeArea(
                   child: Column(
                     children: [
-                      // 50.shb,
+                      50.shb,
                       CommonWidgets.titleBar(context,
-                          title: accountDetailsTxt, fontSize: 20),
+                          title: accountDetailsTxt, fontSize: 20, onPress: () {
+                        Get.back(id: 4);
+                      }),
                       150.shb,
                       loginFirst(context),
                     ],
@@ -30,7 +31,9 @@ class AccountDetails extends StatelessWidget {
                     children: [
                       // 50.shb,
                       CommonWidgets.titleBar(context,
-                          title: accountDetailsTxt, fontSize: 20),
+                          title: accountDetailsTxt, fontSize: 20,onPress: () {
+                            Get.back(id: 4);
+                          }),
                       70.shb,
                       profileImg(),
                       Expanded(

@@ -2,17 +2,16 @@ import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/view/home_option/tab_screens/front_page_deals.dart';
 
 class HomeOptionScreen extends GetView<HomeOptionController> {
-  HomeOptionScreen({Key? key}) : super(key: key);
+  int data;
+  HomeOptionScreen({required this.data ,Key? key}) : super(key: key);
 
-  final int data = Get.arguments[0];
+
   @override
   Widget build(BuildContext context) {
-    const double tabFontSize = 18;
-
-    final HomeOptionController controller = Get.find();
     controller.selectedIndex.value = data;
+    const double tabFontSize = 18;
     return Scaffold(
-      bottomNavigationBar: bottomNavigationWidget(context),
+      // bottomNavigationBar: bottomNavigationWidget(context),
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
         titleSpacing: 5,
@@ -22,14 +21,18 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
     Obx(
           () =>
            SearchBar(
+             route: 3,
             /// Uncomment this line to filter by category
             postType: controller.postType(controller.selectedIndex.value),
           ),
 
         ),
-        leading: AppIcons.IosBackIcon(),
+        leading: AppIcons.IosBackIcon(onPress: (){
+          Get.back(id: 3);
+        }),
         actions: const [
           FilterIcon(
+            route: 3,
             // postType: controller.postType(controller.selectedIndex.value),
             postType: "",
           ),

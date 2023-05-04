@@ -75,8 +75,8 @@ class DonnaFavourite extends StatelessWidget {
               )*/
               favouritePageCard(
                       onTap: () {
-                        Get.toNamed(AppRoutes.favouriteDeal,
-                            arguments: [details]);
+                        Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
+                            arguments: { "details" : details});
                       },
                       imageUrl: details.url!,
                 cardText: details.itemName,

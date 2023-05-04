@@ -40,7 +40,7 @@ class MyAccount extends StatelessWidget {
                   ///Account Details
                   myAccWidget.detailsOptions(controller,
                       title: accountDetailsTxt, ontap: () {
-                    Get.toNamed(AppRoutes.accountDetails);
+                    Get.toNamed(AppRoutes.accountDetails,id: 4);
                   }),
 
                   ///Notification
@@ -59,7 +59,7 @@ class MyAccount extends StatelessWidget {
                   myAccWidget.detailsOptions(controller, title: aboutDonna,
                       ontap: () {
                     CommonUtils.toCheckInternet(action: () {
-                      Get.toNamed(AppRoutes.aboutDonna);
+                      Get.toNamed(AppRoutes.aboutDonna,id: 4);
                     });
                   }),
 
@@ -106,8 +106,11 @@ class MyAccount extends StatelessWidget {
                   myAccWidget.detailsOptions(controller,
                       title: termsConditionsTxt, ontap: () {
                     CommonUtils.toCheckInternet(action: () {
+
+                      // Get.toNamed(AppRoutes.staticPages,
+                      //     arguments: ["40427", termsConditionsTxt],id: 4);
                       Get.toNamed(AppRoutes.staticPages,
-                          arguments: ["40427", termsConditionsTxt]);
+                         id: 4);
                     });
                   }),
 

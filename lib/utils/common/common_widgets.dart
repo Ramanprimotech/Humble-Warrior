@@ -116,7 +116,7 @@ class CommonWidgets {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
             backIcon
-                  ? SizedBox(child: AppIcons.IosBackIcon(onPress: onPress))
+                  ? SizedBox(child: AppIcons.IosBackIcon(onPress: onPress??null))
                   : 40.swb,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

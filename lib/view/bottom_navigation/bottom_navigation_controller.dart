@@ -1,4 +1,5 @@
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/utils/routes/app_generate.dart';
 
 List<ProductCategoryItem> productCategory = [];
 
@@ -10,11 +11,24 @@ class BottomNavigationController extends GetxController {
 
   DateTime? currentBackPressTime;
   final List<Widget> _navigationItems = [
-    const HomeScreen(),
-    const WishList(),
+    Navigator(
+      key: homeNavigation,
+      onGenerateRoute: (settings) => AppGenerate.generateRoutes(settings),
+      initialRoute: AppRoutes.homePage,
+    ),
+    Navigator(
+      key: wishNavigation,
+      onGenerateRoute: (settings) => AppGenerate.generateRoutes(settings),
+      initialRoute: AppRoutes.wishList,
+    ),
+    // const WishList(),
     const Placeholder(),
     const Placeholder(),
-    const MyAccount(),
+    Navigator(
+      key: account,
+      onGenerateRoute: (settings) => AppGenerate.generateRoutes(settings),
+      initialRoute: AppRoutes.myAccount,
+    ),
   ];
 
   List<Widget> get navigationItems => _navigationItems;
@@ -31,15 +45,15 @@ class BottomNavigationController extends GetxController {
           var controller = Get.find<WishListController>();
           controller.getWishList();
         }
-        if (isNavigated) {
-          isNavigated = false;
-          Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
-        }
+        // if (isNavigated) {
+        //   isNavigated = false;
+        //   Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
+        // }
       } else {
         index == 2 ? amazon() : facebook();
       }
       update();
-    } );
+    });
   }
 
   ///--------------Check if user is logged in-------------///

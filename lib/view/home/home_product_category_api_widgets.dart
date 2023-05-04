@@ -80,9 +80,9 @@ class HomePageProductCategoryAPIWidgets
                   imageUrl: record[index].categoryImage,
                   title: record[index].categoryName,
                   onTap: () {
-                    Get.toNamed(AppRoutes.categoryDetailsList, arguments: [
+                    Get.toNamed(AppRoutes.categoryDetailsList, id : 3,arguments:{"record":
                       record[index],
-                    ]);
+                    } );
                   },
                 );
               },

@@ -13,7 +13,7 @@ class AboutScreen extends StatelessWidget {
     final StaticPagesController staticController =
         Get.find<StaticPagesController>();
     return Scaffold(
-      bottomNavigationBar: bottomNavigationWidget(context),
+      // bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
         child: FutureBuilder<List<StaticData>>(
           future: staticController.staticPageApi("40424"),
@@ -23,7 +23,9 @@ class AboutScreen extends StatelessWidget {
                 children: [
                   /// About Donna title
                   CommonWidgets.titleBar(context,
-                      backIcon: true, title: aboutDonnaTxt, fontSize: 18),
+                      backIcon: true, title: aboutDonnaTxt, fontSize: 18,onPress: (){
+                    Get.back(id: 4);
+                      }),
                   Expanded(
                     child: ListView(
                       // physics: const NeverScrollableScrollPhysics(),
@@ -104,6 +106,9 @@ class AboutScreen extends StatelessWidget {
                         backIcon: true,
                         title: aboutDonnaTxt,
                         fontSize: 18,
+                        onPress: (){
+                          Get.back(id: 4);
+                        }
                       ),
                       Expanded(
                         child: ListView(children: [

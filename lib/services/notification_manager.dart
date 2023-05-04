@@ -42,8 +42,10 @@ class NotificationManager {
          if (data["post_id"] != "0") {
           ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
               id: int.parse(data["post_id"]!));
-          Get.toNamed(AppRoutes.frontPageProductDetail,
-              arguments: [productDetailsResponse]);
+          // Get.toNamed(AppRoutes.frontPageProductDetail,
+          //     arguments: [productDetailsResponse]);
+          Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
+              arguments: { "details" :   productDetailsResponse});
         }  else  if (!await launchUrl(
              Uri.parse(data["url_to_redirect"]),
              mode: LaunchMode.externalApplication)) {
@@ -133,8 +135,10 @@ class NotificationManager {
             if (data["post_id"] != "0") {
               ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
                   id: int.parse(data["post_id"]!));
-              Get.toNamed(AppRoutes.frontPageProductDetail,
-                  arguments: [productDetailsResponse]);
+              Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
+                  arguments: { "details" :  productDetailsResponse});
+              // Get.toNamed(AppRoutes.frontPageProductDetail,
+              //     arguments: [productDetailsResponse]);
             }  else  if (!await launchUrl(
                 Uri.parse(data["url_to_redirect"]),
                 mode: LaunchMode.externalApplication)) {

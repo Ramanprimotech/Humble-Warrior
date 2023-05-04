@@ -4,22 +4,24 @@ import 'package:humble_warrior/view/productDetail/product_detail_controller.dart
 import '../../../hw.dart';
 
 class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
-  DailyDealProduct({Key? key}) : super(key: key);
+ final ProductDetailsResponse? details;
+  DailyDealProduct({required this.details,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     ProductDetailController productDetailController = Get.find();
-    final ProductDetailsResponse donnaDealsDetails = Get.arguments[0];
     Future<List<ProductDetailsResponse>> futureInstance =
         productDetailController.productDetailsAPI(
-            idData: donnaDealsDetails.id.toString());
+            idData: details!.id.toString());
     return Scaffold(
-      bottomNavigationBar: bottomNavigationWidget(context),
+      // bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
         child: Column(
           children: [
             CommonWidgets.titleBar(context,
-                title: "Product Details", fontSize: 20, backIcon: true),
+                title: "Product Details", fontSize: 20, backIcon: true,onPress: (){
+              Get.back();
+                }),
             FutureBuilder<List<ProductDetailsResponse>>(
                 future: futureInstance,
                 builder: (context, snapshot) {

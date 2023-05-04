@@ -9,8 +9,8 @@ class WishList extends StatelessWidget {
     WishListController controller = Get.find();
     return Scaffold(
       appBar: AppBar(
-        title: const SearchBar(),
-        actions: const [FilterIcon()],
+        title:  SearchBar(route: 2,),
+        actions: const [FilterIcon(route: 2,)],
       ),
       body: SafeArea(
         child: Column(

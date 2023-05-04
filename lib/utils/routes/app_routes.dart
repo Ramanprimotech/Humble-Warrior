@@ -4,10 +4,10 @@ class AppRoutes {
   static String loginPage = "/loginPage";
   static String bottomNavigation = "/bottomNavigation";
   static String aboutDonna = "/aboutDonna";
-  static String productDetail = "/productDetail";
+  // static String productDetail = "/productDetail";
   static String dailyDealProductDetail = "/dailyDealProductDetail";
-  static String frontPageProductDetail = "/frontPageProductDetail";
-  static String favouriteDeal = "/favouriteDeal";
+  // static String frontPageProductDetail = "/frontPageProductDetail";
+  // static String favouriteDeal = "/favouriteDeal";
   static String homeOptions = "/homeOptions";
   static String splashScreen = "/splashScreen";
   static String myAccount = "/myAccount";
@@ -20,4 +20,5 @@ class AppRoutes {
   static String searchView = "/searchView";
   static String filterView = "/filterView";
   static String sortPages = "/sortPages";
+  static String wishList = "/wishList";
 }

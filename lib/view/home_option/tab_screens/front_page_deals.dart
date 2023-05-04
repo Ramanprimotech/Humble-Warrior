@@ -62,8 +62,8 @@ class FrontPageDeals extends StatelessWidget {
                           index: index,
                           details: details,
                           onTap: () {
-                            Get.toNamed(AppRoutes.frontPageProductDetail,
-                                arguments: [details]);
+                            Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
+                                arguments: { "details" : details});
                           },
                           cardText: details.ribbonName,
                           imageText: true,
@@ -134,7 +134,8 @@ ItemCard frontPageCard(
       if (isDetails) {
         Get.to(CustomPhotoViewer(url: details.url!));
       } else {
-        Get.toNamed(AppRoutes.frontPageProductDetail, arguments: [details]);
+        Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
+            arguments: { "details" : details});
       }
     },
     buttons: frontPageOptionsButton(details, index, context),

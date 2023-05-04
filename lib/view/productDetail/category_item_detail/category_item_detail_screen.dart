@@ -3,21 +3,28 @@ import 'package:humble_warrior/utils/common/html.dart';
 import 'package:humble_warrior/view/productDetail/product_detail_controller.dart';
 
 class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
-  CategoryItemDetail({Key? key}) : super(key: key);
+  final ProductDetailsResponse? details;
+  final int? route;
+  CategoryItemDetail({required this.details, this.route,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ProductDetailsResponse details = Get.arguments[0];
     ProductDetailController controller = Get.find();
     Future<List<ProductDetailsResponse>> futureInstance =
-        controller.productDetailsAPI(idData: details.id.toString());
+        controller.productDetailsAPI(idData: details!.id.toString());
 
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             CommonWidgets.titleBar(context,
-                title: "Product Details", fontSize: 20, backIcon: true),
+                title: "Product Details", fontSize: 20, backIcon: true, onPress: (){
+              if(route == 0){
+                Get.back();
+              }    else {
+                Get.back(id: route ?? 3);
+              }
+                }),
             FutureBuilder<List<ProductDetailsResponse>>(
                 future: futureInstance,
                 builder: (context, snapshot) {

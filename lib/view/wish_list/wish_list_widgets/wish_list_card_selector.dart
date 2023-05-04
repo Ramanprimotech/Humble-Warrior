@@ -59,7 +59,10 @@ Widget categoryListWishListCard(
               Get.to(CustomPhotoViewer(url: details.url!));
             }
           } else {
-            Get.toNamed(AppRoutes.frontPageProductDetail, arguments: [details]);
+            Get.toNamed(AppRoutes.categoryItemDetail,id: 2,
+                arguments: { "route" : 2, "details" :   ProductDetailsResponse(
+                    id: details.id)});
+            // Get.toNamed(AppRoutes.frontPageProductDetail, arguments: [details]);
           }
         },
         details: details,

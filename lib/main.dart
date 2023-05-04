@@ -1,5 +1,10 @@
 import 'package:humble_warrior/hw.dart';
 
+ final GlobalKey<NavigatorState>? mainNavigation = Get.nestedKey(1);
+ final GlobalKey<NavigatorState>? wishNavigation = Get.nestedKey(2);
+ final GlobalKey<NavigatorState>? homeNavigation = Get.nestedKey(3);
+ final GlobalKey<NavigatorState>? account = Get.nestedKey(4);
+
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
     'High Importance Notifications', // title
@@ -22,8 +27,10 @@ Future<void> _messageHandler(RemoteMessage event) async {
         if (data["post_id"] != "0") {
           ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
               id: int.parse(data["post_id"]!));
-          Get.toNamed(AppRoutes.frontPageProductDetail,
-              arguments: [productDetailsResponse]);
+          Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
+              arguments: { "details" : productDetailsResponse});
+          // Get.toNamed(AppRoutes.frontPageProductDetail,
+          //     arguments: [productDetailsResponse]);
         }  else  if (!await launchUrl(
             Uri.parse(data["url_to_redirect"]),
             mode: LaunchMode.externalApplication)) {
@@ -89,7 +96,7 @@ class MyApp extends StatelessWidget {
             valueListenable: theme,
             builder: (BuildContext context, value, Widget? child) {
               return GetMaterialApp(
-                navigatorKey: GlobalVariable.navState,
+                // navigatorKey: mainNavigation,
                 title: 'Flutter Demo',
                 debugShowCheckedModeBanner: false,
                 theme: AppTheme.lightTheme,
@@ -118,4 +125,5 @@ class GlobalVariable {
   /// This global key is used in material app for navigation through firebase notifications.
   /// [navState] usage can be found in [notification_notifier.dart] file.
   static final GlobalKey<NavigatorState> navState = GlobalKey<NavigatorState>();
+
 }

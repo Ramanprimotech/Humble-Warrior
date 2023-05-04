@@ -38,7 +38,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
         titleSpacing: 5,
         leadingWidth: 34,
         centerTitle: false,
-        leading: AppIcons.IosBackIcon(),
+        leading: AppIcons.IosBackIcon(onPress: (){Get.back(id:3);}),
         title: Padding(
           padding: 15.pr,
           child: Card(
@@ -148,7 +148,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: bottomNavigationWidget(context),
+      // bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

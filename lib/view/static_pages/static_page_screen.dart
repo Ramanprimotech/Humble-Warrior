@@ -8,14 +8,18 @@ class StaticPagesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     StaticPagesController controller = Get.find<StaticPagesController>();
-    controller.id = Get.arguments[0];
-    String title = Get.arguments[1];
+    // controller.ids = Get.arguments[0];
+    // String title = Get.arguments[1];
+    controller.ids = "40427";
+    String title = termsConditionsTxt;
     return Scaffold(
       body: SafeArea(
         child: Column(children: [
-          CommonWidgets.titleBar(context, title: title, fontSize: 20),
+          CommonWidgets.titleBar(context, title: title, fontSize: 20,onPress: (){
+            Get.back(id: 4);
+          }),
           FutureBuilder<List<StaticData>>(
-              future: controller.staticPageApi(controller.id),
+              future: controller.staticPageApi(controller.ids),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Expanded(

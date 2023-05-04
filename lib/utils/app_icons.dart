@@ -107,6 +107,7 @@ class AppIcons {
         icon: backArrrowIos(),
         onPressed: onPress ??
             () {
+          print("object");
               Get.back();
             },
       );

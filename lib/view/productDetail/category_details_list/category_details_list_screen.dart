@@ -2,29 +2,30 @@ import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/view/productDetail/category_details_list/category_details_list_controller.dart';
 
 class CategoryListDetails extends StatelessWidget {
-  const CategoryListDetails({Key? key}) : super(key: key);
+  final ProductCategoryItem? item;
+  const CategoryListDetails({required this.item,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     FToast().init(context);
     final CategoryDetailsListController controller = Get.find();
-    ProductCategoryItem item = Get.arguments[0];
+
     controller.context = context;
-    controller.id = item.id.toString();
+    controller.id = item!.id.toString();
     controller.categoryListApi();
     return Scaffold(
-      bottomNavigationBar: bottomNavigationWidget(context),
+      // bottomNavigationBar: bottomNavigationWidget(context),
       appBar: AppBar(
         titleSpacing: 5,
         leadingWidth: 34,
         leading: AppIcons.IosBackIcon(),
-        title: const SearchBar(
+        title:  SearchBar(route: 3,
           margin: EdgeInsets.only(right: 4),
           ///Uncomment for preselected category
           // item: item,
         ),
         actions: [
-          FilterIcon(item: item),
+          FilterIcon(route : 3, item: item),
         ],
       ),
       body: SafeArea(
@@ -88,8 +89,9 @@ class CategoryListDetails extends StatelessWidget {
                                 cardText: details.itemName,
                                 details: details,
                                 onTap: () {
-                                  Get.toNamed(AppRoutes.frontPageProductDetail,
-                                      arguments: [details]);
+                                  Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
+                                      arguments: { "details" :   ProductDetailsResponse(
+                                          id: details.id)});
                                 },
                               )
 

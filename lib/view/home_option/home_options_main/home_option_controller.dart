@@ -3,12 +3,14 @@ import 'package:humble_warrior/view/sorting/sort_controller.dart';
 
 class HomeOptionController extends GetxController
     with GetSingleTickerProviderStateMixin {
+  final int initialIndex;
+  HomeOptionController({required this.initialIndex});
   late TabController tabController;
   final TextEditingController searchTextController = TextEditingController();
   final FocusNode focusNode = FocusNode();
   RxInt selectedIndex = 0.obs;
   RxBool select = false.obs;
-  int initialIndex = Get.arguments[0];
+
   late BuildContext context;
   HiveService service = Get.find<HiveService>();
   final SortController _sortController = Get.find();

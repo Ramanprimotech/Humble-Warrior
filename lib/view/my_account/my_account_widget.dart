@@ -23,7 +23,7 @@ class MyAccWidget {
             child: controller.imageUrl.isEmpty
                 ? InkWell(
                     onTap: () {
-                      Get.toNamed(AppRoutes.accountDetails);
+                      Get.toNamed(AppRoutes.accountDetails,id: 4);
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

@@ -17,34 +17,34 @@ class AppPages {
         name: AppRoutes.bottomNavigation,
         page: () => const BottomNavigationScreen(),
         binding: BottomNavigationBindings()),
-    GetPage(
-        name: AppRoutes.homeOptions,
-        page: () {
-          _bottomNavigationController.isNavigated = true;
-          return HomeOptionScreen();
-        },
-        binding: HomeOptionBindings()),
-    GetPage(
-        name: AppRoutes.dailyDealProductDetail,
-        page: () {
-          _bottomNavigationController.isNavigated = true;
-          return DailyDealProduct();
-        },
-        binding: DailyDealProductBinding()),
-    GetPage(
-        name: AppRoutes.frontPageProductDetail,
-        page: () {
-          _bottomNavigationController.isNavigated = true;
-          return FrontPageDetailScreen();
-        },
-        binding: FrontPageDetailBinding()),
-    GetPage(
-        name: AppRoutes.favouriteDeal,
-        page: () {
-          _bottomNavigationController.isNavigated = true;
-          return const FavouriteDeals();
-        },
-        binding: FavouriteDealsBinding()),
+    // GetPage(
+    //     name: AppRoutes.homeOptions,
+    //     page: () {
+    //       _bottomNavigationController.isNavigated = true;
+    //       return HomeOptionScreen();
+    //     },
+    //     binding: HomeOptionBindings()),
+    // GetPage(
+    //     name: AppRoutes.dailyDealProductDetail,
+    //     page: () {
+    //       _bottomNavigationController.isNavigated = true;
+    //       return DailyDealProduct();
+    //     },
+    //     binding: DailyDealProductBinding()),
+    // GetPage(
+    //     name: AppRoutes.frontPageProductDetail,
+    //     page: () {
+    //       _bottomNavigationController.isNavigated = true;
+    //       return FrontPageDetailScreen();
+    //     },
+    //     binding: FrontPageDetailBinding()),
+    // GetPage(
+    //     name: AppRoutes.favouriteDeal,
+    //     page: () {
+    //       _bottomNavigationController.isNavigated = true;
+    //       return const FavouriteDeals();
+    //     },
+    //     binding: FavouriteDealsBinding()),
     GetPage(
         name: AppRoutes.aboutDonna,
         page: () {
@@ -74,20 +74,20 @@ class AppPages {
           return const BrandsScreen();
         },
         binding: BrandsBinding()),
-    GetPage(
-        name: AppRoutes.categoryDetailsList,
-        page: () {
-          _bottomNavigationController.isNavigated = true;
-          return const CategoryListDetails();
-        },
-        binding: CategoryDetailsListBinding()),
-    GetPage(
-        name: AppRoutes.categoryItemDetail,
-        page: () {
-          _bottomNavigationController.isNavigated = true;
-          return CategoryItemDetail();
-        },
-        binding: CategoryItemDetailBinding()),
+    // GetPage(
+    //     name: AppRoutes.categoryDetailsList,
+    //     page: () {
+    //       _bottomNavigationController.isNavigated = true;
+    //       return const CategoryListDetails();
+    //     },
+    //     binding: CategoryDetailsListBinding()),
+    // GetPage(
+    //     name: AppRoutes.categoryItemDetail,
+    //     page: () {
+    //       _bottomNavigationController.isNavigated = true;
+    //       return CategoryItemDetail();
+    //     },
+    //     binding: CategoryItemDetailBinding()),
     GetPage(
         name: AppRoutes.accountDetails,
         page: () {
@@ -109,19 +109,21 @@ class AppPages {
           return const Sort();
         },
         binding: SortBindings()),
-    GetPage(
-        name: AppRoutes.searchView,
-        page: () {
-          _bottomNavigationController.isNavigated = true;
-          return const SearchView();
-        },
-        binding: SearchViewBindings()),
-    GetPage(
-      name: AppRoutes.filterView,
-      page: () {
-        _bottomNavigationController.isNavigated = true;
-        return FilterScreen();
-      },
-    )
+    // GetPage(
+    //     name: AppRoutes.searchView,
+    //     page: () {
+    //       _bottomNavigationController.isNavigated = true;
+    //       return const SearchView();
+    //     },
+    //     binding: SearchViewBindings()),
+    // GetPage(
+    //   name: AppRoutes.filterView,
+    //   page: () {
+    //     _bottomNavigationController.isNavigated = true;
+    //     return FilterScreen();
+    //   },
+    // )
   ];
+
+
 }

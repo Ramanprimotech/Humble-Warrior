@@ -6,6 +6,7 @@ class SearchBar extends StatelessWidget {
       {Key? key,
       this.child,
       this.margin,
+       required this.route,
       this.padding,
       this.postType,
       this.item})
@@ -15,6 +16,7 @@ class SearchBar extends StatelessWidget {
   final EdgeInsets? margin;
   final EdgeInsets? padding;
   final String? postType;
+  final int? route;
   final ProductCategoryItem? item;
 
   @override
@@ -62,12 +64,13 @@ class SearchBar extends StatelessWidget {
         onTap: () {
           ProductCategoryItem items =
               item == null ? ProductCategoryItem() : item!;
-          Get.toNamed(AppRoutes.searchView, arguments: [
-            postType.isEmptyOrNull ? "" : postType.toString(),
-            items.id == null ? "" : items.id.toString(),
-            items.categoryName == null ? "" : items.categoryName.toString(),
-            items.categoryImage == null ? "" : items.categoryImage.toString()
-          ]);
+          Get.toNamed(AppRoutes.searchView,id: route, arguments: {
+           "postType": postType.isEmptyOrNull ? "" : postType.toString(),
+            "itemId" : items.id == null ? "" : items.id.toString(),
+            "catName":items.categoryName == null ? "" : items.categoryName.toString(),
+           "catImage": items.categoryImage == null ? "" : items.categoryImage.toString(),
+        "route" : route,
+          });
         },
       ),
     );
@@ -81,6 +84,7 @@ class FilterIcon extends StatelessWidget {
       this.margin,
       this.padding,
       this.postType,
+        required this.route,
       this.item})
       : super(key: key);
 
@@ -88,6 +92,7 @@ class FilterIcon extends StatelessWidget {
   final EdgeInsets? margin;
   final EdgeInsets? padding;
   final String? postType;
+  final int route;
   final ProductCategoryItem? item;
 
   @override
@@ -99,7 +104,7 @@ class FilterIcon extends StatelessWidget {
             ProductCategoryItem items =
             item == null ? ProductCategoryItem() : item!;
             Get.put(FilterController());
-            var data = await Get.toNamed(AppRoutes.filterView);
+            var data = await Get.toNamed(AppRoutes.filterView, id : route , arguments: {"route" : route} );
             Get.find<FilterController>().resetList();
           });
 

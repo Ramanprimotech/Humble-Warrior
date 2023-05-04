@@ -25,14 +25,14 @@ class HomeScreenWidgets {
         Theme.of(context).extension<ImageIconTheme>()!;
     return AppBar(
       centerTitle: false,
-      title: const SearchBar(),
+      title: const SearchBar(route: 3,),
       actions: [
         Padding(
           padding: 25.pr,
           child: InkWell(
             onTap: () {
               CommonUtils.toCheckInternet(action: (){
-                Get.toNamed(AppRoutes.notification);
+                Get.toNamed(AppRoutes.notification, id: 3);
               });
             },
             child: GetBuilder<NotificationController>(
