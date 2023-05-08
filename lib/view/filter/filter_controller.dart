@@ -70,7 +70,6 @@ class FilterController extends GetxController {
   Future searchsAPI({bool? refresh = false}) async {
     if (refresh!) {
       searchsPage = 1;
-      searchList.clear();
     }
     List<int> catIds = getIntList();
     await FetchSearchList()
@@ -81,6 +80,9 @@ class FilterController extends GetxController {
         DialogHelper.showToast(context, noMoreDealsTxt);
       } else {
         searchsPage += 1;
+        if (refresh!) {
+          searchList.clear();
+        }
         searchList.addAll(value.data!);
         searchListLength.value = searchList.length;
         if (refresh) {
@@ -98,7 +100,6 @@ class FilterController extends GetxController {
   Future filterAPI(List<int> catIds, {bool? refresh = false}) async {
     if (refresh!) {
       searchsPage = 1;
-      searchList.clear();
     }
 
     await FetchSearchList()
@@ -109,11 +110,14 @@ class FilterController extends GetxController {
         DialogHelper.showToast(context, noMoreDealsTxt);
       } else {
         searchsPage += 1;
+        if (refresh!) {
+          searchList.clear();
+        }
         searchList.addAll(value.data!);
         searchListLength.value = searchList.length;
-        if (refresh) {
-          DialogHelper.showToast(context, dealsRefreshTxt);
-        }
+        // if (refresh) {
+        //   DialogHelper.showToast(context, dealsRefreshTxt);
+        // }
       }
       if (value.totalRecords != null) {
         searchsTotalDeals.value = int.parse(value.totalRecords!);

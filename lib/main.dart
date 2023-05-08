@@ -3,7 +3,7 @@ import 'package:humble_warrior/hw.dart';
  final GlobalKey<NavigatorState>? mainNavigation = Get.nestedKey(1);
  final GlobalKey<NavigatorState>? wishNavigation = Get.nestedKey(2);
  final GlobalKey<NavigatorState>? homeNavigation = Get.nestedKey(3);
- final GlobalKey<NavigatorState>? account = Get.nestedKey(4);
+ final GlobalKey<NavigatorState>? accountNavigation = Get.nestedKey(4);
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id

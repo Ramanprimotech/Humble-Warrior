@@ -25,7 +25,7 @@ class BottomNavigationController extends GetxController {
     const Placeholder(),
     const Placeholder(),
     Navigator(
-      key: account,
+      key: accountNavigation,
       onGenerateRoute: (settings) => AppGenerate.generateRoutes(settings),
       initialRoute: AppRoutes.myAccount,
     ),
@@ -44,6 +44,17 @@ class BottomNavigationController extends GetxController {
         if (index == 1) {
           var controller = Get.find<WishListController>();
           controller.getWishList();
+        }
+        if (selectedIndex == index) {
+          if (index == 0) {
+            homeNavigation!.currentState?.popUntil((route) => route.isFirst);
+          }
+          if (index == 1) {
+            wishNavigation!.currentState?.popUntil((route) => route.isFirst);
+          }
+          if (index == 4) {
+            accountNavigation!.currentState?.popUntil((route) => route.isFirst);
+          }
         }
         // if (isNavigated) {
         //   isNavigated = false;

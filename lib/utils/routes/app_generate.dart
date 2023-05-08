@@ -5,7 +5,6 @@ import '../../hw.dart';
 class AppGenerate {
   static generateRoutes(RouteSettings settings) {
     String? name = settings.name;
-    print("=======$name");
     Map<String, GetPageRoute> routes = {
       AppRoutes.introScreen: GetPageRoute(
           settings: settings,
