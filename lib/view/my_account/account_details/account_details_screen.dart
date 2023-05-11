@@ -15,7 +15,7 @@ class AccountDetails extends StatelessWidget {
               ? SafeArea(
                   child: Column(
                     children: [
-                      50.shb,
+                      // 20.shb,
                       CommonWidgets.titleBar(context,
                           title: accountDetailsTxt, fontSize: 20, onPress: () {
                         Get.back(id: 4);
