@@ -3,6 +3,12 @@ import 'package:humble_warrior/utils/routes/app_generate.dart';
 
 List<ProductCategoryItem> productCategory = [];
 
+RxString currentHomeRoute = "".obs;
+RxString currentWishRoute = "".obs;
+RxString currentAccountRoute = "".obs;
+final MyAppRouteObserver homeRouteObserver = MyAppRouteObserver(currentRouteName: currentHomeRoute);
+final MyAppRouteObserver accountRouteObserver = MyAppRouteObserver(currentRouteName: currentAccountRoute);
+final MyAppRouteObserver wishRouteObserver = MyAppRouteObserver(currentRouteName: currentWishRoute);
 class BottomNavigationController extends GetxController {
   final HomeScreenController controller = Get.find();
 
@@ -13,11 +19,13 @@ class BottomNavigationController extends GetxController {
   final List<Widget> _navigationItems = [
     Navigator(
       key: homeNavigation,
+      observers: [homeRouteObserver],
       onGenerateRoute: (settings) => AppGenerate.generateRoutes(settings),
       initialRoute: AppRoutes.homePage,
     ),
     Navigator(
       key: wishNavigation,
+      observers: [wishRouteObserver],
       onGenerateRoute: (settings) => AppGenerate.generateRoutes(settings),
       initialRoute: AppRoutes.wishList,
     ),
@@ -26,6 +34,8 @@ class BottomNavigationController extends GetxController {
     const Placeholder(),
     Navigator(
       key: accountNavigation,
+      observers: [accountRouteObserver
+      ],
       onGenerateRoute: (settings) => AppGenerate.generateRoutes(settings),
       initialRoute: AppRoutes.myAccount,
     ),
@@ -126,6 +136,24 @@ class BottomNavigationController extends GetxController {
   }
 
   Future<bool> onWillPop() {
+    if(selectedIndex == 0){
+      if(currentHomeRoute.value != AppRoutes.homePage){
+        Get.back(id: 3);
+        return Future.value(false);
+      }
+    }
+    if(selectedIndex == 1){
+      if(currentWishRoute.value != AppRoutes.wishList){
+        Get.back(id: 2);
+        return Future.value(false);
+      }
+    }
+    if(selectedIndex == 4){
+      if(currentAccountRoute.value != AppRoutes.myAccount){
+        Get.back(id: 4);
+        return Future.value(false);
+      }
+    }
     DateTime now = DateTime.now();
     if (currentBackPressTime == null ||
         now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
@@ -134,5 +162,23 @@ class BottomNavigationController extends GetxController {
       return Future.value(false);
     }
     return Future.value(true);
+  }
+}
+
+class MyAppRouteObserver extends RouteObserver<PageRoute<dynamic>> {
+  RxString currentRouteName;
+  MyAppRouteObserver({required this.currentRouteName});
+
+  @override
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    super.didPush(route, previousRoute);
+    currentRouteName.value = route.settings.name??"";
+  }
+
+  @override
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    super.didPop(route, previousRoute);
+    currentRouteName.value = previousRoute?.settings.name??"";
+
   }
 }

@@ -18,8 +18,10 @@ class CategoryListDetails extends StatelessWidget {
       appBar: AppBar(
         titleSpacing: 5,
         leadingWidth: 34,
-        leading: AppIcons.IosBackIcon(),
-        title:  SearchBar(route: 3,
+        leading: AppIcons.IosBackIcon(onPress: (){
+          Navigator.pop(context);
+        }),
+        title: SearchBar(route: 3,
           margin: EdgeInsets.only(right: 4),
           ///Uncomment for preselected category
           // item: item,
