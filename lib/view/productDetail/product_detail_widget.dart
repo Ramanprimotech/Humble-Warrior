@@ -92,7 +92,8 @@ class ProductDetailWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppText(
-            "What is $itemName",
+            // "What is $itemName",
+            "$itemName",
             fontSize: 18,
             maxLines: 2,
             fontWeight: FontWeight.bold,
