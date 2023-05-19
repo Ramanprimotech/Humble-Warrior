@@ -29,7 +29,7 @@ const String photoViewerTxt = "Photo Viewer";
 const String brandsTxt = "BRAND'S";
 const String viewAllTxt = "VIEW ALL";
 const String donnaDailyDealTxt = "Donna's Daily Deals";
-const String donnaFavouriteDealTxt = "Donna's Favourite Things";
+const String donnaFavouriteDealTxt = "Donna's Favorite Things";
 const String donnaFrontPageDealTxt = "Front Page Deals";
 
 // const String brandLink = "https://humblewarrior.com/";
