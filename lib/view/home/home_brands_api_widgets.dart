@@ -231,20 +231,48 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
 
   @override
   Widget waiting() {
+    return Container(
+      height: 90,
+      child: ListView.separated(
+        padding: listPadding,
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: 10,
+        itemBuilder: (ctx, index) {
+          return
+              // Container(
+              //   height: 60,
+              //   color: Colors.transparent,
+              // );
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                child: CustomShimmer.rectangular(width: width, height: height, borderRadius: 10),
+              );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return separatorHeight.swb;
+        },
+      ),
+    );
+  }
+
+
+/*  Widget waiting() {
     return ListView.separated(
       padding: listPadding,
       scrollDirection: Axis.horizontal,
       itemCount: 10,
       itemBuilder: (ctx, index) {
         return
-            // Container(
-            //   color: Colors.transparent,
-            // );
-            CustomShimmer.rectangular(width: width, height: height);
+          // Container(
+          //   color: Colors.transparent,
+          // );
+          CustomShimmer.rectangular(width: width, height: height);
       },
       separatorBuilder: (BuildContext context, int index) {
         return separatorHeight.swb;
       },
     );
-  }
+  }*/
+
 }

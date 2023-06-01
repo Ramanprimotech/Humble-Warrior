@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
             homeScreenWidgets.homeOptionDeals(),
 
             /// Brand List Future Builder
-            homeScreenWidgets.brandListAPIBuilder(waitingState: false),
+            homeScreenWidgets.brandListAPIBuilder(waitingState: true),
           ],
         ),
       ),
