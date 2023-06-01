@@ -65,18 +65,18 @@ class _BrandsScreenState extends State<BrandsScreen> {
                     height: 40,
                     width: 40,
                   ),*/
-                  8.swb,
-                   if(searchIconVisibility==true)
-                     const Icon(
-                       Icons.search,
-                     ),
-                   /*Visibility(
-                     visible: searchIconVisibility,
-                     child: const Icon(
-                      Icons.search,
-                  ),
-                   ),*/
-                  4.swb,
+                  12.swb,
+                  //  if(searchIconVisibility==true)
+                  //    const Icon(
+                  //      Icons.search,
+                  //    ),
+                  //  /*Visibility(
+                  //    visible: searchIconVisibility,
+                  //    child: const Icon(
+                  //     Icons.search,
+                  // ),
+                  //  ),*/
+                  // 4.swb,
                   Expanded(
                     child: TextFormField(
                       onChanged: (value) {
