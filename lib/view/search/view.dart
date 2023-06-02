@@ -14,21 +14,23 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
+  ThemeController themeController = Get.put(ThemeController());
   List<int> selectedCategories = [];
   RxBool showCross = false.obs;
 
   Timer? timer;
-
-  ThemeController themeController = ThemeController();
   FilterController filterController = Get.find();
+
 
   @override
   void initState() {
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = themeController.themeMode == ThemeMode.dark;
     filterController.context = context;
     filterController.postType = widget.postType;
     filterController.catID = widget.catId == "" ? null : int.parse(widget.catId);
@@ -71,6 +73,18 @@ class _SearchViewState extends State<SearchView> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+
+                Padding(
+                  padding: EdgeInsets.only(left: 10,top: 10,bottom: 10),
+                  child: Image.asset(
+                    !isDark!
+                        ? ImagePathAssets.hwLogoUnnamed
+                        : ImagePathAssets.hwLogoUnnamedDark,
+                    height: 40,
+                    width: 40,
+                  ),
+                ),
+
                 8.swb,
                 Obx(() =>
                         // filterController.searchIconVisibility.value
@@ -78,11 +92,11 @@ class _SearchViewState extends State<SearchView> {
                         Icon(
                           Icons.search,
                           size: filterController.searchIconVisibility.value
-                              ? 20
-                              : 15,
-                          color: filterController.searchIconVisibility.value
-                              ? null
-                              : Colors.transparent,
+                              ? 15
+                              : 20,
+                          // color: filterController.searchIconVisibility.value
+                          //     ? null
+                          //     : Colors.grey,
                         )
                     ),
                 4.swb,

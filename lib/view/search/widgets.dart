@@ -8,6 +8,7 @@ class SearchBar extends StatelessWidget {
       this.margin,
        required this.route,
       this.padding,
+      this.onTap,
       this.postType,
       this.item})
       : super(key: key);
@@ -17,6 +18,7 @@ class SearchBar extends StatelessWidget {
   final EdgeInsets? padding;
   final String? postType;
   final int? route;
+  final onTap;
   final ProductCategoryItem? item;
 
   @override
@@ -27,6 +29,17 @@ class SearchBar extends StatelessWidget {
       surfaceTintColor: Colors.transparent,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       child: GestureDetector(
+        onTap: onTap ?? () {
+          ProductCategoryItem items =
+              item == null ? ProductCategoryItem() : item!;
+          Get.toNamed(AppRoutes.searchView,id: route, arguments: {
+           "postType": postType.isEmptyOrNull ? "" : postType.toString(),
+            "itemId" : items.id == null ? "" : items.id.toString(),
+            "catName":items.categoryName == null ? "" : items.categoryName.toString(),
+           "catImage": items.categoryImage == null ? "" : items.categoryImage.toString(),
+        "route" : route,
+          });
+        },
         child: Container(
           height: 45,
           width: double.infinity,
@@ -61,17 +74,6 @@ class SearchBar extends StatelessWidget {
                 ],
               ),
         ),
-        onTap: () {
-          ProductCategoryItem items =
-              item == null ? ProductCategoryItem() : item!;
-          Get.toNamed(AppRoutes.searchView,id: route, arguments: {
-           "postType": postType.isEmptyOrNull ? "" : postType.toString(),
-            "itemId" : items.id == null ? "" : items.id.toString(),
-            "catName":items.categoryName == null ? "" : items.categoryName.toString(),
-           "catImage": items.categoryImage == null ? "" : items.categoryImage.toString(),
-        "route" : route,
-          });
-        },
       ),
     );
   }
