@@ -17,7 +17,7 @@ class _SearchViewState extends State<SearchView> {
   ThemeController themeController = Get.put(ThemeController());
   List<int> selectedCategories = [];
   RxBool showCross = false.obs;
-  RxBool searchIconVisibility = false.obs;
+
   Timer? timer;
   FilterController filterController = Get.find();
 
@@ -114,7 +114,7 @@ class _SearchViewState extends State<SearchView> {
                         timer!.cancel();
                       }
                       if(filterController.focusNode.hasFocus){
-                        searchIconVisibility.value = false;
+                        filterController.searchIconVisibility.value = false;
                       };
                       timer = Timer(const Duration(seconds: 1), () {
                         if (value.length >= 3) {
@@ -134,7 +134,7 @@ class _SearchViewState extends State<SearchView> {
                       // else{
                       //   filterController.focusNode.unfocus();
                       // }
-                      searchIconVisibility.value = true;
+                      filterController.searchIconVisibility.value = true;
                       if (value.isNotEmpty) {
                         hiveService.recentFavourite(
                             item: RecentSearch(
@@ -160,7 +160,7 @@ class _SearchViewState extends State<SearchView> {
                           borderSide: BorderSide.none),
                       prefixIcon: Obx(() =>
                           Visibility(
-                            visible: searchIconVisibility.value,
+                            visible: filterController.searchIconVisibility.value,
                             child: Icon(
                               Icons.search,
                               size: 20.sp,
@@ -310,7 +310,7 @@ class _SearchViewState extends State<SearchView> {
                                   filterController.controller.text =
                                       data[index].productSearched!;
                                   showCross.value = true;
-                                  searchIconVisibility.value = true;
+                                  filterController.searchIconVisibility.value = true;
                                   hiveService.recentFavourite(
                                       item: RecentSearch(
                                           productSearched: filterController

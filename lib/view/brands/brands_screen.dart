@@ -18,11 +18,12 @@ class _BrandsScreenState extends State<BrandsScreen> {
     focusNode.requestFocus();
     focusNode.addListener(() {
       focusNode.hasFocus;
-      // if (focusNode.hasFocus) {
-      //   searchIconVisibility.value = false;
-      // } else {
-      //   searchIconVisibility.value = true;
-      // }
+      // searchIconVisibility.value = !focusNode.hasFocus;
+      if (focusNode.hasFocus) {
+        searchIconVisibility.value = false;
+      } else {
+        searchIconVisibility.value = true;
+      }
     });
     // focusNode.requestFocus();
     // focusNode.addListener(() {

@@ -10,6 +10,7 @@ class FilterController extends GetxController {
   String postType = "";
   late BuildContext context;
   RxBool selevtedVisibility = false.obs;
+  RxBool searchIconVisibility = false.obs;
   int? catID;
 
   ///----Scroll Controllers
@@ -178,13 +179,13 @@ class FilterController extends GetxController {
     scrollControllerListener();
     focusNode.requestFocus();
     focusNode.addListener(() {
-      focusNode.hasFocus;
-      // if (focusNode.hasFocus) {
-      //   searchIconVisibility.value = false;
-      // } else {
-      //   searchIconVisibility.value = true;
-      // }
-    });
+      if (focusNode.hasFocus) {
+        searchIconVisibility.value = false;
+      } else {
+        searchIconVisibility.value = true;
+      }
+    }
+    );
     // searchsAPI();
     super.onInit();
   }
