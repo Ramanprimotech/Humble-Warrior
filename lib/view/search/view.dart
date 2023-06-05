@@ -84,7 +84,7 @@ class _SearchViewState extends State<SearchView> {
                   ),
                 ),*/
 
-                8.swb,
+                4.swb,
                 /*Obx(() =>
                         Visibility(
                           visible: searchIconVisibility.value,
@@ -158,6 +158,10 @@ class _SearchViewState extends State<SearchView> {
                           borderSide: BorderSide.none),
                       enabledBorder: const UnderlineInputBorder(
                           borderSide: BorderSide.none),
+                      prefixIconConstraints: const BoxConstraints(
+                          minWidth: 35,
+                        maxWidth: 35
+                      ),
                       prefixIcon: Obx(() =>
                           Visibility(
                             visible: filterController.searchIconVisibility.value,

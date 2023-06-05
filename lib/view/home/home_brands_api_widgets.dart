@@ -214,7 +214,7 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
           ),
           GestureDetector(
             onTap: () {
-              Get.toNamed(AppRoutes.brands,id: 3);
+              Get.toNamed(AppRoutes.brands);
             },
             child: const AppText(
               viewAllTxt,

@@ -48,7 +48,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
         titleSpacing: 5,
         leadingWidth: 34,
         centerTitle: false,
-        leading: AppIcons.IosBackIcon(onPress: (){Get.back(id:3);}),
+        leading: AppIcons.IosBackIcon(onPress: (){Get.back();}),
         title: Padding(
           padding: 15.pr,
           child: Card(
@@ -76,7 +76,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
                     height: 40,
                     width: 40,
                   ),*/
-                  12.swb,
+                4.swb,
                   //  if(searchIconVisibility==true)
                   //    const Icon(
                   //      Icons.search,
@@ -117,7 +117,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
                         });
                       },
                       decoration:  InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: 13),
+                        contentPadding: 5.pv,
                         hintText: searchTxt,
                         hintStyle: TextStyle(
                           fontWeight: FontWeight.w400,
@@ -128,6 +128,10 @@ class _BrandsScreenState extends State<BrandsScreen> {
                             borderSide: BorderSide.none),
                         enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide.none),
+                        prefixIconConstraints: const BoxConstraints(
+                            minWidth: 35,
+                            maxWidth: 35
+                        ),
                         prefixIcon: Obx(() =>
                             Visibility(
                               visible: searchIconVisibility.value,
