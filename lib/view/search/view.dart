@@ -17,10 +17,9 @@ class _SearchViewState extends State<SearchView> {
   ThemeController themeController = Get.put(ThemeController());
   List<int> selectedCategories = [];
   RxBool showCross = false.obs;
-
+  RxBool searchIconVisibility = false.obs;
   Timer? timer;
   FilterController filterController = Get.find();
-
 
   @override
   void initState() {
@@ -74,7 +73,7 @@ class _SearchViewState extends State<SearchView> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
 
-                Padding(
+                /*Padding(
                   padding: EdgeInsets.only(left: 10,top: 10,bottom: 10),
                   child: Image.asset(
                     !isDark!
@@ -83,23 +82,20 @@ class _SearchViewState extends State<SearchView> {
                     height: 40,
                     width: 40,
                   ),
-                ),
+                ),*/
 
                 8.swb,
-                Obx(() =>
-                        // filterController.searchIconVisibility.value
-                        //     ?
-                        Icon(
-                          Icons.search,
-                          size: filterController.searchIconVisibility.value
-                              ? 15
-                              : 20,
-                          // color: filterController.searchIconVisibility.value
-                          //     ? null
-                          //     : Colors.grey,
-                        )
+                /*Obx(() =>
+                        Visibility(
+                          visible: searchIconVisibility.value,
+                          child: const Icon(
+                            Icons.search,
+                            size: 20,
+                            color: Colors.grey,
+                          ),
+                        ),
                     ),
-                4.swb,
+                4.swb,*/
                 Expanded(
                   child: TextFormField(
                     focusNode: filterController.focusNode,
@@ -107,14 +103,19 @@ class _SearchViewState extends State<SearchView> {
                     onChanged: (value) {
                       if (value.isEmpty &&
                           filterController.controller.text == "") {
+                       // searchIconVisibility.value = false;
+                        showCross.value = false;
+                      }
+                      else {
                         showCross.value = true;
-                      } else {
-                        showCross.value = true;
+                        // searchIconVisibility.value = false;
                       }
                       if (timer != null) {
                         timer!.cancel();
                       }
-
+                      if(filterController.focusNode.hasFocus){
+                        searchIconVisibility.value = false;
+                      };
                       timer = Timer(const Duration(seconds: 1), () {
                         if (value.length >= 3) {
                           /*hiveService.recentFavourite(
@@ -127,14 +128,20 @@ class _SearchViewState extends State<SearchView> {
                       });
                     },
                     onFieldSubmitted: (value) {
-                      filterController.focusNode.unfocus();
+                      // if(showCross == false){
+                      //   filterController.focusNode.hasFocus;
+                      // }
+                      // else{
+                      //   filterController.focusNode.unfocus();
+                      // }
+                      searchIconVisibility.value = true;
                       if (value.isNotEmpty) {
                         hiveService.recentFavourite(
                             item: RecentSearch(
                                 productSearched:
                                     filterController.controller.text));
                         // filterController.searchFromStart();
-                        filterController.focusNode.unfocus();
+                        // filterController.focusNode.unfocus();
                         filterController.searchFromStart();
                         setState(() {});
                       }
@@ -151,6 +158,19 @@ class _SearchViewState extends State<SearchView> {
                           borderSide: BorderSide.none),
                       enabledBorder: const UnderlineInputBorder(
                           borderSide: BorderSide.none),
+                      prefixIcon: Obx(() =>
+                          Visibility(
+                            visible: searchIconVisibility.value,
+                            child: Icon(
+                              Icons.search,
+                              size: 20.sp,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .displayMedium!
+                                  .color,
+                            ),
+                          ),
+                      ),
                       suffixIcon: Obx(
                         () => Visibility(
                           visible: showCross.value,
@@ -165,6 +185,7 @@ class _SearchViewState extends State<SearchView> {
                             ),
                             onTap: () {
                               filterController.controller.clear();
+                              // searchIconVisibility.value = false;
                               showCross.value = false;
                               setState(() {});
                             },
@@ -289,6 +310,7 @@ class _SearchViewState extends State<SearchView> {
                                   filterController.controller.text =
                                       data[index].productSearched!;
                                   showCross.value = true;
+                                  searchIconVisibility.value = true;
                                   hiveService.recentFavourite(
                                       item: RecentSearch(
                                           productSearched: filterController
@@ -328,7 +350,6 @@ class _SearchViewState extends State<SearchView> {
                           child: AppText(
                         "Sorry, we could not find any results matching.",
                         textAlign: TextAlign.center,
-                        color: AppColors.black,
                       ));
                     }
                     return ListView.separated(

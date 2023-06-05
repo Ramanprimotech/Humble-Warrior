@@ -5,7 +5,7 @@ class FilterController extends GetxController {
   RxList<ProductCategoryItem> record = <ProductCategoryItem>[].obs;
   RxList<ProductCategoryItem> unSelectedRecords = <ProductCategoryItem>[].obs;
   TextEditingController controller = TextEditingController();
-  RxBool searchIconVisibility = true.obs;
+
   FocusNode focusNode = FocusNode();
   String postType = "";
   late BuildContext context;
@@ -178,11 +178,12 @@ class FilterController extends GetxController {
     scrollControllerListener();
     focusNode.requestFocus();
     focusNode.addListener(() {
-      if (focusNode.hasFocus) {
-        searchIconVisibility.value = false;
-      } else {
-        searchIconVisibility.value = true;
-      }
+      focusNode.hasFocus;
+      // if (focusNode.hasFocus) {
+      //   searchIconVisibility.value = false;
+      // } else {
+      //   searchIconVisibility.value = true;
+      // }
     });
     // searchsAPI();
     super.onInit();

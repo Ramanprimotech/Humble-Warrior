@@ -234,6 +234,7 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
     return Container(
       height: 90,
       child: ListView.separated(
+        physics: NeverScrollableScrollPhysics(),
         padding: listPadding,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,

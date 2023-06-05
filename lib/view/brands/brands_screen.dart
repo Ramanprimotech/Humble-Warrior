@@ -11,14 +11,23 @@ class _BrandsScreenState extends State<BrandsScreen> {
   TextEditingController searchTextController = TextEditingController();
   FocusNode focusNode = FocusNode();
   bool showCross = false;
-  bool searchIconVisibility = true;
+  RxBool searchIconVisibility = false.obs;
 
   @override
   void initState() {
+    focusNode.requestFocus();
+    focusNode.addListener(() {
+      focusNode.hasFocus;
+      // if (focusNode.hasFocus) {
+      //   searchIconVisibility.value = false;
+      // } else {
+      //   searchIconVisibility.value = true;
+      // }
+    });
     // focusNode.requestFocus();
     // focusNode.addListener(() {
     //   if (focusNode.hasFocus) {
-        searchIconVisibility = true;
+    //     searchIconVisibility.value = true;
     //   } else {
     //     searchIconVisibility = false;
     //   }
@@ -42,6 +51,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
         title: Padding(
           padding: 15.pr,
           child: Card(
+            surfaceTintColor: Colors.transparent,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
             ),
@@ -79,29 +89,32 @@ class _BrandsScreenState extends State<BrandsScreen> {
                   // 4.swb,
                   Expanded(
                     child: TextFormField(
+                      focusNode: focusNode,
+                      controller: searchTextController,
                       onChanged: (value) {
                         if (value.isEmpty &&
                             searchTextController.text == "") {
                           showCross = false;
-                          searchIconVisibility = true;
-                          focusNode.hasFocus;
-                          setState(() {});
-                        } else {
-                          showCross = true;
-                          searchIconVisibility = false;
-                          focusNode.unfocus();
-                          setState(() {});
+                          // searchIconVisibility = true;
+                          // focusNode.hasFocus;
+                          // setState(() {});
                         }
+                        else {
+                          showCross = true;
+                        }
+                        if(focusNode.hasFocus){
+                          searchIconVisibility.value = false;
+                        };
                         setState(() {});
                       },
                       onFieldSubmitted: (value){
-                        setState(() {
-                          searchIconVisibility = false;
+                       focusNode.unfocus();
+                          searchIconVisibility.value = true;
                         showCross = true;
                         focusNode.unfocus();
+                        setState(() {
                         });
                       },
-                      controller: searchTextController,
                       decoration:  InputDecoration(
                         contentPadding: EdgeInsets.symmetric(vertical: 13),
                         hintText: searchTxt,
@@ -114,6 +127,19 @@ class _BrandsScreenState extends State<BrandsScreen> {
                             borderSide: BorderSide.none),
                         enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide.none),
+                        prefixIcon: Obx(() =>
+                            Visibility(
+                              visible: searchIconVisibility.value,
+                              child: Icon(
+                                Icons.search,
+                                size: 20.sp,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .displayMedium!
+                                    .color,
+                              ),
+                            ),
+                        ),
                         suffixIcon: Visibility(
                           visible: showCross,
                           child: GestureDetector(
@@ -128,7 +154,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
                             onTap: () {
                               searchTextController.clear();
                               showCross = false;
-                              searchIconVisibility = false;
+                              // searchIconVisibility.value = false;
                               setState(() {});
                             },
                           ),
