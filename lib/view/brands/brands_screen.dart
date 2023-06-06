@@ -38,6 +38,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final BottomNavigationController bottomNavigationController = Get.find();
     HomeScreenController homeScreenController = Get.find();
     final ThemeController themeController = Get.find();
 
@@ -48,7 +49,9 @@ class _BrandsScreenState extends State<BrandsScreen> {
         titleSpacing: 5,
         leadingWidth: 34,
         centerTitle: false,
-        leading: AppIcons.IosBackIcon(onPress: (){Get.back();}),
+        leading: AppIcons.IosBackIcon(onPress: (){
+          bottomNavigationController.selectedIndex==4?Get.back(id:4):Get.back(id:3);
+        }),
         title: Padding(
           padding: 15.pr,
           child: Card(

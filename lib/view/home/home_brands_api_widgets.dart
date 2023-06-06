@@ -4,6 +4,7 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   final BuildContext context;
 
   HomePageBrandAPIWidgets({required this.context});
+  final BottomNavigationController _bottomNavigationController = Get.find();
 
   /// Brands Item Params
   final double width = 80;
@@ -214,7 +215,11 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
           ),
           GestureDetector(
             onTap: () {
-              Get.toNamed(AppRoutes.brands);
+              print("afdf ${_bottomNavigationController.selectedIndex}");
+              _bottomNavigationController.selectedIndex == 4?
+              Get.toNamed(AppRoutes.brands, id:4):
+              Get.toNamed(AppRoutes.brands,id:3);
+              // print("afdf ${id}");
             },
             child: const AppText(
               viewAllTxt,
