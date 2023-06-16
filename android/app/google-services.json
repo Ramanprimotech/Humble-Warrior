@@ -14,11 +14,35 @@
       },
       "oauth_client": [
         {
+          "client_id": "11517768711-0nede40c87gj0bqrf8j9gq0mfe66dl0u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.humble.warrior",
+            "certificate_hash": "745a90e788697a35abf246e091ed4b73a6869f47"
+          }
+        },
+        {
+          "client_id": "11517768711-66c5mrp13bjaduji139pldnihapjuik3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.humble.warrior",
+            "certificate_hash": "84488ea820d2616aca943a3c163d2a9bd98f77fc"
+          }
+        },
+        {
           "client_id": "11517768711-l3vb1jrbek38h4tms9a3f7olp2vo9223.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.humble.warrior",
             "certificate_hash": "f16bf9b46428264af7cac1a628dbb08df7824c4a"
+          }
+        },
+        {
+          "client_id": "11517768711-t6mp5nprjk588v499gq4o4faskgo076q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.humble.warrior",
+            "certificate_hash": "4f90596e62d800cf8c1b6d342bb59acde929f72d"
           }
         },
         {
