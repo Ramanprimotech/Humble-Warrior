@@ -97,7 +97,7 @@ class MyApp extends StatelessWidget {
             builder: (BuildContext context, value, Widget? child) {
               return GetMaterialApp(
                 // navigatorKey: mainNavigation,
-                title: 'Flutter Demo',
+                title: 'Humble Warrior',
                 debugShowCheckedModeBanner: false,
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
