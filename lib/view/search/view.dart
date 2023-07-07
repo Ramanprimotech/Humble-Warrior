@@ -101,50 +101,55 @@ class _SearchViewState extends State<SearchView> {
                     focusNode: filterController.focusNode,
                     controller: filterController.controller,
                     onChanged: (value) {
-                      if (value.isEmpty &&
-                          filterController.controller.text == "") {
-                       // searchIconVisibility.value = false;
-                        showCross.value = false;
-                      }
-                      else {
-                        showCross.value = true;
-                        // searchIconVisibility.value = false;
-                      }
-                      if (timer != null) {
-                        timer!.cancel();
-                      }
-                      if(filterController.focusNode.hasFocus){
-                        filterController.searchIconVisibility.value = false;
-                      };
-                      timer = Timer(const Duration(seconds: 1), () {
-                        if (value.length >= 3) {
-                          /*hiveService.recentFavourite(
+                      CommonUtils.toCheckInternet(context: context, action: (){
+                        if (value.isEmpty &&
+                            filterController.controller.text == "") {
+                          // searchIconVisibility.value = false;
+                          showCross.value = false;
+                        }
+                        else {
+                          showCross.value = true;
+                          // searchIconVisibility.value = false;
+                        }
+                        if (timer != null) {
+                          timer!.cancel();
+                        }
+                        if(filterController.focusNode.hasFocus){
+                          filterController.searchIconVisibility.value = false;
+                        };
+                        timer = Timer(const Duration(seconds: 1), () {
+                          if (value.length >= 3) {
+                            /*hiveService.recentFavourite(
                               item: RecentSearch(
                                   productSearched:
                                       filterController.controller.text));*/
+                            filterController.searchFromStart();
+                            setState(() {});
+                          }
+                        });
+                      });
+
+                    },
+                    onFieldSubmitted: (value) {
+                      CommonUtils.toCheckInternet(context: context,action: (){
+                        filterController.searchIconVisibility.value = true;
+                        if (value.isNotEmpty) {
+                          hiveService.recentFavourite(
+                              item: RecentSearch(
+                                  productSearched:
+                                  filterController.controller.text));
+                          // filterController.searchFromStart();
+                          // filterController.focusNode.unfocus();
                           filterController.searchFromStart();
                           setState(() {});
                         }
                       });
-                    },
-                    onFieldSubmitted: (value) {
                       // if(showCross == false){
                       //   filterController.focusNode.hasFocus;
                       // }
                       // else{
                       //   filterController.focusNode.unfocus();
                       // }
-                      filterController.searchIconVisibility.value = true;
-                      if (value.isNotEmpty) {
-                        hiveService.recentFavourite(
-                            item: RecentSearch(
-                                productSearched:
-                                    filterController.controller.text));
-                        // filterController.searchFromStart();
-                        // filterController.focusNode.unfocus();
-                        filterController.searchFromStart();
-                        setState(() {});
-                      }
                     },
                     decoration: InputDecoration(
                       contentPadding: 5.pv,

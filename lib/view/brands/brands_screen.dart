@@ -96,27 +96,31 @@ class _BrandsScreenState extends State<BrandsScreen> {
                       focusNode: focusNode,
                       controller: searchTextController,
                       onChanged: (value) {
-                        if (value.isEmpty &&
-                            searchTextController.text == "") {
-                          showCross = false;
-                          // searchIconVisibility = true;
-                          // focusNode.hasFocus;
-                          // setState(() {});
-                        }
-                        else {
-                          showCross = true;
-                        }
-                        if(focusNode.hasFocus){
-                          searchIconVisibility.value = false;
-                        };
-                        setState(() {});
+                        CommonUtils.toCheckInternet(context: context, action: (){
+                          if (value.isEmpty &&
+                              searchTextController.text == "") {
+                            showCross = false;
+                            // searchIconVisibility = true;
+                            // focusNode.hasFocus;
+                            // setState(() {});
+                          }
+                          else {
+                            showCross = true;
+                          }
+                          if(focusNode.hasFocus){
+                            searchIconVisibility.value = false;
+                          };
+                          setState(() {});
+                        });
                       },
                       onFieldSubmitted: (value){
-                       focusNode.unfocus();
+                        CommonUtils.toCheckInternet(context: context, action: (){
+                          focusNode.unfocus();
                           searchIconVisibility.value = true;
-                        showCross = true;
-                        focusNode.unfocus();
-                        setState(() {
+                          showCross = true;
+                          focusNode.unfocus();
+                          setState(() {
+                          });
                         });
                       },
                       decoration:  InputDecoration(
