@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:humble_warrior/view/splash/spalsh_controller.dart';
+import 'package:humble_warrior/view/splash/splash_screen.dart';
 
 class SplashBinding implements Bindings{
   @override
   void dependencies() {
-   Get.lazyPut(() => SplashController());
+   Get.lazyPut(() => SplashScreen());
   }
 }
