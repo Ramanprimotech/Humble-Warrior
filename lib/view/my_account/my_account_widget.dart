@@ -13,38 +13,43 @@ class MyAccWidget {
     return Column(
       children: [
         Obx(
-          () => Container(
-            alignment: Alignment.center,
-            height: 120,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.primary,
+          () => InkWell(
+            onTap: (){
+              Get.toNamed(AppRoutes.accountDetails,id: 4);
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 120,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.primary,
+              ),
+              child: controller.userImg.isEmpty
+                  ? InkWell(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.accountDetails,id: 4);
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          profileText(firstName: controller.username),
+                        ],
+                      ),
+                    )
+                  : CircleAvatar(radius: 60,
+              backgroundColor: Colors.blue,
+                backgroundImage: NetworkImage(controller.userImg.value.toString()),
+              )
+              /*ClipRRect(
+                      borderRadius: BorderRadius.circular(150),
+                      child: Image.file(
+                        File(controller.userImg.value),
+                        fit: BoxFit.fill,
+                        height: 145,
+                        width: 145,
+                      ),
+                    ),*/
             ),
-            child: controller.userImg.isEmpty
-                ? InkWell(
-                    onTap: () {
-                      Get.toNamed(AppRoutes.accountDetails,id: 4);
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        profileText(firstName: controller.username),
-                      ],
-                    ),
-                  )
-                : CircleAvatar(radius: 60,
-            backgroundColor: Colors.blue,
-              backgroundImage: NetworkImage(controller.userImg.value.toString()),
-            )
-            /*ClipRRect(
-                    borderRadius: BorderRadius.circular(150),
-                    child: Image.file(
-                      File(controller.userImg.value),
-                      fit: BoxFit.fill,
-                      height: 145,
-                      width: 145,
-                    ),
-                  ),*/
           ),
         ),
         10.shb,

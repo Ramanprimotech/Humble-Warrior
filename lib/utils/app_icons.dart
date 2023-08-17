@@ -173,7 +173,7 @@ class _HeartState extends State<Heart> {
             } else {
               if (context.mounted) {
                 DialogHelper.showConfirmationDialog(
-                    message: loginWishTxt,
+                    message: accessingMsgTxt,
                     actionLabel: login,
                     action: () {
                       Get.toNamed(AppRoutes.loginPage);

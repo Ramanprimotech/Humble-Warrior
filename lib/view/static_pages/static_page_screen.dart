@@ -66,7 +66,7 @@ class StaticPagesScreen extends StatelessWidget {
                 }
 
                 List<StaticData> staticResponse = snapshot.data!;
-                return staticResponse.isNotEmpty
+                return staticResponse[0].pageContent!.isNotEmpty
                     ? Expanded(
                         child: SingleChildScrollView(
                           child: Padding(
@@ -79,13 +79,14 @@ class StaticPagesScreen extends StatelessWidget {
                       )
                     : Expanded(
                         child: Center(
-                            child: CommonWidgets.errorAPI(
+                            child: AppText("Coming Soon!", fontSize: 20,fontWeight: FontWeight.bold),
+                          /*CommonWidgets.errorAPI(
                                 errorText: somethingWentWrongTxt.toString(),
                                 context: context,
                                 onPress: () {
                                   Get.back();
                                 },
-                                buttonTitle: okTxt)),
+                                buttonTitle: okTxt)*/),
                       );
               }),
         ]),
