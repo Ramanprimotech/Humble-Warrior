@@ -75,6 +75,20 @@ class MyAccountController extends GetxController {
     });
   }
 
+  Future<bool> deleteMyAccount() async{
+    final user = FirebaseAuth.instance.currentUser;
+    if(user != null){
+      await user.delete().then((value)  async{
+        isLoggedIn = false;
+        await SharePreferenceData.addBoolToSF(spIsEntered, false);
+        controller.selectedIndex = 0;
+      });
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   loginPage() {
     isLoggedIn = false;
     controller.selectedIndex = 0;
