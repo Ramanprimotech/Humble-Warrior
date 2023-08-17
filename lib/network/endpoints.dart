@@ -1,6 +1,12 @@
+///Base URL
+abstract class BaseUrl {
+  static const String live = "https://humblewarrior.com";
+  static const String stage = "http://112.196.54.37/Development/HW";
+}
+
 class Endpoints {
   //Base Urls Endpoints
-  static const String baseUrl = "http://112.196.54.37/Development/HW";
+  static const String baseUrl = BaseUrl.live;
   static const String generateToken = "/wp-json/jwt-auth/v1/token/";
   static const String verifyToken = "/wp-json/jwt-auth/v1/token/validate";
   static const String donnaDeals = "/wp-json/hwapi/get_donna_daily_deals";
