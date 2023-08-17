@@ -29,16 +29,16 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                 height: 80 * 4,
                 child: Column(
                   children: [
-                    20.shb,
+                    40.shb,
 
                     /// Facebook
-                    optionWidget(
+                    /*optionWidget(
                         bckClr: AppColors.facebookClr,
                         title: signWithFacebook,
                         textClr: AppColors.white,
                         imagePath: ImagePathAssets.facebookImg,
                         onTap: controller.onClickFunction(
-                            action: OnClick.facebook, context: context)),
+                            action: OnClick.facebook, context: context)),*/
 
                     /// Google
                     optionWidget(
