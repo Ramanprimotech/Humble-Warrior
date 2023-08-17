@@ -1,4 +1,5 @@
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/view/my_account/delete_account_popup.dart';
 
 class MyAccount extends StatelessWidget {
   const MyAccount({Key? key}) : super(key: key);
@@ -117,7 +118,9 @@ class MyAccount extends StatelessWidget {
 
                   ///Login or Logout
                   _loginOrLogout(context),
-                  10.shb,
+
+                  _deleteAccount(context),
+                  10.shb
                 ]),
               ),
             ),
@@ -125,6 +128,20 @@ class MyAccount extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _deleteAccount(context){
+    MyAccountController controller = Get.find();
+    MyAccWidget myAccWidget = MyAccWidget(context: context);
+    return controller.userCheck.value == true
+        ? myAccWidget.detailsOptions(
+        controller,
+        title: deleteMyAccount,
+        textColor: AppColors.primary,
+        ontap: () {
+          _showDeleteAccountPopup(context);
+        }
+    ) : const SizedBox();
   }
 
   /// Login Or Logout
@@ -141,5 +158,15 @@ class MyAccount extends StatelessWidget {
             //     context: context, onTap: controller.loginPage);
             controller.loginPage();
           });
+  }
+
+
+  _showDeleteAccountPopup(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const DeleteAccountPopup();
+        }
+    );
   }
 }

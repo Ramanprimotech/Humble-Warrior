@@ -92,7 +92,7 @@ class MyAccWidget {
   }
 
   detailsOptions(MyAccountController controller,
-      {title, bool isSwitchRequired = false, ontap, click}) {
+      {title, bool isSwitchRequired = false, Color? textColor, ontap, click}) {
     final MaterialStateProperty<Icon?> thumbIcon =
         MaterialStateProperty.resolveWith<Icon?>(
       (Set<MaterialState> states) {
@@ -126,6 +126,7 @@ class MyAccWidget {
                 title,
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
+                color: textColor
                 // color: accountOptionTheme.textColor,
               ),
               isSwitchRequired
