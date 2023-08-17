@@ -80,6 +80,8 @@ class MyAccountController extends GetxController {
     final user = FirebaseAuth.instance.currentUser;
     if(user != null){
       await user.delete().then((value)  async{
+        await SharePreferenceData.clear();
+        FirebaseAuth.instance.signOut();
         isLoggedIn = false;
         await SharePreferenceData.addBoolToSF(spIsEntered, false);
         controller.selectedIndex = 0;
