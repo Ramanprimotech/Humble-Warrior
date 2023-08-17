@@ -80,7 +80,8 @@ class SplashController extends GetxController {
 
   packageInfo() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    version = packageInfo.version;
+    version = "1.0.0";
+    // version = packageInfo.version;
     code = packageInfo.buildNumber;
     print("version ${version}");
     print("build number ${code}");
@@ -127,23 +128,47 @@ class SplashController extends GetxController {
       barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
+        final AccountOptionTheme accountOptionTheme =
+        Theme.of(Get.context!).extension<AccountOptionTheme>()!;
         return AlertDialog(
-          // title: const Text("Partner Perks",),
+          elevation: 3,
+          shadowColor: Theme.of(context).extension<ShadowTheme>()!.shadowColor!,
+          backgroundColor: accountOptionTheme.backGroundColor,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),),
             content: Container(
               height: 250,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const AppText("Humble Warrior", color: Colors.black, fontSize: 22),
+                  AppText("Humble Warrior", color: accountOptionTheme.textColor, fontSize: 22),
                   AppText(
-                    "${data.message ?? ""}",
+                    data.message ?? "",
                     // "We've just released a new update for the app which includes some great new features! To make sure you're getting the most out of the app, we recommend you update the app.",
-                    color: Colors.black,
+                    color: accountOptionTheme.textColor,
                     fontSize: 16,
                     maxLines: 6,
                     textAlign: TextAlign.center,
-                    padding: EdgeInsets.only(top: 12, bottom: 16),
+                    padding: 16.pv,
+                  ),
+                  20.shb,
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 5,
+                      // fixedSize: const Size(, 35),
+                      padding: 15.ph,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      backgroundColor: Theme.of(context).extension<DialogueThemeExtention>()!.buttonColor,
+                    ),
+                    onPressed: (){
+                      CommonUtils().urlLauncher(url: Platform.isAndroid
+                          ? data.androidLink!.isNotEmpty ? data.androidLink! : ""
+                          : Platform.isIOS
+                          ? data.iosLink!.isNotEmpty ? data.iosLink! : ""
+                          : data.iosLink!.isNotEmpty ? data.iosLink! : "");
+                    },
+                    child: const AppText("Update",
+                        color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
