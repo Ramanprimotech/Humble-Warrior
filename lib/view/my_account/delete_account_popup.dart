@@ -63,6 +63,7 @@ class _DeleteAccountPopupState extends State<DeleteAccountPopup>
           (route) => false
       );
     } else {
+      DialogHelper.showToast(context, "Some error occurred");
       setState(() {
         _isLoading = false;
       });
@@ -90,28 +91,33 @@ class _DeleteAccountPopupState extends State<DeleteAccountPopup>
         ),
       actions: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Visibility(
               visible: _showDeleteButton,
-              child: ElevatedButton(
-                  onPressed: _isLoading ? () {} : _handleDeleteButtonPressed,
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      minimumSize: const Size(100, 50)),
-                  child: !_isLoading ? const Text(
+              child : InkWell(
+                onTap: _isLoading ? null : _handleDeleteButtonPressed,
+                child: Container(
+                    alignment: Alignment.center,
+                    // width: 90,
+                    height: 50,
+                    width: 100,
+                    padding: 10.ph,
+                    decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 3)]),
+                    child: !_isLoading ? const AppText(
                       "Delete",
-                      style: TextStyle(
-                        color: Colors.white
-                      ),
-                  ) : const SizedBox(
-                    height: 30,
-                    child: CircularProgressIndicator(
                       color: Colors.white,
-                      strokeWidth: 2
-                    ),
-                  )
-              ),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                    ) : const CircularProgressIndicator(
+                        color: Colors.white,
+                        strokeWidth: 2
+                    )
+                ),
+              )
             ),
             Visibility(
               visible: !_showDeleteButton,
@@ -119,6 +125,7 @@ class _DeleteAccountPopupState extends State<DeleteAccountPopup>
                 'Wait: $_timer seconds',
               ),
             ),
+            const SizedBox(width: 15,),
             TextButton(
               onPressed: () {
                 _isLoading ? null : Navigator.pop(context);

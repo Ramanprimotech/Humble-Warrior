@@ -136,7 +136,7 @@ class MyAccount extends StatelessWidget {
         ? myAccWidget.detailsOptions(
         controller,
         title: deleteMyAccount,
-        textColor: Colors.red,
+        textColor: AppColors.primary,
         ontap: () {
           _showDeleteAccountPopup(context);
         }
