@@ -99,7 +99,7 @@ class AppPages {
         name: AppRoutes.staticPages,
         page: () {
           _bottomNavigationController.isNavigated = true;
-          return const StaticPagesScreen();
+          return StaticPagesScreen();
         },
         binding: StaticPagesBindings()),
     GetPage(

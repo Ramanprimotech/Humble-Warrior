@@ -3,23 +3,26 @@ import 'package:humble_warrior/utils/common/html.dart';
 import 'package:humble_warrior/view/static_pages/static_page_controller.dart';
 
 class StaticPagesScreen extends StatelessWidget {
-  const StaticPagesScreen({Key? key}) : super(key: key);
+  String? ids;
+  String? title;
+  StaticPagesScreen({Key? key, this.ids, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    StaticPagesController controller = Get.find<StaticPagesController>();
+    StaticPagesController controller = Get.put(StaticPagesController());
+    // StaticPagesController controller = Get.find<StaticPagesController>();
     // controller.ids = Get.arguments[0];
-    // String title = Get.arguments[1];
-    controller.ids = "40427";
-    String title = termsConditionsTxt;
+    // controller.title = Get.arguments[1];
+    // controller.ids = "40427";
+    // String title = termsConditionsTxt;
     return Scaffold(
       body: SafeArea(
         child: Column(children: [
-          CommonWidgets.titleBar(context, title: title, fontSize: 20,onPress: (){
+          CommonWidgets.titleBar(context, title: title!, fontSize: 20,onPress: (){
             Get.back(id: 4);
           }),
           FutureBuilder<List<StaticData>>(
-              future: controller.staticPageApi(controller.ids),
+              future: controller.staticPageApi(ids!),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Expanded(

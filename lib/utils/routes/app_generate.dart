@@ -123,7 +123,7 @@ class AppGenerate {
       AppRoutes.staticPages: GetPageRoute(
           settings: settings,
           page: () {
-            return const StaticPagesScreen();
+            return StaticPagesScreen();
           },
           binding: StaticPagesBindings()),
       AppRoutes.sortPages: GetPageRoute(

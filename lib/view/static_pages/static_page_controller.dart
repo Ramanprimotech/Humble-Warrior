@@ -1,7 +1,8 @@
 import 'package:humble_warrior/hw.dart';
 
 class StaticPagesController extends GetxController {
-  late String ids;
+  String ids = "";
+  String title = "";
 
   RxList<StaticData> staticPagesResponse = <StaticData>[].obs;
 

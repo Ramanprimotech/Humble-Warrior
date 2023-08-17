@@ -95,22 +95,23 @@ class MyAccount extends StatelessWidget {
                       click: controller.darkMode),
 
                   ///Help & Support
-                  // myAccWidget.detailsOptions(controller, title: helpSupportTxt,
-                  //     ontap: () {
-                  //   // Get.toNamed(AppRoutes.staticPages,
-                  //   //     arguments: ["40429", helpSupportTxt]);
-                  //       DialogHelper.showToast(context, "Coming Soon");
-                  // }),
+                  myAccWidget.detailsOptions(controller, title: helpSupportTxt,
+                      ontap: () {
+                    Get.to(StaticPagesScreen(ids: "89456", title: helpSupportTxt),id: 4);
+                    // Get.toNamed(AppRoutes.staticPages,
+                    //     arguments: ["89456", helpSupportTxt], id: 4);
+                    //     DialogHelper.showToast(context, "Coming Soon");
+                  }),
 
                   ///Term & Conditions
                   myAccWidget.detailsOptions(controller,
                       title: termsConditionsTxt, ontap: () {
                     CommonUtils.toCheckInternet(action: () {
-
+                      Get.to(StaticPagesScreen(ids: "89453", title: termsConditionsTxt),id: 4);
                       // Get.toNamed(AppRoutes.staticPages,
-                      //     arguments: ["40427", termsConditionsTxt],id: 4);
-                      Get.toNamed(AppRoutes.staticPages,
-                         id: 4);
+                      //     arguments: ["89453", termsConditionsTxt], id: 4);
+                      // Get.toNamed(AppRoutes.staticPages,
+                      //    id: 4);
                     });
                   }),
 
