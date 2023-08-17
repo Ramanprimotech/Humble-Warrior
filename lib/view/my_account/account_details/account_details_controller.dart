@@ -8,9 +8,9 @@ class AccountDetailsController extends GetxController {
   String user = "";
   String username = "";
   String userPhone = "";
-  String userImg = "";
+  RxString userImg = "".obs;
   File? imagePath;
-  RxString imageUrl = "".obs;
+  // RxString imageUrl = "".obs;
 
   @override
   void onInit() {
@@ -18,7 +18,7 @@ class AccountDetailsController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getImageCamera() async {
+/*  Future<void> getImageCamera() async {
     imagePath =
         await CommonUtils().getImagePath(imageSource: ImageSource.camera);
     imageUrl.value = imagePath!.path;
@@ -28,7 +28,7 @@ class AccountDetailsController extends GetxController {
     imagePath =
         await CommonUtils().getImagePath(imageSource: ImageSource.gallery);
     imageUrl.value = imagePath!.path;
-  }
+  }*/
 
   Future<void> getData() async {
     userCheck.value =
@@ -44,13 +44,13 @@ class AccountDetailsController extends GetxController {
 
     userPhone =
         await SharePreferenceData.getStringValuesSF(userPhoneNumber) ?? "";
-    userImg = await SharePreferenceData.getStringValuesSF(userProfilePic) ?? "";
+    userImg.value = await SharePreferenceData.getStringValuesSF(userProfilePic) ?? "";
 
     if (userPhone == "null") {
       userPhone = "N/A";
     }
   }
-
+/*
   Future<void> openBottomSheet() async {
     return showCupertinoModalPopup<void>(
       context: Get.context!,
@@ -77,5 +77,5 @@ class AccountDetailsController extends GetxController {
         );
       },
     );
-  }
+  }*/
 }

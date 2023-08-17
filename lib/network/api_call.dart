@@ -216,6 +216,8 @@ class CallAPI {
       final response = await http.post(
           Uri.parse("${Endpoints.baseUrl}${Endpoints.registerUser}"),
           body: payload);
+      debugPrint("end points registyer ${Endpoints.baseUrl}${Endpoints.registerUser}");
+      debugPrint("paloadao ${payload.toString()}");
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
         await SharePreferenceData.addStringToSF(

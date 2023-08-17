@@ -20,7 +20,7 @@ class MyAccWidget {
               shape: BoxShape.circle,
               color: AppColors.primary,
             ),
-            child: controller.imageUrl.isEmpty
+            child: controller.userImg.isEmpty
                 ? InkWell(
                     onTap: () {
                       Get.toNamed(AppRoutes.accountDetails,id: 4);
@@ -32,15 +32,19 @@ class MyAccWidget {
                       ],
                     ),
                   )
-                : ClipRRect(
+                : CircleAvatar(radius: 60,
+            backgroundColor: Colors.blue,
+              backgroundImage: NetworkImage(controller.userImg.value.toString()),
+            )
+            /*ClipRRect(
                     borderRadius: BorderRadius.circular(150),
                     child: Image.file(
-                      File(controller.imageUrl.value),
+                      File(controller.userImg.value),
                       fit: BoxFit.fill,
                       height: 145,
                       width: 145,
                     ),
-                  ),
+                  ),*/
           ),
         ),
         10.shb,

@@ -11,7 +11,7 @@ class MyAccountController extends GetxController {
   String user = "";
   String username = "";
   String userPhone = "";
-  String userImg = "";
+  RxString userImg = "".obs;
   late BuildContext context;
   ThemeController themeController = Get.find();
   BottomNavigationController controller = Get.find();
@@ -20,13 +20,13 @@ class MyAccountController extends GetxController {
 
   // Rx<File?> imagePath = File("").obs;
   File? imagePath;
-  RxString imageUrl = "".obs;
+  // RxString imageUrl = "".obs;
 
-  Future<void> getImageGallery() async {
+ /* Future<void> getImageGallery() async {
     imagePath =
         await CommonUtils().getImagePath(imageSource: ImageSource.gallery);
     imageUrl.value = imagePath!.path;
-  }
+  }*/
 
   Future<void> getData() async {
     userCheck.value =
@@ -35,18 +35,19 @@ class MyAccountController extends GetxController {
     username = await SharePreferenceData.getStringValuesSF(userName) ?? "";
     userPhone =
         await SharePreferenceData.getStringValuesSF(userPhoneNumber) ?? "";
-    userImg = await SharePreferenceData.getStringValuesSF(userProfilePic) ?? "";
+    userImg.value = await SharePreferenceData.getStringValuesSF(userProfilePic) ?? "";
+    debugPrint("images1 ${userImg.value.toString()}");
   }
 
   void message(context) {
     DialogHelper.showToast(context, stayTunedtxt);
   }
 
-  Future<void> getImageCamera() async {
+  /*Future<void> getImageCamera() async {
     imagePath =
         await CommonUtils().getImagePath(imageSource: ImageSource.camera);
     imageUrl.value = imagePath!.path;
-  }
+  }*/
 
   void switchFunc() {
     checkNotification.value = !checkNotification.value;
@@ -101,6 +102,7 @@ class MyAccountController extends GetxController {
   void onInit() async {
     checkDark.value = themeController.themeMode == ThemeMode.dark;
     await getData();
+    debugPrint("images ${userImg.value.toString()}");
     checkNotification.value = await SharePreferenceData.getBoolValuesSF("notificationCheck")??true;
     super.onInit();
   }

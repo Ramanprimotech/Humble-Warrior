@@ -109,7 +109,7 @@ class AccountDetails extends StatelessWidget {
                     offset: Offset(0, 3),
                   )
                 ]),
-            child: accountController.imageUrl.isEmpty
+            child: accountController.userImg.isEmpty
                 ? InkWell(
                     onTap: () {
                       // _openBottomSheet();
@@ -122,15 +122,19 @@ class AccountDetails extends StatelessWidget {
                       ],
                     ),
                   )
-                : ClipRRect(
+                : CircleAvatar(radius: 60,
+              backgroundColor: Colors.blue,
+              backgroundImage: NetworkImage(accountController.userImg.value.toString()),
+            )
+            /*ClipRRect(
                     borderRadius: BorderRadius.circular(150),
                     child: Image.file(
-                      File(accountController.imageUrl.value),
+                      File(accountController.userImg.value),
                       fit: BoxFit.fill,
                       height: 145,
                       width: 145,
                     ),
-                  ),
+                  ),*/
           ),
         ),
         10.shb,
