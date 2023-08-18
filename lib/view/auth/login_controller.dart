@@ -134,6 +134,7 @@ class LoginController extends GetxController {
   Future<void> saveUserToLocalStorage({ bool fb = false}) async {
     isLoggedIn = true;
     await SharePreferenceData.addBoolToSF(spIsLogged, true);
+    await SharePreferenceData.addStringToSF(userId, user!.uid);
     await SharePreferenceData.addStringToSF(userEmail, "${user?.providerData[0].email}");
     await SharePreferenceData.addStringToSF(
         userPhoneNumber, "${user?.providerData[0].phoneNumber}");

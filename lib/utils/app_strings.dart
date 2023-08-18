@@ -91,6 +91,7 @@ const String galleryTxt = "Gallery";
 const String cancelTxt = "Cancel";
 // const String userData = "userData";
 const String userEmail = "userEmail";
+const String userId = "userId";
 const String userName = "userName";
 const String userPhoneNumber = "userPhoneNumber";
 const String userProfilePic = "userProfilePic";

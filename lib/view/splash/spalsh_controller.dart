@@ -95,8 +95,7 @@ class SplashController extends GetxController {
       };
       print("request ${payload}");
       var response = await http.post(
-        Uri.parse(
-            "http://112.196.54.37/Development/HW/wp-json/hwapi/version"),
+        Uri.parse("${Endpoints.baseUrl}${Endpoints.version}"),
         body: payload,
       );
       if (response.statusCode == 200) {

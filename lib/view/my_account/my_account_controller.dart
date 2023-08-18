@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:humble_warrior/hw.dart';
 
 class MyAccountController extends GetxController {
@@ -15,6 +15,7 @@ class MyAccountController extends GetxController {
   late BuildContext context;
   ThemeController themeController = Get.find();
   BottomNavigationController controller = Get.find();
+
   final StreamController<bool> _verificationNotifier =
       StreamController<bool>.broadcast();
 
@@ -67,13 +68,42 @@ class MyAccountController extends GetxController {
   }
 
   Future<void> logout() async {
+    HiveService service = Get.find<HiveService>();
+    Box<ProductDetailsResponse> box = service.box;
     await FirebaseAuth.instance.signOut().then((value) async {
       await SharePreferenceData.clear();
       isLoggedIn = false;
       await SharePreferenceData.addBoolToSF(spIsEntered, false);
       controller.selectedIndex = 0;
+      userLogout();
       Get.offAllNamed(AppRoutes.loginPage);
     });
+  }
+
+  userLogout() async {
+    try {
+      if (Platform.isAndroid) {
+
+        await GoogleSignIn(
+            clientId:
+            DefaultFirebaseOptions.currentPlatform.androidClientId)
+            .signOut();
+      } else if (Platform.isIOS) {
+
+        await GoogleSignIn(
+            clientId: DefaultFirebaseOptions.currentPlatform.iosClientId)
+            .signOut();
+      }
+    }
+    catch(e){
+      debugPrint("error -->   $e");
+    }
+  }
+
+  _deleteDatabase(){
+    HiveService service = Get.find<HiveService>();
+    Box<ProductDetailsResponse> box = service.box;
+    return box.clear();
   }
 
   Future<bool> deleteMyAccount() async{
@@ -85,6 +115,8 @@ class MyAccountController extends GetxController {
         isLoggedIn = false;
         await SharePreferenceData.addBoolToSF(spIsEntered, false);
         controller.selectedIndex = 0;
+        userLogout();
+        _deleteDatabase();
       });
       return true;
     }else{

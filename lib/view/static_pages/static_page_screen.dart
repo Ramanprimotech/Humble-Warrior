@@ -77,7 +77,7 @@ class StaticPagesScreen extends StatelessWidget {
                           ),
                         ),
                       )
-                    : Expanded(
+                    : const Expanded(
                         child: Center(
                             child: AppText("Coming Soon!", fontSize: 20,fontWeight: FontWeight.bold),
                           /*CommonWidgets.errorAPI(

@@ -13,6 +13,7 @@ class Endpoints {
   static const String frontPage = "/wp-json/hwapi/get_front_page_deals";
   static const String donnaFavourite = "/wp-json/hwapi/get_favourite_things";
   static const String allBrands = "/wp-json/hwapi/get_all_brands";
+  static const String version = "/wp-json/hwapi/version";
   static const String productCategories =
       "/wp-json/hwapi/get_all_product_categories";
   static const String productCategoriesItemList =
