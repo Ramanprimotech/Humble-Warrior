@@ -81,7 +81,7 @@ class FilterController extends GetxController {
         DialogHelper.showToast(context, noMoreDealsTxt);
       } else {
         searchsPage += 1;
-        if (refresh!) {
+        if (refresh) {
           searchList.clear();
         }
         searchList.addAll(value.data!);
@@ -111,14 +111,11 @@ class FilterController extends GetxController {
         DialogHelper.showToast(context, noMoreDealsTxt);
       } else {
         searchsPage += 1;
-        if (refresh!) {
+        if (refresh) {
           searchList.clear();
         }
         searchList.addAll(value.data!);
         searchListLength.value = searchList.length;
-        // if (refresh) {
-        //   DialogHelper.showToast(context, dealsRefreshTxt);
-        // }
       }
       if (value.totalRecords != null) {
         searchsTotalDeals.value = int.parse(value.totalRecords!);
@@ -186,7 +183,6 @@ class FilterController extends GetxController {
       }
     }
     );
-    // searchsAPI();
     super.onInit();
   }
 
