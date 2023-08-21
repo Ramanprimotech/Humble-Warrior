@@ -4,6 +4,7 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   final BuildContext context;
 
   HomePageBrandAPIWidgets({required this.context});
+
   final BottomNavigationController _bottomNavigationController = Get.find();
 
   /// Brands Item Params
@@ -16,7 +17,6 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   final double productArrowIconPadding = 8;
   final double arrowWidth = 30;
   final int badge = 99;
-
 
   /// Brands List Params
   final double separatorHeight = 10;
@@ -34,7 +34,6 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 5,
-          // fixedSize: const Size(, 35),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           backgroundColor: dialogueThemeExtention.buttonColor,
@@ -52,7 +51,7 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   Widget success({List<BrandDetails>? data}) {
     List<BrandDetails> record = data ?? [];
     final ImageIconTheme imageIconTheme =
-    Theme.of(context).extension<ImageIconTheme>()!;
+        Theme.of(context).extension<ImageIconTheme>()!;
     return Column(
       children: [
         const SizedBox(),
@@ -88,15 +87,17 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
                             itemBuilder: (ctx, index) {
                               return GestureDetector(
                                 onTap: () {
-                                  CommonUtils().urlLauncher(url: record[index].brandLink!);
+                                  CommonUtils().urlLauncher(
+                                      url: record[index].brandLink!);
                                 },
                                 child: Container(
                                   width: width,
                                   height: height,
                                   padding: padding,
                                   margin: margin,
-                                  decoration: CustomBoxDecorations(context: context)
-                                      .shadow(color: Colors.grey.shade200),
+                                  decoration:
+                                      CustomBoxDecorations(context: context)
+                                          .shadow(color: Colors.grey.shade200),
                                   child: CommonWidgets.networkImage(
                                     alignment: Alignment.center,
                                     imageUrl: record[index].brandImage!,
@@ -105,7 +106,8 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
                                 ),
                               );
                             },
-                            separatorBuilder: (BuildContext context, int index) {
+                            separatorBuilder:
+                                (BuildContext context, int index) {
                               return separatorHeight.swb;
                             },
                           ),
@@ -114,7 +116,7 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
                     ],
                   ),
                   Obx(
-                        () => Visibility(
+                    () => Visibility(
                       visible: controller.brandListBack.value,
                       child: Positioned(
                         left: 0,
@@ -129,7 +131,8 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
                             child: Container(
                                 alignment: Alignment.center,
                                 padding: productArrowIconPadding.pl,
-                                color: Theme.of(context).scaffoldBackgroundColor,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
                                 height: brandHeight,
                                 width: arrowWidth,
                                 child: AppIcons.backArrrowIos(
@@ -138,7 +141,7 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
                     ),
                   ),
                   Obx(
-                        () => Visibility(
+                    () => Visibility(
                       visible: controller.brandListForward.value,
                       child: Positioned(
                         right: 0,
@@ -151,7 +154,8 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
                                   curve: Curves.linear);
                             },
                             child: Container(
-                                color: Theme.of(context).scaffoldBackgroundColor,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
                                 height: brandHeight,
                                 width: arrowWidth,
                                 child: AppIcons.next(
@@ -174,7 +178,6 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
     );
   }
 
-
   /// Brand Title Row
   Widget _brandRow({required double height, required BuildContext context}) {
     final ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
@@ -183,8 +186,6 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
       padding: const EdgeInsets.only(top: 4, right: 16, left: 16, bottom: 8),
       decoration: BoxDecoration(
           color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-          // borderRadius: const BorderRadius.only(
-          //     topRight: Radius.circular(15), topLeft: Radius.circular(15)),
           boxShadow: [
             BoxShadow(
                 offset: const Offset(-1, -1),
@@ -216,10 +217,9 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
           GestureDetector(
             onTap: () {
               print("afdf ${_bottomNavigationController.selectedIndex}");
-              _bottomNavigationController.selectedIndex == 4?
-              Get.toNamed(AppRoutes.brands, id:4):
-              Get.toNamed(AppRoutes.brands,id:3);
-              // print("afdf ${id}");
+              _bottomNavigationController.selectedIndex == 4
+                  ? Get.toNamed(AppRoutes.brands, id: 4)
+                  : Get.toNamed(AppRoutes.brands, id: 3);
             },
             child: const AppText(
               viewAllTxt,
@@ -233,10 +233,9 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
     );
   }
 
-
   @override
   Widget waiting() {
-    return Container(
+    return SizedBox(
       height: 90,
       child: ListView.separated(
         physics: NeverScrollableScrollPhysics(),
@@ -245,15 +244,11 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
         scrollDirection: Axis.horizontal,
         itemCount: 10,
         itemBuilder: (ctx, index) {
-          return
-              // Container(
-              //   height: 60,
-              //   color: Colors.transparent,
-              // );
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15),
-                child: CustomShimmer.rectangular(width: width, height: height, borderRadius: 10),
-              );
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: CustomShimmer.rectangular(
+                width: width, height: height, borderRadius: 10),
+          );
         },
         separatorBuilder: (BuildContext context, int index) {
           return separatorHeight.swb;
@@ -261,24 +256,4 @@ class HomePageBrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
       ),
     );
   }
-
-
-/*  Widget waiting() {
-    return ListView.separated(
-      padding: listPadding,
-      scrollDirection: Axis.horizontal,
-      itemCount: 10,
-      itemBuilder: (ctx, index) {
-        return
-          // Container(
-          //   color: Colors.transparent,
-          // );
-          CustomShimmer.rectangular(width: width, height: height);
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return separatorHeight.swb;
-      },
-    );
-  }*/
-
 }

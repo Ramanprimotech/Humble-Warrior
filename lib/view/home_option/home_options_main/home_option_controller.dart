@@ -68,9 +68,6 @@ class HomeOptionController extends GetxController
   Future donaDealsAPI({bool? refresh = false}) async {
     if (refresh!) {
       donnaDealsPage = 1;
-      // donnaDealsBool.value = true;
-
-      // update();
     }
     SortItem item = sort();
     PaginationModel paginationModel = PaginationModel(

@@ -37,7 +37,7 @@ class NotificationManager {
         Map data = jsonDecode(response.payload!);
         if (data["url_to_redirect"] != "") {
 
-          Future.delayed(Duration(seconds: 0),()async{
+          Future.delayed(const Duration(seconds: 0),()async{
 
          if (data["post_id"] != "0") {
           ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
@@ -57,7 +57,7 @@ class NotificationManager {
            launchUrl( Uri.parse(data["url_to_redirect"]));
         }
       }catch(e, st){
-        print(st);
+        debugPrint(st.toString());
       }
 
 
@@ -77,13 +77,13 @@ class NotificationManager {
 
 
      if(apple !=null){
-       apple!.imageUrl!.log();
+       apple.imageUrl!.log();
        "apple".log();
-       String? path = await _downloadAndSavePicture(apple!.imageUrl, "fileName.png");
+       String? path = await _downloadAndSavePicture(apple.imageUrl, "fileName.png");
        flutterLocalNotificationsPlugin.show(
          notification.hashCode,
          notification!.title??"",
-         notification!.body??"",
+         notification.body??"",
          NotificationDetails(
            iOS: DarwinNotificationDetails(
              attachments: <DarwinNotificationAttachment>[
@@ -99,12 +99,12 @@ class NotificationManager {
      }
 
      if(android!=null){
-       android!.imageUrl!.log();
-       "adnroid".log();
+       android.imageUrl!.log();
+       "android".log();
         flutterLocalNotificationsPlugin.show(
             notification.hashCode,
             notification!.title??"",
-            notification!.body??"",
+            notification.body??"",
             NotificationDetails(
               android: AndroidNotificationDetails(
                 channel.id,
@@ -130,7 +130,7 @@ class NotificationManager {
 
 
         if (data["url_to_redirect"] != "") {
-          Future.delayed(Duration(seconds: 0),()async{
+          Future.delayed(const Duration(seconds: 0),()async{
 
             if (data["post_id"] != "0") {
               ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
@@ -150,7 +150,7 @@ class NotificationManager {
           Get.toNamed(AppRoutes.notification);
         }
       }catch(e, st){
-        print(st);
+        debugPrint(st.toString());
       }
 
 

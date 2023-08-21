@@ -25,13 +25,15 @@ class HomeScreenWidgets {
         Theme.of(context).extension<ImageIconTheme>()!;
     return AppBar(
       centerTitle: false,
-      title: const SearchBar(route: 3,),
+      title: const SearchBar(
+        route: 3,
+      ),
       actions: [
         Padding(
           padding: 25.pr,
           child: InkWell(
             onTap: () {
-              CommonUtils.toCheckInternet(action: (){
+              CommonUtils.toCheckInternet(action: () {
                 Get.toNamed(AppRoutes.notification, id: 3);
               });
             },
@@ -111,21 +113,6 @@ class HomeScreenWidgets {
         });
   }
 
-/*  /// Brand List
-  GetBuilder<HomeScreenController> brandsList() {
-    return GetBuilder<HomeScreenController>(
-      id: Endpoints.allBrands,
-      init: controller,
-      builder: (controller){
-        return FutureWidget<List<BrandDetails>>().builder(
-          futureWidgets: HomePageBrandAPIWidgets(context: context),
-          future: controller.allBrands(),
-          checkInternet: false,
-          context: context);
-      },
-    );
-  }*/
-
   /// Product Categories API Builder
   GetBuilder<HomeScreenController> productCategoryListAPIBuilder() {
     return GetBuilder<HomeScreenController>(
@@ -157,58 +144,4 @@ class HomeScreenWidgets {
               context: context);
         });
   }
-
-  /*/// Brand Title Row
-  Widget _brandRow({required double height, required BuildContext context}) {
-    final ShadowTheme shadowTheme = Theme.of(context).extension<ShadowTheme>()!;
-    return Container(
-      height: height,
-      padding: const EdgeInsets.only(top: 4, right: 16, left: 16, bottom: 8),
-      decoration: BoxDecoration(
-          color: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-          // borderRadius: const BorderRadius.only(
-          //     topRight: Radius.circular(15), topLeft: Radius.circular(15)),
-          boxShadow: [
-            BoxShadow(
-                offset: const Offset(-1, -1),
-                blurRadius: 2,
-                color: shadowTheme.shadowColor!),
-            BoxShadow(
-                offset: const Offset(1, -1),
-                blurRadius: 1,
-                color: shadowTheme.shadowColor!)
-          ]),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              const AppText(
-                "$brandsTxt I",
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-              5.swb,
-              Padding(
-                padding: 3.pb,
-                child: AppIcons.heart(
-                    iconColor: Colors.red, size: Dimens.smallIcon),
-              ),
-            ],
-          ),
-          GestureDetector(
-            onTap: () {
-              Get.toNamed(AppRoutes.brands);
-            },
-            child: const AppText(
-              viewAllTxt,
-              fontSize: 14,
-              color: AppColors.blue,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }*/
 }
