@@ -127,8 +127,8 @@ class BottomNavigationController extends GetxController {
   @override
   void onInit() {
     getLoggedValue();
-    FirebaseMessaging.instance.getToken().then((token) {});
-    NotificationManager.messageListener();
+    // FirebaseMessaging.instance.getToken().then((token) {});
+    // NotificationManager.messageListener();
     if (value != null) {
       userCheck.value = true;
     }

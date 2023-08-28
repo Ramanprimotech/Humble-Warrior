@@ -30,39 +30,40 @@ class NotificationManager {
 
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
-      onDidReceiveNotificationResponse: (NotificationResponse response) {
-        NotificationController controller = Get.find();
-        controller.update(["badge"]);
-      try {
-        Map data = jsonDecode(response.payload!);
-        if (data["url_to_redirect"] != "") {
-
-          Future.delayed(Duration(seconds: 0),()async{
-
-         if (data["post_id"] != "0") {
-          ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
-              id: int.parse(data["post_id"]!));
-          // Get.toNamed(AppRoutes.frontPageProductDetail,
-          //     arguments: [productDetailsResponse]);
-          Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
-              arguments: { "details" :   productDetailsResponse});
-        }  else  if (!await launchUrl(
-             Uri.parse(data["url_to_redirect"]),
-             mode: LaunchMode.externalApplication)) {
-            throw Exception('Could not launch');
-         }
-          });
-        }
-         else {
-           launchUrl( Uri.parse(data["url_to_redirect"]));
-        }
-      }catch(e, st){
-        print(st);
-      }
-
-
-      },
+      onDidReceiveNotificationResponse: _handleNotificationResponse,
+      onDidReceiveBackgroundNotificationResponse: _handleNotificationResponse
     );
+  }
+
+  static _handleNotificationResponse(NotificationResponse response){
+    NotificationController controller = Get.find();
+    controller.update(["badge"]);
+    try {
+      Map data = jsonDecode(response.payload!);
+      if (data["url_to_redirect"] != "") {
+
+        Future.delayed(const Duration(seconds: 0),()async{
+
+          if (data["post_id"] != "0") {
+            ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
+                id: int.parse(data["post_id"]!));
+            // Get.toNamed(AppRoutes.frontPageProductDetail,
+            //     arguments: [productDetailsResponse]);
+            Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
+                arguments: { "details" :   productDetailsResponse});
+          }  else  if (!await launchUrl(
+              Uri.parse(data["url_to_redirect"]),
+              mode: LaunchMode.externalApplication)) {
+            throw Exception('Could not launch');
+          }
+        });
+      }
+      else {
+        launchUrl( Uri.parse(data["url_to_redirect"]));
+      }
+    }catch(e, st){
+      print(st);
+    }
   }
 
   ///  Notification Listener
@@ -77,13 +78,13 @@ class NotificationManager {
 
 
      if(apple !=null){
-       apple!.imageUrl!.log();
+       apple.imageUrl!.log();
        "apple".log();
-       String? path = await _downloadAndSavePicture(apple!.imageUrl, "fileName.png");
+       String? path = await _downloadAndSavePicture(apple.imageUrl, "fileName.png");
        flutterLocalNotificationsPlugin.show(
          notification.hashCode,
          notification!.title??"",
-         notification!.body??"",
+         notification.body??"",
          NotificationDetails(
            iOS: DarwinNotificationDetails(
              attachments: <DarwinNotificationAttachment>[
@@ -99,12 +100,12 @@ class NotificationManager {
      }
 
      if(android!=null){
-       android!.imageUrl!.log();
+       android.imageUrl!.log();
        "adnroid".log();
         flutterLocalNotificationsPlugin.show(
             notification.hashCode,
             notification!.title??"",
-            notification!.body??"",
+            notification.body??"",
             NotificationDetails(
               android: AndroidNotificationDetails(
                 channel.id,
@@ -118,44 +119,30 @@ class NotificationManager {
         );
       }
     });
+  }
 
-    FirebaseMessaging.onMessageOpenedApp.listen((event) {
-      // NotificationController controller = Get.find();
-      // controller.update(["badge"]);
-
-      debugPrint("notification event ---- $event");
-      "Message Received ${event.data}".log();
-      Map data = event.data;
-      try {
-
-
-        if (data["url_to_redirect"] != "") {
-          Future.delayed(Duration(seconds: 0),()async{
-
-            if (data["post_id"] != "0") {
-              ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
-                  id: int.parse(data["post_id"]!));
-              Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
-                  arguments: { "details" :  productDetailsResponse});
-              // Get.toNamed(AppRoutes.frontPageProductDetail,
-              //     arguments: [productDetailsResponse]);
-            }  else  if (!await launchUrl(
-                Uri.parse(data["url_to_redirect"]),
-                mode: LaunchMode.externalApplication)) {
-              throw Exception('Could not launch');
-            }
-          });
+  static Future<void> messageHandler(RemoteMessage event) async {
+    Map data = event.data;
+    try {
+      if (data["url_to_redirect"] != "") {
+        if (data["post_id"] != "0") {
+          ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
+              id: int.parse(data["post_id"]!));
+          Get.toNamed(AppRoutes.categoryItemDetail, id: 3,
+              arguments: { "details": productDetailsResponse});
+        } else if (!await launchUrl(
+            Uri.parse(data["url_to_redirect"]),
+            mode: LaunchMode.externalApplication)) {
+          throw Exception('Could not launch');
         }
-        else {
-          Get.toNamed(AppRoutes.notification);
-        }
-      }catch(e, st){
-        print(st);
       }
-
-
-
-    });
+      else {
+        Get.toNamed(AppRoutes.notification);
+      }
+    }catch(e, st){
+      print("Remote message exception $e");
+      Get.toNamed(AppRoutes.notification);
+    }
   }
 }
 
