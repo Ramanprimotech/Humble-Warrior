@@ -1,50 +1,22 @@
 import 'package:humble_warrior/hw.dart';
 
- final GlobalKey<NavigatorState>? mainNavigation = Get.nestedKey(1);
- final GlobalKey<NavigatorState>? wishNavigation = Get.nestedKey(2);
- final GlobalKey<NavigatorState>? homeNavigation = Get.nestedKey(3);
- final GlobalKey<NavigatorState>? accountNavigation = Get.nestedKey(4);
+final GlobalKey<NavigatorState>? mainNavigation = Get.nestedKey(1);
+final GlobalKey<NavigatorState>? wishNavigation = Get.nestedKey(2);
+final GlobalKey<NavigatorState>? homeNavigation = Get.nestedKey(3);
+final GlobalKey<NavigatorState>? accountNavigation = Get.nestedKey(4);
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
     'High Importance Notifications', // title
     //  'This channel is used for important notifications.', // description
-    importance: Importance.max,
-    playSound: true);
+    importance: Importance.high,
+    playSound: true
+);
+
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 FlutterLocalNotificationsPlugin();
 
 bool isLoggedIn = false;
-Future<void> _messageHandler(RemoteMessage event) async {
-  // NotificationController controller = Get.find();
-  // controller.update(["badge"]);
-  debugPrint("notification event ---- $event");
-  "Message Received ${event.data}".log();
-  Map data = event.data;
-  try {
-    if (data["url_to_redirect"] != "") {
-      Future.delayed(Duration(seconds: 0),()async{
-        if (data["post_id"] != "0") {
-          ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
-              id: int.parse(data["post_id"]!));
-          Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
-              arguments: { "details" : productDetailsResponse});
-          // Get.toNamed(AppRoutes.frontPageProductDetail,
-          //     arguments: [productDetailsResponse]);
-        }  else  if (!await launchUrl(
-            Uri.parse(data["url_to_redirect"]),
-            mode: LaunchMode.externalApplication)) {
-          throw Exception('Could not launch');
-        }
-      });
-    }
-    else {
-      Get.toNamed(AppRoutes.notification);
-    }
-  }catch(e, st){
-    print(st);
-  }
-}
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,7 +28,8 @@ Future main() async {
     // name: "humble-warrior",
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseMessaging.onBackgroundMessage(_messageHandler);
+
+  FirebaseMessaging.onBackgroundMessage(NotificationManager.messageHandler);
 
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
@@ -64,9 +37,18 @@ Future main() async {
       ?.createNotificationChannel(channel);
 
   NotificationManager.initialize(flutterLocalNotificationsPlugin);
+  NotificationManager.messageListener();
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-      badge: true, alert: true, sound: true);
+      badge: true,
+      alert: true,
+      sound: true
+  );
+
+  FirebaseMessaging.onMessageOpenedApp.listen((remoteMessage) {
+    NotificationManager.messageHandler(remoteMessage);
+  });
+
   await Hive.initFlutter();
   Hive.registerAdapter(ProductDetailsResponseAdapter());
   Hive.registerAdapter(RecentSearchAdapter());

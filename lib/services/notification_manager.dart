@@ -9,16 +9,16 @@ class NotificationManager {
   static Future initialize(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
     final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin();
 
     /// Android Notification Set Up
     AndroidInitializationSettings androidInitializationSettings =
-        const AndroidInitializationSettings('@mipmap/ic_launcher');
+    const AndroidInitializationSettings('@mipmap/ic_launcher');
 
     /// IOS Notification SetUP
 
     const DarwinInitializationSettings iOSSettings =
-        DarwinInitializationSettings(
+    DarwinInitializationSettings(
       requestSoundPermission: true,
       requestBadgePermission: true,
       requestAlertPermission: true,
@@ -29,40 +29,41 @@ class NotificationManager {
         android: androidInitializationSettings, iOS: iOSSettings);
 
     await flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
-      onDidReceiveNotificationResponse: (NotificationResponse response) {
-        NotificationController controller = Get.find();
-        controller.update(["badge"]);
-      try {
-        Map data = jsonDecode(response.payload!);
-        if (data["url_to_redirect"] != "") {
-
-          Future.delayed(const Duration(seconds: 0),()async{
-
-         if (data["post_id"] != "0") {
-          ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
-              id: int.parse(data["post_id"]!));
-          // Get.toNamed(AppRoutes.frontPageProductDetail,
-          //     arguments: [productDetailsResponse]);
-          Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
-              arguments: { "details" :   productDetailsResponse});
-        }  else  if (!await launchUrl(
-             Uri.parse(data["url_to_redirect"]),
-             mode: LaunchMode.externalApplication)) {
-            throw Exception('Could not launch');
-         }
-          });
-        }
-         else {
-           launchUrl( Uri.parse(data["url_to_redirect"]));
-        }
-      }catch(e, st){
-        debugPrint(st.toString());
-      }
-
-
-      },
+        initializationSettings,
+        onDidReceiveNotificationResponse: _handleNotificationResponse,
+        onDidReceiveBackgroundNotificationResponse: _handleNotificationResponse
     );
+  }
+
+  static _handleNotificationResponse(NotificationResponse response){
+    NotificationController controller = Get.find();
+    controller.update(["badge"]);
+    try {
+      Map data = jsonDecode(response.payload!);
+      if (data["url_to_redirect"] != "") {
+
+        Future.delayed(const Duration(seconds: 0),()async{
+
+          if (data["post_id"] != "0") {
+            ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
+                id: int.parse(data["post_id"]!));
+            // Get.toNamed(AppRoutes.frontPageProductDetail,
+            //     arguments: [productDetailsResponse]);
+            Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
+                arguments: { "details" :   productDetailsResponse});
+          }  else  if (!await launchUrl(
+              Uri.parse(data["url_to_redirect"]),
+              mode: LaunchMode.externalApplication)) {
+            throw Exception('Could not launch');
+          }
+        });
+      }
+      else {
+        launchUrl( Uri.parse(data["url_to_redirect"]));
+      }
+    }catch(e, st){
+      print(st);
+    }
   }
 
   ///  Notification Listener
@@ -76,86 +77,74 @@ class NotificationManager {
       AppleNotification? apple = message.notification?.apple;
 
 
-     if(apple !=null){
-       apple.imageUrl!.log();
-       "apple".log();
-       String? path = await _downloadAndSavePicture(apple.imageUrl, "fileName.png");
-       flutterLocalNotificationsPlugin.show(
-         notification.hashCode,
-         notification!.title??"",
-         notification.body??"",
-         NotificationDetails(
-           iOS: DarwinNotificationDetails(
-             attachments: <DarwinNotificationAttachment>[
-               DarwinNotificationAttachment(
-                 path!,
-                 identifier: 'image',
-               ),
-             ],
-           ),
-         ),
-         payload : jsonEncode( message.data),
-       );
-     }
-
-     if(android!=null){
-       android.imageUrl!.log();
-       "android".log();
+      if(apple !=null){
+        apple.imageUrl!.log();
+        "apple".log();
+        String? path = await _downloadAndSavePicture(apple.imageUrl, "fileName.png");
         flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification!.title??"",
-            notification.body??"",
-            NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                icon: "@mipmap/ic_launcher",
-
-                // other properties...
-              ),
+          notification.hashCode,
+          notification!.title??"",
+          notification.body??"",
+          NotificationDetails(
+            iOS: DarwinNotificationDetails(
+              attachments: <DarwinNotificationAttachment>[
+                DarwinNotificationAttachment(
+                  path!,
+                  identifier: 'image',
+                ),
+              ],
             ),
-           payload : jsonEncode( message.data),
+          ),
+          payload : jsonEncode( message.data),
+        );
+      }
+
+      if(android!=null){
+        android.imageUrl!.log();
+        "adnroid".log();
+        flutterLocalNotificationsPlugin.show(
+          notification.hashCode,
+          notification!.title??"",
+          notification.body??"",
+          NotificationDetails(
+            android: AndroidNotificationDetails(
+              channel.id,
+              channel.name,
+              icon: "@mipmap/ic_launcher",
+
+              // other properties...
+            ),
+          ),
+          payload : jsonEncode( message.data),
         );
       }
     });
+  }
 
-    FirebaseMessaging.onMessageOpenedApp.listen((event) {
-      // NotificationController controller = Get.find();
-      // controller.update(["badge"]);
-
-      debugPrint("notification event ---- $event");
-      "Message Received ${event.data}".log();
-      Map data = event.data;
-      try {
-
-
-        if (data["url_to_redirect"] != "") {
-          Future.delayed(const Duration(seconds: 0),()async{
-
-            if (data["post_id"] != "0") {
-              ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
-                  id: int.parse(data["post_id"]!));
-              Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
-                  arguments: { "details" :  productDetailsResponse});
-              // Get.toNamed(AppRoutes.frontPageProductDetail,
-              //     arguments: [productDetailsResponse]);
-            }  else  if (!await launchUrl(
-                Uri.parse(data["url_to_redirect"]),
-                mode: LaunchMode.externalApplication)) {
-              throw Exception('Could not launch');
-            }
-          });
-        }
-        else {
+  static Future<void> messageHandler(RemoteMessage event) async {
+    Map data = event.data;
+    try {
+      if (data["url_to_redirect"] != "") {
+        if (data["post_id"] != "0") {
+          ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
+              id: int.parse(data["post_id"]!));
+          Get.toNamed(AppRoutes.categoryItemDetail, id: 3,
+              arguments: { "details": productDetailsResponse});
+        } else if (!await launchUrl(
+            Uri.parse(data["url_to_redirect"]),
+            mode: LaunchMode.externalApplication)) {
+          throw Exception('Could not launch');
+        }else{
           Get.toNamed(AppRoutes.notification);
         }
-      }catch(e, st){
-        debugPrint(st.toString());
       }
-
-
-
-    });
+      else {
+        Get.toNamed(AppRoutes.notification);
+      }
+    }catch(e, st){
+      print("Remote message exception $e");
+      Get.toNamed(AppRoutes.notification);
+    }
   }
 }
 

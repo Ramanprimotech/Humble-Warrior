@@ -1,9 +1,11 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/modals/response/home_categories_response_model.dart';
 import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/network/api_call.dart';
+import 'package:humble_warrior/utils/routes/app_routes.dart';
 
 class HomeScreenController extends GetxController {
   final TextEditingController searchTextController = TextEditingController();
@@ -30,11 +32,15 @@ class HomeScreenController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     scrollControllerListener();
     focusNode.addListener(() {
       getKeyBoard(Get.context!);
     });
+    final RemoteMessage? message = await FirebaseMessaging.instance.getInitialMessage();
+    if(message != null){
+      Get.toNamed(AppRoutes.notification, id: 3);
+    }
     super.onInit();
   }
 
