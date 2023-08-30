@@ -52,12 +52,12 @@ class FrontPageDeals extends StatelessWidget {
             itemCount: controller.frontPageDealList.length + 1,
             itemBuilder: (ctx, index) {
               ProductDetailsResponse details = ProductDetailsResponse();
-              if (index != controller.frontPageDealList.length) {
+              if (index < controller.frontPageDealList.length) {
                 details = controller.frontPageDealList[index];
               }
               return Stack(
                 children: [
-                  index != controller.frontPageDealList.length
+                  index < controller.frontPageDealList.length
                       ? CardView(
                           index: index,
                           details: details,

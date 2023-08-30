@@ -24,10 +24,10 @@ class WishList extends StatelessWidget {
                         : CustomRefreshIndicator(
                             onRefresh: () async {
                               return Future.delayed(const Duration(seconds: 1),
-                                  () {
-                                controller.getWishList();
-                                return Future.value(0);
-                              });
+                                () {
+                                   controller.getWishList();
+                                   return Future.value(0);
+                                });
                             },
                             child: Obx(
                               () => controller.data.value.isEmpty
@@ -40,11 +40,9 @@ class WishList extends StatelessWidget {
                                   : ListView.separated(
                                       padding: 20.pb,
                                       itemCount: controller.data.value.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
+                                      itemBuilder: (BuildContext context, int index) {
                                         ProductDetailsResponse details =
-                                            controller.data.value.reversed
-                                                .toList()[index];
+                                        controller.data.value.reversed.toList()[index];
                                         return Padding(
                                           padding: const EdgeInsets.only(
                                             left: 20,

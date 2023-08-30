@@ -132,7 +132,8 @@ class NotificationManager {
               arguments: { "details": productDetailsResponse});
         } else if (!await launchUrl(
             Uri.parse(data["url_to_redirect"]),
-            mode: LaunchMode.externalApplication)) {
+            mode: LaunchMode.externalApplication)
+        ) {
           throw Exception('Could not launch');
         }else{
           Get.toNamed(AppRoutes.notification);

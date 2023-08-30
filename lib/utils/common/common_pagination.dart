@@ -25,32 +25,28 @@ class PaginationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer? _timer;
     return NotificationListener<ScrollNotification>(
       onNotification: (ScrollNotification scrollInfo) {
-        if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
-          if (_timer != null) {
-            _timer!.cancel();
-          }
-          _timer = Timer(const Duration(milliseconds: 1000), () {
-            CommonUtils.toCheckInternet(action: () {
+        if (scrollInfo.metrics.pixels >= (scrollInfo.metrics.maxScrollExtent / totalRecords.value) * 5 && totalRecords.value > 5) {
+          if(apiBool.value == false){
+            print("hfjsdfhsjsfsdh Api call");
+            apiBool.value = true;
+              CommonUtils.toCheckInternet(action: () {
               if (length.value < totalRecords.value) {
-                if (apiBool.value == false) {
-                  apiBool.value = true;
-                  update();
-                  // Future.delayed(const Duration(milliseconds: 10), () {
-                  //   scrollController.animateTo(
-                  //     scrollController.position.maxScrollExtent,
-                  //     duration: const Duration(milliseconds: 100),
-                  //     curve: Curves.fastOutSlowIn,
-                  //   );
-                  // });
-
-                  api();
-                }
+                update();
+                // Future.delayed(const Duration(milliseconds: 10), () {
+                //   scrollController.animateTo(
+                //     scrollController.position.maxScrollExtent,
+                //     duration: const Duration(milliseconds: 100),
+                //     curve: Curves.fastOutSlowIn,
+                //   );
+                // });
+                api().whenComplete(() =>
+                   apiBool.value = false
+                );
               }
             });
-          });
+          }
         }
         return true;
       },

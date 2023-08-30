@@ -49,16 +49,15 @@ class DonnaDailyDeals extends StatelessWidget {
                 });
           }
           return ListView.separated(
-            padding:
-                const EdgeInsets.only(left: 16, right: 16, bottom: 10, top: 6),
+            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10, top: 6),
             controller: controller.donnaDealScrollController,
             itemCount: controller.donnaDealList.length + 1,
             itemBuilder: (ctx, index) {
               ProductDetailsResponse details = ProductDetailsResponse();
-              if (index != controller.donnaDealList.length) {
+              if (index < controller.donnaDealList.length) {
                 details = controller.donnaDealList[index];
               }
-              return index != controller.donnaDealList.length
+              return index < controller.donnaDealList.length
                   ? CardView(
                       index: index,
                       details: details,

@@ -29,8 +29,7 @@ class HomeOptionController extends GetxController
   RxInt donnaDealListLength = 0.obs;
   int donnaDealsPage = 1;
   RxInt donnaDealsTotalDeals = 20.obs;
-  final ScrollController donnaDealScrollController =
-      ScrollController(initialScrollOffset: 0.0);
+  final ScrollController donnaDealScrollController = ScrollController(initialScrollOffset: 0.0);
 
   /// Front Page Deals
   final RxInt frontPageDealsLength = 0.obs;
@@ -39,8 +38,7 @@ class HomeOptionController extends GetxController
   List<ProductDetailsResponse> frontPageDealList = [];
   RxInt frontPageDealListLength = 0.obs;
   int frontPageDealsPage = 1;
-  final ScrollController frontPageDealScrollController =
-      ScrollController(initialScrollOffset: 0.0);
+  final ScrollController frontPageDealScrollController = ScrollController(initialScrollOffset: 0.0);
 
   /// Donna's Favourite
   final RxInt donnaFavouriteDealsLength = 0.obs;
@@ -49,14 +47,12 @@ class HomeOptionController extends GetxController
   RxInt donnaFavouriteDealsTotalDeals = 20.obs;
   int donnaFavouriteDealsPage = 1;
   RxInt donnaFavouriteDealListLength = 0.obs;
-  final ScrollController donnaFavouriteDealScrollController =
-      ScrollController(initialScrollOffset: 0.0);
+  final ScrollController donnaFavouriteDealScrollController = ScrollController(initialScrollOffset: 0.0);
 
   @override
   void onInit() {
     _sortController.additionalApplySort = functionSort;
-    tabController =
-        TabController(length: 3, initialIndex: initialIndex, vsync: this);
+    tabController = TabController(length: 3, initialIndex: initialIndex, vsync: this);
     tabController.addListener(() {
       selectedIndex.value = tabController.index;
     });
@@ -81,7 +77,7 @@ class HomeOptionController extends GetxController
       if (value.data == null) {
         DialogHelper.showToast(context, noMoreDealsTxt);
       } else {
-        if(refresh!) {
+        if(refresh) {
           donnaDealList.clear();
         }
         donnaDealsPage += 1;

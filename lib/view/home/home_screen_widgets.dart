@@ -109,7 +109,8 @@ class HomeScreenWidgets {
               futureWidgets: HomePageCategoryAPIWidgets(context: context),
               future: controller.homeCategories(),
               checkInternet: true,
-              context: context);
+              context: context
+          );
         });
   }
 

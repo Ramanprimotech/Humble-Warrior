@@ -54,10 +54,10 @@ class DonnaFavourite extends StatelessWidget {
             itemCount: controller.donnaFavouriteDealList.length + 1,
             itemBuilder: (ctx, index) {
               ProductDetailsResponse details = ProductDetailsResponse();
-              if (index != controller.donnaFavouriteDealList.length) {
+              if (index < controller.donnaFavouriteDealList.length) {
                 details = controller.donnaFavouriteDealList[index];
               }
-              return index != controller.donnaFavouriteDealList.length
+              return index < controller.donnaFavouriteDealList.length
                   ?
               /*CardView(
                 index: index,

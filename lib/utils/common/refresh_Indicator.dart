@@ -12,6 +12,7 @@ class CustomRefreshIndicator extends StatelessWidget {
     return RefreshIndicator(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         onRefresh: onRefresh,
-        child: child);
+        child: child
+    );
   }
 }
