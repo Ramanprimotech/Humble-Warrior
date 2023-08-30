@@ -25,7 +25,7 @@ class MyAccountRepo {
       if(response["status"] == true){
         SharePreferenceData.addBoolToSF("notificationCheck", status);
       }
-      return response["message"];
+      return response["message ${payload.uId}"];
     } catch (e) {
       return "Error: $e";
     }
