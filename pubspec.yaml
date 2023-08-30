@@ -65,7 +65,7 @@ dependencies:
 #  readmore: ^2.2.0
 
 #  webview_flutter:
-#  webview_flutter: ^2.0.4
+  webview_flutter: ^2.0.4
   url_launcher: ^6.1.9
   share_plus: ^6.3.0
   image_picker: ^0.8.6+1

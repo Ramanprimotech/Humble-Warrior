@@ -15,6 +15,7 @@ class AppRoutes {
   static String notification = "/notification";
   static String categoryDetailsList = "/categoryList";
   static String categoryItemDetail = "/categoryItem";
+  static String webView = "/webView";
   static String accountDetails = "/accountDetail";
   static String staticPages = "/staticPages";
   static String searchView = "/searchView";
