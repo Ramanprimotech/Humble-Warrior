@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/view/my_account/my_account_repo.dart';
 
 class MyAccountController extends GetxController {
   RxBool check = true.obs;
@@ -15,6 +16,9 @@ class MyAccountController extends GetxController {
   late BuildContext context;
   ThemeController themeController = Get.find();
   BottomNavigationController controller = Get.find();
+
+
+  final _myAccountRepo = Get.put(MyAccountRepo());
 
   final StreamController<bool> _verificationNotifier =
       StreamController<bool>.broadcast();
@@ -50,9 +54,13 @@ class MyAccountController extends GetxController {
     imageUrl.value = imagePath!.path;
   }*/
 
-  void switchFunc() {
-    checkNotification.value = !checkNotification.value;
-    SharePreferenceData.addBoolToSF("notificationCheck", checkNotification.value);
+  void switchFunc(BuildContext context) async{
+    _myAccountRepo.updateNotification(status: !checkNotification.value).then((message) async{
+      if(message?.isBlank == false){
+        DialogHelper.showToast(context, message!);
+      }
+      checkNotification.value = await _myAccountRepo.notificationStatus();
+    });
     update();
   }
 
@@ -154,7 +162,7 @@ class MyAccountController extends GetxController {
     checkDark.value = themeController.themeMode == ThemeMode.dark;
     await getData();
     debugPrint("images ${userImg.value.toString()}");
-    checkNotification.value = await SharePreferenceData.getBoolValuesSF("notificationCheck")??true;
+    checkNotification.value = await _myAccountRepo.notificationStatus();
     super.onInit();
   }
 

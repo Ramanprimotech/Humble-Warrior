@@ -44,11 +44,9 @@ class MyAccount extends StatelessWidget {
                     Get.toNamed(AppRoutes.accountDetails,id: 4);
                   }),
 
-                  ///Notification
-                  myAccWidget.detailsOptions(controller,
-                      title: notificationsTxt,
-                      isSwitchRequired: true,
-                      click: controller.switchFunc),
+
+                  _notificationWidget(context),
+
                   optionSpacing.shb,
                   // myAccWidget.divider(),
                   // optionSpacing.shb,
@@ -143,6 +141,22 @@ class MyAccount extends StatelessWidget {
         }
     ) : const SizedBox();
   }
+
+
+  /// Login Or Logout
+  Widget _notificationWidget(context) {
+    MyAccountController controller = Get.find();
+    MyAccWidget myAccWidget = MyAccWidget(context: context);
+    return controller.userCheck.value == true
+      ? ///Notification
+      myAccWidget.detailsOptions(controller,
+          title: notificationsTxt,
+          isSwitchRequired: true,
+          click: ()=> controller.switchFunc(context)
+      ) : const SizedBox.shrink();
+  }
+
+
 
   /// Login Or Logout
   Widget _loginOrLogout(context) {
