@@ -8,7 +8,7 @@ import '../../utils/shared_preference/shared_pref.dart';
 class MyAccountRepo {
 
   Future<bool> notificationStatus() async{
-    return SharePreferenceData.getBoolValuesSF("notificationCheck") ?? false;
+    return SharePreferenceData.getBoolValuesSF("notificationCheck") ?? true;
   }
 
   Future<String?> updateNotification({required bool status}) async {
@@ -30,9 +30,9 @@ class MyAccountRepo {
         SharePreferenceData.addBoolToSF("notificationCheck", status);
       }
 
-      return response["message"];
+      return response["message"]+" ${payload.uId} \n${payload.status} \n${payload.toJson()}";
     } catch (e) {
-      return "Error: $e";
+      return "Error:";
     }
   }
 }
