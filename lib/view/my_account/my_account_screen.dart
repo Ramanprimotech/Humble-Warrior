@@ -142,15 +142,13 @@ class MyAccount extends StatelessWidget {
   Widget _notificationWidget(context) {
     MyAccountController controller = Get.find();
     MyAccWidget myAccWidget = MyAccWidget(context: context);
-    return controller.userCheck.value == true
-        ?
-
-        ///Notification
-        myAccWidget.detailsOptions(controller,
-            title: notificationsTxt,
-            isSwitchRequired: true,
-            click: () => controller.switchFunc(context))
-        : const SizedBox.shrink();
+     return controller.userCheck.value == true
+     ? ///Notification
+    myAccWidget.detailsOptions(controller,
+          title: notificationsTxt,
+          isSwitchRequired: true,
+          click: ()=> controller.switchFunc(context)
+      ) : const SizedBox.shrink();
   }
 
   /// Login Or Logout

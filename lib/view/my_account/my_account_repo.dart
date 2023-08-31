@@ -20,11 +20,7 @@ class MyAccountRepo {
 
       if(response["status"] == true){
         final notify = response["notify"];
-        print("Dsaddadd $response");
-        if(notify is bool){
-          print("Dsaddadd $notify");
-          SharePreferenceData.addBoolToSF("notificationCheck", notify);
-        }
+        await SharePreferenceData.addBoolToSF("notificationCheck", notify == "true");
       }
     // ignore: empty_catches
     }catch(e){}
@@ -37,7 +33,7 @@ class MyAccountRepo {
       final id = await SharePreferenceData.getStringValuesSF(spRegisterUserId) ?? "-1";
       final payload = UpdateNotificationData(
         uId: int.parse(id),
-        status: status
+        status: status.toString()
       );
 
       final response = await APIManager()
@@ -78,7 +74,7 @@ class GetNotificationData {
 
 class UpdateNotificationData {
   final int uId;
-  final bool status;
+  final String status;
 
   const UpdateNotificationData({
     required this.uId,
