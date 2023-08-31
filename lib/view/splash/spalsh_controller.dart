@@ -21,7 +21,7 @@ class SplashController extends GetxController {
 
   /// Splash timer
   startTime() async {
-    var duration = const Duration(seconds: 5);
+    var duration = const Duration(milliseconds: 800);
     return Timer(duration, getData);
   }
 

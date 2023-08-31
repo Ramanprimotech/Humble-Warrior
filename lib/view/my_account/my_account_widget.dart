@@ -12,8 +12,7 @@ class MyAccWidget {
   profileImage() {
     return Column(
       children: [
-        InkWell(
-          borderRadius: BorderRadius.circular(100),
+        GestureDetector(
           onTap: () {
             Get.toNamed(AppRoutes.accountDetails,id: 4);
           },
@@ -21,7 +20,7 @@ class MyAccWidget {
             alignment: Alignment.center,
             height: 120,
             width: 120,
-            isCircle: false,
+            isCircle: false, isFill: false,
             imageUrl: controller.userImg.value.toString(),
             errorImage: ImagePathAssets.hwUser,
             fit: BoxFit.contain,

@@ -8,7 +8,7 @@ class CommonWidgets {
       BoxFit? fit,
       double scale = 1,
       Alignment? alignment,
-      EdgeInsets? margin, String? errorImage, isCircle = true}) {
+      EdgeInsets? margin, String? errorImage, isCircle = true, isFill = true}) {
     return CachedNetworkImage(
       height: height,
       width: width,
@@ -17,11 +17,12 @@ class CommonWidgets {
       imageBuilder: (context, imageProvider) => Container(
         margin: margin ?? 0.pa,
         decoration: BoxDecoration(
+          color: Colors.transparent,
           shape: isCircle ? BoxShape.rectangle : BoxShape.circle,
           image: DecorationImage(
             alignment: alignment ?? Alignment.topCenter,
             image: imageProvider,
-            fit: BoxFit.fill,
+            fit: fit,
           ),
         ),
       ),
