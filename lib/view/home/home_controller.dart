@@ -7,7 +7,7 @@ import 'package:humble_warrior/modals/response/home_categories_response_model.da
 import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/network/api_call.dart';
 import 'package:humble_warrior/utils/routes/app_routes.dart';
-import 'package:humble_warrior/view/notification/notification_webview.dart';
+//import 'package:humble_warrior/view/notification/notification_webview.dart';
 
 class HomeScreenController extends GetxController {
   final TextEditingController searchTextController = TextEditingController();
@@ -48,7 +48,7 @@ class HomeScreenController extends GetxController {
       if (data["url_to_redirect"] != "") {
         ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
             id: int.parse(data["post_id"]!));
-        Get.to(WebViewScreen(url: productDetailsResponse.linkUrl.toString()));
+       // Get.to(WebViewScreen(url: productDetailsResponse.linkUrl.toString()));
       } else{
         Get.toNamed(AppRoutes.notification, id: 3);
       }
