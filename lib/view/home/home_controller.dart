@@ -40,15 +40,12 @@ class HomeScreenController extends GetxController {
       getKeyBoard(Get.context!);
     });
     final RemoteMessage? message = await FirebaseMessaging.instance.getInitialMessage();
-    RemoteMessage? event;
-    Map? data = event?.data;
-    if(data == null){
-      Get.toNamed(AppRoutes.notification, id: 3);
-    }else{
+    if(message != null){
+      Map? data = message.data;
       if (data["url_to_redirect"] != "") {
         ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
             id: int.parse(data["post_id"]!));
-       // Get.to(WebViewScreen(url: productDetailsResponse.linkUrl.toString()));
+        // Get.to(WebViewScreen(url: productDetailsResponse.linkUrl.toString()));
       } else{
         Get.toNamed(AppRoutes.notification, id: 3);
       }
