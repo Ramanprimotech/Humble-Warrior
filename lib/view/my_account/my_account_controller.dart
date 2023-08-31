@@ -17,6 +17,7 @@ class MyAccountController extends GetxController {
   ThemeController themeController = Get.find();
   BottomNavigationController controller = Get.find();
 
+  RxBool isNotificationUpdating = false.obs;
 
   final _myAccountRepo = Get.put(MyAccountRepo());
 
@@ -55,10 +56,13 @@ class MyAccountController extends GetxController {
   }*/
 
   void switchFunc(BuildContext context) async{
+    DialogHelper.showLoadingDialog();
     _myAccountRepo.updateNotification(status: !checkNotification.value).then((message) async{
       if(message?.isBlank == false){
         DialogHelper.showToast(context, message!);
       }
+      DialogHelper.closeDialog();
+      isNotificationUpdating.value = false;
       checkNotification.value = await _myAccountRepo.notificationStatus();
     });
     update();

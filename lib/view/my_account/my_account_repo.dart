@@ -6,12 +6,11 @@ import '../../utils/shared_preference/shared_pref.dart';
 class MyAccountRepo {
 
   Future<bool> notificationStatus() async{
-    return await SharePreferenceData.getBoolValuesSF("notificationCheck") ?? false;
+    return await SharePreferenceData.getBoolValuesSF("notificationCheck") ?? true;
   }
 
   Future<String?> updateNotification({required bool status}) async {
     try {
-
       final id = await SharePreferenceData.getStringValuesSF(spRegisterUserId) ?? "-1";
       final payload = NotificationStatus(
         uId: int.parse(id),
