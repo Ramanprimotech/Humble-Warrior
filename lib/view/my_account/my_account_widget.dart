@@ -22,7 +22,7 @@ class MyAccWidget {
               height: 120,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.primary,
+                color: AppColors.gray.withOpacity(0.9),
               ),
               child: controller.userImg.isEmpty
                   ? InkWell(
@@ -37,7 +37,7 @@ class MyAccWidget {
                       ),
                     )
                   : CircleAvatar(radius: 60,
-              backgroundColor: Colors.blue,
+              backgroundColor: AppColors.gray.withOpacity(0.9),
                 backgroundImage: NetworkImage(controller.userImg.value.toString()),
               )
               /*ClipRRect(

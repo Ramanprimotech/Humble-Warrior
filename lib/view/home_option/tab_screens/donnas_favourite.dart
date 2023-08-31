@@ -110,7 +110,7 @@ class DonnaFavourite extends StatelessWidget {
         child: Stack(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(15),
               child: CommonWidgets.networkImage(
                 imageUrl: imageUrl ?? "",
                 alignment: Alignment.topCenter,

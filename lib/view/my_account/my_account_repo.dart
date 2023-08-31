@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import '../../network/api_manager.dart';
 import '../../network/endpoints.dart';
 import '../../utils/app_strings.dart';
@@ -8,13 +6,13 @@ import '../../utils/shared_preference/shared_pref.dart';
 class MyAccountRepo {
 
   Future<bool> notificationStatus() async{
-    return SharePreferenceData.getBoolValuesSF("notificationCheck") ?? true;
+    return await SharePreferenceData.getBoolValuesSF("notificationCheck") ?? false;
   }
 
   Future<String?> updateNotification({required bool status}) async {
     try {
 
-      final String id = await SharePreferenceData.getStringValuesSF(spRegisterUserId) ?? "-1";
+      final id = await SharePreferenceData.getStringValuesSF(spRegisterUserId) ?? "-1";
       final payload = NotificationStatus(
         uId: int.parse(id),
         status: status
@@ -29,10 +27,9 @@ class MyAccountRepo {
       if(response["status"] == true){
         SharePreferenceData.addBoolToSF("notificationCheck", status);
       }
-
-      return response["message"]+" ${payload.uId} \n${payload.status} \n${payload.toJson()}";
+      return response["message"];
     } catch (e) {
-      return "Error:";
+      return "Error: $e";
     }
   }
 }
