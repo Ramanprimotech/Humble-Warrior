@@ -27,15 +27,25 @@ class AccountDetails extends StatelessWidget {
                 )
               : SafeArea(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       // 50.shb,
                       CommonWidgets.titleBar(context,
                           title: accountDetailsTxt, fontSize: 20,onPress: () {
                             Get.back(id: 4);
                           }),
-                      70.shb,
-                      profileImg(),
+                      40.shb,
+                      CommonWidgets.networkImage(
+                        margin: 8.pa,
+                        alignment: Alignment.center,
+                        width: 120,
+                        height: 120,
+                        isCircle: false,
+                        imageUrl: accountController.userImg.value.toString(),
+                        errorImage: ImagePathAssets.hwUser,
+                        fit: BoxFit.contain,
+                      ),
+                      20.shb,
                       Expanded(
                         child: SingleChildScrollView(
                           child: Column(
@@ -85,71 +95,6 @@ class AccountDetails extends StatelessWidget {
           Divider(color: Theme.of(Get.context!).iconTheme.color!, thickness: 1),
         ],
       ),
-    );
-  }
-
-  profileImg() {
-    AccountDetailsController accountController = Get.find();
-    MyAccWidget myAccWidget = MyAccWidget(context: Get.context!);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Obx(
-          () => Container(
-            alignment: Alignment.center,
-            height: 120,
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColors.primary,
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 10,
-                    spreadRadius: 1,
-                    offset: Offset(0, 3),
-                  )
-                ]),
-            child: accountController.userImg.isEmpty
-                ? InkWell(
-                    onTap: () {
-                      // _openBottomSheet();
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        myAccWidget.profileText(
-                            firstName: accountController.username),
-                      ],
-                    ),
-                  )
-                : CircleAvatar(radius: 60,
-              backgroundColor: Colors.blue,
-              backgroundImage: NetworkImage(accountController.userImg.value.toString()),
-            )
-            /*ClipRRect(
-                    borderRadius: BorderRadius.circular(150),
-                    child: Image.file(
-                      File(accountController.userImg.value),
-                      fit: BoxFit.fill,
-                      height: 145,
-                      width: 145,
-                    ),
-                  ),*/
-          ),
-        ),
-        10.shb,
-        (accountController.username == "" ||
-                accountController.username == "null" ||
-                accountController.username == "N/A")
-            ? const AppText("N/A",
-                fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)
-            : AppText(
-                accountController.username,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-      ],
     );
   }
 

@@ -8,7 +8,7 @@ class CommonWidgets {
       BoxFit? fit,
       double scale = 1,
       Alignment? alignment,
-      EdgeInsets? margin}) {
+      EdgeInsets? margin, String? errorImage, isCircle = true}) {
     return CachedNetworkImage(
       height: height,
       width: width,
@@ -17,17 +17,18 @@ class CommonWidgets {
       imageBuilder: (context, imageProvider) => Container(
         margin: margin ?? 0.pa,
         decoration: BoxDecoration(
+          shape: isCircle ? BoxShape.rectangle : BoxShape.circle,
           image: DecorationImage(
             alignment: alignment ?? Alignment.topCenter,
             image: imageProvider,
-            fit: fit,
+            fit: BoxFit.fill,
           ),
         ),
       ),
       placeholder: (context, url) =>
           CustomShimmer(height: height, width: width),
       errorWidget: (context, url, error) => Center(
-          child: Image.asset(
+          child: Image.asset( errorImage??
         ImagePathAssets.noImageFound,
         alignment: Alignment.center,
         fit: fit,

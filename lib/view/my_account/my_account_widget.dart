@@ -12,56 +12,35 @@ class MyAccWidget {
   profileImage() {
     return Column(
       children: [
-        Obx(
-          () => InkWell(
-            onTap: (){
-              Get.toNamed(AppRoutes.accountDetails,id: 4);
-            },
-            child: Container(
-              alignment: Alignment.center,
-              height: 120,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColors.gray.withOpacity(0.9),
-              ),
-              child: controller.userImg.isEmpty
-                  ? InkWell(
-                      onTap: () {
-                        Get.toNamed(AppRoutes.accountDetails,id: 4);
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          profileText(firstName: controller.username),
-                        ],
-                      ),
-                    )
-                  : CircleAvatar(radius: 60,
-              backgroundColor: AppColors.gray.withOpacity(0.9),
-                backgroundImage: NetworkImage(controller.userImg.value.toString()),
-              )
-              /*ClipRRect(
-                      borderRadius: BorderRadius.circular(150),
-                      child: Image.file(
-                        File(controller.userImg.value),
-                        fit: BoxFit.fill,
-                        height: 145,
-                        width: 145,
-                      ),
-                    ),*/
-            ),
+        InkWell(
+          onTap: () {
+            Get.toNamed(AppRoutes.accountDetails,id: 4);
+          },
+          child: CommonWidgets.networkImage(
+            margin: 8.pa,
+            alignment: Alignment.center,
+            height: 120,
+            width: 120,
+            isCircle: false,
+            imageUrl: controller.userImg.value.toString(),
+            errorImage: ImagePathAssets.hwUser,
+            fit: BoxFit.contain,
           ),
         ),
         10.shb,
-        (controller.username == "" ||
-                controller.username == "null" ||
-                controller.username == "N/A")
-            ? const AppText("N/A")
+        (controller.username == "" || controller.username == "null" || controller.username == "N/A")
+            ? 0.shb
             : AppText(controller.username),
         AppText(controller.user),
+        15.shb,
+        Divider(
+          color: Colors.grey.shade200,
+          height: 2,
+        )
       ],
     );
   }
+
 
   profileText({String? firstName, String? secondName}) {
     String text = "";
@@ -83,13 +62,6 @@ class MyAccWidget {
       text.toUpperCase(),
       fontWeight: FontWeight.w900,
       fontSize: 48,
-    );
-  }
-
-  divider({color}) {
-    return Divider(
-      color: color ?? Colors.grey.shade200,
-      height: 2,
     );
   }
 

@@ -17,7 +17,6 @@ class MyAccount extends StatelessWidget {
     /// Variables
     bool isDark = themeController.themeMode == ThemeMode.dark;
 
-    double optionSpacing = 15;
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: !isDark ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
@@ -28,12 +27,9 @@ class MyAccount extends StatelessWidget {
               child: Obx(
                 () => Column(children: [
                   ///Image and account details
-                  if (controller.userCheck.value == true) ...[
+                  if (controller.userCheck.value == true)
                     myAccWidget.profileImage(),
-                    optionSpacing.shb,
-                    myAccWidget.divider(),
-                  ],
-                  optionSpacing.shb,
+                  15.shb,
 
                   ///===> My Account
                   myAccWidget.myAccountTextFun(heading: myAccountTxt),
@@ -41,15 +37,14 @@ class MyAccount extends StatelessWidget {
                   ///Account Details
                   myAccWidget.detailsOptions(controller,
                       title: accountDetailsTxt, ontap: () {
-                    Get.toNamed(AppRoutes.accountDetails,id: 4);
+                    Get.toNamed(AppRoutes.accountDetails, id: 4);
                   }),
-
 
                   _notificationWidget(context),
 
-                  optionSpacing.shb,
+                  15.shb,
                   // myAccWidget.divider(),
-                  // optionSpacing.shb,
+                  // 15.shb,
 
                   ///=====>The Humble Warrior
                   myAccWidget.myAccountTextFun(heading: theHumbleWarriorTxt),
@@ -58,7 +53,7 @@ class MyAccount extends StatelessWidget {
                   myAccWidget.detailsOptions(controller, title: aboutDonna,
                       ontap: () {
                     CommonUtils.toCheckInternet(action: () {
-                      Get.toNamed(AppRoutes.aboutDonna,id: 4);
+                      Get.toNamed(AppRoutes.aboutDonna, id: 4);
                     });
                   }),
 
@@ -67,16 +62,15 @@ class MyAccount extends StatelessWidget {
                     controller,
                     title: shareWithFriendsTxt,
                     ontap: () async {
-                      CommonUtils.toCheckInternet(action: () async{
+                      CommonUtils.toCheckInternet(action: () async {
                         CommonUtils()
                             .share(shareUrl: "https://humblewarrior.com/");
                       });
-
                     },
                   ),
-                  // // optionSpacing.shb,
+                  // // 15.shb,
                   // myAccWidget.divider(),
-                  optionSpacing.shb,
+                  15.shb,
 
                   ///====>Settings
                   myAccWidget.myAccountTextFun(heading: settingsTxt),
@@ -96,7 +90,9 @@ class MyAccount extends StatelessWidget {
                   ///Help & Support
                   myAccWidget.detailsOptions(controller, title: helpSupportTxt,
                       ontap: () {
-                    Get.to(StaticPagesScreen(ids: "89456", title: helpSupportTxt),id: 4);
+                    Get.to(
+                        StaticPagesScreen(ids: "89456", title: helpSupportTxt),
+                        id: 4);
                     // Get.toNamed(AppRoutes.staticPages,
                     //     arguments: ["89456", helpSupportTxt], id: 4);
                     //     DialogHelper.showToast(context, "Coming Soon");
@@ -106,7 +102,10 @@ class MyAccount extends StatelessWidget {
                   myAccWidget.detailsOptions(controller,
                       title: termsConditionsTxt, ontap: () {
                     CommonUtils.toCheckInternet(action: () {
-                      Get.to(StaticPagesScreen(ids: "89453", title: termsConditionsTxt),id: 4);
+                      Get.to(
+                          StaticPagesScreen(
+                              ids: "89453", title: termsConditionsTxt),
+                          id: 4);
                       // Get.toNamed(AppRoutes.staticPages,
                       //     arguments: ["89453", termsConditionsTxt], id: 4);
                       // Get.toNamed(AppRoutes.staticPages,
@@ -128,18 +127,15 @@ class MyAccount extends StatelessWidget {
     );
   }
 
-  Widget _deleteAccount(context){
+  Widget _deleteAccount(context) {
     MyAccountController controller = Get.find();
     MyAccWidget myAccWidget = MyAccWidget(context: context);
     return controller.userCheck.value == true
-        ? myAccWidget.detailsOptions(
-        controller,
-        title: deleteMyAccount,
-        textColor: AppColors.primary,
-        ontap: () {
-          _showDeleteAccountPopup(context);
-        }
-    ) : const SizedBox();
+        ? myAccWidget.detailsOptions(controller,
+            title: deleteMyAccount, textColor: AppColors.primary, ontap: () {
+            _showDeleteAccountPopup(context);
+          })
+        : const SizedBox();
   }
 
   /// Notification Widget
@@ -147,12 +143,14 @@ class MyAccount extends StatelessWidget {
     MyAccountController controller = Get.find();
     MyAccWidget myAccWidget = MyAccWidget(context: context);
     return controller.userCheck.value == true
-      ? ///Notification
-      myAccWidget.detailsOptions(controller,
-          title: notificationsTxt,
-          isSwitchRequired: true,
-          click: ()=> controller.switchFunc(context)
-      ) : const SizedBox.shrink();
+        ?
+
+        ///Notification
+        myAccWidget.detailsOptions(controller,
+            title: notificationsTxt,
+            isSwitchRequired: true,
+            click: () => controller.switchFunc(context))
+        : const SizedBox.shrink();
   }
 
   /// Login Or Logout
@@ -171,13 +169,11 @@ class MyAccount extends StatelessWidget {
           });
   }
 
-
   _showDeleteAccountPopup(BuildContext context) {
     showDialog(
         context: context,
         builder: (context) {
           return const DeleteAccountPopup();
-        }
-    );
+        });
   }
 }

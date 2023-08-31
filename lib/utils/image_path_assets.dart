@@ -11,6 +11,7 @@ class ImagePathAssets {
   /*=================================== Search Bar Icons/Images ===========================================*/
 
   static const String hwLogoUnnamed = "assets/icons/logo.png";
+  static const String hwUser = "assets/icons/user11.png";
   static const String hwLogoUnnamedDark =
       "assets/icons/humble_icon_darkmode.png";
   static const String notificationIcon = 'assets/icons/notification.png';
