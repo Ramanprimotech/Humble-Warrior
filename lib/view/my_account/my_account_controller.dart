@@ -17,8 +17,6 @@ class MyAccountController extends GetxController {
   ThemeController themeController = Get.find();
   BottomNavigationController controller = Get.find();
 
-  RxBool isNotificationUpdating = false.obs;
-
   final _myAccountRepo = Get.put(MyAccountRepo());
 
   final StreamController<bool> _verificationNotifier =
@@ -33,6 +31,7 @@ class MyAccountController extends GetxController {
         await CommonUtils().getImagePath(imageSource: ImageSource.gallery);
     imageUrl.value = imagePath!.path;
   }*/
+
 
   Future<void> getData() async {
     userCheck.value =
@@ -62,7 +61,6 @@ class MyAccountController extends GetxController {
         DialogHelper.showToast(context, message!);
       }
       DialogHelper.closeDialog();
-      isNotificationUpdating.value = false;
       checkNotification.value = await _myAccountRepo.notificationStatus();
     });
     update();
@@ -165,8 +163,8 @@ class MyAccountController extends GetxController {
   void onInit() async {
     checkDark.value = themeController.themeMode == ThemeMode.dark;
     await getData();
-    debugPrint("images ${userImg.value.toString()}");
     checkNotification.value = await _myAccountRepo.notificationStatus();
+    await _myAccountRepo.updateNotification(status: checkNotification.value);
     super.onInit();
   }
 
