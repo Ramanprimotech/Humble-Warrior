@@ -6,13 +6,15 @@ import '../../utils/shared_preference/shared_pref.dart';
 class MyAccountRepo {
 
   Future<bool> notificationStatus() async{
-    return SharePreferenceData.getBoolValuesSF("notificationCheck") ?? false;
+    return await SharePreferenceData.getBoolValuesSF("notificationCheck") ?? false;
   }
 
   Future<String?> updateNotification({required bool status}) async {
     try {
+
+      final id = await SharePreferenceData.getStringValuesSF(spRegisterUserId) ?? "-1";
       final payload = NotificationStatus(
-        uId: await SharePreferenceData.getStringValuesSF(userId) ?? "",
+        uId: int.parse(id),
         status: status
       );
 
@@ -25,7 +27,7 @@ class MyAccountRepo {
       if(response["status"] == true){
         SharePreferenceData.addBoolToSF("notificationCheck", status);
       }
-      return response["message ${payload.uId}"];
+      return response["message"];
     } catch (e) {
       return "Error: $e";
     }
@@ -33,7 +35,7 @@ class MyAccountRepo {
 }
 
 class NotificationStatus {
-  final String uId;
+  final int uId;
   final bool status;
 
   const NotificationStatus({
@@ -43,15 +45,15 @@ class NotificationStatus {
 
   Map<String, dynamic> toJson() {
     return {
-      'uId': uId,
-      'status': status,
+      'user_id': uId,
+      'notify': status,
     };
   }
 
   factory NotificationStatus.fromJson(Map<String, dynamic> json) {
     return NotificationStatus(
-      uId: json['uId'],
-      status: json['status'],
+      uId: json['user_id'],
+      status: json['notify'],
     );
   }
 }
