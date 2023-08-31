@@ -27,6 +27,7 @@ class Endpoints {
   static const String deleteNotificationList = "/wp-json/hwapi/clear_all_notifications";
   static const String search = "/wp-json/wp/v2/search";
   static const String update_notification_user = "/wp-json/hwapi/update_notification_user";
+  static const String get_notification_user = "/wp-json/hwapi/get_notification_user";
 
   static String token = "";
   static String pdf = "https://humblewarrior.com/wp-content/uploads/2020/09/humble-warrior-media.pdf";
