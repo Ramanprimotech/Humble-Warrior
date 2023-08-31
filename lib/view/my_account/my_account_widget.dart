@@ -13,11 +13,11 @@ class MyAccWidget {
     return Column(
       children: [
         InkWell(
+          borderRadius: BorderRadius.circular(100),
           onTap: () {
             Get.toNamed(AppRoutes.accountDetails,id: 4);
           },
           child: CommonWidgets.networkImage(
-            margin: 8.pa,
             alignment: Alignment.center,
             height: 120,
             width: 120,
