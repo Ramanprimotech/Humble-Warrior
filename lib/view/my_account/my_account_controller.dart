@@ -38,8 +38,7 @@ class MyAccountController extends GetxController {
         await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
     user = await SharePreferenceData.getStringValuesSF(userEmail) ?? "";
     username = await SharePreferenceData.getStringValuesSF(userName) ?? "";
-    userPhone =
-        await SharePreferenceData.getStringValuesSF(userPhoneNumber) ?? "";
+    userPhone = await SharePreferenceData.getStringValuesSF(userPhoneNumber) ?? "";
     userImg.value = await SharePreferenceData.getStringValuesSF(userProfilePic) ?? "";
     debugPrint("images1 ${userImg.value.toString()}");
   }
@@ -60,8 +59,8 @@ class MyAccountController extends GetxController {
       if(message?.isBlank == false){
         DialogHelper.showToast(context, message!);
       }
-      DialogHelper.closeDialog();
       checkNotification.value = await _myAccountRepo.notificationStatus();
+      DialogHelper.closeDialog();
     });
     update();
   }
@@ -164,7 +163,6 @@ class MyAccountController extends GetxController {
     checkDark.value = themeController.themeMode == ThemeMode.dark;
     await getData();
     checkNotification.value = await _myAccountRepo.notificationStatus();
-    await _myAccountRepo.updateNotification(status: checkNotification.value);
     super.onInit();
   }
 
