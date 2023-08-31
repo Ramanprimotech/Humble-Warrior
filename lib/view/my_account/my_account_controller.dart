@@ -92,13 +92,11 @@ class MyAccountController extends GetxController {
   userLogout() async {
     try {
       if (Platform.isAndroid) {
-
         await GoogleSignIn(
             clientId:
             DefaultFirebaseOptions.currentPlatform.androidClientId)
             .signOut();
       } else if (Platform.isIOS) {
-
         await GoogleSignIn(
             clientId: DefaultFirebaseOptions.currentPlatform.iosClientId)
             .signOut();
@@ -135,17 +133,20 @@ class MyAccountController extends GetxController {
 
   Future<bool> deleteMyAccount() async{
     final user = FirebaseAuth.instance.currentUser;
-    if(user != null){
-      await user.delete().whenComplete(()  async{
-        await SharePreferenceData.clear();
-        isLoggedIn = false;
-        await SharePreferenceData.addBoolToSF(spIsEntered, false);
-        controller.selectedIndex = 0;
-        _deleteDatabase();
-        userLogout();
-      });
-      return true;
-    }else{
+    try{
+      if(user != null){
+        await user.delete().whenComplete(()  async{
+          await SharePreferenceData.clear();
+          isLoggedIn = false;
+          await SharePreferenceData.addBoolToSF(spIsEntered, false);
+          controller.selectedIndex = 0;
+          _deleteDatabase();
+        });
+        return true;
+      }else{
+        return false;
+      }
+    }catch(e){
       return false;
     }
   }
