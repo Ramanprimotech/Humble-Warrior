@@ -70,7 +70,7 @@ class SplashController extends GetxController {
           }
           else {
             DialogHelper.closeDialog();
-            _showDialog(context);
+            data.message != "" ? _showDialog(context) : DialogHelper.showMaintenanceDialog(context);
           }
           DialogHelper.closeDialog();
         });
@@ -141,7 +141,7 @@ class SplashController extends GetxController {
                 children: [
                   AppText("Humble Warrior", color: accountOptionTheme.textColor, fontSize: 22),
                   AppText(
-                    data.message ?? "",
+                    data.message ?? "Application is under Maintenance.",
                     // "We've just released a new update for the app which includes some great new features! To make sure you're getting the most out of the app, we recommend you update the app.",
                     color: accountOptionTheme.textColor,
                     fontSize: 16,
@@ -150,7 +150,7 @@ class SplashController extends GetxController {
                     padding: 16.pv,
                   ),
                   20.shb,
-                  ElevatedButton(
+                  data.message != "" ? ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       elevation: 5,
                       // fixedSize: const Size(, 35),
@@ -168,7 +168,7 @@ class SplashController extends GetxController {
                     },
                     child: const AppText("Update",
                         color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
+                  ) : SizedBox(),
                 ],
               ),
             )

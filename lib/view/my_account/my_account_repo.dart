@@ -12,6 +12,7 @@ class MyAccountRepo {
       final payload = GetNotificationData(
         uId: int.parse(id)
       );
+
       final response = await APIManager()
           .postAPICallNoBearer(
           url: Endpoints.get_notification_user,

@@ -170,6 +170,69 @@ abstract class DialogHelper {
     );
   }
 
+  static showMaintenanceDialog(BuildContext context) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        final AccountOptionTheme accountOptionTheme =
+        Theme.of(Get.context!).extension<AccountOptionTheme>()!;
+        ThemeController themeController = Get.find();
+        return AlertDialog(
+            elevation: 3,
+            shadowColor: Theme.of(context).extension<ShadowTheme>()!.shadowColor!,
+            backgroundColor: accountOptionTheme.backGroundColor,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),),
+            icon: ClipRRect(
+              borderRadius: BorderRadius.circular(6.0),
+              child: Image.asset(
+                themeController.themeMode == ThemeMode.dark
+                    ? ImagePathAssets.hwLogoDarkMode
+                    : ImagePathAssets.hwLogo,
+                width: Get.width * .30,
+              ),
+            ).centered().pLTRB(0, 10, 0, 5),
+            content: Container(
+              height: 150,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AppText(
+                   "Exciting changes are on the way.",
+                    // "We've just released a new update for the app which includes some great new features! To make sure you're getting the most out of the app, we recommend you update the app.",
+                    color: accountOptionTheme.textColor,
+                    fontSize: 17,
+                    maxLines: 3,
+                    textAlign: TextAlign.center,
+                    fontWeight: FontWeight.bold,
+                    padding: 6.pv,
+                  ),
+                  AppText(
+                    "Thanks for your patience, we'll be back shortly.",
+                    color: accountOptionTheme.textColor,
+                    fontSize: 16,
+                    maxLines: 3,
+                    textAlign: TextAlign.center,
+                    padding: 16.pv,
+                  ),
+                ],
+              ),
+            )
+
+          // const Text("Please install the updated version from TestFlight"),
+          // actions: <Widget>[
+          //    IconButton(
+          //     icon:  const Text("OK"),
+          //     onPressed: () {
+          //       // Navigator.of(context).pop();
+          //     },
+          //   ),
+          // ],
+        );
+      },
+    );
+  }
+
   static void showErrorDialog({
     String title = 'Error',
     String description = "Unknown error occurred",
