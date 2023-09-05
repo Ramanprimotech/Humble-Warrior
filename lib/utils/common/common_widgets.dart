@@ -17,7 +17,7 @@ class CommonWidgets {
       imageBuilder: (context, imageProvider) => Container(
         margin: margin ?? 0.pa,
         decoration: BoxDecoration(
-          color: Colors.transparent,
+          // color: Colors.transparent,
           shape: isCircle ? BoxShape.rectangle : BoxShape.circle,
           image: DecorationImage(
             alignment: alignment ?? Alignment.topCenter,
@@ -27,7 +27,7 @@ class CommonWidgets {
         ),
       ),
       placeholder: (context, url) =>
-          CustomShimmer(height: height, width: width),
+          isCircle ? CustomShimmer(height: height, width: width) : CustomShimmer.circular(height: height, width: width),
       errorWidget: (context, url, error) => Center(
           child: Image.asset( errorImage??
         ImagePathAssets.noImageFound,

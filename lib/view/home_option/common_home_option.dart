@@ -105,9 +105,9 @@ class ItemCard extends StatelessWidget {
 Widget codeButton({required String code, required BuildContext context}) {
   return GestureDetector(
     onTap: () async {
-      await CardView.checkLoggedIn(() {
+      // await CardView.checkLoggedIn(() {
         CommonUtils().copyToClipboard(copyText: code, context: context);
-      }, context);
+      // }, context);
     },
     child: Container(
         alignment: Alignment.center,
@@ -148,9 +148,9 @@ Widget shopButton(
     {required url, required String title, required BuildContext context}) {
   return GestureDetector(
     onTap: () async {
-      await CardView.checkLoggedIn(() {
+      // await CardView.checkLoggedIn(() {
         CommonUtils().urlLauncher(url: url, title: title);
-      }, context);
+      // }, context);
     },
     child: Container(
         alignment: Alignment.center,
