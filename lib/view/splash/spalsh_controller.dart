@@ -36,6 +36,34 @@ class SplashController extends GetxController {
   }
 
   Future<void> getData() async {
+              SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+              final passCode = sharedPreferences.getString("PASSCODE");
+              if (passCode != null) {
+                _showLockScreen(
+                  Get.context!,
+                  opaque: false,
+                  cancelButton: const AppText(
+                    'Cancel',
+                    fontSize: 16,
+                  ),
+                );
+              } else {
+                if (await SharePreferenceData.getBoolValuesSF(spIsLogged) == true) {
+                  Get.offNamed(AppRoutes.bottomNavigation);
+                } else {
+                  if (await SharePreferenceData.getBoolValuesSF(spIsEntered) == true) {
+                    Get.offNamed(AppRoutes.bottomNavigation);
+                  } else {
+                    Get.offNamed(AppRoutes.loginPage);
+                  }
+                }
+              }
+
+            DialogHelper.closeDialog();
+        }
+
+
+/*  Future<void> getData() async {
     // DialogHelper.showLoadingDialog(
     //   label: '', showLabel: false,);
     await CommonUtils.toCheckInternet(
@@ -76,7 +104,7 @@ class SplashController extends GetxController {
         });
       }
     );
-  }
+  }*/
 
   packageInfo() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -258,10 +286,26 @@ class SplashController extends GetxController {
   @override
   void onInit() async {
     await getTheme();
+    packageInfo();
     await TokenManager(onTokenGenerate: () {}, onTokenEror: showError).init();
-    Future.delayed(const Duration(seconds: 3), () {
-      startTime();
-      packageInfo();
+
+    Future.delayed(const Duration(seconds: 3), () async {
+      await CommonUtils.toCheckInternet(
+          context: context,
+          action: () async {
+            await checkVersion(version: version).then((value) async {
+              canNavigateInside = true;
+              if(value == true){
+                startTime();
+              }
+              else {
+                DialogHelper.closeDialog();
+                data.message != "" ? _showDialog(context) : DialogHelper.showMaintenanceDialog(context);
+              }
+              DialogHelper.closeDialog();
+            });
+          }
+      );
     });
 
     super.onInit();
