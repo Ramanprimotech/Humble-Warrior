@@ -84,12 +84,12 @@ class MyAccountController extends GetxController {
       isLoggedIn = false;
       await SharePreferenceData.addBoolToSF(spIsEntered, false);
       controller.selectedIndex = 0;
-      userLogout();
+      disposeGoogleSession();
       Get.offAllNamed(AppRoutes.loginPage);
     });
   }
 
-  userLogout() async {
+  disposeGoogleSession() async {
     try {
       if (Platform.isAndroid) {
         await GoogleSignIn(
@@ -141,6 +141,7 @@ class MyAccountController extends GetxController {
           await SharePreferenceData.addBoolToSF(spIsEntered, false);
           controller.selectedIndex = 0;
           _deleteDatabase();
+          disposeGoogleSession();
         });
         return true;
       }else{
@@ -150,6 +151,7 @@ class MyAccountController extends GetxController {
       return false;
     }
   }
+
 
   loginPage() {
     isLoggedIn = false;
