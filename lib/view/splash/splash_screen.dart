@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
               return Transform.scale(scale: value, child: child);
             },
             tween: Tween(begin: .2, end: 1.5),
-            duration: const Duration(milliseconds: 800),
+            duration: const Duration(milliseconds: 1500),
             child: Image.asset(
               controller.isDark.value
                   ? ImagePathAssets.hwLogoDarkMode
