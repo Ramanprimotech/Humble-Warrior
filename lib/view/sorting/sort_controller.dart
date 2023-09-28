@@ -10,7 +10,6 @@ class SortController extends GetxController {
       const SortItem(itemnName: "A-Z", itemValue: "ASC", type: "name"),
       const SortItem(itemnName: "Z-A", itemValue: "DECS", type: "name")
     ]),
-    // FilterModal(header: "Name", subHeader: ["A-Z", "Z-A"]),
   ];
 
   RxBool isSelected = false.obs;
@@ -60,6 +59,7 @@ class SortController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
     filterSelectionList.addAll(filterData);
     checkFilter();
   }

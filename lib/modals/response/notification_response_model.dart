@@ -8,18 +8,18 @@ class NotificationResponseModel {
     if (json['posts'] != null) {
       posts = <Posts>[];
       json['posts'].forEach((v) {
-        posts!.add(new Posts.fromJson(v));
+        posts!.add(Posts.fromJson(v));
       });
     }
     timestamp = json['timestamp'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.posts != null) {
-      data['posts'] = this.posts!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (posts != null) {
+      data['posts'] = posts!.map((v) => v.toJson()).toList();
     }
-    data['timestamp'] = this.timestamp;
+    data['timestamp'] = timestamp;
     return data;
   }
 }
@@ -31,6 +31,7 @@ class Posts {
   String? categoryName;
   String? thumbnail;
   bool? read;
+  String? productDescription;
 
   Posts(
       {this.id,
@@ -38,6 +39,7 @@ class Posts {
       this.date,
       this.categoryName,
       this.thumbnail,
+      this.productDescription,
       this.read});
 
   Posts.fromJson(Map<String, dynamic> json) {
@@ -46,17 +48,19 @@ class Posts {
     date = json['date'];
     categoryName = json['category_name'];
     thumbnail = json['thumbnail'];
+    productDescription = json['product_description'];
     read = json['read'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['date'] = this.date;
-    data['category_name'] = this.categoryName;
-    data['thumbnail'] = this.thumbnail;
-    data['read'] = this.read;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['date'] = date;
+    data['category_name'] = categoryName;
+    data['thumbnail'] = thumbnail;
+    data['product_description'] = productDescription;
+    data['read'] = read;
     return data;
   }
 }

@@ -1,13 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/extensions.dart';
-import 'package:humble_warrior/utils/media_query_widget.dart';
-import 'package:humble_warrior/utils/theme_extention/custom_notice_theme_extention.dart';
-
-import '../app_colors.dart';
-import '../app_text.dart';
-import '../button.dart';
+import 'package:humble_warrior/hw.dart';
 
 abstract class DialogHelper {
   static final FToast _fToast = FToast();
@@ -30,8 +21,7 @@ abstract class DialogHelper {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
-            mainAxisAlignment:
-                showLabel ? MainAxisAlignment.start : MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircularProgressIndicator(color: AppColors.primary),
               if (showLabel) ...[
@@ -50,15 +40,14 @@ abstract class DialogHelper {
     );
   }
 
-
   static Future<void> showAlertDialog(
-      String message, {
-        String? title,
-        double? textFont,
-        required VoidCallback onTap,
-      }) async {
+    String message, {
+    String? title,
+    double? textFont,
+    required VoidCallback onTap,
+  }) async {
     DialogueThemeExtention dialogueThemeExtention =
-    Theme.of(Get.context!).extension<DialogueThemeExtention>()!;
+        Theme.of(Get.context!).extension<DialogueThemeExtention>()!;
     await Get.dialog(
       Dialog(
         shape: 16.shape,
@@ -78,28 +67,31 @@ abstract class DialogHelper {
                   padding: 8.pb,
                   textAlign: TextAlign.center,
                 ),
-                16.sh,
                 AppText(
                   message,
-                  fontSize: textFont??18,
+                  fontSize: textFont ?? 18,
                   maxLines: 6,
                   textAlign: TextAlign.center,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
-                32.sh,
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 5,
-                    fixedSize: const Size(180, 35),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    backgroundColor: AppColors.primary,
-                  ),
-                  onPressed: onTap,
-                  child: AppText('OK',
-                    color: Colors.white, fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 5,
+                        // fixedSize: const Size(, 35),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        backgroundColor: dialogueThemeExtention.buttonColor,
+                      ),
+                      onPressed: onTap,
+                      child: const AppText(
+                        "Ok",
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
+                      )),
+                )
               ],
             ),
           ),
@@ -111,24 +103,27 @@ abstract class DialogHelper {
   }
 
   static Future<void> showConfirmationDialog({
-    required BuildContext context, required void Function() action,
+    required BuildContext context,
+    required void Function() action,
     void Function()? cancelAction,
-    String? actionLabel, String? cancelLabel, String? message,
+    String? actionLabel,
+    String? cancelLabel,
+    String? message,
   }) async {
     DialogueThemeExtention dialogueThemeExtention =
-    Theme.of(Get.context!).extension<DialogueThemeExtention>()!;
+        Theme.of(Get.context!).extension<DialogueThemeExtention>()!;
     showDialog(
       barrierDismissible: false,
       context: Get.context!,
       builder: (context) => AlertDialog(
         surfaceTintColor: Colors.transparent,
         contentPadding:
-        const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         alignment: Alignment.center,
         actionsAlignment: MainAxisAlignment.spaceAround,
         backgroundColor: dialogueThemeExtention.backGroundColor,
         elevation: 5,
-        title: AppText(message??"Are you Sure?",
+        title: AppText(message ?? "Are you Sure?",
             color: dialogueThemeExtention.textColor,
             textAlign: TextAlign.center,
             maxLines: 2,
@@ -143,9 +138,11 @@ abstract class DialogHelper {
               backgroundColor: AppColors.primary,
             ),
             onPressed: action,
-            child: AppText(actionLabel??'OK',
-                color: Colors.white, fontWeight: FontWeight.bold,
-            fontSize: 14,
+            child: AppText(
+              actionLabel ?? 'OK',
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
             ),
           ),
           OutlinedButton(
@@ -154,21 +151,85 @@ abstract class DialogHelper {
               shape: MaterialStateProperty.resolveWith((states) =>
                   RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10))),
-              // overlayColor: MaterialStateProperty.all(AppColors.primary),
               side: MaterialStateProperty.resolveWith(
-                    (states) => BorderSide(
+                (states) => BorderSide(
                   color: AppColors.primary,
                   width: 2,
                 ),
               ),
             ),
-            onPressed: cancelAction??() {
-              Get.back();
-            },
-            child: AppText(cancelLabel??'Cancel', fontWeight: FontWeight.bold),
+            onPressed: cancelAction ??
+                () {
+                  Get.back();
+                },
+            child:
+                AppText(cancelLabel ?? 'Cancel', fontWeight: FontWeight.bold),
           )
         ],
       ),
+    );
+  }
+
+  static showMaintenanceDialog(BuildContext context) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        final AccountOptionTheme accountOptionTheme =
+        Theme.of(Get.context!).extension<AccountOptionTheme>()!;
+        ThemeController themeController = Get.find();
+        return AlertDialog(
+            elevation: 3,
+            shadowColor: Theme.of(context).extension<ShadowTheme>()!.shadowColor!,
+            backgroundColor: accountOptionTheme.backGroundColor,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),),
+            icon: ClipRRect(
+              borderRadius: BorderRadius.circular(6.0),
+              child: Image.asset(
+                themeController.themeMode == ThemeMode.dark
+                    ? ImagePathAssets.hwLogoDarkMode
+                    : ImagePathAssets.hwLogo,
+                width: Get.width * .30,
+              ),
+            ).centered().pLTRB(0, 10, 0, 5),
+            content: Container(
+              height: 150,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AppText(
+                   "Exciting changes are on the way.",
+                    // "We've just released a new update for the app which includes some great new features! To make sure you're getting the most out of the app, we recommend you update the app.",
+                    color: accountOptionTheme.textColor,
+                    fontSize: 17,
+                    maxLines: 3,
+                    textAlign: TextAlign.center,
+                    fontWeight: FontWeight.bold,
+                    padding: 6.pv,
+                  ),
+                  AppText(
+                    "Thanks for your patience, we'll be back shortly.",
+                    color: accountOptionTheme.textColor,
+                    fontSize: 16,
+                    maxLines: 3,
+                    textAlign: TextAlign.center,
+                    padding: 16.pv,
+                  ),
+                ],
+              ),
+            )
+
+          // const Text("Please install the updated version from TestFlight"),
+          // actions: <Widget>[
+          //    IconButton(
+          //     icon:  const Text("OK"),
+          //     onPressed: () {
+          //       // Navigator.of(context).pop();
+          //     },
+          //   ),
+          // ],
+        );
+      },
     );
   }
 
@@ -192,20 +253,20 @@ abstract class DialogHelper {
                   size: 50,
                 ),
               ),
-              8.sh,
+              8.shb,
               AppText(
                 title,
                 fontSize: 18,
                 padding: 8.pl,
                 fontWeight: FontWeight.bold,
               ),
-              8.sh,
+              8.shb,
               AppText(
                 description,
                 maxLines: maxLines,
                 padding: 8.pl,
               ),
-              16.sh,
+              16.shb,
               const Button(
                 label: 'Close',
                 onTap: closeDialog,
@@ -262,53 +323,74 @@ abstract class DialogHelper {
     DialogueThemeExtention dialogueThemeExtention =
         Theme.of(context).extension<DialogueThemeExtention>()!;
     showDialog(
-      barrierDismissible: false,
+      barrierDismissible: true,
       context: Get.context!,
       builder: (context) => AlertDialog(
         surfaceTintColor: Colors.transparent,
         contentPadding:
-            const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            const EdgeInsets.symmetric(vertical: 20, horizontal: 0),
         alignment: Alignment.center,
         actionsAlignment: MainAxisAlignment.spaceAround,
         backgroundColor: dialogueThemeExtention.backGroundColor,
         elevation: 5,
-        title: AppText("Are you Sure?",
+        title: AppText(AppStrings.logoutTitleText,
             color: dialogueThemeExtention.textColor,
             textAlign: TextAlign.center,
             fontSize: 20),
+        content:  RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+              children: [
+          TextSpan(text: "${AppStrings.logoutSubText} ",style: TextStyle(fontSize: 16, color: Theme.of(context).textTheme.displaySmall!.color!)),
+          TextSpan(text: AppStrings.logoutText,style: TextStyle(fontSize: 16, color: Theme.of(context).textTheme.displaySmall!.color!, fontWeight: FontWeight.bold)),
+        ]),
+        ),
         actions: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              elevation: 5,
-              fixedSize: const Size(90, 35),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              backgroundColor: AppColors.primary,
-            ),
-            onPressed: () {
-              onTap();
-            },
-            child: const AppText('OK',
-                color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          OutlinedButton(
-            style: ButtonStyle(
-              elevation: MaterialStateProperty.resolveWith((states) => 5),
-              shape: MaterialStateProperty.resolveWith((states) =>
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10))),
-              // overlayColor: MaterialStateProperty.all(AppColors.primary),
-              side: MaterialStateProperty.resolveWith(
-                (states) => BorderSide(
-                  color: AppColors.primary,
-                  width: 2,
+          SizedBox(
+            height: 50,
+            child: Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                      elevation:
+                      MaterialStateProperty.resolveWith((states) => 5),
+                      shape: MaterialStateProperty.resolveWith((states) =>
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                      // overlayColor: MaterialStateProperty.all(AppColors.primary),
+                      side: MaterialStateProperty.resolveWith(
+                            (states) => BorderSide(
+                          color: AppColors.primary,
+                          width: 2,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      onTap();
+                    },
+                    child: const AppText('Log out', fontWeight: FontWeight.w600),
+                  ),
                 ),
-              ),
+                16.swb,
+                Expanded(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 5,
+                      // fixedSize: const Size(90, 35),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      backgroundColor: AppColors.primary,
+                    ),
+                    onPressed: () {
+                      Get.back();
+                    },
+                    child: const AppText('Cancel',
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
             ),
-            onPressed: () {
-              Get.back();
-            },
-            child: const AppText('Cancel', fontWeight: FontWeight.bold),
           )
         ],
       ),

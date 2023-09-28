@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_this
+
 class NotificationRequestModel {
   String? token;
   String? device;
@@ -17,7 +19,7 @@ class NotificationRequestModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['token'] = this.token;
     data['device'] = this.device;
     data['user_id'] = this.userId;

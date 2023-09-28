@@ -17,15 +17,18 @@ class RecentSearchAdapter extends TypeAdapter<RecentSearch> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return RecentSearch(
-      productSearched: fields[0] as String?,
+      id: fields[0] as int?,
+      productSearched: fields[1] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, RecentSearch obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
       ..write(obj.productSearched);
   }
 

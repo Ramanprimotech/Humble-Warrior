@@ -1,4 +1,3 @@
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/utils/common/photo_viewer.dart';
 import 'package:humble_warrior/view/productDetail/product_detail_controller.dart';
 
@@ -11,7 +10,7 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
   Widget build(BuildContext context) {
     final ProductDetailsResponse details = Get.arguments[0];
     ProductDetailController controller = Get.find();
-    Future<List<ProductDetailsResponse>> _futureInstance =
+    Future<List<ProductDetailsResponse>> futureInstance =
         controller.productDetailsAPI(idData: details.id.toString());
 
     return Scaffold(
@@ -22,7 +21,7 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
             CommonWidgets.titleBar(context,
                 title: "Product Details", fontSize: 20, backIcon: true),
             FutureBuilder<List<ProductDetailsResponse>>(
-                future: _futureInstance,
+                future: futureInstance,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Expanded(
@@ -32,8 +31,8 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
                             Container(
                               width: Get.width,
                               height: Get.width - 40,
-                              decoration: CustomBoxDecorations()
-                                  .shadow(context: context),
+                              decoration: CustomBoxDecorations(context: context)
+                                  .shadow(),
                             ),
                             Container(
                               margin: 10.pv,
@@ -70,22 +69,20 @@ class FrontPageDetailScreen extends StatelessWidget with ProductDetailWidget {
                       child: Column(
                         children: [
                           Padding(
-                              padding: 8.ph,
-                              child: CardView(
-                                details: data,
-                                onTap: () {
-                                  if (data.url != "" || data.url != null) {
-                                    Get.to(CustomPhotoViewer(url: data.url!));
-                                  }
-                                },
-                                imgUrl: details.url!,
-                                title: details.ribbonName != null
-                                    ? details.ribbonName!
-                                    : details.itemName.toString(),
-                              )
-                              // frontPageCard(data, 0, context,
-                              //     isDetails: true),
-                              ),
+                            padding: 8.ph,
+                            child: CardView(
+                              details: data,
+                              onTap: () {
+                                if (data.url != "" || data.url != null) {
+                                  Get.to(CustomPhotoViewer(url: data.url!));
+                                }
+                              },
+                              imgUrl: data.url!,
+                              title: data.ribbonName != null
+                                  ? data.ribbonName!
+                                  : data.itemName.toString(),
+                            ),
+                          ),
                           productText(context, data.itemName),
                           productDescription(
                               context: context,

@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/helpers/extensions.dart';
-import 'package:humble_warrior/view/home/home_controller.dart';
-import 'package:humble_warrior/view/home/home_screen_widgets.dart';
+import 'package:humble_warrior/hw.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -31,7 +27,7 @@ class HomeScreen extends StatelessWidget {
             homeScreenWidgets.homeOptionDeals(),
 
             /// Brand List Future Builder
-            homeScreenWidgets.brandsList(),
+            homeScreenWidgets.brandListAPIBuilder(waitingState: true),
           ],
         ),
       ),

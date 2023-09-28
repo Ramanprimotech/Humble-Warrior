@@ -1,14 +1,10 @@
 import 'dart:io';
 
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/modals/response/notification_response_model.dart';
-import 'package:humble_warrior/network/api_call.dart';
 
 class NotificationController extends GetxController {
   RxBool loggedIn = true.obs;
-
+RxBool list = false.obs;
   @override
   void onInit() async {
     await getLoggedValue();
@@ -68,24 +64,40 @@ class NotificationController extends GetxController {
   Future<void> getLoggedValue() async {
     loggedIn.value =
         await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
-    print("LoggedIN-------- $loggedIn.value");
   }
 
   Future<bool> notificationDetailsNavigator(String? cat, int? id) async {
     "$cat    $id".log();
+    update(['badge']);
     String category = cat.toString().toUpperCase();
     ProductDetailsResponse productDetailsResponse =
         ProductDetailsResponse(id: id);
-    if (category == "Favourite Things") {
-      Get.toNamed(AppRoutes.favouriteDeal, arguments: [productDetailsResponse]);
-    } else if (category == "Front Page Deals") {
-      Get.toNamed(AppRoutes.frontPageProductDetail,
-          arguments: [productDetailsResponse]);
-    } else {
-      Get.toNamed(AppRoutes.dailyDealProductDetail,
-          arguments: [productDetailsResponse]);
-    }
-
+    Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
+        arguments: { "details" :  productDetailsResponse});
+    // if (category == "Favourite Things".toUpperCase()) {
+    //   Get.toNamed(AppRoutes.favouriteDeal, arguments: [productDetailsResponse]);
+    // } else if (category == "Front Page Deals".toUpperCase()) {
+    //   Get.toNamed(AppRoutes.frontPageProductDetail,
+    //       arguments: [productDetailsResponse]);
+    // } else if (category == "Donna Daily Deals".toUpperCase()) {
+    //   Get.toNamed(AppRoutes.dailyDealProductDetail,
+    //       arguments: [productDetailsResponse]);
+    // } else {
+    //   Get.toNamed(AppRoutes.dailyDealProductDetail,
+    //       arguments: [productDetailsResponse]);
+    // }
     return await notificationStatus(id);
+  }
+
+  Future<bool> deleteNotification() async{
+    String? userId =
+        await SharePreferenceData.getStringValuesSF(spRegisterUserId);
+    var payload = {
+      'user_id' : userId??""
+    };
+
+ bool result  =   await CallAPI.deleteNotification(payload: payload);
+ update(['badge']);
+  return result;
   }
 }

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:humble_warrior/hw.dart';
 
 class AppColors {
-  static const Color purple = Color(0xFF443266);
+  // static const Color purple = Color(0xFF443266);
   static const Color blue = Color(0xff36A9C2);
   static const Color white = Colors.white;
   static const Color black = Colors.black;
@@ -19,7 +19,8 @@ class AppColors {
   static const Color shadowDark = Colors.black54;
   static const Color shadowLight = Color(0xFFD8D4CF);
   static const Color readBox = Color(0xFFDAEBFD);
-  static const Color switchActiveColor = Color(0xFF2af500);
+  // static const Color switchActiveColor = Color(0xFF2af500);
+  static const Color switchActiveColor = Colors.green;
   static const Color switchInactiveColor = Color(0xFF494E4A);
   static const Color appGreen = Color(0xFF63F3B8);
 }

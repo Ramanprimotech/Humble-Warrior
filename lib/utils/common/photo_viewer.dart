@@ -1,5 +1,4 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:photo_view/photo_view.dart';
 
 class CustomPhotoViewer extends StatelessWidget {
   final String url;
@@ -13,6 +12,15 @@ class CustomPhotoViewer extends StatelessWidget {
         child: Stack(
           children: [
             PhotoView(
+              loadingBuilder:
+                  (BuildContext context, ImageChunkEvent? loadingProgress) {
+                return Center(
+                  child: CustomShimmer(
+                    height: 450,
+                    width: Get.width,
+                  ),
+                );
+              },
               initialScale: PhotoViewComputedScale.contained,
               minScale: PhotoViewComputedScale.contained,
               maxScale: PhotoViewComputedScale.contained * 1.5,

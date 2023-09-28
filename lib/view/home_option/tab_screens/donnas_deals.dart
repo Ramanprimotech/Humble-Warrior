@@ -1,5 +1,4 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/utils/common/photo_viewer.dart';
 
 class DonnaDailyDeals extends StatelessWidget {
@@ -8,7 +7,8 @@ class DonnaDailyDeals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeOptionController controller = Get.find();
-
+    controller.context = context;
+    FToast().init(context);
     return PaginationWidget(
       length: controller.donnaDealListLength,
       apiBool: controller.donnaDealsBool,
@@ -22,12 +22,19 @@ class DonnaDailyDeals extends StatelessWidget {
           if (controller.donnaDealList.isEmpty &&
               controller.donnaDealsBool.value == true) {
             return Center(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CircularProgressIndicator(),
-                CommonWidgets.loading(),
-              ],
+                child: ListView.separated(
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (ctx, index) {
+                return const CustomShimmer.rectangular(
+                  height: 290,
+                  borderRadius: 15,
+                  margin: EdgeInsets.symmetric(horizontal: 15),
+                );
+              },
+              itemCount: 10,
+              separatorBuilder: (BuildContext context, int index) {
+                return 18.shb;
+              },
             ));
           }
           if (controller.donnaDealList.isEmpty &&
@@ -42,22 +49,21 @@ class DonnaDailyDeals extends StatelessWidget {
                 });
           }
           return ListView.separated(
-            padding:
-                const EdgeInsets.only(left: 16, right: 16, bottom: 10, top: 6),
+            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10, top: 6),
             controller: controller.donnaDealScrollController,
             itemCount: controller.donnaDealList.length + 1,
             itemBuilder: (ctx, index) {
               ProductDetailsResponse details = ProductDetailsResponse();
-              if (index != controller.donnaDealList.length) {
+              if (index < controller.donnaDealList.length) {
                 details = controller.donnaDealList[index];
               }
-              return index != controller.donnaDealList.length
+              return index < controller.donnaDealList.length
                   ? CardView(
                       index: index,
                       details: details,
                       onTap: () {
-                        Get.toNamed(AppRoutes.dailyDealProductDetail,
-                            arguments: [details]);
+                        Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
+                            arguments: { "details" : details});
                       },
                       imgUrl: details.url!,
                       cardText: details.itemName!,
@@ -65,11 +71,12 @@ class DonnaDailyDeals extends StatelessWidget {
                   // donnaDealsCard(details, index, context, dailyDeals: true)
                   : Obx(
                       () => Visibility(
-                          visible: controller.donnaDealsBool.value,
-                          child: Container(
-                              height: 80,
-                              alignment: Alignment.center,
-                              child: const CircularProgressIndicator())),
+                        visible: controller.donnaDealsBool.value,
+                        child: Container(
+                            height: 80,
+                            alignment: Alignment.center,
+                            child: const CircularProgressIndicator()),
+                      ),
                     );
             },
             separatorBuilder: (BuildContext context, int index) {
@@ -94,7 +101,8 @@ ItemCard donnaDealsCard(
           Get.to(CustomPhotoViewer(url: details.url!));
         }
       } else {
-        Get.toNamed(AppRoutes.dailyDealProductDetail, arguments: [details]);
+        Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
+            arguments: { "details" : details});
       }
     },
     radius: 10,
@@ -117,7 +125,7 @@ Widget donnaDealsButton(
         Padding(
           padding: const EdgeInsets.only(left: 15.0, top: 8.0),
           child: AppText(
-            "${details.itemName!}",
+            details.itemName!,
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),
@@ -129,13 +137,15 @@ Widget donnaDealsButton(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: 8.pl,
+                padding: 8.ph,
                 child: (details.shopUrl == "" ||
                         details.shopUrl == "null" ||
                         details.shopUrl == null)
                     ? 0.shb
                     : shopButton(
-                        url: "${details.shopUrl}", title: details.itemName!),
+                        context: context,
+                        url: "${details.shopUrl}",
+                        title: details.itemName!),
               ),
               !(details.couponCode == null || details.couponCode == "")
                   ? codeButton(code: "${details.couponCode}", context: context)
@@ -157,13 +167,15 @@ Widget donnaDealsButton(
                         key: Key(index.toString()),
                       ),
                     ),
-                    shareButton(shareUrl: details.linkUrl, color: color),
+                    shareButton(
+                        shareUrl: details.linkUrl,
+                        color: color,
+                        context: context),
                   ],
                 )
               : Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    shareButton(shareUrl: details.linkUrl, color: color),
                     IconButton(
                       onPressed: () {
                         // controller.select.value = !controller.select.value;
@@ -175,8 +187,12 @@ Widget donnaDealsButton(
                         key: Key(index.toString()),
                       ),
                     ),
+                    shareButton(
+                        shareUrl: details.linkUrl,
+                        color: color,
+                        context: context),
                   ],
-                ),
+                ).px8(),
         ],
       ),
     ],

@@ -1,12 +1,15 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:humble_warrior/modals/abstract_enums/search_bar.dart';
+import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/modals/response/brands_response_mdel.dart';
 import 'package:humble_warrior/modals/response/home_categories_response_model.dart';
 import 'package:humble_warrior/modals/response/product_category_response.dart';
 import 'package:humble_warrior/network/api_call.dart';
+import 'package:humble_warrior/utils/routes/app_routes.dart';
+//import 'package:humble_warrior/view/notification/notification_webview.dart';
 
-class HomeScreenController extends GetxController implements SearchActions {
+class HomeScreenController extends GetxController {
   final TextEditingController searchTextController = TextEditingController();
 
   ///----Scroll Controllers
@@ -20,6 +23,7 @@ class HomeScreenController extends GetxController implements SearchActions {
   RxBool listForward = true.obs;
   RxBool brandListBack = false.obs;
   RxBool brandListForward = true.obs;
+  bool check = false;
 
   final FocusNode focusNode = FocusNode();
   ValueNotifier<bool> keyboardIsOpened = ValueNotifier(true);
@@ -30,11 +34,22 @@ class HomeScreenController extends GetxController implements SearchActions {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     scrollControllerListener();
     focusNode.addListener(() {
       getKeyBoard(Get.context!);
     });
+    final RemoteMessage? message = await FirebaseMessaging.instance.getInitialMessage();
+    if(message != null){
+      Map? data = message.data;
+      if (data["url_to_redirect"] != "") {
+        ProductDetailsResponse productDetailsResponse = ProductDetailsResponse(
+            id: int.parse(data["post_id"]!));
+        // Get.to(WebViewScreen(url: productDetailsResponse.linkUrl.toString()));
+      } else{
+        Get.toNamed(AppRoutes.notification, id: 3);
+      }
+    }
     super.onInit();
   }
 
@@ -56,127 +71,15 @@ class HomeScreenController extends GetxController implements SearchActions {
   }
 
   Future<List<BrandDetails>> allBrands() async {
-    // List<BrandDetails> data = [];
-    // data.add(BrandDetails(
-    //     brandImage: ImagePathAssets.nikeIcon,
-    //     brandName: nikeTxt,
-    //     brandLink: brandLink));
-    // data.add(BrandDetails(
-    //     brandImage: ImagePathAssets.adidasIcon,
-    //     brandName: adidasTxt,
-    //     brandLink: brandLink));
-    // data.add(BrandDetails(
-    //     brandImage: ImagePathAssets.reebokIcon,
-    //     brandName: reebokTxt,
-    //     brandLink: brandLink));
-    // data.add(BrandDetails(
-    //     brandImage: ImagePathAssets.gucciIcon,
-    //     brandName: gucciTxt,
-    //     brandLink: brandLink));
-    // data.add(BrandDetails(
-    //     brandImage: ImagePathAssets.nikeIcon,
-    //     brandName: nikeTxt,
-    //     brandLink: brandLink));
-    // data.add(BrandDetails(
-    //     brandImage: ImagePathAssets.adidasIcon,
-    //     brandName: adidasTxt,
-    //     brandLink: brandLink));
-    // data.add(BrandDetails(
-    //     brandImage: ImagePathAssets.reebokIcon,
-    //     brandName: reebokTxt,
-    //     brandLink: brandLink));
-    // data.add(BrandDetails(
-    //     brandImage: ImagePathAssets.gucciIcon,
-    //     brandName: gucciTxt,
-    //     brandLink: brandLink));
-    // return data;
-    // return data;
     return CallAPI.allBrands();
   }
 
   Future<List<ProductCategoryItem>> productCategoryAPI() async {
-    // const ProductImages(image: ImagePathAssets.giftIcon, name: giftTxt).add();
-    // const ProductImages(
-    //         image: ImagePathAssets.giftForMomIcon, name: giftForMomTxt)
-    //     .add();
-    // const ProductImages(image: ImagePathAssets.houseIcon, name: homeTxt).add();
-    // const ProductImages(image: ImagePathAssets.beautyIcon, name: beautyTxt)
-    //     .add();
-    // const ProductImages(image: ImagePathAssets.menIcon, name: menTxt).add();
-    // const ProductImages(image: ImagePathAssets.kidsIcon, name: kidsTxt).add();
-    // const ProductImages(image: ImagePathAssets.foodIcon, name: kitchenTxt)
-    //     .add();
-    // const ProductImages(image: ImagePathAssets.travelIcon, name: travelTxt)
-    //     .add();
-    // const ProductImages(image: ImagePathAssets.healthIcon, name: healthTxt)
-    //     .add();
-    // const ProductImages(
-    //         image: ImagePathAssets.womensFashionIcon, name: womensFashionTxt)
-    //     .add();
-    // const ProductImages(image: ImagePathAssets.outdoorIcon, name: outdoorTxt)
-    //     .add();
-    // const ProductImages(image: ImagePathAssets.packingIcon, name: packingTxt)
-    //     .add();
-    // const ProductImages(image: ImagePathAssets.fitnessIcon, name: fitnessTxt)
-    //     .add();
-    // const ProductImages(image: ImagePathAssets.orderIcon, name: foodTxt).add();
-    // const ProductImages(image: ImagePathAssets.jewelryIcon, name: jewelryTxt)
-    //     .add();
-    // const ProductImages(image: ImagePathAssets.babyIcon, name: babyTxt).add();
-    // const ProductImages(image: ImagePathAssets.booksIcon, name: booksTxt).add();
-    // const ProductImages(image: ImagePathAssets.vehicleIcon, name: vehiclesTxt)
-    //     .add();
-    // const ProductImages(image: ImagePathAssets.petsIcon, name: petsTxt).add();
-
+    check = true;
     return CallAPI.productCategoryAPI();
   }
 
   Future<List<HomeCategoryList>> homeCategories() async {
-    // List<HomeCategoryList> data = [];
-    // data.add(HomeCategoryList(
-    //     categoryName: donnaDailyDealTxt.upperCamelCase,
-    //     categoryImage: ImagePathAssets.donnaDailyDealImage,
-    //     id: 0));
-    // data.add(HomeCategoryList(
-    //     categoryName: donnaFavouriteDealTxt.upperCamelCase,
-    //     categoryImage: ImagePathAssets.donnaFavDealImage,
-    //     id: 1));
-    // data.add(HomeCategoryList(
-    //     categoryName: donnaFrontPageDealTxt.upperCamelCase,
-    //     categoryImage: ImagePathAssets.donnaFrontDealImage,
-    //     id: 2));
-    // return data;
     return await CallAPI.homeCategory();
   }
-
-  @override
-  void onChange(String? data) {
-    // TODO: implement onChange
-  }
-
-  @override
-  void onSubmit(String? data) {
-    // TODO: implement onSubmit
-  }
-
-  @override
-  void onTap() {
-    // TODO: implement onTap
-  }
-}
-
-class ProductImages {
-  final String name;
-  final String image;
-
-  const ProductImages({
-    required this.name,
-    required this.image,
-  });
-
-  void add() {
-    productImagesList.add(this);
-  }
-
-  static List<ProductImages> productImagesList = [];
 }

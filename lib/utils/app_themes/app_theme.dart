@@ -1,13 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:humble_warrior/utils/theme_extention/account_option_theme_extentions.dart';
-import 'package:humble_warrior/utils/theme_extention/image_icon_theme_extention.dart';
-import 'package:humble_warrior/utils/theme_extention/shadow_theme_extention.dart';
-import 'package:humble_warrior/utils/theme_extention/shop_button_theme.dart';
-
-import '../app_colors.dart';
-import '../theme_extention/custom_notice_theme_extention.dart';
+import 'package:humble_warrior/hw.dart';
 
 class AppTheme {
   static ThemeData darkTheme = _darkTheme;
@@ -274,6 +266,12 @@ BottomNavigationBarThemeData darkBottomNavigationBarThemeData =
 ///---Light
 AppBarTheme lightAppBarTheme = AppBarTheme(
   toolbarHeight: 70,
+  // systemOverlayStyle: const SystemUiOverlayStyle(
+  //   statusBarColor: Colors.white,
+  //   statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+  //   statusBarBrightness: Brightness.light, // For iOS (dark icons)
+  // ),
+  brightness: Brightness.light,
   elevation: 0,
   centerTitle: true,
   titleTextStyle: TextStyle(color: AppColors.gray),
@@ -285,6 +283,12 @@ AppBarTheme lightAppBarTheme = AppBarTheme(
 
 ///---Dark
 AppBarTheme darkAppBarTheme = AppBarTheme(
+  // systemOverlayStyle: const SystemUiOverlayStyle(
+  //   statusBarColor: Colors.black,
+  //   statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+  //   statusBarBrightness: Brightness.light, // For iOS (dark icons)
+  // ),
+  brightness: Brightness.dark,
   toolbarHeight: 70,
   elevation: 0,
   centerTitle: true,

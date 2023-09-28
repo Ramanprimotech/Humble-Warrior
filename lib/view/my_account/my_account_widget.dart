@@ -12,67 +12,55 @@ class MyAccWidget {
   profileImage() {
     return Column(
       children: [
-        Obx(
-          () => Container(
+        GestureDetector(
+          onTap: () {
+            Get.toNamed(AppRoutes.accountDetails,id: 4);
+          },
+          child: CommonWidgets.networkImage(
             alignment: Alignment.center,
             height: 120,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.primary,
-            ),
-            child: controller.imageUrl.isEmpty
-                ? InkWell(
-                    onTap: () {
-                      Get.toNamed(AppRoutes.accountDetails);
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        profileText(firstName: controller.username),
-                        // const Icon(Icons.camera_alt,
-                        //     color: Colors.black, size: 40),
-                        // 5.sh,
-                        // const AppText(addPhotoTxt),
-                      ],
-                    ),
-                  )
-                : ClipRRect(
-                    borderRadius: BorderRadius.circular(150),
-                    child: Image.file(
-                      File(controller.imageUrl.value),
-                      fit: BoxFit.fill,
-                      height: 145,
-                      width: 145,
-                    ),
-                  ),
+            width: 120,
+            isCircle: false, isFill: false,
+            imageUrl: controller.userImg.value.toString(),
+            errorImage: ImagePathAssets.hwUser,
+            fit: BoxFit.contain,
           ),
         ),
         10.shb,
-        AppText(controller.username),
+        (controller.username == "" || controller.username == "null" || controller.username == "N/A")
+            ? 0.shb
+            : AppText(controller.username),
         AppText(controller.user),
+        15.shb,
+        Divider(
+          color: Colors.grey.shade200,
+          height: 2,
+        )
       ],
     );
   }
 
+
   profileText({String? firstName, String? secondName}) {
-    List<String> names = firstName!.split(" ");
     String text = "";
-    if (names.length == 1) {
-      text = names[0][0];
+    if (firstName == null ||
+        firstName == "" ||
+        firstName == "null" ||
+        firstName == "N/A") {
+      text = "NA";
     } else {
-      text = "${names[0][0]}${names[1][0]}";
+      List<String> names = firstName!.split(" ");
+
+      if (names.length == 1) {
+        text = names[0][0] + names[0][1];
+      } else {
+        text = "${names[0][0]}${names[1][0]}";
+      }
     }
     return AppText(
       text.toUpperCase(),
       fontWeight: FontWeight.w900,
       fontSize: 48,
-    );
-  }
-
-  divider({color}) {
-    return Divider(
-      color: color ?? Colors.grey.shade200,
-      height: 2,
     );
   }
 
@@ -84,7 +72,7 @@ class MyAccWidget {
   }
 
   detailsOptions(MyAccountController controller,
-      {title, bool isSwitchRequired = false, ontap, click}) {
+      {title, bool isSwitchRequired = false, Color? textColor, ontap, click}) {
     final MaterialStateProperty<Icon?> thumbIcon =
         MaterialStateProperty.resolveWith<Icon?>(
       (Set<MaterialState> states) {
@@ -108,10 +96,8 @@ class MyAccWidget {
             bottom: isSwitchRequired ? 0 : 0),
         margin: 10.pv,
         width: MediaQuery.of(Get.context!).size.width,
-        decoration: CustomBoxDecorations().shadow(
-            context: context,
-            color: accountOptionTheme.backGroundColor,
-            radius: 50),
+        decoration: CustomBoxDecorations(context: context)
+            .shadow(color: accountOptionTheme.backGroundColor, radius: 50),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -120,6 +106,7 @@ class MyAccWidget {
                 title,
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
+                color: textColor
                 // color: accountOptionTheme.textColor,
               ),
               isSwitchRequired
@@ -133,7 +120,7 @@ class MyAccWidget {
                             value: title == darkModeTxt
                                 ? controller.checkDark.value
                                 : controller.checkNotification.value,
-                            activeColor: AppColors.switchActiveColor,
+                            activeColor: Colors.greenAccent.shade700,
                             inactiveTrackColor: AppColors.switchInactiveColor,
                             thumbColor: MaterialStateProperty.all(Colors.white),
                             onChanged: (value) {

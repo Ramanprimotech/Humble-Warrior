@@ -1,42 +1,54 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/modals/hive_modal/recent_search_model.dart';
-import 'package:humble_warrior/services/notification_manager.dart';
+
+final GlobalKey<NavigatorState>? mainNavigation = Get.nestedKey(1);
+final GlobalKey<NavigatorState>? wishNavigation = Get.nestedKey(2);
+final GlobalKey<NavigatorState>? homeNavigation = Get.nestedKey(3);
+final GlobalKey<NavigatorState>? accountNavigation = Get.nestedKey(4);
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
     'High Importance Notifications', // title
     //  'This channel is used for important notifications.', // description
-    importance: Importance.max,
-    playSound: true);
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+    importance: Importance.high,
+    playSound: true
+);
 
-Future<void> _messageHandler(RemoteMessage message) async {
-  debugPrint('background message ${message.notification!.body}');
-}
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+FlutterLocalNotificationsPlugin();
+
+bool isLoggedIn = false;
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
+  isLoggedIn =
+      await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
   await Firebase.initializeApp(
+    // name: "humble-warrior",
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseMessaging.onBackgroundMessage(_messageHandler);
+
+  FirebaseMessaging.onBackgroundMessage(NotificationManager.messageHandler);
 
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
+      AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
   NotificationManager.initialize(flutterLocalNotificationsPlugin);
+  NotificationManager.messageListener();
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-      badge: true, alert: true, sound: true);
+      badge: true,
+      alert: true,
+      sound: true
+  );
+
+  FirebaseMessaging.onMessageOpenedApp.listen((remoteMessage) {
+    NotificationManager.messageHandler(remoteMessage);
+  });
+
   await Hive.initFlutter();
   Hive.registerAdapter(ProductDetailsResponseAdapter());
   Hive.registerAdapter(RecentSearchAdapter());
@@ -66,8 +78,8 @@ class MyApp extends StatelessWidget {
             valueListenable: theme,
             builder: (BuildContext context, value, Widget? child) {
               return GetMaterialApp(
-                navigatorKey: GlobalVariable.navState,
-                title: 'Flutter Demo',
+                // navigatorKey: mainNavigation,
+                title: 'Humble Warrior',
                 debugShowCheckedModeBanner: false,
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
@@ -82,7 +94,7 @@ class MyApp extends StatelessWidget {
 }
 
 dependencies() {
-  Get.put(NotificationController());
+  Get.put(NotificationController(),permanent: true);
   Get.put(ThemeController());
   Get.put(HomeScreenController());
   Get.put(BottomNavigationController());
@@ -95,4 +107,5 @@ class GlobalVariable {
   /// This global key is used in material app for navigation through firebase notifications.
   /// [navState] usage can be found in [notification_notifier.dart] file.
   static final GlobalKey<NavigatorState> navState = GlobalKey<NavigatorState>();
+
 }

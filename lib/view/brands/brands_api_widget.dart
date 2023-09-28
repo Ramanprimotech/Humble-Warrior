@@ -1,12 +1,10 @@
 import 'package:humble_warrior/hw.dart';
 
-import '../../modals/response/brands_response_mdel.dart';
-import '../../modals/response/home_categories_response_model.dart';
-
 class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
   final BuildContext context;
+  final String searchText;
 
-  BrandAPIWidgets({required this.context});
+  BrandAPIWidgets({required this.context, required this.searchText});
 
   /// Grid Parameters
   final int crossAxisCount = 2;
@@ -28,51 +26,74 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
 
   @override
   Widget success({List<BrandDetails>? data}) {
-    List<BrandDetails> dataa = data ?? [];
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-        childAspectRatio: childAspectRatio,
-      ),
-      itemCount: dataa.length,
-      itemBuilder: (ctx, index) {
-        BrandDetails brandDetails = dataa[index];
-        return GestureDetector(
-          onTap: () async {
-            await CommonUtils().urlLauncher(url: brandDetails.brandLink!);
-          },
-          child: Card(
-            elevation: 8,
-            margin: 8.pa,
-            color: Colors.grey.shade200,
-            child: CommonWidgets.networkImage(
-              margin: 8.pa,
-              alignment: Alignment.center,
-              imageUrl: dataa[index].brandImage!,
-              fit: BoxFit.contain,
-            ),
+    List<BrandDetails> dataa = data != null
+        ? data.where((element) {
+            return element.brandName!
+                .toLowerCase()
+                .contains(searchText.toLowerCase().trim());
+          }).toList()
+        : [];
+    if (dataa.isEmpty) {
+      return const Center(
+        child: AppText("No Brand Found"),
+      );
+    }
+    return ListView(
+      children: [
+        const AffiliateDiscretionText(),
+        8.shb,
+        GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            childAspectRatio: childAspectRatio,
           ),
-        );
-      },
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: dataa.length,
+          itemBuilder: (ctx, index) {
+            BrandDetails brandDetails = dataa[index];
+            return GestureDetector(
+              onTap: () async {
+                await CommonUtils().urlLauncher(url: brandDetails.brandLink!);
+              },
+              child: Card(elevation: 8,
+                margin: 8.pa,
+                color: Colors.white,
+                child: CommonWidgets.networkImage(
+                  margin: 8.pa,
+                  alignment: Alignment.center,
+                  imageUrl: dataa[index].brandImage!,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 
   @override
   Widget waiting() {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-        childAspectRatio: childAspectRatio,
-      ),
-      itemCount: 20,
-      itemBuilder: (ctx, index) {
-        return Card(
-          elevation: 8,
-          margin: 8.pa,
-          color: Colors.grey.shade200,
-          child: const CustomShimmer.rectangular(),
-        );
-      },
+    return ListView(
+      children: [
+        const AffiliateDiscretionText(),
+        8.shb,
+        GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            childAspectRatio: childAspectRatio,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 8,
+          ),
+          itemCount: 20,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (ctx, index) {
+            return const CustomShimmer.rectangular(borderRadius: 10);
+          },
+        ),
+      ],
     );
   }
 
@@ -115,6 +136,19 @@ class BrandAPIWidgets extends FutureAPI<List<BrandDetails>> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class AffiliateDiscretionText extends StatelessWidget {
+  const AffiliateDiscretionText({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      "* This app shares deals using affiliate codes and may earn commissions for purchases made through the provided links.",
+      style: TextStyle(fontStyle: FontStyle.italic, fontSize: 10),
+      maxLines: 2,
     );
   }
 }

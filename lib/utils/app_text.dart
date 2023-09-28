@@ -1,4 +1,3 @@
-import 'package:google_fonts/google_fonts.dart';
 import 'package:humble_warrior/hw.dart';
 
 class AppText extends StatelessWidget {

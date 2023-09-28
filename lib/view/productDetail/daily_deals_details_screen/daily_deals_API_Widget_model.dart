@@ -1,15 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/network/endpoints.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/app_text.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
-import 'package:humble_warrior/utils/common/refresh_Indicator.dart';
-import 'package:humble_warrior/utils/future_widget/abstract_future_widget.dart';
-import 'package:humble_warrior/view/home_option/tab_screens/donnas_deals.dart';
-import 'package:humble_warrior/view/productDetail/daily_deals_details_screen/daily_deal_product_controller.dart';
-import 'package:humble_warrior/view/productDetail/product_detail_widget.dart';
+
+import 'package:humble_warrior/hw.dart';
 
 class DailyDealsAPIWidgets extends FutureAPI<List<ProductDetailsResponse>>
     with ProductDetailWidget {
@@ -81,7 +71,7 @@ class DailyDealsAPIWidgets extends FutureAPI<List<ProductDetailsResponse>>
             ),
             productText(context, details.itemName.toString()),
             productDescription(
-              context: context,
+                context: context,
                 discription: details.productDescription.toString(),
                 itemName: details.itemName.toString()),
           ],

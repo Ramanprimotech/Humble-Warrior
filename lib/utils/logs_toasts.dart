@@ -1,11 +1,8 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'app_colors.dart';
+import 'package:humble_warrior/hw.dart';
 
-class ToastLogger{
-
+class ToastLogger {
   // Loggers ===========>
   void apiLoggerRequest(String text, String name, Object? error) {
     log(text, time: DateTime.now(), name: "Request==> $name", error: error);
@@ -34,7 +31,7 @@ class ToastLogger{
         icon: const Icon(Icons.error, color: Colors.red),
         snackPosition: SnackPosition.BOTTOM,
         colorText: Colors.white,
-        backgroundColor: AppColors.purple);
+        backgroundColor: AppColors.white);
   }
 
   void toastFail(String text) {
@@ -42,7 +39,7 @@ class ToastLogger{
         // icon: const Icon(Icons.warning_amber_outlined, color: Colors.red),
         snackPosition: SnackPosition.BOTTOM,
         colorText: Colors.white,
-        backgroundColor: AppColors.purple);
+        backgroundColor: AppColors.white);
   }
 
   void toastSucess(String text) {
@@ -50,6 +47,6 @@ class ToastLogger{
         // icon: const Icon(Icons.error, color: Colors.red),
         snackPosition: SnackPosition.BOTTOM,
         colorText: Colors.white,
-        backgroundColor: AppColors.purple);
+        backgroundColor: AppColors.white);
   }
 }

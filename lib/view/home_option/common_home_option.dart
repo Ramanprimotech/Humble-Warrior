@@ -1,19 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/utils/app_colors.dart';
-import 'package:humble_warrior/utils/app_icons.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/common/common_functionality.dart';
-import 'package:humble_warrior/utils/common/common_widgets.dart';
+import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/utils/common/photo_viewer.dart';
-import 'package:humble_warrior/utils/decorations.dart';
-import 'package:humble_warrior/utils/helpers/extensions.dart';
-import 'package:humble_warrior/utils/routes/app_routes.dart';
-
-import '../../utils/app_text.dart';
-import 'tab_screens/donnas_deals.dart';
 
 class ItemCard extends StatelessWidget {
   final double? cardHeight;
@@ -48,7 +35,7 @@ class ItemCard extends StatelessWidget {
       child: Container(
         // height: imageHeight + buttonbarHeight,
         height: Get.width - 40,
-        decoration: CustomBoxDecorations().shadow(context: context),
+        decoration: CustomBoxDecorations(context: context).shadow(),
         child: Column(
           children: [
             Stack(
@@ -118,50 +105,52 @@ class ItemCard extends StatelessWidget {
 Widget codeButton({required String code, required BuildContext context}) {
   return GestureDetector(
     onTap: () async {
-      CommonUtils().copyToClipboard(copyText: code, context: context);
+      // await CardView.checkLoggedIn(() {
+        CommonUtils().copyToClipboard(copyText: code, context: context);
+      // }, context);
     },
     child: Container(
-          alignment: Alignment.center,
-          // width: 90,
-          // height: 35,
-          padding: 1.pa,
-          decoration: BoxDecoration(
-              color: AppColors.appGreen,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
-                BoxShadow(color: Colors.black12, blurRadius: 3)
-              ]),
-          child:  DottedBorder(
-            color: Colors.green,
-            borderType: BorderType.RRect,
-            strokeWidth: 2,
-            dashPattern: [3,3],
-            radius: const Radius.circular(20),
-            padding: const EdgeInsets.only(left: 10,right: 10,top: 5,bottom: 5),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.cut,
-                  size: 17,
-                  color: AppColors.black,
-                ),
-                2.swb,
-                AppText(
-                  code,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14,
-                ),
-              ],
-            ),
-          )),
+        alignment: Alignment.center,
+        padding: 1.pa,
+        decoration: BoxDecoration(
+            color: AppColors.appGreen,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 3)]),
+        child: DottedBorder(
+          color: Colors.green,
+          borderType: BorderType.RRect,
+          strokeWidth: 2,
+          dashPattern: const [3, 3],
+          radius: const Radius.circular(20),
+          padding:
+              const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.cut,
+                size: 17,
+                color: AppColors.black,
+              ),
+              2.swb,
+              AppText(
+                code,
+                color: Colors.black,
+                fontWeight: FontWeight.w700,
+                fontSize: 14,
+              ),
+            ],
+          ),
+        )),
   );
 }
 
-Widget shopButton({required url, required String title}) {
+Widget shopButton(
+    {required url, required String title, required BuildContext context}) {
   return GestureDetector(
     onTap: () async {
-      await CommonUtils().urlLauncher(url: url, title: title);
+      // await CardView.checkLoggedIn(() {
+        CommonUtils().urlLauncher(url: url, title: title);
+      // }, context);
     },
     child: Container(
         alignment: Alignment.center,
@@ -181,11 +170,15 @@ Widget shopButton({required url, required String title}) {
   );
 }
 
-Widget shareButton({required shareUrl, Color? color = Colors.black}) {
+Widget shareButton(
+    {required shareUrl,
+    Color? color = Colors.black,
+    required BuildContext context}) {
   return GestureDetector(
-    onTap: () {
-      // CommonUtils().share(shareUrl: "$shareUrl");
-      CommonUtils().share(shareUrl: shareUrl);
+    onTap: () async {
+      await CardView.checkLoggedIn(() {
+        CommonUtils().share(shareUrl: shareUrl);
+      }, context);
     },
     child: AppIcons.share(iconColor: color),
   );

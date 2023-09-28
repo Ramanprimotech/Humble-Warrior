@@ -1,20 +1,7 @@
-import 'dart:async';
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_colors.dart';
-import 'package:humble_warrior/utils/app_themes/app_theme_controller.dart';
-import 'package:humble_warrior/utils/common/common_functionality.dart';
-import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
-import 'package:humble_warrior/view/my_account/circle.dart';
-import 'package:humble_warrior/view/my_account/keyboard.dart';
-import 'package:humble_warrior/view/my_account/passcode_screen.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../../utils/app_strings.dart';
-import '../../utils/routes/app_routes.dart';
-import '../../utils/shared_prefrence/shared_pref.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/view/my_account/my_account_repo.dart';
 
 class MyAccountController extends GetxController {
   RxBool check = true.obs;
@@ -25,45 +12,57 @@ class MyAccountController extends GetxController {
   String user = "";
   String username = "";
   String userPhone = "";
-  String userImg = "";
+  RxString userImg = "".obs;
   late BuildContext context;
   ThemeController themeController = Get.find();
+  BottomNavigationController controller = Get.find();
+
+  final _myAccountRepo = Get.put(MyAccountRepo());
+
   final StreamController<bool> _verificationNotifier =
       StreamController<bool>.broadcast();
 
   // Rx<File?> imagePath = File("").obs;
   File? imagePath;
-  RxString imageUrl = "".obs;
-  Future<void> getImageGallery() async {
+  // RxString imageUrl = "".obs;
+
+ /* Future<void> getImageGallery() async {
     imagePath =
         await CommonUtils().getImagePath(imageSource: ImageSource.gallery);
     imageUrl.value = imagePath!.path;
-    debugPrint("Image Pathhh $imagePath");
-  }
+  }*/
+
 
   Future<void> getData() async {
     userCheck.value =
         await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
     user = await SharePreferenceData.getStringValuesSF(userEmail) ?? "";
     username = await SharePreferenceData.getStringValuesSF(userName) ?? "";
-    userPhone =
-        await SharePreferenceData.getStringValuesSF(userPhoneNumber) ?? "";
-    userImg = await SharePreferenceData.getStringValuesSF(userProfilePic) ?? "";
-    debugPrint("user data ---- $username ---- $userPhone ---- $userImg");
+    userPhone = await SharePreferenceData.getStringValuesSF(userPhoneNumber) ?? "";
+    userImg.value = await SharePreferenceData.getStringValuesSF(userProfilePic) ?? "";
+    debugPrint("images1 ${userImg.value.toString()}");
   }
 
-  void message(context){
-    DialogHelper.showToast(context, "Stay tuned");
+  void message(context) {
+    DialogHelper.showToast(context, stayTunedtxt);
   }
 
-  Future<void> getImageCamera() async {
+  /*Future<void> getImageCamera() async {
     imagePath =
         await CommonUtils().getImagePath(imageSource: ImageSource.camera);
     imageUrl.value = imagePath!.path;
-  }
+  }*/
 
-  void switchFunc() {
-    checkNotification.value = !checkNotification.value;
+  void switchFunc(BuildContext context) async{
+    DialogHelper.showLoadingDialog();
+    _myAccountRepo.updateNotification(status: !checkNotification.value).then((message) async{
+      if(message?.isBlank == false){
+        DialogHelper.showToast(context, message!);
+      }
+      checkNotification.value = await _myAccountRepo.notificationStatus();
+      DialogHelper.closeDialog();
+    });
+    update();
   }
 
   void darkMode() {
@@ -78,25 +77,100 @@ class MyAccountController extends GetxController {
   }
 
   Future<void> logout() async {
+    HiveService service = Get.find<HiveService>();
+    Box<ProductDetailsResponse> box = service.box;
     await FirebaseAuth.instance.signOut().then((value) async {
       await SharePreferenceData.clear();
+      isLoggedIn = false;
       await SharePreferenceData.addBoolToSF(spIsEntered, false);
+      controller.selectedIndex = 0;
+      disposeGoogleSession();
       Get.offAllNamed(AppRoutes.loginPage);
     });
   }
 
+  disposeGoogleSession() async {
+    try {
+      if (Platform.isAndroid) {
+        await GoogleSignIn(
+            clientId:
+            DefaultFirebaseOptions.currentPlatform.androidClientId)
+            .signOut();
+      } else if (Platform.isIOS) {
+        await GoogleSignIn(
+            clientId: DefaultFirebaseOptions.currentPlatform.iosClientId)
+            .signOut();
+      }
+    }
+    catch(e){
+      debugPrint("error -->   $e");
+    }
+  }
+
+  _deleteDatabase(){
+    HiveService service = Get.find<HiveService>();
+    Box<ProductDetailsResponse> box = service.box;
+    return box.clear();
+  }
+
+  // Future<bool> deleteMyAccount() async{
+  //   final user = FirebaseAuth.instance.currentUser;
+  //   if(user != null){
+  //     await user.delete().then((value)  async{
+  //       await SharePreferenceData.clear();
+  //       FirebaseAuth.instance.signOut();
+  //       isLoggedIn = false;
+  //       await SharePreferenceData.addBoolToSF(spIsEntered, false);
+  //       controller.selectedIndex = 0;
+  //       userLogout();
+  //       _deleteDatabase();
+  //     });
+  //     return true;
+  //   }else{
+  //     return false;
+  //   }
+  // }
+
+  Future<bool> deleteMyAccount() async{
+    final user = FirebaseAuth.instance.currentUser;
+    try{
+      if(user != null){
+        await user.delete().whenComplete(()  async{
+          await SharePreferenceData.clear();
+          isLoggedIn = false;
+          await SharePreferenceData.addBoolToSF(spIsEntered, false);
+          controller.selectedIndex = 0;
+          _deleteDatabase();
+          disposeGoogleSession();
+        });
+        return true;
+      }else{
+        return false;
+      }
+    }catch(e){
+      return false;
+    }
+  }
+
+
   loginPage() {
+    isLoggedIn = false;
+    controller.selectedIndex = 0;
+    controller.update();
+    controller.selectedIndex.toString().log();
     Get.offAllNamed(AppRoutes.loginPage);
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     checkDark.value = themeController.themeMode == ThemeMode.dark;
-    getData();
+    await getData();
+    checkNotification.value = await _myAccountRepo.notificationStatus();
     super.onInit();
   }
 
   void tapPasscode() async {
+    FToast().init(context);
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     var pass = sharedPreferences.getString('PASSCODE');
@@ -108,46 +182,46 @@ class MyAccountController extends GetxController {
           'Cancel',
           style: TextStyle(
             fontSize: 16,
-            // color: (AppMode.darkMode == true) ? Colors.white : Colors.black,
             color: Colors.white,
           ),
           semanticsLabel: 'Cancel',
         ),
       );
     } else {
-      DialogHelper.showConfirmationDialog(
-          message: "Do you want to Change Or Remove the Passcode",
-          cancelLabel: "Change",
-          actionLabel: "Remove",
-          cancelAction: () async {
-            Get.back();
-            await _showLockScreen(
-              Get.context!,
-              opaque: false,
-              cancelButton: Text(
-                'Cancel',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: AppColors.red,
-                ),
-                semanticsLabel: 'Cancel',
-              ),
-            );
-          },
-          action: () async {
-            Get.back(result: true);
-            SharedPreferences sharedPreferences =
-                await SharedPreferences.getInstance();
 
-            var pass = sharedPreferences.getString('PASSCODE');
-            if (pass == null || pass == "") {
-              DialogHelper.showToast(context, 'Passcode not set yet');
-            } else {
-              sharedPreferences.remove('PASSCODE');
-              DialogHelper.showToast(context, 'Successfully removed passcode');
-            }
-          },
-          context: Get.context!);
+      DialogHelper.showConfirmationDialog(
+        context: context,
+        message: confirmPasscodeTxt,
+        cancelLabel: "Change",
+        actionLabel: "Remove",
+        cancelAction: () {
+          Navigator.of(context, rootNavigator: true).pop();
+          _showLockScreen(
+            context,
+            opaque: false,
+            cancelButton: Text(
+              'Cancel',
+              style: TextStyle(
+                fontSize: 16,
+              ),
+              semanticsLabel: 'Cancel',
+            ),
+          );
+        },
+        action: () async {
+          Navigator.of(context, rootNavigator: true).pop();
+          SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+
+          var pass = sharedPreferences.getString('PASSCODE');
+          if (pass == null || pass == "") {
+            DialogHelper.showToast(context, passcodeNotSetTxt);
+          } else {
+            sharedPreferences.remove('PASSCODE');
+            DialogHelper.showToast(context, removedPasscodeTxt);
+          }
+        },
+      );
     }
   }
 
@@ -194,10 +268,10 @@ class MyAccountController extends GetxController {
       if (enteredPasscode != null) {
         SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
-        sharedPreferences.setString('PASSCODE', enteredPasscode);
-        if (sharedPreferences.getString('PASSCODE') != null) {
+        sharedPreferences.setString(spPasscode, enteredPasscode);
+        if (sharedPreferences.getString(spPasscode) != null) {
           DialogHelper.showAlertDialog(
-            'Successfully set app passcode',
+            setPasscodeTxt,
             onTap: () {
               Get.back(result: true);
               Get.back(result: true);
@@ -205,7 +279,7 @@ class MyAccountController extends GetxController {
           );
         } else {
           DialogHelper.showAlertDialog(
-            'Successfully reset app passcode',
+            resetPasscodeTxt,
             onTap: () {
               Get.back(result: true);
               Get.back(result: true);

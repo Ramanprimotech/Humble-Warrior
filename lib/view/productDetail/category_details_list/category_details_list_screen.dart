@@ -1,49 +1,38 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/view/productDetail/category_details_list/category_details_list_controller.dart';
 
 class CategoryListDetails extends StatelessWidget {
-  const CategoryListDetails({Key? key}) : super(key: key);
+  final ProductCategoryItem? item;
+  const CategoryListDetails({required this.item,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     FToast().init(context);
     final CategoryDetailsListController controller = Get.find();
-    String title = Get.arguments[0];
+
     controller.context = context;
-    controller.id = Get.arguments[1];
+    controller.id = item!.id.toString();
     controller.categoryListApi();
     return Scaffold(
-      bottomNavigationBar: bottomNavigationWidget(context),
-      // appBar: AppBar(
-      //   titleSpacing: 5,
-      //   leadingWidth: 35,
-      //   centerTitle: false,
-      //   title: SearchBar(
-      //     margin: 15.pr,
-      //   ),
-      //   leading: AppIcons.IosBackIcon(),
-      // ),
+      // bottomNavigationBar: bottomNavigationWidget(context),
       appBar: AppBar(
         titleSpacing: 5,
         leadingWidth: 34,
-        leading: AppIcons.IosBackIcon(),
-        title: const SearchBar(margin: EdgeInsets.only(right: 4)),
+        leading: AppIcons.IosBackIcon(onPress: (){
+          Navigator.pop(context);
+        }),
+        title: SearchBar(route: 3,
+          margin: EdgeInsets.only(right: 4),
+          ///Uncomment for preselected category
+          // item: item,
+        ),
         actions: [
-          IconButton(
-              padding: 16.pr,
-              onPressed: () {
-                // Get.toNamed(AppRoutes.sortPages);
-              },
-              icon: AppIcons.filter(size: 35))
+          FilterIcon(route : 3, item: item),
         ],
       ),
       body: SafeArea(
         child: Column(
           children: [
-            // CommonWidgets.titleBar(context,
-            //     title: title, fontSize: 20, backIcon: true),
-            // 12.shb,
             Expanded(
               child: PaginationWidget(
                 length: controller.categoryListLength,
@@ -58,12 +47,19 @@ class CategoryListDetails extends StatelessWidget {
                     if (controller.categoryList.isEmpty &&
                         controller.categoryListBool.value == true) {
                       return Center(
-                          child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const CircularProgressIndicator(),
-                          CommonWidgets.loading(),
-                        ],
+                          child: ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (ctx, index) {
+                          return const CustomShimmer.rectangular(
+                            height: 290,
+                            borderRadius: 15,
+                            margin: EdgeInsets.symmetric(horizontal: 15),
+                          );
+                        },
+                        itemCount: 10,
+                        separatorBuilder: (BuildContext context, int index) {
+                          return 18.shb;
+                        },
                       ));
                     }
                     if (controller.categoryList.isEmpty &&
@@ -95,8 +91,9 @@ class CategoryListDetails extends StatelessWidget {
                                 cardText: details.itemName,
                                 details: details,
                                 onTap: () {
-                                  Get.toNamed(AppRoutes.dailyDealProductDetail,
-                                      arguments: [details]);
+                                  Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
+                                      arguments: { "details" :   ProductDetailsResponse(
+                                          id: details.id)});
                                 },
                               )
 
@@ -128,22 +125,6 @@ class CategoryListDetails extends StatelessWidget {
     );
   }
 
-/*  ItemCard categoryListCard(
-      DonnaDealsDetails details, int index, BuildContext context) {
-    return ItemCard(
-      onTap: () {
-        Get.toNamed(AppRoutes.dailyDealProductDetail, arguments: [details]);
-      },
-      radius: 10,
-      buttons: donnaDealsButton(details, index, context,categoryCard: true,
-          cardTitle: details.dealName!),
-      imageUrl: details.url!,
-      title: "",
-      effect: false,
-      buttonbarHeight: 90,
-    );
-  }*/
-
   Widget loginFirst(context) {
     return CommonWidgets.errorAPI(
         height: 150,
@@ -153,30 +134,5 @@ class CategoryListDetails extends StatelessWidget {
         onPress: () {
           Get.offAllNamed(AppRoutes.loginPage);
         });
-    /*Container(
-      height: 150,
-      margin: 20.pa,
-      padding: 20.ps,
-      decoration: CustomBoxDecorations().shadow(context: context),
-      child: Column(children: [
-        AppText(accessingMsgTxt,
-            color: dialogueThemeExtention.textColor, fontSize: 20),
-        20.sh,
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            elevation: 5,
-            // fixedSize: const Size(, 35),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            backgroundColor: dialogueThemeExtention.buttonColor,
-          ),
-          onPressed: () {
-            Get.offAllNamed(AppRoutes.loginPage);
-          },
-          child: const AppText(gotoLoginTxt,
-              color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-      ]),
-    );*/
   }
 }

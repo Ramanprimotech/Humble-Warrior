@@ -1,4 +1,3 @@
-import '../../modals/response/home_categories_response_model.dart';
 import 'package:humble_warrior/hw.dart';
 
 class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
@@ -17,9 +16,13 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
     return Expanded(
       child: CommonWidgets.errorAPI(
           buttonTitle: retryTxt,
-          errorText: error.toString(),
+          errorText: somethingWentWrongTxt.toString(),
           context: context,
-          onPress: () => controller.update([Endpoints.homeCategories])),
+          onPress: () {
+            controller.update([Endpoints.productCategories]);
+            controller.update([Endpoints.allBrands]);
+            controller.update([Endpoints.homeCategories]);
+          }),
     );
   }
 
@@ -30,6 +33,8 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
     return Expanded(
       child: CustomRefreshIndicator(
         onRefresh: () {
+          controller.update([Endpoints.productCategories]);
+          controller.update([Endpoints.allBrands]);
           controller.update([Endpoints.homeCategories]);
 
           return Future.value(0);
@@ -55,9 +60,8 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (ctx, index) {
           return const CustomShimmer.rectangular(
-            height: 220,
-            margin:
-                EdgeInsets.only(left: 16, right: 16, bottom: 10, top: 6),
+            height: 260,
+            margin: EdgeInsets.only(left: 16, right: 16, bottom: 10, top: 6),
           );
         },
       ),
@@ -71,20 +75,20 @@ class HomePageCategoryAPIWidgets extends FutureAPI<List<HomeCategoryList>> {
       padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10, top: 6),
       child: GestureDetector(
         onTap: () {
-          Get.toNamed(AppRoutes.homeOptions, arguments: <int>[homeOptions.id!]);
+          Get.toNamed(AppRoutes.homeOptions, id: 3 ,arguments: {"id": homeOptions.id!});
         },
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: [
             Container(
               decoration:
-                  CustomBoxDecorations().shadow(context: context, radius: 10),
+                  CustomBoxDecorations(context: context).shadow(radius: 10),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: CommonWidgets.networkImage(
                   imageUrl: homeOptions.categoryImage!,
                   fit: BoxFit.fitWidth,
-                  height: 220,
+                  height: 260,
                   alignment: Alignment.topCenter,
                   // width: Get.width,
                 ),

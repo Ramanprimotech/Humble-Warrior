@@ -1,13 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/common/common_functionality.dart';
-import 'package:humble_warrior/utils/extensions.dart';
-import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
-import 'package:humble_warrior/utils/routes/app_routes.dart';
-import 'package:humble_warrior/view/my_account/my_account_controller.dart';
-import 'package:humble_warrior/view/my_account/my_account_widget.dart';
+import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/view/my_account/delete_account_popup.dart';
 
 class MyAccount extends StatelessWidget {
   const MyAccount({Key? key}) : super(key: key);
@@ -15,104 +7,148 @@ class MyAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FToast().init(context);
+
+    /// Controller
     MyAccountController controller = Get.find();
-    controller.context = context;
+    final ThemeController themeController = Get.find();
     MyAccWidget myAccWidget = MyAccWidget(context: context);
-    double optionSpacing = 15;
+    controller.context = context;
+
+    /// Variables
+    bool isDark = themeController.themeMode == ThemeMode.dark;
+
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
-            child: Obx(
-              () => Column(children: [
-                ///Image and account details
-                if (controller.userCheck.value == true) ...[
-                  myAccWidget.profileImage(),
-                  optionSpacing.sh,
-                  myAccWidget.divider(),
-                ],
-                optionSpacing.sh,
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: !isDark ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+              child: Obx(
+                () => Column(children: [
+                  ///Image and account details
+                  if (controller.userCheck.value == true)
+                    myAccWidget.profileImage(),
+                  15.shb,
 
-                ///===> My Account
-                myAccWidget.myAccountTextFun(heading: myAccountTxt),
+                  ///===> My Account
+                  myAccWidget.myAccountTextFun(heading: myAccountTxt),
 
-                ///Account Details
-                myAccWidget.detailsOptions(controller, title: accountDetailsTxt,
-                    ontap: () {
-                  Get.toNamed(AppRoutes.accountDetails);
-                }),
+                  ///Account Details
+                  myAccWidget.detailsOptions(controller,
+                      title: accountDetailsTxt, ontap: () {
+                    Get.toNamed(AppRoutes.accountDetails, id: 4);
+                  }),
 
-                ///Notification
-                myAccWidget.detailsOptions(controller,
-                    title: notificationsTxt,
-                    isSwitchRequired: true,
-                    click: controller.switchFunc),
-                optionSpacing.sh,
-                // myAccWidget.divider(),
-                // optionSpacing.sh,
+                  _notificationWidget(context),
 
-                ///=====>The Humble Warrior
-                myAccWidget.myAccountTextFun(heading: theHumbleWarriorTxt),
+                  15.shb,
+                  // myAccWidget.divider(),
+                  // 15.shb,
 
-                ///About Donna
-                myAccWidget.detailsOptions(controller, title: aboutDonna,
-                    ontap: () {
-                  Get.toNamed(AppRoutes.aboutDonna);
-                }),
+                  ///=====>The Humble Warrior
+                  myAccWidget.myAccountTextFun(heading: theHumbleWarriorTxt),
 
-                ///Share with friends
-                myAccWidget.detailsOptions(
-                  controller,
-                  title: shareWithFriendsTxt,
-                  ontap: () async {
-                    await CommonUtils().urlLauncher(
-                        url: "https://www.humblewarrior.com/",
-                        title: "The Humble Warrior");
-                  },
-                ),
-                // // optionSpacing.sh,
-                // myAccWidget.divider(),
-                optionSpacing.sh,
+                  ///About Donna
+                  myAccWidget.detailsOptions(controller, title: aboutDonna,
+                      ontap: () {
+                    CommonUtils.toCheckInternet(action: () {
+                      Get.toNamed(AppRoutes.aboutDonna, id: 4);
+                    });
+                  }),
 
-                ///====>Settings
-                myAccWidget.myAccountTextFun(heading: settingsTxt),
+                  ///Share with friends
+                  myAccWidget.detailsOptions(
+                    controller,
+                    title: shareWithFriendsTxt,
+                    ontap: () async {
+                      CommonUtils.toCheckInternet(action: () async {
+                        CommonUtils()
+                            .share(shareUrl: "https://humblewarrior.com/");
+                      });
+                    },
+                  ),
+                  // // 15.shb,
+                  // myAccWidget.divider(),
+                  15.shb,
 
-                ///Passcode
-                myAccWidget.detailsOptions(controller, title: passcodeTxt,
-                    ontap: () {
-                  controller.tapPasscode();
-                }),
+                  ///====>Settings
+                  myAccWidget.myAccountTextFun(heading: settingsTxt),
 
-                ///Dark Mode
-                myAccWidget.detailsOptions(controller,
-                    title: darkModeTxt,
-                    isSwitchRequired: true,
-                    click: controller.darkMode),
+                  ///Passcode
+                  // myAccWidget.detailsOptions(controller, title: passcodeTxt,
+                  //     ontap: () {
+                  //   controller.tapPasscode();
+                  // }),
 
-                ///Help & Support
-                myAccWidget.detailsOptions(controller, title: helpSupportTxt,
-                    ontap: () {
-                  Get.toNamed(AppRoutes.staticPages,
-                      arguments: ["40429", "Help & Support"]);
-                }),
+                  ///Dark Mode
+                  myAccWidget.detailsOptions(controller,
+                      title: darkModeTxt,
+                      isSwitchRequired: true,
+                      click: controller.darkMode),
 
-                ///Term & Conditions
-                myAccWidget.detailsOptions(controller,
-                    title: termsConditionsTxt, ontap: () {
-                  Get.toNamed(AppRoutes.staticPages,
-                      arguments: ["40427", "Term & Conditions"]);
-                }),
+                  ///Help & Support
+                  myAccWidget.detailsOptions(controller, title: helpSupportTxt,
+                      ontap: () {
+                    Get.to(
+                        StaticPagesScreen(ids: "89456", title: helpSupportTxt),
+                        id: 4);
+                    // Get.toNamed(AppRoutes.staticPages,
+                    //     arguments: ["89456", helpSupportTxt], id: 4);
+                    //     DialogHelper.showToast(context, "Coming Soon");
+                  }),
 
-                ///Login or Logout
-                _loginOrLogout(context),
-                10.sh,
-              ]),
+                  ///Term & Conditions
+                  myAccWidget.detailsOptions(controller,
+                      title: termsConditionsTxt, ontap: () {
+                    CommonUtils.toCheckInternet(action: () {
+                      Get.to(
+                          StaticPagesScreen(
+                              ids: "89453", title: termsConditionsTxt),
+                          id: 4);
+                      // Get.toNamed(AppRoutes.staticPages,
+                      //     arguments: ["89453", termsConditionsTxt], id: 4);
+                      // Get.toNamed(AppRoutes.staticPages,
+                      //    id: 4);
+                    });
+                  }),
+
+                  ///Login or Logout
+                  _loginOrLogout(context),
+
+                  _deleteAccount(context),
+                  10.shb
+                ]),
+              ),
             ),
           ),
         ),
       ),
     );
+  }
+
+  Widget _deleteAccount(context) {
+    MyAccountController controller = Get.find();
+    MyAccWidget myAccWidget = MyAccWidget(context: context);
+    return controller.userCheck.value == true
+        ? myAccWidget.detailsOptions(controller,
+            title: deleteMyAccount, textColor: AppColors.primary, ontap: () {
+            _showDeleteAccountPopup(context);
+          })
+        : const SizedBox();
+  }
+
+  /// Notification Widget
+  Widget _notificationWidget(context) {
+    MyAccountController controller = Get.find();
+    MyAccWidget myAccWidget = MyAccWidget(context: context);
+     return controller.userCheck.value == true
+     ? ///Notification
+    myAccWidget.detailsOptions(controller,
+          title: notificationsTxt,
+          isSwitchRequired: true,
+          click: ()=> controller.switchFunc(context)
+      ) : const SizedBox.shrink();
   }
 
   /// Login Or Logout
@@ -125,8 +161,17 @@ class MyAccount extends StatelessWidget {
                 context: context, onTap: controller.logout);
           })
         : myAccWidget.detailsOptions(controller, title: login, ontap: () {
-            DialogHelper.logoutDialog(
-                context: context, onTap: controller.loginPage());
+            // DialogHelper.logoutDialog(
+            //     context: context, onTap: controller.loginPage);
+            controller.loginPage();
           });
+  }
+
+  _showDeleteAccountPopup(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const DeleteAccountPopup();
+        });
   }
 }

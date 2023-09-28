@@ -1,35 +1,73 @@
 {
   "project_info": {
-    "project_number": "340829922874",
-    "firebase_url": "https://hwapp-78661-default-rtdb.firebaseio.com",
-    "project_id": "hwapp-78661",
-    "storage_bucket": "hwapp-78661.appspot.com"
+    "project_number": "11517768711",
+    "project_id": "humble-warrior-c70b5",
+    "storage_bucket": "humble-warrior-c70b5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:340829922874:android:062f81e74783000dec7703",
+        "mobilesdk_app_id": "1:11517768711:android:5eea7fb7d6d43e336e66a2",
         "android_client_info": {
-          "package_name": "com.example.humble_warrior"
+          "package_name": "com.humble.warrior"
         }
       },
       "oauth_client": [
         {
-          "client_id": "340829922874-93t396tuid0r0k1f0b3k6hbf4d1lmr4h.apps.googleusercontent.com",
+          "client_id": "11517768711-0nede40c87gj0bqrf8j9gq0mfe66dl0u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.humble.warrior",
+            "certificate_hash": "745a90e788697a35abf246e091ed4b73a6869f47"
+          }
+        },
+        {
+          "client_id": "11517768711-66c5mrp13bjaduji139pldnihapjuik3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.humble.warrior",
+            "certificate_hash": "84488ea820d2616aca943a3c163d2a9bd98f77fc"
+          }
+        },
+        {
+          "client_id": "11517768711-l3vb1jrbek38h4tms9a3f7olp2vo9223.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.humble.warrior",
+            "certificate_hash": "f16bf9b46428264af7cac1a628dbb08df7824c4a"
+          }
+        },
+        {
+          "client_id": "11517768711-t6mp5nprjk588v499gq4o4faskgo076q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.humble.warrior",
+            "certificate_hash": "4f90596e62d800cf8c1b6d342bb59acde929f72d"
+          }
+        },
+        {
+          "client_id": "11517768711-k3lbbct403mvnak7nasagctitejkls22.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBnM-Y6B6Xqm3hVLdNgvXa6UHuSOO9EGas"
+          "current_key": "AIzaSyA0mLm2yaiiuX-_ujLNu5v8rLQUYmRaVmg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "340829922874-93t396tuid0r0k1f0b3k6hbf4d1lmr4h.apps.googleusercontent.com",
+              "client_id": "11517768711-80vpq8bcnej8scscm0gkeo88qip3sc53.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "11517768711-972i9vlsus07hb0pq8ea1rfr3nfbsm7p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hw.int"
+              }
             }
           ]
         }

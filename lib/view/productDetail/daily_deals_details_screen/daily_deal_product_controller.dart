@@ -1,11 +1,6 @@
 import 'dart:io';
+import 'package:humble_warrior/hw.dart';
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/network/api_call.dart';
-import 'package:humble_warrior/utils/common/common_functionality.dart';
-import 'package:image_picker/image_picker.dart';
 
 class DailyDealProductController extends GetxController {
   final TextEditingController searchTextController = TextEditingController();

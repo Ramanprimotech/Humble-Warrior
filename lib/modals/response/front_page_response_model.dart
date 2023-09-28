@@ -13,14 +13,14 @@ class FrontPageResponseModel {
     if (json['data'] != null) {
       data = <FrontPageDetails>[];
       json['data'].forEach((v) {
-        data!.add(new FrontPageDetails.fromJson(v));
+        data!.add(FrontPageDetails.fromJson(v));
       });
     }
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
     data['total_records'] = totalRecords;
     if (this.data != null) {
@@ -48,7 +48,7 @@ class FrontPageDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['product_name'] = productName;
     data['url'] = url;
     data['ribbon_name'] = ribbonName;

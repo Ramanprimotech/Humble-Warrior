@@ -1,15 +1,13 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/abstract_enums/donna_options.dart';
 
 class WishListController extends GetxController {
   RxBool loggedIn = true.obs;
   RxList data = [].obs;
 
-  HiveService _hiveService = Get.find();
+  final HiveService _hiveService = Get.find();
   Future<void> getLoggedValue() async {
     loggedIn.value =
         await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
-    print("LoggedIN-------- $loggedIn.value");
   }
 
   getWishList() {
@@ -30,16 +28,22 @@ class WishListRouting extends DonnaOptions {
   WishListRouting({this.details});
   @override
   donnaDeals() {
-    Get.toNamed(AppRoutes.dailyDealProductDetail, arguments: [details]);
+    Get.toNamed(AppRoutes.categoryItemDetail,id: 2,
+        arguments: {"route" : 2, "details" :   ProductDetailsResponse(
+            id: details.id)});
   }
 
   @override
   donnaFavourite() {
-    Get.toNamed(AppRoutes.favouriteDeal, arguments: [details]);
+    Get.toNamed(AppRoutes.categoryItemDetail,id: 2,
+        arguments: {"route" : 2,"details" :   ProductDetailsResponse(
+            id: details.id)});
   }
 
   @override
   frontPage() {
-    Get.toNamed(AppRoutes.frontPageProductDetail, arguments: [details]);
+    Get.toNamed(AppRoutes.categoryItemDetail,id: 2,
+        arguments: { "details" :   ProductDetailsResponse(
+            id: details.id)});
   }
 }

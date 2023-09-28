@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:humble_warrior/hw.dart';
 
 class CommonWidgets {
@@ -9,60 +8,36 @@ class CommonWidgets {
       BoxFit? fit,
       double scale = 1,
       Alignment? alignment,
-      EdgeInsets? margin}) {
+      EdgeInsets? margin, String? errorImage, isCircle = true, isFill = true}) {
     return CachedNetworkImage(
       height: height,
       width: width,
+      alignment: Alignment.topCenter,
       imageUrl: imageUrl,
       imageBuilder: (context, imageProvider) => Container(
         margin: margin ?? 0.pa,
         decoration: BoxDecoration(
+          // color: Colors.transparent,
+          shape: isCircle ? BoxShape.rectangle : BoxShape.circle,
           image: DecorationImage(
-            alignment: alignment ?? Alignment.center,
+            alignment: alignment ?? Alignment.topCenter,
             image: imageProvider,
             fit: fit,
           ),
         ),
       ),
       placeholder: (context, url) =>
-          CustomShimmer(height: height, width: width),
+          isCircle ? CustomShimmer(height: height, width: width) : CustomShimmer.circular(height: height, width: width),
       errorWidget: (context, url, error) => Center(
-          child: Image.asset(
+          child: Image.asset( errorImage??
         ImagePathAssets.noImageFound,
         alignment: Alignment.center,
         fit: fit,
         height: height,
       )),
-
-      // Container(
-      // color: Colors.grey,
-      // height: height,
-      // width: width ?? Get.width,
-      // child: const Icon(Icons.error)),
     );
   }
 
-  // static Widget noData({required Function update}) {
-  //   return RefreshIndicator(
-  //     onRefresh: () async {
-  //       update();
-  //       return Future.value(0);
-  //     },
-  //     child: ListView(
-  //       children: [
-  //         Container(
-  //           height: Get.height - 250,
-  //           alignment: Alignment.center,
-  //           child: AppText(
-  //             noDataFoundTxt,
-  //             fontSize: 24,
-  //             fontWeight: FontWeight.w700,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
   static Widget noData(
       {required Function update,
       required BuildContext context,
@@ -99,7 +74,7 @@ class CommonWidgets {
         height: height ?? 180,
         width: Get.width,
         padding: 20.pa,
-        decoration: CustomBoxDecorations().shadow(context: context),
+        decoration: CustomBoxDecorations(context: context).shadow(),
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           AppText(errorText,
@@ -138,11 +113,13 @@ class CommonWidgets {
 
       // padding: const EdgeInsets.only(right: 20),
       width: MediaQuery.of(Get.context!).size.width,
-      decoration: CustomBoxDecorations().shadow(context: context),
+      decoration: CustomBoxDecorations(context: context).shadow(),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          backIcon ? AppIcons.IosBackIcon(onPress: onPress) : 40.swb,
+            backIcon
+                  ? SizedBox(child: AppIcons.IosBackIcon(onPress: onPress??null))
+                  : 40.swb,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

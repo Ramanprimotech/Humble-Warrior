@@ -1,7 +1,19 @@
 import 'package:humble_warrior/hw.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,15 +24,12 @@ class SplashScreen extends StatelessWidget {
         child: Obx(
           () => TweenAnimationBuilder(
             builder: (BuildContext context, double? value, Widget? child) {
-              return Transform.scale(scale: value,child: child);
-
+              return Transform.scale(scale: value, child: child);
             },
             tween: Tween(begin: .2, end: 1.5),
-            duration: const Duration(seconds: 2),
+            duration: const Duration(milliseconds: 1500),
             child: Image.asset(
               controller.isDark.value
-                  //     ? ImagePathAssets.logoAnimation
-                  //     : ImagePathAssets.logoAnimation,
                   ? ImagePathAssets.hwLogoDarkMode
                   : ImagePathAssets.hwLogo,
               height: 200,

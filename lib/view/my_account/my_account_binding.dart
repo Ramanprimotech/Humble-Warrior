@@ -1,5 +1,4 @@
-import 'package:get/get.dart';
-import 'package:humble_warrior/view/my_account/my_account_controller.dart';
+import 'package:humble_warrior/hw.dart';
 
 class MyAccountBindings implements Bindings {
   @override

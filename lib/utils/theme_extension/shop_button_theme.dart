@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:humble_warrior/hw.dart';
 
 class ShopNowTheme extends ThemeExtension<ShopNowTheme> {
   final Color? textColor;

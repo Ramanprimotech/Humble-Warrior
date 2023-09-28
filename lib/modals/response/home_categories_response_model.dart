@@ -10,19 +10,19 @@ class HomeCategoryResponseModel {
     if (json['data'] != null) {
       data = <HomeCategoryList>[];
       json['data'].forEach((v) {
-        data!.add(new HomeCategoryList.fromJson(v));
+        data!.add(HomeCategoryList.fromJson(v));
       });
     }
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data['message'] = this.message;
+    data['message'] = message;
     return data;
   }
 }
@@ -46,10 +46,10 @@ class HomeCategoryList {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['category_name'] = this.categoryName;
-    data['category_image'] = this.categoryImage;
-    data['id'] = this.id;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['category_name'] = categoryName;
+    data['category_image'] = categoryImage;
+    data['id'] = id;
     return data;
   }
 }

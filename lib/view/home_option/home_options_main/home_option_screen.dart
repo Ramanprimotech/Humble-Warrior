@@ -2,44 +2,58 @@ import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/view/home_option/tab_screens/front_page_deals.dart';
 
 class HomeOptionScreen extends GetView<HomeOptionController> {
-  const HomeOptionScreen({Key? key}) : super(key: key);
+  int data;
+  HomeOptionScreen({required this.data ,Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
-    // FToast().init(context);
+    controller.selectedIndex.value = data;
     const double tabFontSize = 18;
-    final HomeOptionController controller = Get.find();
-
     return Scaffold(
-      bottomNavigationBar: bottomNavigationWidget(context),
+      // bottomNavigationBar: bottomNavigationWidget(context),
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
         titleSpacing: 5,
         leadingWidth: 35,
         centerTitle: false,
-        title: const SearchBar(),
-        leading: AppIcons.IosBackIcon(),
-        bottom: TabBar(
-            padding: 0.pt,
-            isScrollable: true,
-            controller: controller.tabController,
-            tabs: <Widget>[
-              AppText(
-                donnaDailyDealTxt.upperCamelCase,
-                fontSize: tabFontSize,
-              ),
-              AppText(donnaFrontPageDealTxt.upperCamelCase,
-                  fontSize: tabFontSize),
-              AppText(donnaFavouriteDealTxt.upperCamelCase,
-                  fontSize: tabFontSize),
-            ]),
-        actions: [
-          IconButton(
-              padding: 16.pr,
-              onPressed: () {
-                Get.toNamed(AppRoutes.sortPages);
-              },
-              icon: AppIcons.filter(size: 35))
+        title:
+    Obx(
+          () =>
+           SearchBar(
+             route: 3,
+            /// Uncomment this line to filter by category
+            postType: controller.postType(controller.selectedIndex.value),
+          ),
+
+        ),
+        leading: AppIcons.IosBackIcon(onPress: (){
+          Get.back(id: 3);
+        }),
+        actions: const [
+          FilterIcon(
+            route: 3,
+            // postType: controller.postType(controller.selectedIndex.value),
+            postType: "",
+          ),
         ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(40),
+          child: TabBar(
+              padding: 0.pt,
+              isScrollable: true,
+              controller: controller.tabController,
+              tabs: <Widget>[
+                AppText(
+                  donnaDailyDealTxt.upperCamelCase,
+                  fontSize: tabFontSize,
+                ),
+                AppText(donnaFrontPageDealTxt.upperCamelCase,
+                    fontSize: tabFontSize),
+                AppText(donnaFavouriteDealTxt.upperCamelCase,
+                    fontSize: tabFontSize),
+              ]),
+        ),
       ),
       body: Padding(
         padding: 10.pt,

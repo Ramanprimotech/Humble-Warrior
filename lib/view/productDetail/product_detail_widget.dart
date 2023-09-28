@@ -1,8 +1,5 @@
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/utils/common/html.dart';
-import 'package:simple_html_css/simple_html_css.dart';
-
-import '../../utils/sizes/sizes_config.dart';
 
 class ProductDetailWidget {
   final AccountOptionTheme accountOptionTheme =
@@ -10,7 +7,7 @@ class ProductDetailWidget {
 
   Widget productText(context, title) {
     return Container(
-      decoration: CustomBoxDecorations().shadow(context: context),
+      decoration: CustomBoxDecorations(context: context).shadow(),
       width: MediaQuery.of(Get.context!).size.width * .9,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,40 +84,21 @@ class ProductDetailWidget {
   }
 
   /// Product Description
-  Widget productDescription({String? discription, String? itemName,required BuildContext context}) {
+  Widget productDescription(
+      {String? discription, String? itemName, required BuildContext context}) {
     return SizedBox(
       width: MediaQuery.of(Get.context!).size.width * .9,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppText(
-            "What is $itemName",
+            // "What is $itemName",
+            "$itemName",
             fontSize: 18,
             maxLines: 2,
             fontWeight: FontWeight.bold,
           ),
-          // HTML.toRichText(context, discription.toString(),
-          //   linksCallback: (dynamic link) {
-          //     CommonUtils().urlLauncher(url: link.toString());
-          //   },)
           HtmlData().htmlString(context, discription.toString()),
-      // HTML.toRichText(context, discription.toString(),),
-          // AppText(
-          //   discription ?? "",
-          //   maxLines: 90,
-          // ),
-          // const ReadMoreText(
-          //   AppStrings.lorem,
-          //   trimLines: 20,
-          //   colorClickableText: Colors.pink,
-          //   trimMode: TrimMode.Length,
-          //   trimCollapsedText: readmoreTxt,
-          //   trimExpandedText: readlessTxt,
-          //   lessStyle: TextStyle(
-          //       fontSize: 15, fontWeight: FontWeight.bold, color: Colors.blue),
-          //   moreStyle: TextStyle(
-          //       fontSize: 15, fontWeight: FontWeight.bold, color: Colors.blue),
-          // ).p(6)
         ],
       ).p(6),
     ).py(6);

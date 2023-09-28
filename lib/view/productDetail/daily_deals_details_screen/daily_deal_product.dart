@@ -1,30 +1,29 @@
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/utils/common/photo_viewer.dart';
 import 'package:humble_warrior/view/productDetail/product_detail_controller.dart';
 
 import '../../../hw.dart';
 
 class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
-  DailyDealProduct({Key? key}) : super(key: key);
+ final ProductDetailsResponse? details;
+  DailyDealProduct({required this.details,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final DailyDealProductController controller = Get.find();
-
     ProductDetailController productDetailController = Get.find();
-    final ProductDetailsResponse donnaDealsDetails = Get.arguments[0];
-    Future<List<ProductDetailsResponse>> _futureInstance =
+    Future<List<ProductDetailsResponse>> futureInstance =
         productDetailController.productDetailsAPI(
-            idData: donnaDealsDetails.id.toString());
+            idData: details!.id.toString());
     return Scaffold(
-      bottomNavigationBar: bottomNavigationWidget(context),
+      // bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
         child: Column(
           children: [
             CommonWidgets.titleBar(context,
-                title: "Product Details", fontSize: 20, backIcon: true),
+                title: "Product Details", fontSize: 20, backIcon: true,onPress: (){
+              Get.back();
+                }),
             FutureBuilder<List<ProductDetailsResponse>>(
-                future: _futureInstance,
+                future: futureInstance,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Expanded(
@@ -34,8 +33,8 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
                             Container(
                               width: Get.width,
                               height: Get.width - 40,
-                              decoration: CustomBoxDecorations()
-                                  .shadow(context: context),
+                              decoration: CustomBoxDecorations(context: context)
+                                  .shadow(),
                             ),
                             Container(
                               margin: 10.pv,
@@ -84,8 +83,6 @@ class DailyDealProduct extends StatelessWidget with ProductDetailWidget {
                               imgUrl: data.url!,
                               title: data.itemName!,
                             ),
-                            // donnaDealsCard(data, 0, context,
-                            //     isDetails: true),
                           ),
                           productText(context, data.itemName.toString()),
                           productDescription(

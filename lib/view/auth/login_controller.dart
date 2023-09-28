@@ -1,13 +1,13 @@
 import 'dart:io';
 
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/network/api_call.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class LoginController extends GetxController {
   User? user;
   RxBool isPlatformIOS = false.obs;
   String? platform;
+
 
   ///----------Check Current Platform----------///
   checkCurrentPlatform() {
@@ -26,33 +26,55 @@ class LoginController extends GetxController {
     super.onInit();
   }
 
+  Future<UserCredential> signInWithFacebook() async {
+    // Trigger the sign-in flow
+    final LoginResult loginResult = await FacebookAuth.instance.login();
+
+    // Create a credential from the access token
+    final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+    // Once signed in, return the UserCredential
+    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential).then((value){
+      Get.offAllNamed(AppRoutes.bottomNavigation);
+      print('testing------${value.user!.displayName}');
+      return value;
+    }
+    );
+  }
+
   ///---------------------Click Login Button Functionality-----------------------///
   Function onClickFunction(
       {required OnClick action, required BuildContext context}) {
     Map<OnClick, void Function()> actions = {
       ///--------Click  facebook
       OnClick.facebook: () async {
+          // Trigger the sign-in flow
+          // signInWithFacebook();
         try {
+          Loader.show(context);
+
           user = await AuthManager().facebookLogin();
           if (user != null) {
             /// Save User Info to Local Storage
-            await saveUserToLocalStorage();
+            await saveUserToLocalStorage(fb:true);
 
-            Get.offAllNamed(AppRoutes.bottomNavigation);
-
-            /// Auth Data API
-            await authAPI();
+            await authAPI().whenComplete(
+                    () {
+                  Get.offAllNamed(AppRoutes.bottomNavigation);
+                });
           }
         } catch (e) {
-          debugPrint("error --- $e");
+          print(e);
+        }finally{
+          Loader.hide();
         }
+
       },
 
       ///------------ Click Google
       OnClick.google: () async {
         try {
           Loader.show(context);
-
           user = await AuthManager().googleLogin(
               androidClientId:
                   DefaultFirebaseOptions.currentPlatform.androidClientId ?? "",
@@ -60,38 +82,40 @@ class LoginController extends GetxController {
                   DefaultFirebaseOptions.currentPlatform.iosClientId ?? "");
 
           if (user != null) {
-            Loader.hide();
-
             /// Save User Info to Local Storage
             await saveUserToLocalStorage();
 
-            Get.offAllNamed(AppRoutes.bottomNavigation);
-
             /// Auth Data API
-            await authAPI();
-          } else {
-            Loader.hide();
+            await authAPI().whenComplete(
+                () {
+                  Get.offAllNamed(AppRoutes.bottomNavigation);
+                });
           }
-        } catch (e) {
+        } catch (e, st) {
+          print(e);
+        }finally{
           Loader.hide();
-          // Get.snackbar("Error ", "$e ");
         }
       },
 
       /// ----------- Click apple
       OnClick.apple: () async {
+        try{
+          Loader.show(context);
         user = await AuthManager().appleLogin();
         if (user != null) {
           await saveUserToLocalStorage();
-          if (userPhoneNumber.isEmpty || userProfilePic.isEmpty) {
-            Get.offAllNamed(AppRoutes.bottomNavigation);
-          }
-          Get.offAllNamed(AppRoutes.bottomNavigation);
 
           /// Auth Data API
-          await authAPI();
+          await authAPI().whenComplete(
+                  () {
+                Get.offAllNamed(AppRoutes.bottomNavigation);
+              });
         }
-      },
+      }finally{
+          Loader.hide();
+        }
+    },
 
       /// Click Continue without login
       OnClick.continueWithoutLogin: () async {
@@ -99,7 +123,6 @@ class LoginController extends GetxController {
         await SharePreferenceData.addBoolToSF(spIsEntered, true);
 
         /// Auth Data API
-        await authAPI();
         Get.offAllNamed(AppRoutes.bottomNavigation);
       }
     };
@@ -108,11 +131,13 @@ class LoginController extends GetxController {
   }
 
   ///-----------------------Save User Info to Local Storage--------------------------///
-  Future<void> saveUserToLocalStorage() async {
+  Future<void> saveUserToLocalStorage({ bool fb = false}) async {
+    isLoggedIn = true;
     await SharePreferenceData.addBoolToSF(spIsLogged, true);
-    await SharePreferenceData.addStringToSF(userEmail, "${user?.email}");
+    await SharePreferenceData.addStringToSF(userId, user!.uid);
+    await SharePreferenceData.addStringToSF(userEmail, "${user?.providerData[0].email}");
     await SharePreferenceData.addStringToSF(
-        userPhoneNumber, "${user?.phoneNumber}");
+        userPhoneNumber, "${user?.providerData[0].phoneNumber}");
     await SharePreferenceData.addStringToSF(userName, "${user?.displayName}");
     await SharePreferenceData.addStringToSF(
         userProfilePic, "${user?.photoURL}");
@@ -130,7 +155,6 @@ class LoginController extends GetxController {
       "user_id": user == null ? "" : user!.uid,
       "email": user == null ? "" : user!.email ?? ""
     };
-    print("Apple-------------$payload");
     await CallAPI.authDataAPI(payload: payload);
   }
 }

@@ -1,6 +1,6 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/response/static_page_model.dart';
 import 'package:humble_warrior/utils/common/html.dart';
+import 'package:humble_warrior/utils/common/photo_viewer.dart';
 import 'package:humble_warrior/view/static_pages/static_page_controller.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -8,17 +8,84 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AboutScreenController aboutScreenController = Get.find();
     final HomeScreenController controller = Get.find();
     final StaticPagesController staticController =
         Get.find<StaticPagesController>();
     return Scaffold(
-      bottomNavigationBar: bottomNavigationWidget(context),
+      // bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
         child: FutureBuilder<List<StaticData>>(
-          future: staticController.staticPageApi("40424"),
+          future: staticController.staticPageApi("89450"),
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return Column(
+                children: [
+                  /// About Donna title
+                  CommonWidgets.titleBar(context,
+                      backIcon: true, title: aboutDonnaTxt, fontSize: 18,onPress: (){
+                    Get.back(id: 4);
+                      }),
+                  Expanded(
+                    child: ListView(
+                      // physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        CustomShimmer.rectangular(
+                            height: 380, borderRadius: 15, margin: 16.pa),
+                        const CustomShimmer.rectangular(
+                            height: 20,
+                            borderRadius: 15,
+                            margin: EdgeInsets.only(
+                                right: 150, left: 16, bottom: 12)),
+                        const CustomShimmer.rectangular(
+                            height: 16,
+                            borderRadius: 15,
+                            margin: EdgeInsets.only(
+                                right: 16, left: 16, bottom: 8)),
+                        const CustomShimmer.rectangular(
+                            height: 16,
+                            borderRadius: 15,
+                            margin: EdgeInsets.only(
+                                right: 16, left: 16, bottom: 8)),
+                        const CustomShimmer.rectangular(
+                            height: 16,
+                            borderRadius: 15,
+                            margin: EdgeInsets.only(
+                                right: 16, left: 16, bottom: 8)),
+                        const CustomShimmer.rectangular(
+                          height: 16,
+                          borderRadius: 15,
+                          margin:
+                              EdgeInsets.only(right: 16, left: 16, bottom: 8),
+                        ),
+                        const CustomShimmer.rectangular(
+                          height: 16,
+                          borderRadius: 15,
+                          margin:
+                              EdgeInsets.only(right: 16, left: 16, bottom: 8),
+                        ),
+                        const CustomShimmer.rectangular(
+                          height: 16,
+                          borderRadius: 15,
+                          margin:
+                              EdgeInsets.only(right: 16, left: 16, bottom: 8),
+                        ),
+                        const CustomShimmer.rectangular(
+                          height: 16,
+                          borderRadius: 15,
+                          margin:
+                              EdgeInsets.only(right: 16, left: 16, bottom: 8),
+                        ),
+                        CustomShimmer.rectangular(
+                          height: 180,
+                          borderRadius: 15,
+                          margin: 16.pa,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
             }
             if (snapshot.hasError) {
               return CommonWidgets.errorAPI(
@@ -27,7 +94,7 @@ class AboutScreen extends StatelessWidget {
                   onPress: () {
                     Get.back();
                   },
-                  buttonTitle: okTxt);
+                  buttonTitle: "hjwerf");
             }
             List<StaticData> staticResponse = snapshot.data!;
             return staticResponse.isNotEmpty
@@ -39,16 +106,38 @@ class AboutScreen extends StatelessWidget {
                         backIcon: true,
                         title: aboutDonnaTxt,
                         fontSize: 18,
+                        onPress: (){
+                          Get.back(id: 4);
+                        }
                       ),
                       Expanded(
                         child: ListView(children: [
                           /// About image
                           _showImg(staticResponse),
 
+                          /// About Less
+                          Obx(
+                            () => Visibility(
+                              key: const Key("less"),
+                              visible: aboutScreenController.readMore.value,
+                              child: _detailsLess(context, staticResponse),
+                            ),
+                          ),
+
                           /// About Details
-                          _details(context, staticResponse),
+                          Obx(
+                            () => Visibility(
+                              key: const Key("more"),
+                              visible: !aboutScreenController.readMore.value,
+                              child: _details(context, staticResponse),
+                            ),
+                          ),
+
+                          ///About Donna Bottom Image
+                          _showImgBottom(staticResponse),
 
                           /// See copy of humble warrior button
+                          15.shb,
                           _seeCopyButton(),
                           25.shb,
                         ]),
@@ -57,13 +146,12 @@ class AboutScreen extends StatelessWidget {
                       /// Brands List
                       HomeScreenWidgets(
                               context: context, controller: controller)
-                          .brandsList(),
-                      25.shb,
+                          .brandListAPIBuilder(waitingState: true),
                     ],
                   )
                 : Center(
                     child: CommonWidgets.errorAPI(
-                        errorText: "${snapshot.error}",
+                        errorText: "Something went wrong",
                         context: context,
                         onPress: () {
                           Get.back();
@@ -79,15 +167,43 @@ class AboutScreen extends StatelessWidget {
   _showImg(staticResponse) {
     return Padding(
       padding: 20.ph,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(5),
-        child: CommonWidgets.networkImage(
-          imageUrl: staticResponse[0].pageImage.toString(),
-          // "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
-          fit: BoxFit.fitWidth,
-          height: Get.width - 40,
-          alignment: Alignment.topCenter,
-          width: Get.width,
+      child: GestureDetector(
+        onTap: () {
+          Get.to(
+              CustomPhotoViewer(url: staticResponse[0].pageImage.toString()));
+        },
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: CommonWidgets.networkImage(
+            imageUrl: staticResponse[0].pageImage.toString(),
+            fit: BoxFit.cover,
+            height: 380,
+            alignment: Alignment.topCenter,
+            width: Get.width,
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// About DonnaBottom image
+  _showImgBottom(List<StaticData> staticResponse) {
+    return Padding(
+      padding: 20.ph,
+      child: GestureDetector(
+        onTap: () {
+          Get.to(CustomPhotoViewer(
+              url: staticResponse[0].page_bottom_image.toString()));
+        },
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: CommonWidgets.networkImage(
+            imageUrl: staticResponse[0].page_bottom_image.toString(),
+            fit: BoxFit.fill,
+            height: 170,
+            alignment: Alignment.topCenter,
+            width: Get.width,
+          ),
         ),
       ),
     );
@@ -95,28 +211,60 @@ class AboutScreen extends StatelessWidget {
 
   /// About Details
   _details(context, staticResponse) {
+    final AboutScreenController aboutScreenController = Get.find();
     return Container(
       padding: 10.pa,
       margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
       width: Get.width,
-      decoration: CustomBoxDecorations().shadow(context: context),
+      decoration: CustomBoxDecorations(context: context).shadow(),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const AppText(helloGorgeousTxt, fontWeight: FontWeight.bold),
         HtmlData()
             .htmlString(context, staticResponse[0].pageContent.toString()),
-        // HTML.toRichText(context, staticResponse[0].pageContent.toString(),),
-        // ReadMoreText(
-        //   style: Theme.of(context).textTheme.bodyMedium,
-        //   staticResponse[0].pageContent.toString(),
-        //   trimLines: 10,
-        //   trimMode: TrimMode.Line,
-        //   trimCollapsedText: readMoreTxt,
-        //   trimExpandedText: readLessTxt,
-        //   lessStyle: const TextStyle(
-        //       fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
-        //   moreStyle: const TextStyle(
-        //       fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
-        // ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            GestureDetector(
+              onTap: () {
+                aboutScreenController.readStatus();
+              },
+              child: const AppText(
+                "Read Less",
+                color: AppColors.blue,
+              ),
+            )
+          ],
+        )
+      ]),
+    );
+  }
+
+  /// About DetailsLess
+  _detailsLess(context, List<StaticData> staticResponse) {
+    final AboutScreenController aboutScreenController = Get.find();
+    return Container(
+      padding: 10.pa,
+      margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+      width: Get.width,
+      decoration: CustomBoxDecorations(context: context).shadow(),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        const AppText(helloGorgeousTxt, fontWeight: FontWeight.bold),
+        HtmlData().htmlString(
+            context, staticResponse[0].page_less_content.toString()),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            GestureDetector(
+              onTap: () {
+                aboutScreenController.readStatus();
+              },
+              child: const AppText(
+                "Read More",
+                color: AppColors.blue,
+              ),
+            )
+          ],
+        )
       ]),
     );
   }
@@ -135,7 +283,6 @@ class AboutScreen extends StatelessWidget {
               color: Colors.grey.shade400,
               spreadRadius: 1,
               blurRadius: 1,
-              // offset: const Offset(0, 3),
             )
           ]),
       child: RichText(
@@ -151,9 +298,7 @@ class AboutScreen extends StatelessWidget {
               recognizer: TapGestureRecognizer()
                 ..onTap = () async {
                   await CommonUtils().urlLauncher(
-                      url:
-                          "https://humblewarrior.com/wp-content/uploads/2020/09/humble-warrior-media.pdf",
-                      title: "The Humble Warrior");
+                      url: Endpoints.pdf, title: theHumbleWarriorLowerTxt);
                 },
               text: hereTxt,
               style: const TextStyle(

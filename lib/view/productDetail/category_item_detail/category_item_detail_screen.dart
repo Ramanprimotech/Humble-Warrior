@@ -1,26 +1,32 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
+import 'package:humble_warrior/utils/common/html.dart';
 import 'package:humble_warrior/view/productDetail/product_detail_controller.dart';
-import 'package:simple_html_css/simple_html_css.dart';
 
 class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
-  CategoryItemDetail({Key? key}) : super(key: key);
+  final ProductDetailsResponse? details;
+  final int? route;
+  CategoryItemDetail({required this.details, this.route,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ProductDetailsResponse details = Get.arguments[0];
     ProductDetailController controller = Get.find();
-    Future<List<ProductDetailsResponse>> _futureInstance =
-        controller.productDetailsAPI(idData: details.id.toString());
+    Future<List<ProductDetailsResponse>> futureInstance =
+        controller.productDetailsAPI(idData: details!.id.toString());
 
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             CommonWidgets.titleBar(context,
-                title: "Product Details", fontSize: 20, backIcon: true),
+                title: "Product Details", fontSize: 20, backIcon: true, onPress: (){
+              if(route == 0){
+                Get.back();
+              }    else {
+                Get.back(id: route ?? 3);
+              }
+                }),
             FutureBuilder<List<ProductDetailsResponse>>(
-                future: _futureInstance,
+                future: futureInstance,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Expanded(
@@ -30,8 +36,8 @@ class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
                             Container(
                               width: Get.width,
                               height: Get.width - 40,
-                              decoration: CustomBoxDecorations()
-                                  .shadow(context: context),
+                              decoration: CustomBoxDecorations(context: context)
+                                  .shadow(),
                             ),
                             Container(
                               margin: 10.pv,
@@ -74,7 +80,8 @@ class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
                                 categoryCard: false, isDetails: true),
                           ),
                           productTitleDetail(context, data.itemName),
-                          productDesc(data.productDescription,context: context),
+                          productDesc(data.productDescription,
+                              context: context),
                         ],
                       ),
                     ),
@@ -88,7 +95,7 @@ class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
 
   Widget productTitleDetail(context, title) {
     return Container(
-      decoration: CustomBoxDecorations().shadow(context: context),
+      decoration: CustomBoxDecorations(context: context).shadow(),
       width: MediaQuery.of(Get.context!).size.width * .9,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       margin: const EdgeInsets.symmetric(vertical: 12),
@@ -102,17 +109,11 @@ class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
   }
 
   /// Product Description
-  Widget productDesc(String? dis,{required BuildContext context}) {
+  Widget productDesc(String? dis, {required BuildContext context}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       width: MediaQuery.of(Get.context!).size.width * .9,
-      child:
-    HTML.toRichText(context, dis!),
-     /* AppText(
-        dis ?? "",
-        fontSize: 16,
-        maxLines: 150,
-      ),*/
+      child: HtmlData().htmlString(context, dis!),
     );
   }
 }

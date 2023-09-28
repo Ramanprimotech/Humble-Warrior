@@ -1,16 +1,6 @@
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/utils/sizes/sizes_config.dart';
 
 class AppIcons {
-  // IconData
-
-  //Bottom Navigation ==============>
-  // static Icon home() => const Icon(Icons.home);
-
-  // static Icon favourite(BuildContext context) => Icon(Icons.favorite_outlined,color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,);
-
   static Image favourite(BuildContext context) => Image.asset(
         ImagePathAssets.heartIcon,
         height: 20,
@@ -131,7 +121,6 @@ class AppIcons {
 
   static Icon bookmarks({Color iconColor = Colors.black}) =>
       Icon(Icons.bookmarks, color: iconColor);
-
 }
 
 class Heart extends StatefulWidget {
@@ -159,11 +148,20 @@ class _HeartState extends State<Heart> {
   }
 
   @override
+  void didChangeDependencies() {
+    setState(() {});
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     HiveService service = Get.find<HiveService>();
     Box<ProductDetailsResponse> box = service.box;
+    // List<dynamic> keys = service.findKey(widget.item.id.toString());
+    // print(keys);
+
     return ValueListenableBuilder(
-      valueListenable: box.listenable(keys: [widget.item.id.toString()]),
+      valueListenable: box.listenable(),
       builder: (context, box, child) {
         return GestureDetector(
           key: widget.key,
@@ -175,7 +173,7 @@ class _HeartState extends State<Heart> {
             } else {
               if (context.mounted) {
                 DialogHelper.showConfirmationDialog(
-                    message: loginWishTxt,
+                    message: accessingMsgTxt,
                     actionLabel: login,
                     action: () {
                       Get.toNamed(AppRoutes.loginPage);
@@ -186,7 +184,7 @@ class _HeartState extends State<Heart> {
           },
           child: Icon(
             Icons.favorite_outlined,
-            color: service.hasItem(widget.item.id.toString())
+            color: isLoggedIn && service.hasItem(widget.item.id.toString())
                 ? Colors.red
                 : widget.color,
             size: widget.size ?? Dimens.largeIcon,

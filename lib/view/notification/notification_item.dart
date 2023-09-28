@@ -1,5 +1,4 @@
 import 'package:humble_warrior/hw.dart';
-import 'package:humble_warrior/modals/response/notification_response_model.dart';
 
 class NotificationItem extends StatefulWidget {
   final Posts data;
@@ -11,16 +10,13 @@ class NotificationItem extends StatefulWidget {
 }
 
 class _NotificationItemState extends State<NotificationItem> {
-  final NotificationController _notificationController = Get.find();
-
   @override
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      height: Get.width / 3,
-      decoration: CustomBoxDecorations().shadow(
-          context: context,
-          color: widget.data.read == false ? AppColors.readBox : null),
+      height: Get.width / 4.5,
+      decoration: CustomBoxDecorations(context: context)
+          .shadow(color: widget.data.read == false ? AppColors.readBox : null),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         notificationImg(widget.data.thumbnail ?? "null"),
         notificationDetails(widget.data),
@@ -36,7 +32,6 @@ class _NotificationItemState extends State<NotificationItem> {
       ),
       child: CommonWidgets.networkImage(
         imageUrl: url,
-        // "https://humblewarrior.com/wp-content/uploads/2022/11/Facetune_20-06-2022-06-51-2.jpg",
         alignment: Alignment.topCenter,
         width: Get.width / 3.5,
         fit: BoxFit.cover,
@@ -75,16 +70,6 @@ class _NotificationItemState extends State<NotificationItem> {
                 fontSize: 16,
               ),
             ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 10, top: 5),
-            child: AppText(
-              "These cuties were tough to photograph and honestly my picture doesn't to do justice." *
-                  2,
-              fontSize: 14,
-              color: data.read == false ? Colors.black : null,
-              maxLines: 1,
-            ),
-          ),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,

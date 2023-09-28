@@ -3,7 +3,7 @@ import 'package:humble_warrior/hw.dart';
 class BottomNavigationBindings implements Bindings {
   @override
   void dependencies() {
-    Get.put(NotificationController());
+    Get.put(NotificationController(),permanent: true);
     Get.put(ThemeController(), permanent: true);
     Get.put(HomeScreenController());
     Get.put(BottomNavigationController(), permanent: true);

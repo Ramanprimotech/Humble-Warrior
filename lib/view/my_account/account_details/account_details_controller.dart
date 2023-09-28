@@ -1,20 +1,16 @@
 import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/utils/app_strings.dart';
-import 'package:humble_warrior/utils/common/common_functionality.dart';
-import 'package:humble_warrior/utils/shared_prefrence/shared_pref.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:humble_warrior/hw.dart';
 
-class AccountDetailsController extends GetxController{
-
+class AccountDetailsController extends GetxController {
   RxBool userCheck = false.obs;
   String user = "";
   String username = "";
   String userPhone = "";
-  String userImg = "";
+  RxString userImg = "".obs;
   File? imagePath;
-  RxString imageUrl = "".obs;
+  // RxString imageUrl = "".obs;
 
   @override
   void onInit() {
@@ -22,35 +18,39 @@ class AccountDetailsController extends GetxController{
     super.onInit();
   }
 
-
-  Future<void> getImageCamera() async {
+/*  Future<void> getImageCamera() async {
     imagePath =
-    await CommonUtils().getImagePath(imageSource: ImageSource.camera);
+        await CommonUtils().getImagePath(imageSource: ImageSource.camera);
     imageUrl.value = imagePath!.path;
   }
 
   Future<void> getImageGallery() async {
     imagePath =
-    await CommonUtils().getImagePath(imageSource: ImageSource.gallery);
+        await CommonUtils().getImagePath(imageSource: ImageSource.gallery);
     imageUrl.value = imagePath!.path;
-    debugPrint("Image Pathhh $imagePath");
-  }
+  }*/
 
   Future<void> getData() async {
     userCheck.value =
         await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
     user = await SharePreferenceData.getStringValuesSF(userEmail) ?? "";
-    username = await SharePreferenceData.getStringValuesSF(userName) ?? "";
-    userPhone = await SharePreferenceData.getStringValuesSF(userPhoneNumber) ?? "";
-    userImg = await SharePreferenceData.getStringValuesSF(userProfilePic) ?? "";
 
-    if(userPhone == "null"){
+    String name = await SharePreferenceData.getStringValuesSF(userName) ?? "";
+    if (name == "" || name == "null" || name == "N/A") {
+      username = "N/A";
+    } else {
+      username = name;
+    }
+
+    userPhone =
+        await SharePreferenceData.getStringValuesSF(userPhoneNumber) ?? "";
+    userImg.value = await SharePreferenceData.getStringValuesSF(userProfilePic) ?? "";
+
+    if (userPhone == "null") {
       userPhone = "N/A";
     }
-    else{
-      print("user phone else  --- $userPhone"); }
   }
-
+/*
   Future<void> openBottomSheet() async {
     return showCupertinoModalPopup<void>(
       context: Get.context!,
@@ -62,7 +62,6 @@ class AccountDetailsController extends GetxController{
               cameraTxt,
               onTap: () {
                 getImageCamera();
-                //  CommonUtils().getImagePath(imageSource: ImageSource.camera);
                 Navigator.pop(context);
               },
             ),
@@ -70,7 +69,6 @@ class AccountDetailsController extends GetxController{
               galleryTxt,
               onTap: () {
                 getImageGallery();
-                //  CommonUtils().getImagePath(imageSource: ImageSource.gallery);
                 Navigator.pop(context);
               },
             ),
@@ -79,6 +77,5 @@ class AccountDetailsController extends GetxController{
         );
       },
     );
-  }
-
+  }*/
 }

@@ -1,28 +1,19 @@
-import 'dart:developer';
-
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:humble_warrior/modals/filter_modal.dart';
-import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
-import 'package:humble_warrior/network/endpoints.dart';
-import 'package:humble_warrior/services/hive_storage_service.dart';
-import 'package:humble_warrior/utils/helpers/dialog_helper.dart';
+import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/view/sorting/sort_controller.dart';
-
-import '../../../modals/requests/pagination_modal.dart';
-import '../../../network/api_call.dart';
 
 class HomeOptionController extends GetxController
     with GetSingleTickerProviderStateMixin {
+  final int initialIndex;
+  HomeOptionController({required this.initialIndex});
   late TabController tabController;
   final TextEditingController searchTextController = TextEditingController();
   final FocusNode focusNode = FocusNode();
   RxInt selectedIndex = 0.obs;
   RxBool select = false.obs;
-  int initialIndex = Get.arguments[0];
+
   late BuildContext context;
   HiveService service = Get.find<HiveService>();
-  SortController _sortController = Get.find();
+  final SortController _sortController = Get.find();
 
   ///Storage has item
   bool hasItemInDatabase(String id) {
@@ -38,8 +29,7 @@ class HomeOptionController extends GetxController
   RxInt donnaDealListLength = 0.obs;
   int donnaDealsPage = 1;
   RxInt donnaDealsTotalDeals = 20.obs;
-  final ScrollController donnaDealScrollController =
-      ScrollController(initialScrollOffset: 0.0);
+  final ScrollController donnaDealScrollController = ScrollController(initialScrollOffset: 0.0);
 
   /// Front Page Deals
   final RxInt frontPageDealsLength = 0.obs;
@@ -48,8 +38,7 @@ class HomeOptionController extends GetxController
   List<ProductDetailsResponse> frontPageDealList = [];
   RxInt frontPageDealListLength = 0.obs;
   int frontPageDealsPage = 1;
-  final ScrollController frontPageDealScrollController =
-      ScrollController(initialScrollOffset: 0.0);
+  final ScrollController frontPageDealScrollController = ScrollController(initialScrollOffset: 0.0);
 
   /// Donna's Favourite
   final RxInt donnaFavouriteDealsLength = 0.obs;
@@ -58,15 +47,12 @@ class HomeOptionController extends GetxController
   RxInt donnaFavouriteDealsTotalDeals = 20.obs;
   int donnaFavouriteDealsPage = 1;
   RxInt donnaFavouriteDealListLength = 0.obs;
-  final ScrollController donnaFavouriteDealScrollController =
-      ScrollController(initialScrollOffset: 0.0);
+  final ScrollController donnaFavouriteDealScrollController = ScrollController(initialScrollOffset: 0.0);
 
   @override
   void onInit() {
     _sortController.additionalApplySort = functionSort;
-    debugPrint("$initialIndex");
-    tabController =
-        TabController(length: 3, initialIndex: initialIndex, vsync: this);
+    tabController = TabController(length: 3, initialIndex: initialIndex, vsync: this);
     tabController.addListener(() {
       selectedIndex.value = tabController.index;
     });
@@ -78,26 +64,27 @@ class HomeOptionController extends GetxController
   Future donaDealsAPI({bool? refresh = false}) async {
     if (refresh!) {
       donnaDealsPage = 1;
-      // donnaDealsBool.value = true;
-      donnaDealList.clear();
-      // update();
     }
     SortItem item = sort();
     PaginationModel paginationModel = PaginationModel(
         page: donnaDealsPage.toString(),
         sortName: item.type,
-        sortOrder: item.itemValue);
+        sortOrder: item.itemValue
+    );
     await CallAPI.productListAPI(
             payload: paginationModel, url: Endpoints.donnaDeals)
         .then((value) {
       if (value.data == null) {
-        DialogHelper.showToast(context, "No More Deals");
+        DialogHelper.showToast(context, noMoreDealsTxt);
       } else {
+        if(refresh) {
+          donnaDealList.clear();
+        }
         donnaDealsPage += 1;
         donnaDealList.addAll(value.data!);
         donnaDealListLength.value = donnaDealList.length;
         if (refresh) {
-          DialogHelper.showToast(context, "Deals Refreshed");
+          // DialogHelper.showToast(context, dealsRefreshTxt);
         }
       }
       if (value.totalRecords != null) {
@@ -111,7 +98,8 @@ class HomeOptionController extends GetxController
   Future frontPageDealsAPI({bool? refresh = false}) async {
     if (refresh!) {
       frontPageDealsPage = 1;
-      frontPageDealList.clear();
+
+      update();
     }
     SortItem item = sort();
     PaginationModel paginationModel = PaginationModel(
@@ -122,13 +110,15 @@ class HomeOptionController extends GetxController
             payload: paginationModel, url: Endpoints.frontPage)
         .then((value) {
       if (value.data == null) {
-        DialogHelper.showToast(context, "No More Deals");
+        DialogHelper.showToast(context, noMoreDealsTxt);
       } else {
-        frontPageDealsPage += 1;
+        if(refresh!) {
+          frontPageDealList.clear();
+        }frontPageDealsPage += 1;
         frontPageDealList.addAll(value.data!);
         frontPageDealListLength.value = frontPageDealList.length;
         if (refresh) {
-          DialogHelper.showToast(context, "Deals Refreshed");
+          // DialogHelper.showToast(context, dealsRefreshTxt);
         }
       }
 
@@ -143,27 +133,27 @@ class HomeOptionController extends GetxController
   Future donnaFavouriteDealsAPI({bool? refresh = false}) async {
     if (refresh!) {
       donnaFavouriteDealsPage = 1;
-      // donnaFavouriteDealsBool.value = true;
-      donnaFavouriteDealList.clear();
-      // update();
+
     }
     SortItem item = sort();
     PaginationModel paginationModel = PaginationModel(
         page: donnaFavouriteDealsPage.toString(),
         sortName: item.type,
         sortOrder: item.itemValue);
-    // log(paginationModel.toString(), name: "Sort");
     await CallAPI.productListAPI(
             payload: paginationModel, url: Endpoints.donnaFavourite)
         .then((value) {
       if (value.data == null) {
-        DialogHelper.showToast(context, "No More Deals");
+        DialogHelper.showToast(context, noMoreDealsTxt);
       } else {
+        if(refresh!) {
+          donnaFavouriteDealList.clear();
+        }
         donnaFavouriteDealsPage += 1;
         donnaFavouriteDealList.addAll(value.data!);
         donnaFavouriteDealListLength.value = donnaFavouriteDealList.length;
         if (refresh) {
-          DialogHelper.showToast(context, "Deals Refreshed");
+          // DialogHelper.showToast(context, dealsRefreshTxt);
         }
       }
       if (value.totalRecords != null) {
@@ -176,9 +166,8 @@ class HomeOptionController extends GetxController
   }
 
   SortItem sort() {
-    log(_sortController.checkFilter().toString(), name: "Is Seleced");
     if (!_sortController.checkFilter()) {
-      return SortItem(itemnName: "", itemValue: "", type: "");
+      return const SortItem(itemnName: "", itemValue: "", type: "");
     } else {
       return _sortController
               .filterData[_sortController.headerIndex.value].subHeader[
@@ -209,5 +198,15 @@ class HomeOptionController extends GetxController
     donnaFavouriteDealScrollController.dispose();
     frontPageDealScrollController.dispose();
     super.onClose();
+  }
+
+  String postType(int position) {
+    Map<int, String> post = {
+      0: "deals",
+      1: "product",
+      2: "shopmycloset_product"
+    };
+
+    return post[position]!;
   }
 }

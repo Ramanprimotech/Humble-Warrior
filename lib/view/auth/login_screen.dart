@@ -8,9 +8,9 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
   @override
   Widget build(BuildContext context) {
     ThemeController themeController = Get.find();
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -29,40 +29,40 @@ class LoginScreen extends GetView<LoginController> with AuthWidget {
                 height: 80 * 4,
                 child: Column(
                   children: [
-                    20.shb,
+                    40.shb,
 
                     /// Facebook
-                    optionWidget(
+                    /*optionWidget(
                         bckClr: AppColors.facebookClr,
-                        title: LocalString.signWithFacebook,
+                        title: signWithFacebook,
                         textClr: AppColors.white,
                         imagePath: ImagePathAssets.facebookImg,
                         onTap: controller.onClickFunction(
-                            action: OnClick.facebook, context: context)),
+                            action: OnClick.facebook, context: context)),*/
 
                     /// Google
                     optionWidget(
                         bckClr: AppColors.white,
-                        title: LocalString.signWithGoogle,
+                        title: signWithGoogle,
                         textClr: AppColors.black,
                         imagePath: ImagePathAssets.googleImg,
                         onTap: controller.onClickFunction(
                             action: OnClick.google, context: context)),
 
                     /// Apple
-                    if(Platform.isIOS)
-                    optionWidget(
-                        bckClr: AppColors.grey,
-                        title: LocalString.signWithApple,
-                        textClr: AppColors.white,
-                        imagePath: ImagePathAssets.appleImg,
-                        onTap: controller.onClickFunction(
-                            action: OnClick.apple, context: context)),
+                    if (Platform.isIOS)
+                      optionWidget(
+                          bckClr: AppColors.grey,
+                          title: signWithApple,
+                          textClr: AppColors.white,
+                          imagePath: ImagePathAssets.appleImg,
+                          onTap: controller.onClickFunction(
+                              action: OnClick.apple, context: context)),
 
                     /// Without Login
                     optionWidget(
                         bckClr: AppColors.twitterClr,
-                        title: LocalString.signWithoutLogin,
+                        title: signWithoutLogin,
                         textClr: AppColors.white,
                         onTap: controller.onClickFunction(
                             action: OnClick.continueWithoutLogin,

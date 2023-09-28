@@ -10,9 +10,9 @@ class ProductCategoriesListRequest {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['category_id'] = this.categoryId;
-    data['page'] = this.page;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['category_id'] = categoryId;
+    data['page'] = page;
     return data;
   }
 }

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:humble_warrior/hw.dart';
 
 typedef KeyboardTapCallback = void Function(String text);
 
@@ -96,7 +95,7 @@ class Keyboard extends StatelessWidget {
 
   Widget _buildKeyboardDigit(String text) {
     return Container(
-      margin: EdgeInsets.all(4),
+      margin: const EdgeInsets.all(4),
       child: ClipOval(
         child: Material(
           color: Colors.transparent,
@@ -158,7 +157,7 @@ class AlignedGrid extends StatelessWidget {
       spacing: spacing,
       alignment: WrapAlignment.center,
       children: children
-          .map((item) => Container(
+          .map((item) => SizedBox(
         width: itemSize,
         height: itemSize,
         child: item,
