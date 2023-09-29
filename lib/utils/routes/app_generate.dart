@@ -10,6 +10,10 @@ class AppGenerate {
           settings: settings,
           page: () => const IntroScreen(),
           binding: IntroBinding()),
+      AppRoutes.webView: GetPageRoute(
+          settings: settings,
+          page: () => CommonWebView(url: 'https://www.amazon.com/shop/influencer-1604f2b0'),
+          binding: IntroBinding()),
       AppRoutes.homePage: GetPageRoute(
         settings: settings,
         page: () => const HomeScreen(),
@@ -18,6 +22,12 @@ class AppGenerate {
           settings: settings,
           page: () => const LoginScreen(),
           binding: LoginBinding()),
+      AppRoutes.wishList: GetPageRoute(
+          settings: settings,
+          page: () {
+            return const WishList();
+          },
+          binding: WishListBindings()),
       AppRoutes.bottomNavigation: GetPageRoute(
           settings: settings,
           page: () => const BottomNavigationScreen(),

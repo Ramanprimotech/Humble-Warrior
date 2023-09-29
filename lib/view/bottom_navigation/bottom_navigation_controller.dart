@@ -6,9 +6,11 @@ List<ProductCategoryItem> productCategory = [];
 RxString currentHomeRoute = "".obs;
 RxString currentWishRoute = "".obs;
 RxString currentAccountRoute = "".obs;
+RxString webViewAccountRoute = "".obs;
 final MyAppRouteObserver homeRouteObserver = MyAppRouteObserver(currentRouteName: currentHomeRoute);
 final MyAppRouteObserver accountRouteObserver = MyAppRouteObserver(currentRouteName: currentAccountRoute);
 final MyAppRouteObserver wishRouteObserver = MyAppRouteObserver(currentRouteName: currentWishRoute);
+final MyAppRouteObserver webViewRouteObserver = MyAppRouteObserver(currentRouteName: webViewAccountRoute);
 class BottomNavigationController extends GetxController {
   final HomeScreenController controller = Get.find();
 
@@ -30,7 +32,12 @@ class BottomNavigationController extends GetxController {
       initialRoute: AppRoutes.wishList,
     ),
     // const WishList(),
-    const Placeholder(),
+    Navigator(
+      key: webViewNavigation,
+      observers: [webViewRouteObserver],
+      onGenerateRoute: (settings) => AppGenerate.generateRoutes(settings),
+      initialRoute: AppRoutes.webView,
+    ),
     const Placeholder(),
     Navigator(
       key: accountNavigation,
@@ -49,7 +56,7 @@ class BottomNavigationController extends GetxController {
 
   void onItemTap(int? index) async {
     CommonUtils.toCheckInternet(action: () async {
-      if (index != 2 && index != 3) {
+      if (index != 3) {
         selectedIndex = index!;
         if (index == 1) {
           var controller = Get.find<WishListController>();
@@ -62,6 +69,9 @@ class BottomNavigationController extends GetxController {
           if (index == 1) {
             wishNavigation!.currentState?.popUntil((route) => route.isFirst);
           }
+          if (index == 2) {
+            webViewNavigation!.currentState?.popUntil((route) => route.isFirst);
+          }
           if (index == 4) {
             accountNavigation!.currentState?.popUntil((route) => route.isFirst);
           }
@@ -71,7 +81,7 @@ class BottomNavigationController extends GetxController {
         //   Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
         // }
       } else {
-        index == 2 ? amazon() : facebook();
+        facebook();
       }
       update();
     });
@@ -144,6 +154,12 @@ class BottomNavigationController extends GetxController {
     }
     if(selectedIndex == 1){
       if(currentWishRoute.value != AppRoutes.wishList){
+        Get.back(id: 2);
+        return Future.value(false);
+      }
+    }
+    if(selectedIndex == 2){
+      if(webViewAccountRoute.value != AppRoutes.webView){
         Get.back(id: 2);
         return Future.value(false);
       }

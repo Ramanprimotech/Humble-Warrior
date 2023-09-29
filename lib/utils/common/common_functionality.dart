@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:humble_warrior/hw.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class CommonUtils {
   /// Share Data
@@ -67,6 +68,41 @@ class CommonUtils {
     );
   }
 
+  ///For custom loading
+  static void onLoading(BuildContext context, bool iSloading) {
+    if (iSloading == true) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+            elevation: 0,
+            shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CircularProgressIndicator(color: AppColors.primary),
+                  const SizedBox(
+                    width: 10.0,
+                  ),
+                  // new Text("Please wait..."),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    } else {
+      Navigator.of(context, rootNavigator: true).pop();
+    }
+  }
+
   static Widget actionButton(
     String label, {
     required VoidCallback onTap,
@@ -102,4 +138,35 @@ class CommonUtils {
       ),
     );
   }
+}
+
+class CommonWebView extends StatelessWidget {
+  CommonWebView({Key? key, required this.url}) : super(key: key);
+  final String url;
+  @override
+  Widget build(BuildContext context) {
+    final Completer<WebViewController> _controller =
+    Completer<WebViewController>();
+    return Scaffold(
+      body: SafeArea(
+        child: WebView(
+          initialUrl: url,
+          javascriptMode: JavascriptMode.unrestricted,
+          onWebViewCreated: (WebViewController webViewController) {
+            _controller.complete(webViewController);
+          },
+          onPageStarted: (String url) {
+            CommonUtils.onLoading(context, true);
+            print('Page started loading');
+          },
+          onPageFinished: (String url) {
+            print('Page finished loading');
+           CommonUtils.onLoading(context, false);
+          },
+          gestureNavigationEnabled: true,
+        ),
+      ),
+    );
+  }
+
 }

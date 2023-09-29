@@ -2,6 +2,7 @@ import 'package:humble_warrior/hw.dart';
 
 final GlobalKey<NavigatorState>? mainNavigation = Get.nestedKey(1);
 final GlobalKey<NavigatorState>? wishNavigation = Get.nestedKey(2);
+final GlobalKey<NavigatorState>? webViewNavigation = Get.nestedKey(5);
 final GlobalKey<NavigatorState>? homeNavigation = Get.nestedKey(3);
 final GlobalKey<NavigatorState>? accountNavigation = Get.nestedKey(4);
 
