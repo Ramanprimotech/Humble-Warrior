@@ -6,11 +6,11 @@ List<ProductCategoryItem> productCategory = [];
 RxString currentHomeRoute = "".obs;
 RxString currentWishRoute = "".obs;
 RxString currentAccountRoute = "".obs;
-RxString webViewAccountRoute = "".obs;
+// RxString webViewAccountRoute = "".obs;
 final MyAppRouteObserver homeRouteObserver = MyAppRouteObserver(currentRouteName: currentHomeRoute);
 final MyAppRouteObserver accountRouteObserver = MyAppRouteObserver(currentRouteName: currentAccountRoute);
 final MyAppRouteObserver wishRouteObserver = MyAppRouteObserver(currentRouteName: currentWishRoute);
-final MyAppRouteObserver webViewRouteObserver = MyAppRouteObserver(currentRouteName: webViewAccountRoute);
+// final MyAppRouteObserver webViewRouteObserver = MyAppRouteObserver(currentRouteName: webViewAccountRoute);
 class BottomNavigationController extends GetxController {
   final HomeScreenController controller = Get.find();
 
@@ -32,12 +32,13 @@ class BottomNavigationController extends GetxController {
       initialRoute: AppRoutes.wishList,
     ),
     // const WishList(),
-    Navigator(
-      key: webViewNavigation,
-      observers: [webViewRouteObserver],
-      onGenerateRoute: (settings) => AppGenerate.generateRoutes(settings),
-      initialRoute: AppRoutes.webView,
-    ),
+    // Navigator(
+    //   key: webViewNavigation,
+    //   observers: [webViewRouteObserver],
+    //   onGenerateRoute: (settings) => AppGenerate.generateRoutes(settings),
+    //   initialRoute: AppRoutes.webView,
+    // ),
+    const Placeholder(),
     const Placeholder(),
     Navigator(
       key: accountNavigation,
@@ -56,7 +57,7 @@ class BottomNavigationController extends GetxController {
 
   void onItemTap(int? index) async {
     CommonUtils.toCheckInternet(action: () async {
-      if (index != 3) {
+      if (index != 2 && index != 3) {
         selectedIndex = index!;
         if (index == 1) {
           var controller = Get.find<WishListController>();
@@ -69,9 +70,9 @@ class BottomNavigationController extends GetxController {
           if (index == 1) {
             wishNavigation!.currentState?.popUntil((route) => route.isFirst);
           }
-          if (index == 2) {
-            webViewNavigation!.currentState?.popUntil((route) => route.isFirst);
-          }
+          // if (index == 2) {
+          //   webViewNavigation!.currentState?.popUntil((route) => route.isFirst);
+          // }
           if (index == 4) {
             accountNavigation!.currentState?.popUntil((route) => route.isFirst);
           }
@@ -81,7 +82,7 @@ class BottomNavigationController extends GetxController {
         //   Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
         // }
       } else {
-        facebook();
+        index == 2 ? amazon() : facebook();
       }
       update();
     });
@@ -96,18 +97,18 @@ class BottomNavigationController extends GetxController {
   Future<void> amazon() async {
     try {
       const url =
-          'com.amazon.mobile.shopping://www.amazon.com/shop/influencer-1604f2b0'; // or add your URL here
+          'https://www.amazon.com/shop/influencer-1604f2b0'; // or add your URL here
       final Uri uri = Uri.parse(url);
-      if (!await launchUrl(uri,
-          mode: LaunchMode.externalNonBrowserApplication)) {
-        // throw Exception('Could not launch $uri');
+      // if (!await launchUrl(uri,
+      //     mode: LaunchMode.externalNonBrowserApplication)) {
+      //   // throw Exception('Could not launch $uri');
 
         if (!await launchUrl(
             Uri.parse('https://www.amazon.com/shop/influencer-1604f2b0'),
             mode: LaunchMode.externalApplication)) {
           throw Exception('Could not launch $uri');
         }
-      }
+      // }
     } catch (e) {
       launchUrl(Uri.parse('https://www.amazon.com/shop/influencer-1604f2b0'),
           mode: LaunchMode.externalApplication);
@@ -158,12 +159,12 @@ class BottomNavigationController extends GetxController {
         return Future.value(false);
       }
     }
-    if(selectedIndex == 2){
-      if(webViewAccountRoute.value != AppRoutes.webView){
-        Get.back(id: 2);
-        return Future.value(false);
-      }
-    }
+    // if(selectedIndex == 2){
+    //   if(webViewAccountRoute.value != AppRoutes.webView){
+    //     Get.back(id: 2);
+    //     return Future.value(false);
+    //   }
+    // }
     if(selectedIndex == 4){
       if(currentAccountRoute.value != AppRoutes.myAccount){
         Get.back(id: 4);
