@@ -35,7 +35,7 @@ class MyAccWidget {
         Divider(
           color: Colors.grey.shade200,
           height: 2,
-        )
+        ),
       ],
     );
   }
