@@ -32,7 +32,7 @@ class WishListCardSelector extends StatelessWidget {
     if (type == "Favourite Things") {
       return wishListCards.donnaFavourite();
     }
-    if (type == "Front Page Deals") {
+    if (type == "Shop My Amazon Store") {
       return wishListCards.frontPage();
     }
 

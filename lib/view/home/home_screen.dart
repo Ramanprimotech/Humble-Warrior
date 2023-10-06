@@ -18,7 +18,6 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 22.shb,
-
             ///Home Screen Categories List
             homeScreenWidgets.productCategoryListAPIBuilder(),
             4.shb,

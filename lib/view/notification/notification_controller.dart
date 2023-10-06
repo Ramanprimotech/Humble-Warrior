@@ -15,6 +15,8 @@ RxBool list = false.obs;
   Future<NotificationResponseModel> notificationList() async {
     String? tokenFirebase = await FirebaseMessaging.instance.getToken();
 
+    print("Bearer token from Firebase :: $tokenFirebase");
+
     String? userId =
         await SharePreferenceData.getStringValuesSF(spRegisterUserId);
 

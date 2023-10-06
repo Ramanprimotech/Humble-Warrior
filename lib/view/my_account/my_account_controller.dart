@@ -59,7 +59,11 @@ class MyAccountController extends GetxController {
       if(message?.isBlank == false){
         DialogHelper.showToast(context, message!);
       }
-      checkNotification.value = await _myAccountRepo.notificationStatus();
+      checkNotification.value = await _myAccountRepo.notificationStatus(
+          initialStatus: (notificationStatusLocal){
+            checkNotification.value = notificationStatusLocal;
+          }
+      );
       DialogHelper.closeDialog();
     });
     update();

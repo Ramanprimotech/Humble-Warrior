@@ -5,8 +5,12 @@ import '../../utils/shared_preference/shared_pref.dart';
 
 class MyAccountRepo {
 
-  Future<bool> notificationStatus() async{
+  Future<bool> notificationStatus({Function(bool)? initialStatus}) async{
     try{
+      final notificationStatusLocal = await SharePreferenceData.getBoolValuesSF("notificationCheck") ?? true;
+
+      initialStatus?.call(notificationStatusLocal);
+
       final id = await SharePreferenceData.getStringValuesSF(spRegisterUserId) ?? "-1";
 
       final payload = GetNotificationData(

@@ -126,6 +126,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       child: FutureBuilder<NotificationResponseModel>(
                         future: _notificationController.notificationList(),
                         builder: (context, snapshot) {
+                          print("${SharePreferenceData.getStringValuesSF(spRegisterUserId)} Data of list :: ${snapshot.connectionState} and the ${snapshot.hasError} an the last is ${snapshot.data!.posts!.isEmpty}");
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
                             return ListView.separated(
@@ -174,6 +175,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                               Posts posts = snapshot.data!.posts![index];
                               return GestureDetector(
                                   onTap: () async {
+                                    print("Taped in the list to see the result");
                                     await _notificationController
                                         .notificationDetailsNavigator(
                                             posts.categoryName, posts.id)
@@ -181,6 +183,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                               _notificationController.update();
                                               _notificationController.update(['badge']);
                                             }));
+                                    print("Data of list :: $posts");
                                   },
                                   child: NotificationItem(data: posts));
                             },

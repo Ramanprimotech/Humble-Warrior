@@ -31,7 +31,7 @@ class HomeOptionController extends GetxController
   RxInt donnaDealsTotalDeals = 20.obs;
   final ScrollController donnaDealScrollController = ScrollController(initialScrollOffset: 0.0);
 
-  /// Front Page Deals
+  /// Shop My Amazon Store
   final RxInt frontPageDealsLength = 0.obs;
   final RxBool frontPageDealsBool = true.obs;
   RxInt frontPageDealsTotalDeals = 20.obs;
