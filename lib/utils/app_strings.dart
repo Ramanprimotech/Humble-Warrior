@@ -61,7 +61,7 @@ const String deleteMyAccount = "Delete my account";
 const String helloGorgeousTxt = 'HELLO GORGEOUS!';
 const String readMoreTxt = "read more";
 const String readLessTxt = "read less";
-const String seeCopyHumbleTxt = "See a copy of The Humble Warrior's";
+const String seeCopyHumbleTxt = "See a copy of The Humble Warrior Media Kit";
 const String hereTxt = "here";
 const String aboutDonnaTxt = "About Donna";
 
