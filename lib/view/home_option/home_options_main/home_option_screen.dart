@@ -3,12 +3,14 @@ import 'package:humble_warrior/view/home_option/tab_screens/front_page_deals.dar
 
 class HomeOptionScreen extends GetView<HomeOptionController> {
   int data;
-  HomeOptionScreen({required this.data ,Key? key}) : super(key: key);
+  final List<String> tabTitles;
+  HomeOptionScreen({required this.data ,required this.tabTitles, Key? key}) : super(key: key);
 
 
   @override
   Widget build(BuildContext context) {
-    controller.selectedIndex.value = data;
+    //controller.selectedIndex.value = data;
+    controller.tabController.animateTo(data);
     const double tabFontSize = 18;
     return Scaffold(
       // bottomNavigationBar: bottomNavigationWidget(context),
@@ -18,7 +20,7 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
         leadingWidth: 35,
         centerTitle: false,
         title:
-    Obx(
+        Obx(
           () =>
            SearchBar(
              route: 3,
@@ -43,18 +45,14 @@ class HomeOptionScreen extends GetView<HomeOptionController> {
               padding: 0.pt,
               isScrollable: true,
               controller: controller.tabController,
-              tabs: <Widget>[
-                AppText(
-                  donnaDailyDealTxt.upperCamelCase,
-                  fontSize: tabFontSize,
-                ),
-                AppText(donnaFavouriteDealTxt.upperCamelCase,
-                    fontSize: tabFontSize),
-                AppText(donnaFrontPageDealTxt.upperCamelCase,
-                    fontSize: tabFontSize),
-              ]),
+              tabs: List.generate(tabTitles.length, (index) => AppText(
+                tabTitles[index].toString().upperCamelCase,
+                fontSize: tabFontSize,
+              ),)),
         ),
       ),
+
+
       body: Padding(
         padding: 10.pt,
         child: TabBarView(

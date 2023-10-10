@@ -36,13 +36,14 @@ class AppGenerate {
           settings: settings,
           page: () {
             final args = settings.arguments;
-            if (args is Map<String, int>) {
+            if (args is Map<String, dynamic>) {
               return HomeOptionScreen(
-                data: args['id'] ?? 0,
+                data: args['id'] ?? 0, tabTitles: args['titles'] as List<String>,
               );
             } else {
               return HomeOptionScreen(
-                data: 2,
+                data: 0,
+                tabTitles: ['Donna\'s Daily Deals', 'Front Page Deals', 'Donna\'s Favorite Things'],
               );
             }
           },
