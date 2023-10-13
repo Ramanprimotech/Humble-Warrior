@@ -90,9 +90,10 @@ class MyAccount extends StatelessWidget {
                   ///Help & Support
                   myAccWidget.detailsOptions(controller, title: helpSupportTxt,
                       ontap: () {
-                    Get.to(
-                        StaticPagesScreen(ids: "89456", title: helpSupportTxt),
-                        id: 4);
+                    /// live
+                    // Get.to(StaticPagesScreen(ids: "89456", title: helpSupportTxt), id: 4);
+                        /// staging
+                    Get.to(StaticPagesScreen(ids: "40429", title: helpSupportTxt), id: 4);
                     // Get.toNamed(AppRoutes.staticPages,
                     //     arguments: ["89456", helpSupportTxt], id: 4);
                     //     DialogHelper.showToast(context, "Coming Soon");
@@ -102,10 +103,10 @@ class MyAccount extends StatelessWidget {
                   myAccWidget.detailsOptions(controller,
                       title: termsConditionsTxt, ontap: () {
                     CommonUtils.toCheckInternet(action: () {
-                      Get.to(
-                          StaticPagesScreen(
-                              ids: "89453", title: termsConditionsTxt),
-                          id: 4);
+                      /// live
+                      // Get.to(StaticPagesScreen(ids: "89453", title: termsConditionsTxt), id: 4);
+                      /// staging
+                      Get.to(StaticPagesScreen(ids: "40427", title: termsConditionsTxt), id: 4);
                       // Get.toNamed(AppRoutes.staticPages,
                       //     arguments: ["89453", termsConditionsTxt], id: 4);
                       // Get.toNamed(AppRoutes.staticPages,

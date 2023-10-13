@@ -16,7 +16,10 @@ class AboutScreen extends StatelessWidget {
       // bottomNavigationBar: bottomNavigationWidget(context),
       body: SafeArea(
         child: FutureBuilder<List<StaticData>>(
-          future: staticController.staticPageApi("89450"),
+          ///for live
+          // future: staticController.staticPageApi("89450"),
+          ///for staging
+          future: staticController.staticPageApi("40424"),
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Column(

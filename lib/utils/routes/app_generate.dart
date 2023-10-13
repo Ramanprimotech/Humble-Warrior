@@ -43,7 +43,7 @@ class AppGenerate {
             } else {
               return HomeOptionScreen(
                 data: 0,
-                tabTitles: ['Donna\'s Daily Deals', 'Front Page Deals', 'Donna\'s Favorite Things'],
+                tabTitles: const ['Donna\'s Daily Deals','Donna\'s Favorite Things','Shop My Amazon Store'],
               );
             }
           },
