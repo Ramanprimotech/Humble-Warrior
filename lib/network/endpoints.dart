@@ -6,7 +6,7 @@ abstract class BaseUrl {
 
 class Endpoints {
   //Base Urls Endpoints
-  static const String baseUrl = BaseUrl.stage;
+  static const String baseUrl = BaseUrl.stage;///when ever changing to live url please change static pages id's
   static const String generateToken = "/wp-json/jwt-auth/v1/token/";
   static const String verifyToken = "/wp-json/jwt-auth/v1/token/validate";
   static const String donnaDeals = "/wp-json/hwapi/get_donna_daily_deals";

@@ -291,11 +291,11 @@ class AboutScreen extends StatelessWidget {
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(children: [
-          const TextSpan(
+          /*const TextSpan(
             text: seeCopyHumbleTxt,
             style: TextStyle(
                 fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
-          ),
+          ),*/
           WidgetSpan(child: 10.swb),
           TextSpan(
               recognizer: TapGestureRecognizer()
@@ -303,11 +303,9 @@ class AboutScreen extends StatelessWidget {
                   await CommonUtils().urlLauncher(
                       url: Endpoints.pdf, title: theHumbleWarriorLowerTxt);
                 },
-              text: hereTxt,
+              text: seeCopyHumbleTxt,
               style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
-                  fontSize: 16))
+                  fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black))
         ]),
       ),
     );

@@ -126,7 +126,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       child: FutureBuilder<NotificationResponseModel>(
                         future: _notificationController.notificationList(),
                         builder: (context, snapshot) {
-                          print("${SharePreferenceData.getStringValuesSF(spRegisterUserId)} Data of list :: ${snapshot.connectionState} and the ${snapshot.hasError} an the last is ${snapshot.data!.posts!.isEmpty}");
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
                             return ListView.separated(

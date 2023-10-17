@@ -93,10 +93,10 @@ class MyAccount extends StatelessWidget {
                     /// live
                     // Get.to(StaticPagesScreen(ids: "89456", title: helpSupportTxt), id: 4);
                         /// staging
-                    Get.to(StaticPagesScreen(ids: "40429", title: helpSupportTxt), id: 4);
+                    // Get.to(StaticPagesScreen(ids: "40429", title: helpSupportTxt), id: 4);
                     // Get.toNamed(AppRoutes.staticPages,
                     //     arguments: ["89456", helpSupportTxt], id: 4);
-                    //     DialogHelper.showToast(context, "Coming Soon");
+                        DialogHelper.showToast(context, "Coming Soon!");
                   }),
 
                   ///Term & Conditions
