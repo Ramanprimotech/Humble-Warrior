@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
+import '../hw.dart';
 import 'custome_exception.dart';
 import 'endpoints.dart';
 
@@ -32,6 +33,7 @@ class APIManager {
     log("$urlForPost", name: "Executed POST API");
     var responseJson;
     try {
+      debugPrint("tokentoken ${Endpoints.token}");
       final response = await http.post(urlForPost,
           headers: {'Authorization': 'Bearer ${Endpoints.token}'});
 

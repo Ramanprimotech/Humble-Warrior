@@ -39,6 +39,7 @@ class FetchSearchList {
     try {
       PaginationModel payload = PaginationModel(
           search: id, page: page, postType: postType, catIds: searchCat);
+      print("payoad  ${payload.toString()}");
       payload.toString();
       var response =
       await APIManager().postAPICall(url: Endpoints.search, param: payload);

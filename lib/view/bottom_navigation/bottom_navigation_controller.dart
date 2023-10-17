@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:humble_warrior/hw.dart';
 import 'package:humble_warrior/utils/routes/app_generate.dart';
 
@@ -82,7 +84,7 @@ class BottomNavigationController extends GetxController {
         //   Get.offNamedUntil(AppRoutes.bottomNavigation, (route) => false);
         // }
       } else {
-        index == 2 ? openAmazonInApp() : facebook();
+        index == 2 ? (Platform.isAndroid ? openAmazonInApp(): amazon()): facebook();
       }
       update();
     });
@@ -94,26 +96,26 @@ class BottomNavigationController extends GetxController {
     user = await SharePreferenceData.getStringValuesSF(userEmail) ?? "";
   }
 
-  // Future<void> amazon() async {
-  //   try {
-  //     const url =
-  //         'https://www.amazon.com/shop/influencer-1604f2b0'; // or add your URL here
-  //     final Uri uri = Uri.parse(url);
-  //     // if (!await launchUrl(uri,
-  //     //     mode: LaunchMode.externalNonBrowserApplication)) {
-  //     //   // throw Exception('Could not launch $uri');
-  //
-  //       if (!await launchUrl(
-  //           Uri.parse('https://www.amazon.com/shop/influencer-1604f2b0'),
-  //           mode: LaunchMode.externalApplication)) {
-  //         throw Exception('Could not launch $uri');
-  //       }
-  //     // }
-  //   } catch (e) {
-  //     launchUrl(Uri.parse('https://www.amazon.com/shop/influencer-1604f2b0'),
-  //         mode: LaunchMode.externalApplication);
-  //   }
-  // }
+  Future<void> amazon() async {
+    try {
+      const url =
+          'https://www.amazon.com/shop/influencer-1604f2b0'; // or add your URL here
+      final Uri uri = Uri.parse(url);
+      // if (!await launchUrl(uri,
+      //     mode: LaunchMode.externalNonBrowserApplication)) {
+      //   // throw Exception('Could not launch $uri');
+
+        if (!await launchUrl(
+            Uri.parse('https://www.amazon.com/shop/influencer-1604f2b0'),
+            mode: LaunchMode.externalApplication)) {
+          throw Exception('Could not launch $uri');
+        }
+      // }
+    } catch (e) {
+      launchUrl(Uri.parse('https://www.amazon.com/shop/influencer-1604f2b0'),
+          mode: LaunchMode.externalApplication);
+    }
+  }
 
   Future<void> openAmazonInApp() async {
     const url = 'amzn://https://www.amazon.com/shop/influencer-1604f2b0';
