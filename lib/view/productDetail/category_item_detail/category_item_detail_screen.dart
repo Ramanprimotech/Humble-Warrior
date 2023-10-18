@@ -79,6 +79,7 @@ class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
                             child: categoryListCard(data, 0, context,
                                 categoryCard: false, isDetails: true),
                           ),
+                          if(data.itemName!.isNotEmpty)
                           productTitleDetail(context, data.itemName),
                           productDesc(data.productDescription,
                               context: context),

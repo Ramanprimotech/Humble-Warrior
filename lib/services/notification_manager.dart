@@ -136,15 +136,15 @@ class NotificationManager {
         ) {
           throw Exception('Could not launch');
         }else{
-          Get.toNamed(AppRoutes.notification);
+          Get.toNamed(AppRoutes.notification, id: 3);
         }
       }
       else {
-        Get.toNamed(AppRoutes.notification);
+        Get.toNamed(AppRoutes.notification, id: 3);
       }
     }catch(e, st){
       print("Remote message exception $e");
-      Get.toNamed(AppRoutes.notification);
+      Get.toNamed(AppRoutes.notification, id: 3);
     }
   }
 }

@@ -170,6 +170,7 @@ class MyAccount extends StatelessWidget {
 
   _showDeleteAccountPopup(BuildContext context) {
     showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (context) {
           return const DeleteAccountPopup();
