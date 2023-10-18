@@ -77,12 +77,12 @@ class AppGenerate {
             return const AboutScreen();
           },
           binding: AboutBinding()),
-      AppRoutes.wishList: GetPageRoute(
+     /* AppRoutes.wishList: GetPageRoute(
           settings: settings,
           page: () {
             return const WishList();
           },
-          binding: WishListBindings()),
+          binding: WishListBindings()),*/
       AppRoutes.splashScreen: GetPageRoute(
           settings: settings,
           page: () => const SplashScreen(),

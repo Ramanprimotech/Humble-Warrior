@@ -9,6 +9,7 @@ class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("back route ${route}");
     ProductDetailController controller = Get.find();
     Future<List<ProductDetailsResponse>> futureInstance =
         controller.productDetailsAPI(idData: details!.id.toString());
@@ -19,10 +20,10 @@ class CategoryItemDetail extends StatelessWidget with ProductDetailWidget {
           children: [
             CommonWidgets.titleBar(context,
                 title: "Product Details", fontSize: 20, backIcon: true, onPress: (){
-              if(route == 0){
-                Get.back();
+              if(route == 2){
+                Get.back(id: 2);
               }    else {
-                Get.back(id: route ?? 3);
+                Get.back(id: 3);
               }
                 }),
             FutureBuilder<List<ProductDetailsResponse>>(

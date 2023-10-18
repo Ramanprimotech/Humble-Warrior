@@ -16,10 +16,11 @@ class FilterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("routessd ${route}");
     _filterController.context = context;
     return WillPopScope(
       onWillPop: () async {
-        Get.back(id:  route,result: _filterController.record.value);
+        Get.back(id: route,result: _filterController.record.value);
         _filterController.record.clear();
         _filterController.selevtedVisibility.value = false;
         return false;
@@ -674,8 +675,8 @@ class FilterScreen extends StatelessWidget {
                                             //     item: RecentSearch(
                                             //         productSearched:
                                             //             filterController.controller.text));
-                                            Get.toNamed(AppRoutes.categoryItemDetail,id: 3,
-                                                arguments: { "details" :   ProductDetailsResponse(
+                                            Get.toNamed(AppRoutes.categoryItemDetail,id: route,
+                                                arguments: {"route" : route, "details" :   ProductDetailsResponse(
                                                     id: details.id)});
                                             // Get.toNamed(
                                             //     AppRoutes

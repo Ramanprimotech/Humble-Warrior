@@ -46,7 +46,7 @@ class FetchSearchList {
 
       ProductListResponse productListResponse =
       ProductListResponse.fromJson(response);
-      print(productListResponse.data!.length);
+      print("responsese ${productListResponse.data![0].id}");
       if (response == null) {
         return ProductListResponse(data: []);
       }
