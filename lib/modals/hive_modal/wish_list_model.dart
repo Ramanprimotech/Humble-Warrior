@@ -1,15 +1,16 @@
 import 'package:humble_warrior/hw.dart';
+part 'wish_list_model.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 3)
 class WishListModel{
   @HiveType(typeId: 0)
-  String userid;
+  String? userid;
   @HiveType(typeId: 1)
-  ProductDetailsResponse item;
+  ProductDetailsResponse? item;
 
   WishListModel({
-     required this.userid,
-     required this.item
+     this.userid,
+     this.item
 });
 
   @override

@@ -40,8 +40,7 @@ class WishlistStorageService extends GetxController {
   /// Wish List
   Future<List<ProductDetailsResponse>> getWishList() async{
     final id = await SharePreferenceData.getStringValuesSF(spRegisterUserId) ?? "-1";
-    var data = wishlistBox.values.where((element) => element.userid == id).map((e) => e.item).toList();
-    return data;
+    return wishlistBox.values.where((element) => element.userid == id && element.item != null).map((e) => e.item!).toList();
   }
 
   _addToWishList(ProductDetailsResponse item) async{
@@ -73,7 +72,7 @@ class WishlistStorageService extends GetxController {
 
   _findKey(String id) {
     List<dynamic> key = wishlistBox.keys
-        .where((element) => wishlistBox.get(element)!.item.id.toString() == id)
+        .where((element) => wishlistBox.get(element)?.item?.id.toString() == id)
         .toList();
 
     return key;
@@ -81,16 +80,14 @@ class WishlistStorageService extends GetxController {
 
   hasItem(String id) {
     int listLength = wishlistBox.values.where((element) {
-      return element.item.id.toString() == id.toString();
+      return element.item?.id.toString() == id.toString();
     }).length;
     bool isIt = listLength != 0;
     return isIt;
   }
 
   favourite({required ProductDetailsResponse item}) {
-    if (_hasItem(
-      item.id.toString(),
-    )) {
+    if (hasItem(item.id.toString())) {
       _deleteItem(item.id.toString());
     } else {
       _addToWishList(item);

@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/modals/hive_modal/wish_list_model.dart';
 import 'package:humble_warrior/services/wishlist_storage_service.dart';
 
 final GlobalKey<NavigatorState>? mainNavigation = Get.nestedKey(1);
@@ -65,6 +66,7 @@ Future main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ProductDetailsResponseAdapter());
   Hive.registerAdapter(RecentSearchAdapter());
+  Hive.registerAdapter(WishListModelAdapter());
   Get.put(HiveService());
   Get.put(WishlistStorageService());
   Get.put(ThemeController());
