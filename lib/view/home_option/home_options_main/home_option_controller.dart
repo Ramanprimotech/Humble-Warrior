@@ -17,10 +17,8 @@ class HomeOptionController extends GetxController
   final SortController _sortController = Get.find();
 
   ///Storage has item
-  bool hasItemInDatabase(String id) {
-    return service.hasItem(
-      id,
-    );
+  Future<bool> hasItemInDatabase(String id) async{
+    return await service.hasItem(id);
   }
 
   /// Donna's Deals

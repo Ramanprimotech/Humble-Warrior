@@ -22,39 +22,35 @@ class WishlistStorageService extends GetxController {
     final loginId = await SharePreferenceData.getStringValuesSF(spRegisterUserId);
     final Box<ProductDetailsResponse> oldWishlistBox = await Hive.openBox('Wishlist');
 
-    if (loginId != null && oldWishlistBox.isNotEmpty) {
-      // Merge the data from oldWishlistBox into wishlistBox
-      for (var key in oldWishlistBox.keys) {
-        final item = oldWishlistBox.get(key);
-        if(item != null){
-          wishlistBox.add(WishListModel(userid: loginId, item: item));
-        }
-        await oldWishlistBox.delete(key);
+    if (loginId != null && oldWishlistBox.isBlank == false) {
+      for (var item in oldWishlistBox.values) {
+        wishlistBox.add(WishListModel(loginId,item));
       }
     }
-
+    oldWishlistBox.clear();
     await oldWishlistBox.close();
   }
 
 
   /// Wish List
   Future<List<ProductDetailsResponse>> getWishList() async{
-    final id = await SharePreferenceData.getStringValuesSF(spRegisterUserId) ?? "-1";
-    return wishlistBox.values.where((element) => element.userid == id && element.item != null).map((e) => e.item!).toList();
+    final userId = await SharePreferenceData.getStringValuesSF(spRegisterUserId) ?? "-1";
+    print("ghhsdgfhsgfs ${wishlistBox.values.where((element) => element.userid.toString() == userId.toString())}");
+    return wishlistBox.values.where((element) => element.userid.toString() == userId.toString() && element.item != null).map((e) => e.item!).toList();
   }
 
   _addToWishList(ProductDetailsResponse item) async{
     final userId = await SharePreferenceData.getStringValuesSF(spRegisterUserId) ?? "-1";
-    wishlistBox.add(WishListModel(userid: userId, item: item));
+    await wishlistBox.add(WishListModel(userId,item));
   }
 
 
   clearAllUserData() async{
-    final loginId = await SharePreferenceData.getStringValuesSF(spRegisterUserId) ?? "-1";
+    final userId = await SharePreferenceData.getStringValuesSF(spRegisterUserId) ?? "-1";
     final keysToDelete = <int>[];
     for (var key in wishlistBox.keys) {
       final item = wishlistBox.get(key);
-      if (item?.userid == loginId) {
+      if (item?.userid == userId) {
         keysToDelete.add(key);
       }
     }
@@ -78,21 +74,21 @@ class WishlistStorageService extends GetxController {
     return key;
   }
 
-  hasItem(String id) {
-    int listLength = wishlistBox.values.where((element) {
-      return element.item?.id.toString() == id.toString();
-    }).length;
-    bool isIt = listLength != 0;
-    return isIt;
+  Future<bool> hasItem(String id) async{
+    final userId = await SharePreferenceData.getStringValuesSF(spRegisterUserId) ?? "-1";
+    return wishlistBox.values.where((element) {
+      return element.item?.id.toString() == id.toString() && element.userid == userId;
+    }).isNotEmpty;
   }
 
-  favourite({required ProductDetailsResponse item}) {
-    if (hasItem(item.id.toString())) {
+  favourite({required ProductDetailsResponse item}) async{
+    if (await hasItem(item.id.toString())) {
       _deleteItem(item.id.toString());
     } else {
       _addToWishList(item);
     }
   }
+
 
   @override
   void onClose() {

@@ -8,12 +8,10 @@ class WishListController extends GetxController {
 
   WishlistStorageService service = Get.find<WishlistStorageService>();
   Future<void> getLoggedValue() async {
-    loggedIn.value =
-        await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
+    loggedIn.value = await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
   }
 
   getWishList() async{
-    data.value = [];
     data.value = await service.getWishList();
   }
 

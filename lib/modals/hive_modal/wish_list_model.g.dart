@@ -16,7 +16,10 @@ class WishListModelAdapter extends TypeAdapter<WishListModel> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return WishListModel();
+    return WishListModel(
+      fields[0] as String,
+      fields[1] as ProductDetailsResponse,
+    );
   }
 
   @override

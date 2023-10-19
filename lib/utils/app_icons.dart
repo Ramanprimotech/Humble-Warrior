@@ -184,12 +184,17 @@ class _HeartState extends State<Heart> {
               }
             }
           },
-          child: Icon(
-            Icons.favorite_outlined,
-            color: isLoggedIn && service.hasItem(widget.item.id.toString())
-                ? Colors.red
-                : widget.color,
-            size: widget.size ?? Dimens.largeIcon,
+          child: FutureBuilder(
+            future: service.hasItem(widget.item.id.toString()),
+            builder: (BuildContext context, snapshot){
+              return Icon(
+                Icons.favorite_outlined,
+                color: isLoggedIn && snapshot.data == true
+                    ? Colors.red
+                    : widget.color,
+                size: widget.size ?? Dimens.largeIcon,
+              );
+            },
           ),
         );
       },

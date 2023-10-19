@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:humble_warrior/hw.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:humble_warrior/services/wishlist_storage_service.dart';
 
 class LoginController extends GetxController {
   User? user;
