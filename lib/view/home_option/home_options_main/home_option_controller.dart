@@ -1,4 +1,5 @@
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/services/wishlist_storage_service.dart';
 import 'package:humble_warrior/view/sorting/sort_controller.dart';
 
 class HomeOptionController extends GetxController
@@ -12,7 +13,7 @@ class HomeOptionController extends GetxController
   RxBool select = false.obs;
 
   late BuildContext context;
-  HiveService service = Get.find<HiveService>();
+  WishlistStorageService service = Get.find<WishlistStorageService>();
   final SortController _sortController = Get.find();
 
   ///Storage has item

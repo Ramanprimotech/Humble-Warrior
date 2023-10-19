@@ -1,4 +1,6 @@
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/modals/hive_modal/wish_list_model.dart';
+import 'package:humble_warrior/services/wishlist_storage_service.dart';
 
 class AppIcons {
   static Image favourite(BuildContext context) => Image.asset(
@@ -155,8 +157,8 @@ class _HeartState extends State<Heart> {
 
   @override
   Widget build(BuildContext context) {
-    HiveService service = Get.find<HiveService>();
-    Box<ProductDetailsResponse> box = service.box;
+    WishlistStorageService service = Get.find<WishlistStorageService>();
+    Box<WishListModel> box = service.wishlistBox;
     // List<dynamic> keys = service.findKey(widget.item.id.toString());
     // print(keys);
 

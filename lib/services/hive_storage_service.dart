@@ -17,52 +17,51 @@ class HiveService extends GetxController {
     super.onInit();
   }
 
-  /// Wish List
-  deleteItem(String id) {
-    List key = findKey(id);
-    for (var element in key) {
-      box.delete(element);
-    }
-  }
+  // /// Wish List
+  // deleteItem(String id) {
+  //   List key = findKey(id);
+  //   for (var element in key) {
+  //     box.delete(element);
+  //   }
+  // }
 
-  getWishList() {
-    var data = box.values;
-    return data;
-  }
+  // getWishList() {
+  //   var data = box.values;
+  //   return data;
+  // }
 
-  addToWishList(ProductDetailsResponse item) {
-    // box.put(item.id.toString(), item);
-    box.add(item);
-  }
+  // addToWishList(ProductDetailsResponse item) {
+  //   box.add(item);
+  // }
 
-  findKey(String id) {
-    List<dynamic> key = box.keys
-        .where((element) => box.get(element)!.id.toString() == id)
-        .toList();
 
-    return key;
-  }
+  // findKey(String id) {
+  //   List<dynamic> key = box.keys
+  //       .where((element) => box.get(element)!.id.toString() == id)
+  //       .toList();
+  //
+  //   return key;
+  // }
 
-  hasItem(String id) {
-    int listLength = box.values.where((element) {
-      return element.id.toString() == id.toString();
-    }).length;
-    bool isIt = listLength != 0;
-    return isIt;
-  }
+  // hasItem(String id) {
+  //   int listLength = box.values.where((element) {
+  //     return element.id.toString() == id.toString();
+  //   }).length;
+  //   bool isIt = listLength != 0;
+  //   return isIt;
+  // }
 
-  favourite({required ProductDetailsResponse item}) {
-    if (hasItem(
-      item.id.toString(),
-    )) {
-      deleteItem(item.id.toString());
-    } else {
-      addToWishList(item);
-    }
-  }
+  // favourite({required ProductDetailsResponse item}) {
+  //   if (hasItem(
+  //     item.id.toString(),
+  //   )) {
+  //     deleteItem(item.id.toString());
+  //   } else {
+  //     addToWishList(item);
+  //   }
+  // }
 
   /// Recent
-
   deleteRecentItem(String search) {
     List key = findRecentKey(search);
     for (var element in key) {

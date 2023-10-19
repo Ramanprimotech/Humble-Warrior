@@ -1,4 +1,5 @@
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/services/wishlist_storage_service.dart';
 
 class CardView extends StatelessWidget {
   const CardView(
@@ -27,7 +28,7 @@ class CardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HiveService service = Get.find<HiveService>();
+    WishlistStorageService service = Get.find<WishlistStorageService>();
     Color color = Theme.of(context).textTheme.displayMedium!.color!;
     return Container(
       decoration: CustomBoxDecorations(context: context).shadow(radius: 16),

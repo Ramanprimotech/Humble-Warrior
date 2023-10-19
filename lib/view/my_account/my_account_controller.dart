@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:humble_warrior/hw.dart';
+import 'package:humble_warrior/services/wishlist_storage_service.dart';
 import 'package:humble_warrior/view/my_account/my_account_repo.dart';
 
 class MyAccountController extends GetxController {
@@ -81,8 +82,6 @@ class MyAccountController extends GetxController {
   }
 
   Future<void> logout() async {
-    HiveService service = Get.find<HiveService>();
-    Box<ProductDetailsResponse> box = service.box;
     await FirebaseAuth.instance.signOut().then((value) async {
       await SharePreferenceData.clear();
       isLoggedIn = false;
@@ -112,9 +111,8 @@ class MyAccountController extends GetxController {
   }
 
   _deleteDatabase(){
-    HiveService service = Get.find<HiveService>();
-    Box<ProductDetailsResponse> box = service.box;
-    return box.clear();
+    WishlistStorageService service = Get.find<WishlistStorageService>();
+    return service.clearAllUserData();
   }
 
   // Future<bool> deleteMyAccount() async{

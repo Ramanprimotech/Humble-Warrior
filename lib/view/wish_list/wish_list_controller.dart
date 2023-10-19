@@ -1,18 +1,20 @@
 import 'package:humble_warrior/hw.dart';
 
+import '../../services/wishlist_storage_service.dart';
+
 class WishListController extends GetxController {
   RxBool loggedIn = true.obs;
-  RxList data = [].obs;
+  RxList<ProductDetailsResponse> data = <ProductDetailsResponse>[].obs;
 
-  final HiveService _hiveService = Get.find();
+  WishlistStorageService service = Get.find<WishlistStorageService>();
   Future<void> getLoggedValue() async {
     loggedIn.value =
         await SharePreferenceData.getBoolValuesSF(spIsLogged) ?? false;
   }
 
-  getWishList() {
-    data.value.clear();
-    data.value = _hiveService.getWishList().toList();
+  getWishList() async{
+    data.value = [];
+    data.value = await service.getWishList();
   }
 
   @override
