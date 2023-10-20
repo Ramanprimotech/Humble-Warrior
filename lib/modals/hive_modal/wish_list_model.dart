@@ -1,4 +1,5 @@
 import 'package:humble_warrior/hw.dart';
+
 part 'wish_list_model.g.dart';
 
 @HiveType(typeId: 0)
@@ -11,8 +12,20 @@ class WishListModel {
 
   const WishListModel(this.userid, this.item); // Constructor
 
-  // Add a no-argument factory constructor for Hive
-  // factory WishListModel.empty() {
-  //   return WishListModel("", ProductDetailsResponse());
-  // }
+  // Convert WishListModel to a Map
+  Map<String, dynamic> toJson() {
+    return {
+      'userid': userid,
+      'item': item.toJson(), // Assuming ProductDetailsResponse has a toJson method
+    };
+  }
+
+  // Create a factory method to create WishListModel from a Map
+  factory WishListModel.fromJson(Map<String, dynamic> json) {
+    return WishListModel(
+      json['userid'] as String,
+      ProductDetailsResponse.fromJson(json['item']),
+    );
+  }
 }
+
