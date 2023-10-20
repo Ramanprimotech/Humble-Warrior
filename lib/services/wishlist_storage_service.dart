@@ -12,7 +12,8 @@ class WishlistStorageService extends GetxController {
   @override
   void onInit() async {
     await Hive.initFlutter();
-    wishlistBox = await Hive.openBox("WishlistData");
+    wishlistBox = await Hive.openBox<WishListModel>("WishlistData");
+    // wishlistBox = await Hive.openBox("WishlistData");
     _mergeOldInNewDB();
     super.onInit();
   }
@@ -20,9 +21,10 @@ class WishlistStorageService extends GetxController {
   /// Retrieve existing data from the mobile device and merge it into a new database.
   _mergeOldInNewDB() async{
     final loginId = await SharePreferenceData.getStringValuesSF(spRegisterUserId);
-    final Box<ProductDetailsResponse> oldWishlistBox = await Hive.openBox('Wishlist');
+    Hive.box<ProductDetailsResponse>('Wishlist');
+    Box<ProductDetailsResponse> oldWishlistBox = Hive.box<ProductDetailsResponse>('Wishlist');
 
-    if (loginId != null && oldWishlistBox.isBlank == false) {
+    if (loginId != null && oldWishlistBox.isNotEmpty) {
       for (var item in oldWishlistBox.values) {
         wishlistBox.add(WishListModel(loginId,item));
       }
@@ -35,13 +37,17 @@ class WishlistStorageService extends GetxController {
   /// Wish List
   Future<List<ProductDetailsResponse>> getWishList() async{
     final userId = await SharePreferenceData.getStringValuesSF(spRegisterUserId) ?? "-1";
-    print("ghhsdgfhsgfs ${wishlistBox.values.where((element) => element.userid.toString() == userId.toString())}");
-    return wishlistBox.values.where((element) => element.userid.toString() == userId.toString() && element.item != null).map((e) => e.item!).toList();
+    return wishlistBox.values.where((element) => element.userid == userId).map((e) => e.item).toList();
   }
 
   _addToWishList(ProductDetailsResponse item) async{
     final userId = await SharePreferenceData.getStringValuesSF(spRegisterUserId) ?? "-1";
-    await wishlistBox.add(WishListModel(userId,item));
+
+    final itemToAdd = WishListModel(userId, item);
+    wishlistBox.add(itemToAdd);
+    wishlistBox.compact();
+
+    // await wishlistBox.add(WishListModel(userId,item));
   }
 
 
