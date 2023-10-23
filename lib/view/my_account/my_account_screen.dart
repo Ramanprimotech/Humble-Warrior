@@ -104,9 +104,9 @@ class MyAccount extends StatelessWidget {
                       title: termsConditionsTxt, ontap: () {
                     CommonUtils.toCheckInternet(action: () {
                       /// live
-                      // Get.to(StaticPagesScreen(ids: "89453", title: termsConditionsTxt), id: 4);
+                      Get.to(StaticPagesScreen(ids: "89453", title: termsConditionsTxt), id: 4);
                       /// staging
-                      Get.to(StaticPagesScreen(ids: "40427", title: termsConditionsTxt), id: 4);
+                      // Get.to(StaticPagesScreen(ids: "40427", title: termsConditionsTxt), id: 4);
                       // Get.toNamed(AppRoutes.staticPages,
                       //     arguments: ["89453", termsConditionsTxt], id: 4);
                       // Get.toNamed(AppRoutes.staticPages,
