@@ -108,7 +108,7 @@ class SplashController extends GetxController {
 
   packageInfo() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    version = "1.0.1";
+    version = "1.0.3";
     // version = packageInfo.version;
     code = packageInfo.buildNumber;
     print("version ${version}");
