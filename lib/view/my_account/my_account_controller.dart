@@ -138,12 +138,12 @@ class MyAccountController extends GetxController {
     try{
       if(user != null){
         await user.delete().whenComplete(()  async{
+          _deleteDatabase();
+          disposeGoogleSession();
           await SharePreferenceData.clear();
           isLoggedIn = false;
           await SharePreferenceData.addBoolToSF(spIsEntered, false);
           controller.selectedIndex = 0;
-          _deleteDatabase();
-          disposeGoogleSession();
         });
         return true;
       }else{

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 
+import '../hw.dart';
 import '../modals/hive_modal/wish_list_model.dart';
 import '../utils/app_strings.dart';
 import '../utils/shared_preference/shared_pref.dart';
@@ -13,7 +14,6 @@ class WishlistStorageService extends GetxController {
   void onInit() async {
     await Hive.initFlutter();
     wishlistBox = await Hive.openBox<WishListModel>("WishlistData");
-    // wishlistBox = await Hive.openBox("WishlistData");
     _mergeOldInNewDB();
     super.onInit();
   }
@@ -46,21 +46,26 @@ class WishlistStorageService extends GetxController {
     final itemToAdd = WishListModel(userId, item);
     wishlistBox.add(itemToAdd);
     wishlistBox.compact();
-
-    // await wishlistBox.add(WishListModel(userId,item));
   }
 
 
   clearAllUserData() async{
     final userId = await SharePreferenceData.getStringValuesSF(spRegisterUserId) ?? "-1";
+    debugPrint("This is the user id :: $userId");
     final keysToDelete = <int>[];
+    debugPrint("This is the key before delete :: $keysToDelete");
     for (var key in wishlistBox.keys) {
+      debugPrint("This is the key of wishlistbox :: $key");
       final item = wishlistBox.get(key);
+      debugPrint("This is the item of wishlist :: $item");
+      debugPrint("This is the outside key after id :: ${item?.userid} and $userId");
       if (item?.userid == userId) {
+        debugPrint("This is the inside key after id :: ${item?.userid}");
         keysToDelete.add(key);
       }
     }
     for (var key in keysToDelete) {
+      debugPrint("This is the key before the delete id :: $userId");
       await wishlistBox.delete(key);
     }
   }
@@ -94,7 +99,6 @@ class WishlistStorageService extends GetxController {
       _addToWishList(item);
     }
   }
-
 
   @override
   void onClose() {

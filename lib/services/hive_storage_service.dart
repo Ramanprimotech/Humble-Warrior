@@ -6,13 +6,13 @@ import 'package:humble_warrior/modals/hive_modal/product_details_response.dart';
 import 'package:humble_warrior/modals/hive_modal/recent_search_model.dart';
 
 class HiveService extends GetxController {
-  late Box<ProductDetailsResponse> box;
+  // late Box<ProductDetailsResponse> box;
   late Box<RecentSearch> recentBox;
 
   @override
   void onInit() async {
     await Hive.initFlutter();
-    box = await Hive.openBox("Wishlist");
+    // box = await Hive.openBox("Wishlist");
     recentBox = await Hive.openBox("Recent");
     super.onInit();
   }
@@ -138,7 +138,7 @@ class HiveService extends GetxController {
 
   @override
   void onClose() {
-    box.close();
+    // box.close();
     recentBox.close();
     super.onClose();
   }
