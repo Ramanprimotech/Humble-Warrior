@@ -203,8 +203,8 @@ class HomeOptionController extends GetxController
   String postType(int position) {
     Map<int, String> post = {
       0: "deals",
-      1: "product",
-      2: "shopmycloset_product"
+      1: "shopmycloset_product",
+      2: "product",
     };
 
     return post[position]!;
