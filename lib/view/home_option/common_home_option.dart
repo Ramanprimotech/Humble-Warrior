@@ -110,6 +110,8 @@ Widget codeButton({required String code, required BuildContext context}) {
       // }, context);
     },
     child: Container(
+        width: 110,
+        height: 31,
         alignment: Alignment.center,
         padding: 1.pa,
         decoration: BoxDecoration(
@@ -125,6 +127,7 @@ Widget codeButton({required String code, required BuildContext context}) {
           padding:
               const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Icon(
                 Icons.cut,
@@ -132,11 +135,15 @@ Widget codeButton({required String code, required BuildContext context}) {
                 color: AppColors.black,
               ),
               2.swb,
-              AppText(
-                code,
-                color: Colors.black,
-                fontWeight: FontWeight.w700,
-                fontSize: 14,
+              Expanded(
+                child: AppText(
+                  code,
+                  textAlign: TextAlign.center,
+                  color: Colors.black,
+                  // maxLines: 2,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
+                ),
               ),
             ],
           ),
